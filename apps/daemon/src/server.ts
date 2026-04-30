@@ -29,6 +29,11 @@ import { importClaudeDesignZip } from './claude-design-import.js';
 import { buildDocumentPreview } from './document-preview.js';
 import { lintArtifact, renderFindingsForAgent } from './lint-artifact.js';
 import {
+  decodeImageDataUrl,
+  generateIma2Image,
+  getIma2Status,
+} from './ima2.js';
+import {
   decodeMultipartFilename,
   deleteProjectFile,
   ensureProject,
@@ -37,6 +42,7 @@ import {
   readProjectFile,
   removeProjectDir,
   sanitizeName,
+  sanitizePath,
   writeProjectFile,
 } from './projects.js';
 import { validateArtifactManifestInput } from './artifact-manifest.js';
@@ -410,6 +416,21 @@ export async function startServer({ port = 7456, returnServer = false } = {}) {
 
   app.get('/api/health', (_req, res) => {
     res.json({ ok: true, version: '0.1.0' });
+  });
+
+  // ---- ima2 (local image generation bridge) --------------------------------
+  // Skills like fashion-lookbook ask the daemon to render imagery through a
+  // user-run ima2 server. The status endpoint lets the web UI light up the
+  // feature only when the local server is reachable; the per-project
+  // generate endpoint writes the result straight into the project folder so
+  // the agent can reference it by relative path.
+
+  app.get('/api/imagegen/ima2/status', async (_req, res) => {
+    try {
+      res.json(await getIma2Status());
+    } catch (err) {
+      res.status(500).json({ ok: false, error: String(err) });
+    }
   });
 
   // ---- Projects (DB-backed) -------------------------------------------------
@@ -1127,9 +1148,14 @@ export async function startServer({ port = 7456, returnServer = false } = {}) {
     }
   });
 
-  app.get('/api/projects/:id/files/:name', async (req, res) => {
+  // Read project file. The wildcard fallback supports nested paths like
+  // `images/look-1.png` that skills (e.g. fashion-lookbook with ima2) write
+  // into project subfolders. Express's `:name` parameter does not match `/`,
+  // so the wildcard route catches those requests after the named one fails.
+  app.get(['/api/projects/:id/files/:name', '/api/projects/:id/files/*'], async (req, res) => {
     try {
-      const file = await readProjectFile(PROJECTS_DIR, req.params.id, req.params.name);
+      const fileName = (req.params as { 0?: string; name?: string })[0] || req.params.name;
+      const file = await readProjectFile(PROJECTS_DIR, req.params.id, fileName);
       res.type(file.mime).send(file.buffer);
     } catch (err) {
       const status = err && err.code === 'ENOENT' ? 404 : 400;
@@ -1191,9 +1217,72 @@ export async function startServer({ port = 7456, returnServer = false } = {}) {
     },
   );
 
-  app.delete('/api/projects/:id/files/:name', async (req, res) => {
+  // Generate an image through the ima2 server and persist it inside the
+  // project folder. The agent (or skill template) can then reference the
+  // file by its `images/<name>.png` relative path. We sanitize the
+  // requested name through `sanitizePath` so callers can pick a subfolder
+  // (e.g. `images/look-1.png`) without escaping the project root.
+  app.post('/api/projects/:id/imagegen/ima2/generate', async (req, res) => {
     try {
-      await deleteProjectFile(PROJECTS_DIR, req.params.id, req.params.name);
+      const {
+        prompt,
+        name,
+        serverUrl,
+        quality,
+        size,
+        format,
+        moderation,
+        model,
+        mode,
+        webSearchEnabled,
+        references,
+        timeoutMs,
+      } = req.body || {};
+      const result = await generateIma2Image({
+        prompt,
+        serverUrl,
+        quality,
+        size,
+        format,
+        moderation,
+        model,
+        mode,
+        webSearchEnabled,
+        references,
+        timeoutMs,
+      });
+      const image = decodeImageDataUrl(result.data?.image);
+      const targetName = sanitizePath(
+        name || `images/ima2-${Date.now().toString(36)}.${image.ext}`,
+      );
+      const file = await writeProjectFile(
+        PROJECTS_DIR,
+        req.params.id,
+        targetName,
+        image.buffer,
+      );
+      res.json({
+        ok: true,
+        file,
+        serverUrl: result.serverUrl,
+        ima2: {
+          filename: result.data?.filename || null,
+          requestId: result.data?.requestId || null,
+          elapsed: result.data?.elapsed || null,
+          model: result.data?.model || model || null,
+          size: result.data?.size || size || null,
+        },
+      });
+    } catch (err) {
+      const message = err && (err as Error).message ? (err as Error).message : String(err);
+      res.status(400).json({ ok: false, error: message });
+    }
+  });
+
+  app.delete(['/api/projects/:id/files/:name', '/api/projects/:id/files/*'], async (req, res) => {
+    try {
+      const fileName = (req.params as { 0?: string; name?: string })[0] || req.params.name;
+      await deleteProjectFile(PROJECTS_DIR, req.params.id, fileName);
       /** @type {import('@open-design/contracts').DeleteProjectFileResponse} */
       const body = { ok: true };
       res.json(body);

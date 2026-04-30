@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>27SS Seoul Lightness · Collection Lookbook</title>
+  <style>
+    :root {
+      --bg: #f5f1ea;
+      --paper: #fffdf8;
+      --ink: #17130f;
+      --muted: #6d655a;
+      --line: #ded6ca;
+      --accent: #c5a24b;
+      --accent-soft: color-mix(in oklch, var(--accent) 16%, transparent);
+      --shadow: rgba(32, 25, 18, 0.12);
+      --font-display: "Iowan Old Style", "Charter", Georgia, serif;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+      --container: 1180px;
+      --gutter: clamp(18px, 4vw, 44px);
+      --radius: 8px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-body); line-height: 1.5; }
+    p, h1, h2, h3 { margin: 0; }
+    .page-shell { max-width: var(--container); margin: auto; padding: 56px var(--gutter); }
+    .topline { display: flex; justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: 14px; font: 11px var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+    .section { padding: 72px 0; border-bottom: 1px solid var(--line); }
+    .kicker { font: 11px var(--font-mono); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 14px; }
+    .display { font-family: var(--font-display); font-size: clamp(54px, 9vw, 118px); line-height: .92; letter-spacing: -.035em; font-weight: 400; }
+    .h2 { font-family: var(--font-display); font-size: clamp(34px, 5vw, 64px); line-height: 1; letter-spacing: -.025em; font-weight: 400; }
+    .lead { max-width: 640px; color: var(--muted); font-size: clamp(17px, 2vw, 22px); line-height: 1.45; }
+    .meta { font: 12px var(--font-mono); color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+    .hero-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 5vw, 72px); align-items: end; }
+    .image-frame { min-height: 360px; border-radius: var(--radius); border: 1px solid var(--line); background: linear-gradient(135deg, var(--accent-soft), var(--paper)); box-shadow: 0 24px 70px var(--shadow); display: grid; place-items: center; color: var(--muted); font: 11px var(--font-mono); letter-spacing: .1em; text-transform: uppercase; text-align: center; padding: 28px; }
+    .story-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 6vw, 86px); }
+    .story-copy { display: grid; gap: 22px; }
+    .quote { font-family: var(--font-display); font-size: clamp(30px, 4vw, 54px); line-height: 1.02; color: var(--accent); }
+    .look-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .look-card { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+    .look-card .image-frame { border: 0; border-radius: 0; box-shadow: none; min-height: 300px; aspect-ratio: 4 / 5; }
+    .look-info { padding: 16px; display: grid; gap: 10px; }
+    .look-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+    .look-title { font-family: var(--font-display); font-size: 26px; line-height: 1; }
+    .look-note { color: var(--muted); font-size: 14px; }
+    @media (max-width: 900px) { .hero-grid, .story-grid, .look-grid { grid-template-columns: 1fr; } .topline { flex-direction: column; gap: 8px; } }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topline"><span>OD Fashion Studio</span><span>27SS</span><span>Buyer Preview</span></header>
+    <main>
+      <section class="section hero-grid">
+        <div>
+          <p class="kicker">27SS · Womenswear capsule</p>
+          <h1 class="display">Seoul Lightness</h1>
+          <p class="lead" style="margin-top: 22px;">Light tailoring, washed neutrals, and one citrus accent for humid city mornings and late train commutes.</p>
+          <p class="meta" style="margin-top: 28px;">Drop 01 · Seoul / Online · 6 looks</p>
+        </div>
+        <figure class="image-frame">imagegen output<br />images/cover-look.png</figure>
+      </section>
+      <section class="section story-grid">
+        <div><p class="kicker">Collection story</p><h2 class="h2">Soft structure for weather that keeps changing.</h2></div>
+        <div class="story-copy">
+          <p class="lead">The capsule balances office polish with weekend ease: relaxed waistlines, paper-touch cotton, and fluid layers that move without losing shape.</p>
+          <p class="quote">Washed, weightless, ready before the day decides what it is.</p>
+        </div>
+      </section>
+      <section class="section">
+        <p class="kicker">Key looks</p>
+        <h2 class="h2" style="margin-bottom: 28px;">Six looks that define the capsule</h2>
+        <div class="look-grid">
+          <article class="look-card"><div class="image-frame">look-01.png</div><div class="look-info"><div class="look-head"><h3 class="look-title">Look 01</h3><span class="meta">Tailoring</span></div><p class="look-note">Unlined blazer, chalk cotton trouser, citron knit shell. The range opener.</p></div></article>
+          <article class="look-card"><div class="image-frame">look-02.png</div><div class="look-info"><div class="look-head"><h3 class="look-title">Look 02</h3><span class="meta">Dress</span></div><p class="look-note">Washed column dress with soft belt and compact cardigan. Easy commercial read.</p></div></article>
+          <article class="look-card"><div class="image-frame">look-03.png</div><div class="look-info"><div class="look-head"><h3 class="look-title">Look 03</h3><span class="meta">Layering</span></div><p class="look-note">Sheer overshirt, paper-touch skirt, tonal tank. Light transparency story.</p></div></article>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

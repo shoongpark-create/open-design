@@ -37,6 +37,7 @@
     "@open-design/sidecar-proto": "workspace:0.1.0",
     "better-sqlite3": "^11.10.0",
     "express": "^4.19.2",
+    "ima2-gen": "^1.1.8",
     "jszip": "^3.10.1",
     "multer": "^1.4.5-lts.1"
   },

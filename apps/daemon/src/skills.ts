@@ -1,5 +1,5 @@
 // @ts-nocheck
-// Skill registry. Scans <projectRoot>/skills/* for SKILL.md files, parses
+// Skill registry. Scans <projectRoot>/skills/**/SKILL.md files, parses
 // front-matter, returns listing. No watching in this MVP — re-scans on every
 // GET /api/skills, which is fine for dozens of skills.
 
@@ -9,15 +9,8 @@ import { parseFrontmatter } from "./frontmatter.js";
 
 export async function listSkills(skillsRoot) {
   const out = [];
-  let entries = [];
-  try {
-    entries = await readdir(skillsRoot, { withFileTypes: true });
-  } catch {
-    return out;
-  }
-  for (const entry of entries) {
-    if (!entry.isDirectory()) continue;
-    const dir = path.join(skillsRoot, entry.name);
+  const dirs = await findSkillDirs(skillsRoot);
+  for (const dir of dirs) {
     const skillPath = path.join(dir, "SKILL.md");
     try {
       const stats = await stat(skillPath);
@@ -26,9 +19,15 @@ export async function listSkills(skillsRoot) {
       const { data, body } = parseFrontmatter(raw);
       const hasAttachments = await dirHasAttachments(dir);
       const mode = data.od?.mode || inferMode(body, data.description);
+      const relativeDir = path
+        .relative(skillsRoot, dir)
+        .split(path.sep)
+        .join("/");
+      const category = inferCategory(relativeDir, data.od?.category);
       out.push({
-        id: data.name || entry.name,
-        name: data.name || entry.name,
+        id: data.name || path.basename(dir),
+        name: data.name || path.basename(dir),
+        category,
         description: data.description || "",
         triggers: Array.isArray(data.triggers) ? data.triggers : [],
         mode,
@@ -60,7 +59,51 @@ export async function listSkills(skillsRoot) {
       // Skip unreadable entries — this is discovery, not validation.
     }
   }
+  return out.sort((a, b) => {
+    const categoryCmp = String(a.category || "").localeCompare(
+      String(b.category || "")
+    );
+    if (categoryCmp !== 0) return categoryCmp;
+    return String(a.name || a.id).localeCompare(String(b.name || b.id));
+  });
+}
+
+// Walk the skills tree to find every directory that contains a SKILL.md.
+// Stops descending into a subtree once a SKILL.md is found, so a skill that
+// nests its own folder (e.g. assets/, references/) doesn't get double-listed.
+async function findSkillDirs(root) {
+  const out = [];
+  async function walk(dir) {
+    let entries = [];
+    try {
+      entries = await readdir(dir, { withFileTypes: true });
+    } catch {
+      return;
+    }
+    if (entries.some((entry) => entry.isFile() && entry.name === "SKILL.md")) {
+      out.push(dir);
+      return;
+    }
+    for (const entry of entries) {
+      if (!entry.isDirectory()) continue;
+      if (entry.name.startsWith(".")) continue;
+      await walk(path.join(dir, entry.name));
+    }
+  }
+  await walk(root);
   return out;
+}
+
+// Category is the first path segment relative to skillsRoot (e.g. "marketing"
+// for skills/marketing/blog-post). An explicit `od.category` in front-matter
+// wins over the directory derivation. Skills at the root collapse to
+// "general" so legacy seeds keep a stable bucket.
+function inferCategory(relativeDir, explicit) {
+  if (typeof explicit === "string" && explicit.trim()) {
+    return explicit.trim().toLowerCase();
+  }
+  const first = String(relativeDir || "").split("/")[0]?.trim();
+  return first && first !== "." ? first.toLowerCase() : "general";
 }
 
 // Skills that ship side files (e.g. `assets/template.html`, `references/*.md`)

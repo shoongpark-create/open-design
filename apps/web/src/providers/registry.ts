@@ -75,6 +75,62 @@ export async function daemonIsLive(): Promise<boolean> {
   }
 }
 
+// Probe whether the local ima2 server is reachable through the daemon.
+// Returns null on transport error (network/JSON) so the caller can keep
+// the feature hidden silently; an explicit `{ ok: false, error }` payload
+// from the daemon means ima2 is configured but unhealthy.
+export async function fetchIma2Status(): Promise<{
+  ok: boolean;
+  serverUrl: string | null;
+  error?: string;
+  data?: unknown;
+} | null> {
+  try {
+    const resp = await fetch('/api/imagegen/ima2/status');
+    if (!resp.ok) return null;
+    return await resp.json();
+  } catch {
+    return null;
+  }
+}
+
+// Generate an ima2 image straight into a project folder. Optional `name`
+// can include a subpath (e.g. `images/look-1.png`); the daemon sanitizes
+// it before write. Returns the resulting ProjectFile + raw ima2 metadata
+// (request id, elapsed time, etc.) so the UI can show provenance.
+export async function generateProjectIma2Image(
+  projectId: string,
+  body: {
+    prompt: string;
+    name?: string;
+    quality?: 'low' | 'medium' | 'high';
+    size?: string;
+    format?: 'png' | 'jpg' | 'webp';
+    moderation?: 'low' | 'auto';
+    model?: string;
+    mode?: 'auto' | 'direct';
+    webSearchEnabled?: boolean;
+    references?: string[];
+    timeoutMs?: number;
+  },
+): Promise<{ file: ProjectFile; ima2?: unknown } | null> {
+  try {
+    const resp = await fetch(
+      `/api/projects/${encodeURIComponent(projectId)}/imagegen/ima2/generate`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      },
+    );
+    if (!resp.ok) return null;
+    const json = (await resp.json()) as { file: ProjectFile; ima2?: unknown };
+    return json;
+  } catch {
+    return null;
+  }
+}
+
 export async function fetchSkillExample(id: string): Promise<string | null> {
   try {
     const resp = await fetch(`/api/skills/${encodeURIComponent(id)}/example`);
