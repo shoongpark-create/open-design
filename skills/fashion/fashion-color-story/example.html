@@ -1,0 +1,758 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>27SS Color Story · Humid Commute Palette · NEXU</title>
+  <style>
+    :root {
+      --bg: #efeae1;
+      --paper: #faf6ee;
+      --paper-deep: #e8e1d3;
+      --ink: #161210;
+      --ink-soft: #2c2520;
+      --muted: #6e655a;
+      --muted-soft: #94897b;
+      --line: #d8cebf;
+      --line-soft: #e6ddcd;
+      --accent: #4a5d76;
+      --accent-soft: color-mix(in oklch, var(--accent) 16%, transparent);
+      --accent-loud: #b8754a;
+      --tier-main: #4a5d76;
+      --tier-season: #8a6f4a;
+      --tier-accent: #b8754a;
+      --shadow: rgba(28, 22, 16, 0.10);
+      --shadow-deep: rgba(28, 22, 16, 0.18);
+      --font-display: "Iowan Old Style", "Charter", Georgia, serif;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+      --container: 1240px;
+      --gutter: clamp(18px, 4vw, 48px);
+      --radius: 6px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; background: linear-gradient(180deg, var(--bg), color-mix(in oklch, var(--paper) 60%, var(--bg))); color: var(--ink); font-family: var(--font-body); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+    p, h1, h2, h3 { margin: 0; text-wrap: pretty; }
+    .page-shell { max-width: var(--container); margin-inline: auto; padding: clamp(28px, 5vw, 72px) var(--gutter); }
+    .topline { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--line); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .topline-status { color: var(--accent-loud); }
+    .section { padding: clamp(48px, 7vw, 96px) 0; border-bottom: 1px solid var(--line); }
+    .section:last-child { border-bottom: 0; }
+    .kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-loud); margin-bottom: 14px; }
+    .display { font-family: var(--font-display); font-size: clamp(52px, 9vw, 124px); line-height: 0.92; letter-spacing: -0.035em; font-weight: 400; }
+    .h2 { font-family: var(--font-display); font-size: clamp(32px, 4.6vw, 58px); line-height: 1.02; letter-spacing: -0.022em; font-weight: 400; }
+    .h3 { font-family: var(--font-display); font-size: 24px; line-height: 1.1; letter-spacing: -0.012em; font-weight: 400; }
+    .lead { max-width: 680px; color: var(--muted); font-size: clamp(16px, 1.6vw, 20px); line-height: 1.5; }
+    .meta { font-family: var(--font-mono); color: var(--muted); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .cover-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: clamp(28px, 5vw, 72px); align-items: end; }
+    .thesis { font-family: var(--font-display); font-size: clamp(22px, 2.2vw, 30px); line-height: 1.25; color: var(--ink-soft); max-width: 36ch; margin-top: 26px; letter-spacing: -0.01em; }
+    .cover-meta { margin-top: 28px; display: inline-flex; gap: 14px; flex-wrap: wrap; }
+    .palette-preview { margin: 0; display: grid; gap: 14px; }
+    .preview-strip { display: grid; grid-template-columns: repeat(8, 1fr); gap: 6px; border-radius: var(--radius); overflow: hidden; box-shadow: 0 22px 50px var(--shadow); }
+    .preview-chip { aspect-ratio: 1 / 1.25; display: block; border: 1px solid rgba(0, 0, 0, 0.08); }
+    .preview-caption { text-align: right; letter-spacing: 0.10em; }
+    .thesis-block { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(28px, 6vw, 86px); align-items: start; }
+    .thesis-copy { display: grid; gap: 22px; max-width: 60ch; }
+    .thesis-copy p { color: var(--muted); }
+    .thesis-copy p.lead { color: var(--ink-soft); }
+    .master-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .master-chip { border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 8px 22px var(--shadow); }
+    .chip-swatch { height: 132px; border-bottom: 1px solid rgba(0, 0, 0, 0.08); }
+    .chip-info { padding: 14px 16px 16px; display: grid; gap: 4px; }
+    .chip-name { font-family: var(--font-display); font-size: 19px; letter-spacing: -0.01em; line-height: 1.1; }
+    .chip-code { font-size: 10px; letter-spacing: 0.08em; color: var(--ink-soft); font-family: var(--font-mono); }
+    .chip-tier { align-self: start; padding: 2px 7px; border-radius: 3px; border: 1px solid var(--line); font-size: 9px; letter-spacing: 0.14em; color: var(--muted); font-family: var(--font-mono); text-transform: uppercase; }
+    .master-chip[data-tier="main"] .chip-tier { color: var(--tier-main); border-color: color-mix(in oklch, var(--tier-main) 35%, transparent); }
+    .master-chip[data-tier="season"] .chip-tier { color: var(--tier-season); border-color: color-mix(in oklch, var(--tier-season) 35%, transparent); }
+    .master-chip[data-tier="accent"] .chip-tier { color: var(--tier-accent); border-color: color-mix(in oklch, var(--tier-accent) 40%, transparent); }
+    .proportion-bar { display: flex; width: 100%; height: 56px; border-radius: var(--radius); overflow: hidden; box-shadow: 0 6px 18px var(--shadow); border: 1px solid var(--line); margin-bottom: 36px; }
+    .proportion-segment { flex: 0 0 var(--share, 33.33%); display: flex; align-items: center; justify-content: center; color: white; letter-spacing: 0.10em; font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; }
+    .proportion-segment[data-tier="main"] { background: var(--tier-main); }
+    .proportion-segment[data-tier="season"] { background: var(--tier-season); }
+    .proportion-segment[data-tier="accent"] { background: var(--tier-accent); }
+    .tier-blocks { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .tier-block { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: color-mix(in oklch, var(--paper) 96%, white); display: grid; gap: 14px; border-top-width: 4px; }
+    .tier-block[data-tier="main"] { border-top-color: var(--tier-main); }
+    .tier-block[data-tier="season"] { border-top-color: var(--tier-season); }
+    .tier-block[data-tier="accent"] { border-top-color: var(--tier-accent); }
+    .tier-title { font-family: var(--font-display); font-size: 22px; letter-spacing: -0.012em; line-height: 1.05; }
+    .tier-desc { font-size: 14px; color: var(--muted); }
+    .tier-chips { display: flex; gap: 4px; flex-wrap: wrap; }
+    .tier-chip { width: 36px; height: 36px; border-radius: 4px; border: 1px solid rgba(0, 0, 0, 0.08); box-shadow: 0 2px 6px var(--shadow); }
+    .color-detail { display: grid; grid-template-columns: minmax(280px, 0.9fr) 1.1fr; grid-template-areas: "head head" "swatch codes" "swatch fabric" "swatch rules"; gap: 24px clamp(24px, 4vw, 56px); padding: clamp(48px, 7vw, 96px) 0; }
+    .color-detail .color-head { grid-area: head; display: flex; align-items: baseline; gap: 24px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .color-detail .color-swatch-large { grid-area: swatch; align-self: start; width: 100%; aspect-ratio: 1 / 1; border-radius: var(--radius); box-shadow: 0 22px 60px var(--shadow); border: 1px solid rgba(0, 0, 0, 0.08); max-height: 460px; }
+    .color-detail .color-meta { flex: 1; display: grid; gap: 6px; }
+    .color-detail .color-tagline { color: var(--ink-soft); font-size: 18px; max-width: 40ch; }
+    .color-detail .color-codes { grid-area: codes; }
+    .color-detail .color-fabric { grid-area: fabric; }
+    .color-detail .color-rules { grid-area: rules; }
+    .code-table { width: 100%; border-collapse: collapse; font-family: var(--font-mono); font-size: 13px; }
+    .code-table th, .code-table td { padding: 10px 14px; text-align: left; border-bottom: 1px solid var(--line-soft); }
+    .code-table th { width: 130px; color: var(--muted); font-weight: normal; letter-spacing: 0.08em; font-size: 10px; text-transform: uppercase; }
+    .code-table td { color: var(--ink); letter-spacing: 0.02em; }
+    .fabric-list, .rule-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+    .fabric-list li { padding: 10px 14px; border: 1px solid var(--line-soft); border-radius: 4px; background: color-mix(in oklch, var(--paper) 95%, white); font-size: 14px; color: var(--ink-soft); }
+    .rule-list li { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; font-size: 14px; color: var(--ink-soft); }
+    .rule-tag { font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; padding: 2px 8px; border-radius: 3px; flex-shrink: 0; margin-top: 1px; }
+    .rule-do { background: color-mix(in oklch, var(--tier-main) 12%, transparent); color: var(--tier-main); }
+    .rule-dont { background: color-mix(in oklch, var(--tier-accent) 12%, transparent); color: var(--tier-accent); }
+    .color-detail[data-tier="main"] .color-head { border-bottom-color: var(--tier-main); }
+    .color-detail[data-tier="season"] .color-head { border-bottom-color: var(--tier-season); }
+    .color-detail[data-tier="accent"] .color-head { border-bottom-color: var(--tier-accent); }
+    .matrix-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); }
+    .matrix { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .matrix th, .matrix td { padding: 10px 12px; text-align: center; border-bottom: 1px solid var(--line-soft); border-right: 1px solid var(--line-soft); }
+    .matrix th { font-weight: normal; }
+    .matrix tbody th { text-align: left; font-family: var(--font-display); font-size: 16px; color: var(--ink); }
+    .matrix .matrix-corner { background: var(--paper-deep); text-align: left; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted); }
+    .matrix .matrix-color { vertical-align: bottom; padding: 14px 8px; background: var(--paper-deep); }
+    .matrix-chip { display: block; width: 28px; height: 28px; border-radius: 3px; margin: 0 auto 6px; border: 1px solid rgba(0, 0, 0, 0.08); }
+    .matrix .matrix-color .meta { display: block; font-size: 9px; letter-spacing: 0.06em; }
+    .matrix .matrix-total { background: var(--paper-deep); font-family: var(--font-mono); font-size: 12px; }
+    .matrix .matrix-totals th { background: var(--paper-deep); }
+    .matrix .matrix-totals td { background: var(--paper-deep); font-family: var(--font-mono); font-size: 12px; }
+    .matrix .matrix-totals td.matrix-grand { background: var(--ink); color: var(--paper); font-weight: bold; }
+    .matrix-note { margin-top: 12px; font-size: 11px; letter-spacing: 0.06em; }
+    .count-table { width: 100%; border-collapse: collapse; background: var(--paper); border: 1px solid var(--line); }
+    .count-table th, .count-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line-soft); }
+    .count-table th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted); font-weight: normal; background: var(--paper-deep); }
+    .count-table tbody td:first-child { font-family: var(--font-display); font-size: 17px; }
+    .count-table tbody td:nth-child(2) { font-family: var(--font-mono); font-size: 14px; }
+    .pantone-note { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(24px, 5vw, 64px); align-items: start; }
+    .pantone-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .pantone-card { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); display: grid; gap: 12px; }
+    .pantone-card p { color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .pantone-card strong { color: var(--ink); }
+    .qc-block { display: grid; gap: 24px; }
+    .qc-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .qc-card { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); display: grid; gap: 10px; }
+    .qc-card p, .qc-list { color: var(--muted); font-size: 14px; line-height: 1.5; }
+    .qc-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+    .qc-list strong { color: var(--ink); }
+    .anti-block { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(24px, 5vw, 64px); align-items: start; }
+    .anti-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; max-width: 60ch; }
+    .anti-list li { padding: 14px 18px; border: 1px dashed var(--line); border-radius: var(--radius); color: var(--ink-soft); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; background: color-mix(in oklch, var(--paper) 80%, white); }
+    .anti-list li::before { content: "× "; color: var(--accent-loud); font-weight: 600; }
+    .carryover-table { width: 100%; border-collapse: collapse; background: var(--paper); border: 1px solid var(--line); }
+    .carryover-table th, .carryover-table td { padding: 14px 16px; text-align: left; border-bottom: 1px solid var(--line-soft); font-size: 14px; }
+    .carryover-table th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: var(--muted); font-weight: normal; background: var(--paper-deep); }
+    .row-chip { display: inline-block; width: 18px; height: 18px; border-radius: 3px; vertical-align: middle; margin-right: 10px; border: 1px solid rgba(0, 0, 0, 0.08); }
+    .open-questions { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(24px, 5vw, 64px); align-items: start; }
+    .next-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; max-width: 60ch; }
+    .next-list li { display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line-soft); }
+    .next-when { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .next-what { color: var(--ink-soft); font-size: 15px; line-height: 1.5; }
+    @media (max-width: 1024px) { .master-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .qc-grid { grid-template-columns: 1fr 1fr; } .pantone-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 800px) { .cover-grid, .thesis-block, .pantone-note, .anti-block, .open-questions { grid-template-columns: 1fr; } .preview-strip { grid-template-columns: repeat(4, 1fr); } .master-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .tier-blocks { grid-template-columns: 1fr; } .qc-grid { grid-template-columns: 1fr; } .color-detail { grid-template-columns: 1fr; grid-template-areas: "head" "swatch" "codes" "fabric" "rules"; } .color-detail .color-swatch-large { aspect-ratio: 5 / 3; max-height: 320px; } .color-detail .color-head { flex-direction: column; align-items: flex-start; gap: 10px; } .topline { flex-direction: column; align-items: flex-start; } }
+    @media (max-width: 520px) { .master-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topline">
+      <span>NEXU STUDIO</span>
+      <span>27 Spring / Summer — Color Story</span>
+      <span class="topline-status">v2 · Locked 2026.10.01</span>
+    </header>
+    <main id="color-story">
+
+      <!-- 1. Cover -->
+      <section class="section cover-grid" data-od-id="cover">
+        <div>
+          <p class="kicker">27SS · Color Story</p>
+          <h1 class="display">Humid<br/>Commute<br/>Palette</h1>
+          <p class="thesis">8개 컬러 · 3 main · 4 season · 1 dry pop accent. 새벽 4호선의 톤을 미세하게 흐리고, 한 점만 마른 광택으로 깬다.</p>
+          <p class="meta cover-meta">
+            <span>NEXU Studio</span>
+            <span>Author · Lead Designer</span>
+            <span>Lock 2026.10.01</span>
+            <span>Status · v2 locked</span>
+          </p>
+        </div>
+        <figure class="palette-preview">
+          <div class="preview-strip">
+            <span class="preview-chip" style="background:#f1ece1;"></span>
+            <span class="preview-chip" style="background:#1a1f24;"></span>
+            <span class="preview-chip" style="background:#1c2a4a;"></span>
+            <span class="preview-chip" style="background:#7e8fa3;"></span>
+            <span class="preview-chip" style="background:#a08172;"></span>
+            <span class="preview-chip" style="background:#3a3631;"></span>
+            <span class="preview-chip" style="background:#d3c9b1;"></span>
+            <span class="preview-chip" style="background:#bd6c3d;"></span>
+          </div>
+          <p class="meta preview-caption">8 colors · 3 main · 4 season · 1 accent</p>
+        </figure>
+      </section>
+
+      <!-- 2. Thesis -->
+      <section class="section thesis-block" data-od-id="thesis">
+        <div>
+          <p class="kicker">Why this palette</p>
+          <h2 class="h2">통근 시간의 미세한 습기를 컬러로 옮긴 결과.</h2>
+        </div>
+        <div class="thesis-copy">
+          <p class="lead">컨셉보드 "Humid Commute" 영역에서 6개 컬러 시드를 8개 락 컬러로 확장. 메인 3색은 NEXU 브랜드 캐리오버(아이보리·소프트 블랙·네이비)로 셀-스루 안정성 유지, 시즌 4색은 새벽 통근 톤(블루·테라코타·차콜·옅은 그레이), 액센트 1색은 마른 광택의 dry pop으로 Musinsa 썸네일 안전장치.</p>
+          <p>60/30/10 비율은 K-DTC 영캐주얼의 보수적 안전선. 26FW의 짙은 톤(60% 네이비·차콜) 대비 27SS는 mid-tone 비중을 키움. 액센트는 시즌 한 점만, 자켓·셔츠 1~2 스타일에 한정.</p>
+          <p>26FW에서 powder pink가 조기 소진(완판 67%)되었지만 27SS에는 의도적으로 빼고 dry pop accent로 대체. 이유: 26FW 고객 인식이 "핑크 시즌"으로 굳어서 27SS의 humid 톤과 충돌. WGSN 27 키컬러 Luminous Blue는 채도를 한 단계 dusty로 끌어내려 6am sky blue로 변환.</p>
+        </div>
+      </section>
+
+      <!-- 3. Master Grid -->
+      <section class="section" data-od-id="master-grid">
+        <p class="kicker">Master palette · all colors</p>
+        <h2 class="h2" style="margin-bottom: 28px;">8 colors at a glance.</h2>
+        <div class="master-grid">
+          <article class="master-chip" data-tier="main">
+            <div class="chip-swatch" style="background:#f1ece1;"></div>
+            <div class="chip-info"><h3 class="chip-name">humid linen ivory</h3><p class="meta chip-code">#F1ECE1 · 11-0507 TCX</p><p class="meta chip-tier">main</p></div>
+          </article>
+          <article class="master-chip" data-tier="main">
+            <div class="chip-swatch" style="background:#1a1f24;"></div>
+            <div class="chip-info"><h3 class="chip-name">soft black</h3><p class="meta chip-code">#1A1F24 · 19-1102 TCX</p><p class="meta chip-tier">main</p></div>
+          </article>
+          <article class="master-chip" data-tier="main">
+            <div class="chip-swatch" style="background:#1c2a4a;"></div>
+            <div class="chip-info"><h3 class="chip-name">brand navy</h3><p class="meta chip-code">#1C2A4A · 19-3911 TCX</p><p class="meta chip-tier">main</p></div>
+          </article>
+          <article class="master-chip" data-tier="season">
+            <div class="chip-swatch" style="background:#7e8fa3;"></div>
+            <div class="chip-info"><h3 class="chip-name">6am sky blue</h3><p class="meta chip-code">#7E8FA3 · 16-4109 TCX</p><p class="meta chip-tier">season</p></div>
+          </article>
+          <article class="master-chip" data-tier="season">
+            <div class="chip-swatch" style="background:#a08172;"></div>
+            <div class="chip-info"><h3 class="chip-name">weathered terracotta</h3><p class="meta chip-code">#A08172 · 17-1422 TCX</p><p class="meta chip-tier">season</p></div>
+          </article>
+          <article class="master-chip" data-tier="season">
+            <div class="chip-swatch" style="background:#3a3631;"></div>
+            <div class="chip-info"><h3 class="chip-name">industrial charcoal</h3><p class="meta chip-code">#3A3631 · 19-4205 TCX</p><p class="meta chip-tier">season</p></div>
+          </article>
+          <article class="master-chip" data-tier="season">
+            <div class="chip-swatch" style="background:#d3c9b1;"></div>
+            <div class="chip-info"><h3 class="chip-name">milky overcast</h3><p class="meta chip-code">#D3C9B1 · 13-0905 TCX</p><p class="meta chip-tier">season</p></div>
+          </article>
+          <article class="master-chip" data-tier="accent">
+            <div class="chip-swatch" style="background:#bd6c3d;"></div>
+            <div class="chip-info"><h3 class="chip-name">dry pop</h3><p class="meta chip-code">#BD6C3D · 17-1463 TCX</p><p class="meta chip-tier">accent</p></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 4. Hierarchy + Proportion -->
+      <section class="section hierarchy" data-od-id="hierarchy">
+        <p class="kicker">Hierarchy</p>
+        <h2 class="h2" style="margin-bottom: 28px;">60 / 30 / 10 — palette weight.</h2>
+        <div class="proportion-bar" role="img" aria-label="Palette proportion bar">
+          <div class="proportion-segment" data-tier="main" style="--share: 60%;"><span class="meta">main · 60%</span></div>
+          <div class="proportion-segment" data-tier="season" style="--share: 30%;"><span class="meta">season · 30%</span></div>
+          <div class="proportion-segment" data-tier="accent" style="--share: 10%;"><span class="meta">accent · 10%</span></div>
+        </div>
+        <div class="tier-blocks">
+          <div class="tier-block" data-tier="main">
+            <h3 class="tier-title">Main · 3 colors</h3>
+            <p class="lead tier-desc">NEXU 브랜드 캐리오버. 모든 카테고리에 등장하는 안전선.</p>
+            <div class="tier-chips">
+              <span class="tier-chip" style="background:#f1ece1;" title="humid linen ivory"></span>
+              <span class="tier-chip" style="background:#1a1f24;" title="soft black"></span>
+              <span class="tier-chip" style="background:#1c2a4a;" title="brand navy"></span>
+            </div>
+          </div>
+          <div class="tier-block" data-tier="season">
+            <h3 class="tier-title">Season · 4 colors</h3>
+            <p class="lead tier-desc">27SS 새벽 통근 톤. 채도 한 단계 흐림.</p>
+            <div class="tier-chips">
+              <span class="tier-chip" style="background:#7e8fa3;" title="6am sky blue"></span>
+              <span class="tier-chip" style="background:#a08172;" title="weathered terracotta"></span>
+              <span class="tier-chip" style="background:#3a3631;" title="industrial charcoal"></span>
+              <span class="tier-chip" style="background:#d3c9b1;" title="milky overcast"></span>
+            </div>
+          </div>
+          <div class="tier-block" data-tier="accent">
+            <h3 class="tier-title">Accent · 1 color</h3>
+            <p class="lead tier-desc">마른 광택. Musinsa 썸네일 클릭 안전장치 + dry industrial tension.</p>
+            <div class="tier-chips">
+              <span class="tier-chip" style="background:#bd6c3d;" title="dry pop"></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. Per-color details (8 spreads) -->
+
+      <!-- 5.1 humid linen ivory (main) -->
+      <section class="section color-detail" data-od-id="color-humid-linen-ivory" data-tier="main">
+        <div class="color-head">
+          <div class="color-meta">
+            <p class="meta">main · carryover from 26SS</p>
+            <h3 class="h3 color-name">humid linen ivory</h3>
+            <p class="lead color-tagline">아이보리 베이스. 모든 카테고리·모든 시즌의 시작점.</p>
+          </div>
+        </div>
+        <div class="color-swatch-large" style="background:#f1ece1;" aria-label="humid linen ivory"></div>
+        <div class="color-codes">
+          <table class="code-table">
+            <tbody>
+              <tr><th>HEX</th><td>#F1ECE1</td></tr>
+              <tr><th>RGB</th><td>241, 236, 225</td></tr>
+              <tr><th>Pantone TCX</th><td>11-0507 TCX · Pristine</td></tr>
+              <tr><th>Pantone TPG</th><td>11-0507 TPG (paper / lookbook only)</td></tr>
+              <tr><th>Coloro</th><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="color-fabric">
+          <p class="kicker">Fabric pairings</p>
+          <ul class="fabric-list">
+            <li>Washed cotton (body) — 셔츠·팬츠 베이스</li>
+            <li>Linen blend — 가벼운 자켓, 블라우스</li>
+            <li>14 gauge knit — 크루넥, 카디건</li>
+          </ul>
+        </div>
+        <div class="color-rules">
+          <p class="kicker">Use rules</p>
+          <ul class="rule-list">
+            <li><span class="rule-tag rule-do">use</span>모든 카테고리, 모든 룩의 베이스 단독 룩으로 가능</li>
+            <li><span class="rule-tag rule-do">pair</span>brass hardware, raw selvedge, 흰 스티치</li>
+            <li><span class="rule-tag rule-dont">avoid</span>풀 화이트(11-0601)와 같은 룩에 같이 — 회색감 충돌</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 5.2 soft black (main) -->
+      <section class="section color-detail" data-od-id="color-soft-black" data-tier="main">
+        <div class="color-head">
+          <div class="color-meta">
+            <p class="meta">main · permanent brand carryover</p>
+            <h3 class="h3 color-name">soft black</h3>
+            <p class="lead color-tagline">진짜 블랙(19-4007 Caviar)이 아닌 약간 따뜻한 NEXU 블랙.</p>
+          </div>
+        </div>
+        <div class="color-swatch-large" style="background:#1a1f24;" aria-label="soft black"></div>
+        <div class="color-codes">
+          <table class="code-table">
+            <tbody>
+              <tr><th>HEX</th><td>#1A1F24</td></tr>
+              <tr><th>RGB</th><td>26, 31, 36</td></tr>
+              <tr><th>Pantone TCX</th><td>19-1102 TCX · Phantom</td></tr>
+              <tr><th>Pantone TPG</th><td>19-1102 TPG (paper / lookbook only)</td></tr>
+              <tr><th>Coloro</th><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="color-fabric">
+          <p class="kicker">Fabric pairings</p>
+          <ul class="fabric-list">
+            <li>Brushed wool tropical — 자켓·팬츠 셋업</li>
+            <li>Technical nylon (dry) — 미니 백, 자켓 안감</li>
+            <li>Knit (14 gauge cotton blend) — 셔츠 위 레이어</li>
+          </ul>
+        </div>
+        <div class="color-rules">
+          <p class="kicker">Use rules</p>
+          <ul class="rule-list">
+            <li><span class="rule-tag rule-do">use</span>아우터·팬츠 메인 컬러 캐리오버</li>
+            <li><span class="rule-tag rule-do">pair</span>industrial charcoal과 톤 차이로 레이어 가능</li>
+            <li><span class="rule-tag rule-dont">avoid</span>3M 반사 트림, 풀 블랙 셋업(브랜드 톤 아님)</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 5.3 brand navy (main) -->
+      <section class="section color-detail" data-od-id="color-brand-navy" data-tier="main">
+        <div class="color-head">
+          <div class="color-meta">
+            <p class="meta">main · permanent brand carryover</p>
+            <h3 class="h3 color-name">brand navy</h3>
+            <p class="lead color-tagline">NEXU 시그니처 네이비. 모든 시즌 등장 의무.</p>
+          </div>
+        </div>
+        <div class="color-swatch-large" style="background:#1c2a4a;" aria-label="brand navy"></div>
+        <div class="color-codes">
+          <table class="code-table">
+            <tbody>
+              <tr><th>HEX</th><td>#1C2A4A</td></tr>
+              <tr><th>RGB</th><td>28, 42, 74</td></tr>
+              <tr><th>Pantone TCX</th><td>19-3911 TCX · Iron</td></tr>
+              <tr><th>Pantone TPG</th><td>19-3911 TPG (paper / lookbook only)</td></tr>
+              <tr><th>Coloro</th><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="color-fabric">
+          <p class="kicker">Fabric pairings</p>
+          <ul class="fabric-list">
+            <li>Brushed wool tropical — 자켓·팬츠</li>
+            <li>Washed cotton (body) — 셔츠·블라우스</li>
+            <li>Light denim (raw selvedge) — 데님 팬츠</li>
+          </ul>
+        </div>
+        <div class="color-rules">
+          <p class="kicker">Use rules</p>
+          <ul class="rule-list">
+            <li><span class="rule-tag rule-do">use</span>모든 카테고리. 매 시즌 1 스타일은 반드시 navy로</li>
+            <li><span class="rule-tag rule-do">pair</span>humid linen ivory와의 high-contrast pairing 권장</li>
+            <li><span class="rule-tag rule-dont">avoid</span>black과 같은 룩 — 톤 충돌</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 5.4 6am sky blue (season) -->
+      <section class="section color-detail" data-od-id="color-6am-sky-blue" data-tier="season">
+        <div class="color-head">
+          <div class="color-meta">
+            <p class="meta">season · new for 27SS</p>
+            <h3 class="h3 color-name">6am sky blue</h3>
+            <p class="lead color-tagline">WGSN Luminous Blue를 한 단계 dusty로 끌어내린 시즌 컬러.</p>
+          </div>
+        </div>
+        <div class="color-swatch-large" style="background:#7e8fa3;" aria-label="6am sky blue"></div>
+        <div class="color-codes">
+          <table class="code-table">
+            <tbody>
+              <tr><th>HEX</th><td>#7E8FA3</td></tr>
+              <tr><th>RGB</th><td>126, 143, 163</td></tr>
+              <tr><th>Pantone TCX</th><td>16-4109 TCX · Stone Blue</td></tr>
+              <tr><th>Pantone TPG</th><td>16-4109 TPG (paper / lookbook only)</td></tr>
+              <tr><th>Coloro</th><td>125-28-38 (reference, WGSN trace-back)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="color-fabric">
+          <p class="kicker">Fabric pairings</p>
+          <ul class="fabric-list">
+            <li>Washed cotton (body) — 셔츠 메인</li>
+            <li>Cotton poplin — 블라우스</li>
+            <li>14 gauge knit — 카디건</li>
+          </ul>
+        </div>
+        <div class="color-rules">
+          <p class="kicker">Use rules</p>
+          <ul class="rule-list">
+            <li><span class="rule-tag rule-do">use</span>27SS 시즌 메인 — 셔츠·니트·블라우스</li>
+            <li><span class="rule-tag rule-do">pair</span>milky overcast와 톤온톤 레이어, dry pop 1점 액센트</li>
+            <li><span class="rule-tag rule-dont">avoid</span>풀 새틴 광택 소재 — 톤이 차가워짐</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 5.5 weathered terracotta (season) -->
+      <section class="section color-detail" data-od-id="color-weathered-terracotta" data-tier="season">
+        <div class="color-head">
+          <div class="color-meta">
+            <p class="meta">season · new for 27SS</p>
+            <h3 class="h3 color-name">weathered terracotta</h3>
+            <p class="lead color-tagline">WGSN Energy Orange의 Korean DTC 변환. 흙빛 따뜻함.</p>
+          </div>
+        </div>
+        <div class="color-swatch-large" style="background:#a08172;" aria-label="weathered terracotta"></div>
+        <div class="color-codes">
+          <table class="code-table">
+            <tbody>
+              <tr><th>HEX</th><td>#A08172</td></tr>
+              <tr><th>RGB</th><td>160, 129, 114</td></tr>
+              <tr><th>Pantone TCX</th><td>17-1422 TCX · Burlwood</td></tr>
+              <tr><th>Pantone TPG</th><td>17-1422 TPG (paper / lookbook only)</td></tr>
+              <tr><th>Coloro</th><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="color-fabric">
+          <p class="kicker">Fabric pairings</p>
+          <ul class="fabric-list">
+            <li>Heavy cotton canvas — 자켓·미니 백</li>
+            <li>Washed cotton (body) — 셔츠</li>
+            <li>14 gauge knit — 풀오버</li>
+          </ul>
+        </div>
+        <div class="color-rules">
+          <p class="kicker">Use rules</p>
+          <ul class="rule-list">
+            <li><span class="rule-tag rule-do">use</span>27SS 자켓·셔츠·니트 — 시즌의 따뜻함 표현</li>
+            <li><span class="rule-tag rule-do">pair</span>brand navy와 high-contrast, ivory와 톤 매칭</li>
+            <li><span class="rule-tag rule-dont">avoid</span>dry pop accent와 같은 룩 — 같은 톤 패밀리 충돌</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 5.6 industrial charcoal (season) -->
+      <section class="section color-detail" data-od-id="color-industrial-charcoal" data-tier="season">
+        <div class="color-head">
+          <div class="color-meta">
+            <p class="meta">season · new for 27SS</p>
+            <h3 class="h3 color-name">industrial charcoal</h3>
+            <p class="lead color-tagline">soft black보다 한 단계 옅은 워크룸 회색. dry industrial tension의 앵커.</p>
+          </div>
+        </div>
+        <div class="color-swatch-large" style="background:#3a3631;" aria-label="industrial charcoal"></div>
+        <div class="color-codes">
+          <table class="code-table">
+            <tbody>
+              <tr><th>HEX</th><td>#3A3631</td></tr>
+              <tr><th>RGB</th><td>58, 54, 49</td></tr>
+              <tr><th>Pantone TCX</th><td>19-4205 TCX · Dark Shadow</td></tr>
+              <tr><th>Pantone TPG</th><td>19-4205 TPG (paper / lookbook only)</td></tr>
+              <tr><th>Coloro</th><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="color-fabric">
+          <p class="kicker">Fabric pairings</p>
+          <ul class="fabric-list">
+            <li>Technical nylon (dry) — 자켓·미니 백</li>
+            <li>Brushed wool tropical — 팬츠</li>
+            <li>Heavy cotton canvas — 워크 자켓</li>
+          </ul>
+        </div>
+        <div class="color-rules">
+          <p class="kicker">Use rules</p>
+          <ul class="rule-list">
+            <li><span class="rule-tag rule-do">use</span>아우터·팬츠 — 시즌 industrial tension 앵커</li>
+            <li><span class="rule-tag rule-do">pair</span>dry pop accent와 단 한 점 페어 (자켓 안감 / 라벨)</li>
+            <li><span class="rule-tag rule-dont">avoid</span>soft black과 같은 룩 — 거의 동일톤</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 5.7 milky overcast (season) -->
+      <section class="section color-detail" data-od-id="color-milky-overcast" data-tier="season">
+        <div class="color-head">
+          <div class="color-meta">
+            <p class="meta">season · new for 27SS</p>
+            <h3 class="h3 color-name">milky overcast</h3>
+            <p class="lead color-tagline">서울 6월 정오의 옅게 흐린 하늘. 가장 부드러운 시즌 컬러.</p>
+          </div>
+        </div>
+        <div class="color-swatch-large" style="background:#d3c9b1;" aria-label="milky overcast"></div>
+        <div class="color-codes">
+          <table class="code-table">
+            <tbody>
+              <tr><th>HEX</th><td>#D3C9B1</td></tr>
+              <tr><th>RGB</th><td>211, 201, 177</td></tr>
+              <tr><th>Pantone TCX</th><td>13-0905 TCX · Birch</td></tr>
+              <tr><th>Pantone TPG</th><td>13-0905 TPG (paper / lookbook only)</td></tr>
+              <tr><th>Coloro</th><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="color-fabric">
+          <p class="kicker">Fabric pairings</p>
+          <ul class="fabric-list">
+            <li>Silk-cotton blend — 블라우스 (옅은 광택)</li>
+            <li>Washed cotton (body) — 셔츠</li>
+            <li>Linen blend — 가벼운 자켓</li>
+          </ul>
+        </div>
+        <div class="color-rules">
+          <p class="kicker">Use rules</p>
+          <ul class="rule-list">
+            <li><span class="rule-tag rule-do">use</span>블라우스·셔츠 — 가장 부드러운 시즌 컬러</li>
+            <li><span class="rule-tag rule-do">pair</span>6am sky blue와 톤온톤, ivory와 헤리티지 매칭</li>
+            <li><span class="rule-tag rule-dont">avoid</span>Musinsa 단독 썸네일 — 워시아웃 위험. 자켓·니트와 페어로만</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 5.8 dry pop (accent) -->
+      <section class="section color-detail" data-od-id="color-dry-pop" data-tier="accent">
+        <div class="color-head">
+          <div class="color-meta">
+            <p class="meta">accent · new for 27SS · 1 color only</p>
+            <h3 class="h3 color-name">dry pop</h3>
+            <p class="lead color-tagline">시즌 전체의 dry industrial tension을 하나로 압축한 마른 광택.</p>
+          </div>
+        </div>
+        <div class="color-swatch-large" style="background:#bd6c3d;" aria-label="dry pop"></div>
+        <div class="color-codes">
+          <table class="code-table">
+            <tbody>
+              <tr><th>HEX</th><td>#BD6C3D</td></tr>
+              <tr><th>RGB</th><td>189, 108, 61</td></tr>
+              <tr><th>Pantone TCX</th><td>17-1463 TCX · Persimmon</td></tr>
+              <tr><th>Pantone TPG</th><td>17-1463 TPG (paper / lookbook only)</td></tr>
+              <tr><th>Coloro</th><td>—</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="color-fabric">
+          <p class="kicker">Fabric pairings</p>
+          <ul class="fabric-list">
+            <li>Satin patch — 트림으로만 (라벨, 포켓 안감)</li>
+            <li>Heavy cotton canvas — 1 자켓 한정</li>
+            <li>Brass hardware — 오리지널 페어</li>
+          </ul>
+        </div>
+        <div class="color-rules">
+          <p class="kicker">Use rules</p>
+          <ul class="rule-list">
+            <li><span class="rule-tag rule-do">use</span>27SS 시즌 전체 1~2 스타일에만. 사틴 트림은 OK</li>
+            <li><span class="rule-tag rule-do">pair</span>industrial charcoal과 단 한 점 페어 — dry industrial tension 완성</li>
+            <li><span class="rule-tag rule-dont">avoid</span>weathered terracotta와 같은 룩 — 같은 톤 패밀리</li>
+            <li><span class="rule-tag rule-dont">avoid</span>3 스타일 이상 — accent 기능 상실</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 6. Category × Color Matrix -->
+      <section class="section" data-od-id="category-matrix">
+        <p class="kicker">Category × color distribution</p>
+        <h2 class="h2" style="margin-bottom: 28px;">컬러가 카테고리에 어떻게 분배되는가.</h2>
+        <div class="matrix-wrap">
+          <table class="matrix">
+            <thead>
+              <tr>
+                <th class="matrix-corner">Category</th>
+                <th class="matrix-color"><span class="matrix-chip" style="background:#f1ece1;"></span><span class="meta">linen ivory</span></th>
+                <th class="matrix-color"><span class="matrix-chip" style="background:#1a1f24;"></span><span class="meta">soft black</span></th>
+                <th class="matrix-color"><span class="matrix-chip" style="background:#1c2a4a;"></span><span class="meta">brand navy</span></th>
+                <th class="matrix-color"><span class="matrix-chip" style="background:#7e8fa3;"></span><span class="meta">sky blue</span></th>
+                <th class="matrix-color"><span class="matrix-chip" style="background:#a08172;"></span><span class="meta">terracotta</span></th>
+                <th class="matrix-color"><span class="matrix-chip" style="background:#3a3631;"></span><span class="meta">charcoal</span></th>
+                <th class="matrix-color"><span class="matrix-chip" style="background:#d3c9b1;"></span><span class="meta">overcast</span></th>
+                <th class="matrix-color"><span class="matrix-chip" style="background:#bd6c3d;"></span><span class="meta">dry pop</span></th>
+                <th class="matrix-total">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><th>Shirts</th><td>5</td><td>3</td><td>4</td><td>4</td><td>3</td><td></td><td>3</td><td></td><td class="matrix-total">22</td></tr>
+              <tr><th>Outer</th><td>1</td><td>2</td><td>1</td><td></td><td>1</td><td>2</td><td></td><td>1</td><td class="matrix-total">8</td></tr>
+              <tr><th>Pants</th><td>3</td><td>2</td><td>3</td><td></td><td>2</td><td>2</td><td></td><td></td><td class="matrix-total">12</td></tr>
+              <tr><th>Knits</th><td>4</td><td>2</td><td>2</td><td>3</td><td>2</td><td></td><td>2</td><td></td><td class="matrix-total">15</td></tr>
+              <tr><th>Skirts / Dresses</th><td>2</td><td>1</td><td></td><td>1</td><td>1</td><td></td><td>1</td><td></td><td class="matrix-total">6</td></tr>
+              <tr><th>Accessories</th><td>1</td><td>2</td><td>1</td><td></td><td>1</td><td>2</td><td></td><td>1</td><td class="matrix-total">8</td></tr>
+              <tr class="matrix-totals"><th>Total per color</th><td>16</td><td>12</td><td>11</td><td>8</td><td>10</td><td>6</td><td>6</td><td>2</td><td class="matrix-grand">71</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="meta matrix-note">Empty cell = color not used in this category. Cell number = colorway count for that category × color pair. Accent (dry pop) appears in only 2 categories with 2 total colorways — 정상 범위.</p>
+      </section>
+
+      <!-- 7. Colorway Count per Style -->
+      <section class="section" data-od-id="colorway-count">
+        <p class="kicker">Colorway count per style</p>
+        <h2 class="h2" style="margin-bottom: 28px;">스타일당 몇 개 컬러로 낼 것인가.</h2>
+        <table class="count-table">
+          <thead><tr><th>Category</th><th>Colorway count per style</th><th>Reasoning</th></tr></thead>
+          <tbody>
+            <tr><td>Shirts</td><td>3–4</td><td>27SS 셔츠 6 스타일 × 평균 3.7 컬러 = 22 colorway. Top-of-funnel SKU.</td></tr>
+            <tr><td>Outer</td><td>1–2</td><td>27SS 자켓 5 스타일 × 1.6 = 8. 코스트 리스크 컨트롤.</td></tr>
+            <tr><td>Pants</td><td>2–3</td><td>27SS 팬츠 5 스타일 × 2.4 = 12. 메인 + 시즌 1색 페어가 표준.</td></tr>
+            <tr><td>Knits</td><td>3–5</td><td>27SS 니트 4 스타일 × 3.75 = 15. 가장 다양한 컬러웨이.</td></tr>
+            <tr><td>Skirts / Dresses</td><td>1–2</td><td>27SS 스커트/드레스 4 스타일 × 1.5 = 6. Statement piece.</td></tr>
+            <tr><td>Accessories</td><td>2–3</td><td>27SS 미니백·악세서리 4 스타일 × 2 = 8. 썸네일 필수 노출.</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 8. Pantone TCX vs TPG Note -->
+      <section class="section pantone-note" data-od-id="pantone-note">
+        <div>
+          <p class="kicker">Pantone systems</p>
+          <h2 class="h2">TCX는 작업 표준. TPG는 종이 전용.</h2>
+        </div>
+        <div class="pantone-grid">
+          <article class="pantone-card">
+            <h3 class="h3">TCX · Textile Cotton Extended</h3>
+            <p>면에 염색된 스왓치. 모든 27SS 컬러 코드는 TCX 기준. 다잉 공장·랩딥·랏 승인 모두 TCX. 약 2,625 컬러 보유. <strong>모든 공급사 브리프는 TCX로.</strong></p>
+          </article>
+          <article class="pantone-card">
+            <h3 class="h3">TPG · Textile Paper Green</h3>
+            <p>인쇄 종이판. ~40~60% 저렴. 같은 코드라도 약 15% 더 밝게 보임. <strong>인쇄용 룩북·종이 자료에만 사용. 패브릭 매칭에는 절대 사용 금지.</strong></p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 9. Dyeing QC + Tolerance -->
+      <section class="section qc-block" data-od-id="qc">
+        <p class="kicker">Dyeing QC + tolerance</p>
+        <h2 class="h2" style="margin-bottom: 24px;">공급사 브리프 — TCX 코드와 함께 보낼 내용.</h2>
+        <div class="qc-grid">
+          <article class="qc-card">
+            <p class="kicker">Working standard</p>
+            <h3 class="h3">Pantone TCX (fabric)</h3>
+            <p>이 컬러스토리의 모든 코드는 TCX. TPG는 인쇄 자료 한정 참조.</p>
+          </article>
+          <article class="qc-card">
+            <p class="kicker">Tolerance</p>
+            <h3 class="h3">ΔE ≤ 1.0–2.0</h3>
+            <ul class="qc-list">
+              <li><strong>Brand main</strong> (navy/black/ivory) — ΔE ≤ 1.0 (예외 없음).</li>
+              <li><strong>Season</strong> (sky blue, terracotta, charcoal, overcast) — ΔE ≤ 1.5.</li>
+              <li><strong>Accent</strong> (dry pop) — ΔE ≤ 1.5 (1색이라 엄격).</li>
+            </ul>
+          </article>
+          <article class="qc-card">
+            <p class="kicker">Lab-dip</p>
+            <h3 class="h3">3-strike approval</h3>
+            <p>Strike 1 — 컬러당 lighter/target/darker 3종. D65 + TL84 라이트박스 비교. Strike 2 narrowed. Strike 3 final. 라운드당 5–10 영업일.</p>
+          </article>
+          <article class="qc-card">
+            <p class="kicker">Bulk lot</p>
+            <h3 class="h3">Head-to-head per lot</h3>
+            <p>모든 벌크 다잉 랏은 승인된 Strike와 D65+TL84 비교 의무. 같은 TCX 코드라도 랏 드리프트 가능. 공급사 서면 락 필수.</p>
+          </article>
+          <article class="qc-card">
+            <p class="kicker">On near-miss</p>
+            <h3 class="h3">Accept / re-strike / reject</h3>
+            <p>허용 범위 — accept. 방향성 수정 가능 — re-strike (5–7일). 수정 불가 — reject + 재염 (10–14일, 추가 비용).</p>
+          </article>
+          <article class="qc-card">
+            <p class="kicker">Light source</p>
+            <h3 class="h3">D65 + TL84 minimum</h3>
+            <p>D65 일광 검증, TL84 매장 형광등. 단일 광원 검수는 메타메리즘을 숨김. K-DTC 매장은 대부분 TL84.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 10. Anti-palette -->
+      <section class="section anti-block" data-od-id="anti-palette">
+        <div>
+          <p class="kicker">Anti-palette</p>
+          <h2 class="h2">27SS는 의도적으로 다음 컬러를 쓰지 않는다.</h2>
+        </div>
+        <ul class="anti-list">
+          <li>no powder pink — 26FW 셀-스루 67% 후 고객 인식 "pink 시즌"으로 굳음</li>
+          <li>no fluorescents (acid yellow, hi-vis) — Musinsa 썸네일 워시아웃 + 브랜드 톤 충돌</li>
+          <li>no pure black (19-4007 Caviar) — soft black 19-1102가 브랜드 메인</li>
+          <li>no resort coral / poolside pastel — 27SS humid commute 영역 외</li>
+          <li>no military olive — 26FW에서 너무 많이 사용</li>
+          <li>no metallics (gold, silver) — dry pop accent로 광택 충분</li>
+          <li>no neon green — Korean DTC 영캐주얼 톤이 아님</li>
+        </ul>
+      </section>
+
+      <!-- 11. Carryover -->
+      <section class="section" data-od-id="carryover">
+        <p class="kicker">Carryover from previous seasons</p>
+        <h2 class="h2" style="margin-bottom: 28px;">이전 시즌에서 이어지는 컬러.</h2>
+        <table class="carryover-table">
+          <thead>
+            <tr><th>Color</th><th>TCX</th><th>From</th><th>Sell-through cue</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="row-chip" style="background:#f1ece1;"></span>humid linen ivory</td><td>11-0507 TCX</td><td>26SS / 26FW</td><td>26SS 81% sell-through, 셔츠 부문 top-1</td><td>carryover · main</td></tr>
+            <tr><td><span class="row-chip" style="background:#1a1f24;"></span>soft black</td><td>19-1102 TCX</td><td>permanent</td><td>모든 시즌 등장 의무 (브랜드 메인)</td><td>carryover · main</td></tr>
+            <tr><td><span class="row-chip" style="background:#1c2a4a;"></span>brand navy</td><td>19-3911 TCX</td><td>permanent</td><td>26FW 78% sell-through, 자켓 top-3</td><td>carryover · main</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 12. Open Questions / Next Decisions -->
+      <section class="section open-questions" data-od-id="next-decisions">
+        <div>
+          <p class="kicker">Open / next</p>
+          <h2 class="h2">아직 락이 안 된 결정과 마감일.</h2>
+        </div>
+        <ol class="next-list">
+          <li><span class="next-when">2026.10.08</span><span class="next-what">동대문 종합시장 1차 답사 — washed cotton·canvas 후보 락. 컬러스토리 8색 vs 보유 원단 매칭.</span></li>
+          <li><span class="next-when">2026.10.15</span><span class="next-what">협력 다잉 공장(KS Color)에 TCX 8코드 + tolerance 명세 발송. Strike 1 due 2026.10.22.</span></li>
+          <li><span class="next-when">2026.10.22</span><span class="next-what">Strike 1 검수 — D65 + TL84. dry pop과 industrial charcoal이 가장 컨버전스 어려울 가능성.</span></li>
+          <li><span class="next-when">2026.10.29</span><span class="next-what">Strike 2 — sky blue / overcast Coloro 트레이스백 정합성 확인 (WGSN 27 키컬러 트랙).</span></li>
+          <li><span class="next-when">2026.11.05</span><span class="next-what">Strike 3 final + 라인업 매트릭스 v1 합의 (MD).</span></li>
+          <li><span class="next-when">2026.11.20</span><span class="next-what">1차 샘플 작업지시서에 컬러스토리 v3 (locked) 첨부 — 샘플실 오해 방지.</span></li>
+        </ol>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>
