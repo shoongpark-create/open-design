@@ -75,6 +75,7 @@ export interface AgentInfo {
 export interface SkillSummary {
   id: string;
   name: string;
+  category?: string | null;
   description: string;
   triggers: string[];
   mode: 'prototype' | 'deck' | 'template' | 'design-system';

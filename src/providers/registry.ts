@@ -70,6 +70,21 @@ export async function daemonIsLive(): Promise<boolean> {
   }
 }
 
+export async function fetchIma2Status(): Promise<{
+  ok: boolean;
+  serverUrl: string | null;
+  error?: string;
+  data?: unknown;
+} | null> {
+  try {
+    const resp = await fetch('/api/imagegen/ima2/status');
+    if (!resp.ok) return null;
+    return await resp.json();
+  } catch {
+    return null;
+  }
+}
+
 export async function fetchSkillExample(id: string): Promise<string | null> {
   try {
     const resp = await fetch(`/api/skills/${encodeURIComponent(id)}/example`);
@@ -143,6 +158,39 @@ export async function writeProjectBase64File(
     if (!resp.ok) return null;
     const json = (await resp.json()) as { file: ProjectFile };
     return json.file;
+  } catch {
+    return null;
+  }
+}
+
+export async function generateProjectIma2Image(
+  projectId: string,
+  body: {
+    prompt: string;
+    name?: string;
+    quality?: 'low' | 'medium' | 'high';
+    size?: string;
+    format?: 'png' | 'jpg' | 'webp';
+    moderation?: 'low' | 'auto';
+    model?: string;
+    mode?: 'auto' | 'direct';
+    webSearchEnabled?: boolean;
+    references?: string[];
+    timeoutMs?: number;
+  },
+): Promise<{ file: ProjectFile; ima2?: unknown } | null> {
+  try {
+    const resp = await fetch(
+      `/api/projects/${encodeURIComponent(projectId)}/imagegen/ima2/generate`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      },
+    );
+    if (!resp.ok) return null;
+    const json = (await resp.json()) as { file: ProjectFile; ima2?: unknown };
+    return json;
   } catch {
     return null;
   }

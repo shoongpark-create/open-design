@@ -14,12 +14,18 @@ import { renderDesignSystemPreview } from './design-system-preview.js';
 import { renderDesignSystemShowcase } from './design-system-showcase.js';
 import { lintArtifact, renderFindingsForAgent } from './lint-artifact.js';
 import {
+  decodeImageDataUrl,
+  generateIma2Image,
+  getIma2Status,
+} from './ima2.js';
+import {
   deleteProjectFile,
   ensureProject,
   listFiles,
   readProjectFile,
   removeProjectDir,
   sanitizeName,
+  sanitizePath,
   writeProjectFile,
 } from './projects.js';
 import {
@@ -105,6 +111,14 @@ export async function startServer({ port = 7456 } = {}) {
 
   app.get('/api/health', (_req, res) => {
     res.json({ ok: true, version: '0.1.0' });
+  });
+
+  app.get('/api/imagegen/ima2/status', async (_req, res) => {
+    try {
+      res.json(await getIma2Status());
+    } catch (err) {
+      res.status(500).json({ ok: false, error: String(err) });
+    }
   });
 
   // ---- Projects (DB-backed) -------------------------------------------------
@@ -462,7 +476,8 @@ export async function startServer({ port = 7456 } = {}) {
   // skill looks like. Lets users browse skills without running an agent.
   //
   // The skill's `id` (from SKILL.md frontmatter `name`) can differ from its
-  // on-disk folder name (e.g. id `magazine-web-ppt` lives in `skills/guizang-ppt/`),
+  // on-disk folder name (e.g. id `magazine-web-ppt` lives in
+  // `skills/marketing/guizang-ppt/`),
   // so we resolve the actual directory via listSkills() rather than guessing.
   //
   // Resolution order:
@@ -580,7 +595,7 @@ export async function startServer({ port = 7456 } = {}) {
   // No mtime-based caching — frames are static and small.
   app.use('/frames', express.static(path.join(PROJECT_ROOT, 'assets', 'frames')));
 
-  // Project files. Each project owns a flat folder under .od/projects/<id>/
+  // Project files. Each project owns a folder under .od/projects/<id>/
   // containing every file the user has uploaded, pasted, sketched, or that
   // the agent has generated. Names are sanitized; paths are confined to the
   // project's own folder (see daemon/projects.js).
@@ -593,9 +608,10 @@ export async function startServer({ port = 7456 } = {}) {
     }
   });
 
-  app.get('/api/projects/:id/files/:name', async (req, res) => {
+  app.get(['/api/projects/:id/files/:name', '/api/projects/:id/files/*'], async (req, res) => {
     try {
-      const file = await readProjectFile(PROJECTS_DIR, req.params.id, req.params.name);
+      const fileName = req.params[0] || req.params.name;
+      const file = await readProjectFile(PROJECTS_DIR, req.params.id, fileName);
       res.type(file.mime).send(file.buffer);
     } catch (err) {
       const code = err && err.code === 'ENOENT' ? 404 : 400;
@@ -614,7 +630,7 @@ export async function startServer({ port = 7456 } = {}) {
         await ensureProject(PROJECTS_DIR, req.params.id);
         if (req.file) {
           const buf = await fs.promises.readFile(req.file.path);
-          const desiredName = sanitizeName(req.body?.name || req.file.originalname);
+          const desiredName = sanitizePath(req.body?.name || req.file.originalname);
           const meta = await writeProjectFile(
             PROJECTS_DIR,
             req.params.id,
@@ -640,9 +656,66 @@ export async function startServer({ port = 7456 } = {}) {
     },
   );
 
-  app.delete('/api/projects/:id/files/:name', async (req, res) => {
+  app.post('/api/projects/:id/imagegen/ima2/generate', async (req, res) => {
     try {
-      await deleteProjectFile(PROJECTS_DIR, req.params.id, req.params.name);
+      const {
+        prompt,
+        name,
+        serverUrl,
+        quality,
+        size,
+        format,
+        moderation,
+        model,
+        mode,
+        webSearchEnabled,
+        references,
+        timeoutMs,
+      } = req.body || {};
+      const result = await generateIma2Image({
+        prompt,
+        serverUrl,
+        quality,
+        size,
+        format,
+        moderation,
+        model,
+        mode,
+        webSearchEnabled,
+        references,
+        timeoutMs,
+      });
+      const image = decodeImageDataUrl(result.data?.image);
+      const targetName = sanitizePath(
+        name || `images/ima2-${Date.now().toString(36)}.${image.ext}`,
+      );
+      const file = await writeProjectFile(
+        PROJECTS_DIR,
+        req.params.id,
+        targetName,
+        image.buffer,
+      );
+      res.json({
+        ok: true,
+        file,
+        serverUrl: result.serverUrl,
+        ima2: {
+          filename: result.data?.filename || null,
+          requestId: result.data?.requestId || null,
+          elapsed: result.data?.elapsed || null,
+          model: result.data?.model || model || null,
+          size: result.data?.size || size || null,
+        },
+      });
+    } catch (err) {
+      res.status(400).json({ ok: false, error: err?.message || String(err) });
+    }
+  });
+
+  app.delete(['/api/projects/:id/files/:name', '/api/projects/:id/files/*'], async (req, res) => {
+    try {
+      const fileName = req.params[0] || req.params.name;
+      await deleteProjectFile(PROJECTS_DIR, req.params.id, fileName);
       res.json({ ok: true });
     } catch (err) {
       const code = err && err.code === 'ENOENT' ? 404 : 400;

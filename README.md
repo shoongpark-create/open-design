@@ -31,7 +31,7 @@ That's not "AI tries to design something". That's an AI that has been trained, b
 OD stands on four open-source shoulders:
 
 - [**`alchaincyf/huashu-design`**](https://github.com/alchaincyf/huashu-design) — the design-philosophy compass. Junior-Designer workflow, the 5-step brand-asset protocol, the anti-AI-slop checklist, the 5-dimensional self-critique, and the "5 schools × 20 design philosophies" idea behind our direction picker — all distilled into [`src/prompts/discovery.ts`](src/prompts/discovery.ts).
-- [**`op7418/guizang-ppt-skill`**](https://github.com/op7418/guizang-ppt-skill) — the deck mode. Bundled verbatim under [`skills/guizang-ppt/`](skills/guizang-ppt/) with original LICENSE preserved; magazine-style layouts, WebGL hero, P0/P1/P2 checklists.
+- [**`op7418/guizang-ppt-skill`**](https://github.com/op7418/guizang-ppt-skill) — the deck mode. Bundled verbatim under [`skills/marketing/guizang-ppt/`](skills/marketing/guizang-ppt/) with original LICENSE preserved; magazine-style layouts, WebGL hero, P0/P1/P2 checklists.
 - [**`OpenCoworkAI/open-codesign`**](https://github.com/OpenCoworkAI/open-codesign) — the UX north star and our closest peer. The first open-source Claude-Design alternative. We borrow its streaming-artifact loop, its sandboxed-iframe preview pattern (vendored React 18 + Babel), its live agent panel (todos + tool calls + interruptible generation), and its five-format export list (HTML / PDF / PPTX / ZIP / Markdown). We deliberately diverge on form factor — they are a desktop Electron app bundling [`pi-ai`][piai]; we are a web app + local daemon that delegates to your existing CLI.
 - [**`multica-ai/multica`**](https://github.com/multica-ai/multica) — the daemon-and-runtime architecture. PATH-scan agent detection, the local daemon as the only privileged process, the agent-as-teammate worldview.
 
@@ -106,42 +106,42 @@ The visually distinctive skills you'll most likely run first. Each ships a real 
 <table>
 <tr>
 <td width="50%" valign="top">
-<a href="skills/dating-web/"><img src="docs/screenshots/skills/dating-web.png" alt="dating-web" /></a><br/>
-<sub><b><a href="skills/dating-web/"><code>dating-web</code></a></b> · <i>prototype</i><br/>Consumer dating / matchmaking dashboard — left rail nav, ticker bar, KPIs, 30-day mutual-matches chart, editorial typography.</sub>
+<a href="skills/marketing/dating-web/"><img src="docs/screenshots/skills/dating-web.png" alt="dating-web" /></a><br/>
+<sub><b><a href="skills/marketing/dating-web/"><code>dating-web</code></a></b> · <i>prototype</i><br/>Consumer dating / matchmaking dashboard — left rail nav, ticker bar, KPIs, 30-day mutual-matches chart, editorial typography.</sub>
 </td>
 <td width="50%" valign="top">
-<a href="skills/digital-eguide/"><img src="docs/screenshots/skills/digital-eguide.png" alt="digital-eguide" /></a><br/>
-<sub><b><a href="skills/digital-eguide/"><code>digital-eguide</code></a></b> · <i>template</i><br/>Two-spread digital e-guide — cover (title, author, TOC teaser) + lesson spread with pull-quote and step list. Creator / lifestyle tone.</sub>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="top">
-<a href="skills/email-marketing/"><img src="docs/screenshots/skills/email-marketing.png" alt="email-marketing" /></a><br/>
-<sub><b><a href="skills/email-marketing/"><code>email-marketing</code></a></b> · <i>prototype</i><br/>Brand product-launch HTML email — masthead, hero image, headline lockup, CTA, specs grid. Centered single-column, table-fallback safe.</sub>
-</td>
-<td width="50%" valign="top">
-<a href="skills/gamified-app/"><img src="docs/screenshots/skills/gamified-app.png" alt="gamified-app" /></a><br/>
-<sub><b><a href="skills/gamified-app/"><code>gamified-app</code></a></b> · <i>prototype</i><br/>Three-frame gamified mobile-app prototype on a dark showcase stage — cover, today's quests with XP ribbons + level bar, quest detail.</sub>
+<a href="skills/marketing/digital-eguide/"><img src="docs/screenshots/skills/digital-eguide.png" alt="digital-eguide" /></a><br/>
+<sub><b><a href="skills/marketing/digital-eguide/"><code>digital-eguide</code></a></b> · <i>template</i><br/>Two-spread digital e-guide — cover (title, author, TOC teaser) + lesson spread with pull-quote and step list. Creator / lifestyle tone.</sub>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
-<a href="skills/mobile-onboarding/"><img src="docs/screenshots/skills/mobile-onboarding.png" alt="mobile-onboarding" /></a><br/>
-<sub><b><a href="skills/mobile-onboarding/"><code>mobile-onboarding</code></a></b> · <i>prototype</i><br/>Three-frame mobile onboarding flow — splash, value-prop, sign-in. Status bar, swipe dots, primary CTA.</sub>
+<a href="skills/marketing/email-marketing/"><img src="docs/screenshots/skills/email-marketing.png" alt="email-marketing" /></a><br/>
+<sub><b><a href="skills/marketing/email-marketing/"><code>email-marketing</code></a></b> · <i>prototype</i><br/>Brand product-launch HTML email — masthead, hero image, headline lockup, CTA, specs grid. Centered single-column, table-fallback safe.</sub>
 </td>
 <td width="50%" valign="top">
-<a href="skills/motion-frames/"><img src="docs/screenshots/skills/motion-frames.png" alt="motion-frames" /></a><br/>
-<sub><b><a href="skills/motion-frames/"><code>motion-frames</code></a></b> · <i>prototype</i><br/>Single-frame motion-design hero with looping CSS animations — rotating type ring, animated globe, ticking timer. Hand-off ready for HyperFrames.</sub>
+<a href="skills/marketing/gamified-app/"><img src="docs/screenshots/skills/gamified-app.png" alt="gamified-app" /></a><br/>
+<sub><b><a href="skills/marketing/gamified-app/"><code>gamified-app</code></a></b> · <i>prototype</i><br/>Three-frame gamified mobile-app prototype on a dark showcase stage — cover, today's quests with XP ribbons + level bar, quest detail.</sub>
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
-<a href="skills/social-carousel/"><img src="docs/screenshots/skills/social-carousel.png" alt="social-carousel" /></a><br/>
-<sub><b><a href="skills/social-carousel/"><code>social-carousel</code></a></b> · <i>prototype</i><br/>Three-card 1080×1080 social-media carousel — cinematic panels with display headlines that connect across the series, brand mark, loop affordance.</sub>
+<a href="skills/marketing/mobile-onboarding/"><img src="docs/screenshots/skills/mobile-onboarding.png" alt="mobile-onboarding" /></a><br/>
+<sub><b><a href="skills/marketing/mobile-onboarding/"><code>mobile-onboarding</code></a></b> · <i>prototype</i><br/>Three-frame mobile onboarding flow — splash, value-prop, sign-in. Status bar, swipe dots, primary CTA.</sub>
 </td>
 <td width="50%" valign="top">
-<a href="skills/sprite-animation/"><img src="docs/screenshots/skills/sprite-animation.png" alt="sprite-animation" /></a><br/>
-<sub><b><a href="skills/sprite-animation/"><code>sprite-animation</code></a></b> · <i>prototype</i><br/>Pixel / 8-bit animated explainer slide — full-bleed cream stage, animated pixel mascot, kinetic Japanese display type, looping CSS keyframes.</sub>
+<a href="skills/marketing/motion-frames/"><img src="docs/screenshots/skills/motion-frames.png" alt="motion-frames" /></a><br/>
+<sub><b><a href="skills/marketing/motion-frames/"><code>motion-frames</code></a></b> · <i>prototype</i><br/>Single-frame motion-design hero with looping CSS animations — rotating type ring, animated globe, ticking timer. Hand-off ready for HyperFrames.</sub>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<a href="skills/marketing/social-carousel/"><img src="docs/screenshots/skills/social-carousel.png" alt="social-carousel" /></a><br/>
+<sub><b><a href="skills/marketing/social-carousel/"><code>social-carousel</code></a></b> · <i>prototype</i><br/>Three-card 1080×1080 social-media carousel — cinematic panels with display headlines that connect across the series, brand mark, loop affordance.</sub>
+</td>
+<td width="50%" valign="top">
+<a href="skills/marketing/sprite-animation/"><img src="docs/screenshots/skills/sprite-animation.png" alt="sprite-animation" /></a><br/>
+<sub><b><a href="skills/marketing/sprite-animation/"><code>sprite-animation</code></a></b> · <i>prototype</i><br/>Pixel / 8-bit animated explainer slide — full-bleed cream stage, animated pixel mascot, kinetic Japanese display type, looping CSS keyframes.</sub>
 </td>
 </tr>
 </table>
@@ -150,31 +150,32 @@ The visually distinctive skills you'll most likely run first. Each ships a real 
 
 | Skill | Mode | Default for | What it produces |
 |---|---|---|---|
-| [`web-prototype`](skills/web-prototype/) | prototype | desktop | Single-page HTML — landings, marketing, hero pages |
-| [`saas-landing`](skills/saas-landing/) | prototype | desktop | Hero / features / pricing / CTA marketing layout |
-| [`dashboard`](skills/dashboard/) | prototype | desktop | Admin / analytics with sidebar + data dense layout |
-| [`pricing-page`](skills/pricing-page/) | prototype | desktop | Standalone pricing + comparison tables |
-| [`docs-page`](skills/docs-page/) | prototype | desktop | 3-column documentation layout |
-| [`blog-post`](skills/blog-post/) | prototype | desktop | Editorial long-form |
-| [`mobile-app`](skills/mobile-app/) | prototype | mobile | iPhone 15 Pro / Pixel framed app screen(s) |
-| [`simple-deck`](skills/simple-deck/) | deck | desktop | Minimal horizontal-swipe deck |
-| [`guizang-ppt`](skills/guizang-ppt/) | deck | **default** for deck | Magazine-style web PPT — bundled from [op7418/guizang-ppt-skill][guizang] |
+| [`web-prototype`](skills/marketing/web-prototype/) | prototype | desktop | Single-page HTML — landings, marketing, hero pages |
+| [`saas-landing`](skills/marketing/saas-landing/) | prototype | desktop | Hero / features / pricing / CTA marketing layout |
+| [`dashboard`](skills/marketing/dashboard/) | prototype | desktop | Admin / analytics with sidebar + data dense layout |
+| [`pricing-page`](skills/marketing/pricing-page/) | prototype | desktop | Standalone pricing + comparison tables |
+| [`docs-page`](skills/marketing/docs-page/) | prototype | desktop | 3-column documentation layout |
+| [`blog-post`](skills/marketing/blog-post/) | prototype | desktop | Editorial long-form |
+| [`fashion-lookbook`](skills/fashion/fashion-lookbook/) | prototype | desktop | Fashion collection lookbook with project-local ima2-generated campaign imagery |
+| [`mobile-app`](skills/marketing/mobile-app/) | prototype | mobile | iPhone 15 Pro / Pixel framed app screen(s) |
+| [`simple-deck`](skills/marketing/simple-deck/) | deck | desktop | Minimal horizontal-swipe deck |
+| [`guizang-ppt`](skills/marketing/guizang-ppt/) | deck | **default** for deck | Magazine-style web PPT — bundled from [op7418/guizang-ppt-skill][guizang] |
 
 ### Document / work-product surfaces
 
 | Skill | Mode | What it produces |
 |---|---|---|
-| [`pm-spec`](skills/pm-spec/) | template | PM specification doc with TOC + decision log |
-| [`weekly-update`](skills/weekly-update/) | template | Team weekly with progress / blockers / next |
-| [`meeting-notes`](skills/meeting-notes/) | template | Meeting decision log |
-| [`eng-runbook`](skills/eng-runbook/) | template | Incident runbook |
-| [`finance-report`](skills/finance-report/) | template | Exec finance summary |
-| [`hr-onboarding`](skills/hr-onboarding/) | template | Role onboarding plan |
-| [`invoice`](skills/invoice/) | template | Single-page invoice |
-| [`kanban-board`](skills/kanban-board/) | template | Board snapshot |
-| [`team-okrs`](skills/team-okrs/) | template | OKR scoresheet |
+| [`pm-spec`](skills/marketing/pm-spec/) | template | PM specification doc with TOC + decision log |
+| [`weekly-update`](skills/marketing/weekly-update/) | template | Team weekly with progress / blockers / next |
+| [`meeting-notes`](skills/marketing/meeting-notes/) | template | Meeting decision log |
+| [`eng-runbook`](skills/marketing/eng-runbook/) | template | Incident runbook |
+| [`finance-report`](skills/marketing/finance-report/) | template | Exec finance summary |
+| [`hr-onboarding`](skills/marketing/hr-onboarding/) | template | Role onboarding plan |
+| [`invoice`](skills/marketing/invoice/) | template | Single-page invoice |
+| [`kanban-board`](skills/marketing/kanban-board/) | template | Board snapshot |
+| [`team-okrs`](skills/marketing/team-okrs/) | template | OKR scoresheet |
 
-Adding a skill takes one folder. Read [`docs/skills-protocol.md`](docs/skills-protocol.md) for the extended frontmatter, fork an existing skill, restart the daemon, it appears in the picker.
+Adding a skill takes one folder. Skills can be grouped under category folders such as `skills/marketing/` or `skills/fashion/`; the daemon scans nested `SKILL.md` files and keeps the frontmatter `name` as the public skill id. Read [`docs/skills-protocol.md`](docs/skills-protocol.md) for the extended frontmatter, fork an existing skill, restart the daemon, it appears in the picker.
 
 ## Six load-bearing ideas
 
@@ -511,7 +512,7 @@ Every external project this repo borrows from. Each link goes to the source so y
 |---|---|
 | [`Claude Design`][cd] | The closed-source product this repo is the open-source alternative to. |
 | [**`alchaincyf/huashu-design`**](https://github.com/alchaincyf/huashu-design) | The design-philosophy core. Junior-Designer workflow, the 5-step brand-asset protocol, anti-AI-slop checklist, 5-dimensional self-critique, and the "5 schools × 20 design philosophies" library behind our direction picker — all distilled into [`src/prompts/discovery.ts`](src/prompts/discovery.ts) and [`src/prompts/directions.ts`](src/prompts/directions.ts). |
-| [**`op7418/guizang-ppt-skill`**][guizang] | Magazine-web-PPT skill bundled verbatim under [`skills/guizang-ppt/`](skills/guizang-ppt/) with original LICENSE preserved. Default for deck mode. P0/P1/P2 checklist culture borrowed for every other skill. |
+| [**`op7418/guizang-ppt-skill`**][guizang] | Magazine-web-PPT skill bundled verbatim under [`skills/marketing/guizang-ppt/`](skills/marketing/guizang-ppt/) with original LICENSE preserved. Default for deck mode. P0/P1/P2 checklist culture borrowed for every other skill. |
 | [**`multica-ai/multica`**](https://github.com/multica-ai/multica) | The daemon + adapter architecture. PATH-scan agent detection, local daemon as the only privileged process, agent-as-teammate worldview. We adopt the model; we do not vendor the code. |
 | [**`OpenCoworkAI/open-codesign`**][ocod] | The first open-source Claude-Design alternative and our closest peer. UX patterns adopted: streaming-artifact loop, sandboxed-iframe preview (vendored React 18 + Babel), live agent panel (todos + tool calls + interruptible), five-format export list (HTML/PDF/PPTX/ZIP/Markdown), local-first storage hub, `SKILL.md` taste-injection. UX patterns on our roadmap: comment-mode surgical edits, AI-emitted tweaks panel. **We deliberately do not vendor [`pi-ai`][piai]** — open-codesign bundles it as the agent runtime; we delegate to whichever CLI the user already has. |
 | [`VoltAgent/awesome-claude-design`][acd] / [`awesome-design-md`][acd2] | Source of the 9-section `DESIGN.md` schema and 69 product systems imported via [`scripts/sync-design-systems.mjs`](scripts/sync-design-systems.mjs). |
@@ -558,4 +559,4 @@ Full walkthrough, bar-for-merging, code style, and what we don't accept → [`CO
 
 ## License
 
-Apache-2.0. The bundled `skills/guizang-ppt/` retains its original [LICENSE](skills/guizang-ppt/LICENSE) (MIT) and authorship attribution to [op7418](https://github.com/op7418).
+Apache-2.0. The bundled `skills/marketing/guizang-ppt/` retains its original [LICENSE](skills/marketing/guizang-ppt/LICENSE) (MIT) and authorship attribution to [op7418](https://github.com/op7418).

@@ -9,11 +9,11 @@
 import { mkdir, readdir, readFile, rm, stat, unlink, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-const FORBIDDEN_NAME = /[\\/]|^\.\.?$/;
+const FORBIDDEN_SEGMENT = /^\.\.?$/;
 
 export function projectDir(projectsRoot, projectId) {
   if (!isSafeId(projectId)) throw new Error('invalid project id');
-  return path.join(projectsRoot, projectId);
+  return path.resolve(projectsRoot, projectId);
 }
 
 export async function ensureProject(projectsRoot, projectId) {
@@ -24,35 +24,44 @@ export async function ensureProject(projectsRoot, projectId) {
 
 export async function listFiles(projectsRoot, projectId) {
   const dir = projectDir(projectsRoot, projectId);
-  let entries = [];
-  try {
-    entries = await readdir(dir, { withFileTypes: true });
-  } catch (err) {
-    if (err && err.code === 'ENOENT') return [];
-    throw err;
-  }
   const out = [];
-  for (const e of entries) {
-    if (!e.isFile()) continue;
-    if (e.name.startsWith('.')) continue;
-    const full = path.join(dir, e.name);
-    const st = await stat(full);
-    out.push({
-      name: e.name,
-      // The project folder is flat today so `path` equals `name`. We emit
-      // both so frontend code that thinks in path terms (the @-mention
-      // picker, attachment chips) can stay path-shaped without a remap.
-      path: e.name,
-      type: 'file',
-      size: st.size,
-      mtime: st.mtimeMs,
-      kind: kindFor(e.name),
-      mime: mimeFor(e.name),
-    });
-  }
+  await collectFiles(dir, '', out).catch((err) => {
+    if (!err || err.code !== 'ENOENT') throw err;
+  });
   // Newest first — matches the visual order users expect after generating.
   out.sort((a, b) => b.mtime - a.mtime);
   return out;
+}
+
+async function collectFiles(root, relDir, out) {
+  const current = relDir ? path.join(root, relDir) : root;
+  let entries = [];
+  try {
+    entries = await readdir(current, { withFileTypes: true });
+  } catch (err) {
+    if (err && err.code === 'ENOENT') return;
+    throw err;
+  }
+  for (const e of entries) {
+    if (e.name.startsWith('.')) continue;
+    const rel = relDir ? `${relDir}/${e.name}` : e.name;
+    const full = path.join(root, rel);
+    if (e.isDirectory()) {
+      await collectFiles(root, rel, out);
+      continue;
+    }
+    if (!e.isFile()) continue;
+    const st = await stat(full);
+    out.push({
+      name: rel,
+      path: rel,
+      type: 'file',
+      size: st.size,
+      mtime: st.mtimeMs,
+      kind: kindFor(rel),
+      mime: mimeFor(rel),
+    });
+  }
 }
 
 export async function readProjectFile(projectsRoot, projectId, name) {
@@ -78,7 +87,7 @@ export async function writeProjectFile(
   { overwrite = true } = {},
 ) {
   const dir = await ensureProject(projectsRoot, projectId);
-  const safeName = sanitizeName(name);
+  const safeName = sanitizePath(name);
   const target = path.join(dir, safeName);
   if (!overwrite) {
     try {
@@ -88,6 +97,7 @@ export async function writeProjectFile(
       if (!err || err.code !== 'ENOENT') throw err;
     }
   }
+  await mkdir(path.dirname(target), { recursive: true });
   await writeFile(target, body);
   const st = await stat(target);
   return {
@@ -111,10 +121,11 @@ export async function removeProjectDir(projectsRoot, projectId) {
 }
 
 function resolveSafe(dir, name) {
-  if (typeof name !== 'string' || !name || FORBIDDEN_NAME.test(name)) {
+  if (typeof name !== 'string' || !name) {
     throw new Error('invalid file name');
   }
-  const target = path.resolve(dir, name);
+  const safeName = sanitizePath(name);
+  const target = path.resolve(dir, safeName);
   if (!target.startsWith(dir + path.sep) && target !== dir) {
     throw new Error('path escapes project dir');
   }
@@ -131,6 +142,15 @@ export function sanitizeName(raw) {
     .replace(/^\.+/, '_')
     .trim();
   return cleaned || `file-${Date.now()}`;
+}
+
+export function sanitizePath(raw) {
+  const parts = String(raw ?? '')
+    .split(/[\\/]+/)
+    .map((part) => sanitizeName(part))
+    .filter((part) => part && !FORBIDDEN_SEGMENT.test(part));
+  if (parts.length === 0) return `file-${Date.now()}`;
+  return parts.join('/');
 }
 
 function isSafeId(id) {
