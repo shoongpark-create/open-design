@@ -22,6 +22,7 @@ pnpm tools-dev
 
 설치된 어떤 코드 에이전트 CLI든 자동 감지됩니다. 없으면 Anthropic API로 폴백(BYOK).
 
+**다른 머신에서 처음부터 환경을 구축**하려면 [docs/setup.ko.md](./docs/setup.ko.md)를 참고하세요 (3개 sibling 리포 클론 + 의존성 + 심링크 재생성 + 데몬 시작, 한 번에 따라할 수 있는 단계별 가이드).
 자세한 설치/실행은 [QUICKSTART.md](./QUICKSTART.md)를, 에이전트 워크플로우 규약은 [AGENTS.md](./AGENTS.md)를 참고하세요.
 
 ---
@@ -286,6 +287,7 @@ pnpm tools-dev stop
 
 | 문서 | 내용 |
 |---|---|
+| [docs/setup.ko.md](./docs/setup.ko.md) | **★ 셋업 가이드** — 다른 머신에서 처음부터 환경 구축 (3 리포 클론 + 의존성 + 심링크) |
 | [docs/open-design-overview.ko.md](./docs/open-design-overview.ko.md) | **★ 심화 가이드** — 패션 비즈니스 매핑, 의사결정 단계, 시스템 정합성 점검 결과 |
 | [docs/architecture.md](./docs/architecture.md) | 시스템 아키텍처 |
 | [docs/spec.md](./docs/spec.md) | 스킬·디자인시스템 스펙 |

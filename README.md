@@ -22,6 +22,7 @@ pnpm tools-dev
 
 Whichever code-agent CLI you have installed is auto-detected. If none are found, it falls back to the Anthropic API (BYOK).
 
+**To bootstrap a fresh machine from scratch**, follow [docs/setup.ko.md](./docs/setup.ko.md) (Korean) — a step-by-step guide that clones all 3 sibling repos, installs deps, regenerates symlinks, and starts the daemon.
 See [QUICKSTART.md](./QUICKSTART.md) for setup details and [AGENTS.md](./AGENTS.md) for the agent contract.
 
 ---
@@ -287,6 +288,7 @@ pnpm tools-dev stop
 
 | Doc | Content |
 |---|---|
+| [docs/setup.ko.md](./docs/setup.ko.md) | **★ Setup guide (Korean)** — bootstrap a fresh machine: 3-repo clone + deps + symlinks + daemon |
 | [docs/open-design-overview.ko.md](./docs/open-design-overview.ko.md) | **★ Deep guide (Korean)** — fashion-business mapping, decision-to-artifact map, system-integrity audit |
 | [docs/architecture.md](./docs/architecture.md) | System architecture |
 | [docs/spec.md](./docs/spec.md) | Skill / design-system spec |

@@ -22,6 +22,7 @@ pnpm tools-dev
 
 任何已安装的 code-agent CLI 都会被自动检测。如果一个都没有，自动回退到 Anthropic API（BYOK）。
 
+**在新机器上从零搭建环境**请参考 [docs/setup.ko.md](./docs/setup.ko.md)（韩文）：3 个 sibling 仓库 clone + 依赖 + symlink 重建 + daemon 启动的逐步指南。
 详细安装/运行见 [QUICKSTART.md](./QUICKSTART.md)；agent 协议见 [AGENTS.md](./AGENTS.md)。
 
 ---
@@ -286,6 +287,7 @@ pnpm tools-dev stop
 
 | 文档 | 内容 |
 |---|---|
+| [docs/setup.ko.md](./docs/setup.ko.md) | **★ 搭建指南（韩文）** — 在新机器从零搭建：3 仓库 clone + 依赖 + symlink + daemon |
 | [docs/open-design-overview.ko.md](./docs/open-design-overview.ko.md) | **★ 深度指南（韩文）** — 时装业务映射、决策→产物表、系统完整性审计 |
 | [docs/architecture.md](./docs/architecture.md) | 系统架构 |
 | [docs/spec.md](./docs/spec.md) | Skill / 设计系统规范 |
