@@ -1,0 +1,150 @@
+---
+name: fashion-brand-roadmap
+description: |
+  Brand **roadmap pyramid** as a single HTML file. The 4-tier pyramid a
+  brand director uses to lock the brand's identity from North Star
+  (abstract aspiration) → Principles (action rules) → Characters (how
+  customers perceive us) → Foundation (the founding keywords). Internal,
+  perpetual document; revised once per fiscal year, not once per season.
+  Use when the brief asks for a "brand roadmap", "브랜드 로드맵", "북극성",
+  "north star", "브랜드 피라미드", "브랜드 정체성 정립", "Foundation/
+  Characters/Principles/North Star".
+triggers:
+  - "brand roadmap"
+  - "brand pyramid"
+  - "north star"
+  - "brand identity"
+  - "브랜드 로드맵"
+  - "북극성"
+  - "브랜드 피라미드"
+  - "브랜드 정체성"
+od:
+  mode: prototype
+  platform: desktop
+  scenario: design
+  category: fashion
+  featured: 19
+  preview:
+    type: html
+    entry: index.html
+  design_system:
+    requires: true
+    sections: [color, typography, layout, components]
+  example_prompt: "Build a brand roadmap pyramid for WACKYWILLY: North Star = '상품력으로 신뢰를 / 트렌드로 감도를 / IP로 독창성을 / 고객에게 즐거움을'; Principles = 팬덤·존중·새로운시도·트렌드리딩; Characters = 재미있는·따라하고싶은·신뢰할수있는·K-아이돌; Foundation = 아이피·프로덕트·라이프스타일·플레이."
+---
+
+# Fashion Brand Roadmap Skill
+
+Produce a single-file HTML **brand roadmap pyramid** — the 4-tier visual
+that locks a brand's identity at the North Star / Principles / Characters
+/ Foundation levels. It is **internal-facing**: the audience is the
+brand director, the leadership team, every new joiner. It is **not** a
+seasonal artifact; revise once per fiscal year unless a major reposition
+happens mid-cycle.
+
+The roadmap answers four questions at once:
+
+1. **What is the abstract end-state?** (North Star — the brand the
+   customer feels, not the products)
+2. **What action rules unlock it?** (Principles — the 3–6 behavior
+   rules every team applies)
+3. **How are we perceived in concrete terms?** (Characters — 4–6
+   adjectives or short phrases customers actually say)
+4. **What were the founding keywords?** (Foundation — the original
+   building blocks; never deleted, sometimes evolved)
+
+It is the **parent** of every other internal artifact: positioning
+maps, season strategies, season concepts all inherit from this.
+
+## Resource map
+
+```
+fashion-brand-roadmap/
+├── SKILL.md
+├── assets/
+│   └── template.html
+└── references/
+    ├── layouts.md
+    └── checklist.md
+```
+
+## Workflow
+
+### Step 0 — Pre-flight
+
+1. Read `assets/template.html` end-to-end.
+2. Read `references/layouts.md` and pick a pyramid rhythm.
+3. Read `references/checklist.md`.
+4. Read the active `DESIGN.md`. Bind type and color tokens.
+5. Image generation is **optional**. The default uses CSS-rendered
+   pyramid with text only. Generate a single background mood image
+   (the pyramid backdrop) only if explicitly requested. If used,
+   follow [`../_shared/imagegen.md`](../_shared/imagegen.md).
+
+### Step 1 — Clarify the roadmap
+
+Ask in the first discovery form if not provided:
+
+- Brand name and brand mark / wordmark
+- Effective year (e.g. 2026, FY26, 27SS-revised)
+- North Star — 2–4 short clauses; the abstract end-state
+- Principles — 3–6 short action verbs / verb phrases
+- Characters — 4–6 customer-perceived adjectives or short phrases
+- Foundation — 3–5 founding keywords (the original building blocks)
+- Optional: background mood image (yes / no; default no)
+- Highlight tier — which tier is currently being emphasized for the
+  effective year (default: Characters)
+
+### Step 2 — Pick a rhythm
+
+Pick **one** rhythm from `references/layouts.md`:
+
+- **Classic 4-tier pyramid** (default) — symmetric pyramid, North Star
+  at apex, Foundation at base, with annotation rail on the left
+- **Stacked-blocks pyramid** — wider base, distinct blocks per tier;
+  use when each tier carries 5+ items
+- **Annotated frame** — pyramid on the right, full per-tier annotation
+  panels on the left; use when the audience needs full context (board
+  meetings, strategy reviews)
+
+State the chosen rhythm in one sentence.
+
+### Step 3 — Compose the roadmap
+
+Copy `assets/template.html` to `index.html`. Replace `[REPLACE]`
+tokens, bind active `DESIGN.md` tokens into `:root`, then paste the
+chosen rhythm from `references/layouts.md` into
+`<main id="brand-roadmap">`.
+
+Required sections, in order:
+
+1. **Header strip** — brand + effective year + status (locked /
+   draft) + lock date.
+2. **Roadmap pyramid** — the 4-tier visual with all tier labels and
+   tier content. Highlighted tier carries an accent treatment.
+3. **Per-tier annotation** — one paragraph per tier explaining the
+   tier's role, with examples or anchors.
+4. **Cross-reference** — a short list of where this roadmap shows up
+   in seasonal artifacts (positioning map, season strategy, season
+   concept boards). Helps new joiners follow the dependency chain.
+5. **Revision log** — table of prior versions with date and 1-line
+   change note.
+
+### Step 4 — Self-check
+
+Run `references/checklist.md`. Every tier must carry text content;
+North Star must read as aspirational, not operational; Principles
+must read as action verbs; Characters must read as adjectives /
+phrases customers would say; Foundation keywords must be founding
+keywords (not new additions).
+
+## Output contract
+
+```
+<artifact identifier="fashion-brand-roadmap-slug" type="text/html" title="Brand Roadmap Title">
+<!doctype html>
+<html>...</html>
+</artifact>
+```
+
+One sentence before the artifact, nothing after.

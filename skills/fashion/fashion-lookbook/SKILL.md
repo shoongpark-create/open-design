@@ -21,6 +21,7 @@ od:
   mode: prototype
   platform: desktop
   scenario: marketing
+  category: fashion
   featured: 12
   preview:
     type: html
@@ -56,11 +57,13 @@ fashion-lookbook/
 ### Step 0 — Pre-flight
 
 1. Read `assets/template.html` end-to-end.
-2. Read `references/trend-research.md` so the output reflects current fashion
+2. Read [`../_shared/imagegen.md`](../_shared/imagegen.md) — the shared
+   image-engine fallback chain (ima2 → ComfyUI → styled fallback).
+3. Read `references/trend-research.md` so the output reflects current fashion
    and digital-commerce expectations instead of generic editorial styling.
-3. Read `references/layouts.md` and choose a spread rhythm before writing.
-4. Read `references/checklist.md`.
-5. Read the active DESIGN.md. Map its palette and type rules to the template's
+4. Read `references/layouts.md` and choose a spread rhythm before writing.
+5. Read `references/checklist.md`.
+6. Read the active DESIGN.md. Map its palette and type rules to the template's
    `:root` variables. If the active DESIGN.md is a product/UI system, translate
    it into fashion terms: accent → seasonal pop color, surface → paper/card,
    muted → care-label/caption tone, foreground → editorial ink.
@@ -100,27 +103,17 @@ discipline all decisions:
 Do not mix more than two trend lenses unless the user explicitly asks for a
 maximal, eclectic collection.
 
-### Step 3 — Generate look imagery with ima2/imagegen
+### Step 3 — Generate look imagery (shared engine fallback)
 
-Use the local `ima2` image engine whenever the lookbook needs original
-campaign/look images. Prefer the Open Design daemon bridge if available:
+Use the shared engine fallback chain in
+[`../_shared/imagegen.md`](../_shared/imagegen.md). In short: probe
+**ima2 daemon bridge → ima2 CLI → ComfyUI → styled fallback**, stop at the
+first success, and use that engine for the entire run. Default model is
+`gpt-5.5`, default size for full-look shots is `1024x1536`. Do not invent a
+new engine selection or pin to an older model.
 
-```
-POST /api/projects/<projectId>/imagegen/ima2/generate
-```
-
-with JSON `{ "prompt": "...", "name": "images/look-01.png", "quality": "medium", "size": "1024x1536", "moderation": "low" }`.
-
-If you are working directly in the project folder and the daemon bridge is not
-available, use the `ima2` CLI instead:
-
-```
-ima2 gen "<prompt>" -o images/look-01.png --model gpt-5.4 --moderation low
-```
-
-`ima2 serve` must already be running and Codex/ChatGPT OAuth must be logged in.
-Generate project-bound raster assets, then reference them from the HTML. Do not
-leave referenced images in an external or temporary location.
+The shared guide ships the daemon endpoint, the ima2 CLI invocation, and the
+ComfyUI HTTP graph in full — read it once at Step 0 and follow it verbatim.
 
 Create an `images/` folder beside `index.html` and save final assets with stable
 names:

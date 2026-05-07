@@ -80,10 +80,13 @@ fashion-color-story/
 ### Step 0 — Pre-flight
 
 1. Read `assets/template.html` end-to-end.
-2. Read `references/trend-research.md` for season trend inputs (WGSN/Coloro
+2. Read [`../_shared/imagegen.md`](../_shared/imagegen.md) — the shared
+   image-engine fallback chain (used only if the user requests Step 8 mood
+   thumbnails; default is no imagery).
+3. Read `references/trend-research.md` for season trend inputs (WGSN/Coloro
    key colors, K-DTC saturation rules, TCX vs. TPG decisions).
-3. Read `references/layouts.md` and pick a section set before writing.
-4. Read `references/checklist.md`.
+4. Read `references/layouts.md` and pick a section set before writing.
+5. Read `references/checklist.md`.
 5. Read the active `DESIGN.md` and translate its tokens into `:root`.
    Important: a color story's accent color comes from *the season palette
    itself*, not from the design system. Bind the design system fonts and
@@ -224,14 +227,15 @@ Required sections, in order:
     prior-season lock document.
 12. **Open / next decisions** — what still needs to be locked, by when.
 
-### Step 8 — Optional: ima2 mood thumbnails
+### Step 8 — Optional: mood thumbnails
 
 A color story does **not** need full mood imagery (that's the concept
 board's job). At most 1 small mood image per locked color is helpful — and
 only if the user explicitly asks. Default: pure CSS chips, no imagery.
 
-If imagery is requested, generate via the ima2 daemon bridge (same as
-fashion-concept-board) and save under `images/color-XX.png`.
+If imagery is requested, follow the shared engine fallback chain in
+[`../_shared/imagegen.md`](../_shared/imagegen.md) (default: ima2,
+`gpt-5.5`, `1024x1024`) and save under `images/color-XX.png`.
 
 ### Step 9 — Self-check
 

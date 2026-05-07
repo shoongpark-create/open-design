@@ -72,11 +72,13 @@ fashion-concept-board/
 ### Step 0 — Pre-flight
 
 1. Read `assets/template.html` end-to-end.
-2. Read `references/trend-research.md` so the concept territory connects to
+2. Read [`../_shared/imagegen.md`](../_shared/imagegen.md) — the shared
+   image-engine fallback chain. Concept boards always need imagery.
+3. Read `references/trend-research.md` so the concept territory connects to
    actual season trend data (WGSN/Coloro 27SS keywords, K-DTC reality) instead
    of a generic Pinterest dump.
-3. Read `references/layouts.md` and pick a board rhythm before writing.
-4. Read `references/checklist.md`.
+4. Read `references/layouts.md` and pick a board rhythm before writing.
+5. Read `references/checklist.md`.
 5. Read the active `DESIGN.md`. Map its palette and type rules to the
    template's `:root` variables. If `DESIGN.md` describes a product/UI system,
    translate it into editorial fashion terms: accent → seasonal pop, surface →
@@ -113,7 +115,7 @@ images. Example:
 > "27SS territory: *humid early-summer commute* (primary) × *slight industrial
 > dryness* (tension)."
 
-### Step 3 — Generate mood imagery with ima2 / imagegen
+### Step 3 — Generate mood imagery (shared engine fallback)
 
 A concept board needs **9–16 mood images** that span the territory rather than
 all looking like product shots. Aim for variety across these *image roles*:
@@ -132,19 +134,11 @@ all looking like product shots. Aim for variety across these *image roles*:
 This image-role variety is what makes a concept board feel like territory and
 not a lookbook preview.
 
-Use the local `ima2` image engine. Prefer the Open Design daemon bridge:
-
-```
-POST /api/projects/<projectId>/imagegen/ima2/generate
-```
-
-with JSON `{ "prompt": "...", "name": "images/mood-01.png", "quality": "medium", "size": "1024x1024", "moderation": "low" }`.
-
-If the daemon bridge is not available, use the CLI:
-
-```
-ima2 gen "<prompt>" -o images/mood-01.png --model gpt-5.4 --moderation low
-```
+Use the shared engine fallback chain in
+[`../_shared/imagegen.md`](../_shared/imagegen.md): probe **ima2 daemon
+bridge → ima2 CLI → ComfyUI → styled fallback**, stop at the first success,
+use that engine for the entire run. Default model is `gpt-5.5`, default size
+for mood images is `1024x1024` (square).
 
 Save assets in a project-local `images/` folder with stable names:
 
