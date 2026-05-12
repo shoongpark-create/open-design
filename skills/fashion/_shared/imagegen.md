@@ -1,187 +1,121 @@
-# Fashion Image Generation — Shared Fallback Chain
+# Fashion Image Generation — Project Policy
 
-This document is the **single source of truth** for how every fashion skill
-generates project-local raster imagery. It is referenced from each fashion
-`SKILL.md` so the rules stay consistent and CLI-agnostic.
+This document is the **single source of truth** for how every fashion skill in
+this project generates project-local raster imagery.
 
-The agent is one of: `claude`, `codex`, `cursor-agent`, `gemini`, `opencode`,
-`qwen`, `copilot`, or the Anthropic API fallback. Whichever one is running, it
-has the daemon-shared toolset: `Read`, `Write`, `Bash`, `WebFetch`. **Do not**
-assume any agent-specific tool — the engine selection below uses only those
-four primitives so the same SKILL.md works on every runtime.
+## Project override
 
-## Engine fallback chain (in priority order)
+When the user mentions `imagegen`, `$imagegen`, or asks a fashion skill to
+generate images, use the Codex built-in `image_gen` tool through the current
+authenticated session.
 
-| Tier | Engine | Probe | Why this order |
-|---|---|---|---|
-| **1** | **ima2 via daemon bridge** (default) | `GET /api/imagegen/ima2/status` returns `ok: true` | Codex/ChatGPT OAuth path — model `gpt-5.5`, best fashion fidelity, project-bound writes, no extra runtime |
-| **1b** | **ima2 CLI** (same engine, no daemon) | `command -v ima2` succeeds **and** an `ima2 serve` is up at `127.0.0.1:3333` | Same model and quality as Tier 1; used when running outside the OD daemon |
-| **2** | **ComfyUI HTTP** (fallback) | `GET http://127.0.0.1:8188/system_stats` returns 200 | Local SD/SDXL/Flux engine when ima2 is unavailable; no OAuth needed |
-| **3** | **Styled fallback block** (no image) | none of the above | Page must still ship; render a CSS placeholder card with the original prompt |
+Do **not** use any of these paths in this project:
 
-Probe order is strict: Tier 1 → 1b → 2 → 3. Stop at the first success and use
-that engine for the entire skill run. Do not mix engines mid-artifact.
+- OpenAI API / CLI fallback, including `scripts/image_gen.py`
+- `OPENAI_API_KEY` setup or direct SDK runners
+- `ima2` daemon bridge or `ima2` CLI
+- local ComfyUI / SD / SDXL / Flux HTTP workflows
+- one-off shell scripts that call external image APIs
+
+If the user explicitly asks for API, CLI, `ima2`, or ComfyUI, state that this
+project's imagegen policy is built-in authenticated generation only, then ask
+for confirmation before using any non-built-in path.
+
+## Built-in workflow
+
+1. Generate each distinct asset with one built-in `image_gen` call.
+2. Treat model names such as `gpt-image-2`, `gpt-image-2.0`, or "Image 2.0" as
+   a quality/style target in the prompt. The built-in tool does not expose a
+   model-selection argument.
+3. Use compact, production-oriented prompts from the per-skill `SKILL.md`.
+4. After generation, copy the selected output from
+   `$CODEX_HOME/generated_images/...` into the current project. Leave the
+   original generated file in place.
+5. Save final project assets under `<project>/images/` using stable semantic
+   filenames such as `cover-look.png`, `look-01.png`, or `mood-03.png`.
+6. Never reference `$CODEX_HOME`, temporary folders, external URLs, or base64
+   blobs from the final HTML artifact.
 
 ## Defaults
 
-These defaults apply across all fashion skills unless the per-skill SKILL.md
-overrides them.
+These defaults apply across all fashion skills unless the per-skill `SKILL.md`
+needs a different crop for the artifact.
 
 ```
-model       = gpt-5.5         (ima2 default; do not pin to gpt-5.4)
-moderation  = low
-size        = 1024x1024       (square mood / chips / details)
-size_look   = 1024x1536       (vertical 4:5 figure / styling shots)
-quality     = medium
-out_dir     = images/         (project-local, beside index.html)
+engine      = built-in image_gen authenticated path
+size_mood   = square or near-square mood image
+size_look   = vertical 4:5 editorial / full-body figure
+out_dir     = images/ beside index.html
+quality     = high editorial prompt quality; no API quality flag
 ```
 
-Per-skill SKILL.md may override `size`, `quality`, or `out_dir`, but **must**
-keep `model = gpt-5.5` and `moderation = low` unless the user explicitly asks
-otherwise.
+The built-in tool may return dimensions that are not exact matches to the
+requested crop. Preserve the generated image and use CSS `object-fit: cover`
+or non-destructive local copies when layout needs a consistent frame.
 
-## Tier 1 — ima2 via daemon bridge (default)
+## Transparent images
 
-**Probe:**
+For transparent-background requests, follow the `imagegen` skill's built-in
+first chroma-key workflow:
 
-```bash
-# Returns { ok: true, serverUrl: "http://127.0.0.1:3333" } when ready.
-curl -s http://127.0.0.1:LOCAL_DAEMON_PORT/api/imagegen/ima2/status
-```
+1. Generate the subject on a perfectly flat chroma-key background.
+2. Copy the generated image into the project or `tmp/imagegen/`.
+3. Use the installed
+   `$CODEX_HOME/skills/.system/imagegen/scripts/remove_chroma_key.py` helper to
+   produce a PNG/WebP with alpha.
+4. Validate transparent corners and no obvious fringe before referencing the
+   result.
 
-The daemon port is the one printed by `pnpm tools-dev`. When the agent runs
-under the OD daemon, the project-relative path is sufficient.
+Do not switch to native transparent CLI output in this project unless the user
+explicitly confirms a policy exception.
 
-**Generate:**
+## Prompt shape
 
-```
-POST /api/projects/<projectId>/imagegen/ima2/generate
-Content-Type: application/json
+Image-generation prompts may be written in English for model quality. However,
+when the user writes in Korean or the brand/context is Korean, visible artifact
+copy derived from those prompts — captions, fallback cards, prompt-register
+summaries, alt text, and section labels — should use a Korean fashion-business
+register, not full translation. Use Korean noun-phrase report structure with
+accepted English terms such as mood, lookbook, styling, fit, silhouette,
+colorway, carryover, bridge, SKU, target lot, item, category,
+BASIC/TREND/ACCENT, and UNI/WOMEN when those terms are the natural working
+language. Keep filenames and model parameters in English. Prefer noun-phrase
+endings for visible report copy, prompt registers, fallback cards, and revision
+notes, for example `생성 완료`, `로고 사용 금지`, `styling reference`,
+`owner 확인`, `대체 프롬프트 유지`, or `Local ComfyUI 미사용`.
 
-{
-  "prompt": "...",
-  "name": "images/look-01.png",
-  "model": "gpt-5.5",
-  "quality": "medium",
-  "size": "1024x1536",
-  "moderation": "low"
-}
-```
+Each fashion skill defines its own per-asset prompt shape, but all prompts
+should keep these shared constraints:
 
-The daemon writes the PNG into the project's `images/` folder and returns
-`{ name, path, bytes, ima2: { ... } }`. The artifact references the local
-relative path — never an external URL or base64 blob.
+- `Use case:` use `ads-marketing`, `product-mockup`, or another exact
+  `imagegen` taxonomy slug when useful.
+- `Asset type:` name the project use, for example `fashion lookbook image`.
+- `Composition/framing:` specify full body, three-quarter, square mood image,
+  or detail crop, plus usable margins.
+- `Constraints:` include `no logos, no readable text, no watermark, no
+  distorted hands, no extra limbs`.
+- `Avoid:` include a specific anti-direction for the asset, for example
+  `runway crowd`, `busy background`, or `cropped shoes`.
+- `Color palette:` translate active `DESIGN.md` tokens into physical apparel
+  colors.
+- `Materials/textures:` use the active fabric board if present; otherwise pull
+  from the user brief.
 
-## Tier 1b — ima2 CLI (no daemon)
+## Failure behavior
 
-If the daemon bridge is unreachable but the `ima2` binary is on `PATH` and
-`ima2 serve` is already running, call the CLI directly. Use the same model and
-moderation defaults.
+If the built-in `image_gen` tool is unavailable or the image generation fails:
 
-```bash
-ima2 gen "<prompt>" \
-  -o images/look-01.png \
-  --model gpt-5.5 \
-  --moderation low \
-  --size 1024x1536 \
-  --quality medium
-```
+1. Do not fall back to API, `ima2`, or ComfyUI.
+2. Keep the HTML artifact shippable by rendering the existing styled fallback
+   block with the original prompt in `data-fallback`.
+3. Tell the user which asset failed and that no non-built-in engine was used.
 
-The agent must be in the project's working directory (the daemon sets
-`cwd = .od/projects/<id>`). The output path must be relative to `cwd`.
+## Project-bound gates
 
-## Tier 2 — ComfyUI HTTP (fallback)
+Before finishing any artifact that references generated imagery, verify:
 
-**Probe:**
-
-```bash
-curl -sf http://127.0.0.1:8188/system_stats >/dev/null && echo "comfy ok"
-```
-
-ComfyUI is workflow-based, so the agent must POST a complete graph to
-`/prompt` and then poll `/history/<prompt_id>` for the output filename. Use
-this minimal text-to-image graph (SDXL base; substitute the checkpoint name
-the user has installed):
-
-```bash
-PROMPT='editorial fashion lookbook image, full-body fashion model wearing relaxed boxy shirt and washed denim, studio backdrop, vertical 4:5, no logos, no readable text, no watermark'
-
-curl -s -X POST http://127.0.0.1:8188/prompt \
-  -H 'Content-Type: application/json' \
-  -d @- <<JSON
-{
-  "prompt": {
-    "3":  { "class_type": "KSampler", "inputs": { "seed": 0, "steps": 28, "cfg": 6, "sampler_name": "dpmpp_2m", "scheduler": "karras", "denoise": 1, "model": ["4", 0], "positive": ["6", 0], "negative": ["7", 0], "latent_image": ["5", 0] } },
-    "4":  { "class_type": "CheckpointLoaderSimple", "inputs": { "ckpt_name": "sd_xl_base_1.0.safetensors" } },
-    "5":  { "class_type": "EmptyLatentImage", "inputs": { "width": 1024, "height": 1536, "batch_size": 1 } },
-    "6":  { "class_type": "CLIPTextEncode", "inputs": { "text": "$PROMPT", "clip": ["4", 1] } },
-    "7":  { "class_type": "CLIPTextEncode", "inputs": { "text": "logos, readable text, watermark, distorted hands, extra limbs, runway crowd, beauty-shot framing", "clip": ["4", 1] } },
-    "8":  { "class_type": "VAEDecode", "inputs": { "samples": ["3", 0], "vae": ["4", 2] } },
-    "9":  { "class_type": "SaveImage", "inputs": { "filename_prefix": "od_fashion", "images": ["8", 0] } }
-  }
-}
-JSON
-```
-
-Then poll `/history/<prompt_id>` until the entry exists, read
-`outputs.<node_id>.images[].filename`, and copy the file from
-`<comfy_root>/output/` into the project's `images/` folder with a stable name
-(`images/look-01.png` etc.). If `<comfy_root>` is unknown, ask the user once
-and then cache it in `.od/projects/<id>/.imagegen-comfy.json`.
-
-The negative prompt above is the fashion default. Add user-supplied "avoid"
-items by appending them; do not remove the defaults.
-
-When the user has a different checkpoint installed (e.g. `flux1-dev.safetensors`
-or `juggernautXL_v9.safetensors`), substitute the `ckpt_name` field. The
-agent may probe `GET /object_info` to list installed checkpoints.
-
-## Tier 3 — Styled fallback block (no image)
-
-If Tier 1, 1b, and 2 all fail (or the user ran with `--no-imagegen`), every
-`<figure class="image-frame">` slot falls back to a styled placeholder card
-that displays the original imagegen prompt. The page must still render. Use:
-
-```html
-<figure class="image-frame" data-fallback="...prompt...">
-  <!-- <img> intentionally omitted; CSS shows the prompt text -->
-</figure>
-```
-
-The shared `assets/template.html` of every fashion skill ships with the
-fallback CSS already wired. Do not invent new fallback markup.
-
-## Prompt shapes
-
-Each fashion skill defines its own per-asset prompt shape, but all of them
-share these constraints:
-
-- `Constraints:` — `no logos, no readable text, no watermark, no distorted hands, no extra limbs`
-- `Avoid:` — at least one explicit "what we are not" line per image; mood
-  boards add `catalog-pose, runway crowd, studio backdrop seamless white`;
-  lookbook shots add `cropped shoes unless specified, busy background`
-- `Color palette:` — translate active DESIGN.md tokens to physical color names
-  (the agent never invents colors from memory)
-- `Materials/textures:` — pull from the active fabric board if the skill has
-  read one; otherwise pull from the user brief
-
-See per-skill `SKILL.md` Step 3 for the exact prompt shape.
-
-## Project-bound writes
-
-All images live under `<project>/images/` with stable, semantic names. Never
-use a tmp folder, an absolute path, or a non-deterministic name. The same
-artifact, re-rendered, must point at the same files.
-
-## Gates
-
-Before emitting `<artifact>`, the agent must verify:
-
-- Every `<img src="...">` resolves to a file the agent actually wrote in
-  `images/`.
-- Every `images/*.png` referenced in the artifact has been written this run
-  (no orphan references).
-- If any image generation failed, the matching `<figure>` falls back to the
-  styled placeholder rather than rendering a broken `<img>`.
-
-These gates apply to every skill that uses this guide.
+- Every `<img src="...">` resolves to a file under the project.
+- Every generated deliverable was copied into `<project>/images/`.
+- No final artifact references `$CODEX_HOME`, temporary folders, external
+  image URLs, or base64 blobs.
+- No API key, `ima2`, or ComfyUI setup was requested or used.

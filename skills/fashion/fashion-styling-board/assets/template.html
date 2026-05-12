@@ -11,6 +11,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>[REPLACE Season] [REPLACE Period] Styling Board · [REPLACE Brand]</title>
 <style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
   :root {
     /* Bind from active DESIGN.md */
     --ink:        #1f2933;
@@ -25,9 +27,19 @@
     --axis-trend:     #5b8169;
     --axis-accent:    var(--accent);
 
-    --font-display: "Inter Display", "Pretendard", system-ui, sans-serif;
-    --font-text:    "Inter", "Pretendard", system-ui, sans-serif;
-    --font-mono:    "JetBrains Mono", ui-monospace, monospace;
+    --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
+
+    --font-display-report: "Paperlogy", "Wanted Sans Variable", "SUIT Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
+
+    --font-display-street: "Black Han Sans", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-play: "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-romance: "Grandiflora One", "Diphylleia", "Hahmlet", "Noto Serif KR", "Source Serif 4", ui-serif, Georgia, serif;
+
+    --font-display: var(--font-display-report);
+    --font-text: var(--font-sans);
+    --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
     --gap-1: 4px;
     --gap-2: 8px;

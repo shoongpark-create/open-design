@@ -57,6 +57,40 @@ The key item sheet answers four questions about a single item:
 It is a **single item** document — never combine two items into one sheet.
 Use one sheet per item; chain them in `fashion-season-deck` if needed.
 
+## Output language
+
+Keep this skill's instructions in English. For user-facing artifact copy,
+default to a Korean fashion-business register when the user writes in Korean or
+the brand/context is Korean. Do not fully translate every label into Korean.
+Use natural Korean noun-phrase report style for strategy, rationale, caveats,
+owner notes, and decisions; keep established industry English or mixed terms when they are
+the normal working language. Typical terms to keep include SKU, new lineup,
+mood, lookbook, styling, fit, silhouette, colorway, carryover, target lot, drop,
+bridge, category, item, setup, BASIC/TREND/ACCENT, BTA, UNI/WOMEN, S1~S4,
+fabric/graphic names, season codes, and file paths. Section labels and table
+headers may be mixed, e.g. `Category × SKU Plan`, `Bridge Map`, `Open
+Decisions`, `Anti-pattern · 하지 않을 것`. Avoid awkward literal Hangulization
+such as `락 리뷰` when `LOCK REVIEW` is clearer. Image-generation prompts may
+stay in English; visible captions and fallback text should match the artifact
+register: Korean phrases with accepted fashion-business English terms. For
+report-style artifacts, prefer noun-phrase endings in Korean body copy, table
+interpretation, HTML comments, revision logs, and decision notes (e.g. `적용`, `전환`, `확보 사유`, `사용 금지`,
+`owner 확인`, `sample check 완료`, `Local ComfyUI 미사용`) instead of stiff
+finite endings such as `~이다`, `~한다`, or `~하였다`.
+
+## Typography
+
+Use the active `DESIGN.md` WACKYWILLY type system. Keep `Pretendard Variable`
+as the default body, table, UI, and decision-log font. Choose exactly one point
+font token per artifact and bind `--font-display` to it: `--font-display-report`
+for operational decks, line-up docs, roadmaps, and internal presentations;
+`--font-display-romance` for WACKYLILY, romantic street, soft editorial,
+lookbook, and mood-board artifacts; `--font-display-street` for strong street,
+launch, promo, and key-visual directions; `--font-display-play` for character
+IP, fandom goods, and witty campaign moments. Do not use point fonts for table
+body, long notes, revision logs, SKU rows, code, dates, filenames, or owner/by
+fields; keep those in `--font-sans` or `--font-mono`.
+
 ## Resource map
 
 ```
@@ -76,7 +110,7 @@ fashion-key-item-sheet/
 
 1. Read `assets/template.html` end-to-end.
 2. Read [`../_shared/imagegen.md`](../_shared/imagegen.md) — the shared
-   image-engine fallback chain.
+   project imagegen policy.
 3. Read `references/slices.md` to understand which slices apply to which
    item families.
 4. Read `references/layouts.md` and pick a slice composition.
@@ -134,8 +168,9 @@ The left side is a **mood collage** of 5–6 figures wearing the item or
 close variants. The goal is silhouette / fit / layering reading at a
 glance — not catalog beauty.
 
-Use the shared engine fallback chain. Default size `1024x1536`,
-`quality: medium`. Save into `images/` with names matching the role:
+Use the shared project imagegen policy: generate each worn-reference figure
+with the built-in authenticated `image_gen` path only. Save project-local
+copies into `images/` with names matching the role:
 
 ```
 images/worn-01.png … images/worn-06.png

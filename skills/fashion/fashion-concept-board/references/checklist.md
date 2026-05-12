@@ -53,7 +53,7 @@ the whole season inherits the vagueness. Run this gate before emitting.
 - The board shows **one clear contrast** somewhere (e.g. soft material seed
   paired with industrial detail seed) — too much agreement is suspicious.
 - Mood grid lighting / color temperature is coherent — not 12 unrelated
-  ima2 outputs glued together.
+  imagegen outputs glued together.
 
 ## P2 — Polish
 

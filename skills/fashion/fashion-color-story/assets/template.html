@@ -2,7 +2,7 @@
 <!--
   OD fashion-color-story seed.
 
-  Copy this file to <project>/index.html. Optional ima2 mood thumbnails
+  Copy this file to <project>/index.html. Optional imagegen mood thumbnails
   go under <project>/images/ — but most color stories ship without
   imagery (chips + codes are the deliverable).
 -->
@@ -12,6 +12,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>[REPLACE] Season Color Story</title>
   <style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
     :root {
       --bg: #efeae1;
       --paper: #faf6ee;
@@ -35,9 +37,14 @@
 
       --shadow: rgba(28, 22, 16, 0.10);
       --shadow-deep: rgba(28, 22, 16, 0.18);
-      --font-display: "Iowan Old Style", "Charter", Georgia, serif;
-      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-      --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+      --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
+      --font-display-report: "Paperlogy", "Wanted Sans Variable", "SUIT Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
+      --font-display-street: "Black Han Sans", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+      --font-display-play: "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+      --font-display-romance: "Grandiflora One", "Diphylleia", "Hahmlet", "Noto Serif KR", "Source Serif 4", ui-serif, Georgia, serif;
+      --font-display: var(--font-display-romance);
+      --font-body: var(--font-sans);
+      --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
       --container: 1240px;
       --gutter: clamp(18px, 4vw, 48px);
       --radius: 6px;

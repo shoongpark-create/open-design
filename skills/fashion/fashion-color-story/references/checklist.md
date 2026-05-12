@@ -61,7 +61,7 @@ before emitting.
   page — color story is regularly printed for wall reference.
 - Mobile reflow keeps swatch + code side-by-side at minimum width 480px;
   below that, swatch stacks above code.
-- One ima2 mood thumbnail is included **only** for accent or season
+- One imagegen mood thumbnail is included **only** for accent or season
   colors that benefit from textile context. Main carryover tier should
   not need imagery — code + fabric pairing list is enough.
 

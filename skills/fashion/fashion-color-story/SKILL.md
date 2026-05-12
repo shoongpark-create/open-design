@@ -62,6 +62,40 @@ If the concept board's color section had **seeds** ("humid linen ivory",
 Pristine", "Pantone 16-4109 TCX Stone Blue") with the seeds preserved as
 naming.
 
+## Output language
+
+Keep this skill's instructions in English. For user-facing artifact copy,
+default to a Korean fashion-business register when the user writes in Korean or
+the brand/context is Korean. Do not fully translate every label into Korean.
+Use natural Korean noun-phrase report style for strategy, rationale, caveats,
+owner notes, and decisions; keep established industry English or mixed terms when they are
+the normal working language. Typical terms to keep include SKU, new lineup,
+mood, lookbook, styling, fit, silhouette, colorway, carryover, target lot, drop,
+bridge, category, item, setup, BASIC/TREND/ACCENT, BTA, UNI/WOMEN, S1~S4,
+fabric/graphic names, season codes, and file paths. Section labels and table
+headers may be mixed, e.g. `Category × SKU Plan`, `Bridge Map`, `Open
+Decisions`, `Anti-pattern · 하지 않을 것`. Avoid awkward literal Hangulization
+such as `락 리뷰` when `LOCK REVIEW` is clearer. Image-generation prompts may
+stay in English; visible captions and fallback text should match the artifact
+register: Korean phrases with accepted fashion-business English terms. For
+report-style artifacts, prefer noun-phrase endings in Korean body copy, table
+interpretation, HTML comments, revision logs, and decision notes (e.g. `적용`, `전환`, `확보 사유`, `사용 금지`,
+`owner 확인`, `sample check 완료`, `Local ComfyUI 미사용`) instead of stiff
+finite endings such as `~이다`, `~한다`, or `~하였다`.
+
+## Typography
+
+Use the active `DESIGN.md` WACKYWILLY type system. Keep `Pretendard Variable`
+as the default body, table, UI, and decision-log font. Choose exactly one point
+font token per artifact and bind `--font-display` to it: `--font-display-report`
+for operational decks, line-up docs, roadmaps, and internal presentations;
+`--font-display-romance` for WACKYLILY, romantic street, soft editorial,
+lookbook, and mood-board artifacts; `--font-display-street` for strong street,
+launch, promo, and key-visual directions; `--font-display-play` for character
+IP, fandom goods, and witty campaign moments. Do not use point fonts for table
+body, long notes, revision logs, SKU rows, code, dates, filenames, or owner/by
+fields; keep those in `--font-sans` or `--font-mono`.
+
 ## Resource map
 
 ```
@@ -81,7 +115,7 @@ fashion-color-story/
 
 1. Read `assets/template.html` end-to-end.
 2. Read [`../_shared/imagegen.md`](../_shared/imagegen.md) — the shared
-   image-engine fallback chain (used only if the user requests Step 8 mood
+   project imagegen policy (used only if the user requests Step 8 mood
    thumbnails; default is no imagery).
 3. Read `references/trend-research.md` for season trend inputs (WGSN/Coloro
    key colors, K-DTC saturation rules, TCX vs. TPG decisions).
@@ -216,7 +250,7 @@ Required sections, in order:
    blocks; main / season / accent grouped sections.
 5. **Per-color detail spreads** — one wide spread per color: large swatch,
    codes table, fabric pairings, carryover status, use rules, optional
-   ima2 mood image (1 small image per color is enough; no full looks).
+   imagegen mood image (1 small image per color is enough; no full looks).
 6. **Category × color matrix** — the merchandising distribution table.
 7. **Colorway count per style** — rule of thumb table (shirts 3–4 colorways,
    outer 1–2, knit 2–3, etc.).
@@ -233,9 +267,10 @@ A color story does **not** need full mood imagery (that's the concept
 board's job). At most 1 small mood image per locked color is helpful — and
 only if the user explicitly asks. Default: pure CSS chips, no imagery.
 
-If imagery is requested, follow the shared engine fallback chain in
-[`../_shared/imagegen.md`](../_shared/imagegen.md) (default: ima2,
-`gpt-5.5`, `1024x1024`) and save under `images/color-XX.png`.
+If imagery is requested, follow the shared project imagegen policy in
+[`../_shared/imagegen.md`](../_shared/imagegen.md): use the built-in
+authenticated `image_gen` path only, then save project-local copies under
+`images/color-XX.png`.
 
 ### Step 9 — Self-check
 

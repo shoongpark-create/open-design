@@ -54,6 +54,40 @@ The concept board exists to answer four questions:
    / detail *seeds* — not yet finalized palettes or specs)
 4. **What are we deliberately not doing?** (anti-direction, off-territory list)
 
+## Output language
+
+Keep this skill's instructions in English. For user-facing artifact copy,
+default to a Korean fashion-business register when the user writes in Korean or
+the brand/context is Korean. Do not fully translate every label into Korean.
+Use natural Korean noun-phrase report style for strategy, rationale, caveats,
+owner notes, and decisions; keep established industry English or mixed terms when they are
+the normal working language. Typical terms to keep include SKU, new lineup,
+mood, lookbook, styling, fit, silhouette, colorway, carryover, target lot, drop,
+bridge, category, item, setup, BASIC/TREND/ACCENT, BTA, UNI/WOMEN, S1~S4,
+fabric/graphic names, season codes, and file paths. Section labels and table
+headers may be mixed, e.g. `Category × SKU Plan`, `Bridge Map`, `Open
+Decisions`, `Anti-pattern · 하지 않을 것`. Avoid awkward literal Hangulization
+such as `락 리뷰` when `LOCK REVIEW` is clearer. Image-generation prompts may
+stay in English; visible captions and fallback text should match the artifact
+register: Korean phrases with accepted fashion-business English terms. For
+report-style artifacts, prefer noun-phrase endings in Korean body copy, table
+interpretation, HTML comments, revision logs, and decision notes (e.g. `적용`, `전환`, `확보 사유`, `사용 금지`,
+`owner 확인`, `sample check 완료`, `Local ComfyUI 미사용`) instead of stiff
+finite endings such as `~이다`, `~한다`, or `~하였다`.
+
+## Typography
+
+Use the active `DESIGN.md` WACKYWILLY type system. Keep `Pretendard Variable`
+as the default body, table, UI, and decision-log font. Choose exactly one point
+font token per artifact and bind `--font-display` to it: `--font-display-report`
+for operational decks, line-up docs, roadmaps, and internal presentations;
+`--font-display-romance` for WACKYLILY, romantic street, soft editorial,
+lookbook, and mood-board artifacts; `--font-display-street` for strong street,
+launch, promo, and key-visual directions; `--font-display-play` for character
+IP, fandom goods, and witty campaign moments. Do not use point fonts for table
+body, long notes, revision logs, SKU rows, code, dates, filenames, or owner/by
+fields; keep those in `--font-sans` or `--font-mono`.
+
 ## Resource map
 
 ```
@@ -73,7 +107,8 @@ fashion-concept-board/
 
 1. Read `assets/template.html` end-to-end.
 2. Read [`../_shared/imagegen.md`](../_shared/imagegen.md) — the shared
-   image-engine fallback chain. Concept boards always need imagery.
+   project imagegen policy. Concept boards always need imagery, generated with
+   the built-in authenticated `image_gen` path only.
 3. Read `references/trend-research.md` so the concept territory connects to
    actual season trend data (WGSN/Coloro 27SS keywords, K-DTC reality) instead
    of a generic Pinterest dump.
@@ -115,7 +150,7 @@ images. Example:
 > "27SS territory: *humid early-summer commute* (primary) × *slight industrial
 > dryness* (tension)."
 
-### Step 3 — Generate mood imagery (shared engine fallback)
+### Step 3 — Generate mood imagery (project imagegen path)
 
 A concept board needs **9–16 mood images** that span the territory rather than
 all looking like product shots. Aim for variety across these *image roles*:
@@ -134,11 +169,11 @@ all looking like product shots. Aim for variety across these *image roles*:
 This image-role variety is what makes a concept board feel like territory and
 not a lookbook preview.
 
-Use the shared engine fallback chain in
-[`../_shared/imagegen.md`](../_shared/imagegen.md): probe **ima2 daemon
-bridge → ima2 CLI → ComfyUI → styled fallback**, stop at the first success,
-use that engine for the entire run. Default model is `gpt-5.5`, default size
-for mood images is `1024x1024` (square).
+Use the shared project imagegen policy in
+[`../_shared/imagegen.md`](../_shared/imagegen.md). Generate each mood image
+with the built-in `image_gen` tool through the current authenticated Codex
+session. Do not use API/CLI fallback, `ima2`, or local ComfyUI. Square or
+near-square mood images are preferred.
 
 Save assets in a project-local `images/` folder with stable names:
 
@@ -150,7 +185,7 @@ images/seed-silhouette-01.png … images/seed-silhouette-04.png  (optional)
 images/anti-territory-01.png  (optional, only if used)
 ```
 
-For each mood image, write a compact ima2 prompt using this shape (note: this
+For each mood image, write a compact `imagegen` prompt using this shape (note: this
 is **not** a model-wearing-clothes prompt — that is the lookbook's job):
 
 ```
