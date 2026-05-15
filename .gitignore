@@ -8,6 +8,14 @@ out/
 *.log
 .vite
 
+# Vendored-skill caches (preserved from .claude/ pre-monorepo gitignore).
+# Real skill content sits under skills/vendored/<name>/; these caches are
+# regenerated locally per machine.
+**/.venv/
+**/__pycache__/
+**/.marknative/
+*.pyc
+
 # Local runtime data — auto-created by the daemon on first start.
 # Holds app.sqlite (project metadata), projects/<id>/ (per-project artifacts,
 # the agent's CWD), and artifacts/ (one-off renders). Never commit.

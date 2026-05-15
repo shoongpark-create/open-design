@@ -1,0 +1,330 @@
+{
+  "subject": {
+    "key": "event",
+    "title": "행사 / 공연 / 무대",
+    "desc": "공연, 강연, 축제, 발표 장면",
+    "kicker": "CATEGORY",
+    "tone": "copper"
+  },
+  "knowledge": {
+    "summary": "행사 이미지는 행사 종류, 순간, 무대/관객 비중이 맞아야 현장감이 자연스럽게 살아납니다.",
+    "consider": [
+      "행사 순간",
+      "무대와 관객 비중",
+      "조명 방향",
+      "현장 규모감",
+      "홍보용 여백"
+    ]
+  },
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어떤 행사 장면인가요?",
+      "summaryLabel": "행사 종류",
+      "promptLabel": "Event type",
+      "description": "",
+      "options": [
+        {
+          "key": "event-concert",
+          "title": "콘서트 / 공연",
+          "desc": "무대와 조명이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "event-lecture",
+          "title": "강연 / 세미나",
+          "desc": "발표와 청중 흐름이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "event-conference",
+          "title": "컨퍼런스",
+          "desc": "전문 행사 분위기가 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "event-weddinghall",
+          "title": "웨딩홀 / 본식",
+          "desc": "특별한 행사감이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "event-festival",
+          "title": "축제 / 페스티벌",
+          "desc": "활기와 군중감이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "event-award",
+          "title": "시상식",
+          "desc": "조명과 상징성이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "event-school",
+          "title": "학교 행사",
+          "desc": "발표와 기념성이 있는 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "event-sports",
+          "title": "스포츠 경기장",
+          "desc": "에너지와 관중감이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "event-backstage",
+          "title": "백스테이지 / 준비 장면",
+          "desc": "무대 뒤 긴장감이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "event-booth",
+          "title": "전시 / 부스 운영",
+          "desc": "브랜드 소개와 현장감이 중요한 장면",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "focus",
+      "title": "무엇이 중심인가요?",
+      "summaryLabel": "강조 포인트",
+      "promptLabel": "Focus",
+      "description": "",
+      "options": [
+        {
+          "key": "event-focus-stage",
+          "title": "무대 전체",
+          "desc": "조명과 규모가 먼저 보이는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "event-focus-speaker",
+          "title": "발표자 / 공연자 중심",
+          "desc": "주인공 행동이 중심인 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "event-focus-audience",
+          "title": "관객 반응",
+          "desc": "현장 열기와 반응이 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "event-focus-screen",
+          "title": "스크린 / 현수막 포함",
+          "desc": "행사 정보가 함께 보이는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "event-focus-light",
+          "title": "조명 / 레이저 강조",
+          "desc": "시각 효과가 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "event-focus-moment",
+          "title": "결정적 순간 포착",
+          "desc": "박수, 환호, 동작이 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "event-focus-detail",
+          "title": "소품 / 장비 디테일",
+          "desc": "마이크, 악기, 장비가 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "event-focus-mix",
+          "title": "무대와 관객 균형",
+          "desc": "행사 전체 분위기를 담는 방향",
+          "kicker": "FOCUS"
+        }
+      ]
+    },
+    {
+      "key": "moment",
+      "title": "어느 순간이 좋을까요?",
+      "summaryLabel": "행사 순간",
+      "promptLabel": "Event moment",
+      "description": "",
+      "options": [
+        {
+          "key": "event-moment-opening",
+          "title": "시작 직전 / 오프닝",
+          "desc": "막 시작되는 긴장감이 있는 순간",
+          "kicker": "MOMENT"
+        },
+        {
+          "key": "event-moment-main",
+          "title": "메인 진행 중",
+          "desc": "행사 핵심 장면이 펼쳐지는 순간",
+          "kicker": "MOMENT"
+        },
+        {
+          "key": "event-moment-climax",
+          "title": "하이라이트 / 절정",
+          "desc": "열기와 반응이 가장 큰 순간",
+          "kicker": "MOMENT"
+        },
+        {
+          "key": "event-moment-applause",
+          "title": "박수 / 환호",
+          "desc": "관객 반응이 함께 살아나는 순간",
+          "kicker": "MOMENT"
+        },
+        {
+          "key": "event-moment-presentation",
+          "title": "설명 / 발표 장면",
+          "desc": "스크린과 발표 흐름이 중요한 순간",
+          "kicker": "MOMENT"
+        },
+        {
+          "key": "event-moment-break",
+          "title": "쉬는 시간 / 현장 스케치",
+          "desc": "행사 틈새 분위기를 담는 순간",
+          "kicker": "MOMENT"
+        },
+        {
+          "key": "event-moment-backstage",
+          "title": "준비 / 대기 순간",
+          "desc": "무대 뒤 긴장감이 느껴지는 순간",
+          "kicker": "MOMENT"
+        },
+        {
+          "key": "event-moment-closing",
+          "title": "마무리 / 엔딩",
+          "desc": "끝맺음 감성과 정리감이 있는 순간",
+          "kicker": "MOMENT"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "land-panorama",
+          "title": "파노라마 와이드",
+          "desc": "넓은 풍경과 스케일이 먼저 느껴지는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-mid",
+          "title": "중간 거리 풍경",
+          "desc": "주제와 배경이 균형 있게 보이는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-foreground",
+          "title": "전경 강조",
+          "desc": "앞쪽 요소를 크게 두고 깊이를 만드는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-silhouette",
+          "title": "실루엣 포함",
+          "desc": "해질녘이나 역광에서 분위기가 살아나는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-road",
+          "title": "길이 이어지는 화면",
+          "desc": "시선이 안쪽으로 자연스럽게 들어가는 구성",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-top",
+          "title": "높은 시점 / 항공 느낌",
+          "desc": "지역 전체 윤곽이 보이는 시원한 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-framed",
+          "title": "창틀 / 문틀 프레이밍",
+          "desc": "안쪽 장면을 액자처럼 감싸는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-detail",
+          "title": "디테일 클로즈업",
+          "desc": "풍경 일부의 질감과 포인트를 크게 보는 화면",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "어떤 분위기를 원하시나요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "mood-bright",
+          "title": "밝고 친근하게",
+          "desc": "입문자도 편하게 느끼는 가볍고 열린 분위기",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-clean",
+          "title": "깨끗하고 맑게",
+          "desc": "정보 전달이 또렷한 클린한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-warm",
+          "title": "따뜻하고 편안하게",
+          "desc": "부드럽고 정감 있는 인상을 주는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-calm",
+          "title": "차분하고 담백하게",
+          "desc": "과장되지 않고 정리된 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-cinematic",
+          "title": "영화처럼 깊게",
+          "desc": "공기감과 서사가 함께 느껴지는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-dramatic",
+          "title": "강렬하고 드라마틱하게",
+          "desc": "명암과 감정이 또렷한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-luxury",
+          "title": "고급스럽고 세련되게",
+          "desc": "브랜드 비주얼 같은 정제된 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-playful",
+          "title": "귀엽고 경쾌하게",
+          "desc": "색감과 인상이 가볍고 재미있는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-future",
+          "title": "미래적이고 차갑게",
+          "desc": "기술적이고 현대적인 느낌",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-vintage",
+          "title": "빈티지하고 레트로하게",
+          "desc": "옛 감성과 필름 느낌이 남는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}

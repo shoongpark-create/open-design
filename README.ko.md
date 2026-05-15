@@ -15,17 +15,26 @@
 ## 빠른 시작
 
 ```bash
-# 의존성 설치 (Node ~24, pnpm >=10.33.2)
-pnpm install
+# 1. 모노레포 클론
+git clone https://github.com/shoongpark-create/open-design.git
+cd open-design
 
-# 데몬 + 웹 UI 동시 시작 (브라우저 자동 오픈)
-pnpm tools-dev
+# 2. 1회 셋업 — ~/.claude/skills와 ~/.codex/skills 마운트 자동 생성
+./setup.sh        # Mac / Linux
+# .\setup.ps1     # Windows (PowerShell)
+
+# 3. 엔진 실행 (옵션 — 2단계만 끝나도 Claude Code / Codex CLI 즉시 사용 가능)
+pnpm install
+pnpm tools-dev    # daemon + 웹 UI 동시 시작, 브라우저 자동 오픈
 ```
+
+`setup.sh --start`로 2·3단계를 한 명령으로 합칠 수 있습니다. setup은 idempotent — `git pull` 후 매번 재실행해도 안전합니다.
 
 설치된 어떤 코드 에이전트 CLI든 자동 감지됩니다. 없으면 Anthropic API로 폴백(BYOK).
 
-**다른 머신에서 처음부터 환경을 구축**하려면 [docs/setup.ko.md](./docs/setup.ko.md)를 참고하세요 (3개 sibling 리포 클론 + 의존성 + 심링크 재생성 + 데몬 시작, 한 번에 따라할 수 있는 단계별 가이드).
 자세한 설치/실행은 [QUICKSTART.md](./QUICKSTART.md)를, 에이전트 워크플로우 규약은 [AGENTS.md](./AGENTS.md)를 참고하세요.
+
+> **2026-05 — 모노레포 통합.** 이전 3-리포 구조(`open-design` + `open-design-skills` + `open-design-codex`)를 이 단일 리포로 합쳤습니다. `open-design-skills/skills/` 안에 있던 vendored 스킬 20개는 `skills/vendored/`로 이동했습니다. 기존 2개 리포는 GitHub에 archive 상태로 남기며, 더 이상 source of truth가 아닙니다.
 
 ---
 
@@ -36,7 +45,9 @@ pnpm tools-dev
 | 패션 시즌 디자인 스킬 | **15개** (컨셉 → 종합 덱까지 풀 커버) |
 | 마케팅/일반 스킬 | **31개** (랜딩, 대시보드, 덱, 문서, 모바일 등) |
 | 데이터/인텔리전스 스킬 | **7개** (musinsa-ranking, sales-analysis, trend-radar, demand-optimizer, …) |
+| Vendored OSS 스킬 | **20개** (canvas-design, docx, pdf, pptx, xlsx, theme-factory, …) |
 | UI 마스터 스킬 | **1개** (`impeccable` — 디자인/리디자인/비평/감사) |
+| **전체 스킬** | **74개**, 단일 모노레포에서 `setup.sh`로 Claude Code · Codex CLI 양쪽에 일괄 마운트 |
 | 스킬 등록(register) | **K-패션(한국어 우선·LLM-agnostic)** — 2026-05 마이그레이션 완료 |
 | 스킬 구조 | `SKILL.md` + `assets/template.html` + `references/{layouts,checklist}.md` |
 | 디자인 시스템 | **72개** (Linear, Stripe, Apple, Nike, Xiaohongshu, …) |

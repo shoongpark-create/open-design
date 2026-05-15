@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Simple Design System — UI Kit</title>
+  <link rel="stylesheet" href="../../colors_and_type.css?v=2">
+  <style>
+    html, body { margin: 0; height: 100%; background: var(--c-bg-subtle); }
+    #root { height: 100%; }
+    .app { display: flex; flex-direction: column; height: 100vh; background: var(--c-bg); }
+    .shell { display: flex; flex: 1; min-height: 0; }
+    .main { flex: 1; display: flex; flex-direction: column; min-width: 0; background: var(--c-bg-subtle); }
+    .content { flex: 1; overflow-y: auto; padding: 28px 32px; }
+    .h-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 20px; }
+    .h1 { font: 700 28px/34px var(--font-sans); letter-spacing: -0.01em; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+    .meta-row { display: flex; align-items: center; gap: 12px; color: var(--c-fg-2); font-size: 13px; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script src="../../assets/icons.js"></script>
+
+  <script type="text/babel" src="Button.jsx"></script>
+  <script type="text/babel" src="Tag.jsx"></script>
+  <script type="text/babel" src="Input.jsx"></script>
+  <script type="text/babel" src="Card.jsx"></script>
+  <script type="text/babel" src="Nav.jsx"></script>
+  <script type="text/babel" src="AIChat.jsx"></script>
+
+  <script type="text/babel">
+    const NAV = [
+      { id: 'inbox',    label: 'Inbox',    icon: 'mail',     count: 3 },
+      { id: 'projects', label: 'Projects', icon: 'folder' },
+      { id: 'people',   label: 'People',   icon: 'user' },
+      { id: 'chat',     label: 'AI assist',icon: 'message-circle' },
+      { id: 'settings', label: 'Settings', icon: 'settings' },
+    ];
+
+    const PROJECTS = [
+      { name: 'Q2 launch plan',  status: 'positive', lead: 'AK', updated: 'Updated 2h ago', due: 'Apr 28', tags: ['Marketing','Beta'] },
+      { name: 'Pricing refresh', status: 'brand',    lead: 'JL', updated: 'Updated yesterday', due: 'May 12', tags: ['Growth'] },
+      { name: 'Docs revamp',     status: 'warning',  lead: 'MR', updated: 'Updated 3d ago', due: 'Jun 03', tags: ['Content','Draft'] },
+      { name: 'Mobile signup',   status: 'neutral',  lead: 'SC', updated: 'Updated 1w ago', due: 'TBD',    tags: ['Mobile'] },
+      { name: 'Churn analysis',  status: 'info',     lead: 'PT', updated: 'Updated 30m ago', due: 'Apr 24', tags: ['Analytics','Priority'] },
+      { name: 'Onboarding test', status: 'danger',   lead: 'NH', updated: 'Updated 4h ago', due: 'Overdue', tags: ['Blocked'] },
+    ];
+
+    function App() {
+      const [active, setActive] = React.useState('inbox');
+      const [dialogOpen, setDialogOpen] = React.useState(false);
+      const [messages, setMessages] = React.useState([
+        { role: 'assistant', text: 'Hi — I can summarize your inbox, draft replies, or dig into a project. What do you want to do?' },
+      ]);
+
+      const sendChat = async (text) => {
+        setMessages(m => [...m, { role: 'user', text }, { role: 'assistant', text: '…' }]);
+        try {
+          const reply = await window.claude.complete({
+            messages: [
+              { role: 'user', content: 'You are a helpful assistant in a project management app. Keep replies short (2-3 sentences). User message: ' + text }
+            ]
+          });
+          setMessages(m => [...m.slice(0, -1), { role: 'assistant', text: reply }]);
+        } catch (e) {
+          setMessages(m => [...m.slice(0, -1), { role: 'assistant', text: 'Sorry — I had trouble replying. Try again.' }]);
+        }
+      };
+
+      const Topbar_ = (
+        <Topbar title="Simple Workspace" actions={
+          <>
+            <IconButton name="search" />
+            <IconButton name="bell" />
+            <Avatar initials="AK" size={28} />
+          </>
+        } />
+      );
+
+      return (
+        <div className="app">
+          {Topbar_}
+          <div className="shell">
+            <Sidebar items={NAV} active={active} onSelect={setActive} />
+            <div className="main">
+              {active === 'inbox' && <InboxView onOpen={() => setDialogOpen(true)} />}
+              {active === 'projects' && <ProjectsView />}
+              {active === 'people' && <PeopleView />}
+              {active === 'chat' && <ChatView messages={messages} onSend={sendChat} />}
+              {active === 'settings' && <SettingsView />}
+            </div>
+          </div>
+          <Dialog
+            open={dialogOpen}
+            onClose={() => setDialogOpen(false)}
+            title="Archive this thread?"
+            actions={
+              <>
+                <Button variant="neutral" onClick={() => setDialogOpen(false)}>Cancel</Button>
+                <Button variant="primary" onClick={() => setDialogOpen(false)}>Archive</Button>
+              </>
+            }
+          >
+            The thread will move to your archive. You can restore it any time from the archive view.
+          </Dialog>
+        </div>
+      );
+    }
+
+    function InboxView({ onOpen }) {
+      const [filter, setFilter] = React.useState('all');
+      const items = [
+        { from: 'Maya Rodriguez', subj: 'Q2 launch plan — review needed', snippet: 'I pushed the draft to the shared doc. Can you take a look before Friday?', time: '2h', tag: 'brand' },
+        { from: 'Billing',         subj: 'April invoice is ready',         snippet: 'Your invoice for April is available. Download it from the billing dashboard.',     time: '5h', tag: 'neutral' },
+        { from: 'Sam Chen',        subj: 'Docs revamp blockers',           snippet: 'Got blocked on the API reference. Sync tomorrow?',                                  time: '1d', tag: 'warning' },
+        { from: 'AI assistant',    subj: 'Your weekly digest',             snippet: 'Three things changed in your workspace this week. Review them before your sync.',  time: '1d', tag: 'info' },
+      ];
+      return (
+        <div className="content">
+          <div className="h-row">
+            <div className="h1">Inbox</div>
+            <div style={{ display: 'flex', gap: 8 }}>
+              <Button variant="neutral" leftIcon="filter" size="sm">Filter</Button>
+              <Button variant="primary" leftIcon="plus" size="sm">New message</Button>
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: 8, marginBottom: 16 }}>
+            {['all','unread','mentions','archived'].map(f =>
+              <Chip key={f} active={filter === f} onClick={() => setFilter(f)}>
+                {f[0].toUpperCase() + f.slice(1)}
+              </Chip>
+            )}
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {items.map((it, i) => (
+              <Card key={i} padding={16} interactive style={{ cursor: 'pointer' }}>
+                <div onClick={onOpen} style={{ display: 'flex', gap: 14 }}>
+                  <Avatar initials={it.from.split(' ').map(s=>s[0]).slice(0,2).join('')} size={36} color="var(--c-fg)" />
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 2 }}>
+                      <div style={{ fontWeight: 600, fontSize: 14 }}>{it.from}</div>
+                      <Tag variant={it.tag}>{it.time}</Tag>
+                    </div>
+                    <div style={{ fontSize: 14, fontWeight: 500, marginBottom: 2 }}>{it.subj}</div>
+                    <div style={{ fontSize: 13, color: 'var(--c-fg-2)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{it.snippet}</div>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    function ProjectsView() {
+      const [tab, setTab] = React.useState('all');
+      return (
+        <div className="content">
+          <div className="h-row">
+            <div className="h1">Projects</div>
+            <Button variant="primary" leftIcon="plus" size="sm">New project</Button>
+          </div>
+          <Tabs tabs={[
+            { id: 'all', label: 'All' },
+            { id: 'mine', label: 'My projects' },
+            { id: 'starred', label: 'Starred' },
+            { id: 'archived', label: 'Archived' },
+          ]} active={tab} onChange={setTab} />
+          <div style={{ height: 20 }} />
+          <div className="grid">
+            {PROJECTS.map((p, i) => (
+              <Card key={i} interactive>
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 12 }}>
+                  <Tag variant={p.status}>●</Tag>
+                  <IconButton name="more-horizontal" size={28} />
+                </div>
+                <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>{p.name}</div>
+                <div style={{ fontSize: 13, color: 'var(--c-fg-2)', marginBottom: 14 }}>{p.updated}</div>
+                <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 14 }}>
+                  {p.tags.map(t => <Tag key={t} variant="neutral">{t}</Tag>)}
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                  <div className="meta-row">
+                    <Icon name="calendar" size={14} />
+                    <span>{p.due}</span>
+                  </div>
+                  <Avatar initials={p.lead} size={26} color="var(--c-brand)" />
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    function PeopleView() {
+      const people = [
+        { name: 'Alex Kim', role: 'Product · PM', initials: 'AK', color: 'var(--c-brand)' },
+        { name: 'Jordan Lee', role: 'Engineering · Lead', initials: 'JL', color: 'var(--c-info)' },
+        { name: 'Maya Rodriguez', role: 'Design · Senior', initials: 'MR', color: 'var(--c-success)' },
+        { name: 'Sam Chen', role: 'Content · Editor', initials: 'SC', color: 'var(--c-warning)' },
+        { name: 'Priya Tan', role: 'Data · Analyst', initials: 'PT', color: 'var(--c-danger)' },
+        { name: 'Noah Harris', role: 'Ops · Manager', initials: 'NH', color: 'var(--c-fg)' },
+      ];
+      return (
+        <div className="content">
+          <div className="h-row"><div className="h1">People</div>
+            <Button variant="primary" leftIcon="plus" size="sm">Invite</Button>
+          </div>
+          <div className="grid">
+            {people.map((p, i) => (
+              <Card key={i} interactive>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+                  <Avatar initials={p.initials} color={p.color} size={48} />
+                  <div>
+                    <div style={{ fontSize: 15, fontWeight: 600 }}>{p.name}</div>
+                    <div style={{ fontSize: 13, color: 'var(--c-fg-2)' }}>{p.role}</div>
+                  </div>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    function ChatView({ messages, onSend }) {
+      return (
+        <div style={{ flex: 1, minHeight: 0, padding: 28, display: 'flex' }}>
+          <AIChat messages={messages} onSend={onSend} />
+        </div>
+      );
+    }
+
+    function SettingsView() {
+      const [name, setName] = React.useState('Alex Kim');
+      const [email, setEmail] = React.useState('alex@example.com');
+      const [saved, setSaved] = React.useState(false);
+      return (
+        <div className="content" style={{ maxWidth: 640 }}>
+          <div className="h1" style={{ marginBottom: 20 }}>Settings</div>
+          <Card>
+            <div style={{ fontSize: 16, fontWeight: 600, marginBottom: 4 }}>Profile</div>
+            <div style={{ fontSize: 13, color: 'var(--c-fg-2)', marginBottom: 20 }}>
+              Your name and email are visible to people in your workspace.
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+              <Input label="Full name" value={name} onChange={setName} />
+              <Input label="Email" value={email} onChange={setEmail} leftIcon="mail" />
+              <div style={{ display: 'flex', gap: 8, marginTop: 6 }}>
+                <Button variant="primary" onClick={() => { setSaved(true); setTimeout(() => setSaved(false), 2000); }}>Save changes</Button>
+                <Button variant="ghost">Cancel</Button>
+                {saved && <Tag variant="positive" style={{ alignSelf: 'center' }}>Saved</Tag>}
+              </div>
+            </div>
+          </Card>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>

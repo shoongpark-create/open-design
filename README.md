@@ -15,17 +15,31 @@
 ## Quick start
 
 ```bash
-# Install dependencies (Node ~24, pnpm >=10.33.2)
-pnpm install
+# 1. Clone the monorepo
+git clone https://github.com/shoongpark-create/open-design.git
+cd open-design
 
-# Start daemon + web UI in one go (browser opens automatically)
-pnpm tools-dev
+# 2. One-shot setup — links ~/.claude/skills and ~/.codex/skills
+./setup.sh        # Mac / Linux
+# .\setup.ps1     # Windows (PowerShell)
+
+# 3. Start the engine (optional — Claude Code / Codex CLI already work after step 2)
+pnpm install
+pnpm tools-dev    # daemon + web UI, browser opens automatically
 ```
 
-Whichever code-agent CLI you have installed is auto-detected. If none are found, it falls back to the Anthropic API (BYOK).
+`setup.sh --start` collapses steps 2 + 3 into one call. The setup is idempotent — re-run it after every `git pull`.
 
-**To bootstrap a fresh machine from scratch**, follow [docs/setup.ko.md](./docs/setup.ko.md) (Korean) — a step-by-step guide that clones all 3 sibling repos, installs deps, regenerates symlinks, and starts the daemon.
+Whichever code-agent CLI you have installed is auto-detected. If none are found, the engine falls back to the Anthropic API (BYOK).
+
 See [QUICKSTART.md](./QUICKSTART.md) for setup details and [AGENTS.md](./AGENTS.md) for the agent contract.
+
+> **2026-05 — monorepo consolidation.** The previous three-repo layout
+> (`open-design` + `open-design-skills` + `open-design-codex`) has been
+> merged into this single repo. The 20 vendored skills that lived in
+> `open-design-skills/skills/` now sit under `skills/vendored/`. The two
+> archived repos remain on GitHub for reference but are no longer the
+> source of truth.
 
 ---
 
@@ -36,7 +50,9 @@ See [QUICKSTART.md](./QUICKSTART.md) for setup details and [AGENTS.md](./AGENTS.
 | Fashion season-design skills | **15** (concept → master deck, end-to-end) |
 | Marketing / general skills | **31** (landing, dashboard, deck, document, mobile, …) |
 | Data / intelligence skills | **7** (musinsa-ranking, sales-analysis, trend-radar, demand-optimizer, …) |
+| Vendored OSS skills | **20** (canvas-design, docx, pdf, pptx, xlsx, theme-factory, …) |
 | UI master skill | **1** (`impeccable` — design / redesign / critique / audit) |
+| **Total skills** | **74** in one monorepo, mounted to both Claude Code and Codex CLI by `setup.sh` |
 | Skill register | **K-fashion (Korean-first, LLM-agnostic)** since 2026-05 |
 | Skill layout | `SKILL.md` + `assets/template.html` + `references/{layouts,checklist}.md` |
 | Brand design systems | **72** (Linear, Stripe, Apple, Nike, Xiaohongshu, …) |

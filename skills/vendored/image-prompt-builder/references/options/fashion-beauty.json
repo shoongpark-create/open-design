@@ -1,0 +1,525 @@
+{
+  "subject": {
+    "key": "fashion-beauty",
+    "title": "패션 / 뷰티 / 룩북",
+    "desc": "의상, 메이크업, 헤어 중심 이미지",
+    "kicker": "CATEGORY",
+    "tone": "violet"
+  },
+  "knowledge": {
+    "summary": "패션과 뷰티는 무엇을 보여줄지뿐 아니라 몸선과 손 포즈가 같이 맞아야 화보 느낌이 납니다.",
+    "consider": [
+      "메인 포인트",
+      "포즈와 몸선",
+      "질감 / 광택",
+      "헤어 / 메이크업",
+      "브랜드 무드"
+    ]
+  },
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어떤 패션 컷인가요?",
+      "summaryLabel": "세부 분야",
+      "promptLabel": "Fashion detail",
+      "description": "",
+      "options": [
+        {
+          "key": "fashion-lookbook",
+          "title": "룩북 / 쇼핑몰 컷",
+          "desc": "의상 전체가 잘 보이는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fashion-street",
+          "title": "스트리트 룩",
+          "desc": "도시 감성과 개성이 살아 있는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fashion-editorial",
+          "title": "패션 화보",
+          "desc": "잡지 같은 완성도가 느껴지는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fashion-brand",
+          "title": "브랜드 캠페인 컷",
+          "desc": "브랜드 무드와 메시지가 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fashion-makeup",
+          "title": "메이크업 중심 컷",
+          "desc": "피부, 립, 아이메이크업이 중심인 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fashion-hair",
+          "title": "헤어 스타일 컷",
+          "desc": "헤어 질감과 실루엣이 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fashion-accessory",
+          "title": "액세서리 중심",
+          "desc": "가방, 신발, 주얼리가 중심인 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fashion-fitting",
+          "title": "피팅룸 / 데일리 스타일",
+          "desc": "실사용 느낌이 있는 패션 컷",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fashion-nail",
+          "title": "네일 / 손 디테일",
+          "desc": "손과 소품 디테일이 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fashion-runway",
+          "title": "무대 / 런웨이 무드",
+          "desc": "화려함과 집중도가 있는 방향",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "focus",
+      "title": "무엇을 가장 보여줄까요?",
+      "summaryLabel": "강조 포인트",
+      "promptLabel": "Main focus",
+      "description": "",
+      "options": [
+        {
+          "key": "fashion-focus-full",
+          "title": "의상 전체 실루엣",
+          "desc": "전신 균형과 핏이 먼저 보이는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "fashion-focus-top",
+          "title": "상의 / 자켓",
+          "desc": "상반신 스타일이 중심인 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "fashion-focus-bottom",
+          "title": "하의 / 신발",
+          "desc": "하체 스타일과 디테일이 중심인 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "fashion-focus-makeup",
+          "title": "메이크업 디테일",
+          "desc": "피부와 메이크업이 먼저 보이는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "fashion-focus-hair",
+          "title": "헤어 결 / 웨이브",
+          "desc": "헤어 질감과 스타일이 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "fashion-focus-skin",
+          "title": "피부 표현",
+          "desc": "맑은 피부와 광택 표현이 중심인 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "fashion-focus-bag",
+          "title": "가방 / 소품",
+          "desc": "주요 액세서리를 크게 보여주는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "fashion-focus-hand",
+          "title": "손 / 포즈 디테일",
+          "desc": "손동작과 스타일링이 중요한 방향",
+          "kicker": "FOCUS"
+        }
+      ]
+    },
+    {
+      "key": "pose",
+      "title": "어떤 포즈가 좋을까요?",
+      "summaryLabel": "포즈",
+      "promptLabel": "Fashion pose",
+      "description": "",
+      "options": [
+        {
+          "key": "fashion-pose-walk",
+          "title": "런웨이처럼 걷기",
+          "desc": "전신 라인과 실루엣이 살아나는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-wall",
+          "title": "벽에 기대기",
+          "desc": "도시적이고 세련된 패션 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-hip",
+          "title": "한 손 허리 / 골반 강조",
+          "desc": "자신감 있는 패션 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-crossleg",
+          "title": "앉아 다리 꼬기",
+          "desc": "시크하고 화보 같은 앉은 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-deepseat",
+          "title": "의자에 깊게 앉기",
+          "desc": "하이엔드 룩북에 잘 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-over-shoulder",
+          "title": "어깨 너머로 돌아보기",
+          "desc": "헤어와 옆선을 같이 살리는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-hair",
+          "title": "헤어를 만지거나 넘기기",
+          "desc": "뷰티 / 헤어 포인트가 잘 보이는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-bag",
+          "title": "가방이나 소품 잡기",
+          "desc": "액세서리를 강조하기 쉬운 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-floor",
+          "title": "바닥 / 계단에 앉기",
+          "desc": "강한 스타일링 컷에 어울리는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-turn",
+          "title": "몸을 틀며 방향 전환하기",
+          "desc": "움직임이 살아 있는 화보 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-sunglasses",
+          "title": "선글라스나 안경 만지기",
+          "desc": "소품 포인트가 잘 사는 패션 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-collar",
+          "title": "옷깃 / 코트깃 잡기",
+          "desc": "브랜드 룩북에서 자주 쓰는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-lapel",
+          "title": "재킷 앞깃을 정리하기",
+          "desc": "하이엔드한 분위기가 쉬운 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-crouch",
+          "title": "쭈그려 앉아 시선 주기",
+          "desc": "스트리트 화보에 자주 쓰는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-stairs",
+          "title": "계단 위에 앉거나 서기",
+          "desc": "길고 입체적인 실루엣을 주는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-recline",
+          "title": "소파나 체어에 기대어 눕기",
+          "desc": "에디토리얼 화보에 어울리는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-chairknee",
+          "title": "의자에 앉아 무릎을 세우기",
+          "desc": "다리 라인을 강조하는 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-back",
+          "title": "등 라인이나 뒷모습 보이기",
+          "desc": "의상 핏과 헤어를 같이 살리는 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-coatflip",
+          "title": "코트자락 / 옷자락 날리기",
+          "desc": "움직임과 실루엣이 강한 화보 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-armup",
+          "title": "팔을 위로 올려 길게 늘이기",
+          "desc": "몸선과 옷 실루엣이 드라마틱해지는 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-sidechair",
+          "title": "의자에 옆으로 기대 앉기",
+          "desc": "하이엔드 화보에서 자주 쓰는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-floorstretch",
+          "title": "바닥에 다리를 뻗고 기대기",
+          "desc": "에디토리얼 무드가 강한 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-arch",
+          "title": "상체를 살짝 젖혀 목선 살리기",
+          "desc": "뷰티 / 패션 겸용으로 우아한 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-strap",
+          "title": "가방끈 / 어깨끈을 잡아 당기기",
+          "desc": "액세서리와 쇄골선을 같이 살리는 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-kneel",
+          "title": "무릎을 굽힌 낮은 포즈",
+          "desc": "스트리트 패션이나 화보에 강한 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-window",
+          "title": "유리 / 쇼윈도에 기대기",
+          "desc": "도시적인 반사광과 잘 어울리는 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-chairback",
+          "title": "의자 등받이를 거꾸로 잡기",
+          "desc": "강한 패션 화보 느낌을 주는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-legcrossstand",
+          "title": "서서 한쪽 다리를 교차하기",
+          "desc": "다리선이 길어 보이는 럭셔리 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "fashion-pose-necktouch",
+          "title": "목선이나 쇄골선을 손으로 살리기",
+          "desc": "뷰티와 패션을 같이 살리는 포즈",
+          "kicker": "POSE"
+        }
+      ]
+    },
+    {
+      "key": "styling",
+      "title": "어떤 스타일로 갈까요?",
+      "summaryLabel": "스타일 방향",
+      "promptLabel": "Style direction",
+      "description": "",
+      "options": [
+        {
+          "key": "fashion-tone-minimal",
+          "title": "미니멀 / 모던",
+          "desc": "군더더기 없이 세련된 방향",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "fashion-tone-chic",
+          "title": "시크 / 도시적",
+          "desc": "도회적이고 날카로운 무드",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "fashion-tone-y2k",
+          "title": "Y2K / 트렌디",
+          "desc": "젊고 과감한 스타일 방향",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "fashion-tone-romantic",
+          "title": "부드럽고 로맨틱",
+          "desc": "여성스럽고 따뜻한 분위기",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "fashion-tone-luxury",
+          "title": "럭셔리 / 하이엔드",
+          "desc": "브랜드 화보 같은 프리미엄 무드",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "fashion-tone-natural",
+          "title": "자연스럽고 편안하게",
+          "desc": "데일리룩에 잘 맞는 방향",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "fashion-tone-strong",
+          "title": "강렬하고 개성 있게",
+          "desc": "색과 포즈가 과감한 방향",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "fashion-tone-clean",
+          "title": "깨끗하고 담백하게",
+          "desc": "제품/룩 전달이 우선인 방향",
+          "kicker": "STYLE"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "comp-close",
+          "title": "얼굴 클로즈업",
+          "desc": "표정과 디테일이 가장 먼저 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-bust",
+          "title": "바스트 샷",
+          "desc": "상반신 중심으로 안정감 있게 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-medium",
+          "title": "미디엄 샷",
+          "desc": "인물과 주변 맥락을 함께 보여주는 기본 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-wide",
+          "title": "와이드 샷",
+          "desc": "배경과 공간 분위기까지 같이 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-low",
+          "title": "로우 앵글",
+          "desc": "주제의 존재감을 더 크게 느끼게 하는 각도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-top",
+          "title": "탑뷰 / 오버헤드",
+          "desc": "위에서 내려다보는 정리된 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-pov",
+          "title": "POV / 셀카 느낌",
+          "desc": "직접 찍은 듯 가까운 거리감이 있는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-symmetry",
+          "title": "정면 대칭",
+          "desc": "또렷하고 정돈된 인상을 주는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-asymmetry",
+          "title": "비대칭 배치",
+          "desc": "시선 흐름과 여백이 살아 있는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-poster",
+          "title": "포스터형 메인 비주얼",
+          "desc": "한 장면 자체가 강하게 보이는 구성",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "어떤 분위기를 원하시나요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "mood-bright",
+          "title": "밝고 친근하게",
+          "desc": "입문자도 편하게 느끼는 가볍고 열린 분위기",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-clean",
+          "title": "깨끗하고 맑게",
+          "desc": "정보 전달이 또렷한 클린한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-warm",
+          "title": "따뜻하고 편안하게",
+          "desc": "부드럽고 정감 있는 인상을 주는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-calm",
+          "title": "차분하고 담백하게",
+          "desc": "과장되지 않고 정리된 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-cinematic",
+          "title": "영화처럼 깊게",
+          "desc": "공기감과 서사가 함께 느껴지는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-dramatic",
+          "title": "강렬하고 드라마틱하게",
+          "desc": "명암과 감정이 또렷한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-luxury",
+          "title": "고급스럽고 세련되게",
+          "desc": "브랜드 비주얼 같은 정제된 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-playful",
+          "title": "귀엽고 경쾌하게",
+          "desc": "색감과 인상이 가볍고 재미있는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-future",
+          "title": "미래적이고 차갑게",
+          "desc": "기술적이고 현대적인 느낌",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-vintage",
+          "title": "빈티지하고 레트로하게",
+          "desc": "옛 감성과 필름 느낌이 남는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}

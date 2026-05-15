@@ -1,0 +1,411 @@
+{
+  "subject": {
+    "key": "vehicle",
+    "title": "차량 / 모빌리티",
+    "desc": "자동차, 바이크, 모빌리티 이미지",
+    "kicker": "CATEGORY",
+    "tone": "blue"
+  },
+  "knowledge": {
+    "summary": "차량 이미지는 차종만 정하는 것보다도 어떤 맥락에서 보여줄지, 주행인지 정차인지가 결과를 크게 바꿉니다.",
+    "consider": [
+      "사용 맥락",
+      "실내/외관 여부",
+      "주행감",
+      "배경 장소",
+      "광택과 라이트 표현"
+    ]
+  },
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어떤 차량 컷인가요?",
+      "summaryLabel": "차량 방향",
+      "promptLabel": "Vehicle direction",
+      "description": "",
+      "options": [
+        {
+          "key": "vehicle-car-exterior",
+          "title": "자동차 외관",
+          "desc": "차량 전체 실루엣이 중심인 이미지",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "vehicle-car-interior",
+          "title": "차량 내부 / 콕핏",
+          "desc": "대시보드와 좌석 등 내부가 중심",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "vehicle-bike",
+          "title": "바이크 / 오토바이",
+          "desc": "기동감이 중요한 모빌리티 이미지",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "vehicle-ev",
+          "title": "전기차 / 충전 장면",
+          "desc": "미래성과 기술성이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "vehicle-luxury",
+          "title": "고급 차량 히어로 컷",
+          "desc": "프리미엄 무드가 중요한 차량 이미지",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "vehicle-sports",
+          "title": "스포츠 / 레이싱 차량",
+          "desc": "속도감과 역동성이 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "vehicle-utility",
+          "title": "상용차 / 실용 차량",
+          "desc": "업무성과 용도가 보이는 이미지",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "vehicle-classic",
+          "title": "빈티지 / 클래식 차량",
+          "desc": "복고 감성이 중요한 차량 이미지",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "vehicle-detail",
+          "title": "휠 / 라이트 / 디테일",
+          "desc": "부품과 디테일이 중심인 컷",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "vehicle-driver",
+          "title": "운전자 포함 장면",
+          "desc": "사람과 차량의 관계가 보이는 이미지",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "vehicle-van",
+          "title": "캠핑카 / 밴 라이프",
+          "desc": "여행과 생활감이 함께 보이는 이미지",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "vehicle-scooter",
+          "title": "스쿠터 / 소형 이동수단",
+          "desc": "가벼운 도시 이동감이 중심인 이미지",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "action",
+      "title": "어떤 장면이 좋을까요?",
+      "summaryLabel": "장면 방향",
+      "promptLabel": "Scene direction",
+      "description": "",
+      "options": [
+        {
+          "key": "vehicle-parked",
+          "title": "정차된 히어로 샷",
+          "desc": "차량 형태가 또렷하게 보이는 구성",
+          "kicker": "ACTION"
+        },
+        {
+          "key": "vehicle-moving",
+          "title": "주행 중 장면",
+          "desc": "속도감과 이동감이 느껴지는 구성",
+          "kicker": "ACTION"
+        },
+        {
+          "key": "vehicle-door",
+          "title": "문을 열고 타는 순간",
+          "desc": "실사용 감이 있는 장면",
+          "kicker": "ACTION"
+        },
+        {
+          "key": "vehicle-charge",
+          "title": "충전 / 정비 장면",
+          "desc": "기능 맥락이 보이는 장면",
+          "kicker": "ACTION"
+        },
+        {
+          "key": "vehicle-roadtrip",
+          "title": "로드트립 출발 느낌",
+          "desc": "여행성과 이동의 설렘이 있는 장면",
+          "kicker": "ACTION"
+        },
+        {
+          "key": "vehicle-showroom",
+          "title": "전시장 / 쇼룸 느낌",
+          "desc": "제품 전시처럼 정돈된 장면",
+          "kicker": "ACTION"
+        },
+        {
+          "key": "vehicle-night",
+          "title": "야간 조명 반사",
+          "desc": "라이트와 반사가 강조되는 장면",
+          "kicker": "ACTION"
+        },
+        {
+          "key": "vehicle-offroad",
+          "title": "오프로드 / 자연 속",
+          "desc": "터프한 사용 맥락이 보이는 장면",
+          "kicker": "ACTION"
+        }
+      ]
+    },
+    {
+      "key": "purpose",
+      "title": "어디에 쓸 느낌인가요?",
+      "summaryLabel": "사용 맥락",
+      "promptLabel": "Vehicle purpose",
+      "description": "",
+      "options": [
+        {
+          "key": "vehicle-purpose-daily",
+          "title": "출퇴근 / 일상 이동",
+          "desc": "실사용 감이 먼저 보이면 좋은 방향",
+          "kicker": "PURPOSE"
+        },
+        {
+          "key": "vehicle-purpose-trip",
+          "title": "여행 / 로드트립",
+          "desc": "이동과 장소 감성이 함께 보이면 좋은 방향",
+          "kicker": "PURPOSE"
+        },
+        {
+          "key": "vehicle-purpose-performance",
+          "title": "성능 / 스포츠",
+          "desc": "속도감과 강한 인상이 중요한 방향",
+          "kicker": "PURPOSE"
+        },
+        {
+          "key": "vehicle-purpose-premium",
+          "title": "프리미엄 / 광고용",
+          "desc": "쇼룸처럼 세련된 방향",
+          "kicker": "PURPOSE"
+        },
+        {
+          "key": "vehicle-purpose-ev",
+          "title": "전기차 / 기술 강조",
+          "desc": "충전과 미래성이 보이면 좋은 방향",
+          "kicker": "PURPOSE"
+        },
+        {
+          "key": "vehicle-purpose-work",
+          "title": "업무 / 실용성 강조",
+          "desc": "용도와 활용이 읽히는 방향",
+          "kicker": "PURPOSE"
+        },
+        {
+          "key": "vehicle-purpose-hobby",
+          "title": "취미 / 클래식 감성",
+          "desc": "개성과 애정이 느껴지는 방향",
+          "kicker": "PURPOSE"
+        },
+        {
+          "key": "vehicle-purpose-detail",
+          "title": "디테일 / 리뷰용",
+          "desc": "휠, 라이트, 콕핏이 먼저 보이는 방향",
+          "kicker": "PURPOSE"
+        }
+      ]
+    },
+    {
+      "key": "environment",
+      "title": "어디서 보여줄까요?",
+      "summaryLabel": "배경 환경",
+      "promptLabel": "Environment",
+      "description": "",
+      "options": [
+        {
+          "key": "vehicle-env-city",
+          "title": "도심 거리",
+          "desc": "현대적이고 실사용 느낌이 있는 배경",
+          "kicker": "ENV"
+        },
+        {
+          "key": "vehicle-env-highway",
+          "title": "고속도로 / 큰 길",
+          "desc": "이동감이 강조되는 배경",
+          "kicker": "ENV"
+        },
+        {
+          "key": "vehicle-env-studio",
+          "title": "스튜디오 / 단색 배경",
+          "desc": "차량 자체가 중심인 배경",
+          "kicker": "ENV"
+        },
+        {
+          "key": "vehicle-env-showroom",
+          "title": "쇼룸 / 실내 전시",
+          "desc": "제품처럼 깔끔한 배경",
+          "kicker": "ENV"
+        },
+        {
+          "key": "vehicle-env-beach",
+          "title": "바다 / 여행지",
+          "desc": "여유와 여행 감성이 있는 배경",
+          "kicker": "ENV"
+        },
+        {
+          "key": "vehicle-env-mountain",
+          "title": "산 / 자연 속",
+          "desc": "야외 활동성과 연결되는 배경",
+          "kicker": "ENV"
+        },
+        {
+          "key": "vehicle-env-nightcity",
+          "title": "야간 도시",
+          "desc": "네온과 반사가 살아나는 배경",
+          "kicker": "ENV"
+        },
+        {
+          "key": "vehicle-env-garage",
+          "title": "차고 / 작업 공간",
+          "desc": "정비와 취미성이 느껴지는 배경",
+          "kicker": "ENV"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "comp-close",
+          "title": "얼굴 클로즈업",
+          "desc": "표정과 디테일이 가장 먼저 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-bust",
+          "title": "바스트 샷",
+          "desc": "상반신 중심으로 안정감 있게 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-medium",
+          "title": "미디엄 샷",
+          "desc": "인물과 주변 맥락을 함께 보여주는 기본 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-wide",
+          "title": "와이드 샷",
+          "desc": "배경과 공간 분위기까지 같이 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-low",
+          "title": "로우 앵글",
+          "desc": "주제의 존재감을 더 크게 느끼게 하는 각도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-top",
+          "title": "탑뷰 / 오버헤드",
+          "desc": "위에서 내려다보는 정리된 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-pov",
+          "title": "POV / 셀카 느낌",
+          "desc": "직접 찍은 듯 가까운 거리감이 있는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-symmetry",
+          "title": "정면 대칭",
+          "desc": "또렷하고 정돈된 인상을 주는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-asymmetry",
+          "title": "비대칭 배치",
+          "desc": "시선 흐름과 여백이 살아 있는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-poster",
+          "title": "포스터형 메인 비주얼",
+          "desc": "한 장면 자체가 강하게 보이는 구성",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "어떤 분위기를 원하시나요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "mood-bright",
+          "title": "밝고 친근하게",
+          "desc": "입문자도 편하게 느끼는 가볍고 열린 분위기",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-clean",
+          "title": "깨끗하고 맑게",
+          "desc": "정보 전달이 또렷한 클린한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-warm",
+          "title": "따뜻하고 편안하게",
+          "desc": "부드럽고 정감 있는 인상을 주는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-calm",
+          "title": "차분하고 담백하게",
+          "desc": "과장되지 않고 정리된 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-cinematic",
+          "title": "영화처럼 깊게",
+          "desc": "공기감과 서사가 함께 느껴지는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-dramatic",
+          "title": "강렬하고 드라마틱하게",
+          "desc": "명암과 감정이 또렷한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-luxury",
+          "title": "고급스럽고 세련되게",
+          "desc": "브랜드 비주얼 같은 정제된 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-playful",
+          "title": "귀엽고 경쾌하게",
+          "desc": "색감과 인상이 가볍고 재미있는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-future",
+          "title": "미래적이고 차갑게",
+          "desc": "기술적이고 현대적인 느낌",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-vintage",
+          "title": "빈티지하고 레트로하게",
+          "desc": "옛 감성과 필름 느낌이 남는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}

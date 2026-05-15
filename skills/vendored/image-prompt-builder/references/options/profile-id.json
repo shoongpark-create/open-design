@@ -1,0 +1,441 @@
+{
+  "subject": {
+    "key": "profile-id",
+    "title": "증명 / 프로필 사진",
+    "desc": "이력서, 회사 소개, 강사 프로필용",
+    "kicker": "CATEGORY",
+    "tone": "teal"
+  },
+  "knowledge": {
+    "summary": "프로필 사진은 목적에 맞는 인상도 중요하지만, 너무 딱딱하지 않은 자세를 고르는 것도 큰 차이를 만듭니다.",
+    "consider": [
+      "사용 목적",
+      "보이고 싶은 인상",
+      "프로필 자세",
+      "배경 방식",
+      "과한 연출 줄이기"
+    ]
+  },
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어디에 쓸 프로필인가요?",
+      "summaryLabel": "사용 목적",
+      "promptLabel": "Profile purpose",
+      "description": "",
+      "options": [
+        {
+          "key": "profile-resume",
+          "title": "이력서 / 회사 프로필",
+          "desc": "정돈되고 신뢰감 있는 인물 사진",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "profile-social",
+          "title": "SNS 프로필",
+          "desc": "개인 브랜딩과 분위기가 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "profile-lecturer",
+          "title": "강사 / 발표자 소개",
+          "desc": "전문성과 친근함이 함께 필요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "profile-team",
+          "title": "팀원 소개용 사진",
+          "desc": "회사 페이지에 잘 어울리는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "profile-coach",
+          "title": "코치 / 컨설턴트",
+          "desc": "전문성, 상담감이 느껴지는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "profile-author",
+          "title": "작가 / 크리에이터 소개",
+          "desc": "취향과 개성이 드러나는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "profile-model",
+          "title": "배우 / 모델 프로필",
+          "desc": "얼굴 인상과 캐릭터가 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "profile-student",
+          "title": "학생 / 지원용 사진",
+          "desc": "단정하고 밝은 인상이 필요한 방향",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "appearance",
+      "title": "어떤 인상으로 보일까요?",
+      "summaryLabel": "원하는 인상",
+      "promptLabel": "Desired impression",
+      "description": "",
+      "options": [
+        {
+          "key": "profile-trust",
+          "title": "신뢰감 있게",
+          "desc": "전문성과 안정감이 먼저 느껴지는 인상",
+          "kicker": "IMPRESSION"
+        },
+        {
+          "key": "profile-friendly",
+          "title": "친근하게",
+          "desc": "부드럽고 approachable한 인상",
+          "kicker": "IMPRESSION"
+        },
+        {
+          "key": "profile-smart",
+          "title": "깔끔하고 똑똑하게",
+          "desc": "정리된 인상이 강한 방향",
+          "kicker": "IMPRESSION"
+        },
+        {
+          "key": "profile-calm",
+          "title": "차분하고 단정하게",
+          "desc": "과하지 않고 편안한 인상",
+          "kicker": "IMPRESSION"
+        },
+        {
+          "key": "profile-bright",
+          "title": "밝고 긍정적으로",
+          "desc": "입문자나 대중 대상에 잘 맞는 인상",
+          "kicker": "IMPRESSION"
+        },
+        {
+          "key": "profile-premium",
+          "title": "고급스럽고 품위 있게",
+          "desc": "하이엔드 서비스와 어울리는 인상",
+          "kicker": "IMPRESSION"
+        },
+        {
+          "key": "profile-creative",
+          "title": "개성 있게",
+          "desc": "창작자나 개인 브랜드에 어울리는 인상",
+          "kicker": "IMPRESSION"
+        },
+        {
+          "key": "profile-strong",
+          "title": "또렷하고 자신감 있게",
+          "desc": "리더십과 존재감이 느껴지는 인상",
+          "kicker": "IMPRESSION"
+        }
+      ]
+    },
+    {
+      "key": "pose",
+      "title": "어떤 자세가 자연스러울까요?",
+      "summaryLabel": "프로필 자세",
+      "promptLabel": "Profile pose",
+      "description": "",
+      "options": [
+        {
+          "key": "profile-pose-front",
+          "title": "정면으로 바르게 서기",
+          "desc": "가장 기본이 되는 프로필 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-angled",
+          "title": "살짝 45도로 서기",
+          "desc": "부드럽고 자연스러운 기본 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-crossedarms",
+          "title": "가벼운 팔짱",
+          "desc": "전문성과 자신감이 드러나는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-handclasp",
+          "title": "손을 가볍게 모으기",
+          "desc": "정돈되고 안정적인 인상의 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-seated",
+          "title": "의자에 단정하게 앉기",
+          "desc": "강사나 저자 소개에 잘 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-desk",
+          "title": "책상 / 노트북 옆 자세",
+          "desc": "업무 맥락이 드러나는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-book",
+          "title": "책 / 노트 / 펜 들기",
+          "desc": "학생, 저자, 코치형에 어울리는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-present",
+          "title": "설명하는 손짓",
+          "desc": "강사 / 발표자 소개에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-pocket",
+          "title": "주머니 손으로 편하게",
+          "desc": "캐주얼한 개인 브랜딩 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-lean",
+          "title": "한쪽에 가볍게 기대기",
+          "desc": "딱딱하지 않은 개인 프로필 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-tablet",
+          "title": "태블릿이나 서류를 들기",
+          "desc": "업무 / 강사형 프로필에 잘 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-mic",
+          "title": "마이크나 발표 도구를 들기",
+          "desc": "강연자 / 진행자 느낌이 나는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-clipboard",
+          "title": "클립보드나 파일을 들기",
+          "desc": "회사 / 코치형 프로필에 어울리는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-sideseat",
+          "title": "의자에 살짝 옆으로 앉기",
+          "desc": "딱딱하지 않게 정돈된 인상을 주는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-handsbehind",
+          "title": "손을 뒤로 두고 서기",
+          "desc": "깔끔하고 군더더기 없는 기본 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-coffee",
+          "title": "컵을 들고 편하게 서기",
+          "desc": "개인 브랜딩이나 SNS용 프로필에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-onehand",
+          "title": "한 손만 가볍게 제스처 주기",
+          "desc": "친근한 소개형 프로필에 어울리는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-rail",
+          "title": "난간이나 창틀에 살짝 기대기",
+          "desc": "딱딱하지 않은 브랜딩 프로필에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "profile-pose-notebook",
+          "title": "노트북이나 책을 품에 안기",
+          "desc": "강사 / 저자 / 학생 프로필에 잘 맞는 자세",
+          "kicker": "POSE"
+        }
+      ]
+    },
+    {
+      "key": "background",
+      "title": "배경은 어떻게 할까요?",
+      "summaryLabel": "배경 방식",
+      "promptLabel": "Background style",
+      "description": "",
+      "options": [
+        {
+          "key": "profile-bg-white",
+          "title": "흰 배경 스튜디오",
+          "desc": "가장 단정하고 범용적인 배경",
+          "kicker": "BACKGROUND"
+        },
+        {
+          "key": "profile-bg-gray",
+          "title": "회색 / 중립 배경",
+          "desc": "정리된 스튜디오 느낌의 배경",
+          "kicker": "BACKGROUND"
+        },
+        {
+          "key": "profile-bg-office",
+          "title": "사무실 느낌 흐림",
+          "desc": "업무 관련성이 보이는 배경",
+          "kicker": "BACKGROUND"
+        },
+        {
+          "key": "profile-bg-window",
+          "title": "창가 자연광",
+          "desc": "밝고 부드러운 인상의 배경",
+          "kicker": "BACKGROUND"
+        },
+        {
+          "key": "profile-bg-color",
+          "title": "단색 컬러 배경",
+          "desc": "개인 브랜딩 느낌이 있는 배경",
+          "kicker": "BACKGROUND"
+        },
+        {
+          "key": "profile-bg-deep",
+          "title": "짙은 고급 배경",
+          "desc": "차분하고 프리미엄한 인상",
+          "kicker": "BACKGROUND"
+        },
+        {
+          "key": "profile-bg-books",
+          "title": "책 / 작업 공간 배경",
+          "desc": "전문가나 작가 느낌이 있는 배경",
+          "kicker": "BACKGROUND"
+        },
+        {
+          "key": "profile-bg-minimal",
+          "title": "아주 단순한 여백 배경",
+          "desc": "주인공 인상만 또렷하게 보이는 배경",
+          "kicker": "BACKGROUND"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "comp-close",
+          "title": "얼굴 클로즈업",
+          "desc": "표정과 디테일이 가장 먼저 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-bust",
+          "title": "바스트 샷",
+          "desc": "상반신 중심으로 안정감 있게 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-medium",
+          "title": "미디엄 샷",
+          "desc": "인물과 주변 맥락을 함께 보여주는 기본 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-wide",
+          "title": "와이드 샷",
+          "desc": "배경과 공간 분위기까지 같이 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-low",
+          "title": "로우 앵글",
+          "desc": "주제의 존재감을 더 크게 느끼게 하는 각도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-top",
+          "title": "탑뷰 / 오버헤드",
+          "desc": "위에서 내려다보는 정리된 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-pov",
+          "title": "POV / 셀카 느낌",
+          "desc": "직접 찍은 듯 가까운 거리감이 있는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-symmetry",
+          "title": "정면 대칭",
+          "desc": "또렷하고 정돈된 인상을 주는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-asymmetry",
+          "title": "비대칭 배치",
+          "desc": "시선 흐름과 여백이 살아 있는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-poster",
+          "title": "포스터형 메인 비주얼",
+          "desc": "한 장면 자체가 강하게 보이는 구성",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "전체 분위기는 어느 쪽이 좋을까요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "trust-clear",
+          "title": "깔끔하고 신뢰감 있게",
+          "desc": "회사 소개나 업무 자료에 잘 맞는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-friendly",
+          "title": "친근하고 부드럽게",
+          "desc": "접근성이 좋아 보이는 서비스 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-premium",
+          "title": "차분하고 프리미엄하게",
+          "desc": "전문성과 품질감이 느껴지는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-smart",
+          "title": "똑똑하고 현대적으로",
+          "desc": "기술적이고 효율적인 인상이 있는 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-human",
+          "title": "사람 냄새 나게",
+          "desc": "딱딱함을 줄이고 실사용 장면이 느껴지는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-calm",
+          "title": "과하지 않게 안정적으로",
+          "desc": "설명 자료에 무리가 없는 담백한 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-bold",
+          "title": "선명하고 자신감 있게",
+          "desc": "강한 메시지와 전달력이 필요한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-soft",
+          "title": "부드럽고 환하게",
+          "desc": "교육, 케어, 입문자 대상에 맞는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}

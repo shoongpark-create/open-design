@@ -1,0 +1,342 @@
+{
+  "subject": {
+    "key": "landscape",
+    "title": "풍경 / 자연 / 도시",
+    "desc": "자연, 도시 전경, 야경, 계절 풍경",
+    "kicker": "CATEGORY",
+    "tone": "forest"
+  },
+  "knowledge": {
+    "summary": "풍경은 시간대, 날씨, 사람 유무, 전경 / 배경 균형에 따라 인상이 크게 달라집니다.",
+    "consider": [
+      "시간대",
+      "날씨",
+      "전경 포인트",
+      "사람 / 사물 유무",
+      "하늘 비중"
+    ]
+  },
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어떤 풍경인가요?",
+      "summaryLabel": "풍경 종류",
+      "promptLabel": "Landscape type",
+      "description": "",
+      "options": [
+        {
+          "key": "land-city",
+          "title": "도시 전경",
+          "desc": "빌딩과 도시 흐름이 보이는 풍경",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "land-night",
+          "title": "도시 야경",
+          "desc": "조명과 반짝임이 중심인 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "land-nature",
+          "title": "산 / 숲",
+          "desc": "자연이 풍부한 풍경 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "land-sea",
+          "title": "바다 / 해변",
+          "desc": "수평선과 바다 색감이 중요한 풍경",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "land-season",
+          "title": "계절감 풍경",
+          "desc": "봄꽃, 여름빛, 가을빛, 겨울기운이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "land-sky",
+          "title": "하늘 / 구름 중심",
+          "desc": "하늘이 주인공인 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "land-rural",
+          "title": "시골 / 들판",
+          "desc": "한적하고 넓은 느낌이 중요한 풍경",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "land-lake",
+          "title": "호수 / 강",
+          "desc": "물결과 반사가 중요한 풍경",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "land-snow",
+          "title": "눈 풍경",
+          "desc": "차갑고 고요한 계절감이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "land-desert",
+          "title": "사막 / 황량한 풍경",
+          "desc": "질감과 스케일이 중요한 장면",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "time",
+      "title": "시간대와 날씨는 어떻게 할까요?",
+      "summaryLabel": "시간 / 날씨",
+      "promptLabel": "Time and weather",
+      "description": "",
+      "options": [
+        {
+          "key": "land-time-sunrise",
+          "title": "해 뜨기 직전",
+          "desc": "차갑고 맑은 시작 공기가 있는 시간",
+          "kicker": "TIME"
+        },
+        {
+          "key": "land-time-morning",
+          "title": "밝은 아침",
+          "desc": "선명하고 깨끗한 풍경 표현",
+          "kicker": "TIME"
+        },
+        {
+          "key": "land-time-noon",
+          "title": "한낮의 선명함",
+          "desc": "색과 구조가 또렷한 시간",
+          "kicker": "TIME"
+        },
+        {
+          "key": "land-time-sunset",
+          "title": "노을 시간",
+          "desc": "따뜻한 빛이 감도는 풍경",
+          "kicker": "TIME"
+        },
+        {
+          "key": "land-time-bluehour",
+          "title": "블루아워",
+          "desc": "푸른 하늘과 조명이 함께 살아나는 시간",
+          "kicker": "TIME"
+        },
+        {
+          "key": "land-time-night",
+          "title": "밤 풍경",
+          "desc": "도시빛이나 별빛이 살아나는 시간",
+          "kicker": "TIME"
+        },
+        {
+          "key": "land-time-rain",
+          "title": "비 오는 날",
+          "desc": "젖은 공기와 반사가 살아나는 날씨",
+          "kicker": "TIME"
+        },
+        {
+          "key": "land-time-fog",
+          "title": "안개 낀 날",
+          "desc": "깊이감과 신비로움이 있는 날씨",
+          "kicker": "TIME"
+        },
+        {
+          "key": "land-time-snow",
+          "title": "눈 오는 날",
+          "desc": "차갑고 정적인 계절감이 강한 날씨",
+          "kicker": "TIME"
+        },
+        {
+          "key": "land-time-wind",
+          "title": "바람감이 느껴지는 날",
+          "desc": "구름과 움직임이 살아나는 날씨",
+          "kicker": "TIME"
+        }
+      ]
+    },
+    {
+      "key": "presence",
+      "title": "사람이나 소품은 얼마나 넣을까요?",
+      "summaryLabel": "등장 요소",
+      "promptLabel": "Presence",
+      "description": "",
+      "options": [
+        {
+          "key": "land-presence-none",
+          "title": "사람 없이 풍경만",
+          "desc": "공간과 자연 자체가 중심인 화면",
+          "kicker": "PRESENCE"
+        },
+        {
+          "key": "land-presence-one",
+          "title": "실루엣 한 명",
+          "desc": "사람이 스케일을 만들어주는 화면",
+          "kicker": "PRESENCE"
+        },
+        {
+          "key": "land-presence-back",
+          "title": "뒷모습 한 명",
+          "desc": "여행자 감성이 더해지는 화면",
+          "kicker": "PRESENCE"
+        },
+        {
+          "key": "land-presence-car",
+          "title": "차 / 도로 포함",
+          "desc": "이동감이 함께 보이는 풍경",
+          "kicker": "PRESENCE"
+        },
+        {
+          "key": "land-presence-building",
+          "title": "건물 일부 포함",
+          "desc": "자연과 구조물이 같이 보이는 화면",
+          "kicker": "PRESENCE"
+        },
+        {
+          "key": "land-presence-animal",
+          "title": "동물 포함",
+          "desc": "자연 속 생명감이 더해지는 화면",
+          "kicker": "PRESENCE"
+        },
+        {
+          "key": "land-presence-group",
+          "title": "작은 그룹 포함",
+          "desc": "행동과 추억이 느껴지는 풍경",
+          "kicker": "PRESENCE"
+        },
+        {
+          "key": "land-presence-object",
+          "title": "소품 / 텐트 / 자전거 포함",
+          "desc": "이야기성이 더해지는 화면",
+          "kicker": "PRESENCE"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "land-panorama",
+          "title": "파노라마 와이드",
+          "desc": "넓은 풍경과 스케일이 먼저 느껴지는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-mid",
+          "title": "중간 거리 풍경",
+          "desc": "주제와 배경이 균형 있게 보이는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-foreground",
+          "title": "전경 강조",
+          "desc": "앞쪽 요소를 크게 두고 깊이를 만드는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-silhouette",
+          "title": "실루엣 포함",
+          "desc": "해질녘이나 역광에서 분위기가 살아나는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-road",
+          "title": "길이 이어지는 화면",
+          "desc": "시선이 안쪽으로 자연스럽게 들어가는 구성",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-top",
+          "title": "높은 시점 / 항공 느낌",
+          "desc": "지역 전체 윤곽이 보이는 시원한 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-framed",
+          "title": "창틀 / 문틀 프레이밍",
+          "desc": "안쪽 장면을 액자처럼 감싸는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-detail",
+          "title": "디테일 클로즈업",
+          "desc": "풍경 일부의 질감과 포인트를 크게 보는 화면",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "어떤 분위기를 원하시나요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "mood-bright",
+          "title": "밝고 친근하게",
+          "desc": "입문자도 편하게 느끼는 가볍고 열린 분위기",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-clean",
+          "title": "깨끗하고 맑게",
+          "desc": "정보 전달이 또렷한 클린한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-warm",
+          "title": "따뜻하고 편안하게",
+          "desc": "부드럽고 정감 있는 인상을 주는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-calm",
+          "title": "차분하고 담백하게",
+          "desc": "과장되지 않고 정리된 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-cinematic",
+          "title": "영화처럼 깊게",
+          "desc": "공기감과 서사가 함께 느껴지는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-dramatic",
+          "title": "강렬하고 드라마틱하게",
+          "desc": "명암과 감정이 또렷한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-luxury",
+          "title": "고급스럽고 세련되게",
+          "desc": "브랜드 비주얼 같은 정제된 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-playful",
+          "title": "귀엽고 경쾌하게",
+          "desc": "색감과 인상이 가볍고 재미있는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-future",
+          "title": "미래적이고 차갑게",
+          "desc": "기술적이고 현대적인 느낌",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-vintage",
+          "title": "빈티지하고 레트로하게",
+          "desc": "옛 감성과 필름 느낌이 남는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}

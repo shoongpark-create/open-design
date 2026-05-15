@@ -1,0 +1,516 @@
+{
+  "subject": {
+    "key": "selfie-sns",
+    "title": "셀카 / SNS 사진",
+    "desc": "셀카, 인스타 감성, 일상 인증샷",
+    "kicker": "CATEGORY",
+    "tone": "blue"
+  },
+  "knowledge": {
+    "summary": "셀카는 얼굴 거리감, 찍는 각도, 폰과 손동작, 앉는 자세까지 함께 정리될수록 훨씬 자연스럽습니다.",
+    "consider": [
+      "얼굴 거리감",
+      "찍는 각도",
+      "포즈와 손동작",
+      "배경 정리",
+      "생활감 있는 무드"
+    ]
+  },
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어떤 셀카인가요?",
+      "summaryLabel": "사진 방향",
+      "promptLabel": "Selfie direction",
+      "description": "",
+      "options": [
+        {
+          "key": "selfie-instagram",
+          "title": "인스타 감성 셀카",
+          "desc": "감성과 일상 무드가 중요한 셀카",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "selfie-mirror",
+          "title": "거울 셀카",
+          "desc": "전신 스타일과 공간이 함께 보이는 컷",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "selfie-travel",
+          "title": "여행 셀카",
+          "desc": "장소 감성과 인물이 함께 보이는 컷",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "selfie-cafe",
+          "title": "카페 인증샷",
+          "desc": "소품과 분위기가 함께 보이는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "selfie-daily",
+          "title": "데일리 기록",
+          "desc": "평소 일상처럼 자연스러운 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "selfie-profile",
+          "title": "SNS 프로필용 셀카",
+          "desc": "얼굴 인상과 분위기가 분명한 컷",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "selfie-room",
+          "title": "방 안 데일리 무드",
+          "desc": "실내 분위기와 생활감이 보이는 컷",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "selfie-night",
+          "title": "야간 감성 셀카",
+          "desc": "조명과 공기감이 중요한 셀카",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "selfie-fitness",
+          "title": "운동 / 자기관리 인증",
+          "desc": "활동성과 건강미가 보이는 컷",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "selfie-friend",
+          "title": "친구와 함께 찍은 느낌",
+          "desc": "가볍고 즐거운 관계성이 느껴지는 컷",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "pose",
+      "title": "어떤 포즈가 좋을까요?",
+      "summaryLabel": "자세 / 각도",
+      "promptLabel": "Pose and angle",
+      "description": "",
+      "options": [
+        {
+          "key": "self-pose-face",
+          "title": "얼굴 가까이",
+          "desc": "얼굴과 표정이 먼저 보이는 셀카",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-half",
+          "title": "상반신 중심",
+          "desc": "옷과 표정이 함께 보이는 구도",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-full",
+          "title": "전신 거울샷",
+          "desc": "스타일 전체가 보이는 셀카",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-walk",
+          "title": "걷는 중 자연스럽게",
+          "desc": "브이로그처럼 흐름이 있는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-sit",
+          "title": "앉아서 편하게",
+          "desc": "카페나 실내에서 여유 있는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-phone",
+          "title": "폰을 크게 보이게",
+          "desc": "셀카 도구와 손동작이 같이 보이는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-lookingback",
+          "title": "뒤돌아보는 포즈",
+          "desc": "감성 컷에 잘 맞는 자연스러운 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-peace",
+          "title": "가벼운 제스처",
+          "desc": "브이, 손하트 같은 친근한 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-bed",
+          "title": "침대에 기대거나 엎드리기",
+          "desc": "사적인 무드와 편한 분위기가 있는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-crossleg",
+          "title": "의자에 앉아 다리 꼬기",
+          "desc": "세련되고 꾸민 느낌이 나는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-overhead",
+          "title": "위에서 내려다보는 각도",
+          "desc": "얼굴형과 눈매가 또렷해지는 셀카",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-sideface",
+          "title": "옆얼굴 / 반측면",
+          "desc": "코선과 턱선을 살리기 좋은 셀카",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-window",
+          "title": "창가에 기대서 찍기",
+          "desc": "빛이 부드럽게 들어오는 감성 셀카",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-floor",
+          "title": "바닥이나 침대에 앉기",
+          "desc": "편한 일상 무드가 살아나는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-coffee",
+          "title": "컵이나 소품 들기",
+          "desc": "카페 / 브이로그 감성이 쉬운 셀카",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-cover",
+          "title": "폰이나 손으로 살짝 가리기",
+          "desc": "부끄러운 듯한 연출이 쉬운 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-stretch",
+          "title": "운동 후 스트레칭 느낌",
+          "desc": "활동적이고 건강한 인상에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-prone",
+          "title": "침대에 엎드려 찍기",
+          "desc": "편한 방 셀카나 감성 컷에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-side",
+          "title": "옆으로 누워 얼굴만 들기",
+          "desc": "부드럽고 사적인 무드가 강한 셀카",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-vface",
+          "title": "얼굴 옆 브이 포즈",
+          "desc": "SNS 감성이 강한 대표적인 손동작",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-heart",
+          "title": "손하트 / 볼하트 하기",
+          "desc": "귀엽고 밝은 인상을 주는 셀카",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-mouthcover",
+          "title": "입가를 살짝 가리며 웃기",
+          "desc": "부끄러운 듯한 연출에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-chairarm",
+          "title": "의자 팔걸이나 테이블에 기대기",
+          "desc": "실내 감성 컷에 자주 쓰는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-kneeup",
+          "title": "한쪽 무릎을 올려 앉기",
+          "desc": "꾸민 일상 사진에 잘 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-squat",
+          "title": "쪼그려 앉아 내려다보기",
+          "desc": "스트리트 감성이나 거울샷에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-sink",
+          "title": "욕실 세면대 / 거울 앞 기대기",
+          "desc": "꾸민 셀카나 거울 인증샷에 자주 쓰는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-hip",
+          "title": "한 손 허리로 거울샷 찍기",
+          "desc": "전신 코디나 실루엣을 살리기 쉬운 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-toe",
+          "title": "한 발을 앞으로 빼고 찍기",
+          "desc": "다리 비율이 길어 보이는 거울 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-overheadbed",
+          "title": "침대에 누워 위에서 내려찍기",
+          "desc": "포근하고 여성적인 방 셀카 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-pillow",
+          "title": "베개를 안고 옆으로 기대기",
+          "desc": "부드럽고 사적인 무드가 쉬운 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-windowseat",
+          "title": "창가에 앉아 무릎을 모으기",
+          "desc": "감성 셀카나 브이로그 컷에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-hairlift",
+          "title": "머리를 한쪽으로 쓸어 넘기기",
+          "desc": "얼굴선과 헤어를 같이 살리는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-shoulder",
+          "title": "어깨를 살짝 돌려 반측면 찍기",
+          "desc": "쇄골선과 옆선을 자연스럽게 살리는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-bag",
+          "title": "가방이나 소지품을 들어 보이기",
+          "desc": "외출 룩이나 데일리 코디 셀카에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-stair",
+          "title": "계단에 앉거나 서서 찍기",
+          "desc": "여행 / 외출 셀카에서 자주 쓰는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-walllean",
+          "title": "벽에 기대 다리선을 강조하기",
+          "desc": "꾸민 일상컷이나 야간 셀카에 어울리는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "self-pose-armup",
+          "title": "한쪽 팔을 들어 머리 위로 두기",
+          "desc": "여성스러운 실루엣이 잘 보이는 셀카 자세",
+          "kicker": "POSE"
+        }
+      ]
+    },
+    {
+      "key": "setting",
+      "title": "어디서 찍을까요?",
+      "summaryLabel": "배경 / 장소",
+      "promptLabel": "Setting",
+      "description": "",
+      "options": [
+        {
+          "key": "self-set-room",
+          "title": "방 / 집 안",
+          "desc": "생활감 있는 실내 배경",
+          "kicker": "SETTING"
+        },
+        {
+          "key": "self-set-mirror",
+          "title": "거울 앞",
+          "desc": "반사 화면이 중심이 되는 배경",
+          "kicker": "SETTING"
+        },
+        {
+          "key": "self-set-cafe",
+          "title": "카페 / 식탁",
+          "desc": "잔과 소품이 함께 보이는 배경",
+          "kicker": "SETTING"
+        },
+        {
+          "key": "self-set-street",
+          "title": "거리 / 골목",
+          "desc": "도시 감성이 느껴지는 배경",
+          "kicker": "SETTING"
+        },
+        {
+          "key": "self-set-window",
+          "title": "창가 자연광",
+          "desc": "빛이 부드럽게 들어오는 배경",
+          "kicker": "SETTING"
+        },
+        {
+          "key": "self-set-gym",
+          "title": "헬스장 / 스튜디오",
+          "desc": "운동 기록 느낌의 배경",
+          "kicker": "SETTING"
+        },
+        {
+          "key": "self-set-car",
+          "title": "차 안 / 이동 중",
+          "desc": "이동 감성이 보이는 배경",
+          "kicker": "SETTING"
+        },
+        {
+          "key": "self-set-night",
+          "title": "야간 네온 / 조명",
+          "desc": "밤 분위기가 살아나는 배경",
+          "kicker": "SETTING"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "comp-close",
+          "title": "얼굴 클로즈업",
+          "desc": "표정과 디테일이 가장 먼저 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-bust",
+          "title": "바스트 샷",
+          "desc": "상반신 중심으로 안정감 있게 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-medium",
+          "title": "미디엄 샷",
+          "desc": "인물과 주변 맥락을 함께 보여주는 기본 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-wide",
+          "title": "와이드 샷",
+          "desc": "배경과 공간 분위기까지 같이 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-low",
+          "title": "로우 앵글",
+          "desc": "주제의 존재감을 더 크게 느끼게 하는 각도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-top",
+          "title": "탑뷰 / 오버헤드",
+          "desc": "위에서 내려다보는 정리된 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-pov",
+          "title": "POV / 셀카 느낌",
+          "desc": "직접 찍은 듯 가까운 거리감이 있는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-symmetry",
+          "title": "정면 대칭",
+          "desc": "또렷하고 정돈된 인상을 주는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-asymmetry",
+          "title": "비대칭 배치",
+          "desc": "시선 흐름과 여백이 살아 있는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-poster",
+          "title": "포스터형 메인 비주얼",
+          "desc": "한 장면 자체가 강하게 보이는 구성",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "어떤 분위기를 원하시나요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "mood-bright",
+          "title": "밝고 친근하게",
+          "desc": "입문자도 편하게 느끼는 가볍고 열린 분위기",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-clean",
+          "title": "깨끗하고 맑게",
+          "desc": "정보 전달이 또렷한 클린한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-warm",
+          "title": "따뜻하고 편안하게",
+          "desc": "부드럽고 정감 있는 인상을 주는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-calm",
+          "title": "차분하고 담백하게",
+          "desc": "과장되지 않고 정리된 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-cinematic",
+          "title": "영화처럼 깊게",
+          "desc": "공기감과 서사가 함께 느껴지는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-dramatic",
+          "title": "강렬하고 드라마틱하게",
+          "desc": "명암과 감정이 또렷한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-luxury",
+          "title": "고급스럽고 세련되게",
+          "desc": "브랜드 비주얼 같은 정제된 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-playful",
+          "title": "귀엽고 경쾌하게",
+          "desc": "색감과 인상이 가볍고 재미있는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-future",
+          "title": "미래적이고 차갑게",
+          "desc": "기술적이고 현대적인 느낌",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-vintage",
+          "title": "빈티지하고 레트로하게",
+          "desc": "옛 감성과 필름 느낌이 남는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}

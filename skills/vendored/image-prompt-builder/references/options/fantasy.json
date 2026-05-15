@@ -1,0 +1,387 @@
+{
+  "subject": {
+    "key": "fantasy",
+    "title": "판타지 / SF / 세계관",
+    "desc": "판타지, SF, 게임 콘셉트 장면",
+    "kicker": "CATEGORY",
+    "tone": "violet"
+  },
+  "knowledge": {
+    "summary": "세계관 이미지는 주인공보다도 배경 설정, 상징, 빛 효과가 한 덩어리로 맞아야 살아납니다.",
+    "consider": [
+      "세계관 키워드",
+      "주인공 / 배경 비중",
+      "빛 효과",
+      "스케일감",
+      "상징 오브젝트"
+    ]
+  },
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어떤 세계관인가요?",
+      "summaryLabel": "세계관 방향",
+      "promptLabel": "World type",
+      "description": "",
+      "options": [
+        {
+          "key": "fantasy-character",
+          "title": "판타지 인물",
+          "desc": "의상과 분위기가 중요한 캐릭터 이미지",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fantasy-city",
+          "title": "SF 미래도시",
+          "desc": "구조물과 세계관이 중요한 배경 이미지",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fantasy-magic",
+          "title": "마법 / 이세계 장면",
+          "desc": "빛과 판타지 요소가 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fantasy-cyberpunk",
+          "title": "사이버펑크",
+          "desc": "네온과 기술 감성이 강한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fantasy-monster",
+          "title": "괴물 / 생물체",
+          "desc": "비현실적인 존재가 중심인 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fantasy-game",
+          "title": "게임 콘셉트 아트",
+          "desc": "설정화처럼 보이는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fantasy-mecha",
+          "title": "메카 / 로봇",
+          "desc": "기계적 디테일이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fantasy-post",
+          "title": "포스트아포칼립스",
+          "desc": "폐허와 생존 분위기가 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fantasy-myth",
+          "title": "신화 / 전설",
+          "desc": "상징성과 장엄함이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "fantasy-fairy",
+          "title": "동화풍 세계",
+          "desc": "부드럽고 마법 같은 분위기의 장면",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "stage",
+      "title": "어떤 무대인가요?",
+      "summaryLabel": "세계관 무대",
+      "promptLabel": "World stage",
+      "description": "",
+      "options": [
+        {
+          "key": "fantasy-stage-forest",
+          "title": "숲 / 신성한 자연",
+          "desc": "자연과 마법 기운이 함께 있는 무대",
+          "kicker": "STAGE"
+        },
+        {
+          "key": "fantasy-stage-castle",
+          "title": "성 / 왕국 / 중세 도시",
+          "desc": "전통 판타지 세계가 느껴지는 무대",
+          "kicker": "STAGE"
+        },
+        {
+          "key": "fantasy-stage-future",
+          "title": "미래 도시 / 네온 거리",
+          "desc": "기술과 도시 문명이 중심인 무대",
+          "kicker": "STAGE"
+        },
+        {
+          "key": "fantasy-stage-ruin",
+          "title": "폐허 / 붕괴된 도시",
+          "desc": "위험과 서사가 느껴지는 무대",
+          "kicker": "STAGE"
+        },
+        {
+          "key": "fantasy-stage-space",
+          "title": "우주선 / 정거장 / 실험실",
+          "desc": "SF 설정이 또렷한 무대",
+          "kicker": "STAGE"
+        },
+        {
+          "key": "fantasy-stage-portal",
+          "title": "차원문 / 포털 / 꿈세계",
+          "desc": "현실과 다른 경계가 보이는 무대",
+          "kicker": "STAGE"
+        },
+        {
+          "key": "fantasy-stage-altar",
+          "title": "제단 / 의식 공간",
+          "desc": "상징과 의식이 중심인 무대",
+          "kicker": "STAGE"
+        },
+        {
+          "key": "fantasy-stage-extreme",
+          "title": "사막 / 설원 / 극한 지형",
+          "desc": "환경 자체가 주인공인 무대",
+          "kicker": "STAGE"
+        }
+      ]
+    },
+    {
+      "key": "focus",
+      "title": "무엇이 중심인가요?",
+      "summaryLabel": "강조 포인트",
+      "promptLabel": "Focus",
+      "description": "",
+      "options": [
+        {
+          "key": "fantasy-focus-character",
+          "title": "주인공 캐릭터 중심",
+          "desc": "인물의 존재감이 가장 큰 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "fantasy-focus-world",
+          "title": "세계관 배경 중심",
+          "desc": "도시, 구조, 공간이 더 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "fantasy-focus-object",
+          "title": "무기 / 오브젝트 중심",
+          "desc": "한 대상이 상징처럼 보이는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "fantasy-focus-battle",
+          "title": "전투 직전 / 긴장 장면",
+          "desc": "역동성과 힘이 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "fantasy-focus-explore",
+          "title": "탐험 / 이동 장면",
+          "desc": "세계 속을 걷는 느낌이 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "fantasy-focus-ritual",
+          "title": "의식 / 마법 발동 장면",
+          "desc": "빛과 상징이 강한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "fantasy-focus-team",
+          "title": "여러 캐릭터 조합",
+          "desc": "파티 또는 집단성이 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "fantasy-focus-mood",
+          "title": "분위기 우선 장면",
+          "desc": "서사 공기감이 먼저 느껴지는 방향",
+          "kicker": "FOCUS"
+        }
+      ]
+    },
+    {
+      "key": "render",
+      "title": "어떤 표현이 좋을까요?",
+      "summaryLabel": "표현 방식",
+      "promptLabel": "Rendering",
+      "description": "",
+      "options": [
+        {
+          "key": "fantasy-render-real",
+          "title": "리얼하고 영화처럼",
+          "desc": "실사에 가까운 질감 표현",
+          "kicker": "RENDER"
+        },
+        {
+          "key": "fantasy-render-illustration",
+          "title": "일러스트 콘셉트 아트처럼",
+          "desc": "설정화 같은 표현",
+          "kicker": "RENDER"
+        },
+        {
+          "key": "fantasy-render-anime",
+          "title": "애니풍 / 게임풍",
+          "desc": "선명한 캐릭터성이 있는 표현",
+          "kicker": "RENDER"
+        },
+        {
+          "key": "fantasy-render-dark",
+          "title": "어둡고 묵직하게",
+          "desc": "다크 판타지 느낌이 강한 표현",
+          "kicker": "RENDER"
+        },
+        {
+          "key": "fantasy-render-glow",
+          "title": "빛과 마법 효과 강조",
+          "desc": "발광과 효과가 중요한 표현",
+          "kicker": "RENDER"
+        },
+        {
+          "key": "fantasy-render-epic",
+          "title": "장엄하고 웅장하게",
+          "desc": "스케일감이 큰 표현",
+          "kicker": "RENDER"
+        },
+        {
+          "key": "fantasy-render-clean",
+          "title": "깨끗하고 또렷하게",
+          "desc": "보기 쉬운 정리된 표현",
+          "kicker": "RENDER"
+        },
+        {
+          "key": "fantasy-render-dreamy",
+          "title": "몽환적이고 부드럽게",
+          "desc": "현실보다 꿈같은 표현",
+          "kicker": "RENDER"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "poster-center",
+          "title": "정중앙 메인 비주얼",
+          "desc": "주제가 정면에서 강하게 보이는 포스터 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-left-space",
+          "title": "왼쪽 여백형",
+          "desc": "오른쪽 비주얼, 왼쪽 텍스트 배치가 쉬운 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-right-space",
+          "title": "오른쪽 여백형",
+          "desc": "왼쪽 비주얼, 오른쪽 텍스트 배치가 쉬운 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-top-space",
+          "title": "상단 타이틀형",
+          "desc": "위쪽 제목 공간을 남기는 포스터 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-bottom-space",
+          "title": "하단 크레딧형",
+          "desc": "아래쪽에 정보가 들어가기 쉬운 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-diagonal",
+          "title": "대각선 흐름형",
+          "desc": "시선이 사선으로 움직이는 역동적인 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-collage",
+          "title": "콜라주형",
+          "desc": "여러 요소를 한 장에 묶는 구성",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-minimal",
+          "title": "미니멀 메인형",
+          "desc": "요소를 줄여 상징이 강하게 보이는 구조",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "어떤 분위기를 원하시나요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "mood-bright",
+          "title": "밝고 친근하게",
+          "desc": "입문자도 편하게 느끼는 가볍고 열린 분위기",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-clean",
+          "title": "깨끗하고 맑게",
+          "desc": "정보 전달이 또렷한 클린한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-warm",
+          "title": "따뜻하고 편안하게",
+          "desc": "부드럽고 정감 있는 인상을 주는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-calm",
+          "title": "차분하고 담백하게",
+          "desc": "과장되지 않고 정리된 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-cinematic",
+          "title": "영화처럼 깊게",
+          "desc": "공기감과 서사가 함께 느껴지는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-dramatic",
+          "title": "강렬하고 드라마틱하게",
+          "desc": "명암과 감정이 또렷한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-luxury",
+          "title": "고급스럽고 세련되게",
+          "desc": "브랜드 비주얼 같은 정제된 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-playful",
+          "title": "귀엽고 경쾌하게",
+          "desc": "색감과 인상이 가볍고 재미있는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-future",
+          "title": "미래적이고 차갑게",
+          "desc": "기술적이고 현대적인 느낌",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-vintage",
+          "title": "빈티지하고 레트로하게",
+          "desc": "옛 감성과 필름 느낌이 남는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}

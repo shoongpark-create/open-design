@@ -1,0 +1,333 @@
+{
+  "subject": {
+    "key": "space",
+    "title": "공간 / 인테리어",
+    "desc": "거실, 주방, 카페 같은 실내 공간",
+    "kicker": "CATEGORY",
+    "tone": "emerald"
+  },
+  "knowledge": null,
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어떤 공간인가요?",
+      "summaryLabel": "공간 종류",
+      "promptLabel": "Interior type",
+      "description": "",
+      "options": [
+        {
+          "key": "space-living",
+          "title": "거실",
+          "desc": "집의 중심 공간 느낌이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "space-bedroom",
+          "title": "침실",
+          "desc": "편안함과 휴식감이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "space-kitchen",
+          "title": "주방 / 다이닝",
+          "desc": "생활감과 구조가 보이는 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "space-cafe",
+          "title": "카페 / 소형 매장",
+          "desc": "상업 공간 감성이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "space-office",
+          "title": "사무실 / 작업실",
+          "desc": "생산성과 정리감이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "space-studio",
+          "title": "촬영 / 크리에이터 스튜디오",
+          "desc": "장비와 창작 분위기가 보이는 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "space-shop",
+          "title": "쇼룸 / 편집숍",
+          "desc": "브랜드 디스플레이가 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "space-hotel",
+          "title": "호텔 / 로비",
+          "desc": "고급스럽고 정돈된 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "space-bath",
+          "title": "욕실 / 파우더룸",
+          "desc": "재질과 정리감이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "space-kids",
+          "title": "아이방 / 취미방",
+          "desc": "개성과 컬러가 보이는 장면",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "style",
+      "title": "어떤 스타일인가요?",
+      "summaryLabel": "공간 스타일",
+      "promptLabel": "Interior style",
+      "description": "",
+      "options": [
+        {
+          "key": "space-style-minimal",
+          "title": "미니멀 / 모던",
+          "desc": "요소를 줄여 정리된 느낌",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "space-style-natural",
+          "title": "내추럴 / 우드",
+          "desc": "나무와 따뜻한 재질감이 보이는 방향",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "space-style-nordic",
+          "title": "북유럽 / 화이트",
+          "desc": "밝고 담백한 실내 스타일",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "space-style-luxury",
+          "title": "럭셔리 / 호텔 무드",
+          "desc": "고급 소재와 여유감이 보이는 방향",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "space-style-black",
+          "title": "모던 블랙",
+          "desc": "강한 콘트라스트와 세련된 분위기",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "space-style-vintage",
+          "title": "빈티지 / 클래식",
+          "desc": "시간감이 있는 공간 스타일",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "space-style-color",
+          "title": "컬러 포인트",
+          "desc": "색감이 살아 있는 감각적인 공간",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "space-style-cozy",
+          "title": "코지 / 아늑한",
+          "desc": "편안하고 생활감 있는 공간",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "space-style-industrial",
+          "title": "인더스트리얼",
+          "desc": "금속, 콘크리트 감성이 살아나는 방향",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "space-style-editorial",
+          "title": "매거진 화보 같은 공간",
+          "desc": "공간 자체가 스타일 화보처럼 보이는 방향",
+          "kicker": "STYLE"
+        }
+      ]
+    },
+    {
+      "key": "light",
+      "title": "빛은 어떻게 할까요?",
+      "summaryLabel": "빛 / 조명",
+      "promptLabel": "Lighting",
+      "description": "",
+      "options": [
+        {
+          "key": "space-light-morning",
+          "title": "오전 자연광",
+          "desc": "맑고 선명한 빛이 들어오는 방향",
+          "kicker": "LIGHT"
+        },
+        {
+          "key": "space-light-noon",
+          "title": "환하고 깨끗한 채광",
+          "desc": "전체가 밝고 보기 쉬운 방향",
+          "kicker": "LIGHT"
+        },
+        {
+          "key": "space-light-sunset",
+          "title": "해질녘 따뜻한 빛",
+          "desc": "감성적인 공기감이 살아나는 방향",
+          "kicker": "LIGHT"
+        },
+        {
+          "key": "space-light-lamp",
+          "title": "무드등 / 간접조명",
+          "desc": "저녁 실내 분위기가 살아나는 방향",
+          "kicker": "LIGHT"
+        },
+        {
+          "key": "space-light-window",
+          "title": "창가 역광",
+          "desc": "빛과 그림자가 섬세하게 보이는 방향",
+          "kicker": "LIGHT"
+        },
+        {
+          "key": "space-light-soft",
+          "title": "부드러운 확산광",
+          "desc": "눈에 편하고 화사한 방향",
+          "kicker": "LIGHT"
+        },
+        {
+          "key": "space-light-contrast",
+          "title": "명암이 있는 조명",
+          "desc": "고급스럽고 드라마틱한 방향",
+          "kicker": "LIGHT"
+        },
+        {
+          "key": "space-light-night",
+          "title": "야간 실내 조명",
+          "desc": "도시 야간 무드가 있는 방향",
+          "kicker": "LIGHT"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "land-panorama",
+          "title": "파노라마 와이드",
+          "desc": "넓은 풍경과 스케일이 먼저 느껴지는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-mid",
+          "title": "중간 거리 풍경",
+          "desc": "주제와 배경이 균형 있게 보이는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-foreground",
+          "title": "전경 강조",
+          "desc": "앞쪽 요소를 크게 두고 깊이를 만드는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-silhouette",
+          "title": "실루엣 포함",
+          "desc": "해질녘이나 역광에서 분위기가 살아나는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-road",
+          "title": "길이 이어지는 화면",
+          "desc": "시선이 안쪽으로 자연스럽게 들어가는 구성",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-top",
+          "title": "높은 시점 / 항공 느낌",
+          "desc": "지역 전체 윤곽이 보이는 시원한 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-framed",
+          "title": "창틀 / 문틀 프레이밍",
+          "desc": "안쪽 장면을 액자처럼 감싸는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-detail",
+          "title": "디테일 클로즈업",
+          "desc": "풍경 일부의 질감과 포인트를 크게 보는 화면",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "어떤 분위기를 원하시나요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "mood-bright",
+          "title": "밝고 친근하게",
+          "desc": "입문자도 편하게 느끼는 가볍고 열린 분위기",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-clean",
+          "title": "깨끗하고 맑게",
+          "desc": "정보 전달이 또렷한 클린한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-warm",
+          "title": "따뜻하고 편안하게",
+          "desc": "부드럽고 정감 있는 인상을 주는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-calm",
+          "title": "차분하고 담백하게",
+          "desc": "과장되지 않고 정리된 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-cinematic",
+          "title": "영화처럼 깊게",
+          "desc": "공기감과 서사가 함께 느껴지는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-dramatic",
+          "title": "강렬하고 드라마틱하게",
+          "desc": "명암과 감정이 또렷한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-luxury",
+          "title": "고급스럽고 세련되게",
+          "desc": "브랜드 비주얼 같은 정제된 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-playful",
+          "title": "귀엽고 경쾌하게",
+          "desc": "색감과 인상이 가볍고 재미있는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-future",
+          "title": "미래적이고 차갑게",
+          "desc": "기술적이고 현대적인 느낌",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-vintage",
+          "title": "빈티지하고 레트로하게",
+          "desc": "옛 감성과 필름 느낌이 남는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}

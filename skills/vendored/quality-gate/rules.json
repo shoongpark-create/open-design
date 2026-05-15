@@ -1,0 +1,89 @@
+{
+  "$description": "quality-gate 검증 규칙 정의 — 스킬 SKILL.md와 함께 사용",
+  "$version": "1.0.0",
+  "$tokens_ref": "system/presets/wacky-willy/design-tokens.json",
+
+  "gates": [
+    {
+      "id": "bta",
+      "critical_id": 1,
+      "title": "BTA 명시",
+      "applies_to": ["sku", "capsule", "line_sheet", "costing", "volume_plan"],
+      "checks": [
+        { "field": "bta_tag", "must_be_in": ["basic", "trend", "accent"] },
+        { "field": "bta_distribution", "ratio_within_bands": "design-tokens.bta.ratio" }
+      ],
+      "on_fail": "block"
+    },
+    {
+      "id": "3b",
+      "critical_id": 2,
+      "title": "3B 착장 금지",
+      "applies_to": ["look", "visual", "lookbook", "campaign", "ad_creative"],
+      "checks": [
+        {
+          "rule": "all_three_basic",
+          "expr": "sku.bta=='basic' AND colorway⊆{black,white} AND coordination=='matching'"
+        }
+      ],
+      "on_fail": "block"
+    },
+    {
+      "id": "logo",
+      "critical_id": 3,
+      "title": "로고 형태/색상 변형 금지",
+      "applies_to": ["visual", "merchandise", "packaging"],
+      "checks": [
+        { "field": "logo.shape", "must_equal": "circle-only" },
+        { "field": "logo.color", "must_be_in": "design-tokens.logo.color-allowlist" },
+        { "field": "logo.deformation", "must_equal": "none" }
+      ],
+      "on_fail": "block"
+    },
+    {
+      "id": "color-context",
+      "critical_id": 3,
+      "title": "컨텍스트 인식 컬러 allowlist",
+      "applies_to": ["visual", "lookbook", "ad_creative", "pdp", "social", "packaging", "deck", "doc", "report", "briefing"],
+      "checks": [
+        {
+          "rule": "context_aware_allowlist",
+          "expr": "if category ∈ {deck, doc, report, briefing} AND channel == 'internal' → use design-tokens.color.allowlist-editorial-report; else → use design-tokens.color.allowlist"
+        }
+      ],
+      "on_fail": "warn",
+      "$note": "외부 송출은 strict allowlist, 내부 보고는 editorial 확장 allowlist 적용"
+    },
+    {
+      "id": "preset",
+      "critical_id": 4,
+      "title": "프리셋 진실성",
+      "applies_to": ["copy", "doc", "deck", "press_release"],
+      "checks": [
+        {
+          "rule": "brand_nouns_in_presets",
+          "scan": ["concept", "target", "category", "ip_name", "muse"],
+          "source": "system/presets/wacky-willy/*.json"
+        }
+      ],
+      "on_fail": "block"
+    },
+    {
+      "id": "evidence",
+      "critical_id": 5,
+      "title": "Evidence before Assertions",
+      "applies_to": ["any_completion_report"],
+      "checks": [
+        { "rule": "artifact_path_readable" },
+        { "rule": "report_matches_artifact" }
+      ],
+      "on_fail": "warn"
+    }
+  ],
+
+  "verdict_logic": {
+    "BLOCK": ">=1 gate with on_fail=block failed",
+    "WARN":  "only warn-level failures",
+    "PASS":  "all gates passed"
+  }
+}

@@ -1,0 +1,321 @@
+{
+  "subject": {
+    "key": "poster",
+    "title": "포스터 / 커버 / 키비주얼",
+    "desc": "포스터, 커버, 메인 키비주얼",
+    "kicker": "CATEGORY",
+    "tone": "copper"
+  },
+  "knowledge": null,
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어떤 포스터인가요?",
+      "summaryLabel": "용도",
+      "promptLabel": "Poster purpose",
+      "description": "",
+      "options": [
+        {
+          "key": "poster-movie",
+          "title": "영화 포스터",
+          "desc": "한 장면의 분위기와 제목이 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "poster-event",
+          "title": "행사 / 전시 포스터",
+          "desc": "정보와 비주얼이 함께 필요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "poster-performance",
+          "title": "공연 / 콘서트 포스터",
+          "desc": "무드와 에너지가 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "poster-album",
+          "title": "앨범 커버",
+          "desc": "아티스트 무드와 심벌성이 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "poster-book",
+          "title": "책 표지",
+          "desc": "메시지와 상징성이 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "poster-campaign",
+          "title": "브랜드 캠페인",
+          "desc": "브랜드 메시지가 중심인 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "poster-launch",
+          "title": "제품 런칭 비주얼",
+          "desc": "새로움과 집중도가 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "poster-youtube",
+          "title": "유튜브 커버 / 썸네일 배경",
+          "desc": "텍스트 배치가 쉬운 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "poster-title",
+          "title": "타이틀 배경용 비주얼",
+          "desc": "문구가 들어갈 메인 배경이 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "poster-festival",
+          "title": "페스티벌 / 시즌 포스터",
+          "desc": "행사성과 에너지가 느껴지는 방향",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "motif",
+      "title": "무엇이 중심인가요?",
+      "summaryLabel": "메인 모티프",
+      "promptLabel": "Main motif",
+      "description": "",
+      "options": [
+        {
+          "key": "poster-motif-person",
+          "title": "인물 중심",
+          "desc": "주인공 존재감이 가장 큰 방향",
+          "kicker": "MOTIF"
+        },
+        {
+          "key": "poster-motif-object",
+          "title": "오브젝트 중심",
+          "desc": "한 물체나 대상이 상징이 되는 방향",
+          "kicker": "MOTIF"
+        },
+        {
+          "key": "poster-motif-symbol",
+          "title": "상징 / 심벌 중심",
+          "desc": "의미를 압축한 메타포가 중요한 방향",
+          "kicker": "MOTIF"
+        },
+        {
+          "key": "poster-motif-landscape",
+          "title": "풍경 중심",
+          "desc": "장소와 공기감이 포스터의 핵심인 방향",
+          "kicker": "MOTIF"
+        },
+        {
+          "key": "poster-motif-collage",
+          "title": "콜라주 느낌",
+          "desc": "여러 요소가 겹쳐 보이는 방향",
+          "kicker": "MOTIF"
+        },
+        {
+          "key": "poster-motif-texture",
+          "title": "질감 / 패턴 중심",
+          "desc": "배경 자체의 무드가 강한 방향",
+          "kicker": "MOTIF"
+        },
+        {
+          "key": "poster-motif-light",
+          "title": "빛 / 색 중심",
+          "desc": "조명과 색감이 상징이 되는 방향",
+          "kicker": "MOTIF"
+        },
+        {
+          "key": "poster-motif-dual",
+          "title": "대비되는 두 요소",
+          "desc": "두 대상의 대비가 핵심인 방향",
+          "kicker": "MOTIF"
+        }
+      ]
+    },
+    {
+      "key": "layout",
+      "title": "텍스트는 어떻게 놓을까요?",
+      "summaryLabel": "텍스트 구조",
+      "promptLabel": "Text structure",
+      "description": "",
+      "options": [
+        {
+          "key": "poster-layout-center",
+          "title": "가운데 제목",
+          "desc": "중앙 타이틀이 강하게 들어가는 구조",
+          "kicker": "TEXT"
+        },
+        {
+          "key": "poster-layout-top",
+          "title": "상단 제목 + 메인 비주얼",
+          "desc": "위쪽 헤드라인이 쉬운 구조",
+          "kicker": "TEXT"
+        },
+        {
+          "key": "poster-layout-bottom",
+          "title": "하단 정보 / 크레딧",
+          "desc": "아래쪽 텍스트 정리에 쉬운 구조",
+          "kicker": "TEXT"
+        },
+        {
+          "key": "poster-layout-left",
+          "title": "왼쪽 타이포 공간",
+          "desc": "왼쪽 여백이 큰 구조",
+          "kicker": "TEXT"
+        },
+        {
+          "key": "poster-layout-right",
+          "title": "오른쪽 타이포 공간",
+          "desc": "오른쪽 여백이 큰 구조",
+          "kicker": "TEXT"
+        },
+        {
+          "key": "poster-layout-vertical",
+          "title": "세로형 포스터 균형",
+          "desc": "세로 비율에서 안정적인 구조",
+          "kicker": "TEXT"
+        },
+        {
+          "key": "poster-layout-clean",
+          "title": "텍스트 없이 비주얼 중심",
+          "desc": "이미지 자체가 강한 구조",
+          "kicker": "TEXT"
+        },
+        {
+          "key": "poster-layout-badge",
+          "title": "작은 서브 문구 포함",
+          "desc": "부제나 배지가 들어가기 쉬운 구조",
+          "kicker": "TEXT"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "poster-center",
+          "title": "정중앙 메인 비주얼",
+          "desc": "주제가 정면에서 강하게 보이는 포스터 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-left-space",
+          "title": "왼쪽 여백형",
+          "desc": "오른쪽 비주얼, 왼쪽 텍스트 배치가 쉬운 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-right-space",
+          "title": "오른쪽 여백형",
+          "desc": "왼쪽 비주얼, 오른쪽 텍스트 배치가 쉬운 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-top-space",
+          "title": "상단 타이틀형",
+          "desc": "위쪽 제목 공간을 남기는 포스터 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-bottom-space",
+          "title": "하단 크레딧형",
+          "desc": "아래쪽에 정보가 들어가기 쉬운 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-diagonal",
+          "title": "대각선 흐름형",
+          "desc": "시선이 사선으로 움직이는 역동적인 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-collage",
+          "title": "콜라주형",
+          "desc": "여러 요소를 한 장에 묶는 구성",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-minimal",
+          "title": "미니멀 메인형",
+          "desc": "요소를 줄여 상징이 강하게 보이는 구조",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "어떤 분위기를 원하시나요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "mood-bright",
+          "title": "밝고 친근하게",
+          "desc": "입문자도 편하게 느끼는 가볍고 열린 분위기",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-clean",
+          "title": "깨끗하고 맑게",
+          "desc": "정보 전달이 또렷한 클린한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-warm",
+          "title": "따뜻하고 편안하게",
+          "desc": "부드럽고 정감 있는 인상을 주는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-calm",
+          "title": "차분하고 담백하게",
+          "desc": "과장되지 않고 정리된 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-cinematic",
+          "title": "영화처럼 깊게",
+          "desc": "공기감과 서사가 함께 느껴지는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-dramatic",
+          "title": "강렬하고 드라마틱하게",
+          "desc": "명암과 감정이 또렷한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-luxury",
+          "title": "고급스럽고 세련되게",
+          "desc": "브랜드 비주얼 같은 정제된 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-playful",
+          "title": "귀엽고 경쾌하게",
+          "desc": "색감과 인상이 가볍고 재미있는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-future",
+          "title": "미래적이고 차갑게",
+          "desc": "기술적이고 현대적인 느낌",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-vintage",
+          "title": "빈티지하고 레트로하게",
+          "desc": "옛 감성과 필름 느낌이 남는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}

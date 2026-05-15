@@ -1,0 +1,375 @@
+{
+  "subject": {
+    "key": "service",
+    "title": "서비스 / 앱 설명 이미지",
+    "desc": "앱·웹·AI 서비스 소개용 비주얼",
+    "kicker": "CATEGORY",
+    "tone": "blue"
+  },
+  "knowledge": {
+    "summary": "서비스 설명 이미지는 신뢰감, 사용 장면, 디바이스 표현, 텍스트 여백이 함께 맞아야 합니다.",
+    "consider": [
+      "신뢰감",
+      "사람 + 화면 관계",
+      "디바이스 표현",
+      "텍스트 구조",
+      "복잡도 조절"
+    ]
+  },
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어떤 서비스인가요?",
+      "summaryLabel": "서비스 종류",
+      "promptLabel": "Service type",
+      "description": "",
+      "options": [
+        {
+          "key": "service-app",
+          "title": "앱 소개 메인 비주얼",
+          "desc": "앱 첫 화면이나 소개 배너용 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "service-ai",
+          "title": "AI / 챗봇 서비스",
+          "desc": "미래성과 친근함이 함께 필요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "service-web",
+          "title": "웹서비스 소개",
+          "desc": "웹 메인 히어로와 잘 맞는 비주얼",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "service-saas",
+          "title": "대시보드 / SaaS",
+          "desc": "툴과 생산성 느낌이 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "service-commerce",
+          "title": "쇼핑 / 커머스",
+          "desc": "사용 흐름과 구매감이 느껴지는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "service-finance",
+          "title": "금융 / 결제 서비스",
+          "desc": "신뢰감과 깔끔함이 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "service-support",
+          "title": "고객지원 / 상담 서비스",
+          "desc": "사람 중심 안내가 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "service-education",
+          "title": "교육 / 학습 서비스",
+          "desc": "친절하고 이해 쉬운 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "service-health",
+          "title": "건강 / 케어 서비스",
+          "desc": "안정감과 따뜻함이 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "service-marketing",
+          "title": "마케팅 / 광고 서비스",
+          "desc": "성과와 역동감이 중요한 방향",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "usage",
+      "title": "어디에 쓸 이미지인가요?",
+      "summaryLabel": "사용 용도",
+      "promptLabel": "Service usage",
+      "description": "",
+      "options": [
+        {
+          "key": "service-usage-hero",
+          "title": "메인 랜딩 첫 화면용",
+          "desc": "첫인상과 대표성이 중요한 용도",
+          "kicker": "USAGE"
+        },
+        {
+          "key": "service-usage-feature",
+          "title": "기능 설명 섹션용",
+          "desc": "서비스 기능이 읽히는 용도",
+          "kicker": "USAGE"
+        },
+        {
+          "key": "service-usage-appstore",
+          "title": "앱스토어 / 소개 카드용",
+          "desc": "디바이스 중심 구성이 쉬운 용도",
+          "kicker": "USAGE"
+        },
+        {
+          "key": "service-usage-social",
+          "title": "SNS 홍보 포스트용",
+          "desc": "빠르게 눈에 띄는 용도",
+          "kicker": "USAGE"
+        },
+        {
+          "key": "service-usage-banner",
+          "title": "배너 / 광고 카피용",
+          "desc": "큰 여백과 카피가 필요한 용도",
+          "kicker": "USAGE"
+        },
+        {
+          "key": "service-usage-doc",
+          "title": "제안서 / 소개 자료용",
+          "desc": "문서에 넣기 쉬운 용도",
+          "kicker": "USAGE"
+        },
+        {
+          "key": "service-usage-dashboard",
+          "title": "대시보드 / SaaS 소개용",
+          "desc": "화면과 정보 구조가 중요한 용도",
+          "kicker": "USAGE"
+        },
+        {
+          "key": "service-usage-support",
+          "title": "고객지원 / 안내 페이지용",
+          "desc": "사람 중심 안내가 필요한 용도",
+          "kicker": "USAGE"
+        }
+      ]
+    },
+    {
+      "key": "visual",
+      "title": "어떻게 보여줄까요?",
+      "summaryLabel": "비주얼 구조",
+      "promptLabel": "Visual structure",
+      "description": "",
+      "options": [
+        {
+          "key": "service-visual-device",
+          "title": "디바이스 목업 중심",
+          "desc": "폰이나 노트북 화면이 중심인 구성",
+          "kicker": "VISUAL"
+        },
+        {
+          "key": "service-visual-person-device",
+          "title": "사람 + 화면",
+          "desc": "실사용 감이 쉽게 느껴지는 구성",
+          "kicker": "VISUAL"
+        },
+        {
+          "key": "service-visual-ui",
+          "title": "UI가 떠 있는 합성형",
+          "desc": "기술 서비스처럼 보이는 구성",
+          "kicker": "VISUAL"
+        },
+        {
+          "key": "service-visual-hand",
+          "title": "손에 든 폰 / 기기",
+          "desc": "직접 쓰는 장면이 있는 구성",
+          "kicker": "VISUAL"
+        },
+        {
+          "key": "service-visual-dashboard",
+          "title": "대시보드 화면 중심",
+          "desc": "정보 구조가 중요한 구성",
+          "kicker": "VISUAL"
+        },
+        {
+          "key": "service-visual-team",
+          "title": "팀 협업 장면",
+          "desc": "사람과 서비스 맥락이 보이는 구성",
+          "kicker": "VISUAL"
+        },
+        {
+          "key": "service-visual-symbolic",
+          "title": "추상적 서비스 키비주얼",
+          "desc": "기능을 상징적으로 표현하는 구성",
+          "kicker": "VISUAL"
+        },
+        {
+          "key": "service-visual-banner",
+          "title": "큰 여백 배너형",
+          "desc": "메인 카피를 넣기 쉬운 구성",
+          "kicker": "VISUAL"
+        }
+      ]
+    },
+    {
+      "key": "tone",
+      "title": "서비스 인상은 어떤가요?",
+      "summaryLabel": "서비스 톤",
+      "promptLabel": "Service tone",
+      "description": "",
+      "options": [
+        {
+          "key": "service-tone-trust",
+          "title": "신뢰감 있게",
+          "desc": "금융, 업무, 전문 서비스에 잘 맞는 톤",
+          "kicker": "TONE"
+        },
+        {
+          "key": "service-tone-friendly",
+          "title": "친근하고 쉽게",
+          "desc": "입문자 대상 서비스에 잘 맞는 톤",
+          "kicker": "TONE"
+        },
+        {
+          "key": "service-tone-future",
+          "title": "미래적이고 기술적으로",
+          "desc": "AI, 테크 서비스에 잘 맞는 톤",
+          "kicker": "TONE"
+        },
+        {
+          "key": "service-tone-premium",
+          "title": "고급스럽고 세련되게",
+          "desc": "브랜드 가치를 높이는 톤",
+          "kicker": "TONE"
+        },
+        {
+          "key": "service-tone-clean",
+          "title": "간결하고 정돈되게",
+          "desc": "복잡하지 않고 보기 쉬운 톤",
+          "kicker": "TONE"
+        },
+        {
+          "key": "service-tone-human",
+          "title": "사람 냄새 나게",
+          "desc": "실사용자 중심 느낌이 있는 톤",
+          "kicker": "TONE"
+        },
+        {
+          "key": "service-tone-bold",
+          "title": "강한 인상으로",
+          "desc": "메인 캠페인이나 런칭에 잘 맞는 톤",
+          "kicker": "TONE"
+        },
+        {
+          "key": "service-tone-soft",
+          "title": "부드럽고 안정적으로",
+          "desc": "케어, 교육 서비스에 잘 맞는 톤",
+          "kicker": "TONE"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "poster-center",
+          "title": "정중앙 메인 비주얼",
+          "desc": "주제가 정면에서 강하게 보이는 포스터 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-left-space",
+          "title": "왼쪽 여백형",
+          "desc": "오른쪽 비주얼, 왼쪽 텍스트 배치가 쉬운 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-right-space",
+          "title": "오른쪽 여백형",
+          "desc": "왼쪽 비주얼, 오른쪽 텍스트 배치가 쉬운 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-top-space",
+          "title": "상단 타이틀형",
+          "desc": "위쪽 제목 공간을 남기는 포스터 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-bottom-space",
+          "title": "하단 크레딧형",
+          "desc": "아래쪽에 정보가 들어가기 쉬운 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-diagonal",
+          "title": "대각선 흐름형",
+          "desc": "시선이 사선으로 움직이는 역동적인 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-collage",
+          "title": "콜라주형",
+          "desc": "여러 요소를 한 장에 묶는 구성",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-minimal",
+          "title": "미니멀 메인형",
+          "desc": "요소를 줄여 상징이 강하게 보이는 구조",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "어떤 분위기를 원하시나요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "trust-clear",
+          "title": "깔끔하고 신뢰감 있게",
+          "desc": "회사 소개나 업무 자료에 잘 맞는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-friendly",
+          "title": "친근하고 부드럽게",
+          "desc": "접근성이 좋아 보이는 서비스 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-premium",
+          "title": "차분하고 프리미엄하게",
+          "desc": "전문성과 품질감이 느껴지는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-smart",
+          "title": "똑똑하고 현대적으로",
+          "desc": "기술적이고 효율적인 인상이 있는 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-human",
+          "title": "사람 냄새 나게",
+          "desc": "딱딱함을 줄이고 실사용 장면이 느껴지는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-calm",
+          "title": "과하지 않게 안정적으로",
+          "desc": "설명 자료에 무리가 없는 담백한 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-bold",
+          "title": "선명하고 자신감 있게",
+          "desc": "강한 메시지와 전달력이 필요한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-soft",
+          "title": "부드럽고 환하게",
+          "desc": "교육, 케어, 입문자 대상에 맞는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}

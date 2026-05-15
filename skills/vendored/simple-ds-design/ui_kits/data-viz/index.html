@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Data Viz Kit — Showcase</title>
+  <link rel="stylesheet" href="../../colors_and_type.css?v=2">
+  <style>
+    body { margin: 0; background: var(--c-bg-subtle); font-family: var(--font-sans); color: var(--c-fg); }
+    .wrap { max-width: 1320px; margin: 0 auto; padding: 64px 48px; display: flex; flex-direction: column; gap: 56px; }
+    .head { display: flex; flex-direction: column; gap: 18px; }
+    .sub { font-family: var(--font-sans); font-weight: 300; font-size: 32px; color: var(--c-fg); }
+    .hero { font-family: var(--font-sans); font-weight: 700; font-size: 56px; line-height: 0.97; color: var(--c-fg); letter-spacing: -0.01em; }
+    .badges { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 8px; }
+    .chart-card { background: var(--c-bg); border-radius: 48px; }
+    .chart-title { font-family: var(--font-sans); font-weight: 700; font-size: 28px; color: var(--c-fg); }
+    .grid-2 { display: grid; grid-template-columns: 1.5fr 1fr; gap: 32px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .section-label { font-family: var(--font-sans); font-weight: 700; font-size: 20px; color: var(--c-fg-2); text-transform: uppercase; letter-spacing: 0.12em; }
+    .tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--c-border-muted); padding-bottom: 12px; margin-bottom: 24px; }
+    .tab { padding: 10px 18px; border-radius: 12px; cursor: pointer; font-family: var(--font-sans); font-weight: 500; font-size: 15px; color: var(--c-fg-2); }
+    .tab.active { background: var(--c-fg); color: #fff; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+  <script type="text/babel" src="BarChart.jsx"></script>
+  <script type="text/babel" src="LineChart.jsx"></script>
+  <script type="text/babel" src="DonutChart.jsx"></script>
+  <script type="text/babel" src="AreaChart.jsx"></script>
+  <script type="text/babel" src="Pieces.jsx"></script>
+
+  <script type="text/babel">
+    const DATA = ['var(--dv-1)','var(--dv-2)','var(--dv-3)','var(--dv-4)','var(--dv-5)','var(--dv-6)','var(--dv-7)','var(--dv-8)'];
+
+    function App() {
+      const [tab, setTab] = React.useState('overview');
+      return (
+        <div className="wrap">
+          <div className="head">
+            <span className="sub">Figma Template</span>
+            <h1 className="hero">Data Visualization<br/>Graphs / Charts Kit</h1>
+            <div className="badges">
+              <Badge filled>Customizable</Badge>
+              <Badge>AutoLayout V4!</Badge>
+              <Badge>Graphs</Badge>
+              <Badge>Data</Badge>
+              <Badge>Styles</Badge>
+            </div>
+          </div>
+
+          <div className="tabs">
+            {['overview','bars','lines','donut','area'].map(t => (
+              <div key={t} className={'tab ' + (tab===t?'active':'')} onClick={()=>setTab(t)}>{t[0].toUpperCase()+t.slice(1)}</div>
+            ))}
+          </div>
+
+          {tab === 'overview' && (
+            <>
+              <div className="grid-3">
+                <Metric label="Total revenue" value="$125.2M" delta="+12.4%" deltaPositive />
+                <Metric label="Active accounts" value="3,584" delta="+8.9%" deltaPositive />
+                <Metric label="Churn rate" value="4.38%" delta="-0.6pp" deltaPositive />
+              </div>
+              <div className="grid-2">
+                <LineChart
+                  title="Revenue trend"
+                  series={[
+                    { label: 'Enterprise', points: [42, 48, 55, 61, 68, 78, 91, 104, 115, 123], endLabel: '123.2' },
+                    { label: 'Mid-market', points: [30, 34, 40, 47, 55, 64, 74, 86, 98, 125], endLabel: '125.2' },
+                    { label: 'SMB',        points: [22, 27, 33, 39, 46, 54, 63, 73, 84,  115], endLabel: '115.3' },
+                    { label: 'Self-serve', points: [10, 14, 18, 23, 28, 34, 42, 51, 62,  90],  endLabel: '90.6' },
+                  ]}
+                  colors={['var(--dv-1)','var(--dv-6)','var(--dv-7)','var(--dv-8)']}
+                  xLabels={['2011','2012','2013','2014','2015','2016','2017','2018','2019','2020']}
+                  height={380}
+                />
+                <DonutChart
+                  title="Revenue share"
+                  segments={[
+                    { label: 'Ent', value: 48.8 },
+                    { label: 'Mid', value: 24.3 },
+                    { label: 'SMB', value: 14.6 },
+                    { label: 'Self', value: 12.3 },
+                  ]}
+                  colors={['var(--dv-2)','var(--dv-3)','var(--dv-4)','var(--dv-5)']}
+                  size={320}
+                />
+              </div>
+            </>
+          )}
+
+          {tab === 'bars' && (
+            <BarChart
+              title="Quarterly bookings by region"
+              data={[
+                { label: 'North', values: [3.58, 4.38, 5.21], seriesLabels: ['Q1','Q2','Q3'] },
+                { label: 'South', values: [2.81, 3.92, 4.11] },
+                { label: 'East',  values: [4.10, 5.02, 6.33] },
+                { label: 'West',  values: [3.22, 4.01, 4.88] },
+                { label: 'Intl',  values: [5.12, 6.30, 7.84] },
+              ]}
+              colors={['var(--dv-9)','var(--dv-1)','var(--dv-6)']}
+              height={460}
+            />
+          )}
+
+          {tab === 'lines' && (
+            <LineChart
+              title="Ten-year growth"
+              series={[
+                { label: 'Product A', points: [10,18,26,35,46,58,71,85,100,123], endLabel: '123.2' },
+                { label: 'Product B', points: [12,20,28,38,50,63,77,92,108,125], endLabel: '125.2' },
+                { label: 'Product C', points: [8,14,22,30,40,50,62,74,88,115], endLabel: '115.3' },
+                { label: 'Product D', points: [5,9,14,20,27,35,44,54,66,90], endLabel: '90.6' },
+              ]}
+              colors={['var(--dv-1)','var(--dv-6)','var(--dv-7)','var(--dv-8)']}
+              xLabels={['2011','2012','2013','2014','2015','2016','2017','2018','2019','2020']}
+            />
+          )}
+
+          {tab === 'donut' && (
+            <div className="grid-2">
+              <DonutChart
+                title="Market share"
+                segments={[
+                  { label: 'A', value: 48.8 },
+                  { label: 'B', value: 24.3 },
+                  { label: 'C', value: 14.6 },
+                  { label: 'D', value: 12.3 },
+                ]}
+                colors={['var(--dv-2)','var(--dv-3)','var(--dv-4)','var(--dv-5)']}
+              />
+              <StackedBar
+                rows={[
+                  { label: 'Jan', values: [15.3, 9.0, 75.8] },
+                  { label: 'Feb', values: [10.2, 7.6, 82.4] },
+                  { label: 'Mar', values: [9.8, 7.1, 82.9] },
+                  { label: 'Apr', values: [10.4, 7.7, 82.5] },
+                ]}
+                colors={['var(--dv-9)','var(--dv-2)','var(--dv-6)']}
+                labels={['Retained','At-risk','Expanded']}
+              />
+            </div>
+          )}
+
+          {tab === 'area' && (
+            <AreaChart
+              title="Daily active users"
+              points={[42,48,55,61,68,78,91,104,115,123,140,156,171,190,208,225]}
+              xLabels={['','','','','','','','','','','','','','','','']}
+              color="var(--dv-1)"
+            />
+          )}
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+  </script>
+</body>
+</html>

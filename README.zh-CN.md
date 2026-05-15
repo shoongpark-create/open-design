@@ -15,17 +15,26 @@
 ## 快速开始
 
 ```bash
-# 安装依赖（Node ~24, pnpm >=10.33.2）
-pnpm install
+# 1. 克隆 monorepo
+git clone https://github.com/shoongpark-create/open-design.git
+cd open-design
 
-# 同时启动 daemon + web UI（自动打开浏览器）
-pnpm tools-dev
+# 2. 一次性 setup — 自动建立 ~/.claude/skills 和 ~/.codex/skills 挂载
+./setup.sh        # Mac / Linux
+# .\setup.ps1     # Windows（PowerShell）
+
+# 3. 启动引擎（可选 — 只完成第 2 步，Claude Code / Codex CLI 就已能用）
+pnpm install
+pnpm tools-dev    # daemon + web UI 同时启动，自动打开浏览器
 ```
 
-任何已安装的 code-agent CLI 都会被自动检测。如果一个都没有，自动回退到 Anthropic API（BYOK）。
+`setup.sh --start` 可以把第 2、3 步合并成一条命令。setup 是 idempotent — 每次 `git pull` 后重跑都安全。
 
-**在新机器上从零搭建环境**请参考 [docs/setup.ko.md](./docs/setup.ko.md)（韩文）：3 个 sibling 仓库 clone + 依赖 + symlink 重建 + daemon 启动的逐步指南。
+任何已安装的 code-agent CLI 都会被自动检测。一个都没有时，引擎自动回退到 Anthropic API（BYOK）。
+
 详细安装/运行见 [QUICKSTART.md](./QUICKSTART.md)；agent 协议见 [AGENTS.md](./AGENTS.md)。
+
+> **2026-05 — monorepo 整合。** 之前的三仓库结构（`open-design` + `open-design-skills` + `open-design-codex`）已合并为本仓库。原先放在 `open-design-skills/skills/` 下的 20 个 vendored skill 现在位于 `skills/vendored/`。被替代的两个旧仓库仍以 archive 状态保留在 GitHub 上，不再作为 source of truth。
 
 ---
 
@@ -36,7 +45,9 @@ pnpm tools-dev
 | 时装季节设计 skill | **15 个**（concept → 综合 deck，端到端） |
 | 营销/通用 skill | **31 个**（landing、dashboard、deck、文档、移动端等） |
 | 数据/情报 skill | **7 个**（musinsa-ranking、sales-analysis、trend-radar、demand-optimizer……） |
+| Vendored OSS skill | **20 个**（canvas-design、docx、pdf、pptx、xlsx、theme-factory……） |
 | UI 大师 skill | **1 个**（`impeccable` — 设计 / 重设计 / 评审 / 审计） |
+| **总 skill 数** | **74 个**，单一 monorepo，通过 `setup.sh` 同时挂载到 Claude Code 与 Codex CLI |
 | Skill register | **K-fashion（韩语优先、LLM-agnostic）** — 2026-05 迁移完成 |
 | Skill 结构 | `SKILL.md` + `assets/template.html` + `references/{layouts,checklist}.md` |
 | 品牌设计系统 | **72 个**（Linear、Stripe、Apple、Nike、小红书……） |

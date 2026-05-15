@@ -1,0 +1,330 @@
+{
+  "subject": {
+    "key": "workspace",
+    "title": "업무 참고 이미지",
+    "desc": "발표 자료, 문서, 업무 설명용",
+    "kicker": "CATEGORY",
+    "tone": "teal"
+  },
+  "knowledge": {
+    "summary": "업무 참고 이미지는 예쁨보다도 설명에 방해되지 않는 정리감과 여백이 더 중요합니다.",
+    "consider": [
+      "텍스트 여백",
+      "정보 전달력",
+      "공간 정리",
+      "사람 / 기기 비중",
+      "브랜드 톤"
+    ]
+  },
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어떤 업무 장면인가요?",
+      "summaryLabel": "사용 장면",
+      "promptLabel": "Work scene",
+      "description": "",
+      "options": [
+        {
+          "key": "work-presentation",
+          "title": "발표 자료 참고컷",
+          "desc": "슬라이드나 제안서에 넣기 쉬운 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "work-planning",
+          "title": "기획안 / 문서 삽입용",
+          "desc": "설명 자료에 어울리는 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "work-data",
+          "title": "데이터 / 분석 느낌",
+          "desc": "수치, 차트, 정보성이 느껴지는 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "work-meeting",
+          "title": "회의 / 협업 장면",
+          "desc": "팀워크와 커뮤니케이션이 보이는 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "work-focus",
+          "title": "혼자 집중해서 일하는 장면",
+          "desc": "생산성과 몰입감이 보이는 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "work-remote",
+          "title": "재택근무 / 원격 작업",
+          "desc": "노트북과 공간이 함께 보이는 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "work-consulting",
+          "title": "상담 / 안내 장면",
+          "desc": "고객 응대나 설명이 보이는 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "work-education",
+          "title": "교육 / 세미나 장면",
+          "desc": "가르치거나 듣는 흐름이 보이는 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "work-tech",
+          "title": "기기 / 장비 중심 업무",
+          "desc": "도구와 디바이스가 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "work-workshop",
+          "title": "작업 공정 / 제작 과정",
+          "desc": "손이 움직이는 실제 작업 장면",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "focus",
+      "title": "무엇을 가장 보여줄까요?",
+      "summaryLabel": "강조 포인트",
+      "promptLabel": "Focus",
+      "description": "",
+      "options": [
+        {
+          "key": "work-focus-people",
+          "title": "사람 중심",
+          "desc": "인물의 행동과 협업이 먼저 보이는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "work-focus-device",
+          "title": "노트북 / 기기 중심",
+          "desc": "도구와 화면이 중심인 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "work-focus-doc",
+          "title": "문서 / 차트 중심",
+          "desc": "정보가 눈에 들어오는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "work-focus-hand",
+          "title": "손 / 작업 과정",
+          "desc": "실제 일하는 움직임이 보이는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "work-focus-space",
+          "title": "공간 분위기 중심",
+          "desc": "업무 환경 전체가 보이는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "work-focus-mix",
+          "title": "사람 + 화면 균형",
+          "desc": "업무 맥락이 쉽게 읽히는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "work-focus-team",
+          "title": "여러 사람 협업",
+          "desc": "토론과 상호작용이 보이는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "work-focus-clean",
+          "title": "아주 정리된 배치",
+          "desc": "슬라이드 삽입에 편한 방향",
+          "kicker": "FOCUS"
+        }
+      ]
+    },
+    {
+      "key": "layout",
+      "title": "여백은 어떻게 둘까요?",
+      "summaryLabel": "레이아웃",
+      "promptLabel": "Layout",
+      "description": "",
+      "options": [
+        {
+          "key": "work-layout-left",
+          "title": "왼쪽 여백 크게",
+          "desc": "문서나 제목 넣기 쉬운 구조",
+          "kicker": "LAYOUT"
+        },
+        {
+          "key": "work-layout-right",
+          "title": "오른쪽 여백 크게",
+          "desc": "설명 문구가 들어가기 쉬운 구조",
+          "kicker": "LAYOUT"
+        },
+        {
+          "key": "work-layout-center",
+          "title": "가운데 정리형",
+          "desc": "정보가 균형 있게 보이는 구조",
+          "kicker": "LAYOUT"
+        },
+        {
+          "key": "work-layout-wide",
+          "title": "넓은 와이드형",
+          "desc": "배너나 슬라이드 상단에 잘 맞는 구조",
+          "kicker": "LAYOUT"
+        },
+        {
+          "key": "work-layout-top",
+          "title": "상단 제목형",
+          "desc": "위에 헤드라인을 넣기 쉬운 구조",
+          "kicker": "LAYOUT"
+        },
+        {
+          "key": "work-layout-bottom",
+          "title": "하단 요약형",
+          "desc": "아래쪽 정리 문구와 잘 맞는 구조",
+          "kicker": "LAYOUT"
+        },
+        {
+          "key": "work-layout-close",
+          "title": "손 / 화면 클로즈업",
+          "desc": "핵심 행동이 크게 보이는 구조",
+          "kicker": "LAYOUT"
+        },
+        {
+          "key": "work-layout-overview",
+          "title": "공간 전체 개요",
+          "desc": "업무 환경이 한눈에 보이는 구조",
+          "kicker": "LAYOUT"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "comp-close",
+          "title": "얼굴 클로즈업",
+          "desc": "표정과 디테일이 가장 먼저 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-bust",
+          "title": "바스트 샷",
+          "desc": "상반신 중심으로 안정감 있게 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-medium",
+          "title": "미디엄 샷",
+          "desc": "인물과 주변 맥락을 함께 보여주는 기본 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-wide",
+          "title": "와이드 샷",
+          "desc": "배경과 공간 분위기까지 같이 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-low",
+          "title": "로우 앵글",
+          "desc": "주제의 존재감을 더 크게 느끼게 하는 각도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-top",
+          "title": "탑뷰 / 오버헤드",
+          "desc": "위에서 내려다보는 정리된 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-pov",
+          "title": "POV / 셀카 느낌",
+          "desc": "직접 찍은 듯 가까운 거리감이 있는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-symmetry",
+          "title": "정면 대칭",
+          "desc": "또렷하고 정돈된 인상을 주는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-asymmetry",
+          "title": "비대칭 배치",
+          "desc": "시선 흐름과 여백이 살아 있는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-poster",
+          "title": "포스터형 메인 비주얼",
+          "desc": "한 장면 자체가 강하게 보이는 구성",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "어떤 분위기를 원하시나요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "trust-clear",
+          "title": "깔끔하고 신뢰감 있게",
+          "desc": "회사 소개나 업무 자료에 잘 맞는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-friendly",
+          "title": "친근하고 부드럽게",
+          "desc": "접근성이 좋아 보이는 서비스 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-premium",
+          "title": "차분하고 프리미엄하게",
+          "desc": "전문성과 품질감이 느껴지는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-smart",
+          "title": "똑똑하고 현대적으로",
+          "desc": "기술적이고 효율적인 인상이 있는 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-human",
+          "title": "사람 냄새 나게",
+          "desc": "딱딱함을 줄이고 실사용 장면이 느껴지는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-calm",
+          "title": "과하지 않게 안정적으로",
+          "desc": "설명 자료에 무리가 없는 담백한 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-bold",
+          "title": "선명하고 자신감 있게",
+          "desc": "강한 메시지와 전달력이 필요한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "trust-soft",
+          "title": "부드럽고 환하게",
+          "desc": "교육, 케어, 입문자 대상에 맞는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}

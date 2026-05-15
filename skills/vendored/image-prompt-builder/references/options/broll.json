@@ -1,0 +1,273 @@
+{
+  "subject": {
+    "key": "broll",
+    "title": "배경 / B-roll 장면",
+    "desc": "중간 삽입컷, 전환컷, 배경 이미지",
+    "kicker": "CATEGORY",
+    "tone": "forest"
+  },
+  "knowledge": {
+    "summary": "B-roll은 장면 자체보다도 어디에 얹어 쓸지, 텍스트가 들어갈지, 분위기 전환용인지가 더 중요합니다.",
+    "consider": [
+      "사용 목적",
+      "텍스트 여백",
+      "장면 복잡도",
+      "감성 전환",
+      "연결되는 화면 톤"
+    ]
+  },
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어떤 삽입컷인가요?",
+      "summaryLabel": "장면 종류",
+      "promptLabel": "B-roll type",
+      "description": "",
+      "options": [
+        {
+          "key": "broll-abstract",
+          "title": "추상 배경",
+          "desc": "설명 중간에 쓰기 좋은 비정형 배경",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "broll-texture",
+          "title": "소재 / 질감",
+          "desc": "재질감이 중심인 전환용 이미지",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "broll-desk",
+          "title": "책상 위 소품",
+          "desc": "작업 과정이나 설명 컷에 좋은 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "broll-hands",
+          "title": "손이 하는 작업",
+          "desc": "만지는 동작이 중심인 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "broll-window",
+          "title": "창밖 / 커튼 / 빛",
+          "desc": "분위기 전환에 좋은 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "broll-city-detail",
+          "title": "도시 디테일",
+          "desc": "간판, 길, 창문 같은 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "broll-nature-detail",
+          "title": "자연 디테일",
+          "desc": "잎, 물결, 바람 같은 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "broll-light",
+          "title": "빛 번짐 / 반사",
+          "desc": "몽환적인 전환에 좋은 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "broll-object",
+          "title": "오브젝트 하나 중심",
+          "desc": "키워드 상징처럼 쓰기 좋은 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "broll-empty",
+          "title": "텍스트 넣기 쉬운 빈 배경",
+          "desc": "자막이나 제목 얹기 좋은 장면",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "usage",
+      "title": "어디에 쓸 컷인가요?",
+      "summaryLabel": "사용 목적",
+      "promptLabel": "Usage",
+      "description": "",
+      "options": [
+        {
+          "key": "broll-use-intro",
+          "title": "인트로용",
+          "desc": "시작 분위기를 잡는 장면",
+          "kicker": "USAGE"
+        },
+        {
+          "key": "broll-use-middle",
+          "title": "설명 중간 삽입용",
+          "desc": "정보 사이에 넣기 좋은 장면",
+          "kicker": "USAGE"
+        },
+        {
+          "key": "broll-use-transition",
+          "title": "전환컷용",
+          "desc": "장면을 자연스럽게 넘기는 용도",
+          "kicker": "USAGE"
+        },
+        {
+          "key": "broll-use-outro",
+          "title": "마무리용",
+          "desc": "끝맺음 감성을 주는 용도",
+          "kicker": "USAGE"
+        },
+        {
+          "key": "broll-use-thumbbg",
+          "title": "썸네일 배경용",
+          "desc": "제목과 요소를 얹기 쉬운 용도",
+          "kicker": "USAGE"
+        },
+        {
+          "key": "broll-use-banner",
+          "title": "웹 배너 배경용",
+          "desc": "카피가 들어가기 쉬운 용도",
+          "kicker": "USAGE"
+        },
+        {
+          "key": "broll-use-presentation",
+          "title": "발표 자료 배경용",
+          "desc": "정보 위에 얹기 쉬운 용도",
+          "kicker": "USAGE"
+        },
+        {
+          "key": "broll-use-atmosphere",
+          "title": "분위기 전달용",
+          "desc": "맥락보다 공기감이 중요한 용도",
+          "kicker": "USAGE"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "land-panorama",
+          "title": "파노라마 와이드",
+          "desc": "넓은 풍경과 스케일이 먼저 느껴지는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-mid",
+          "title": "중간 거리 풍경",
+          "desc": "주제와 배경이 균형 있게 보이는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-foreground",
+          "title": "전경 강조",
+          "desc": "앞쪽 요소를 크게 두고 깊이를 만드는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-silhouette",
+          "title": "실루엣 포함",
+          "desc": "해질녘이나 역광에서 분위기가 살아나는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-road",
+          "title": "길이 이어지는 화면",
+          "desc": "시선이 안쪽으로 자연스럽게 들어가는 구성",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-top",
+          "title": "높은 시점 / 항공 느낌",
+          "desc": "지역 전체 윤곽이 보이는 시원한 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-framed",
+          "title": "창틀 / 문틀 프레이밍",
+          "desc": "안쪽 장면을 액자처럼 감싸는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-detail",
+          "title": "디테일 클로즈업",
+          "desc": "풍경 일부의 질감과 포인트를 크게 보는 화면",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "어떤 분위기를 원하시나요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "mood-bright",
+          "title": "밝고 친근하게",
+          "desc": "입문자도 편하게 느끼는 가볍고 열린 분위기",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-clean",
+          "title": "깨끗하고 맑게",
+          "desc": "정보 전달이 또렷한 클린한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-warm",
+          "title": "따뜻하고 편안하게",
+          "desc": "부드럽고 정감 있는 인상을 주는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-calm",
+          "title": "차분하고 담백하게",
+          "desc": "과장되지 않고 정리된 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-cinematic",
+          "title": "영화처럼 깊게",
+          "desc": "공기감과 서사가 함께 느껴지는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-dramatic",
+          "title": "강렬하고 드라마틱하게",
+          "desc": "명암과 감정이 또렷한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-luxury",
+          "title": "고급스럽고 세련되게",
+          "desc": "브랜드 비주얼 같은 정제된 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-playful",
+          "title": "귀엽고 경쾌하게",
+          "desc": "색감과 인상이 가볍고 재미있는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-future",
+          "title": "미래적이고 차갑게",
+          "desc": "기술적이고 현대적인 느낌",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-vintage",
+          "title": "빈티지하고 레트로하게",
+          "desc": "옛 감성과 필름 느낌이 남는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,663 @@
+{
+  "subject": {
+    "key": "portrait",
+    "title": "인물 사진",
+    "desc": "프로필, 화보, 브랜딩용 인물 컷",
+    "kicker": "CATEGORY",
+    "tone": "emerald"
+  },
+  "knowledge": {
+    "summary": "인물 사진은 인물 유형, 인상, 스타일링뿐 아니라 서는 법과 손동작까지 맞아야 결과가 살아납니다.",
+    "consider": [
+      "연령대 / 인물 유형",
+      "외형 인상",
+      "헤어 / 의상",
+      "포즈와 손동작",
+      "표정과 시선"
+    ]
+  },
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어떤 인물 사진인가요?",
+      "summaryLabel": "인물 방향",
+      "promptLabel": "Portrait direction",
+      "description": "",
+      "options": [
+        {
+          "key": "portrait-profile",
+          "title": "프로필 / 비즈니스 인물",
+          "desc": "신뢰감과 정돈된 인물이 필요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "portrait-sns",
+          "title": "SNS 브랜딩 인물",
+          "desc": "개인 채널, 브랜딩용 인물 이미지",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "portrait-daily",
+          "title": "일상 감성 인물",
+          "desc": "생활감이 있고 자연스러운 인물 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "portrait-fashion",
+          "title": "화보 / 에디토리얼",
+          "desc": "잡지 느낌의 세련된 인물 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "portrait-studio",
+          "title": "스튜디오 인물",
+          "desc": "조명이 정리된 깔끔한 인물 사진",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "portrait-outdoor",
+          "title": "야외 자연광 인물",
+          "desc": "배경 공기감이 살아 있는 인물 사진",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "portrait-artist",
+          "title": "아티스트 / 창작자",
+          "desc": "개성과 분위기가 중요한 인물 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "portrait-interview",
+          "title": "인터뷰 / 토크 인물",
+          "desc": "말하는 사람의 분위기가 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "portrait-fitness",
+          "title": "운동 / 건강 인물",
+          "desc": "활동성과 생기가 보이는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "portrait-student",
+          "title": "학생 / 청년 인물",
+          "desc": "가볍고 밝은 인상을 주는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "portrait-senior",
+          "title": "시니어 포트레이트",
+          "desc": "편안하고 품위 있는 인물 사진",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "portrait-cover",
+          "title": "커버용 메인 인물",
+          "desc": "포스터나 표지 같은 메인 비주얼 방향",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "people",
+      "title": "누가 등장하나요?",
+      "summaryLabel": "등장 인물",
+      "promptLabel": "Who appears",
+      "description": "",
+      "options": [
+        {
+          "key": "people-female",
+          "title": "여성 1명",
+          "desc": "한 사람의 인상이 명확하게 보이는 구성",
+          "kicker": "PEOPLE"
+        },
+        {
+          "key": "people-male",
+          "title": "남성 1명",
+          "desc": "한 사람의 표정과 스타일이 중심인 구성",
+          "kicker": "PEOPLE"
+        },
+        {
+          "key": "people-neutral",
+          "title": "중성적 / 담백한 인상",
+          "desc": "성별 고정감보다 분위기가 중요한 구성",
+          "kicker": "PEOPLE"
+        },
+        {
+          "key": "people-senior",
+          "title": "시니어 1명",
+          "desc": "연륜과 안정감이 보이는 구성",
+          "kicker": "PEOPLE"
+        },
+        {
+          "key": "people-teen",
+          "title": "학생 / 청년 1명",
+          "desc": "젊고 밝은 인상이 보이는 구성",
+          "kicker": "PEOPLE"
+        },
+        {
+          "key": "people-two",
+          "title": "2명",
+          "desc": "관계와 거리감이 함께 보이는 구성",
+          "kicker": "PEOPLE"
+        },
+        {
+          "key": "people-three",
+          "title": "3명 이상",
+          "desc": "소규모 그룹의 조합이 보이는 구성",
+          "kicker": "PEOPLE"
+        },
+        {
+          "key": "people-person-object",
+          "title": "인물 + 소품",
+          "desc": "책, 카메라, 악기 같은 소품이 함께 보이는 구성",
+          "kicker": "PEOPLE"
+        }
+      ]
+    },
+    {
+      "key": "appearance",
+      "title": "어떤 인상인가요?",
+      "summaryLabel": "외형 인상",
+      "promptLabel": "Appearance impression",
+      "description": "",
+      "options": [
+        {
+          "key": "look-soft",
+          "title": "부드럽고 친근한 인상",
+          "desc": "첫 인상이 편하고 가까운 느낌",
+          "kicker": "IMPRESSION"
+        },
+        {
+          "key": "look-clean",
+          "title": "깨끗하고 담백한 인상",
+          "desc": "정리되고 군더더기 없는 느낌",
+          "kicker": "IMPRESSION"
+        },
+        {
+          "key": "look-urban",
+          "title": "도시적이고 세련된 인상",
+          "desc": "현대적이고 스타일리시한 느낌",
+          "kicker": "IMPRESSION"
+        },
+        {
+          "key": "look-strong",
+          "title": "또렷하고 강한 인상",
+          "desc": "눈빛과 존재감이 강하게 보이는 느낌",
+          "kicker": "IMPRESSION"
+        },
+        {
+          "key": "look-warm",
+          "title": "따뜻하고 정감 있는 인상",
+          "desc": "감정선이 부드럽게 읽히는 방향",
+          "kicker": "IMPRESSION"
+        },
+        {
+          "key": "look-premium",
+          "title": "고급스럽고 차분한 인상",
+          "desc": "브랜드 화보 같은 무드",
+          "kicker": "IMPRESSION"
+        },
+        {
+          "key": "look-fresh",
+          "title": "건강하고 생기 있는 인상",
+          "desc": "활동성과 활력이 느껴지는 방향",
+          "kicker": "IMPRESSION"
+        },
+        {
+          "key": "look-creative",
+          "title": "개성 있고 창의적인 인상",
+          "desc": "일반적인 프로필보다 캐릭터가 살아 있는 방향",
+          "kicker": "IMPRESSION"
+        }
+      ]
+    },
+    {
+      "key": "styling",
+      "title": "어떤 스타일인가요?",
+      "summaryLabel": "스타일링",
+      "promptLabel": "Styling",
+      "description": "",
+      "options": [
+        {
+          "key": "style-casual",
+          "title": "캐주얼 / 일상복",
+          "desc": "과하지 않고 생활감 있는 스타일",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "style-formal",
+          "title": "정장 / 포멀",
+          "desc": "전문성과 신뢰감이 잘 보이는 스타일",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "style-minimal",
+          "title": "미니멀 / 단정",
+          "desc": "색과 디테일을 줄인 정리된 스타일",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "style-street",
+          "title": "스트리트 / 트렌디",
+          "desc": "젊고 감각적인 패션 방향",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "style-romantic",
+          "title": "부드럽고 로맨틱하게",
+          "desc": "따뜻하고 섬세한 스타일",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "style-luxury",
+          "title": "럭셔리 / 하이엔드",
+          "desc": "고급 잡지 화보 같은 방향",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "style-creative",
+          "title": "아티스트 / 창작자 무드",
+          "desc": "개성과 취향이 드러나는 스타일",
+          "kicker": "STYLE"
+        },
+        {
+          "key": "style-active",
+          "title": "활동적 / 스포츠 느낌",
+          "desc": "움직임과 건강미가 잘 보이는 스타일",
+          "kicker": "STYLE"
+        }
+      ]
+    },
+    {
+      "key": "pose",
+      "title": "어떤 자세가 좋을까요?",
+      "summaryLabel": "포즈",
+      "promptLabel": "Pose",
+      "description": "",
+      "options": [
+        {
+          "key": "portrait-pose-stand",
+          "title": "정면으로 바르게 서기",
+          "desc": "기본이 되는 안정적인 인물 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-angle",
+          "title": "사선으로 몸 틀기",
+          "desc": "허리와 어깨 라인이 자연스럽게 보이는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-chair",
+          "title": "의자에 단정하게 앉기",
+          "desc": "프로필이나 인터뷰형에 잘 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-crossleg",
+          "title": "의자에 다리 꼬고 앉기",
+          "desc": "세련되고 화보 같은 인상",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-lean",
+          "title": "벽이나 난간에 기대기",
+          "desc": "자연스럽고 감성적인 인물 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-table",
+          "title": "테이블 / 책상에 기대기",
+          "desc": "직업감이나 생활감이 보이는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-walk",
+          "title": "걷는 중 스냅처럼",
+          "desc": "움직임이 살아 있는 인물 컷",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-shoulder",
+          "title": "어깨를 틀고 돌아보기",
+          "desc": "반측면 인상을 강조하는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-pocket",
+          "title": "주머니 손으로 편하게 서기",
+          "desc": "과하지 않게 멋을 주는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-hair",
+          "title": "머리카락 / 얼굴선을 만지기",
+          "desc": "여유롭고 감성적인 손동작",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-floor",
+          "title": "바닥 / 계단 / 벤치에 앉기",
+          "desc": "자유롭고 캐주얼한 인물 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-bed",
+          "title": "소파 / 침대에 기대거나 엎드리기",
+          "desc": "강한 화보감이나 사적인 무드",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-armsfolded",
+          "title": "가볍게 팔짱 끼기",
+          "desc": "신뢰감이나 존재감을 주는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-neck",
+          "title": "목선이나 쇄골선을 살리기",
+          "desc": "섬세하고 여성적인 무드를 주는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-cheek",
+          "title": "볼이나 턱선을 손으로 받치기",
+          "desc": "감성적인 얼굴 강조 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-cup",
+          "title": "컵이나 책 같은 소품 들기",
+          "desc": "일상감이나 직업감을 주는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-jacket",
+          "title": "재킷이나 옷깃 만지기",
+          "desc": "스타일링 중심 화보에 잘 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-stairs",
+          "title": "계단에 한쪽 다리를 두고 서기",
+          "desc": "길고 세련된 실루엣을 만드는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-prone",
+          "title": "침대나 소파에 엎드려 얼굴 들기",
+          "desc": "섹시하거나 사적인 화보 무드",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-kneel",
+          "title": "무릎을 굽히거나 쭈그려 앉기",
+          "desc": "스트리트나 감성 스냅에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-window",
+          "title": "창가에 기대서 빛 받기",
+          "desc": "자연광 인물컷에 자주 쓰는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-hip",
+          "title": "한 손 허리로 실루엣 만들기",
+          "desc": "허리선과 골반 라인이 살아나는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-armup",
+          "title": "머리 위로 손을 올려 늘리기",
+          "desc": "여성 화보 느낌과 길쭉한 실루엣이 쉬운 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-recline",
+          "title": "소파 팔걸이나 등받이에 비스듬히 기대기",
+          "desc": "요염하지만 과하지 않은 화보 포즈",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-sidechair",
+          "title": "의자에 옆으로 걸터앉기",
+          "desc": "다리선과 옆선을 함께 보여주기 좋은 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-oneshoulder",
+          "title": "한쪽 어깨를 드러내듯 몸 틀기",
+          "desc": "시선이 자연스럽게 어깨선으로 가는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-legstretch",
+          "title": "바닥이나 침대에 다리 뻗고 앉기",
+          "desc": "길고 여유로운 실루엣을 만드는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-backarch",
+          "title": "상체를 살짝 젖혀 목선 드러내기",
+          "desc": "우아하고 여성적인 분위기를 주는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-chairback",
+          "title": "의자 등받이를 안듯 기대기",
+          "desc": "감성 화보나 브랜딩 인물컷에 어울리는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-floorlean",
+          "title": "바닥에 앉아 팔로 몸을 지탱하기",
+          "desc": "내추럴하면서도 스타일리시한 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "portrait-pose-overknee",
+          "title": "의자에 앉아 한쪽 무릎을 세우기",
+          "desc": "다리 라인과 표정을 함께 살리는 자세",
+          "kicker": "POSE"
+        }
+      ]
+    },
+    {
+      "key": "expression",
+      "title": "표정과 시선은 어떻게 할까요?",
+      "summaryLabel": "표정 / 시선",
+      "promptLabel": "Expression and gaze",
+      "description": "",
+      "options": [
+        {
+          "key": "gaze-camera",
+          "title": "카메라를 정면으로 보기",
+          "desc": "시선이 바로 닿아 존재감이 큰 표정",
+          "kicker": "EXPRESSION"
+        },
+        {
+          "key": "gaze-away",
+          "title": "옆을 바라보기",
+          "desc": "생각에 잠긴 듯 자연스러운 인상",
+          "kicker": "EXPRESSION"
+        },
+        {
+          "key": "gaze-smile",
+          "title": "가볍게 웃는 표정",
+          "desc": "편안하고 호감 가는 방향",
+          "kicker": "EXPRESSION"
+        },
+        {
+          "key": "gaze-neutral",
+          "title": "담백한 무표정",
+          "desc": "정제된 화보나 브랜딩에 잘 맞는 방향",
+          "kicker": "EXPRESSION"
+        },
+        {
+          "key": "gaze-confident",
+          "title": "자신감 있는 표정",
+          "desc": "전문성과 강한 인상을 주는 방향",
+          "kicker": "EXPRESSION"
+        },
+        {
+          "key": "gaze-gentle",
+          "title": "부드럽고 차분한 표정",
+          "desc": "따뜻한 분위기를 만드는 방향",
+          "kicker": "EXPRESSION"
+        },
+        {
+          "key": "gaze-laugh",
+          "title": "활짝 웃는 표정",
+          "desc": "생기와 친근함이 큰 방향",
+          "kicker": "EXPRESSION"
+        },
+        {
+          "key": "gaze-focused",
+          "title": "집중한 눈빛",
+          "desc": "진지하고 몰입된 인상을 주는 방향",
+          "kicker": "EXPRESSION"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "comp-close",
+          "title": "얼굴 클로즈업",
+          "desc": "표정과 디테일이 가장 먼저 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-bust",
+          "title": "바스트 샷",
+          "desc": "상반신 중심으로 안정감 있게 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-medium",
+          "title": "미디엄 샷",
+          "desc": "인물과 주변 맥락을 함께 보여주는 기본 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-wide",
+          "title": "와이드 샷",
+          "desc": "배경과 공간 분위기까지 같이 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-low",
+          "title": "로우 앵글",
+          "desc": "주제의 존재감을 더 크게 느끼게 하는 각도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-top",
+          "title": "탑뷰 / 오버헤드",
+          "desc": "위에서 내려다보는 정리된 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-pov",
+          "title": "POV / 셀카 느낌",
+          "desc": "직접 찍은 듯 가까운 거리감이 있는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-symmetry",
+          "title": "정면 대칭",
+          "desc": "또렷하고 정돈된 인상을 주는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-asymmetry",
+          "title": "비대칭 배치",
+          "desc": "시선 흐름과 여백이 살아 있는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-poster",
+          "title": "포스터형 메인 비주얼",
+          "desc": "한 장면 자체가 강하게 보이는 구성",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "어떤 분위기를 원하시나요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "mood-bright",
+          "title": "밝고 친근하게",
+          "desc": "입문자도 편하게 느끼는 가볍고 열린 분위기",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-clean",
+          "title": "깨끗하고 맑게",
+          "desc": "정보 전달이 또렷한 클린한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-warm",
+          "title": "따뜻하고 편안하게",
+          "desc": "부드럽고 정감 있는 인상을 주는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-calm",
+          "title": "차분하고 담백하게",
+          "desc": "과장되지 않고 정리된 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-cinematic",
+          "title": "영화처럼 깊게",
+          "desc": "공기감과 서사가 함께 느껴지는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-dramatic",
+          "title": "강렬하고 드라마틱하게",
+          "desc": "명암과 감정이 또렷한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-luxury",
+          "title": "고급스럽고 세련되게",
+          "desc": "브랜드 비주얼 같은 정제된 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-playful",
+          "title": "귀엽고 경쾌하게",
+          "desc": "색감과 인상이 가볍고 재미있는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-future",
+          "title": "미래적이고 차갑게",
+          "desc": "기술적이고 현대적인 느낌",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-vintage",
+          "title": "빈티지하고 레트로하게",
+          "desc": "옛 감성과 필름 느낌이 남는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}

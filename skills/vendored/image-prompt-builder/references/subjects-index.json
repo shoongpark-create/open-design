@@ -1,0 +1,149 @@
+[
+  {
+    "key": "thumbnail-person",
+    "title": "유튜브 썸네일 인물",
+    "desc": "유튜브 클릭을 부르는 인물 썸네일",
+    "kicker": "CATEGORY",
+    "tone": "forest"
+  },
+  {
+    "key": "portrait",
+    "title": "인물 사진",
+    "desc": "프로필, 화보, 브랜딩용 인물 컷",
+    "kicker": "CATEGORY",
+    "tone": "emerald"
+  },
+  {
+    "key": "selfie-sns",
+    "title": "셀카 / SNS 사진",
+    "desc": "셀카, 인스타 감성, 일상 인증샷",
+    "kicker": "CATEGORY",
+    "tone": "blue"
+  },
+  {
+    "key": "product",
+    "title": "제품 사진",
+    "desc": "상세페이지, 광고, 브랜드용 제품 컷",
+    "kicker": "CATEGORY",
+    "tone": "copper"
+  },
+  {
+    "key": "food-drink",
+    "title": "음식 / 음료 사진",
+    "desc": "카페, 메뉴, 디저트, 음료 이미지",
+    "kicker": "CATEGORY",
+    "tone": "gold"
+  },
+  {
+    "key": "landscape",
+    "title": "풍경 / 자연 / 도시",
+    "desc": "자연, 도시 전경, 야경, 계절 풍경",
+    "kicker": "CATEGORY",
+    "tone": "forest"
+  },
+  {
+    "key": "travel",
+    "title": "여행 / 브이로그 장면",
+    "desc": "여행 컷, 브이로그, 인트로 장면",
+    "kicker": "CATEGORY",
+    "tone": "blue"
+  },
+  {
+    "key": "profile-id",
+    "title": "증명 / 프로필 사진",
+    "desc": "이력서, 회사 소개, 강사 프로필용",
+    "kicker": "CATEGORY",
+    "tone": "teal"
+  },
+  {
+    "key": "workspace",
+    "title": "업무 참고 이미지",
+    "desc": "발표 자료, 문서, 업무 설명용",
+    "kicker": "CATEGORY",
+    "tone": "teal"
+  },
+  {
+    "key": "service",
+    "title": "서비스 / 앱 설명 이미지",
+    "desc": "앱·웹·AI 서비스 소개용 비주얼",
+    "kicker": "CATEGORY",
+    "tone": "blue"
+  },
+  {
+    "key": "group-family",
+    "title": "커플 / 가족 / 그룹",
+    "desc": "커플, 가족, 팀처럼 함께 나오는 사진",
+    "kicker": "CATEGORY",
+    "tone": "gold"
+  },
+  {
+    "key": "fashion-beauty",
+    "title": "패션 / 뷰티 / 룩북",
+    "desc": "의상, 메이크업, 헤어 중심 이미지",
+    "kicker": "CATEGORY",
+    "tone": "violet"
+  },
+  {
+    "key": "animal",
+    "title": "반려동물 / 동물",
+    "desc": "반려동물과 동물 초상, 활동 장면",
+    "kicker": "CATEGORY",
+    "tone": "gold"
+  },
+  {
+    "key": "space",
+    "title": "공간 / 인테리어",
+    "desc": "거실, 주방, 카페 같은 실내 공간",
+    "kicker": "CATEGORY",
+    "tone": "emerald"
+  },
+  {
+    "key": "poster",
+    "title": "포스터 / 커버 / 키비주얼",
+    "desc": "포스터, 커버, 메인 키비주얼",
+    "kicker": "CATEGORY",
+    "tone": "copper"
+  },
+  {
+    "key": "illustration",
+    "title": "캐릭터 / 일러스트",
+    "desc": "캐릭터, 브랜드 마스코트, 일러스트",
+    "kicker": "CATEGORY",
+    "tone": "violet"
+  },
+  {
+    "key": "fantasy",
+    "title": "판타지 / SF / 세계관",
+    "desc": "판타지, SF, 게임 콘셉트 장면",
+    "kicker": "CATEGORY",
+    "tone": "violet"
+  },
+  {
+    "key": "event",
+    "title": "행사 / 공연 / 무대",
+    "desc": "공연, 강연, 축제, 발표 장면",
+    "kicker": "CATEGORY",
+    "tone": "copper"
+  },
+  {
+    "key": "vehicle",
+    "title": "차량 / 모빌리티",
+    "desc": "자동차, 바이크, 모빌리티 이미지",
+    "kicker": "CATEGORY",
+    "tone": "blue"
+  },
+  {
+    "key": "architecture",
+    "title": "건축 / 외관",
+    "desc": "건물 외관, 거리, 상업공간 외부",
+    "kicker": "CATEGORY",
+    "tone": "teal"
+  },
+  {
+    "key": "broll",
+    "title": "배경 / B-roll 장면",
+    "desc": "중간 삽입컷, 전환컷, 배경 이미지",
+    "kicker": "CATEGORY",
+    "tone": "forest"
+  }
+]

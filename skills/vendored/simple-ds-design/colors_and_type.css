@@ -1,0 +1,151 @@
+/* v=2026-04-20 */
+/* =============================================================
+   Simple Design System Kit — Core Tokens
+   Primary system: Simple Design System (Community) — Figma
+   Secondary system: Data Viz Charts Kit — charts only
+   ============================================================= */
+
+/* ---------- Fonts ----------
+   Pretendard — primary UI face (user-provided brand font, full weight range).
+   Roboto Mono — code / mono.
+   Space Grotesk — display (Whyte substitute, flagged in README).
+   =============================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+@font-face { font-family: "Pretendard"; src: url("./fonts/Pretendard-Thin.otf")       format("opentype"); font-weight: 100; font-style: normal; font-display: swap; }
+@font-face { font-family: "Pretendard"; src: url("./fonts/Pretendard-ExtraLight.otf") format("opentype"); font-weight: 200; font-style: normal; font-display: swap; }
+@font-face { font-family: "Pretendard"; src: url("./fonts/Pretendard-Light.otf")      format("opentype"); font-weight: 300; font-style: normal; font-display: swap; }
+@font-face { font-family: "Pretendard"; src: url("./fonts/Pretendard-Regular.otf")    format("opentype"); font-weight: 400; font-style: normal; font-display: swap; }
+@font-face { font-family: "Pretendard"; src: url("./fonts/Pretendard-Medium.otf")     format("opentype"); font-weight: 500; font-style: normal; font-display: swap; }
+@font-face { font-family: "Pretendard"; src: url("./fonts/Pretendard-SemiBold.otf")   format("opentype"); font-weight: 600; font-style: normal; font-display: swap; }
+@font-face { font-family: "Pretendard"; src: url("./fonts/Pretendard-Bold.otf")       format("opentype"); font-weight: 700; font-style: normal; font-display: swap; }
+@font-face { font-family: "Pretendard"; src: url("./fonts/Pretendard-ExtraBold.otf")  format("opentype"); font-weight: 800; font-style: normal; font-display: swap; }
+@font-face { font-family: "Pretendard"; src: url("./fonts/Pretendard-Black.otf")      format("opentype"); font-weight: 900; font-style: normal; font-display: swap; }
+
+:root {
+  /* =========================================================
+     TYPOGRAPHY — base faces
+     ========================================================= */
+  --font-sans: "Pretendard", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-mono: "Roboto Mono", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --font-display: "Space Grotesk", "Pretendard", ui-sans-serif, system-ui, sans-serif; /* Whyte substitute */
+
+  /* =========================================================
+     TYPE SCALE — from Simple DS /Text components
+     Pretendard weights available: 100/200/300/400/500/600/700/800/900
+     ========================================================= */
+  --fs-display:    80px;  --lh-display:    88px;  --tracking-display: -0.02em;
+  --fs-title-hero: 56px;  --lh-title-hero: 60px;  --tracking-hero:    -0.02em;
+  --fs-title-page: 40px;  --lh-title-page: 48px;  --tracking-page:    -0.01em;
+  --fs-heading:    24px;  --lh-heading:    32px;
+  --fs-subheading: 20px;  --lh-subheading: 28px;
+  --fs-subtitle:   18px;  --lh-subtitle:   28px;
+  --fs-body:       16px;  --lh-body:       24px;
+  --fs-small:      14px;  --lh-small:      20px;
+  --fs-xs:         12px;  --lh-xs:         16px;
+
+  /* =========================================================
+     COLOR — Simple DS base
+     ========================================================= */
+  --c-bg:          rgb(255, 255, 255);
+  --c-bg-subtle:   rgb(250, 250, 250);
+  --c-bg-muted:    rgb(245, 245, 245);
+  --c-bg-inverse:  rgb(30, 30, 30);
+
+  --c-fg:          rgb(30, 30, 30);
+  --c-fg-2:        rgb(117, 117, 117);
+  --c-fg-3:        rgb(161, 161, 161);
+  --c-fg-inverse:  rgb(255, 255, 255);
+
+  --c-border:      rgb(217, 217, 217);
+  --c-border-strong: rgb(161, 161, 161);
+  --c-border-muted: rgb(235, 235, 235);
+
+  --c-brand:        rgb(138, 34, 111);
+  --c-brand-fg:     rgb(255, 255, 255);
+  --c-brand-subtle: rgb(250, 225, 250);
+  --c-brand-hover:  rgb(110, 25, 88);
+
+  --c-success:        rgb(20, 174, 92);
+  --c-success-subtle: rgb(221, 245, 232);
+  --c-success-fg:     rgb(8, 92, 48);
+
+  --c-warning:        rgb(232, 185, 49);
+  --c-warning-subtle: rgb(253, 243, 213);
+  --c-warning-fg:     rgb(125, 95, 9);
+
+  --c-danger:         rgb(236, 34, 31);
+  --c-danger-subtle:  rgb(253, 222, 222);
+  --c-danger-fg:      rgb(144, 11, 9);
+
+  --c-info:           rgb(47, 112, 232);
+  --c-info-subtle:    rgb(224, 235, 253);
+  --c-info-fg:        rgb(24, 66, 143);
+
+  /* ========== DATA VIZ (secondary — charts only) ========== */
+  --dv-1: #1F77B4; --dv-2: #FF7F0E; --dv-3: #2CA02C; --dv-4: #D62728; --dv-5: #9467BD;
+  --dv-6: #8C564B; --dv-7: #E377C2; --dv-8: #7F7F7F; --dv-9: #BCBD22; --dv-10: #17BECF;
+  --dv-grid: rgba(30, 30, 30, 0.08);
+  --dv-axis: rgba(30, 30, 30, 0.6);
+
+  /* =========================================================
+     RADII
+     ========================================================= */
+  --r-0: 0px; --r-xs: 2px; --r-sm: 4px; --r-md: 8px;
+  --r-lg: 12px; --r-xl: 16px; --r-2xl: 24px; --r-pill: 9999px;
+
+  /* =========================================================
+     SPACING — 4 px base, 8 px rhythm
+     ========================================================= */
+  --s-0: 0px; --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-5: 20px;
+  --s-6: 24px; --s-8: 32px; --s-10: 40px; --s-12: 48px; --s-16: 64px; --s-20: 80px; --s-24: 96px;
+
+  /* =========================================================
+     SHADOWS
+     ========================================================= */
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.06), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.10), 0 8px 16px rgba(0, 0, 0, 0.06);
+  --shadow-focus: 0 0 0 3px rgba(138, 34, 111, 0.20);
+
+  /* =========================================================
+     MOTION
+     ========================================================= */
+  --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur-fast: 120ms; --dur-med: 200ms; --dur-slow: 320ms;
+}
+
+/* =============================================================
+   Semantic type utilities
+   ============================================================= */
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--c-fg);
+  background: var(--c-bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.t-display    { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-display);    line-height: var(--lh-display);    letter-spacing: var(--tracking-display); }
+.t-title-hero { font-family: var(--font-sans);    font-weight: 700; font-size: var(--fs-title-hero); line-height: var(--lh-title-hero); letter-spacing: var(--tracking-hero); }
+.t-title-page { font-family: var(--font-sans);    font-weight: 700; font-size: var(--fs-title-page); line-height: var(--lh-title-page); letter-spacing: var(--tracking-page); }
+.t-heading    { font-family: var(--font-sans);    font-weight: 600; font-size: var(--fs-heading);    line-height: var(--lh-heading); }
+.t-subheading { font-family: var(--font-sans);    font-weight: 600; font-size: var(--fs-subheading); line-height: var(--lh-subheading); }
+.t-subtitle   { font-family: var(--font-sans);    font-weight: 500; font-size: var(--fs-subtitle);   line-height: var(--lh-subtitle); color: var(--c-fg-2); }
+.t-body       { font-family: var(--font-sans);    font-weight: 400; font-size: var(--fs-body);       line-height: var(--lh-body); }
+.t-body-strong{ font-family: var(--font-sans);    font-weight: 600; font-size: var(--fs-body);       line-height: var(--lh-body); }
+.t-small      { font-family: var(--font-sans);    font-weight: 400; font-size: var(--fs-small);      line-height: var(--lh-small); }
+.t-xs         { font-family: var(--font-sans);    font-weight: 500; font-size: var(--fs-xs);         line-height: var(--lh-xs); color: var(--c-fg-2); letter-spacing: 0.02em; text-transform: uppercase; }
+.t-code       { font-family: var(--font-mono);    font-weight: 400; font-size: 0.9em;                background: var(--c-bg-muted); padding: 2px 6px; border-radius: var(--r-sm); }
+.t-link       { color: var(--c-brand); text-decoration: underline; text-underline-offset: 2px; }
+.t-link:hover { color: var(--c-brand-hover); }
+
+h1 { font-family: var(--font-sans); font-weight: 700; font-size: var(--fs-title-page); line-height: var(--lh-title-page); letter-spacing: var(--tracking-page); margin: 0; }
+h2 { font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-heading);    line-height: var(--lh-heading);    margin: 0; }
+h3 { font-family: var(--font-sans); font-weight: 600; font-size: var(--fs-subheading); line-height: var(--lh-subheading); margin: 0; }
+p  { margin: 0; }

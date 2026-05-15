@@ -1,0 +1,399 @@
+{
+  "subject": {
+    "key": "architecture",
+    "title": "건축 / 외관",
+    "desc": "건물 외관, 거리, 상업공간 외부",
+    "kicker": "CATEGORY",
+    "tone": "teal"
+  },
+  "knowledge": {
+    "summary": "건축 이미지는 건물 종류뿐 아니라 거리 맥락, 입구 비중, 사람 스케일이 맞아야 의도가 또렷해집니다.",
+    "consider": [
+      "건물 용도",
+      "정면/사선",
+      "거리 맥락",
+      "간판/브랜드",
+      "시간대와 반사"
+    ]
+  },
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어떤 외관 장면인가요?",
+      "summaryLabel": "건축 방향",
+      "promptLabel": "Architecture type",
+      "description": "",
+      "options": [
+        {
+          "key": "arch-house",
+          "title": "주택 / 단독주택",
+          "desc": "집 외관과 생활 감성이 보이는 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "arch-apartment",
+          "title": "아파트 / 빌딩",
+          "desc": "도시형 건축 느낌이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "arch-cafe",
+          "title": "카페 외관",
+          "desc": "입구와 브랜드 감성이 보이는 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "arch-hotel",
+          "title": "호텔 / 리조트",
+          "desc": "고급 외관과 분위기가 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "arch-hanok",
+          "title": "한옥 / 전통 건축",
+          "desc": "전통미와 구조가 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "arch-future",
+          "title": "미래적 건축",
+          "desc": "형태와 기술 감성이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "arch-commercial",
+          "title": "상업 공간 외부",
+          "desc": "유입성과 브랜드 인상이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "arch-public",
+          "title": "공공 / 문화 건축",
+          "desc": "공간 성격과 상징성이 보이는 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "arch-garden",
+          "title": "정원 / 테라스 포함",
+          "desc": "외부 공간과 건물이 같이 보이는 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "arch-minimal",
+          "title": "미니멀 외관",
+          "desc": "형태와 재료감이 또렷한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "arch-landmark",
+          "title": "랜드마크 / 상징 건축",
+          "desc": "장소 대표성이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "arch-office",
+          "title": "오피스 / 업무용 건물",
+          "desc": "현대적이고 정돈된 인상이 중요한 장면",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "time",
+      "title": "시간대와 날씨는 어떻게 할까요?",
+      "summaryLabel": "시간 / 날씨",
+      "promptLabel": "Time and weather",
+      "description": "",
+      "options": [
+        {
+          "key": "arch-time-morning",
+          "title": "맑은 아침",
+          "desc": "또렷하고 산뜻한 외관 표현",
+          "kicker": "TIME"
+        },
+        {
+          "key": "arch-time-noon",
+          "title": "정오의 선명한 빛",
+          "desc": "형태와 구조가 명확한 표현",
+          "kicker": "TIME"
+        },
+        {
+          "key": "arch-time-sunset",
+          "title": "노을 시간",
+          "desc": "따뜻한 외관 색감이 살아나는 표현",
+          "kicker": "TIME"
+        },
+        {
+          "key": "arch-time-bluehour",
+          "title": "블루아워",
+          "desc": "도시 조명과 하늘 색이 어울리는 표현",
+          "kicker": "TIME"
+        },
+        {
+          "key": "arch-time-night",
+          "title": "완전한 야경",
+          "desc": "조명과 반사가 강조되는 표현",
+          "kicker": "TIME"
+        },
+        {
+          "key": "arch-time-rain",
+          "title": "비 온 뒤",
+          "desc": "젖은 바닥 반사가 살아나는 표현",
+          "kicker": "TIME"
+        },
+        {
+          "key": "arch-time-fog",
+          "title": "안개 / 흐린 날",
+          "desc": "분위기와 실루엣이 강조되는 표현",
+          "kicker": "TIME"
+        },
+        {
+          "key": "arch-time-spring",
+          "title": "계절감 있는 날",
+          "desc": "나무와 공기가 함께 느껴지는 표현",
+          "kicker": "TIME"
+        }
+      ]
+    },
+    {
+      "key": "focus",
+      "title": "무엇을 가장 보여줄까요?",
+      "summaryLabel": "강조 포인트",
+      "promptLabel": "Architecture focus",
+      "description": "",
+      "options": [
+        {
+          "key": "arch-point-front",
+          "title": "정면 파사드",
+          "desc": "건물 전면 인상이 가장 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "arch-point-angle",
+          "title": "사선 뷰",
+          "desc": "입체감과 형태감이 잘 보이는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "arch-point-entrance",
+          "title": "입구 / 출입구",
+          "desc": "브랜드 진입감이 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "arch-point-sign",
+          "title": "간판 / 로고 포함",
+          "desc": "브랜드명이 함께 읽히는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "arch-point-full",
+          "title": "건물 전체",
+          "desc": "큰 비율과 실루엣이 중심인 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "arch-point-detail",
+          "title": "외장재 / 디테일",
+          "desc": "재료 질감이 중심인 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "arch-point-human",
+          "title": "사람과 함께",
+          "desc": "스케일감과 사용 맥락이 보이는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "arch-point-street",
+          "title": "거리 맥락 포함",
+          "desc": "주변 도시 분위기까지 보이는 방향",
+          "kicker": "FOCUS"
+        }
+      ]
+    },
+    {
+      "key": "context",
+      "title": "어떤 맥락으로 보일까요?",
+      "summaryLabel": "건축 맥락",
+      "promptLabel": "Architecture context",
+      "description": "",
+      "options": [
+        {
+          "key": "arch-context-solo",
+          "title": "건물 단독으로 깔끔하게",
+          "desc": "주변보다 건물 자체가 중심인 맥락",
+          "kicker": "CONTEXT"
+        },
+        {
+          "key": "arch-context-street",
+          "title": "거리와 함께",
+          "desc": "도시 흐름 안에서 보이는 맥락",
+          "kicker": "CONTEXT"
+        },
+        {
+          "key": "arch-context-entry",
+          "title": "입구 / 진입 동선 중심",
+          "desc": "사람이 들어가는 느낌이 중요한 맥락",
+          "kicker": "CONTEXT"
+        },
+        {
+          "key": "arch-context-brand",
+          "title": "간판 / 브랜드 보이게",
+          "desc": "상업성이나 인지가 중요한 맥락",
+          "kicker": "CONTEXT"
+        },
+        {
+          "key": "arch-context-people",
+          "title": "사람이 크기감을 주게",
+          "desc": "스케일과 사용감이 느껴지는 맥락",
+          "kicker": "CONTEXT"
+        },
+        {
+          "key": "arch-context-garden",
+          "title": "정원 / 테라스 포함",
+          "desc": "외부 공간까지 함께 보이는 맥락",
+          "kicker": "CONTEXT"
+        },
+        {
+          "key": "arch-context-landmark",
+          "title": "광장 / 장소 대표성 중심",
+          "desc": "랜드마크처럼 보이는 맥락",
+          "kicker": "CONTEXT"
+        },
+        {
+          "key": "arch-context-night",
+          "title": "야경 / 조명 연출 중심",
+          "desc": "빛과 반사가 먼저 보이는 맥락",
+          "kicker": "CONTEXT"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "land-panorama",
+          "title": "파노라마 와이드",
+          "desc": "넓은 풍경과 스케일이 먼저 느껴지는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-mid",
+          "title": "중간 거리 풍경",
+          "desc": "주제와 배경이 균형 있게 보이는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-foreground",
+          "title": "전경 강조",
+          "desc": "앞쪽 요소를 크게 두고 깊이를 만드는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-silhouette",
+          "title": "실루엣 포함",
+          "desc": "해질녘이나 역광에서 분위기가 살아나는 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-road",
+          "title": "길이 이어지는 화면",
+          "desc": "시선이 안쪽으로 자연스럽게 들어가는 구성",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-top",
+          "title": "높은 시점 / 항공 느낌",
+          "desc": "지역 전체 윤곽이 보이는 시원한 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-framed",
+          "title": "창틀 / 문틀 프레이밍",
+          "desc": "안쪽 장면을 액자처럼 감싸는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "land-detail",
+          "title": "디테일 클로즈업",
+          "desc": "풍경 일부의 질감과 포인트를 크게 보는 화면",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "어떤 분위기를 원하시나요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "mood-bright",
+          "title": "밝고 친근하게",
+          "desc": "입문자도 편하게 느끼는 가볍고 열린 분위기",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-clean",
+          "title": "깨끗하고 맑게",
+          "desc": "정보 전달이 또렷한 클린한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-warm",
+          "title": "따뜻하고 편안하게",
+          "desc": "부드럽고 정감 있는 인상을 주는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-calm",
+          "title": "차분하고 담백하게",
+          "desc": "과장되지 않고 정리된 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-cinematic",
+          "title": "영화처럼 깊게",
+          "desc": "공기감과 서사가 함께 느껴지는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-dramatic",
+          "title": "강렬하고 드라마틱하게",
+          "desc": "명암과 감정이 또렷한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-luxury",
+          "title": "고급스럽고 세련되게",
+          "desc": "브랜드 비주얼 같은 정제된 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-playful",
+          "title": "귀엽고 경쾌하게",
+          "desc": "색감과 인상이 가볍고 재미있는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-future",
+          "title": "미래적이고 차갑게",
+          "desc": "기술적이고 현대적인 느낌",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-vintage",
+          "title": "빈티지하고 레트로하게",
+          "desc": "옛 감성과 필름 느낌이 남는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}

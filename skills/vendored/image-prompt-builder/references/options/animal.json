@@ -1,0 +1,411 @@
+{
+  "subject": {
+    "key": "animal",
+    "title": "반려동물 / 동물",
+    "desc": "반려동물과 동물 초상, 활동 장면",
+    "kicker": "CATEGORY",
+    "tone": "gold"
+  },
+  "knowledge": {
+    "summary": "동물 사진은 종 종류보다도 눈빛을 볼지, 움직임을 볼지, 사람과의 교감을 볼지가 먼저 정리돼야 안정됩니다.",
+    "consider": [
+      "표정/눈빛",
+      "행동 순간",
+      "사람과 거리감",
+      "실내/실외",
+      "털결과 질감"
+    ]
+  },
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어떤 동물 장면에 가깝나요?",
+      "summaryLabel": "동물 방향",
+      "promptLabel": "Animal direction",
+      "description": "",
+      "options": [
+        {
+          "key": "animal-dog",
+          "title": "강아지",
+          "desc": "표정과 털결이 중요한 반려견 컷",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "animal-cat",
+          "title": "고양이",
+          "desc": "눈빛과 자세가 중요한 반려묘 컷",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "animal-small",
+          "title": "작은 반려동물",
+          "desc": "햄스터, 토끼 같은 소형 동물",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "animal-bird",
+          "title": "새 / 조류",
+          "desc": "깃털과 움직임이 중요한 동물",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "animal-horse",
+          "title": "말 / 큰 동물",
+          "desc": "체형과 존재감이 중요한 동물",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "animal-farm",
+          "title": "농장 동물",
+          "desc": "소, 양, 염소 같은 평온한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "animal-wild",
+          "title": "야생동물 느낌",
+          "desc": "자연 속 생명감이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "animal-water",
+          "title": "물속 / 수족관 느낌",
+          "desc": "물과 반사 표현이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "animal-owner",
+          "title": "사람과 함께",
+          "desc": "교감과 관계가 보이는 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "animal-multi",
+          "title": "여러 마리 함께",
+          "desc": "무리감과 상호작용이 중요한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "animal-reptile",
+          "title": "파충류 / 특수 동물",
+          "desc": "질감과 색이 독특한 장면",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "animal-baby",
+          "title": "아기 동물",
+          "desc": "작고 귀여운 인상이 중심인 장면",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "action",
+      "title": "어떤 순간이 좋을까요?",
+      "summaryLabel": "행동 / 자세",
+      "promptLabel": "Animal action",
+      "description": "",
+      "options": [
+        {
+          "key": "animal-action-face",
+          "title": "얼굴 정면 초상",
+          "desc": "표정과 눈빛이 가장 중요한 장면",
+          "kicker": "ACTION"
+        },
+        {
+          "key": "animal-action-sit",
+          "title": "앉아 있는 자세",
+          "desc": "안정감 있게 또렷한 장면",
+          "kicker": "ACTION"
+        },
+        {
+          "key": "animal-action-run",
+          "title": "달리거나 뛰는 순간",
+          "desc": "역동성과 에너지가 있는 장면",
+          "kicker": "ACTION"
+        },
+        {
+          "key": "animal-action-play",
+          "title": "장난 / 놀이 중",
+          "desc": "활발함과 생활감이 있는 장면",
+          "kicker": "ACTION"
+        },
+        {
+          "key": "animal-action-sleep",
+          "title": "편하게 쉬는 순간",
+          "desc": "평온하고 귀여운 장면",
+          "kicker": "ACTION"
+        },
+        {
+          "key": "animal-action-eat",
+          "title": "먹는 장면",
+          "desc": "생활감이 또렷한 장면",
+          "kicker": "ACTION"
+        },
+        {
+          "key": "animal-action-walk",
+          "title": "산책 / 이동 중",
+          "desc": "함께 움직이는 느낌이 있는 장면",
+          "kicker": "ACTION"
+        },
+        {
+          "key": "animal-action-cuddle",
+          "title": "사람과 교감하는 순간",
+          "desc": "정서적인 관계가 보이는 장면",
+          "kicker": "ACTION"
+        }
+      ]
+    },
+    {
+      "key": "focus",
+      "title": "무엇을 가장 보여줄까요?",
+      "summaryLabel": "강조 포인트",
+      "promptLabel": "Animal focus",
+      "description": "",
+      "options": [
+        {
+          "key": "animal-focus-eyes",
+          "title": "눈빛과 얼굴",
+          "desc": "표정과 교감이 먼저 보이면 좋은 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "animal-focus-body",
+          "title": "전신 자세",
+          "desc": "몸의 실루엣과 자세가 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "animal-focus-fur",
+          "title": "털결 / 질감",
+          "desc": "촉감과 디테일이 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "animal-focus-move",
+          "title": "움직임 / 순간 포착",
+          "desc": "달림, 점프, 놀이가 먼저 보이는 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "animal-focus-bond",
+          "title": "사람과 교감",
+          "desc": "함께 있는 감정선이 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "animal-focus-group",
+          "title": "여러 마리 상호작용",
+          "desc": "무리감과 관계가 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "animal-focus-cute",
+          "title": "귀여운 순간",
+          "desc": "작고 사랑스러운 인상이 중요한 방향",
+          "kicker": "FOCUS"
+        },
+        {
+          "key": "animal-focus-wild",
+          "title": "존재감 / 야생 느낌",
+          "desc": "강한 생명감이 먼저 보이는 방향",
+          "kicker": "FOCUS"
+        }
+      ]
+    },
+    {
+      "key": "environment",
+      "title": "어디서 보여줄까요?",
+      "summaryLabel": "배경 환경",
+      "promptLabel": "Environment",
+      "description": "",
+      "options": [
+        {
+          "key": "animal-env-home",
+          "title": "집 안 / 실내",
+          "desc": "반려동물 일상 배경이 있는 장면",
+          "kicker": "ENV"
+        },
+        {
+          "key": "animal-env-bed",
+          "title": "침대 / 소파 / 쿠션 위",
+          "desc": "편안한 휴식 장면이 어울리는 배경",
+          "kicker": "ENV"
+        },
+        {
+          "key": "animal-env-yard",
+          "title": "마당 / 공원",
+          "desc": "밝고 자연스러운 야외 배경",
+          "kicker": "ENV"
+        },
+        {
+          "key": "animal-env-street",
+          "title": "거리 / 산책길",
+          "desc": "산책과 이동감이 있는 배경",
+          "kicker": "ENV"
+        },
+        {
+          "key": "animal-env-nature",
+          "title": "숲 / 들판 / 자연",
+          "desc": "야생 또는 자연감이 있는 배경",
+          "kicker": "ENV"
+        },
+        {
+          "key": "animal-env-farm",
+          "title": "농장 / 마구간",
+          "desc": "큰 동물이나 농장 동물에 맞는 배경",
+          "kicker": "ENV"
+        },
+        {
+          "key": "animal-env-water",
+          "title": "물가 / 수족관 / 수면 근처",
+          "desc": "물과 반사가 중요한 배경",
+          "kicker": "ENV"
+        },
+        {
+          "key": "animal-env-studio",
+          "title": "단색 / 스튜디오 배경",
+          "desc": "얼굴 초상에 집중하기 쉬운 배경",
+          "kicker": "ENV"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "comp-close",
+          "title": "얼굴 클로즈업",
+          "desc": "표정과 디테일이 가장 먼저 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-bust",
+          "title": "바스트 샷",
+          "desc": "상반신 중심으로 안정감 있게 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-medium",
+          "title": "미디엄 샷",
+          "desc": "인물과 주변 맥락을 함께 보여주는 기본 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-wide",
+          "title": "와이드 샷",
+          "desc": "배경과 공간 분위기까지 같이 보이는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-low",
+          "title": "로우 앵글",
+          "desc": "주제의 존재감을 더 크게 느끼게 하는 각도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-top",
+          "title": "탑뷰 / 오버헤드",
+          "desc": "위에서 내려다보는 정리된 화면",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-pov",
+          "title": "POV / 셀카 느낌",
+          "desc": "직접 찍은 듯 가까운 거리감이 있는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-symmetry",
+          "title": "정면 대칭",
+          "desc": "또렷하고 정돈된 인상을 주는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-asymmetry",
+          "title": "비대칭 배치",
+          "desc": "시선 흐름과 여백이 살아 있는 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "comp-poster",
+          "title": "포스터형 메인 비주얼",
+          "desc": "한 장면 자체가 강하게 보이는 구성",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "어떤 분위기를 원하시나요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "mood-bright",
+          "title": "밝고 친근하게",
+          "desc": "입문자도 편하게 느끼는 가볍고 열린 분위기",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-clean",
+          "title": "깨끗하고 맑게",
+          "desc": "정보 전달이 또렷한 클린한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-warm",
+          "title": "따뜻하고 편안하게",
+          "desc": "부드럽고 정감 있는 인상을 주는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-calm",
+          "title": "차분하고 담백하게",
+          "desc": "과장되지 않고 정리된 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-cinematic",
+          "title": "영화처럼 깊게",
+          "desc": "공기감과 서사가 함께 느껴지는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-dramatic",
+          "title": "강렬하고 드라마틱하게",
+          "desc": "명암과 감정이 또렷한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-luxury",
+          "title": "고급스럽고 세련되게",
+          "desc": "브랜드 비주얼 같은 정제된 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-playful",
+          "title": "귀엽고 경쾌하게",
+          "desc": "색감과 인상이 가볍고 재미있는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-future",
+          "title": "미래적이고 차갑게",
+          "desc": "기술적이고 현대적인 느낌",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-vintage",
+          "title": "빈티지하고 레트로하게",
+          "desc": "옛 감성과 필름 느낌이 남는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,552 @@
+{
+  "subject": {
+    "key": "thumbnail-person",
+    "title": "유튜브 썸네일 인물",
+    "desc": "유튜브 클릭을 부르는 인물 썸네일",
+    "kicker": "CATEGORY",
+    "tone": "forest"
+  },
+  "knowledge": {
+    "summary": "썸네일은 표정, 제목 여백, 손짓과 몸 방향이 함께 맞아야 클릭력이 올라갑니다.",
+    "consider": [
+      "표정 강도",
+      "텍스트 여백",
+      "손 제스처",
+      "시선 방향",
+      "작은 화면에서도 읽힘"
+    ]
+  },
+  "steps": [
+    {
+      "key": "detail",
+      "title": "어떤 썸네일인가요?",
+      "summaryLabel": "영상 주제",
+      "promptLabel": "Video topic",
+      "description": "",
+      "options": [
+        {
+          "key": "thumb-howto",
+          "title": "튜토리얼 / 실전형",
+          "desc": "방법을 알려주는 콘텐츠에 맞는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "thumb-explain",
+          "title": "설명 / 강의형",
+          "desc": "정보 전달이 또렷한 설명형 썸네일",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "thumb-review",
+          "title": "리뷰 / 비교형",
+          "desc": "전후 비교나 평가 포인트가 보이는 썸네일",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "thumb-reaction",
+          "title": "리액션 / 감정형",
+          "desc": "표정 자체가 클릭 포인트가 되는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "thumb-vlog",
+          "title": "브이로그 / 일상형",
+          "desc": "가볍고 친근한 콘텐츠에 맞는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "thumb-news",
+          "title": "이슈 / 뉴스형",
+          "desc": "반응과 메시지가 빠르게 읽히는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "thumb-brand",
+          "title": "채널 대표 / 브랜딩형",
+          "desc": "대표 얼굴과 채널 정체성이 보이는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "thumb-before-after",
+          "title": "전후 비교형",
+          "desc": "변화가 한눈에 느껴지는 썸네일",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "thumb-ranking",
+          "title": "추천 / 랭킹형",
+          "desc": "여러 정보를 묶어 보여주는 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "thumb-post",
+          "title": "후기 / 체험형",
+          "desc": "직접 써본 느낌과 감상이 중요한 방향",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "thumb-story",
+          "title": "스토리 / 경험담형",
+          "desc": "감정선이 읽히는 이야기형 썸네일",
+          "kicker": "DETAIL"
+        },
+        {
+          "key": "thumb-promo",
+          "title": "홍보 / 알림형",
+          "desc": "신제품, 공지, 이벤트 전달에 맞는 방향",
+          "kicker": "DETAIL"
+        }
+      ]
+    },
+    {
+      "key": "people",
+      "title": "누가 나오면 좋을까요?",
+      "summaryLabel": "등장 구성",
+      "promptLabel": "People setup",
+      "description": "",
+      "options": [
+        {
+          "key": "thumb-one-female",
+          "title": "여성 1명",
+          "desc": "한 명의 표정이 가장 강하게 보이는 구성",
+          "kicker": "PEOPLE"
+        },
+        {
+          "key": "thumb-one-male",
+          "title": "남성 1명",
+          "desc": "한 명의 리액션이 중심이 되는 구성",
+          "kicker": "PEOPLE"
+        },
+        {
+          "key": "thumb-two-people",
+          "title": "2명 대면 구도",
+          "desc": "서로 다른 반응이 함께 보이는 구성",
+          "kicker": "PEOPLE"
+        },
+        {
+          "key": "thumb-host-product",
+          "title": "인물 + 제품",
+          "desc": "호스트와 핵심 대상이 함께 보이는 구성",
+          "kicker": "PEOPLE"
+        },
+        {
+          "key": "thumb-host-screen",
+          "title": "인물 + 화면",
+          "desc": "설명 대상이 되는 화면이나 결과물이 함께 보이는 구성",
+          "kicker": "PEOPLE"
+        },
+        {
+          "key": "thumb-group",
+          "title": "2~3명 그룹",
+          "desc": "토크나 패널형 콘텐츠에 맞는 구성",
+          "kicker": "PEOPLE"
+        },
+        {
+          "key": "thumb-senior",
+          "title": "시니어 / 전문가 인상",
+          "desc": "설명력과 신뢰감이 먼저 보이는 구성",
+          "kicker": "PEOPLE"
+        },
+        {
+          "key": "thumb-solo-wide",
+          "title": "인물 1명 + 여백",
+          "desc": "제목과 포인트 문구를 넣기 쉬운 구성",
+          "kicker": "PEOPLE"
+        }
+      ]
+    },
+    {
+      "key": "pose",
+      "title": "어떤 자세가 좋을까요?",
+      "summaryLabel": "포즈 / 제스처",
+      "promptLabel": "Pose",
+      "description": "",
+      "options": [
+        {
+          "key": "thumb-pose-point",
+          "title": "화면 / 제목 가리키기",
+          "desc": "설명이나 튜토리얼형에서 자주 쓰는 제스처",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-openhand",
+          "title": "한 손으로 설명하기",
+          "desc": "정보 전달이 쉬운 오픈핸드 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-product",
+          "title": "제품이나 소품 들기",
+          "desc": "핵심 대상이 같이 보이는 썸네일 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-screen",
+          "title": "화면 캡처 옆에서 보여주기",
+          "desc": "설정 화면이나 결과물을 같이 보여주는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-arms",
+          "title": "양손 펼쳐 리액션 주기",
+          "desc": "놀람이나 강조가 잘 보이는 손동작",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-crossed",
+          "title": "팔짱으로 자신감 주기",
+          "desc": "전문가형 / 신뢰형 썸네일에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-lean",
+          "title": "몸을 앞으로 숙여 집중시키기",
+          "desc": "클릭 유도용 긴장감이 있는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-fists",
+          "title": "주먹 쥐고 강조하기",
+          "desc": "강한 메시지나 성과형 제목에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-compare",
+          "title": "양쪽 비교 제스처",
+          "desc": "비교형 / 전후형 콘텐츠에 잘 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-seated",
+          "title": "책상 앞에 앉아 설명하기",
+          "desc": "강의형 / 설정형 썸네일에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-up",
+          "title": "위쪽을 손으로 짚기",
+          "desc": "상단 제목이나 포인트를 올려주는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-down",
+          "title": "아래쪽을 짚어 강조하기",
+          "desc": "하단 자막이나 결과를 가리키는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-thumbsup",
+          "title": "엄지로 좋다고 표시하기",
+          "desc": "추천 / 후기형에 잘 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-question",
+          "title": "턱이나 볼에 손을 두고 의문형",
+          "desc": "질문형 제목에 잘 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-keyboard",
+          "title": "키보드나 마우스를 만지며 설명",
+          "desc": "설정 / 작업형 썸네일에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-mouthcover",
+          "title": "입을 가리며 놀란 반응",
+          "desc": "충격 / 반전형 클릭 유도 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-count",
+          "title": "손가락으로 숫자 세기",
+          "desc": "순위 / 단계 / 리스트형 제목에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-frame",
+          "title": "양손으로 화면 영역 프레이밍",
+          "desc": "중앙 포인트를 감싸며 강조하는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-cheek",
+          "title": "볼이나 턱선에 손을 대고 반응하기",
+          "desc": "썸네일용 감정 표현이 강해지는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-leanseat",
+          "title": "의자에 기대서 옆으로 설명하기",
+          "desc": "토크형 / 리뷰형에서 자주 쓰는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-device",
+          "title": "휴대폰이나 태블릿을 세워 들기",
+          "desc": "앱 / 설정 결과물을 같이 보여주기 좋은 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-clap",
+          "title": "양손을 모아 기대감 주기",
+          "desc": "후기나 추천형의 밝은 반응을 살리는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-laptop",
+          "title": "노트북 화면을 열어 보여주기",
+          "desc": "강의 / 작업형 썸네일에 맞는 자세",
+          "kicker": "POSE"
+        },
+        {
+          "key": "thumb-pose-hip",
+          "title": "한 손 허리로 자신감 주기",
+          "desc": "브랜드형 / 메인 비주얼 썸네일에 맞는 자세",
+          "kicker": "POSE"
+        }
+      ]
+    },
+    {
+      "key": "reaction",
+      "title": "표정과 반응은 어느 정도가 좋을까요?",
+      "summaryLabel": "반응 강도",
+      "promptLabel": "Reaction strength",
+      "description": "",
+      "options": [
+        {
+          "key": "react-smile",
+          "title": "밝은 미소",
+          "desc": "부담 없이 보기 좋은 친근한 반응",
+          "kicker": "REACTION"
+        },
+        {
+          "key": "react-surprise",
+          "title": "놀람 / 충격",
+          "desc": "강한 클릭 유도가 필요한 리액션",
+          "kicker": "REACTION"
+        },
+        {
+          "key": "react-serious",
+          "title": "진지하고 단단하게",
+          "desc": "설명형 콘텐츠에 맞는 표정",
+          "kicker": "REACTION"
+        },
+        {
+          "key": "react-curious",
+          "title": "궁금 / 의문",
+          "desc": "질문형 메시지와 잘 맞는 반응",
+          "kicker": "REACTION"
+        },
+        {
+          "key": "react-confident",
+          "title": "자신감 있게",
+          "desc": "노하우나 팁을 알려주는 느낌",
+          "kicker": "REACTION"
+        },
+        {
+          "key": "react-calm",
+          "title": "담백하고 차분하게",
+          "desc": "브랜딩이나 전문가 채널에 잘 맞는 반응",
+          "kicker": "REACTION"
+        },
+        {
+          "key": "react-laugh",
+          "title": "크게 웃는 반응",
+          "desc": "예능형, 입문형 콘텐츠에 잘 맞는 표정",
+          "kicker": "REACTION"
+        },
+        {
+          "key": "react-beforeafter",
+          "title": "전후 차이 반응",
+          "desc": "변화나 비교 포인트를 살리는 표정",
+          "kicker": "REACTION"
+        }
+      ]
+    },
+    {
+      "key": "text",
+      "title": "텍스트는 어디에 둘까요?",
+      "summaryLabel": "텍스트 구조",
+      "promptLabel": "Text layout",
+      "description": "",
+      "options": [
+        {
+          "key": "text-left",
+          "title": "왼쪽 제목 여백",
+          "desc": "오른쪽 인물, 왼쪽 텍스트 구조",
+          "kicker": "TEXT"
+        },
+        {
+          "key": "text-right",
+          "title": "오른쪽 제목 여백",
+          "desc": "왼쪽 인물, 오른쪽 텍스트 구조",
+          "kicker": "TEXT"
+        },
+        {
+          "key": "text-top",
+          "title": "상단 제목",
+          "desc": "위쪽 제목과 아래 비주얼이 어울리는 구조",
+          "kicker": "TEXT"
+        },
+        {
+          "key": "text-bottom",
+          "title": "하단 캡션",
+          "desc": "아래쪽 정보가 읽히는 구조",
+          "kicker": "TEXT"
+        },
+        {
+          "key": "text-center-small",
+          "title": "중앙 짧은 문구",
+          "desc": "짧고 강한 키워드가 들어가는 구조",
+          "kicker": "TEXT"
+        },
+        {
+          "key": "text-none",
+          "title": "텍스트 없이 인물 중심",
+          "desc": "비주얼 자체로 클릭을 유도하는 구조",
+          "kicker": "TEXT"
+        },
+        {
+          "key": "text-badge",
+          "title": "배지 / 말풍선 포인트",
+          "desc": "작은 강조 문구가 들어가기 쉬운 구조",
+          "kicker": "TEXT"
+        },
+        {
+          "key": "text-split",
+          "title": "좌우 분할형",
+          "desc": "두 정보를 대비하기 쉬운 레이아웃",
+          "kicker": "TEXT"
+        }
+      ]
+    },
+    {
+      "key": "composition",
+      "title": "화면은 어떻게 잡을까요?",
+      "summaryLabel": "구도",
+      "promptLabel": "Composition",
+      "description": "",
+      "options": [
+        {
+          "key": "poster-center",
+          "title": "정중앙 메인 비주얼",
+          "desc": "주제가 정면에서 강하게 보이는 포스터 구도",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-left-space",
+          "title": "왼쪽 여백형",
+          "desc": "오른쪽 비주얼, 왼쪽 텍스트 배치가 쉬운 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-right-space",
+          "title": "오른쪽 여백형",
+          "desc": "왼쪽 비주얼, 오른쪽 텍스트 배치가 쉬운 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-top-space",
+          "title": "상단 타이틀형",
+          "desc": "위쪽 제목 공간을 남기는 포스터 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-bottom-space",
+          "title": "하단 크레딧형",
+          "desc": "아래쪽에 정보가 들어가기 쉬운 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-diagonal",
+          "title": "대각선 흐름형",
+          "desc": "시선이 사선으로 움직이는 역동적인 구조",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-collage",
+          "title": "콜라주형",
+          "desc": "여러 요소를 한 장에 묶는 구성",
+          "kicker": "COMPOSITION"
+        },
+        {
+          "key": "poster-minimal",
+          "title": "미니멀 메인형",
+          "desc": "요소를 줄여 상징이 강하게 보이는 구조",
+          "kicker": "COMPOSITION"
+        }
+      ]
+    },
+    {
+      "key": "mood",
+      "title": "어떤 분위기를 원하시나요?",
+      "summaryLabel": "분위기",
+      "promptLabel": "Mood",
+      "description": "",
+      "options": [
+        {
+          "key": "mood-bright",
+          "title": "밝고 친근하게",
+          "desc": "입문자도 편하게 느끼는 가볍고 열린 분위기",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-clean",
+          "title": "깨끗하고 맑게",
+          "desc": "정보 전달이 또렷한 클린한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-warm",
+          "title": "따뜻하고 편안하게",
+          "desc": "부드럽고 정감 있는 인상을 주는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-calm",
+          "title": "차분하고 담백하게",
+          "desc": "과장되지 않고 정리된 톤",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-cinematic",
+          "title": "영화처럼 깊게",
+          "desc": "공기감과 서사가 함께 느껴지는 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-dramatic",
+          "title": "강렬하고 드라마틱하게",
+          "desc": "명암과 감정이 또렷한 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-luxury",
+          "title": "고급스럽고 세련되게",
+          "desc": "브랜드 비주얼 같은 정제된 무드",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-playful",
+          "title": "귀엽고 경쾌하게",
+          "desc": "색감과 인상이 가볍고 재미있는 방향",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-future",
+          "title": "미래적이고 차갑게",
+          "desc": "기술적이고 현대적인 느낌",
+          "kicker": "MOOD"
+        },
+        {
+          "key": "mood-vintage",
+          "title": "빈티지하고 레트로하게",
+          "desc": "옛 감성과 필름 느낌이 남는 방향",
+          "kicker": "MOOD"
+        }
+      ]
+    }
+  ]
+}
