@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Lull · Mobile onboarding</title>
+<title>마뗑킴 · 모바일 온보딩 플로우</title>
 <style>
   :root {
     --canvas: #efece4;
@@ -12,7 +12,7 @@
     --accent: #c66e3a;
     --warm: #e8a76e;
     --display: 'Iowan Old Style', 'Charter', Georgia, serif;
-    --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
+    --body: -apple-system, BlinkMacSystemFont, 'Pretendard Variable', 'Segoe UI', Inter, sans-serif;
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--canvas); font-family: var(--body); color: var(--ink); }
@@ -100,12 +100,13 @@
   .alt { text-align: center; color: var(--muted); padding-top: 12px; font-size: 13px; }
   .alt a { color: var(--accent); font-weight: 600; }
 
-  /* Phone 3 — sign-in */
+  /* Phone 3 — 사인인 옵션 */
   .signin-options { display: flex; flex-direction: column; gap: 10px; }
   .opt { display: flex; align-items: center; gap: 12px; padding: 14px 18px; border: 1px solid rgba(35,33,24,0.12); border-radius: 14px; font-weight: 500; font-size: 14.5px; }
   .opt .glyph { width: 22px; height: 22px; border-radius: 50%; background: var(--ink); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; }
+  .opt.kakao .glyph { background: #fee500; color: #3c1e1e; }
   .opt.apple .glyph { background: #000; }
-  .opt.google .glyph { background: linear-gradient(135deg, #ea4335, #fbbc05, #34a853, #4285f4); }
+  .opt.naver .glyph { background: #03c75a; }
   .opt.email .glyph { background: var(--accent); }
 
   .terms { font-size: 11px; color: var(--muted); text-align: center; padding-top: 14px; line-height: 1.5; }
@@ -119,17 +120,18 @@
 </head>
 <body>
 <div class="stage">
-  <h1>Lull · onboarding flow</h1>
-  <p class="lede">Three screens, one tone of voice. Designed in the Lull design system — warm canvas, serif headings, single accent.</p>
+  <h1>Matin Kim · 자사몰 앱 온보딩</h1>
+  <p class="lede">3개 스크린, 하나의 톤. 마뗑킴 디자인 시스템 — 따뜻한 크림 캔버스, 산세리프 헤드라인, 단일 액센트.</p>
 
   <div class="phones">
-    <!-- Screen 1: welcome -->
+    <!-- Screen 1: 스플래시 / 웰컴 -->
     <div class="phone">
       <div class="notch"></div>
       <div class="statusbar"><span>9:41</span><div class="right"><span>5G</span><span class="status-icon"></span></div></div>
       <div class="phone-body">
-        <div class="phone-top"><span class="skip">Skip</span></div>
+        <div class="phone-top"><span class="skip">건너뛰기</span></div>
         <div class="hero">
+          <!-- 마뗑킴 시그니처 로고 일러스트 -->
           <svg class="art" viewBox="0 0 220 220">
             <defs>
               <radialGradient id="moon1" cx="50%" cy="40%" r="60%">
@@ -146,21 +148,22 @@
           </svg>
         </div>
         <div class="copy">
-          <h2>Quiet beats noise.</h2>
-          <p>Twelve minutes a day. A practice that fits in a coffee break. No streaks, no badges — just a calmer evening.</p>
+          <h2>쿨하게, 매일.</h2>
+          <p>마뗑킴이 제안하는 데일리 럭셔리. 매일의 일상에 쿨한 무드 한 스푼.</p>
         </div>
         <div class="pager"><span class="active"></span><span></span><span></span></div>
-        <div class="cta">Continue</div>
+        <div class="cta">시작하기</div>
       </div>
     </div>
 
-    <!-- Screen 2: value props -->
+    <!-- Screen 2: 밸류프롭 — 시즌 신상 + 멤버십 혜택 -->
     <div class="phone">
       <div class="notch"></div>
       <div class="statusbar"><span>9:41</span><div class="right"><span>5G</span><span class="status-icon"></span></div></div>
       <div class="phone-body">
-        <div class="phone-top"><span class="skip">Skip</span></div>
+        <div class="phone-top"><span class="skip">건너뛰기</span></div>
         <div class="hero">
+          <!-- 회원 전용 사전예약 + 신상 카드 시각화 -->
           <svg class="art" viewBox="0 0 220 220">
             <rect x="38" y="48" width="144" height="100" rx="14" fill="#fff" stroke="#c66e3a" stroke-width="1.5"/>
             <rect x="56" y="68" width="56" height="6" rx="3" fill="#c66e3a"/>
@@ -172,31 +175,32 @@
           </svg>
         </div>
         <div class="copy">
-          <h2>Practice that meets you where you are.</h2>
-          <p>Adaptive sessions that get shorter on busy days, deeper on quiet ones. The kind of routine that survives a Wednesday.</p>
+          <h2>회원만의 사전예약, 먼저 만나보세요.</h2>
+          <p>27SS 신상 사전예약 · 무료 배송 · 시즌 룩북 다운로드. 회원이 되면 모든 혜택을 누릴 수 있습니다.</p>
         </div>
         <div class="pager"><span></span><span class="active"></span><span></span></div>
-        <div class="cta">Continue</div>
+        <div class="cta">계속</div>
       </div>
     </div>
 
-    <!-- Screen 3: sign in -->
+    <!-- Screen 3: 사인인 — 카카오·Apple·네이버·이메일 -->
     <div class="phone">
       <div class="notch"></div>
       <div class="statusbar"><span>9:41</span><div class="right"><span>5G</span><span class="status-icon"></span></div></div>
       <div class="phone-body">
-        <div class="phone-top"><span class="skip">Help</span></div>
+        <div class="phone-top"><span class="skip">도움말</span></div>
         <div style="padding: 24px 0;">
-          <h2 style="font-family: var(--display); font-size: 32px; margin: 0 0 8px; letter-spacing: -0.01em; line-height: 1.05; font-weight: 700;">Make a place for it.</h2>
-          <p style="margin: 0; color: var(--muted); font-size: 15px;">Save your sessions across devices. We don't email, we don't share.</p>
+          <h2 style="font-family: var(--display); font-size: 32px; margin: 0 0 8px; letter-spacing: -0.01em; line-height: 1.05; font-weight: 700;">자리를 마련해 두었어요.</h2>
+          <p style="margin: 0; color: var(--muted); font-size: 15px;">기기 간 위시리스트와 주문 내역이 함께. 알림은 회원님이 원할 때만.</p>
         </div>
         <div class="signin-options">
-          <div class="opt apple"><span class="glyph"></span>Continue with Apple</div>
-          <div class="opt google"><span class="glyph"></span>Continue with Google</div>
-          <div class="opt email"><span class="glyph">@</span>Continue with email</div>
+          <div class="opt kakao"><span class="glyph">K</span>카카오로 시작하기</div>
+          <div class="opt apple"><span class="glyph"></span>Apple로 계속하기</div>
+          <div class="opt naver"><span class="glyph">N</span>네이버로 계속하기</div>
+          <div class="opt email"><span class="glyph">@</span>이메일로 계속하기</div>
         </div>
         <div style="flex: 1;"></div>
-        <div class="terms">By continuing, you agree to Lull's <a>Terms</a> and <a>Privacy Policy</a>.</div>
+        <div class="terms">계속하면 마뗑킴의 <a>이용약관</a>과 <a>개인정보처리방침</a>에 동의하게 됩니다.</div>
         <div class="pager"><span></span><span></span><span class="active"></span></div>
       </div>
     </div>

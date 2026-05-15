@@ -1,0 +1,388 @@
+<!doctype html>
+<!--
+  K-패션 시즌 키비주얼 모션 포스터 시드.
+
+  CSS 키프레임 only — JavaScript 없음, 외부 이미지 없음.
+  16:9 풀블리드 (인스타 릴스 9:16 재크롭을 위해 핵심 요소는 가운데 70% 안에).
+
+  레이어 구조 (뒤에서 앞으로):
+    1) 스테이지 — 오프-화이트 + 미세한 점 그리드
+    2) 동심원 링 4개 (다른 속도로 회전: 60s / 90s / 180s / 36s)
+    3) 포컬 마크 (중앙 시즌 모노그램 — 시드는 globe, 시즌 모티프로 교체 가능)
+    4) 링 라벨 (시즌 키워드 5~8개)
+    5) 헤드라인 (디스플레이 세리프, 이탤릭 액센트 1단어, type-in 페이드)
+    6) 프레임 크롬 (코너 스탬프 4개 — 정적)
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 토큰 바인딩 — --accent (시즌 키컬러), --font-display (브랜드 톤)
+    4) references/layouts.md 에서 컴포지션 패턴 선택
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude (Claude.ai · Claude Code): <artifact> 태그로 감싸 출력
+    - 기타 (ChatGPT · Gemini · Grok): 표준 마크다운 HTML 코드블록
+    - OpenDesign: data-od-id 사용. 그 외는 id 속성 대체.
+
+  하드 룰:
+    - JavaScript 절대 금지 (HyperFrames/Lottie 캡처 호환)
+    - 외부 이미지 URL 금지 — 모든 비주얼 인라인 SVG + CSS
+    - 최소 3개 레이어가 다른 속도로 움직임
+    - 액센트는 헤드라인 이탤릭 단어 1개에만
+    - 핵심 요소는 가운데 70% 영역 안 (9:16 재크롭 가능)
+-->
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>[REPLACE 브랜드] [REPLACE 시즌 코드] — 시즌 키비주얼 모션</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Hahmlet:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper:   #f3eee5;
+      --paper-2: #ede7d8;
+      --ink:     #1a1816;
+      --muted:   #7a766c;
+      --accent:  #c0563b;
+
+      --font-display-romance:  "Hahmlet", "Cormorant Garamond", Georgia, serif;
+      --font-display-magazine: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+      --font-display-clean:    "Instrument Serif", "Iowan Old Style", Georgia, serif;
+      --font-display: var(--font-display-magazine);
+      --font-mono: "IBM Plex Mono", ui-monospace, "JetBrains Mono", Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font: 14px/1.5 -apple-system, system-ui, "Pretendard Variable", sans-serif;
+      overflow: hidden;
+    }
+
+    /* ─── 스테이지 (풀블리드 16:9) ─── */
+    main {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(26,24,22,0.04), transparent 70%),
+        radial-gradient(circle, rgba(26,24,22,0.10) 1px, transparent 1.4px) 0 0 / 28px 28px,
+        var(--paper);
+      overflow: hidden;
+    }
+
+    /* ─── 코너 크롬 (정적 메타) ─── */
+    .chrome {
+      position: absolute;
+      left: 36px;
+      right: 36px;
+      font: 10px/1.4 var(--font-mono);
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .chrome.top {
+      top: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .chrome.top .right {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+    .chrome.top .rule {
+      width: 60px;
+      height: 1px;
+      background: var(--ink);
+      opacity: 0.6;
+    }
+    .chrome.bot {
+      bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .meta-tl {
+      position: absolute;
+      top: 96px;
+      left: 56px;
+      font: 10px/1.5 var(--font-mono);
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .meta-tl b {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 4px;
+      letter-spacing: 0.12em;
+    }
+    .issue {
+      position: absolute;
+      top: 96px;
+      right: 56px;
+      font: 9px/1.3 var(--font-mono);
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-align: right;
+      text-transform: uppercase;
+    }
+    .issue .num {
+      font: 18px/1 var(--font-display);
+      font-style: italic;
+      color: var(--ink);
+      display: block;
+      letter-spacing: 0;
+      margin-bottom: 4px;
+    }
+
+    /* ─── 컴포지션 (중앙 정사각 영역) ─── */
+    .stage {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+    }
+    .composition {
+      position: relative;
+      width: min(78vh, 78vw);
+      aspect-ratio: 1 / 1;
+    }
+
+    /* ─── 동심원 링 4개 — 다른 속도로 회전 ─── */
+    .ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1px solid rgba(26,24,22,0.45);
+      animation: spin 60s linear infinite;
+    }
+    .ring.r2 {
+      inset: 4%;
+      border-color: rgba(26,24,22,0.30);
+      animation-duration: 90s;
+      animation-direction: reverse;
+    }
+    .ring.r3 {
+      inset: 10%;
+      border-color: rgba(26,24,22,0.22);
+      border-style: dashed;
+      animation-duration: 180s;
+    }
+    .ring.r4 {
+      inset: 18%;
+      border-color: rgba(26,24,22,0.12);
+      animation-duration: 36s;
+    }
+
+    /* ─── 링 라벨 (시즌 키워드 5~8개) ─── */
+    .ring-labels {
+      position: absolute;
+      inset: 0;
+      animation: spin 60s linear infinite;
+    }
+    .ring-labels span {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      font: 12px/1 var(--font-display);
+      font-style: italic;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      transform-origin: 0 0;
+      white-space: nowrap;
+    }
+    .ring-labels span.l1 { transform: rotate(-12deg) translate(0, -49vh); }
+    .ring-labels span.l2 { transform: rotate(34deg)  translate(0, -49vh); }
+    .ring-labels span.l3 { transform: rotate(78deg)  translate(0, -49vh); }
+    .ring-labels span.l4 { transform: rotate(132deg) translate(0, -49vh); }
+    .ring-labels span.l5 { transform: rotate(178deg) translate(0, -49vh); }
+    .ring-labels span.l6 { transform: rotate(224deg) translate(0, -49vh); }
+    .ring-labels span.l7 { transform: rotate(266deg) translate(0, -49vh); }
+    .ring-labels span.l8 { transform: rotate(312deg) translate(0, -49vh); }
+
+    /* ─── 포컬 마크 (중앙 모티프) ─── */
+    .focal {
+      position: absolute;
+      inset: 22%;
+      border-radius: 50%;
+      animation: spin 38s linear infinite reverse;
+      transform-style: preserve-3d;
+    }
+    .focal svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .focal-dot {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 7px;
+      height: 7px;
+      background: var(--accent);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse 2.6s ease-in-out infinite;
+    }
+
+    /* ─── 헤드라인 ─── */
+    .headline {
+      position: absolute;
+      bottom: 80px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font: 38px/1.1 var(--font-display);
+      letter-spacing: -0.005em;
+      animation: type-in 1.4s cubic-bezier(.2,.7,.2,1) both;
+    }
+    .headline .em { font-style: italic; color: var(--ink); }
+    .headline .accent {
+      font-style: italic;
+      color: var(--accent);
+      padding-left: 4px;
+      padding-right: 4px;
+    }
+    .baseline {
+      position: absolute;
+      bottom: 56px;
+      left: 36px;
+      right: 36px;
+      height: 1px;
+      background: rgba(26,24,22,0.25);
+    }
+
+    /* ─── 키프레임 ─── */
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pulse {
+      0%, 100% {
+        box-shadow: 0 0 0 0 rgba(192,86,59,0.45);
+        transform: translate(-50%, -50%) scale(1);
+      }
+      50% {
+        box-shadow: 0 0 0 18px rgba(192,86,59,0);
+        transform: translate(-50%, -50%) scale(1.25);
+      }
+    }
+    @keyframes type-in {
+      from { opacity: 0; letter-spacing: 0.06em; }
+      to   { opacity: 1; letter-spacing: -0.005em; }
+    }
+
+    @media (max-width: 900px) {
+      .meta-tl { left: 20px; }
+      .issue { right: 20px; }
+      .headline { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <main data-od-id="stage">
+    <!-- 상단 코너 크롬 -->
+    <div class="chrome top">
+      <div>[REPLACE MATIN KIM STUDIO — APR 10 · 2027]</div>
+      <div class="right">
+        <div class="rule"></div>
+        <div>[REPLACE 27SS · BLOOM]</div>
+      </div>
+    </div>
+
+    <!-- 좌상단 + 우상단 메타 -->
+    <div class="meta-tl">
+      <b>[REPLACE 01 · CAMPAIGN · 27SS]</b>
+      [REPLACE ISSUE · 2027]
+    </div>
+    <div class="issue">
+      <span class="num">[REPLACE 12]</span>
+      [REPLACE SECOND LOOP · 16:9]
+    </div>
+
+    <!-- 컴포지션 — 회전하는 링 + 포컬 마크 + 라벨 -->
+    <div class="stage">
+      <div class="composition" data-od-id="composition">
+        <div class="ring r1"></div>
+        <div class="ring r2"></div>
+        <div class="ring r3"></div>
+        <div class="ring r4"></div>
+
+        <!--
+          중앙 포컬 마크 — 시즌 모노그램.
+          시드 기본값: 추상 globe (universal).
+          교체 옵션:
+            - 마뗑킴: 달/태양 모노그램
+            - 마르디 메크르디: 시그니처 꽃 일러스트
+            - 와키윌리: 캐릭터 IP 모노그램
+            - 키르시: 체리 심볼
+            - 아더에러: 왜곡된 그리드/타이포
+        -->
+        <div class="focal" data-od-id="focal">
+          <svg viewBox="0 0 200 200" aria-hidden="true">
+            <defs>
+              <radialGradient id="focalShade" cx="35%" cy="32%" r="78%">
+                <stop offset="0%"   stop-color="#fffaf0"/>
+                <stop offset="60%"  stop-color="#ece6da"/>
+                <stop offset="100%" stop-color="#cfc8b9"/>
+              </radialGradient>
+            </defs>
+            <circle cx="100" cy="100" r="92" fill="url(#focalShade)" stroke="rgba(26,24,22,0.35)" stroke-width="0.7"/>
+            <g fill="none" stroke="rgba(26,24,22,0.40)" stroke-width="0.7">
+              <ellipse cx="100" cy="100" rx="92" ry="20"/>
+              <ellipse cx="100" cy="100" rx="92" ry="48"/>
+              <ellipse cx="100" cy="100" rx="92" ry="78"/>
+              <ellipse cx="100" cy="100" rx="20" ry="92"/>
+              <ellipse cx="100" cy="100" rx="48" ry="92"/>
+              <ellipse cx="100" cy="100" rx="78" ry="92"/>
+            </g>
+            <g fill="rgba(26,24,22,0.28)" stroke="rgba(26,24,22,0.55)" stroke-width="0.6">
+              <path d="M 64 70 Q 78 58 96 64 L 110 78 Q 102 92 88 96 L 70 92 Q 60 84 64 70 Z"/>
+              <path d="M 116 70 Q 138 64 156 80 Q 152 96 138 100 Q 124 96 116 86 Z"/>
+              <path d="M 54 110 Q 72 110 84 124 Q 80 142 64 150 Q 50 138 54 110 Z"/>
+              <path d="M 102 118 Q 124 112 146 126 Q 142 144 120 152 Q 102 144 102 118 Z"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="focal-dot"></div>
+      </div>
+    </div>
+
+    <!-- 링 라벨 — 시즌 키워드 5~8개 -->
+    <div class="ring-labels" data-od-id="ring-labels" aria-hidden="true">
+      <span class="l1"><i>[REPLACE 봄]</i></span>
+      <span class="l2"><i>[REPLACE BLOOM]</i></span>
+      <span class="l3"><i>[REPLACE Quietly]</i></span>
+      <span class="l4"><i>[REPLACE ivory]</i></span>
+      <span class="l5"><i>[REPLACE sage]</i></span>
+      <span class="l6"><i>[REPLACE ash]</i></span>
+      <span class="l7"><i>[REPLACE Linen]</i></span>
+      <span class="l8"><i>[REPLACE 27SS]</i></span>
+    </div>
+
+    <!-- 헤드라인 — 이탤릭 액센트 1단어 -->
+    <div class="headline" data-od-id="headline">
+      <span class="em">[REPLACE Bloom]</span>
+      <span class="accent">[REPLACE Quietly.]</span>
+      [REPLACE 봄, 천천히 피어나다.]
+    </div>
+    <div class="baseline"></div>
+
+    <!-- 하단 코너 크롬 -->
+    <div class="chrome bot">
+      <div>[REPLACE LOOP · 12s · CSS]</div>
+      <div>[REPLACE REELS / IG / SHOP · 27SS DROP 02]</div>
+    </div>
+  </main>
+</body>
+</html>

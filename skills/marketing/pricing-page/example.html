@@ -1,9 +1,13 @@
 <!doctype html>
-<html lang="en">
+<!--
+  K-패션 멤버십 가격 페이지 예시 — 마뗑킴(MATIN KIM) MEMBERS 4단 멤버십.
+  CSS 토큰은 원본 SaaS 가격 페이지와 동일. 카피·등급 라벨·혜택만 K-패션화.
+-->
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pricing — Filebase</title>
+  <title>MEMBERS — 마뗑킴(MATIN KIM)</title>
   <style>
     :root {
       --bg: #fafaf9; --fg: #1c1b1a; --muted: #6b6964; --border: #e6e4e0;
@@ -18,14 +22,15 @@
     .toggle { display: inline-flex; margin-top: 28px; border: 1px solid var(--border); border-radius: 999px; background: var(--surface); overflow: hidden; }
     .toggle button { font: inherit; cursor: pointer; padding: 8px 18px; border: none; background: transparent; color: var(--muted); }
     .toggle button.active { background: var(--fg); color: white; }
-    .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 64px; }
-    @media (max-width: 800px) { .tiers { grid-template-columns: 1fr; } }
-    .tier { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 36px 32px; }
+    .tiers { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 64px; }
+    @media (max-width: 980px) { .tiers { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .tiers { grid-template-columns: 1fr; } }
+    .tier { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 32px 28px; }
     .tier.featured { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(201,100,66,0.08); }
-    .tier h2 { margin: 0 0 4px; font-size: 18px; letter-spacing: -0.01em; }
+    .tier h2 { margin: 0 0 4px; font-size: 18px; letter-spacing: 0.08em; text-transform: uppercase; }
     .tier .desc { color: var(--muted); font-size: 14px; margin: 0 0 24px; }
-    .tier .price { font-size: 48px; letter-spacing: -0.025em; line-height: 1; margin-bottom: 6px; }
-    .tier .price small { font-size: 14px; color: var(--muted); font-weight: 400; letter-spacing: 0; }
+    .tier .price { font-size: 32px; letter-spacing: -0.025em; line-height: 1.1; margin-bottom: 6px; }
+    .tier .price small { font-size: 13px; color: var(--muted); font-weight: 400; letter-spacing: 0; display: block; margin-top: 4px; }
     .tier ul { list-style: none; padding: 0; margin: 24px 0 28px; font-size: 14px; }
     .tier ul li { padding: 8px 0; color: var(--fg); border-top: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-start; }
     .tier ul li::before { content: '✓'; color: var(--accent); flex-shrink: 0; }
@@ -50,77 +55,104 @@
 </head>
 <body>
   <div class="wrap">
+    <!-- 헤더(Hero) — 페이지 타이틀 + 데크 + 등급 기준 토글 -->
     <header data-od-id="header">
-      <h1>One flat rate. No throttling.</h1>
-      <p>Start free. Pick a paid tier the day you outgrow it. Switch yearly billing for two months off.</p>
+      <h1>오래 머무를수록, 더 가까이.</h1>
+      <p>마뗑킴 회원은 매 시즌 가장 먼저 만납니다. 누적 구매액에 따라 자동으로 등급이 부여됩니다.</p>
       <div class="toggle">
-        <button class="active">Monthly</button>
-        <button>Yearly · save 17%</button>
+        <button class="active">최근 12개월 기준</button>
+        <button>연 누적 기준</button>
       </div>
     </header>
 
+    <!-- 등급 카드 4단 — BASIC / SILVER / GOLD / PLATINUM. GOLD 추천 강조 -->
     <section class="tiers" data-od-id="tiers">
       <div class="tier">
-        <h2>Solo</h2>
-        <p class="desc">For individuals.</p>
-        <div class="price">$8 <small>/ month</small></div>
+        <h2>BASIC</h2>
+        <p class="desc">가입 즉시.</p>
+        <div class="price">₩0
+          <small>누적 ₩0 ~ ₩299,999</small>
+        </div>
         <ul>
-          <li>1 TB storage</li>
-          <li>Block-level sync</li>
-          <li>2 devices</li>
-          <li>Email support</li>
+          <li>구매액 0.5% 적립</li>
+          <li>₩50,000 이상 무료 배송</li>
+          <li>생일 쿠폰 ₩5,000</li>
+          <li>매거진 / 룩북 온라인</li>
         </ul>
-        <button class="cta cta-secondary">Choose Solo</button>
-      </div>
-      <div class="tier featured">
-        <span class="featured-pill">Recommended</span>
-        <h2>Team</h2>
-        <p class="desc">For teams up to 50 people.</p>
-        <div class="price">$14 <small>/ seat / month</small></div>
-        <ul>
-          <li>5 TB pooled storage</li>
-          <li>Shared folders & granular roles</li>
-          <li>Unlimited devices</li>
-          <li>Audit log + usage analytics</li>
-          <li>Priority support</li>
-        </ul>
-        <button class="cta cta-primary">Choose Team</button>
+        <button class="cta cta-secondary">BASIC으로 시작</button>
       </div>
       <div class="tier">
-        <h2>Enterprise</h2>
-        <p class="desc">SSO, on-prem keys, 99.99% SLA.</p>
-        <div class="price">Custom</div>
+        <h2>SILVER</h2>
+        <p class="desc">12개월 누적 ₩30만 이상.</p>
+        <div class="price">자동 부여
+          <small>누적 ₩300,000 ~ ₩999,999</small>
+        </div>
         <ul>
-          <li>Unlimited storage</li>
-          <li>SAML / SCIM provisioning</li>
-          <li>On-prem encryption keys</li>
-          <li>Dedicated CSM</li>
+          <li>구매액 1% 적립</li>
+          <li>₩30,000 이상 무료 배송</li>
+          <li>시즌 사전예약 12시간 우선</li>
+          <li>생일 쿠폰 ₩10,000</li>
         </ul>
-        <button class="cta cta-secondary">Talk to sales</button>
+        <button class="cta cta-secondary">SILVER 자세히</button>
+      </div>
+      <div class="tier featured">
+        <span class="featured-pill">MOST POPULAR</span>
+        <h2>GOLD</h2>
+        <p class="desc">12개월 누적 ₩100만 이상.</p>
+        <div class="price">자동 부여
+          <small>누적 ₩1,000,000 ~ ₩2,999,999</small>
+        </div>
+        <ul>
+          <li>구매액 2% 적립</li>
+          <li>전 상품 무료 배송</li>
+          <li>시즌 사전예약 24시간 우선</li>
+          <li>시즌 룩북 우편 발송</li>
+          <li>생일 쿠폰 ₩20,000</li>
+        </ul>
+        <button class="cta cta-primary">GOLD 혜택 보기</button>
+      </div>
+      <div class="tier">
+        <h2>PLATINUM</h2>
+        <p class="desc">12개월 누적 ₩300만 이상.</p>
+        <div class="price">초대제
+          <small>매 시즌 자체 심사 후 안내</small>
+        </div>
+        <ul>
+          <li>구매액 3% 적립</li>
+          <li>전 상품 익일 배송</li>
+          <li>시즌 사전예약 48시간 우선</li>
+          <li>매장 시즌 행사 초대 (+1 동반)</li>
+          <li>전용 CS 라인</li>
+        </ul>
+        <button class="cta cta-secondary">PLATINUM 안내 신청</button>
       </div>
     </section>
 
+    <!-- 혜택 비교표 — 등급 4열 + 혜택 행. 적립·배송·시즌 혜택 3개 그룹 -->
     <section class="compare" data-od-id="compare">
-      <h3>Plan comparison</h3>
+      <h3>등급별 혜택 비교</h3>
       <table>
-        <thead><tr><th>Feature</th><th>Solo</th><th>Team</th><th>Enterprise</th></tr></thead>
+        <thead><tr><th>혜택</th><th>BASIC</th><th>SILVER</th><th>GOLD</th><th>PLATINUM</th></tr></thead>
         <tbody>
-          <tr><td>Block-level sync</td><td class="has">✓</td><td class="has">✓</td><td class="has">✓</td></tr>
-          <tr><td>End-to-end encryption</td><td class="has">✓</td><td class="has">✓</td><td class="has">✓</td></tr>
-          <tr><td>Shared folders</td><td class="no">—</td><td class="has">✓</td><td class="has">✓</td></tr>
-          <tr><td>SAML / SCIM</td><td class="no">—</td><td class="no">—</td><td class="has">✓</td></tr>
-          <tr><td>Audit log</td><td class="no">—</td><td class="has">✓</td><td class="has">✓</td></tr>
-          <tr><td>SLA</td><td class="no">—</td><td>99.9%</td><td>99.99%</td></tr>
-          <tr><td>Support</td><td>Email</td><td>Priority</td><td>Dedicated CSM</td></tr>
+          <tr><td>구매액 적립률</td><td>0.5%</td><td>1%</td><td class="has">2%</td><td class="has">3%</td></tr>
+          <tr><td>무료 배송</td><td>₩50,000~</td><td>₩30,000~</td><td class="has">전 상품</td><td class="has">전 상품 익일</td></tr>
+          <tr><td>시즌 사전예약 우선</td><td class="no">—</td><td>12시간</td><td class="has">24시간</td><td class="has">48시간</td></tr>
+          <tr><td>시즌 룩북 우편 발송</td><td class="no">—</td><td class="no">—</td><td class="has">✓</td><td class="has">✓ + 한정 카드</td></tr>
+          <tr><td>매장 시즌 행사 초대</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="has">✓ (+1 동반)</td></tr>
+          <tr><td>생일 쿠폰</td><td>₩5,000</td><td>₩10,000</td><td>₩20,000</td><td>₩50,000</td></tr>
+          <tr><td>전용 CS 라인</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td class="has">✓</td></tr>
+          <tr><td>등급 유지 조건</td><td>—</td><td>12개월 ₩30만</td><td>12개월 ₩100만</td><td>12개월 ₩300만</td></tr>
         </tbody>
       </table>
     </section>
 
+    <!-- FAQ — 한국 고객이 실제 궁금해할 4개 질문 -->
     <section class="faq" data-od-id="faq">
-      <h3>Common questions</h3>
-      <details><summary>Can I change tiers mid-month?</summary><p>Yes. Switching upward charges a prorated difference; downgrades take effect at the next billing cycle.</p></details>
-      <details><summary>Is there a free tier?</summary><p>14-day free trial on every paid tier. No credit card required.</p></details>
-      <details><summary>How does seat-based billing work for Team?</summary><p>You pay per active seat per month. Inactive seats automatically free up after 30 days; we'll prorate the credit.</p></details>
+      <h3>자주 묻는 질문</h3>
+      <details><summary>등급은 언제 갱신되나요?</summary><p>최근 12개월 누적 구매액 기준으로 매월 1일 자동 갱신됩니다. 등급이 올라가면 즉시 적용되고, 내려가는 경우에도 다음 1일까지는 기존 등급이 유지됩니다.</p></details>
+      <details><summary>27SS 시즌 사전예약은 며칠 전부터 가능한가요?</summary><p>정식 발매 기준 PLATINUM 48시간 전, GOLD 24시간 전, SILVER 12시간 전에 사전예약이 시작됩니다. 사전예약 시작 시 카카오톡 알림톡과 이메일로 알려드립니다.</p></details>
+      <details><summary>등급이 떨어질 수 있나요?</summary><p>최근 12개월 누적 구매액이 등급 기준 아래로 떨어지면 한 단계씩 조정됩니다. 단, 떨어진 등급의 혜택(쿠폰·룩북 등)이 이미 발급된 경우 만료일까지 유지됩니다.</p></details>
+      <details><summary>PLATINUM은 어떻게 초대되나요?</summary><p>매 시즌 시작 시점에 12개월 누적 ₩300만 이상 회원을 대상으로 심사 후 카카오톡 알림톡으로 안내드립니다. 자동 부여가 아닌 초대제로 운영합니다.</p></details>
     </section>
   </div>
 </body>

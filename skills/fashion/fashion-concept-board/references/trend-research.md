@@ -1,192 +1,145 @@
-# Fashion Concept Board Trend Research
+# 컨셉 보드 트렌드 리서치
 
-This is the *territory filter* for season concept boards. Different from the
-lookbook's trend research, which talks about commerce-ready cues. A concept
-board's trend research is about **mood territory** — the emotional, cultural,
-and atmospheric direction a season is going to live inside. It is the
-upstream filter that should disqualify generic Pinterest mood pulls.
+이 문서는 시즌 컨셉 보드의 *영역(territory) 필터*. 룩북의 트렌드 리서치(커머스 준비된 큐)와 다름. 컨셉 보드의 트렌드 리서치는 **무드 영역** — 시즌이 살게 될 감성·문화·분위기 방향에 대한 것. 제너릭 Pinterest 무드 풀을 걸러내는 상위 필터.
 
-## How to use this file
+## 사용 방법
 
-1. Pick **one primary tonality** from the Tone Lenses section.
-2. Pick **one tension/contrast tonality** to keep the season from collapsing
-   into one note.
-3. Use the 27SS Trend Inputs section to anchor the territory in the actual
-   season data (WGSN/Coloro key colors, runway directions, K-DTC reality).
-4. Use the K-Young-Casual Adjustments section to translate global trend
-   signals into Seoul-coded reality.
+1. 톤 렌즈 섹션에서 **primary 톤 1개** 선택
+2. 단일 톤 붕괴를 막을 **tension/contrast 톤 1개** 선택
+3. 27SS 트렌드 인풋 섹션으로 실제 시즌 데이터(WGSN/Coloro 핵심 컬러, 런웨이 방향, K-DTC 현실)에 영역을 앵커링
+4. K-영캐주얼 조정 섹션으로 글로벌 트렌드 시그널을 Seoul-coded 현실로 번역
 
-A concept board's job is **not** to say "we will use color X and silhouette
-Y". That is the job of `fashion-color-story` and the line-up. A concept
-board's job is to declare *what mood this season is committing to*.
+컨셉 보드의 일은 `컬러 X와 실루엣 Y를 사용` 선언이 **아님**. 그것은 `fashion-color-story`와 라인업의 일. 컨셉 보드의 일은 *이번 시즌이 어떤 무드에 커밋하는지* 선언.
 
-## Tone Lenses (pick 1 primary + 1 tension)
+## 톤 렌즈 (primary 1 + tension 1 선택)
 
-### 1. Quiet domesticity / interior light
+### 1. Quiet domesticity / interior light (콰이엇 도메스티시티 / 인테리어 빛)
 
-Soft daylight, indoor textures, low-saturation palettes, the feeling of a
-well-lit kitchen at 7am. Adjacent: Hammershøi, Sofie D'Hoore, Daniel
-Lismore's quietest moments, Studio Nicholson's restraint.
+소프트 데일라이트, 실내 텍스처, 저채도 팔레트, 7시 잘 조명된 키친의 느낌. 인접: Hammershøi, Sofie D'Hoore, Daniel Lismore의 가장 조용한 순간들, Studio Nicholson의 절제.
 
-Imagegen cues: low-angle morning sun, kitchen window, white linen, ceramic,
-brushed cotton, no model in frame.
+이미지 큐: 로우 앵글 아침 햇살, 키친 창, 화이트 린넨, 세라믹, 브러시드 코튼, 프레임에 모델 없음.
 
-### 2. Humid commute / urban sweat
+### 2. Humid commute / urban sweat (습한 출근길 / 어반 스웻)
 
-Early-summer Seoul / Tokyo / Shanghai — not glamorous, slightly damp, the
-aesthetic of moving through a city before the day starts. Body language is
-mid-action, not posed.
+초여름 서울 / 도쿄 / 상하이 — 글래머러스 아님, 살짝 축축, 하루 시작 전 도시 이동의 미학. 신체 언어는 mid-action, 포즈 아님.
 
-Imagegen cues: 6–7am light, public transport handrails, sweat-cotton-tee
-fabric, hand on bag strap, half-eaten umbrella, brushed concrete platform.
+이미지 큐: 6~7시 빛, 대중교통 손잡이, 스웻 코튼 티셔츠, 가방 끈 잡은 손, 반쯤 먹은 우산, 브러시드 콘크리트 플랫폼.
 
-### 3. Dry industrial craft
+### 3. Dry industrial craft (드라이 인더스트리얼 크래프트)
 
-Workwear without nostalgia. Clean utility, hand-finished hardware, paper-feel
-cotton, raw selvedge, visible stitching. Adjacent: Engineered Garments,
-Margaret Howell, Fennica, AURALEE.
+노스탤지어 없는 워크웨어. 클린 유틸리티, 핸드 마감 하드웨어, 페이퍼-필 코튼, 로 셀비지, 가시 스티칭. 인접: Engineered Garments, Margaret Howell, Fennica, AURALEE.
 
-Imagegen cues: workshop natural light, brass hardware close-up, raw cotton
-hem, atelier table, no fashion-model framing.
+이미지 큐: 워크샵 자연광, 브래스 하드웨어 클로즈업, 로 코튼 헴, 아틀리에 테이블, 패션 모델 프레이밍 없음.
 
-### 4. Romantic but unsentimental
+### 4. Romantic but unsentimental (로맨틱 + 비센티멘털)
 
-Soft proportions, gathered details, blouse volume, lace — but cropped tight,
-photographed dry, with no rococo sweetness. Adjacent: Cecilie Bahnsen done
-without the sugar, early Renata Brenha, recent Simone Rocha when she pulls
-back.
+소프트 프로포션, 개더드 디테일, 블라우스 볼륨, 레이스 — 그러나 타이트하게 크롭, 드라이하게 촬영, 로코코 스위트니스 없음. 인접: Cecilie Bahnsen 슈가 없이, 초기 Renata Brenha, 최근 Simone Rocha 절제 시점.
 
-Imagegen cues: blouse fabric close-up, gathered seam detail, single ribbon
-edge, grey paper backdrop, no full body, no flower props.
+이미지 큐: 블라우스 패브릭 클로즈업, 개더드 심 디테일, 싱글 리본 엣지, 그레이 페이퍼 백드롭, 풀 보디 없음, 플라워 프롭 없음.
 
-### 5. Studio practice / atelier tools
+### 5. Studio practice / atelier tools (스튜디오 프랙티스 / 아틀리에 도구)
 
-The look of a working design studio rather than a finished collection.
-Pattern paper, masking tape on muslin, a cup of cold coffee, a hand pinning a
-shoulder. Best as a tension lens — never the primary.
+완성된 컬렉션이 아닌 작업 중인 디자인 스튜디오 외관. 패턴 페이퍼, 모슬린 위 마스킹 테이프, 식은 커피 한 잔, 어깨를 핀하는 손. tension 렌즈로 최적 — primary로는 절대 사용 금지.
 
-Imagegen cues: muslin on dressform, scissors on cutting table, pencil
-annotation on pattern, shallow depth, raw artificial light.
+이미지 큐: 드레스폼 위 모슬린, 커팅 테이블 위 가위, 패턴 위 연필 어노테이션, 얕은 심도, 로 인공조명.
 
-### 6. Liminal night / suburb edge
+### 6. Liminal night / suburb edge (리미널 밤 / 교외 엣지)
 
-Very specific 27SS-compatible territory: the time between commute and
-weekend, parking lots after 9pm, convenience-store aisles, dim train station
-fluorescents. Korean designer brands have used this territory consistently
-(thisisneverthat 24FW, NOMANUAL collections).
+27SS와 매우 호환되는 영역: 출근과 주말 사이의 시간, 9시 이후 주차장, 편의점 통로, 흐릿한 기차역 형광등. 한국 디자이너 브랜드가 일관되게 사용한 영역 (thisisneverthat 24FW, NOMANUAL 컬렉션).
 
-Imagegen cues: yellow-green fluorescent, parking-lot puddle, asphalt
-texture, 24-hour mart aisle, mid-distance figure, no advertising visible.
+이미지 큐: 옐로우 그린 형광등, 주차장 웅덩이, 아스팔트 텍스처, 24시간 마트 통로, 미드 디스턴스 피규어, 광고 미가시.
 
-### 7. Cold-tropics / wet-light / tropic-but-not-resort
+### 7. Cold-tropics / wet-light (콜드 트로픽스 / 웨트 라이트)
 
-Hot and humid but not vacation-coded. The reality of summer in Seoul is wet
-shoes, fogged glass, sweat patches, and the sky going milky white at noon.
+뜨겁고 습하지만 휴양 코드 아님. 서울 여름의 현실은 젖은 신발, 김 서린 유리, 땀 자국, 정오에 우윳빛이 되는 하늘.
 
-Imagegen cues: misty sky, wet pavement, plant leaves with droplets, indoor
-condensation on glass, fabric wet-tone (slightly darker than dry), no beach,
-no resort decor.
+이미지 큐: 미스티 스카이, 젖은 보도, 물방울 식물 잎, 실내 유리 결로, 패브릭 웨트 톤(드라이보다 살짝 어두움), 비치 없음, 리조트 데코 없음.
 
-### 8. Functional emotional ease
+### 8. Functional emotional ease (펑셔널 에모셔널 이즈)
 
-Quiet utility. Pockets that work, weight that disappears, fabric that
-behaves through a long day. Korean DTC's strongest commercial territory —
-the "everyday but considered" lane.
+콰이엇 유틸리티. 작동하는 포켓, 사라지는 무게감, 긴 하루 동안 작동하는 패브릭. 한국 D2C의 가장 강한 상업적 영역 — `매일이지만 고려된` 라인.
 
-Copy cues: "all-day", "after work", "wash and re-wear", "travel fold",
-"transit-ready".
+카피 큐: `all-day`, `퇴근 후`, `세탁 후 재착용`, `여행 폴드`, `transit-ready`.
 
-## Anti-patterns (avoid as primary territory)
+## Anti-pattern (primary 영역으로 회피)
 
-These are emotionally exhausted as primary tonalities for 27SS young-casual.
-They can appear as small footnote moments but **must not** be the season
-direction.
+27SS 영캐주얼 primary 톤으로 감정 소진된 영역. 작은 풋노트 모먼트로는 등장 가능하지만 시즌 방향으로 **절대 금지**.
 
-- **Y2K nostalgia** — exhausted, especially low-rise / butterfly / bedazzled.
-- **Cottagecore / lavender-fields** — over-saturated reference space.
-- **Gorpcore / techwear costume** — locked to specific brand identities.
-- **Gen-Z parody** — irony as direction without substance.
-- **Generic quiet luxury** — "beige cashmere on a beige model on a beige
-  bench" is a tired mood territory; it is a finishing technique, not a
-  season story.
-- **Pinterest-aesthetic** — if the concept board is indistinguishable from a
-  Pinterest "fashion mood board" search, the territory has no point of view.
+- **Y2K 노스탤지어** — 소진, 특히 로우라이즈 / 버터플라이 / 비대즐드
+- **Cottagecore / 라벤더 필드** — 과포화 레퍼런스 공간
+- **Gorpcore / 테크웨어 코스튬** — 특정 브랜드 정체성에 LOCK됨
+- **Gen-Z 패러디** — 콘텐츠 없는 아이러니 방향
+- **제너릭 콰이엇 럭셔리** — `베이지 캐시미어 + 베이지 모델 + 베이지 벤치`는 소진된 무드 영역; 마감 기법이지 시즌 스토리 아님
+- **Pinterest 미학** — 컨셉 보드가 Pinterest `fashion mood board` 검색과 구분 불가능하면, 영역에 관점 없음
 
-## 27SS Trend Inputs (factual season data)
+## 27SS 트렌드 인풋 (사실 시즌 데이터)
 
-### WGSN / Coloro 27 Key Colors
+### WGSN / Coloro 27 핵심 컬러
 
-[WGSN/Coloro press release][wgsn-27]:
+[WGSN/Coloro 보도자료][wgsn-27]:
 
-- **Luminous Blue** (Coloro 125-28-38) — Color of the Year 2027. A digital,
-  optimistic mid-blue.
-- **Energy Orange** — high-saturation activating orange.
-- **Pop Pink** — clean cool pink.
-- **Meadowland Green** — natural mid-green (slightly yellow base).
-- **Clay** — warm earthy neutral.
+- **Luminous Blue** (Coloro 125-28-38) — 2027 올해의 컬러. 디지털, 낙관적 미드 블루
+- **Energy Orange** — 고채도 활성 오렌지
+- **Pop Pink** — 클린 쿨 핑크
+- **Meadowland Green** — 자연 미드 그린 (살짝 옐로우 베이스)
+- **Clay** — 따뜻한 어시 뉴트럴
 
-K-young-casual reality: these global key colors are usually translated **one
-step lower in saturation** to land in Seoul-coded color culture. Luminous
-Blue becomes a dustier mid-blue; Energy Orange becomes a faded terracotta;
-Pop Pink becomes a powdered blush. The concept board can either accept the
-WGSN saturation directly (loud territory) or pre-shift it (quiet territory).
+K-영캐주얼 현실: 글로벌 핵심 컬러는 보통 **한 단계 낮은 saturation**으로 번역되어 Seoul-coded 컬러 문화에 안착. Luminous Blue → 더스티 미드 블루; Energy Orange → 페이드 테라코타; Pop Pink → 파우더 블러쉬. 컨셉 보드는 WGSN saturation을 직접 수용(라우드 영역)하거나 사전 시프트(콰이엇 영역) 가능.
 
-### SS26 / SS27 Runway Direction Signals (general patterns to anchor against)
+### SS26 / SS27 런웨이 방향 시그널 (앵커할 일반 패턴)
 
-- **Soft, sculpted volume** — proportion stays loose but is intentional, not
-  oversize-by-default.
-- **Sheer / layered transparency** — handled cleanly, not boudoir.
-- **Print restraint** — one print moment per look, not all-over noise.
-- **Real shoes** — sensible footwear is back; hyper-aggressive heels are out.
-- **Workwear hybrid** — tailoring crossed with utility (e.g. structured
-  jacket with cargo pocket, trouser with snap closure).
+- **소프트, 스컬프티드 볼륨** — 프로포션이 루즈하지만 의도적, 디폴트 오버사이즈 아님
+- **시어 / 레이어드 투명** — 클린하게 핸들, boudoir 아님
+- **프린트 절제** — 룩당 프린트 모먼트 1개, 올오버 노이즈 아님
+- **리얼 슈즈** — 합리적 신발 복귀; 하이퍼 어그레시브 힐 아웃
+- **워크웨어 하이브리드** — 테일러링 + 유틸리티 크로스 (예: 카고 포켓 스트럭처드 재킷, 스냅 클로저 트라우저)
 
-These are *anchors*, not commands. A concept board can deliberately reject
-all of them with a clear thesis.
+이들은 *앵커*, 명령이 아님. 컨셉 보드는 명확한 thesis로 모두 의도적으로 거절 가능.
 
-### K-DTC Specific Reality (for young-casual brands)
+### K-DTC 특화 현실 (영캐주얼 브랜드)
 
-- Drop cadence is monthly, so the concept board territory must hold up across
-  4–6 monthly drops in 27SS, not just the first one.
-- Channel mix is Musinsa + 29CM + W컨셉 + own DTC. Each channel has slightly
-  different visual norms (Musinsa is louder; 29CM is editorial; W컨셉 is
-  curated).
-- Korean young-casual customers respond to **specificity**, not generic
-  trend statements. "27SS humid commute" lands; "modern minimal" does not.
-- Best-seller data from 26FW/26SS will inform how aggressive vs. continuous
-  the new concept can be. A concept board should acknowledge this in the
-  thesis, even briefly.
+- 드롭 케이던스 월별 — 컨셉 보드 영역이 27SS 4~6 월별 드롭에 걸쳐 작동해야 함, 첫 드롭만 아님
+- 채널 믹스 무신사 + 29CM + W컨셉 + 자사 D2C. 채널마다 시각 노름 약간 다름 (무신사 라우드, 29CM 에디토리얼, W컨셉 큐레이션)
+- 한국 영캐주얼 고객은 **구체성**에 반응, 제너릭 트렌드 진술 아님. `27SS 습한 출근길`은 안착; `모던 미니멀`은 안 됨
+- 26FW/26SS 베스트셀러 데이터가 새 컨셉이 얼마나 공격적/연속적이어야 할지 결정. 컨셉 보드는 thesis에 이를 짧게라도 인지
 
-## Mood Grid Variety Rules
+## 무드 그리드 다양성 규칙
 
-A concept board with 12 model-wearing-outfit images is a lookbook preview,
-not a concept board. Enforce the variety rule:
+12장 모델-입은-아웃핏 컨셉 보드는 룩북 프리뷰지 컨셉 보드 아님. 다양성 규칙 강제:
 
-| Image role | Count | Why |
-| --- | --- | --- |
-| Scene (place / weather / time) | 2–3 | Sets the season's environment |
-| Gesture / body fragment (no full outfit) | 2–3 | Body language without product |
-| Texture / material close-up | 2–3 | Fabric world without garment |
-| Light / color moment (window, wall, sky) | 2–3 | Color/temperature evidence |
-| Garment fragment (collar, hem, cuff) | 1–2 | Product hint without product |
-| Anti-territory footnote | 0–1 | Optional contrast image |
+| 이미지 역할 | 카운트 | 왜 |
+|---|---|---|
+| Scene (장소/날씨/시간) | 2~3 | 시즌 환경 설정 |
+| Gesture / 신체 단편 (풀 아웃핏 없음) | 2~3 | 상품 없는 신체 언어 |
+| Texture / 소재 클로즈업 | 2~3 | 가먼트 없는 패브릭 세계 |
+| Light / 컬러 모먼트 (창, 벽, 하늘) | 2~3 | 컬러/온도 증거 |
+| Garment fragment (칼라, 헴, 커프스) | 1~2 | 상품 없는 상품 힌트 |
+| Anti-territory 풋노트 | 0~1 | 선택 대비 이미지 |
 
-If the user explicitly asks for a "lookbook concept board" hybrid, allow up
-to 3 model-styled images, but never more than 25% of the grid.
+사용자가 명시적으로 `룩북 컨셉 보드 하이브리드`를 요청하면 모델 스타일링 이미지 최대 3장 허용, 그러나 그리드의 25% 절대 초과 금지.
 
-## Sequencing rule
+## 시퀀싱 규칙
 
-The strongest concept boards sequence the territory build:
+가장 강한 컨셉 보드는 영역 빌드를 다음과 같이 시퀀스:
 
-1. Thesis (one sentence)
-2. Mood (image territory)
-3. References (cultural anchors that prove the territory is not invented)
-4. Tone dials (where on the axes)
-5. Seeds (color / material / silhouette / detail — exploratory)
-6. Anti-territory (what this is not)
-7. Open questions (next decisions)
+1. Thesis (한 문장)
+2. Mood (이미지 영역)
+3. References (영역이 임의 아님을 증명하는 문화 앵커)
+4. Tone dials (축들 위 어디)
+5. Seeds (컬러 / 소재 / 실루엣 / 디테일 — 탐색)
+6. Anti-territory (이것이 아닌 것)
+7. Open questions (다음 결정)
 
-This order takes the viewer from emotion → evidence → exploration → discipline,
-which is how a real season review meeting is structured.
+이 순서가 viewer를 emotion → evidence → exploration → discipline으로 안내, 실제 시즌 리뷰 회의 구조 그대로.
+
+## K-패션 영캐주얼 영역 사례 (브랜드별)
+
+- **마뗑킴**: Quiet domesticity × subtle wit. 도시적 미니멀에 친근 SNS 톤
+- **마르디 메크르디**: Romantic but unsentimental × functional ease. 프렌치 데일리 + 다채로움
+- **아더에러**: Dry industrial craft × digital glitch. 포스트 미니멀리즘 + 블루 시그니처
+- **키르시**: Liminal night × humorous youth. 영 컬처 + 비비드 키치
+- **시야쥬**: Quiet domesticity × thoughtful detail. 에센셜·타임리스
+- **인사일런스**: Quiet domesticity × urban code. 도시적 모노톤
+- **와키윌리**: Humid commute × fandom warmth. 캐릭터 IP + 영캐주얼
 
 [wgsn-27]: https://www.wgsn.com/en/wgsn/press/press-releases/wgsn-and-coloro-reveal-colour-year-2027-luminous-blue-and-s-s-27-key

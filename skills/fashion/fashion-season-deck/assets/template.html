@@ -1,9 +1,26 @@
 <!doctype html>
 <!--
-  fashion-season-deck template
-  Copy to <project>/index.html, replace [REPLACE] tokens, bind active
-  DESIGN.md tokens into :root, and assemble slides per
-  references/slide-order.md and references/layouts.md.
+  K-패션 시즌 덱 시작 템플릿.
+  사용 방법:
+    1) 이 파일을 <project>/index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+    4) references/slide-order.md + references/layouts.md에 따라 슬라이드 조립
+
+  환경 호환성:
+    - Claude 환경: <artifact> 태그로 감싸 출력
+    - 그 외 환경: 표준 HTML 코드 블록으로 출력
+    - OpenDesign 환경: 슬라이드별 data-od-id 추가 가능
+
+  이미지 생성:
+    - 슬라이드별 이미지는 각 모듈 스킬의 기본 정책 따름 (../_shared/imagegen.md)
+    - 외부 URL · base64 · 임시 폴더 참조 금지
+
+  필수 슬라이드:
+    - slide--cover (슬라이드 1)
+    - slide--toc (슬라이드 2)
+    - slide--end (최종 슬라이드)
+    - 섹션 디바이더는 그룹 슬라이드 앞에 배치
 -->
 <html lang="ko">
 <head>
@@ -11,29 +28,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>[REPLACE Season] [REPLACE Brand] · Design Plan Deck</title>
 <style>
+  /* 한국 K-패션 표준 폰트 시스템 */
   @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
   @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
   :root {
+    /* 색상 토큰 (프로젝트 DESIGN.md에서 오버라이드) */
     --ink:        #1f2933;
     --paper:      #fafaf7;
     --rule:       #e7e3da;
     --muted:      #6b7280;
     --accent:     #b8443a;
-    --cover-bg:   #2c4248;     /* WACKYWILLY-style deep teal default */
+    --cover-bg:   #2c4248;     /* 와키윌리 27SS 덱 스타일 딥 틸 기본값 */
     --cover-fg:   #ffffff;
     --divider-bg: #2c4248;
     --divider-fg: #ffffff;
 
+    /* 폰트 토큰 */
     --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
-
     --font-display-report: "Paperlogy", "Wanted Sans Variable", "SUIT Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
-
     --font-display-street: "Black Han Sans", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
-
     --font-display-play: "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
-
     --font-display-romance: "Grandiflora One", "Diphylleia", "Hahmlet", "Noto Serif KR", "Source Serif 4", ui-serif, Georgia, serif;
 
+    /* 시즌 덱은 내부 리뷰 발표용 — 기본값 report */
     --font-display: var(--font-display-report);
     --font-text: var(--font-sans);
     --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
@@ -42,7 +59,7 @@
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: var(--font-text); }
 
-  /* Deck container */
+  /* 덱 컨테이너 */
   .deck { display: block; }
   .deck--scroll-vertical { scroll-snap-type: y mandatory; overflow-y: scroll; height: 100vh; }
   .deck--scroll-horizontal { display: flex; flex-direction: row; scroll-snap-type: x mandatory; overflow-x: auto; overflow-y: hidden; height: 100vh; }
@@ -50,7 +67,7 @@
   .deck--scroll-vertical .slide { scroll-snap-align: start; min-height: 100vh; }
   .deck--print .slide { width: 297mm; height: 210mm; }
 
-  /* Slide base */
+  /* 슬라이드 베이스 */
   .slide { position: relative; padding: 56px; display: flex; flex-direction: column; gap: 16px; background: var(--paper); }
   .slide-header { display: flex; gap: 16px; align-items: baseline; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
   .slide-num { font-family: var(--font-mono); font-size: 11px; color: var(--muted); }
@@ -60,7 +77,7 @@
   .slide-attribution code { font-family: var(--font-mono); background: rgba(0,0,0,0.05); padding: 2px 6px; border-radius: 3px; color: var(--accent); }
   .page-num { font-variant-numeric: tabular-nums; }
 
-  /* Cover */
+  /* 커버 */
   .slide--cover { background: var(--cover-bg); color: var(--cover-fg); padding: 80px; }
   .slide--cover .cover-header { margin-top: auto; display: flex; align-items: center; gap: 24px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.4); }
   .slide--cover .brand-mark { font-family: var(--font-display); font-size: 32px; font-weight: 700; }
@@ -75,37 +92,37 @@
   .toc-list li { counter-increment: toc; }
   .toc-list li::before { content: counter(toc, decimal-leading-zero) "."; font-family: var(--font-mono); font-size: 14px; color: var(--muted); display: inline-block; width: 36px; }
 
-  /* Divider */
+  /* 디바이더 */
   .slide--divider { background: var(--divider-bg); color: var(--divider-fg); padding: 80px; justify-content: center; }
   .slide--divider h2 { font-family: var(--font-display); font-size: 96px; margin: 0; line-height: 1; }
   .slide--divider::before { content: ""; width: 80px; height: 2px; background: var(--divider-fg); display: block; margin-bottom: 16px; }
 
-  /* Embed slide — scope upstream module CSS to .slide[data-source="..."] */
+  /* 임베드 슬라이드 — 상위 모듈 CSS를 .slide[data-source="..."] 셀렉터로 스코프 */
   .slide--embed .slide-body { padding: 0; }
-  .slide--embed .slide-body :is(h1, h2, h3) { /* let upstream styles win when scoped */ }
+  .slide--embed .slide-body :is(h1, h2, h3) { /* 스코프되면 상위 스타일 우선 */ }
 
-  /* Placeholder */
+  /* 플레이스홀더 */
   .slide--placeholder { justify-content: center; align-items: center; text-align: center; background: rgba(0,0,0,0.03); border: 2px dashed var(--rule); }
   .slide--placeholder h2 { font-family: var(--font-display); font-size: 24px; margin: 0; }
   .slide--placeholder p { color: var(--muted); max-width: 60ch; margin: 0; }
   .slide--placeholder code { font-family: var(--font-mono); background: rgba(0,0,0,0.06); padding: 2px 8px; border-radius: 3px; }
 
-  /* End */
+  /* 엔드 */
   .slide--end { background: var(--cover-bg); color: var(--cover-fg); padding: 80px; align-items: flex-end; justify-content: center; text-align: right; }
   .slide--end h1 { font-family: var(--font-display); font-size: 96px; margin: 0; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.4); }
   .slide--end p { font-family: var(--font-display); font-size: 18px; margin: 12px 0 0; opacity: 0.9; }
 
-  /* Inline (project-bound content) */
+  /* 인라인 (프로젝트 자체 콘텐츠) */
   .slide--inline { padding: 56px; }
   .slide--inline h2 { font-family: var(--font-display); font-size: 24px; margin: 0 0 16px; }
 
-  /* Deck navigation */
+  /* 덱 내비게이션 */
   .deck-nav { position: fixed; bottom: 16px; right: 16px; z-index: 1000; display: flex; align-items: center; gap: 8px; padding: 6px 10px; background: rgba(0,0,0,0.65); color: #fff; border-radius: 999px; font-family: var(--font-mono); font-size: 12px; backdrop-filter: blur(8px); }
   .deck-nav button { background: transparent; color: inherit; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; width: 24px; height: 24px; cursor: pointer; font-size: 12px; line-height: 1; padding: 0; display: flex; align-items: center; justify-content: center; }
   .deck-nav button:hover { background: rgba(255,255,255,0.15); }
   .deck-counter { letter-spacing: 0.04em; min-width: 50px; text-align: center; }
 
-  /* Print */
+  /* 인쇄 */
   @page { size: A4 landscape; margin: 0; }
   @media print {
     body { background: #fff; }
@@ -118,9 +135,9 @@
 </head>
 <body class="deck deck--scroll-vertical">
   <!--
-    Assemble slides here per references/slide-order.md and references/layouts.md.
-    Required: slide--cover (slide 1), slide--toc (slide 2), slide--end (last).
-    Section dividers appear before their grouped slides.
+    references/slide-order.md + references/layouts.md에 따라 여기에 슬라이드 조립.
+    필수: slide--cover (슬라이드 1), slide--toc (슬라이드 2), slide--end (마지막).
+    섹션 디바이더는 그룹 슬라이드 앞에 위치.
   -->
 
   <nav class="deck-nav" aria-label="Deck navigation">
@@ -130,8 +147,8 @@
   </nav>
 
   <script>
-    // Minimal arrow-key + space + button navigation. Replace with project-bound
-    // logic if a different rhythm (horizontal / paginated) is chosen.
+    // 최소 화살표 키 + 스페이스 + 버튼 내비게이션.
+    // 다른 리듬(가로 / 페이지네이션)이 선택되면 프로젝트별 로직으로 교체.
     (function(){
       const slides = Array.from(document.querySelectorAll('.slide'));
       const total = slides.length;
@@ -150,7 +167,7 @@
         if (t.dataset.cmd === 'next') show(idx+1);
         if (t.dataset.cmd === 'prev') show(idx-1);
       });
-      // Update counter as user scrolls
+      // 사용자 스크롤 시 카운터 업데이트
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting && entry.intersectionRatio > 0.5) {

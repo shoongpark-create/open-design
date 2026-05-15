@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Invoice · Sable Studio · INV-2025-0142</title>
+<title>발주서 · WACKYWILLY · PO-27SS-W001</title>
 <style>
   :root {
     --bg: #f3f1ec;
@@ -13,8 +13,8 @@
     --line: #ddd6c4;
     --accent: #1f4d3a;
     --accent-soft: #e3ece8;
-    --display: 'Iowan Old Style', 'Charter', Georgia, serif;
-    --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
+    --display: 'Hahmlet', 'Iowan Old Style', 'Charter', Georgia, serif;
+    --body: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
     --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   }
   * { box-sizing: border-box; }
@@ -87,126 +87,133 @@
 </head>
 <body>
 <div class="sheet">
+  <!-- 상단: 발주처 워드마크 + 발주서 라벨/번호/일자 -->
   <header class="brandbar">
     <div>
       <div class="brand">
-        <div class="brand-mark">S</div>
+        <div class="brand-mark">W</div>
         <div>
-          <div class="brand-name">Sable Studio</div>
-          <div class="brand-meta">Brand &amp; product design · est. 2018</div>
+          <div class="brand-name">WACKYWILLY</div>
+          <div class="brand-meta">의류·잡화 · 영캐주얼 · est. 2021</div>
         </div>
       </div>
     </div>
     <div class="invoice-block">
-      <div class="invoice-label">Invoice</div>
-      <div class="invoice-num">INV-2025-0142</div>
-      <div class="invoice-dates"><strong>Issued</strong> 14 October 2025 · <strong>Due</strong> 13 November 2025</div>
+      <div class="invoice-label">발주서 · Purchase Order</div>
+      <div class="invoice-num">PO-27SS-W001</div>
+      <div class="invoice-dates"><strong>발행일</strong> 2026.05.14 · <strong>입고 예정</strong> 2026.06.28</div>
     </div>
   </header>
 
+  <!-- 공급받는자(자사 = 발주처) / 공급자(OEM 공장) 블록. 한국 사업자 표준 필드 -->
   <section class="parties">
     <div class="party">
-      <h4>From</h4>
-      <div class="name">Sable Studio LLC</div>
+      <h4>공급받는자 · 발주처</h4>
+      <div class="name">(주)와키윌리</div>
       <div class="lines">
-        221 Cooper Street, 4F<br>
-        Brooklyn, NY 11211 · USA<br>
-        EIN 87-1234567<br>
-        <a href="mailto:billing@sable.studio">billing@sable.studio</a>
+        대표 강윤 · 사업자등록번호 123-45-67890<br>
+        서울특별시 성동구 성수일로 12, 7층<br>
+        업태 도소매 · 종목 의류·잡화<br>
+        담당 <a href="mailto:po@wackywilly.kr">생산실 김도하 · po@wackywilly.kr</a>
       </div>
     </div>
     <div class="party">
-      <h4>Bill to</h4>
-      <div class="name">Northwind Trading Co.</div>
+      <h4>공급자 · 수주처</h4>
+      <div class="name">한국어패럴 (OEM 공장 A)</div>
       <div class="lines">
-        Attn: Mira Okafor, CFO<br>
-        500 Howard Street, Floor 9<br>
-        San Francisco, CA 94103 · USA<br>
-        AP: <a href="mailto:ap@northwind.com">ap@northwind.com</a>
+        대표 이성호 · 사업자등록번호 542-87-01234<br>
+        경기도 안산시 단원구 와동 233<br>
+        업태 제조 · 종목 의류 봉제<br>
+        담당 <a href="mailto:sales@korapparel.co.kr">영업팀 박진우 · sales@korapparel.co.kr</a>
       </div>
     </div>
   </section>
 
+  <!-- 프로젝트 참조: 시즌 코드 + 차수 + 결제 조건 -->
   <div class="ref-strip">
-    <div><div class="label">Project</div><div class="value">Northwind brand identity refresh</div></div>
-    <div><div class="label">PO Number</div><div class="value">NW-PO-2025-3387</div></div>
-    <div><div class="label">Terms</div><div class="value">Net 30 · USD</div></div>
+    <div><div class="label">프로젝트</div><div class="value">27SS WOMEN 라인 1차 본생산</div></div>
+    <div><div class="label">시즌·차수</div><div class="value">27SS · 1차 발주 (MOQ 200)</div></div>
+    <div><div class="label">결제 조건</div><div class="value">40% 선급 / 60% 입고 시 · KRW</div></div>
   </div>
 
+  <!-- 라인 아이템: SKU · 컬러웨이 · 사이즈 어소트 · LOT · 수량 · 사입단가 -->
   <table>
     <thead>
       <tr>
-        <th>Description</th>
-        <th class="num">Qty</th>
-        <th class="num">Rate</th>
-        <th class="num">Amount</th>
+        <th>품명 · 카테고리 · 컬러웨이</th>
+        <th class="num">수량(장)</th>
+        <th class="num">사입단가(원)</th>
+        <th class="num">공급가액(원)</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td class="desc"><strong>Discovery & strategy</strong><small>Stakeholder interviews, competitive audit, brand audit, written strategy doc.</small></td>
-        <td class="num">1</td>
-        <td class="num">$8,500.00</td>
-        <td class="num">$8,500.00</td>
+        <td class="desc"><strong>WOMEN 린넨 블레이저 · CW01 OAT</strong><small>SKU 27SS-W001 · LOT-27SS-W001 · 사이즈 S/M/L 어소트 2:3:2 · 사입가율 28%</small></td>
+        <td class="num">680</td>
+        <td class="num">42,000</td>
+        <td class="num">28,560,000</td>
       </tr>
       <tr>
-        <td class="desc"><strong>Identity system design</strong><small>Wordmark, monogram, palette, typography, motion principles, two production rounds.</small></td>
-        <td class="num">1</td>
-        <td class="num">$22,000.00</td>
-        <td class="num">$22,000.00</td>
+        <td class="desc"><strong>WOMEN 코튼 블라우스 · CW02 NAVY</strong><small>SKU 27SS-W012 · LOT-27SS-W012 · 사이즈 S/M/L 어소트 3:4:3 · 사입가율 30%</small></td>
+        <td class="num">920</td>
+        <td class="num">18,500</td>
+        <td class="num">17,020,000</td>
       </tr>
       <tr>
-        <td class="desc"><strong>Brand guidelines & handoff</strong><small>Brand book PDF, Figma library, asset pack, two team handoff sessions.</small></td>
-        <td class="num">1</td>
-        <td class="num">$6,500.00</td>
-        <td class="num">$6,500.00</td>
+        <td class="desc"><strong>WOMEN 와이드 팬츠 · CW01 OAT / CW03 CHARCOAL</strong><small>SKU 27SS-W023 · LOT-27SS-W023 · 사이즈 S/M/L 어소트 2:3:3 · 사입가율 28%</small></td>
+        <td class="num">540</td>
+        <td class="num">36,000</td>
+        <td class="num">19,440,000</td>
       </tr>
       <tr>
-        <td class="desc"><strong>Senior design hours · overage</strong><small>Additional rounds requested between 12 Sep and 28 Sep beyond the original SOW.</small></td>
-        <td class="num">14</td>
-        <td class="num">$220.00</td>
-        <td class="num">$3,080.00</td>
+        <td class="desc"><strong>WOMEN 캐시미어 블렌드 니트 · CW04 IVORY</strong><small>SKU 27SS-W034 · LOT-27SS-W034 · 사이즈 S/M/L 어소트 2:3:2 · 사입가율 32%</small></td>
+        <td class="num">320</td>
+        <td class="num">24,000</td>
+        <td class="num">7,680,000</td>
       </tr>
     </tbody>
   </table>
 
+  <!-- 결제 조건 + 합계 (VAT 별도 + 10%) -->
   <div class="totals">
     <div class="terms">
-      <h5>Payment terms</h5>
-      Payment is due within 30 days of issue. Late payments incur a 1.5% monthly service charge per the master services agreement signed 14 February 2025. The 10% retainer paid 12 August 2025 has been applied below.
+      <h5>결제 조건</h5>
+      MSA(공급계약서) 2026.02.14 기준. 40% 선급금은 발주 확정 후 7영업일 내 입금, 60% 잔금은 입고 검수 통과 후 30일 내 결제. 견본 컨퍼(CON) 2026.05.28 완료 예정 · 본생산 시작 2026.06.02.
     </div>
     <div class="totals-block">
-      <div class="total-row"><span>Subtotal</span><span>$40,080.00</span></div>
-      <div class="total-row discount"><span>Retainer applied (10%)</span><span>−$4,008.00</span></div>
-      <div class="total-row tax"><span>Sales tax · NY (9%)</span><span>$3,246.48</span></div>
-      <div class="total-row subtotal"><span>Net before tax</span><span>$36,072.00</span></div>
-      <div class="total-row grand"><span>Total due</span><span>$39,318.48</span></div>
+      <div class="total-row"><span>공급가액 합계</span><span>72,700,000원</span></div>
+      <div class="total-row tax"><span>부가세 (10%)</span><span>7,270,000원</span></div>
+      <div class="total-row subtotal"><span>합계금액 (VAT 포함)</span><span>79,970,000원</span></div>
+      <div class="total-row discount"><span>선급금 (40%)</span><span>31,988,000원</span></div>
+      <div class="total-row grand"><span>잔금 (입고 시 60%)</span><span>47,982,000원</span></div>
     </div>
   </div>
 
+  <!-- 결제 정보: 계좌 이체 + 입금 마감 -->
   <div class="pay">
     <div>
-      <h4>Wire / ACH (USD)</h4>
-      <div class="row"><span>Bank</span><span>Mercury Bank</span></div>
-      <div class="row"><span>Routing (ACH)</span><span>084-001-122</span></div>
-      <div class="row"><span>Routing (Wire)</span><span>026-073-150</span></div>
-      <div class="row"><span>Account</span><span>9847-2210-3318</span></div>
-      <div class="row"><span>Memo</span><span>INV-2025-0142</span></div>
+      <h4>입금 계좌 (선급금)</h4>
+      <div class="row"><span>은행</span><span>국민은행</span></div>
+      <div class="row"><span>계좌번호</span><span>123456-04-789012</span></div>
+      <div class="row"><span>예금주</span><span>한국어패럴(주)</span></div>
+      <div class="row"><span>입금 마감</span><span>2026.05.21</span></div>
+      <div class="row"><span>입금메모</span><span>PO-27SS-W001</span></div>
     </div>
     <div>
-      <h4>Online payment</h4>
-      <div class="row"><span>Pay link</span><span>sable.studio/p/inv-0142</span></div>
-      <div class="row"><span>Stripe / card / ACH</span><span>Yes</span></div>
-      <div class="row"><span>Wise / SEPA / FX</span><span>On request</span></div>
-      <div class="row"><span>Receipt</span><span>Auto-emailed</span></div>
+      <h4>세금계산서 발행</h4>
+      <div class="row"><span>발행 방식</span><span>홈택스 전자세금계산서</span></div>
+      <div class="row"><span>발행 시점</span><span>선급 입금 후 익일</span></div>
+      <div class="row"><span>담당</span><span>회계팀 박서진</span></div>
+      <div class="row"><span>이메일</span><span>tax@wackywilly.kr</span></div>
     </div>
   </div>
 
+  <!-- 사인: 발주처 담당 PD 서명 -->
   <div class="signoff">
-    <p>Thank you, Northwind. It's been a privilege to work on this rebrand.</p>
+    <p>본 발주는 27SS 시즌 본생산의 핵심 1차 발주입니다. 견본 컨퍼·납기·품질 약속을 함께 지켜주시면 감사하겠습니다.</p>
     <div class="signature">
-      <div class="scribble">Lila Vega</div>
-      <div class="name">Lila Vega · Founder, Sable Studio</div>
+      <div class="scribble">김도하</div>
+      <div class="name">김도하 · 생산실 PD, (주)와키윌리</div>
     </div>
   </div>
 </div>

@@ -1,9 +1,15 @@
 <!doctype html>
-<html lang="en">
+<!--
+  K-패션 와이어프레임 v0.1 예시 — 와키윌리(WACKYWILLY) 27SS 그래픽 티셔츠 무신사 상세페이지.
+  4탭 시안 (00 ALL / 01 A·정보형 / 02 B·매거진형 / 03 C·룩북형 / 04 D·스토리형).
+  활성 = 02 B·매거진형. 디자인실 그래픽팀이 1차 품평회 전 공유하는 손그림 시안.
+  CSS는 원본과 동일. 라벨·KPI·스티커 메모·도메인만 K-패션화.
+-->
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Zentou AI Portal — Wireframe v0.1</title>
+  <title>와키윌리 27SS 상세페이지 — Wireframe v0.1</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Patrick+Hand&family=DM+Serif+Display&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -143,66 +149,75 @@
 </head>
 <body>
   <div class="page">
+    <!-- 페이지 헤더: 와키윌리 27SS 그래픽 티셔츠 상세페이지 + WIREFRAME v0.1 핀 -->
     <div class="head" data-od-id="head">
-      <h1><em>Zentou AI · Portal</em>
+      <h1><em>WACKYWILLY · 27SS</em>
         <span class="pin"><span class="x"></span>WIREFRAME v0.1</span>
       </h1>
-      <div class="sub">受験者画面のレイアウト探索 — 4案 + 元画面の再整理</div>
-      <div class="meta"><b>DATE</b> 2026-04-18 · <b>DEVICE</b> DESKTOP 1440 · <b>FIDELITY</b> LOW</div>
+      <div class="sub">그래픽 티셔츠 상세페이지 — 4탭 시안 + 무신사 입점 기준</div>
+      <div class="meta"><b>DATE</b> 2026-05-15 · <b>DEVICE</b> DESKTOP 1440 · <b>STAGE</b> v0.1 · <b>FIDELITY</b> LOW</div>
     </div>
 
+    <!-- 탭 스트립: 00 ALL / 01 A·정보형 / 02 B·매거진형 (활성) / 03 C·룩북형 / 04 D·스토리형 -->
     <div class="tabs" data-od-id="tabs">
       <div class="tab"><span class="glyph"></span><span class="num">00</span>ALL</div>
-      <div class="tab"><span class="glyph"></span><span class="num">01</span>A · 整理型 (元画面ベース)</div>
-      <div class="tab active"><span class="glyph"></span><span class="num">02</span>B · ダッシュボード (KPI)</div>
-      <div class="tab"><span class="glyph"></span><span class="num">03</span>C · タイムライン (次の試験)</div>
-      <div class="tab"><span class="glyph"></span><span class="num">04</span>D · 学習体験型</div>
+      <div class="tab"><span class="glyph"></span><span class="num">01</span>A · 정보형 (무신사 기본)</div>
+      <div class="tab active"><span class="glyph"></span><span class="num">02</span>B · 매거진형 (29CM 톤)</div>
+      <div class="tab"><span class="glyph"></span><span class="num">03</span>C · 룩북형 (자사몰 톤)</div>
+      <div class="tab"><span class="glyph"></span><span class="num">04</span>D · 스토리형 (디자이너 노트)</div>
     </div>
 
+    <!-- 스케치 캔버스: 그래프 페이퍼 위 매거진형 B안 -->
     <div class="canvas" data-od-id="canvas">
       <div class="section-label">
-        <h2>B · ダッシュボード</h2>
-        <span class="pill">DATA-FORWARD</span>
+        <h2>B · 매거진형 — 29CM 톤</h2>
+        <span class="pill">EDITORIAL-FORWARD</span>
       </div>
-      <p class="lede">KPIを最上段に。「今の自分の位置」を一目で把握 → 詳細は下へスクロール。</p>
+      <p class="lede">모델컷 + 디자이너 의도를 최상단에. 스펙·사이즈 가이드는 아래로 → 매거진 호흡으로 읽히게.</p>
 
-      <div class="browser" data-od-id="browser"><div class="dots"><span></span><span></span><span></span></div><div class="url">zentou-ai.jp / portal / dashboard</div><div class="user">motoki.daisuke</div></div>
+      <!-- 무신사 URL 행 -->
+      <div class="browser" data-od-id="browser"><div class="dots"><span></span><span></span><span></span></div><div class="url">musinsa.com / products / wackywilly-27ss-graphic-tee</div><div class="user">graphic.kim</div></div>
 
       <div class="layout">
+        <!-- 사이드바: 상세페이지 섹션 메뉴. 활성 = 모델 / 룩 -->
         <aside class="nav" data-od-id="sidebar">
-          <span class="brand">全統 AI</span>
+          <span class="brand">WACKYWILLY</span>
           <ul>
-            <li class="active"><span class="square"></span>ダッシュボード</li>
-            <li><span class="square"></span>試験日程</li>
-            <li><span class="square"></span>成績一覧</li>
-            <li><span class="square"></span>練習問題</li>
-            <li><span class="square"></span>学習計画</li>
+            <li><span class="square"></span>상품 정보</li>
+            <li class="active"><span class="square"></span>모델 / 룩</li>
+            <li><span class="square"></span>소재 / 케어</li>
+            <li><span class="square"></span>사이즈 가이드</li>
+            <li><span class="square"></span>리뷰</li>
+            <li><span class="square"></span>Q&A</li>
+            <li><span class="square"></span>배송 / 반품</li>
           </ul>
         </aside>
 
         <div data-od-id="main">
           <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;">
             <div>
-              <div class="greeting">おかえりなさい</div>
-              <div class="name">motoki.daisuke <span style="font-size:18px;color:var(--pencil);">さん</span></div>
+              <div class="greeting">27SS · KEY ITEM</div>
+              <div class="name">CHARACTER GRAPHIC TEE <span style="font-size:18px;color:var(--pencil);">(UNI)</span></div>
             </div>
             <div class="toggle-row">
-              <span class="tag">今週</span>
-              <span class="tag active">今月</span>
-              <span class="tag">通算</span>
+              <span class="tag">정가</span>
+              <span class="tag active">프리오더</span>
+              <span class="tag">VIP가</span>
             </div>
           </div>
 
+          <!-- KPI 4개: 발매가 / 정상판매율 타겟 / LOT / 컬러웨이 -->
           <div class="kpis" data-od-id="kpis">
-            <div class="kpi tilt-1"><div class="label">認定ランク</div><div class="value">A2</div><div class="small">基礎認定</div></div>
-            <div class="kpi tilt-2"><div class="label">偏差値</div><div class="value ink" style="color:#3b6e8e;">39</div><div class="small">↑ +3.2 前回比</div></div>
-            <div class="kpi tilt-3"><div class="label">次回まで</div><div class="value">1日</div><div class="small">04/19 10:00</div></div>
-            <div class="kpi tilt-4"><div class="label">練習進捗</div><div class="value ink" style="color:#3b6e8e;">62%</div><div class="small">▰▰▰▰▰▱▱▱</div></div>
+            <div class="kpi tilt-1"><div class="label">발매가</div><div class="value">₩69K</div><div class="small">프리오더 ₩49K (~05/22)</div></div>
+            <div class="kpi tilt-2"><div class="label">정상판매율 타겟</div><div class="value ink" style="color:#3b6e8e;">75%</div><div class="small">↑ +12% vs 26SS 베이스</div></div>
+            <div class="kpi tilt-3"><div class="label">LOT 1차</div><div class="value">800</div><div class="small">컬러 × 사이즈 = 18 셀</div></div>
+            <div class="kpi tilt-4"><div class="label">발매일</div><div class="value ink" style="color:#3b6e8e;">D-12</div><div class="small">05/27 KO 11:00</div></div>
           </div>
 
           <div class="panels" data-od-id="panels">
+            <!-- 손그림 차트: 26SS → 27SS 정상판매율 추이 -->
             <div class="panel" data-od-id="chart">
-              <h3><span class="dot"></span>CHART · 偏差値推移</h3>
+              <h3><span class="dot"></span>CHART · 정상판매율 추이 (그래픽 티 카테고리)</h3>
               <svg class="scribble" viewBox="0 0 480 160" aria-hidden="true">
                 <path d="M 14 142 L 460 142" stroke="#4d473d" stroke-width="1.6" fill="none"/>
                 <path d="M 14 14 L 14 142" stroke="#4d473d" stroke-width="1.6" fill="none"/>
@@ -214,8 +229,9 @@
                 <circle cx="440" cy="28" r="4" fill="#d8482b"/>
               </svg>
             </div>
+            <!-- 해칭 채움 막대 차트: 컬러웨이별 사전 관심도 -->
             <div class="panel" data-od-id="bars">
-              <h3><span class="dot"></span>SUBJECTS · 科目別</h3>
+              <h3><span class="dot"></span>COLORWAY · 컬러별 사전 관심도</h3>
               <svg class="scribble" viewBox="0 0 320 160" aria-hidden="true">
                 <defs>
                   <pattern id="hatch" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
@@ -228,28 +244,30 @@
                 <rect x="142" y="78" width="38" height="64" fill="url(#hatch)" stroke="#2b2620" stroke-width="1.4"/>
                 <rect x="198" y="22" width="38" height="120" fill="url(#hatch)" stroke="#2b2620" stroke-width="1.4"/>
                 <rect x="254" y="50" width="38" height="92" fill="url(#hatch)" stroke="#2b2620" stroke-width="1.4"/>
-                <text x="14" y="158" font-family="IBM Plex Mono, monospace" font-size="11" fill="#4d473d">開発 / 国 / 数 / 英 / 理</text>
+                <text x="14" y="158" font-family="IBM Plex Mono, monospace" font-size="11" fill="#4d473d">아이보리 / 블랙 / 오트밀 / 라임 / 시그니처 오렌지</text>
               </svg>
             </div>
           </div>
 
           <div class="events" data-od-id="events">
-            <div class="label">📣 お知らせ (直近 3 件)</div>
+            <div class="label">📣 디자인 메모 (직근 3건)</div>
             <div class="lines"><span></span><span></span><span></span></div>
           </div>
 
           <div class="next-step" data-od-id="next-step">
-            <div class="head">● NEXT STEP / 次にやること</div>
+            <div class="head">● NEXT STEP / 다음 단계</div>
             <ul>
-              <li>試験の申込を完了する</li>
-              <li>弱点「論理」を10問だけ解く</li>
+              <li>v0.5 시안 리뷰 (디자인실 + MD실 + 마케팅실 합동, 05/20)</li>
+              <li>활성 시안 1개 선택 후 v1.0 픽셀 디자인 착수 (web-prototype 스킬)</li>
             </ul>
           </div>
         </div>
       </div>
 
-      <div class="sticky sn1" data-od-id="sticky-1"><div class="tape"></div>一日目から触りたくなる画面に</div>
-      <div class="sticky sn2" data-od-id="sticky-2"><div class="tape"></div><b>page-1 / 5</b><br/>余白は気持ちよく。<br/>密度は B 案ぐらい。</div>
+      <!-- 스티커 메모 1: 디자인 의도 핀 -->
+      <div class="sticky sn1" data-od-id="sticky-1"><div class="tape"></div>여백은 무신사 톤 +20% — 매거진 호흡</div>
+      <!-- 스티커 메모 2: 페이지 진척 + 다음 단계 -->
+      <div class="sticky sn2" data-od-id="sticky-2"><div class="tape"></div><b>p.1 / 5</b><br/>B안 선호.<br/>MD 검토 후 LOCK.</div>
     </div>
   </div>
 </body>

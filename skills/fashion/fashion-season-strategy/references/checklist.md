@@ -1,34 +1,46 @@
-# Season Strategy Checklist
+# 시즌 전략 자체 검수 체크리스트
 
-P0 are hard gates.
+산출물 출력 직전에 한 항목씩 확인하세요. **P0**는 통과해야 하는 하드 게이트.
 
-## P0
+## P0 — 통과 필수
 
-- [ ] Header carries season, line, status, lock date.
-- [ ] Title appears above the pillars block.
-- [ ] Exactly **3 pillar cards** are present (not 2, not 4).
-- [ ] Each pillar carries title + 1-line description + ≥ 1 chip when
-  metrics are known (or zero chips when explicitly intent-only).
-- [ ] Hero categories block carries 2–4 cards.
-- [ ] Each hero card carries name + 1-line pillar focus + ≥ 1 bullet
-  tactic.
-- [ ] Cross-functional alignment table lists every pillar and assigns
-  ≥ 1 team as `●` lead.
-- [ ] No external image URLs (this skill is text/icon-led; images are
-  optional and project-local if used).
+- [ ] 헤더에 시즌, 라인, 상태, 락 일자가 모두 표기됨
+- [ ] 축 블록 위에 시즌 전략 타이틀(예: "27SS 전략 3축") 표시
+- [ ] **정확히 3개**의 전략 축 카드가 존재 (2개나 4개 금지)
+- [ ] 각 축은 타이틀 + 1줄 설명 + 메트릭이 있을 때 ≥ 1개 칩 (없을 때는 0개 칩 명시적 의도 표시)
+- [ ] 히어로 카테고리 블록은 **2~4개** 카드 (1개 또는 5개 이상 금지)
+- [ ] 각 히어로 카드는 이름 + 1줄 축 포커스 + ≥ 1개 불릿 전술
+- [ ] 크로스 팩셔널 정렬 표가 모든 축을 나열 + ≥ 1개 팀에 `●` lead 지정
+- [ ] 외부 이미지 URL 없음 (이 스킬은 텍스트/아이콘 중심. 이미지 사용 시 프로젝트 로컬)
 
-## P1
+## P1 — 강력 권장
 
-- [ ] Pillar metrics use canonical units (QR %, LOT pcs, SKU count) —
-  not vague "more / less".
-- [ ] Hero category names use the brand's working nouns (가방 / 모자 /
-  신발) — do not auto-translate.
-- [ ] Pillar 03 (히어로 육성 등) is consistent with the IMC calendar
-  if both exist for this season.
+- [ ] 축 메트릭이 카노니컬 단위 사용 (`QR %`, `LOT pcs`, `SKU 개수`, `정상판매율 %`) — "더 많이 / 더 적게" 같은 모호한 표현 금지
+- [ ] 히어로 카테고리명이 브랜드의 working noun 사용 (`가방`, `모자`, `신발`) — 영문 자동 번역 금지
+- [ ] 축 ③(히어로 육성 등)이 시즌이 이미 존재하는 경우 IMC 캘린더(`fashion-imc-calendar`)와 정합
 
-## P2
+## P2 — 다듬기
 
-- [ ] Card heights stay balanced (no one pillar card 2x the height of
-  the others); tighten copy if needed.
-- [ ] Open / next decisions list has owner + date for every entry, or
-  the section is omitted entirely.
+- [ ] 카드 높이가 균형 유지 (한 축 카드가 다른 카드의 2배 높이 금지). 필요 시 카피 정리
+- [ ] Open / Next Decisions 항목마다 owner + 일자 존재. 없으면 섹션 자체 삭제
+
+## K-패션 비즈니스 특화 검수
+
+- [ ] **3대 축이 K-young-casual 카노니컬과 정합** — 보통 ① 시장 대응(QR/SPOT) ② 캐리오버 리뉴얼 ③ IMC 히어로 육성 패턴. 다른 패턴 사용 시 명시적 사유 기재
+- [ ] **QR 비율이 한국 패션업계 표준** — 일반적으로 시즌 SKU의 20~40% 권장. 그 외 비율은 라쇼날 명시
+- [ ] **In-Season SPOT 개수 적정** — 보통 시즌당 10~20개 SKU. 너무 적으면 대응력 부족, 너무 많으면 디자인 리소스 과부하
+- [ ] **히어로 카테고리가 시즌의 채널 전략과 정합** — 자사몰 강세 카테고리, 무신사 강세 카테고리, 라이브커머스 강세 카테고리 의식
+- [ ] **사입가율 / 정상판매율 / 회전율 메트릭이 적용됨** — 한국 패션업계의 핵심 KPI가 축 또는 히어로 전술에 포함됨
+- [ ] **크로스 팩셔널 정렬 표가 한국 부서 R&R 의식** — MD 실장, 디자인 실장, 마케팅 실장, 생산실장 모두 명시
+- [ ] **시즌 사이클 위치 정합** — 시즌 시작 6개월 전 락. 후속 산출물(컨셉, 컬러, 라인업)이 이 전략을 상속하는지 확인
+- [ ] **디스플레이 폰트가 운영 덱 톤** — `--font-display-report` 기본
+
+## 검수 실행 흐름
+
+1. 산출물 HTML을 브라우저에서 열어 시각적으로 점검
+2. P0 항목을 차례로 확인. 미통과 시 작업으로 되돌아가 수정
+3. 축 개수(3개) + 히어로 카드 개수(2~4개) 카운트
+4. P1·P2는 시간 여유에 따라 다듬기
+5. 최종 검수 통과 후 헤더 상태를 `locked`로 표기
+
+검수 통과 후 사용자에게 산출물 외에 별도 보고는 하지 않습니다 (출력 규약).

@@ -1,74 +1,189 @@
 ---
 name: dashboard
 description: |
-  Admin / analytics dashboard in a single HTML file. Fixed left sidebar,
-  top bar with user/search, main grid of KPI cards and one or two charts.
-  Use when the brief asks for a "dashboard", "admin", "analytics", or
-  "control panel" screen.
+  K-패션 브랜드의 **시즌 매출 / 운영 대시보드**를 단일 HTML 파일로 생성하는 스킬입니다.
+  좌측 고정 사이드바, 상단바(검색·기간 선택), KPI 카드 + 차트 + 테이블 그리드 구조.
+  영업기획·MD실·이커머스팀이 매주 또는 매판기 들여다보는 매출/재고/판매 현황판입니다.
+  지표는 한국 패션 KPI 표준 — 정상판매율(정판율), 재고자산회전율, GMV, AOV,
+  BTA 비중, 채널별 매출(무신사/29CM/자사몰), 카테고리별 회전율 — 을 사용합니다.
+  사용자가 "시즌 대시보드", "매출 대시보드", "판기 현황판", "BTA 대시보드",
+  "정판율 모니터", "채널별 GMV", "관리 화면"을 언급하면 활성화하세요.
 triggers:
+  - "시즌 대시보드"
+  - "매출 대시보드"
+  - "판기 대시보드"
+  - "BTA 대시보드"
+  - "정판율 모니터"
+  - "채널별 매출"
+  - "패션 대시보드"
   - "dashboard"
   - "admin panel"
   - "analytics"
-  - "control panel"
-  - "后台"
-  - "管理后台"
 od:
   mode: prototype
   platform: desktop
   scenario: operations
+  category: fashion
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
+  example_prompt: "와키윌리 27SS 시즌 매출 대시보드를 만들어주세요. KPI는 정상판매율 / 재고자산회전율 / GMV / AOV. 메인 차트는 4월~6월 일별 매출 추이, 보조 차트는 BTA 비중과 채널별 매출(무신사 / 29CM / 자사몰 / 기타). 하단에는 카테고리별 회전율 테이블."
 ---
 
-# Dashboard Skill
+# 패션 대시보드 스킬
 
-Produce a single-screen admin / analytics dashboard.
+K-패션 브랜드의 **시즌·운영 대시보드**를 단일 HTML 파일로 생성합니다. 영업기획·MD실·이커머스팀이 매주 또는 매판기(S1~S4) 들여다보는 매출/재고/판매 모니터링 화면입니다. KPI 카드, 매출 추이 차트, 채널별 비중 차트, 카테고리별 테이블의 4단 구조.
 
-## Workflow
+이 산출물의 청중은 **MD 실장, 영업기획팀, 이커머스팀, 대표/임원**입니다. 한국 패션기업에서는 보통 영업기획팀이 데이터 파이프라인을 정의하고 MD실이 의사결정 컨텍스트로 활용하는 흐름을 따릅니다. 마르디 메크르디의 재고자산회전율 20회(업계 평균 3~4회) 같은 사실 데이터를 인지하고 작성합니다.
 
-1. **Read the active DESIGN.md** (injected above). Colors, typography, spacing,
-   component styling all come from it. Do not invent new tokens.
-2. **Classify** what the dashboard monitors (sales, traffic, usage, incidents,
-   ops, etc.) from the brief. Generate specific, plausible metric names and
-   values — no "Metric A / Metric B" placeholders.
-3. **Lay out** the required regions:
-   - **Left sidebar** (220–260px): brand mark at top, 6–8 nav links with
-     icons, active state uses the DS accent.
-   - **Top bar**: page title on the left, search input + user avatar / status
-     on the right.
-   - **Main**:
-     - Row 1: 3–4 KPI cards (label + big number + delta vs. prior period).
-     - Row 2: one primary chart (full width or 2/3) — render as an inline SVG
-       line / bar / area chart drawn from real-looking numbers.
-     - Row 3: one secondary chart or table (recent events, top items, etc.).
-4. **Write** one self-contained HTML document:
-   - `<!doctype html>` through `</html>`, CSS in one inline `<style>` block.
-   - CSS Grid for the overall layout; Flexbox inside cards.
-   - Semantic HTML: `<aside>`, `<header>`, `<main>`, `<section>`.
-   - Tag each logical region with `data-od-id="slug"` for comment mode.
-5. **Charts**: inline SVG only, no JS libraries. A line chart is ~10 lines of
-   `<polyline>` with a subtle area fill. A bar chart is N `<rect>`s with
-   DS-accent fill. Label axes lightly (muted text, smaller scale).
-6. **Self-check**:
-   - Every color comes from DESIGN.md tokens.
-   - Accent used at most twice (sidebar active + one chart highlight).
-   - Sidebar + top bar are sticky; main scrolls independently.
-   - Density matches the DS mood — airy DSes get more padding, dense DSes
-     (trading, crypto) tighten rows.
+## 환경 호환성
 
-## Output contract
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
 
-Emit between `<artifact>` tags:
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 `data-od-id` 속성으로 인라인 코멘트 기능 사용 가능. 그 외에는 일반 `id` 속성으로 대체합니다.
+
+본문 작업 흐름은 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 `DESIGN.md` 경로나 기본 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 비즈니스 대시보드의 등록(register)을 따릅니다.
+
+- KPI 라벨은 한국 패션 현장 표기 우선 — 한국어를 기본으로 두되, 한국 패션 현장에서 영문이 표준인 지표는 영문 유지: GMV, AOV, ROAS, MoM, YoY, QoQ, SKU, BTA, LOT.
+- 한국어 표기 우선 사례: 정상판매율(정판율), 재고자산회전율, 사입가율, 디스카운트율, 마진율, 시즌 판기(S1~S4), 핵심 SKU.
+- 차트 캡션·범례·테이블 헤더는 짧고 명사구 종결 권장.
+- 채널 표기는 한국 표준: 무신사 / 29CM / W컨셉 / 자사몰 / SSF샵 / 한섬몰 / 에이블리 / 지그재그.
+- 날짜는 한국 표기(예: "27SS S1 (5-6월)", "2027.05.14") 권장.
+
+## 폴더 구조
 
 ```
-<artifact identifier="dashboard-slug" type="text/html" title="Dashboard Title">
-<!doctype html>
-<html>...</html>
-</artifact>
+dashboard/
+├── SKILL.md       ← 이 파일
+└── example.html   ← 작성 예시 (와키윌리 27SS 매출 대시보드)
 ```
 
-One sentence before the artifact, nothing after.
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. `example.html`을 처음부터 끝까지 읽어 사이드바 + 상단바 + KPI + 차트 + 테이블 구조를 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 파일이 자동 주입되지 않는 환경이라면 사용자에게 경로나 기본 톤을 묻고 진행합니다.
+
+### Step 1 — 분류 및 정보 수집
+
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
+
+- 브랜드명 + 시즌 코드 (예: 와키윌리 27SS, 마뗑킴 26FW)
+- 측정 기간 (S1 / S2 / S3 / S4 판기 또는 월별)
+- 핵심 KPI 4개 (기본 권장: **정상판매율 · 재고자산회전율 · GMV · AOV**)
+- 채널 구성 (자사몰 / 무신사 / 29CM / W컨셉 / SSF샵 / 기타 입점채널)
+- BTA 비중 추적 여부 (Basic / Trend / Accent 카테고리)
+- 카테고리 분류 (상의 / 하의 / 아우터 / 원피스 / ACC / UNI / WOMEN 등)
+
+"Metric A / Metric B" 같은 플레이스홀더 금지 — 실제 K-패션 KPI 명칭과 그럴듯한 수치를 사용합니다.
+
+### Step 2 — 레이아웃
+
+다음 4개 영역을 배치합니다.
+
+- **좌측 사이드바** (220~260px): 브랜드 워드마크 상단, 6~8개 네비 링크(개요 / 매출 / 재고 / 채널 / 카테고리 / SKU / 회원 / 설정), 액티브 상태는 액센트 컬러.
+- **상단바**: 좌측에 페이지 제목(예: "27SS 시즌 매출 · S1 판기"), 우측에 기간 선택 드롭다운("최근 30일 ▾") + Primary CTA("리포트 내보내기").
+- **KPI 카드 Row 1** (3~4개): 라벨 + 큰 숫자 + Δ(전기 대비 변화). 예시: 정상판매율 / 재고자산회전율 / GMV / AOV.
+- **차트 Row 2** (2/3 + 1/3 분할): 좌측 메인 차트(일별/주별 매출 추이 · 인라인 SVG 라인), 우측 보조 차트(BTA 비중 또는 채널별 GMV · 인라인 SVG 바).
+- **테이블 Row 3** (풀 너비): 카테고리별 회전율 / 판매율 / 재고 / TOP SKU 등.
+
+### Step 3 — 작성
+
+1. 단일 HTML 문서(`<!doctype html>` ~ `</html>`)로 작성, CSS는 인라인 `<style>` 한 블록.
+2. CSS Grid로 전체 레이아웃, 카드 내부는 Flexbox.
+3. 시맨틱 HTML: `<aside>`, `<header>`, `<main>`, `<section>`.
+4. 주요 영역(sidebar, topbar, kpis, chart-panel, channel-panel, recent-events)에 식별용 속성. OpenDesign 환경에서는 `data-od-id="<slug>"`, 그 외에서는 `id` 속성으로 대체.
+5. 차트는 인라인 SVG만 사용 (외부 JS 라이브러리 금지). 라인 차트는 `<polyline>` 10줄 + 옅은 영역 채움. 바 차트는 N개 `<rect>` + 액센트 채움. 축 라벨은 옅게.
+
+### Step 4 — 자체 검수
+
+- 모든 색상은 `:root` 토큰에서 옴 — 임의 hex 금지
+- 액센트는 사이드바 활성 상태 + 차트 강조 1곳, 최대 2번 사용
+- 사이드바·상단바는 sticky, 메인 영역만 스크롤
+- 정상판매율(정판율) 값은 60~85% 범위 (한국 패션 평균), 재고자산회전율은 카테고리별 3~20회 범위
+- 숫자는 모두 그럴듯한 K-패션 실데이터: GMV 단위는 억/만원, AOV는 5만~25만원 권장
+- 채널 표기 한국 표준 사용 (무신사 / 29CM / 자사몰 등)
+
+## 한국 K-패션 KPI 표준 (참고)
+
+대시보드 작성 시 사용할 K-패션 핵심 지표.
+
+| 지표 | 한국 패션 평균치 | 우수 브랜드 사례 |
+|---|---|---|
+| **정상판매율 (정판율)** | 60~75% | 마르디 메크르디 85%+ (시그니처 IP 견인) |
+| **재고자산회전율** | 3~4회/년 | 마르디 메크르디 20회 (업계 1위급) |
+| **사입가율** | 25~35% | 브랜드별 상이 |
+| **AOV (객단가)** | 8만~15만원 | 컨템포러리 18만~25만원 |
+| **GMV 시즌 성장률** | 10~30% YoY | 신생 브랜드 100%+ |
+| **할인율 (디스카운트율)** | 시즌 말 15~30% | 정판 강한 브랜드는 10% 이하 |
+| **카카오 알림톡 오픈율** | 50~70% | 회원 활성도 지표 |
+
+위 사례는 카피·예시 참고용입니다. 실제 산출물은 사용자 브랜드의 실제 데이터로 작성하세요. 데이터가 없으면 사용자에게 묻고, 추정값을 쓸 때는 "illustrative" 라벨로 표시합니다.
+
+## 한국 패션기업 조직 R&R 메모
+
+대시보드의 작성·소비 흐름.
+
+- **영업기획팀**: 데이터 파이프라인 구축, 위클리 매출 리포트 발행, 대시보드 운영 주체
+- **MD 실장**: 정판율·회전율 모니터링, 카테고리 매출 의사결정, 리오더 결정
+- **이커머스팀**: 채널별 GMV·AOV·전환율 분석, 자사몰 퍼포먼스 책임
+- **마케팅실**: ROAS·신규회원 유입·캠페인 효과 추적 (별도 마케팅 대시보드 가능)
+- **대표/임원**: 시즌 결산 시 종합 리뷰 (월별/판기별 대시보드 받음)
+
+## 시즌 사이클 내 위치
+
+대시보드는 **시즌 진행 중 상시 운영**되며, 다음 산출물과 연결됩니다.
+
+```
+[시즌 시작 (S1 판기 시작)]
+    ↓ 매일 데이터 수집
+[대시보드 — 매일 업데이트, 영업기획이 운영]
+    ↓ 매주 위클리 리뷰
+[fashion-imc-calendar 캠페인 효과 점검]
+    ↓ 판기 종료 시
+[finance-report — 판기 매출 결산 보고]
+    ↓ 시즌 종료 시
+[fashion-season-deck 회고 챕터로 통합]
+```
+
+## 채널 연계
+
+이 대시보드는 다음 데이터 소스를 종합합니다.
+
+- **자사몰** (카페24 / 쇼피파이 / 자체 구축) — GMV, AOV, 회원 데이터
+- **무신사 입점관리자** — 무신사 GMV, 베스트 랭킹, 리뷰 수
+- **29CM 입점관리자** — 29CM GMV, 큐레이션 노출 데이터
+- **W컨셉 / SSF샵 / 한섬몰** — 입점채널별 매출
+- **카카오톡 채널 / 알림톡** — 회원 활성도, 오픈율
+- **광고 플랫폼** (메타 / 구글 / 네이버) — ROAS, 전환
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="dashboard-slug" type="text/html" title="대시보드 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "와키윌리 27SS 시즌 매출 대시보드를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

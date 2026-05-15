@@ -1,16 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Pulse — analytics overview</title>
+  <title>와키윌리 — 27SS 시즌 매출 현황판</title>
   <style>
     :root {
       --bg: #fafaf9; --fg: #1c1b1a; --muted: #6b6964; --border: #e6e4e0;
       --accent: #c96442; --surface: #ffffff; --good: #2f7d4a; --bad: #b53a2a;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.5 -apple-system, system-ui, sans-serif; display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
+    body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.5 -apple-system, system-ui, 'Pretendard Variable', sans-serif; display: grid; grid-template-columns: 220px 1fr; min-height: 100vh; }
     .sidebar { background: var(--surface); border-right: 1px solid var(--border); padding: 16px; }
     .brand { font-weight: 600; padding: 8px 10px 18px; }
     .nav { display: flex; flex-direction: column; gap: 2px; }
@@ -48,68 +48,76 @@
   </style>
 </head>
 <body>
+  <!-- 좌측 사이드바: 와키윌리 운영 메뉴 -->
   <aside class="sidebar" data-od-id="sidebar">
-    <div class="brand">◐ Pulse</div>
+    <div class="brand">◐ WACKYWILLY</div>
     <nav class="nav">
-      <a href="#" class="active">Overview</a>
-      <a href="#">Funnels</a>
-      <a href="#">Cohorts</a>
-      <a href="#">Sessions</a>
-      <span class="group-label">Workspace</span>
-      <a href="#">Sources</a>
-      <a href="#">Members</a>
-      <a href="#">Billing</a>
-      <a href="#">Settings</a>
+      <a href="#" class="active">시즌 개요</a>
+      <a href="#">매출 분석</a>
+      <a href="#">재고 / 회전율</a>
+      <a href="#">채널별 GMV</a>
+      <span class="group-label">상품</span>
+      <a href="#">카테고리</a>
+      <a href="#">BTA 비중</a>
+      <a href="#">SKU 매니저</a>
+      <a href="#">회원 / VIP</a>
+      <a href="#">설정</a>
     </nav>
   </aside>
   <main>
+    <!-- 상단바: 시즌 페이지 타이틀 + 기간 선택 -->
     <div class="topbar" data-od-id="topbar">
-      <h1>Overview · April 2026</h1>
+      <h1>27SS 시즌 개요 · S1 판기 (5-6월)</h1>
       <div class="right">
-        <button class="btn-secondary">Last 30 days ▾</button>
-        <button class="btn-primary">+ New report</button>
+        <button class="btn-secondary">최근 30일 ▾</button>
+        <button class="btn-primary">+ 위클리 리포트</button>
       </div>
     </div>
 
+    <!-- KPI Row 1: K-패션 표준 4개 지표 -->
     <div class="kpis" data-od-id="kpis">
-      <div class="kpi"><div class="label">MRR</div><div class="value">$48.2K</div><div class="delta up">+12.4% MoM</div></div>
-      <div class="kpi"><div class="label">Active accounts</div><div class="value">3,184</div><div class="delta up">+204 this month</div></div>
-      <div class="kpi"><div class="label">Churn (30d)</div><div class="value">2.1%</div><div class="delta down">+0.4 pp</div></div>
-      <div class="kpi"><div class="label">P95 latency</div><div class="value">182 ms</div><div class="delta up">-23 ms</div></div>
+      <div class="kpi"><div class="label">정상판매율</div><div class="value">78.4%</div><div class="delta up">▲ 6.2 pp vs 26SS</div></div>
+      <div class="kpi"><div class="label">재고자산회전율</div><div class="value">8.2회</div><div class="delta up">▲ 1.8회 YoY</div></div>
+      <div class="kpi"><div class="label">시즌 GMV</div><div class="value">12.4억</div><div class="delta up">▲ 34.6% MoM</div></div>
+      <div class="kpi"><div class="label">AOV (객단가)</div><div class="value">98,400원</div><div class="delta up">▲ 7,200원</div></div>
     </div>
 
     <div class="panels-row">
+      <!-- 메인 차트: 일별 매출 추이 -->
       <div class="panel" data-od-id="chart-panel">
-        <h3>Revenue · 30 days</h3>
+        <h3>일별 GMV · 5월 1일 ~ 6월 14일</h3>
         <div class="chart">
           <svg viewBox="0 0 600 240" preserveAspectRatio="none">
             <polyline fill="none" stroke="#c96442" stroke-width="2" points="0,180 30,170 60,150 90,160 120,140 150,120 180,130 210,110 240,90 270,100 300,80 330,70 360,80 390,60 420,50 450,60 480,40 510,30 540,40 570,20 600,10" />
           </svg>
         </div>
       </div>
-      <div class="panel" data-od-id="signups-panel">
-        <h3>New accounts</h3>
+      <!-- 보조 차트: 채널별 GMV 비중 -->
+      <div class="panel" data-od-id="channel-panel">
+        <h3>채널별 GMV 비중</h3>
         <table>
-          <thead><tr><th>Account</th><th>Plan</th><th>Status</th></tr></thead>
+          <thead><tr><th>채널</th><th>비중</th><th>전월 대비</th></tr></thead>
           <tbody>
-            <tr><td>Linear</td><td>Team</td><td><span class="pill good">active</span></td></tr>
-            <tr><td>Cursor</td><td>Pro</td><td><span class="pill good">active</span></td></tr>
-            <tr><td>Notion</td><td>Team</td><td><span class="pill bad">trial</span></td></tr>
-            <tr><td>Vercel</td><td>Enterprise</td><td><span class="pill good">active</span></td></tr>
+            <tr><td>자사몰</td><td>42%</td><td><span class="pill good">▲ 4 pp</span></td></tr>
+            <tr><td>무신사</td><td>31%</td><td><span class="pill good">▲ 2 pp</span></td></tr>
+            <tr><td>29CM</td><td>14%</td><td><span class="pill bad">▼ 3 pp</span></td></tr>
+            <tr><td>W컨셉 / SSF</td><td>13%</td><td><span class="pill good">▲ 1 pp</span></td></tr>
           </tbody>
         </table>
       </div>
     </div>
 
-    <div class="panel" data-od-id="recent-events">
-      <h3>Recent events</h3>
+    <!-- 하단 테이블: 카테고리별 회전율 + 정판율 -->
+    <div class="panel" data-od-id="category-table">
+      <h3>카테고리별 회전율 · 정판율 · 핵심 SKU</h3>
       <table>
-        <thead><tr><th>Time</th><th>Account</th><th>Event</th><th>Plan</th></tr></thead>
+        <thead><tr><th>카테고리</th><th>BTA</th><th>회전율</th><th>정판율</th><th>대표 SKU</th></tr></thead>
         <tbody>
-          <tr><td>2:14 pm</td><td>Acme Co</td><td>Upgraded to Team</td><td>Team</td></tr>
-          <tr><td>1:48 pm</td><td>Northwind</td><td>Connected GitHub</td><td>Pro</td></tr>
-          <tr><td>1:32 pm</td><td>Globex</td><td>Cancelled subscription</td><td>Solo</td></tr>
-          <tr><td>12:51 pm</td><td>Initech</td><td>New seat invited</td><td>Team</td></tr>
+          <tr><td>WOMEN · 원피스</td><td>Trend</td><td>14.2회</td><td><span class="pill good">82%</span></td><td>플라워 와키 원피스</td></tr>
+          <tr><td>UNI · 그래픽 티</td><td>Accent</td><td>11.8회</td><td><span class="pill good">87%</span></td><td>윌리 캐릭터 반팔티</td></tr>
+          <tr><td>UNI · 셋업</td><td>Basic</td><td>6.4회</td><td><span class="pill good">71%</span></td><td>워시드 데님 셋업</td></tr>
+          <tr><td>ACC · 백</td><td>Trend</td><td>9.6회</td><td><span class="pill good">76%</span></td><td>윌리 미니 토트</td></tr>
+          <tr><td>WOMEN · 아우터</td><td>Basic</td><td>3.2회</td><td><span class="pill bad">58%</span></td><td>크롭 셔켓</td></tr>
         </tbody>
       </table>
     </div>

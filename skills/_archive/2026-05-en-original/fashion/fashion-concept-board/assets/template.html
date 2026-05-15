@@ -1,0 +1,514 @@
+<!doctype html>
+<!--
+  OD fashion-concept-board seed.
+
+  Copy this file to <project>/index.html. Generated mood imagery should be
+  saved under <project>/images/ and referenced with relative paths.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>[REPLACE] Season Concept Board</title>
+  <style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
+    :root {
+      --bg: #efeae1;
+      --paper: #faf6ee;
+      --paper-deep: #e8e1d3;
+      --ink: #161210;
+      --ink-soft: #2c2520;
+      --muted: #6e655a;
+      --muted-soft: #94897b;
+      --line: #d8cebf;
+      --line-soft: #e6ddcd;
+      --accent: #4a5d76;
+      --accent-soft: color-mix(in oklch, var(--accent) 16%, transparent);
+      --accent-loud: #b8754a;
+      --shadow: rgba(28, 22, 16, 0.10);
+      --shadow-deep: rgba(28, 22, 16, 0.18);
+      --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
+      --font-display-report: "Paperlogy", "Wanted Sans Variable", "SUIT Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
+      --font-display-street: "Black Han Sans", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+      --font-display-play: "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+      --font-display-romance: "Grandiflora One", "Diphylleia", "Hahmlet", "Noto Serif KR", "Source Serif 4", ui-serif, Georgia, serif;
+      --font-display: var(--font-display-romance);
+      --font-body: var(--font-sans);
+      --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+      --container: 1200px;
+      --gutter: clamp(18px, 4vw, 48px);
+      --radius: 6px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 85% 12%, color-mix(in oklch, var(--accent) 8%, transparent), transparent 30%),
+        radial-gradient(circle at 12% 88%, color-mix(in oklch, var(--accent-loud) 6%, transparent), transparent 26%),
+        linear-gradient(180deg, var(--bg), color-mix(in oklch, var(--paper) 60%, var(--bg)));
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    p, h1, h2, h3 { margin: 0; text-wrap: pretty; }
+
+    .page-shell {
+      max-width: var(--container);
+      margin-inline: auto;
+      padding: clamp(28px, 5vw, 72px) var(--gutter);
+    }
+    .topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .topline-status {
+      color: var(--accent-loud);
+    }
+    .section { padding: clamp(48px, 7vw, 96px) 0; border-bottom: 1px solid var(--line); }
+    .section:last-child { border-bottom: 0; }
+
+    .kicker {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent-loud);
+      margin-bottom: 14px;
+    }
+    .display {
+      font-family: var(--font-display);
+      font-size: clamp(52px, 9vw, 124px);
+      line-height: 0.92;
+      letter-spacing: -0.035em;
+      font-weight: 400;
+    }
+    .h2 {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 4.6vw, 58px);
+      line-height: 1.02;
+      letter-spacing: -0.022em;
+      font-weight: 400;
+    }
+    .lead {
+      max-width: 680px;
+      color: var(--muted);
+      font-size: clamp(16px, 1.6vw, 20px);
+      line-height: 1.5;
+    }
+    .meta {
+      font-family: var(--font-mono);
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ---- Cover -------------------------------------------------------- */
+    .cover-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr);
+      gap: clamp(28px, 5vw, 72px);
+      align-items: end;
+    }
+    .thesis {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.4vw, 32px);
+      line-height: 1.25;
+      color: var(--ink-soft);
+      max-width: 30ch;
+      margin-top: 26px;
+      letter-spacing: -0.01em;
+    }
+    .cover-meta {
+      margin-top: 28px;
+      display: inline-flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .image-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--accent-soft), color-mix(in oklch, var(--paper) 90%, var(--ink)));
+      border: 1px solid var(--line);
+      box-shadow: 0 22px 60px var(--shadow);
+      min-height: 320px;
+    }
+    .image-frame::before {
+      content: attr(data-fallback);
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 26px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.5;
+    }
+    .image-frame img {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      object-fit: cover;
+    }
+    .cover-image { aspect-ratio: 4 / 5; }
+
+    /* ---- Keyword cloud ------------------------------------------------ */
+    .keyword-cloud { padding-top: clamp(36px, 5vw, 72px); padding-bottom: clamp(36px, 5vw, 72px); }
+    .kw-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: clamp(14px, 2vw, 28px) clamp(20px, 3vw, 40px);
+      align-items: baseline;
+      max-width: 1000px;
+    }
+    .kw {
+      font-family: var(--font-display);
+      letter-spacing: -0.02em;
+      line-height: 0.95;
+      transition: color 0.2s ease;
+    }
+    .kw-loud {
+      font-size: clamp(48px, 7vw, 92px);
+      color: var(--ink);
+      font-weight: 400;
+    }
+    .kw-mid {
+      font-size: clamp(34px, 4.5vw, 56px);
+      color: var(--ink-soft);
+    }
+    .kw-soft {
+      font-size: clamp(22px, 2.6vw, 34px);
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    /* ---- Thesis block ------------------------------------------------- */
+    .thesis-block {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: clamp(28px, 6vw, 86px);
+      align-items: start;
+    }
+    .thesis-copy { display: grid; gap: 22px; max-width: 60ch; }
+    .thesis-copy p { color: var(--muted); }
+    .thesis-copy p.lead { color: var(--ink-soft); }
+
+    /* ---- Mood grid ---------------------------------------------------- */
+    .mood-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .mood-card {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .mood-card .image-frame {
+      aspect-ratio: 1 / 1;
+      min-height: 180px;
+      border-radius: var(--radius);
+      box-shadow: 0 12px 30px var(--shadow);
+    }
+    .mood-card[data-image-role="scene"] .image-frame { aspect-ratio: 4 / 3; }
+    .mood-card[data-image-role="gesture"] .image-frame { aspect-ratio: 4 / 5; }
+    .mood-card[data-image-role="garment-fragment"] .image-frame { aspect-ratio: 1 / 1; }
+    .mood-card figcaption { display: grid; gap: 4px; padding: 0 4px; }
+    .role-tag {
+      align-self: start;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 3px 7px;
+      border: 1px solid var(--accent-soft);
+      border-radius: 3px;
+    }
+    .mood-card figcaption p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* ---- Reference shelf --------------------------------------------- */
+    .reference-shelf {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .reference-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 96%, white);
+      display: grid;
+      gap: 10px;
+      min-height: 168px;
+    }
+    .ref-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+    }
+    .reference-card p {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    /* ---- Tone dials --------------------------------------------------- */
+    .dials .dial-list {
+      display: grid;
+      gap: 30px;
+      max-width: 720px;
+    }
+    .dial { display: grid; gap: 10px; }
+    .dial-axis {
+      display: flex;
+      justify-content: space-between;
+    }
+    .dial-track {
+      position: relative;
+      height: 4px;
+      background: var(--line);
+      border-radius: 999px;
+    }
+    .dial-marker {
+      position: absolute;
+      left: calc(var(--dial-pos, 50) * 1%);
+      top: 50%;
+      width: 16px;
+      height: 16px;
+      border-radius: 999px;
+      background: var(--ink);
+      transform: translate(-50%, -50%);
+      box-shadow: 0 4px 14px var(--shadow-deep);
+    }
+    .dial-note {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* ---- Seed blocks (color / material / silhouette / detail) -------- */
+    .seed-block {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: clamp(24px, 5vw, 64px);
+      align-items: start;
+    }
+    .seed-chips {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .seed-chip {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      padding: 14px;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      gap: 10px;
+      min-height: 132px;
+    }
+    .swatch {
+      height: 64px;
+      border-radius: 4px;
+      background: var(--accent);
+      border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    .seed-meta { display: grid; gap: 4px; }
+    .seed-name {
+      font-family: var(--font-display);
+      font-size: 17px;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    .seed-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 0;
+    }
+    .seed-list li {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 22px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--line-soft);
+      align-items: baseline;
+    }
+    .seed-list li:last-child { border-bottom: 0; }
+    .seed-list .seed-name {
+      font-size: 18px;
+    }
+    .seed-detail {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    /* ---- Anti-territory ---------------------------------------------- */
+    .anti-territory {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: clamp(24px, 5vw, 64px);
+      align-items: start;
+    }
+    .anti-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      gap: 10px;
+      max-width: 60ch;
+    }
+    .anti-list li {
+      padding: 14px 18px;
+      border: 1px dashed var(--line);
+      border-radius: var(--radius);
+      color: var(--ink-soft);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      background: color-mix(in oklch, var(--paper) 80%, white);
+    }
+    .anti-list li::before {
+      content: "× ";
+      color: var(--accent-loud);
+      font-weight: 600;
+    }
+
+    /* ---- Open questions ---------------------------------------------- */
+    .open-questions {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: clamp(24px, 5vw, 64px);
+      align-items: start;
+    }
+    .next-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      counter-reset: nextstep;
+      display: grid;
+      gap: 12px;
+      max-width: 60ch;
+    }
+    .next-list li {
+      counter-increment: nextstep;
+      display: grid;
+      grid-template-columns: 110px 1fr;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .next-list li::before {
+      content: counter(nextstep, decimal-leading-zero);
+      grid-column: 1;
+      grid-row: 1;
+      align-self: start;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      padding-top: 2px;
+    }
+    .next-when {
+      grid-column: 1;
+      grid-row: 1;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      align-self: start;
+      padding-top: 2px;
+      padding-left: 36px;
+    }
+    .next-what {
+      color: var(--ink-soft);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* ---- Responsive --------------------------------------------------- */
+    @media (max-width: 1024px) {
+      .mood-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .seed-chips { grid-template-columns: repeat(3, 1fr); }
+      .reference-shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 800px) {
+      .cover-grid, .thesis-block, .seed-block, .anti-territory, .open-questions {
+        grid-template-columns: 1fr;
+      }
+      .mood-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .seed-chips { grid-template-columns: repeat(2, 1fr); }
+      .reference-shelf { grid-template-columns: 1fr; }
+      .seed-list li { grid-template-columns: 1fr; gap: 6px; }
+      .seed-list .seed-name { font-size: 16px; }
+      .topline { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 520px) {
+      .mood-grid { grid-template-columns: 1fr; }
+      .seed-chips { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      body { background: var(--paper); }
+      .section { break-inside: avoid; padding: 24px 0; }
+      .mood-grid, .reference-shelf, .seed-chips { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topline" data-od-id="topline">
+      <span>[REPLACE] Studio / Brand</span>
+      <span>[REPLACE] Season — Concept Board</span>
+      <span class="topline-status">[REPLACE] v1 / draft / locked</span>
+    </header>
+    <main id="concept-board">
+      <!-- Paste sections from references/layouts.md here, in this order:
+           1. cover
+           2. keyword cloud
+           3. thesis statement
+           4. mood grid (12)
+           5. reference shelf
+           6. tone dials
+           7. color seeds
+           8. material seeds
+           9. silhouette seeds
+           10. detail seeds
+           11. anti-territory
+           12. open questions / next decisions
+      -->
+    </main>
+  </div>
+</body>
+</html>

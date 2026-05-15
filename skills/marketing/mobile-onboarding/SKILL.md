@@ -1,21 +1,28 @@
 ---
 name: mobile-onboarding
 description: |
-  A multi-screen mobile onboarding flow rendered as three phone frames
-  side by side — splash, value-prop, sign-in. Status bar, swipe dots,
-  primary CTA. Use when the brief mentions "mobile onboarding", "iOS
-  onboarding", "phone signup", or "移动端引导".
+  K-패션 브랜드의 **모바일 앱 온보딩 플로우**를 단일 HTML 파일로 생성하는 스킬입니다.
+  iPhone 프레임 3개(스플래시 · 밸류프롭 · 사인인/스타일 취향 진단)를 가로로
+  나란히 배치한 픽셀 정확 프로토타입입니다. 자사몰 앱, 마뗑킴/마르디 메크르디
+  스타일 브랜드 앱, 무신사·29CM 톤의 패션 커머스 앱 첫 화면 설계에 사용합니다.
+  사용자가 "모바일 온보딩", "앱 첫 화면", "앱 회원가입 플로우", "스타일 취향 진단",
+  "패션 앱 온보딩", "iOS 온보딩"을 언급하면 활성화하세요.
 triggers:
+  - "모바일 온보딩"
+  - "앱 첫 화면"
+  - "앱 온보딩"
+  - "패션 앱 온보딩"
+  - "스타일 취향 진단"
+  - "회원가입 플로우"
   - "mobile onboarding"
   - "ios onboarding"
-  - "android onboarding"
-  - "phone signup"
   - "app onboarding"
-  - "移动端引导"
+  - "phone signup"
 od:
   mode: prototype
   platform: mobile
   scenario: design
+  category: fashion
   featured: 5
   preview:
     type: html
@@ -23,30 +30,165 @@ od:
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Design a 3-screen mobile onboarding flow for a meditation app — welcome, value props, sign-in."
+  example_prompt: "마뗑킴(Matin Kim) 자사몰 앱 온보딩 3단계 플로우를 만들어주세요. 스플래시(브랜드 인사) + 밸류프롭(쿨한 무드 시그니처 컬렉션 소개) + 스타일 취향 진단 사인인 화면. 컬러는 미니멀 크림+블랙, 타이포는 산세리프 중심."
 ---
 
-# Mobile Onboarding Skill
+# 모바일 온보딩 스킬
 
-Produce a three-screen mobile onboarding flow on a single HTML page.
+K-패션 브랜드 자사몰/멤버십 앱의 **3-스크린 모바일 온보딩 플로우**를 단일 HTML 페이지에 픽셀 정확 iPhone 프레임 3개로 표현합니다. 신규 가입자가 앱을 처음 열었을 때 보는 흐름 — 스플래시(브랜드 인사) → 밸류프롭(혜택/시그니처 소개) → 사인인 또는 스타일 취향 진단 — 을 한 화면에 배치해 디자인 리뷰·기획 검토용으로 사용합니다.
 
-## Workflow
+이 산출물의 청중은 **자사몰 PM, 이커머스팀, 마케팅실, 디자인실, 외주 앱 개발 파트너**입니다. 한국 K-패션 브랜드에서는 보통 자사몰 PM이 와이어를 정의하고 디자인실(그래픽팀)이 비주얼 시안을 만든 뒤 마케팅실이 카피를 락업하는 흐름을 따릅니다. 무신사·29CM·에이블리 같은 멀티 브랜드 플랫폼이 아니라 **단일 브랜드 자사몰 앱** 컨텍스트에 최적화되어 있습니다.
 
-1. Read DESIGN.md.
-2. Identify the app + audience.
-3. Layout: three phone frames side by side. Each phone:
-   - Status bar (time, battery, signal).
-   - Hero artwork or icon.
-   - Headline + supporting paragraph.
-   - 3-dot pagination.
-   - Primary CTA (full-width pill button).
-   - "Skip" or alt action top-right.
-4. Last phone is the sign-in / continue-with options screen.
-5. Strong typography, gentle gradients, accessible contrast.
+## 환경 호환성
 
-## Output contract
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 본문에서 권장하는 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기 기능을 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 작업 흐름은 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 `DESIGN.md` 경로나 기본 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+사용자가 한국어로 작성하거나 브랜드/맥락이 한국 K-패션이라면, 산출물 카피는 **한국 패션 비즈니스 등록(register)**을 따릅니다.
+
+- 화면에 보이는 모든 카피는 한국어 우선. 단, 한국 패션 앱에서 자연스럽게 통용되는 영문은 그대로 유지(예: "SHOP", "LOOKBOOK", "CONTINUE", "VIP", "WELCOME").
+- 유지하는 용어 예시: 룩북 · 스타일링 · 컬렉션 · 멤버십 · 사전예약 · OOTD · SS / FW · KV(키비주얼).
+- 카카오·애플·네이버·구글 소셜 로그인 표기는 한국 표준: "카카오로 시작하기", "Apple로 계속하기", "네이버로 계속하기".
+- 본문 카피, 인사말, CTA 라벨은 **명사구·문장형 혼용** 허용 — 단, CTA 버튼은 짧은 명사·동사(예: "시작하기", "계속", "스타일 진단 시작") 권장.
+- 카피 톤은 브랜드 캐릭터를 따릅니다. 마뗑킴 = 미니멀 / 마르디 = 사랑스러운 / 아더에러 = 컨셉추얼 / 와키윌리 = 위트.
+
+## 폴더 구조
 
 ```
-<artifact identifier="mobile-onboarding-name" type="text/html" title="Mobile Onboarding">
-<!doctype html>...</artifact>
+mobile-onboarding/
+├── SKILL.md        ← 이 파일
+└── example.html    ← 작성 예시 (한국어 K-패션 사례)
 ```
+
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. `example.html`을 처음부터 끝까지 읽어 스플래시/밸류프롭/사인인 3-스크린 구조를 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 파일이 자동 주입되지 않는 환경이라면 사용자에게 경로나 기본 톤을 묻고 진행합니다.
+3. 이미지 생성은 **선택**입니다. 기본 출력은 인라인 SVG 일러스트/아이콘으로 처리합니다.
+
+### Step 1 — 정보 수집
+
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
+
+- 브랜드명 (예: 마뗑킴, 마르디 메크르디, 아더에러, 키르시, 와키윌리, 자사 브랜드)
+- 브랜드 캐릭터/톤 (미니멀 / 사랑스러운 / 컨셉추얼 / 위트 / 헤리티지)
+- 앱 성격 (자사몰 / 멤버십 라운지 / 사전예약 전용 / 룩북 큐레이션)
+- 첫 화면 시즌 컨텍스트 (예: 27SS 신상 발매, 멤버십 오픈, 콜라보 론칭)
+- 사인인 옵션 (카카오 · Apple · 네이버 · 이메일 — 보통 카카오가 첫 번째)
+- 3번째 스크린 성격: **사인인 화면** vs **스타일 취향 진단 시작 화면** 중 어느 쪽인지
+
+### Step 2 — 레이아웃
+
+iPhone 프레임 3개를 가로 grid로 배치합니다. 각 프레임은 다음을 포함:
+
+- **Status bar** (시간, 5G, 배터리)
+- **상단 우측 액션** ("건너뛰기" 또는 "도움말")
+- **히어로 영역** — 브랜드 로고/시그니처 그래픽/대표 비주얼 (SVG)
+- **카피 영역** — 헤드라인(serif 또는 굵은 sans) + 서브 카피(muted)
+- **3-dot 페이지네이션** (현재 스크린 표시)
+- **Primary CTA** (풀 너비 pill 버튼)
+
+각 스크린의 역할:
+
+1. **Screen 1 · 스플래시 / 웰컴** — 브랜드 워드마크 + 한 줄 카피 ("당신의 일상에 스며드는 스타일")
+2. **Screen 2 · 밸류프롭** — 시그니처 컬렉션 / 멤버십 혜택 / 회원 사전예약 권한 등 3가지 중 1개 강조
+3. **Screen 3 · 사인인** 또는 **스타일 취향 진단 시작** — 카카오/Apple/이메일 또는 "스타일 진단 시작하기"
+
+### Step 3 — 작성
+
+1. 단일 HTML 문서(`<!doctype html>` ~ `</html>`)로 작성하고 CSS는 인라인 `<style>` 한 블록.
+2. 시맨틱 HTML: 각 프레임은 `<section class="phone">`.
+3. 주요 영역(stage, phone-1, phone-2, phone-3, hero, copy, cta, signin)에 식별용 속성을 부여하세요. OpenDesign 환경에서는 `data-od-id="<slug>"`, 그 외 환경에서는 일반 `id` 속성으로 대체합니다.
+4. 부드러운 그라데이션, 접근성 있는 콘트라스트, 디스플레이 폰트 1개 + 본문 sans 1개로 제한.
+
+### Step 4 — 자체 검수
+
+- 3개 프레임 모두 노치/스테이터스바/페이지네이션/CTA 보유
+- 카피가 K-패션 브랜드 톤과 일치 (마뗑킴 = 미니멀, 마르디 = 사랑스러운 등)
+- "Continue with Apple/Google" 같은 영문 원본 표기 대신 한국 표준 표기 사용
+- 사인인 옵션 첫 번째에 **카카오**가 위치 (한국 표준)
+- 색상은 모두 `:root` 토큰에서 옴 — 임의 hex 금지
+- 디스플레이 폰트는 1개, 본문 sans 1개 (Pretendard 권장)
+
+## 한국 K-패션 브랜드 사례 (참고)
+
+자사몰 앱 온보딩 작성 시 참고할 K-패션 브랜드 패턴.
+
+| 브랜드 | 톤 | 첫 화면 카피 예시 | 3번째 스크린 성격 |
+|---|---|---|---|
+| **마뗑킴 (Matin Kim)** | 미니멀, 쿨한 데일리 럭셔리 | "쿨하게, 매일." / "Welcome to Matin Kim" | 카카오 사인인 + 멤버십 안내 |
+| **마르디 메크르디 (Mardi Mercredi)** | 사랑스러운, 프렌치 시크 | "Every Wednesday, with you." / "오늘도 사랑스럽게" | 스타일 취향 진단 (좋아하는 컬러/꽃 패턴 선택) |
+| **아더에러 (ADER ERROR)** | 컨셉추얼, 글로벌 | "Postmodernism, daily." / "왜곡된 일상, 새로운 시선" | 다국어(KR/EN) 선택 → 사인인 |
+| **키르시 (KIRSH)** | 비비드, 영컬처 | "체리처럼 상큼하게." / "Young, Lovely, Now." | 스타일 키워드 진단 (키치/베이직/스트릿) |
+| **와키윌리 (WACKYWILLY)** | 위트, K-아이돌 팬덤 | "오늘도 즐겁게." / "Playful Everyday" | 캐릭터 IP 픽 + 마일리지 적립 시작 |
+| **무신사 스탠다드 (Musinsa Standard)** | 베이직, 가성비 | "데일리의 표준." / "Standard for everyday." | 사이즈 선호 입력 + 사인인 |
+
+위 사례는 카피·예시 참고용입니다. 실제 산출물은 사용자 브랜드의 실제 키워드로 작성하세요.
+
+## 한국 패션기업 조직 R&R 메모
+
+모바일 앱 온보딩 산출물의 작성 흐름.
+
+- **자사몰 PM / 이커머스팀**: 와이어 정의, 유저 플로우 락업, A/B 테스트 설계
+- **디자인실 (그래픽팀 / UX팀)**: 비주얼 시안, 시그니처 일러스트, 인터랙션 디자인
+- **마케팅실**: 카피 톤 락업, CTA 워딩, 브랜드 보이스 합의
+- **개발 파트너 (외주 또는 인하우스)**: SwiftUI / React Native / Flutter 구현
+- **CRM 담당**: 카카오 알림톡 연동, 푸시 알림 전략, 신규 가입 리워드 트리거
+
+## 시즌 사이클 내 위치
+
+모바일 온보딩은 **시즌 사이클과 독립적인 영구 자산**이지만, 시즌 캠페인이나 멤버십 리뉴얼 시점에 부분 업데이트됩니다.
+
+```
+[앱 최초 런칭 시 1회 풀세트 제작]
+    ↓
+[시즌 키비주얼 변경 시 — Screen 1 히어로만 교체]
+    ↓
+[멤버십 정책 변경 시 — Screen 2 밸류프롭 교체]
+    ↓
+[신규 사인인 방식 도입 시 — Screen 3 옵션 추가]
+```
+
+다음 산출물과 연결:
+- `fashion-imc-calendar` — 시즌 캠페인에 맞춘 온보딩 KV 교체 일정
+- `fashion-key-item-sheet` — 밸류프롭에서 강조할 시즌 키 아이템
+- `gamified-app` — 가입 후 마일리지/출석 챌린지 연계
+
+## 채널 연계
+
+이 산출물은 다음 채널에서 사용됩니다.
+
+- **자사몰 앱** (iOS · Android) — 신규 설치 후 첫 진입
+- **카카오톡 알림톡** — "회원 가입을 환영합니다" 후속 메시지
+- **CRM 시퀀스** — 가입 후 24시간/3일/7일 리워드 트리거
+- **퍼포먼스 마케팅 랜딩** — 앱 다운로드 광고 클릭 후 첫 화면
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="mobile-onboarding-slug" type="text/html" title="모바일 온보딩 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "마뗑킴 자사몰 앱 온보딩 3-스크린 플로우를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

@@ -1,44 +1,58 @@
-# Web prototype checklist
+# K-패션 자사몰 웹 프로토타입 체크리스트
 
-Run this before emitting `<artifact>`. P0 = must pass; P1 = should pass; P2 = nice to have.
+`<artifact>` 출력 전에 위에서 아래로 점검. P0 = 통과 필수, P1 = 통과 권장, P2 = 보너스.
 
-## P0 — must pass
+## P0 — 통과 필수
 
-- [ ] **No raw hex outside `:root` token block.** Every color is `var(--bg)` / `var(--fg)` / `var(--muted)` / `var(--border)` / `var(--accent)` / `var(--surface)` (or a `color-mix()` of those). Grep `#[0-9a-fA-F]{3,8}` outside `:root{}` should return nothing.
-- [ ] **All headings use `var(--font-display)`.** No sans-serif `<h1>` / `<h2>`. Inter / Roboto / system-sans never serve as a display face.
-- [ ] **Accent appears at most twice per screen.** Count: eyebrow color, primary CTA fill, anything else? If three or more, demote one to `var(--fg)` or `var(--muted)`.
-- [ ] **No purple/violet gradient backgrounds.** No `linear-gradient(... #a855f7 / #8b5cf6 / purple ...)`. The seed template has no gradients on backgrounds — keep it that way.
-- [ ] **No emoji used as feature icons.** Use the inline SVG monoline marks shipped in Layout 3, or a tasteful single-character glyph in `--font-mono`. ✨ 🚀 🎯 are out.
-- [ ] **No invented metrics.** Every number on the page came from the user, the brief, or is clearly labelled as a placeholder (e.g. `[REPLACE] · 38×`). "10× faster", "99.9% uptime" without source = remove.
-- [ ] **No filler copy.** Zero "Feature One / Feature Two", lorem ipsum, "Lorem ipsum dolor". If a section feels empty, delete it; do not pad.
-- [ ] **`data-od-id` on every top-level `<section>`.** Used by comment mode to target sections.
-- [ ] **Mobile reflow works.** All `grid-2`, `grid-3`, `grid-4`, `grid-2-1`, `grid-1-2` collapse to one column at ≤920px (the default media query in `template.html` does this). Verify by mentally narrowing — no horizontal scroll.
-- [ ] **No `scrollIntoView()` calls.** Breaks the OD preview iframe. Use `scrollTo({...})` if you need scroll behaviour.
+- [ ] **`:root` 토큰 블록 밖에서 원시 hex 금지.** 모든 색은 `var(--bg)` / `var(--fg)` / `var(--muted)` / `var(--border)` / `var(--accent)` / `var(--surface)` (또는 그것들의 `color-mix()`). `:root{}` 밖에서 `#[0-9a-fA-F]{3,8}` grep 시 빈 결과.
+- [ ] **모든 헤딩은 `var(--font-display)` 사용.** 산세리프 `<h1>` / `<h2>` 금지. Pretendard / Inter / Roboto / 시스템 산세리프가 디스플레이 폰트가 되면 안 됨. K-패션 자사몰은 디스플레이 세리프 (Hahmlet, 본명조, Iowan Old Style)가 표준.
+- [ ] **액센트는 화면당 최대 2회 출현.** 카운트: 아이브로우 컬러, 1차 CTA 채움, 그 외? 3회 이상이면 1개를 `var(--fg)` 또는 `var(--muted)`로 강등.
+- [ ] **퍼플/바이올렛 그라데이션 배경 금지.** `linear-gradient(... #a855f7 / #8b5cf6 / purple ...)` 금지. 시드 템플릿은 배경에 그라데이션이 없음 — 유지.
+- [ ] **이모지를 키 아이템 아이콘으로 사용 금지.** Layout 3에서 제공되는 인라인 SVG 모노라인 마크, 또는 `.ph-img.square`에 모델/제품 부분 컷을 사용. ✨ 🚀 🎯 금지.
+- [ ] **수치를 발명하지 말 것.** 페이지의 모든 숫자는 사용자, 브리프, 또는 명확히 자리표시자로 표시(예: `[REPLACE] · 82%`)된 것이어야 함. `10× faster`, `99.9% uptime` 같은 SaaS 어휘 금지. K-패션 KPI: `정상판매율`, `재고 회전수`, `사전예약 비율`, `LOOKBOOK PV`만 사용.
+- [ ] **필러 카피 금지.** "Feature One / Feature Two", lorem ipsum, `Lorem ipsum dolor` 모두 금지. 섹션이 비어 보이면 삭제 — 패딩하지 말 것.
+- [ ] **`data-od-id`는 OpenDesign 환경에서 권장, 다른 환경에서는 선택.** OpenDesign 환경의 코멘트 모드가 섹션을 타게팅하는 데 사용. 다른 LLM 환경(ChatGPT, Gemini)에서는 일반 `id` 속성으로 대체하거나 생략 가능.
+- [ ] **모바일 리플로 작동.** 모든 `grid-2`, `grid-3`, `grid-4`, `grid-2-1`, `grid-1-2`가 ≤920px에서 1열로 축소(`template.html`의 기본 미디어 쿼리 처리). 정신적으로 좁혀 검증 — 가로 스크롤 없음.
+- [ ] **`scrollIntoView()` 호출 금지.** OD 프리뷰 iframe을 깨뜨림. 필요하면 `scrollTo({...})` 사용.
+- [ ] **K-패션 등록 준수.** 영문 헤드라인은 그대로 OK. 데크와 본문은 한국 패션 매거진 톤. `Get Started` 같은 SaaS 카피 금지 → `사전예약 신청`, `룩북 보기`, `회원가입 후 우선 알림`.
 
-## P1 — should pass
+## P1 — 통과 권장
 
-- [ ] **One decisive flourish.** A pull quote, a striking stat, a real-feeling photograph, one micro-animation on the hero. *One.* Not three.
-- [ ] **Section rhythm alternates.** No two stat rows in a row. No two feature triplets in a row. No two quote blocks in a row.
-- [ ] **Headlines under 14 words.** If longer, the writing is doing the design's job.
-- [ ] **Lead text under 56 ch / two sentences.** `max-width: 60ch` on `.lead` enforces this; don't override.
-- [ ] **CTA buttons say what happens.** "Start free" beats "Get Started". "Read the story" beats "Learn More".
-- [ ] **Hover states present** for all `<a>` and `.btn`. Seed template covers this.
-- [ ] **Numerics use `.num` (mono, tabular).** Prices, stats, version numbers, dates.
-- [ ] **One image style per page.** Don't mix square portrait headshots with widescreen product hero with vertical phone mock — pick a lane.
+- [ ] **결정적 디테일 1개.** 풀쿼트 1개, 인상적인 통계, 진짜 같은 모델컷 자리, 히어로의 마이크로 애니메이션 1개. *1개.* 3개는 아님.
+- [ ] **섹션 리듬 교차.** 연속 2개 통계 행 금지. 연속 2개 키 아이템 트리플렛 금지. 연속 2개 풀쿼트 금지.
+- [ ] **헤드라인 14단어 미만 (영문) 또는 14자 미만 (한국어).** 더 길면 글이 디자인의 일을 대신함.
+- [ ] **데크는 56자 미만 / 2문장 이하.** `.lead`의 `max-width: 60ch`가 이를 강제 — 오버라이드 금지.
+- [ ] **CTA 버튼은 행동을 명시.** `사전예약 신청` > `Start`. `룩북 보기` > `Learn More`. `회원가입 후 우선 알림` > `Sign Up`. `팝업 위치 보기` > `View`.
+- [ ] **모든 `<a>`와 `.btn`에 호버 상태 존재.** 시드 템플릿이 처리.
+- [ ] **숫자는 `.num` (mono, tabular) 사용.** 가격(`₩128,000`), 통계, 시즌 코드, 일자, LOT 수량.
+- [ ] **페이지당 이미지 스타일 1개.** 정사각 모델 헤드샷 + 와이드 키비주얼 + 세로 모델 풀샷 혼합 금지 — 하나만.
+- [ ] **시즌 코드 정합성.** 페이지 전체에 한 가지 시즌 코드 (27SS 또는 26FW). 혼합 금지.
 
-## P2 — nice to have
+## P2 — 보너스
 
-- [ ] **`text-wrap: pretty` / `balance`** on long paragraphs / headings (already on `<p>` and `h*` in seed).
-- [ ] **`color-mix()` for derived tones.** No additional `--accent-50` / `--accent-300` Bootstrap-style tokens — derive on the spot.
-- [ ] **Sticky topnav has frosted glass** (already in seed via `backdrop-filter: blur()`).
-- [ ] **Loaded fonts are system-first.** Iowan Old Style / Charter for serif, system stack for sans. Only pull a Google Font if DESIGN.md specifies one.
+- [ ] **`text-wrap: pretty` / `balance`** 긴 단락 / 헤딩에 적용 (시드의 `<p>`와 `h*`에 이미 적용).
+- [ ] **`color-mix()`로 파생 톤.** Bootstrap 스타일 `--accent-50` / `--accent-300` 토큰 추가 금지 — 현장에서 파생.
+- [ ] **Sticky topnav에 프로스티드 글래스** (시드의 `backdrop-filter: blur()`로 이미 적용).
+- [ ] **로드된 폰트는 시스템 우선.** Iowan Old Style / Charter for serif, Pretendard / 시스템 스택 for sans. DESIGN.md가 명시할 때만 Google Fonts 추가.
+- [ ] **K-패션 도메인 사용.** 푸터의 메일 주소는 `contact@brand.kr`, `hello@matinkim.com` 같은 한국 도메인.
+- [ ] **카카오톡 채널 연동 힌트.** 푸터에 카카오 채널 링크 또는 알림톡 가입 유도 (선택).
 
-## Anti-slop spot-check
+## 안티-슬롭 즉시 점검
 
-Look at the page for two seconds. If your gut says any of:
+페이지를 2초간 응시. 직감이 다음 중 하나라도 떠올린다면:
 
-- "looks like every Cursor / Linear / Vercel ripoff I've seen this month"
-- "this could be any AI startup's homepage"
-- "the feature row has an icon, a heading, and three lines of vague benefit copy"
+- "이번 달에 본 모든 Linear / Vercel / Cursor 모방 페이지와 똑같다"
+- "이건 아무 AI 스타트업의 홈페이지가 될 수 있다"
+- "키 아이템 행에 아이콘, 헤딩, 3줄 추상 카피만 있다"
+- "이 페이지는 K-패션 자사몰처럼 보이지 않고 SaaS 랜딩처럼 보인다"
 
-…go back, replace one feature cell with something more specific to *this* product (a screenshot, a concrete example, a sample of the actual output), and remove one accent.
+…다시 돌아가서 키 아이템 셀 1개를 더 구체적으로(룩북 컷, 진짜 가격, 진짜 컬러웨이 명) 바꾸고, 액센트 1개를 제거하세요.
+
+## K-패션 자사몰 톤 점검
+
+- [ ] 페이지가 **자사몰**처럼 읽힘 — 무신사 입점 페이지 또는 SaaS 랜딩이 아님
+- [ ] **포엣코어 톤** — 기능·스펙 직설 → 감각·계절감·디자이너 의도
+- [ ] 시즌 코드 (`27SS`, `26FW`)가 명시
+- [ ] 가격은 한국 표준 (`₩128,000` 또는 `128,000원`, 큰 숫자는 mono)
+- [ ] 디자이너 이름·매거진 인용·룩북 사진 크레딧이 진짜 (가짜 인물 금지)
+- [ ] CTA가 K-패션 행동 어휘 (`사전예약 신청`, `룩북 보기`, `MEMBERS 가입`, `팝업 위치`)

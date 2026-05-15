@@ -1,187 +1,176 @@
-# Fabric Library
+# 패브릭 라이브러리
 
-Canonical fabric vocabulary used in K-young-casual / streetwear seasons.
-Group A is the **structural** fabrics (the look + hand). Group B is the
-**functional** fabrics (the value driver — function must be visible to
-count). Pick from these or define new ones using the same shape.
+한국 영캐주얼 / 스트릿웨어 시즌에 사용되는 canonical 패브릭 어휘. 그룹 A는 **구조** 패브릭(룩 + 핸드), 그룹 B는 **기능성** 패브릭(가치 동인 — 기능은 가시적이어야 작동). 여기서 선택하거나 동일 형식으로 신규 정의하세요.
 
 ---
 
-## Group A — Structural fabrics
+## 그룹 A — 구조 패브릭
 
-### A1. Waffle jersey (와플 저지)
+### A1. 와플 저지 (Waffle jersey)
 
-- **Hand** — soft, textured, bumpy 3D weave; light to mid weight
-- **Knit/weave** — waffle (honeycomb) knit; cotton or cotton-blend
-- **Use when** — UNI henley / overshirt; WOMEN lovely top with print
-  overlay
-- **Avoid when** — bottoms (pattern distorts under stretch)
-- **Carryover signal** — durable; refresh by pigment-dye or color
-  variation
+- **핸드** — 소프트, 텍스처감, 3D 입체 위브, 라이트~미드 웨이트
+- **위브/니트** — 와플(허니컴) 니트, 코튼 또는 코튼 블렌드
+- **사용** — UNI 헨리/오버셔츠, WOMEN 러블리 톱 + 프린트 오버레이
+- **회피** — 하의(스트레치 시 패턴 왜곡)
+- **캐리오버 시그널** — 내구성 있음, 피그먼트 염색·컬러 변주로 리프레시
 
-### A2. Slub jersey (슬럽 저지)
+### A2. 슬럽 저지 (Slub jersey)
 
-- **Hand** — uneven yarn slubs giving a vintage, textured look;
-  breathable
-- **Knit/weave** — single jersey with slub yarn
-- **Use when** — vintage graphic tees, summer relaxed tees
-- **Avoid when** — clean / minimal silhouettes
-- **Often paired with** — pigment-dyeing for full vintage hand
+- **핸드** — 불균일 슬럽 얀 → 빈티지, 텍스처감, 통기성
+- **위브/니트** — 슬럽 얀 싱글 저지
+- **사용** — 빈티지 그래픽 티, 여름 릴랙스 티
+- **회피** — 클린 / 미니멀 실루엣
+- **자주 페어** — 피그먼트 염색 (풀 빈티지 핸드)
 
-### A3. Rib jersey (립 저지)
+### A3. 립 저지 (Rib jersey)
 
-- **Hand** — stretchy, hugs body, vertical rib texture
-- **Knit/weave** — 1x1 or 2x2 rib knit
-- **Use when** — basics layering tees, slim silhouettes, women's
-  ribbed dresses
-- **Avoid when** — oversized / boxy silhouettes (rib disappears)
+- **핸드** — 스트레치, body-hug, 수직 립 텍스처
+- **위브/니트** — 1×1 또는 2×2 립 니트
+- **사용** — 베이직 레이어링 티, 슬림 실루엣, WOMEN 립드 드레스
+- **회피** — 오버사이즈 / 박시 실루엣 (립 사라짐)
 
-### A4. Crease check (크리즈 체크)
+### A4. 크리즈 체크 (Crease check)
 
-- **Hand** — natural creases that hide daily wrinkles, breathable
-- **Weave** — woven check with intentional crinkle finish
-- **Use when** — UNI overshirt / lightweight outer
-- **Avoid when** — formal silhouettes
+- **핸드** — 자연 주름이 일상 구김 은폐, 통기성
+- **위브** — 크링클 마감 우븐 체크
+- **사용** — UNI 오버셔츠 / 라이트 아우터
+- **회피** — 포멀 실루엣
 
-### A5. Pattern seersucker (패턴 시어서커)
+### A5. 패턴 시어서커 (Pattern seersucker)
 
-- **Hand** — crisp puckered surface, breathable; airy summer hand
-- **Weave** — seersucker, puckered stripe / check
-- **Use when** — UNI summer overshirt, WOMEN oversized shirt
-- **Avoid when** — winter / structured silhouettes
+- **핸드** — 크리스피 퍼커링 표면, 통기성, 에어리 여름 핸드
+- **위브** — 시어서커, 퍼커링 스트라이프/체크
+- **사용** — UNI 여름 오버셔츠, WOMEN 오버사이즈 셔츠
+- **회피** — 겨울 / 스트럭처드 실루엣
 
-### A6. CN allover (CN 올오버)
+### A6. CN 올오버 (CN allover)
 
-- **Hand** — cotton + nylon blend, soft cotton hand with crisp nylon
-  rustle
-- **Weave** — woven plain weave with CN blend, often printed allover
-  (cartoons, characters)
-- **Use when** — playful camp shirts, oversized button-downs
-- **Avoid when** — quiet / minimal silhouettes
+- **핸드** — 코튼 + 나일론 블렌드, 소프트 코튼 핸드 + 크리스피 나일론 러슬
+- **위브** — CN 블렌드 우븐 플레인 위브, 자주 올오버 프린트(카툰, 캐릭터)
+- **사용** — 플레이풀 캠프 셔츠, 오버사이즈 버튼다운
+- **회피** — 콰이엇 / 미니멀 실루엣
 
-### A7. Dot jersey (도트 저지)
+### A7. 도트 저지 (Dot jersey)
 
-- **Hand** — soft single jersey with small dot print
-- **Use when** — WOMEN lovely tees, polka-dot series
-- **Pair with** — basic single jersey for hard count balance
+- **핸드** — 소프트 싱글 저지 + 작은 도트 프린트
+- **사용** — WOMEN 러블리 티, 폴카 도트 시리즈
+- **페어** — 베이직 싱글 저지 (하드 카운트 밸런스)
 
-### A8. Lovely print jersey (러블리 프린트 저지)
+### A8. 러블리 프린트 저지 (Lovely print jersey)
 
-- **Hand** — soft single jersey with kids-coded floral / fruit /
-  character prints
-- **Use when** — WOMEN summer tee with wit
-- **Avoid when** — UNI line (reads as feminine)
+- **핸드** — 소프트 싱글 저지 + 키즈 코드 플로럴/프루트/캐릭터 프린트
+- **사용** — WOMEN 여름 티 + 위트
+- **회피** — UNI 라인 (페미닌으로 읽힘)
 
-### A9. Poly uragiri (폴리 우라기리)
+### A9. 폴리 우라기리 (Poly uragiri)
 
-- **Hand** — soft 3D textured polyester, dimensional surface
-- **Use when** — WOMEN dress, skirt with structural texture
-- **Avoid when** — hot summer (polyester traps heat)
+- **핸드** — 소프트 3D 텍스처 폴리에스터, 입체 표면
+- **사용** — WOMEN 드레스, 스커트 (구조 텍스처)
+- **회피** — 더운 여름 (폴리 → 열 가둠)
 
-### A10. Check seersucker (체크 시어서커)
+### A10. 체크 시어서커 (Check seersucker)
 
-- **Hand** — light, airy, pastel-friendly check with puckered
-  seersucker hand
-- **Use when** — WOMEN casual oversized shirt
-- **Pair with** — pastel palette
+- **핸드** — 라이트, 에어리, 파스텔 친화 체크 + 시어서커 퍼커링 핸드
+- **사용** — WOMEN 캐주얼 오버사이즈 셔츠
+- **페어** — 파스텔 팔레트
 
-### A11. Poly mesh (폴리 메시)
+### A11. 폴리 메시 (Poly mesh)
 
-- **Hand** — light, breathable, sporty, slightly transparent
-- **Use when** — sporty layering tee, gym-coded summer top
-- **Avoid when** — romantic / lovely territory
+- **핸드** — 라이트, 통기성, 스포티, 살짝 투명
+- **사용** — 스포티 레이어링 티, 짐 코드 여름 톱
+- **회피** — 로맨틱 / 러블리 영역
 
-### A12. Lace / scallop / ruffle trim
+### A12. 레이스 / 스캘롭 / 러플 트림
 
-- **Hand** — feminine, decorative; trim category, not fabric body
-- **Use when** — WOMEN ruffle / ribbon series; trim only, not full body
+- **핸드** — 페미닌, 장식적; 트림 카테고리, 풀 보디 패브릭 아님
+- **사용** — WOMEN 러플 / 리본 시리즈; 트림 전용, 풀 보디 아님
 
 ---
 
-## Group B — Functional fabrics (with hangtag)
+## 그룹 B — 기능성 패브릭 (행택 포함)
 
-Function must be **visible** on the floor — a customer should see the
-hangtag and understand the value before touching the garment.
+기능은 매장에서 **가시적**이어야 함 — 고객이 가먼트를 만지기 전에 행택을 보고 가치를 이해해야 함.
 
-### B1. Sorona Cool single jersey (소로나쿨 싱글저지)
+### B1. 소로나쿨 싱글저지 (Sorona Cool single jersey)
 
-- **Function** — eco-sourced Sorona fiber blended with cool-touch
-  synthetic; cool to skin on contact
-- **Ingredient brand** — Sorona (DuPont-licensed)
-- **Hangtag** — Sorona logo + COOL TOUCH callout
-- **Use when** — summer tees / sleeveless / lightweight outer
-- **Lead time** — confirm with supplier; lab-dip first
+- **기능** — 친환경 소로나 + 쿨터치 합섬 블렌드, 피부 접촉 시 차가운 느낌
+- **인그리디언트 브랜드** — Sorona (DuPont 라이선스)
+- **행택** — Sorona 로고 + COOL TOUCH 콜아웃
+- **사용** — 여름 티 / 슬리브리스 / 라이트 아우터
+- **리드타임** — 공급사 확인, 랩딥 우선
 
-### B2. Sorona Polymer fleece (소로나 폴리머 쭈리)
+### B2. 소로나 폴리머 쭈리 (Sorona Polymer fleece)
 
-- **Function** — eco Sorona with high stretch + recovery; soft hand
-- **Hangtag** — Sorona Polymer
-- **Use when** — sweat setup, hoodies, easy-fit knit-feel pieces
-- **Lead time** — confirm with supplier
+- **기능** — 친환경 소로나 + 높은 스트레치·회복력, 소프트 핸드
+- **행택** — Sorona Polymer
+- **사용** — 스웻 셋업, 후디, 이지 핏 니트 필 피스
+- **리드타임** — 공급사 확인
 
-### B3. Askin single jersey (아스킨 싱글저지)
+### B3. 아스킨 싱글저지 (Askin single jersey)
 
-- **Function** — wide skin-contact area releases heat fast → cooling
-  effect
-- **Ingredient brand** — Askin (Hyosung Creora-licensed)
-- **Hangtag** — Askin COOL + Creora Polyester
-- **Use when** — peak summer cooling tees
-- **Pair with** — UV-block hangtag if base fabric also blocks UV
+- **기능** — 넓은 피부 접촉 영역으로 빠른 발열 방출 → 쿨링
+- **인그리디언트 브랜드** — Askin (효성 Creora 라이선스)
+- **행택** — Askin COOL + Creora Polyester
+- **사용** — 피크 여름 쿨링 티
+- **페어** — 베이스 패브릭이 UV 차단도 하면 UV-block 행택 추가
 
 ### B4. Cool Cotton
 
-- **Function** — cotton blend treated for cool touch; familiar cotton
-  hand with summer comfort
-- **Hangtag** — Cool Cotton + (sometimes) Askin
-- **Use when** — signature graphic tee, basic tee summer line
+- **기능** — 쿨터치 처리 코튼 블렌드, 익숙한 코튼 핸드 + 여름 컴포트
+- **행택** — Cool Cotton + (가끔) Askin
+- **사용** — 시그니처 그래픽 티, 베이직 티 여름 라인
 
-### B5. Light nylon (UV-block + water-repellent)
+### B5. 라이트 나일론 (UV 차단 + 생활방수)
 
-- **Function** — strong UV block + light water-repellent for weather
-  shifts
-- **Hangtag** — UPF 50+ + WATER REPELLENT (often Korean: UV차단 +
-  생활방수)
-- **Use when** — light outer, packable jacket, technical bag
-- **Avoid when** — non-utility silhouettes
+- **기능** — 강력 UV 차단 + 라이트 생활방수 (날씨 변화 대응)
+- **행택** — UPF 50+ + WATER REPELLENT (한국어: UV차단 + 생활방수)
+- **사용** — 라이트 아우터, 패커블 재킷, 테크니컬 백
+- **회피** — 비유틸리티 실루엣
 
-### B6. Coolmax denim
+### B6. 쿨맥스 데님 (Coolmax denim)
 
-- **Function** — denim blend with Coolmax cooling fiber; lightweight
-  feel without losing denim look
-- **Ingredient brand** — Coolmax (Invista)
-- **Hangtag** — Coolmax COOL + DRY
-- **Use when** — easy-denim setup, summer denim shorts
+- **기능** — 쿨맥스 쿨링 파이버 블렌드 데님, 데님 룩 유지하며 경량감
+- **인그리디언트 브랜드** — Coolmax (Invista)
+- **행택** — Coolmax COOL + DRY
+- **사용** — 이지 데님 셋업, 여름 데님 쇼츠
 
-### B7. Linen-like denim
+### B7. 린넨라이크 데님 (Linen-like denim)
 
-- **Function** — denim with linen-like dry hand; lighter than
-  conventional denim
-- **Hangtag** — LINEN LIKE
-- **Use when** — easy-denim setup, summer pants
+- **기능** — 린넨 라이크 드라이 핸드 데님, 일반 데님보다 가벼움
+- **행택** — LINEN LIKE
+- **사용** — 이지 데님 셋업, 여름 팬츠
 
-### B8. Recycled polyester / nylon
+### B8. 리사이클 폴리에스터 / 나일론 (Recycled polyester / nylon)
 
-- **Function** — sustainability story; same hand as virgin counterpart
-- **Hangtag** — RECYCLED, often co-branded with supplier
-- **Use when** — bag, outer, sustainability-coded item
-- **Avoid when** — no story to back it (lone bullet does not sell)
+- **기능** — 지속가능성 스토리, 버진 카운터파트와 동일 핸드
+- **행택** — RECYCLED, 자주 공급사 코브랜딩
+- **사용** — 가방, 아우터, 지속가능성 코드 아이템
+- **회피** — 백스토리 없는 단독 bullet (안 팔림)
 
 ---
 
-## Fabric card shape (for the layout)
+## 패브릭 카드 표준 형식 (레이아웃용)
 
-Every fabric card the layout pastes should carry:
+레이아웃이 붙여 넣는 모든 패브릭 카드 표준:
 
 ```
-Name              — canonical fabric name (Korean + English when applicable)
+Name              — canonical 패브릭 이름 (한국어 + 영어 혼용 가능)
 Group             — Structural / Functional
-Hand              — 1-line hand-feel descriptor
-Weave / knit      — weave or knit type
-Use when          — 1-line "use when" note
-Recommended cats  — comma list of categories (top / outer / bottom / setup)
-Color story link  — references to active color story color names
-Hangtag mock      — only for functional fabrics
-Carryover         — new / carried from [season]
-Supplier          — if known
+Hand              — 1줄 핸드필 디스크립터
+Weave / knit      — 위브 또는 니트 타입
+Use when          — 1줄 "use when" 노트
+Recommended cats  — 카테고리 콤마 리스트 (top / outer / bottom / setup)
+Color story link  — 컬러 스토리 컬러 이름 참조
+Hangtag mock      — 기능성 패브릭만
+Carryover         — new / [시즌]에서 캐리오버
+Supplier          — 알려진 경우
 Approval status   — for-info / lab-dip pending / bulk pending / approved
 ```
+
+## 한국 K-패션 공급사 메모
+
+- **소로나·아스킨·쿨맥스·Creora**: 한국 공장 다수가 라이선스 보유. 행택 자산은 공급사가 무료 제공 (인그리디언트 브랜드 강화 인센티브)
+- **동대문 패브릭 시장**: 한국 영캐주얼 브랜드의 표준 패브릭 소싱 경로. 시즌 4~5개월 전 직접 방문(`패브릭 트립`)이 표준
+- **부산·구미 광역 공장**: 자카드·우라기리 등 특수 위브, 동대문 대비 MOQ 높지만 단가 좋음
+- **MOQ 통상치**: 베이직 저지 30~50yds (소량 가능), 자카드/특수 위브 100yds 이상
+- **리드타임 통상치**: 한국 공장 14~28일, 해외(중국·베트남) 35~60일

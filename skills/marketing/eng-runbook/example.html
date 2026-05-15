@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Auth Service · Runbook</title>
+<title>27SS 1차 발주 · 발주 운영 매뉴얼</title>
 <style>
   :root {
     --bg: #0c0e14;
@@ -16,8 +16,8 @@
     --accent-soft: rgba(110,231,183,0.1);
     --warn: #fbbf24;
     --danger: #f87171;
-    --display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
+    --display: 'Pretendard Variable', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --body: 'Pretendard Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
     --mono: ui-monospace, 'JetBrains Mono', SFMono-Regular, Menlo, monospace;
   }
   * { box-sizing: border-box; }
@@ -96,154 +96,172 @@
 </head>
 <body>
 <div class="page">
+  <!-- 헤더: 브랜드 / 시즌 발주 코드 / 담당 부서 / Tier 등급 -->
   <header class="head">
     <div class="head-left">
-      <div class="crumb">Northwind / Identity / Auth</div>
-      <h1>auth-service</h1>
-      <div class="head-meta">Owned by <span>@identity-platform</span> · v4.7.2 · Last reviewed 14 Oct 2025</div>
+      <div class="crumb">WACKYWILLY / 27SS / 1차 발주</div>
+      <h1>27SS · 1차 발주 SOP</h1>
+      <div class="head-meta">생산실 <span>@생산-1팀</span> · v1.2 · 최종 검토 2026-05-14</div>
     </div>
-    <span class="pill tier"><span class="dot"></span>Tier 0 · production-critical</span>
+    <span class="pill tier"><span class="dot"></span>Tier 0 · 시즌 메인 발주</span>
   </header>
 
+  <!-- 01. 서비스 요약: 발주 목적·규모·의존성 -->
   <section>
-    <h2><span class="index">01</span>Service summary</h2>
+    <h2><span class="index">01</span>발주 개요</h2>
     <div class="summary">
       <div class="panel">
-        <p><strong>auth-service</strong> issues, validates, and revokes session tokens for every Northwind product surface — web, mobile, and the public API. It owns the password store, the TOTP/WebAuthn enrollments, and the audit-log writer for all auth events.</p>
-        <p>If <code>auth-service</code> is down, customers cannot log in or refresh sessions. Existing valid sessions continue to work for their TTL (15 minutes) but no new auth happens.</p>
+        <p><strong>27SS 1차 발주</strong>는 와키윌리 봄여름 시즌의 메인 본생산 발주입니다. UNI 라인 42 SKU + WOMEN 라인 38 SKU, 총 80 SKU / 24,500 PCS / 사입금액 7.2억 규모. S1 판기(5-6월) 매장 입고를 위해 <strong>6월 28일 입고 마감</strong> 필수.</p>
+        <p>본 발주가 지연되면 S1 판기 매출 직접 타격 — 정상판매율 60% 기준 약 4.3억 매출 영향. 캐리오버 SKU는 별도 라인업으로 운영하며 본 SOP 대상 외.</p>
       </div>
       <div class="panel deps">
-        <h3>Dependencies</h3>
+        <h3>의존성</h3>
         <ul>
-          <li><span>Postgres · auth-db</span><span class="ok">healthy</span></li>
-          <li><span>Redis · session-cache</span><span class="ok">healthy</span></li>
-          <li><span>KMS · auth-keyring</span><span class="ok">healthy</span></li>
-          <li><span>SES · transactional</span><span class="warn">degraded</span></li>
-          <li><span>Pager · oncall.northwind</span><span class="ok">healthy</span></li>
+          <li><span>대구 인견 (메인 원단)</span><span class="ok">정상</span></li>
+          <li><span>서울 단추 거래처</span><span class="ok">정상</span></li>
+          <li><span>OEM 공장 A · 우먼 외피</span><span class="ok">정상</span></li>
+          <li><span>OEM 공장 B · 유니 니트</span><span class="warn">납기 지연 3일</span></li>
+          <li><span>QC 외주실 · 동대문</span><span class="ok">정상</span></li>
+          <li><span>3PL · 굿스플로 평택센터</span><span class="ok">정상</span></li>
         </ul>
       </div>
     </div>
   </section>
 
+  <!-- 02. 알람 표: 발주 진행 중 자주 발생하는 이슈 -->
   <section>
-    <h2><span class="index">02</span>Alerts you might wake up to</h2>
+    <h2><span class="index">02</span>알람 — 발주 중 발생할 수 있는 이슈</h2>
     <table>
-      <thead><tr><th>Alert</th><th>Severity</th><th>What it means</th><th>First response</th></tr></thead>
+      <thead><tr><th>알람</th><th>심각도</th><th>의미</th><th>1차 대응</th></tr></thead>
       <tbody>
         <tr>
-          <td class="code">auth.login_5xx_rate &gt; 1%</td>
-          <td><span class="sev sev-1">SEV-1</span></td>
-          <td>Login endpoint returning errors. Customers are locked out.</td>
-          <td>Check Postgres + Redis dashboards. Roll back last deploy if &lt; 30 min old.</td>
-        </tr>
-        <tr>
-          <td class="code">auth.token_refresh_lag_p95 &gt; 800ms</td>
+          <td class="code">color.deltaE &gt; 1.5</td>
           <td><span class="sev sev-2">SEV-2</span></td>
-          <td>Refresh path is slow. Web app starts to feel sluggish.</td>
-          <td>Inspect Redis CPU + connection count. Scale read replicas if needed.</td>
+          <td>컬러 락 대비 색차 ΔE 1.5 초과. 매장 행거 톤 안 맞음.</td>
+          <td>공장에 재염색 요청. 견본 재제출 요구. RMD에 컬러 락 변경 검토 보고.</td>
         </tr>
         <tr>
-          <td class="code">auth.signup_failure &gt; 10/min</td>
+          <td class="code">size.spec_drift &gt; ±0.5cm</td>
           <td><span class="sev sev-2">SEV-2</span></td>
-          <td>New signups are failing. Often SES bounces or SMTP auth.</td>
-          <td>Check SES bounce rate. Failover transactional queue to backup region.</td>
+          <td>그레이딩 어긋남. 사이즈별 핏 일관성 깨짐.</td>
+          <td>재단 재검 지시. 사이즈 재측정. 재단실 패턴 재확인.</td>
         </tr>
         <tr>
-          <td class="code">auth.kms_signing_errors &gt; 0</td>
+          <td class="code">delivery.lag &gt; 3d</td>
+          <td><span class="sev sev-2">SEV-2</span></td>
+          <td>OEM 공장 납기 지연 3일 초과. 매장 입고 일정 위협.</td>
+          <td>공장에 사유 요청. 예비 공장 검토. MD에게 캐리오버 전환 가능 여부 보고.</td>
+        </tr>
+        <tr>
+          <td class="code">fabric.shortage</td>
           <td><span class="sev sev-1">SEV-1</span></td>
-          <td>KMS can't sign session tokens. New logins fail; existing sessions OK.</td>
-          <td>Page the security team. Do not roll keys without a security engineer.</td>
+          <td>원단 결품으로 본생산 정지. 라인 전체 영향.</td>
+          <td>대구 인견에 즉시 연락. 가용 LOT 확인. 대체 원단 협의 — 컬러 락 변경 동의 필수.</td>
         </tr>
         <tr>
-          <td class="code">auth.audit_writer_backlog &gt; 5k</td>
+          <td class="code">qc.defect_rate &gt; 5%</td>
+          <td><span class="sev sev-1">SEV-1</span></td>
+          <td>봉제 결함률 5% 초과. 본생산 품질 문제.</td>
+          <td>본생산 즉시 정지. QC 외주실 전수 검사 의뢰. 공장 책임자에 클레임 등록.</td>
+        </tr>
+        <tr>
+          <td class="code">claim.field_return</td>
           <td><span class="sev sev-3">SEV-3</span></td>
-          <td>Audit log writer is falling behind. Compliance impact.</td>
-          <td>Drain manually. Open a ticket; not a wake-up.</td>
+          <td>입고 후 매장·소비자 클레임 발생. 컴플라이언스 이슈.</td>
+          <td>클레임 시트 등록. A품/B품 재분류 지시. 영업기획 공유.</td>
         </tr>
       </tbody>
     </table>
   </section>
 
+  <!-- 03. 표준 절차: 발주 진행 / 컬러 락 변경 / 클레임 / 입고 검수 -->
   <section>
-    <h2><span class="index">03</span>Common procedures</h2>
+    <h2><span class="index">03</span>표준 절차</h2>
     <div class="procs">
       <div class="proc">
-        <div class="proc-head"><h3>Deploy a new version</h3><span class="when">Use during business hours</span></div>
-        <p>Deploys are blue/green. The script waits for two consecutive healthchecks before promoting traffic.</p>
-<pre><span class="cmt"># Deploy auth-service v4.7.3 to production</span>
-$ nw deploy auth-service --tag <span class="var">v4.7.3</span> --env production
+        <div class="proc-head"><h3>본생산 발주 진행</h3><span class="when">라인업 LOCK 직후 · 1차 발주 시</span></div>
+        <p>견본 컨퍼(CON) 완료 후 OEM 공장에 본생산 P/O를 제출합니다. ERP에서 발주서 발행 후 공장 단톡방에 동시 전달.</p>
+<pre><span class="cmt"># 27SS WOMEN 라인 1차 발주를 OEM 공장 A에 제출</span>
+$ po submit --season <span class="var">27SS</span> --line <span class="var">WOMEN-1</span> --factory <span class="var">OEM-A</span>
 
-<span class="cmt"># Wait for two consecutive healthchecks (~90 s), then promote.</span>
-$ nw deploy promote auth-service --env production
-<span class="ok">→ traffic shifted: 10% / 50% / 100%</span></pre>
+<span class="cmt"># P/O 번호 발급 후 거래명세서 자동 생성 (40% 선급 / 60% 입고 시)</span>
+$ po confirm <span class="var">PO-27SS-W001</span>
+<span class="ok">→ P/O 발행 완료 · LOT-27SS-W001 ~ W038 · 1.8억 / 40% 선급금 7,200만원</span></pre>
       </div>
       <div class="proc">
-        <div class="proc-head"><h3>Roll back to last known good</h3><span class="when">Use when error rate &gt; 1% post-deploy</span></div>
-<pre><span class="cmt"># Rolls back to the previously promoted version, no rebuild.</span>
-$ nw deploy rollback auth-service --env production
-<span class="ok">→ rolled back to v4.7.2 in 38 s</span></pre>
+        <div class="proc-head"><h3>컬러 락 변경 (Color Re-lock)</h3><span class="when">색차 ΔE 1.5 초과 시 · MD 사인오프 필수</span></div>
+<pre><span class="cmt"># 견본 색차 발생 → 재염색 vs 컬러 락 변경 의사결정 후 실행</span>
+$ color relock --sku <span class="var">27SS-W014</span> --from <span class="var">CW01-OAT</span> --to <span class="var">CW01-OAT-v2</span>
+<span class="ok">→ 컬러 락 변경 등록 · 디자인실장 + MD 실장 사인 필요</span>
+
+<span class="cmt"># 변경 후 그래픽 디렉션·룩북 어셋 일괄 업데이트 알림</span>
+$ asset notify --type <span class="var">color-change</span> --sku <span class="var">27SS-W014</span></pre>
       </div>
       <div class="proc">
-        <div class="proc-head"><h3>Rotate signing keys</h3><span class="when">Schedule with security; never solo</span></div>
-<pre><span class="cmt"># 1. Generate the new signing key in KMS</span>
-$ nw kms create-key --alias auth-signing-<span class="var">$(date +%Y%m%d)</span>
+        <div class="proc-head"><h3>클레임 처리</h3><span class="when">QC 결함률 5% 초과 또는 입고 후 매장 클레임 발생 시</span></div>
+<pre><span class="cmt"># 1. 클레임 등록 · 사유 코드 + 사진 첨부 + 영향 LOT 범위 지정</span>
+$ claim open --lot <span class="var">LOT-27SS-W023</span> --code <span class="var">sewing-defect</span> --rate <span class="var">7.2%</span>
 
-<span class="cmt"># 2. Mark the new key as the primary; old key remains valid for 24h</span>
-$ nw kms set-primary auth-signing --key <span class="var">&lt;arn&gt;</span>
+<span class="cmt"># 2. A품/B품 재분류 후 거래명세서 차감액 산출</span>
+$ claim grade --lot <span class="var">LOT-27SS-W023</span> --a-grade <span class="var">820</span> --b-grade <span class="var">68</span>
+<span class="ok">→ 차감액 1,360만원 (B품 68장 × 20만원)</span>
 
-<span class="cmt"># 3. After 24h, schedule deletion of the previous key</span>
-$ nw kms schedule-deletion auth-signing --key <span class="var">&lt;old-arn&gt;</span> --days 30</pre>
+<span class="cmt"># 3. 공장 책임자에 클레임 공문 발송 + 재발주 결정 보고</span>
+$ claim notify --factory <span class="var">OEM-B</span> --next <span class="var">re-order-or-credit</span></pre>
       </div>
       <div class="proc">
-        <div class="proc-head"><h3>Drain audit-log backlog</h3><span class="when">Use when audit_writer_backlog alert fires</span></div>
-<pre>$ nw exec auth-service -- bin/audit-drain --batch <span class="var">5000</span>
-<span class="ok">→ drained 4,812 entries in 12 s; backlog now 0</span></pre>
+        <div class="proc-head"><h3>입고 검수 (3PL 도착 후)</h3><span class="when">매 입고일 · QC 외주실 동행 필수</span></div>
+<pre><span class="cmt"># 입고 즉시 SKU 수량 · LOT 코드 · 박스 단위 일치 확인</span>
+$ inbound check --po <span class="var">PO-27SS-W001</span> --location <span class="var">3PL-PYEONGTAEK</span>
+<span class="ok">→ 24,420 PCS 입고 · 견본 80 PCS 부족 · 공장에 추가 출고 요청</span></pre>
       </div>
     </div>
   </section>
 
+  <!-- 04. 담당자 로테이션: 주차별 PD/RMD/QC 배치 -->
   <section>
-    <h2><span class="index">04</span>On-call rotation · this month</h2>
+    <h2><span class="index">04</span>담당자 로테이션 · 이번 발주 사이클</h2>
     <table class="rota">
-      <thead><tr><th>Week</th><th>Primary</th><th>Secondary</th><th>Backup (escalation)</th></tr></thead>
+      <thead><tr><th>주차</th><th>PD (생산 담당)</th><th>RMD (머천다이저)</th><th>QC (검수 책임)</th></tr></thead>
       <tbody>
-        <tr><td>Oct 27 – Nov 02</td><td>Devon Park</td><td>Priya Banerjee</td><td>Sasha Lin</td></tr>
-        <tr><td>Nov 03 – Nov 09</td><td>Caleb Renner</td><td>Devon Park</td><td>Sasha Lin</td></tr>
-        <tr><td>Nov 10 – Nov 16</td><td>Priya Banerjee</td><td>Caleb Renner</td><td>Mira Reddy</td></tr>
-        <tr><td>Nov 17 – Nov 23</td><td>Sasha Lin</td><td>Priya Banerjee</td><td>Mira Reddy</td></tr>
+        <tr><td>5월 1주 · 발주 진행</td><td>김도하</td><td>박지연</td><td>이수민</td></tr>
+        <tr><td>5월 2-3주 · 견본 CON</td><td>김도하</td><td>박지연</td><td>이수민</td></tr>
+        <tr><td>5월 4주 ~ 6월 2주 · 본생산</td><td>장하늘</td><td>박지연</td><td>최서연</td></tr>
+        <tr><td>6월 3-4주 · 입고 검수</td><td>장하늘</td><td>윤재민</td><td>최서연</td></tr>
       </tbody>
     </table>
   </section>
 
+  <!-- 05. 사고 대응: 첫 30분 대응 5단계 -->
   <section>
-    <h2><span class="index">05</span>Incident response — first 30 minutes</h2>
+    <h2><span class="index">05</span>사고 대응 — 첫 30분</h2>
     <div class="checklist">
       <div class="step">
         <div class="step-num">1</div>
-        <div><h4>Acknowledge the page within 5 min.</h4><p>Type <code>/ack</code> in <code>#incidents-auth</code>. The bot stops re-paging and tags the on-call.</p></div>
+        <div><h4>5분 내 알람 확인 (Ack)</h4><p>슬랙 <code>#생산-27ss</code> 채널에 <code>/ack</code> 입력. 봇이 재알람 멈추고 담당 PD 태깅.</p></div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <div><h4>Open the incident channel.</h4><p>Run <code>/incident open auth-service "&lt;short title&gt;"</code>. Slack bot creates a dedicated channel and pages the secondary.</p></div>
+        <div><h4>이슈 채널 개설</h4><p><code>/incident open 27SS "공장명·이슈요약"</code> 실행. 전용 채널 자동 생성, 백업 PD에 호출.</p></div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <div><h4>Post a status snapshot.</h4><p>Customer-impact in one line, what you know, what you're checking next. Re-post every 10 minutes.</p></div>
+        <div><h4>상태 스냅샷 게시</h4><p>매장 영향 한 줄, 현재 파악된 사실, 다음 확인 항목. 10분마다 재게시.</p></div>
       </div>
       <div class="step">
         <div class="step-num">4</div>
-        <div><h4>Mitigate before you diagnose.</h4><p>If a recent deploy is suspect, roll back. If KMS is degraded, fail open is <em>never</em> the answer for auth — escalate to security.</p></div>
+        <div><h4>진단보다 우선 대응</h4><p>색차·납기 지연이면 예비 공장·캐리오버 전환 먼저 검토. 원단 결품이면 컬러 락 변경 협의가 우선 — 본생산 정지는 <em>최후</em>의 카드.</p></div>
       </div>
       <div class="step">
         <div class="step-num">5</div>
-        <div><h4>Hand off or stand down.</h4><p>If you can't resolve in 30 min, hand to the secondary. When healthy, close with <code>/incident close</code>; postmortem is owed within 5 business days.</p></div>
+        <div><h4>인수인계 또는 종료</h4><p>30분 내 해결 못 하면 백업 PD에 인계. 정상화 시 <code>/incident close</code>. 사후 리포트는 5영업일 내.</p></div>
       </div>
     </div>
   </section>
 
   <footer>
-    <span>Northwind Identity Platform · runbook v3.2</span>
-    <span>Source: ops-docs/auth-service.md</span>
+    <span>WACKYWILLY 생산실 · 발주 SOP v3.2</span>
+    <span>Source: 생산-매뉴얼/27ss-po1.md</span>
   </footer>
 </div>
 </body>

@@ -1,0 +1,497 @@
+<!doctype html>
+<!--
+  K-패션 VIP 멤버 라운지 / 퍼스널 스타일 매칭 대시보드 시드.
+
+  매거진 에디토리얼 톤 desktop dashboard.
+    - 상단 티커 (브랜드 슬로건 + 다음 등급 진척)
+    - 좌측 레일 (워드마크 + 회원 카드 + TODAY/YOU/ARCHIVE 그룹 + 상태)
+    - 본문 KPI 9개 그리드 (3×3)
+    - 매칭 아이템 차트 패널 (최근 30일, 30개 막대 + 최근 2일 액센트)
+    - 트렌드 패널 (최근 12주 + 1~2문장 해석)
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 토큰 바인딩 — --paper / --accent (브랜드 키컬러) / --good / --bad
+    4) references/layouts.md 에서 본문 패턴 변형 선택
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude (Claude.ai · Claude Code): <artifact> 태그로 감싸 출력
+    - 기타 (ChatGPT · Gemini · Grok): 표준 마크다운 HTML 코드블록
+    - OpenDesign: data-od-id 사용. 그 외는 id 속성 대체.
+
+  하드 룰:
+    - 데이팅 클리셰 절대 금지 (하트·불꽃·match·spark·"perfect match")
+      ※ "스타일 매칭"은 큐레이션 용어로 OK
+    - 매거진 에디토리얼 톤 — 차분, 관조적, 일요판 컬럼처럼
+    - 액센트 3~4회만 (KPI 1개 + 차트 최근 2일 막대 + 네비 활성 1개 정도)
+    - 숫자는 세리프 디스플레이, 라벨은 mono, 본문은 세리프 또는 sans
+-->
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>[REPLACE 브랜드] · [REPLACE VIP 라운지 슬로건]</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Serif+Text:ital@0;1&family=Hahmlet:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+    :root {
+      --paper:    #f4ede0;
+      --panel:    #f9f3e7;
+      --ink:      #1f1c14;
+      --muted:    #7a7264;
+      --rule:     #d6cdb6;
+      --accent:   #c14a2b;
+      --good:     #406b3a;
+      --bad:      #b6422f;
+
+      --font-display-romance: "Hahmlet", "DM Serif Display", "Noto Serif KR", Georgia, serif;
+      --font-display-magazine: "DM Serif Display", "Iowan Old Style", Georgia, serif;
+      --font-display: var(--font-display-magazine);
+
+      --font-body-serif: "DM Serif Text", "Iowan Old Style", Georgia, serif;
+      --font-sans:
+        "Pretendard Variable", Pretendard,
+        -apple-system, BlinkMacSystemFont,
+        "Apple SD Gothic Neo", system-ui, sans-serif;
+
+      --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font: 14px/1.55 var(--font-body-serif);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── 상단 티커 ─── */
+    .ticker {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 28px;
+      border-bottom: 1px solid var(--ink);
+      font: 11px/1 var(--font-mono);
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .ticker .left {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .ticker b {
+      color: var(--ink);
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* ─── 레이아웃 ─── */
+    .layout {
+      display: grid;
+      grid-template-columns: 232px 1fr;
+      min-height: calc(100vh - 44px);
+    }
+
+    /* ─── 좌측 레일 ─── */
+    aside.rail {
+      border-right: 1px solid var(--ink);
+      padding: 22px 22px 22px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    aside .brand {
+      font: italic 800 30px/1 var(--font-display);
+      letter-spacing: -0.005em;
+    }
+    aside .brand .dot { color: var(--accent); }
+
+    aside .user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    aside .avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--paper);
+      display: grid;
+      place-items: center;
+      font: 700 12px/1 var(--font-mono);
+      letter-spacing: 0.06em;
+    }
+    aside .user .meta {
+      font: 13px/1.2 var(--font-mono);
+    }
+    aside .user .meta b {
+      display: block;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    aside .user .meta span {
+      color: var(--muted);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+    }
+
+    aside h4 {
+      font: 11px/1 var(--font-mono);
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+    aside ul {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    aside li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 8px;
+      border-radius: 4px;
+      font: 15.5px/1.2 var(--font-body-serif);
+      color: var(--ink);
+      cursor: default;
+    }
+    aside li.active {
+      background: rgba(193,74,43,0.10);
+      color: var(--accent);
+      font-weight: 600;
+    }
+    aside li.active::before {
+      content: '●';
+      color: var(--accent);
+      margin-right: 6px;
+      font-size: 9px;
+    }
+    aside li .badge {
+      background: var(--accent);
+      color: var(--paper);
+      font: 10px/1 var(--font-mono);
+      padding: 3px 6px;
+      border-radius: 999px;
+      letter-spacing: 0.06em;
+    }
+    aside li .badge.gray { background: var(--ink); }
+    aside li .num {
+      font: 11px/1 var(--font-mono);
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    aside .status {
+      margin-top: auto;
+      padding-top: 18px;
+      border-top: 1px solid var(--rule);
+      font: 11px/1.4 var(--font-mono);
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    aside .status .live::before {
+      content: '●';
+      color: #2f7d4a;
+      margin-right: 6px;
+    }
+
+    /* ─── 본문 ─── */
+    main { padding: 30px 36px 44px; }
+
+    /* KPI 9칸 그리드 (3×3) */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: minmax(120px, auto);
+      gap: 22px 36px;
+      margin-bottom: 36px;
+    }
+    .stat {
+      padding: 4px 0 14px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .stat .label {
+      font: 11px/1.4 var(--font-mono);
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .stat .value {
+      font: 800 56px/1.05 var(--font-display);
+      letter-spacing: -0.01em;
+      font-feature-settings: 'tnum';
+      font-variant-numeric: tabular-nums;
+      margin-bottom: 6px;
+    }
+    .stat .value.good { color: var(--good); }
+    .stat .value.bad  { color: var(--bad); }
+    .stat .value.accent { color: var(--accent); }
+    .stat .value em {
+      font-style: italic;
+      font-weight: 400;
+    }
+    .stat .note {
+      font: italic 13.5px/1.4 var(--font-body-serif);
+      color: var(--muted);
+      max-width: 32ch;
+      margin: 0;
+    }
+    .stat .arrow {
+      font-style: normal;
+      color: var(--good);
+      font-size: 14px;
+    }
+    .stat .arrow.down { color: var(--bad); }
+
+    /* 패널 (차트) */
+    .panel {
+      padding: 18px 0 24px;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 18px;
+    }
+    .panel-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 14px;
+    }
+    .panel-head h3 {
+      margin: 0;
+      font: italic 24px/1 var(--font-display);
+      letter-spacing: -0.005em;
+    }
+    .panel-head .meta {
+      font: 11px/1.4 var(--font-mono);
+      color: var(--muted);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      max-width: 56ch;
+      text-align: right;
+    }
+    .panel svg {
+      width: 100%;
+      height: 220px;
+      display: block;
+    }
+    .panel .axis {
+      display: flex;
+      justify-content: space-between;
+      font: 10px/1 var(--font-mono);
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      padding: 8px 4px 0;
+      text-transform: uppercase;
+    }
+
+    .lower-panel .lede {
+      font: italic 15px/1.55 var(--font-body-serif);
+      color: var(--muted);
+      margin: 0;
+      max-width: 70ch;
+    }
+    .lower-panel .lede b {
+      color: var(--ink);
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    /* ─── 반응형 ─── */
+    @media (max-width: 1100px) {
+      .layout { grid-template-columns: 1fr; }
+      aside.rail {
+        border-right: none;
+        border-bottom: 1px solid var(--ink);
+      }
+      .grid { grid-template-columns: repeat(2, 1fr); gap: 18px 28px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 티커 — 슬로건 + 다음 등급 진척 -->
+  <div class="ticker" data-od-id="ticker">
+    <div class="left">
+      <span>[REPLACE 당신의 취향이 만든 라운지 · 매주 월요일 큐레이션 리뉴얼]</span>
+      <span style="opacity:0.6;">·</span>
+      <span>REVIEWED WEEKLY</span>
+    </div>
+    <div>NEXT TIER [REPLACE VVIP] · ₩<b>[REPLACE 2,400,000]</b> 남음</div>
+  </div>
+
+  <div class="layout">
+    <!-- 좌측 레일 — 워드마크 + 회원 카드 + 3 네비 그룹 + 상태 -->
+    <aside class="rail" data-od-id="rail">
+      <div class="brand">[REPLACE matin kim]<span class="dot">.</span></div>
+      <div class="user">
+        <div class="avatar">[REPLACE MJ]</div>
+        <div class="meta">
+          <b>[REPLACE @minji_27ss]</b>
+          <span>[REPLACE PLATINUM · 누적 ₩4.6M]</span>
+        </div>
+      </div>
+
+      <div data-od-id="nav-today">
+        <h4>Today</h4>
+        <ul>
+          <li>오늘의 추천 <span class="badge">8</span></li>
+          <li>위시리스트 <span class="badge">14</span></li>
+          <li>최근 본 아이템 <span class="num">22</span></li>
+          <li>알림함 <span class="badge gray">3</span></li>
+        </ul>
+      </div>
+
+      <div data-od-id="nav-you">
+        <h4>You</h4>
+        <ul>
+          <li class="active">매칭 룩 &amp; 컬렉션</li>
+          <li>회원 정보 · 등급 혜택</li>
+          <li>포인트 내역 <span class="num">₩84,200</span></li>
+          <li>설정</li>
+        </ul>
+      </div>
+
+      <div data-od-id="nav-archive">
+        <h4>Archive</h4>
+        <ul>
+          <li>과거 룩북 (26FW · 26SS)</li>
+          <li>만료된 쿠폰 <span class="num">5</span></li>
+        </ul>
+      </div>
+
+      <div class="status">
+        <div class="live">온라인 · 마지막 방문 [REPLACE 11분 전]</div>
+        <div style="opacity:0.7;margin-top:2px;">[REPLACE matin kim lounge v.2.7.1]</div>
+      </div>
+    </aside>
+
+    <main data-od-id="main">
+      <!-- ─── KPI 9개 그리드 ─── -->
+      <section class="grid" data-od-id="kpis">
+        <div class="stat">
+          <div class="label">Wishlist items</div>
+          <div class="value"><em>[REPLACE 142]</em></div>
+          <p class="note"><span class="arrow">↑</span> [REPLACE 이번 주 +12 · 건강한 증가.]</p>
+        </div>
+        <div class="stat">
+          <div class="label">Matched looks</div>
+          <div class="value good">[REPLACE 47]</div>
+          <p class="note">[REPLACE 최근 30일, 같은 컬렉션에서 8회.]</p>
+        </div>
+        <div class="stat">
+          <div class="label">Collections</div>
+          <div class="value"><em>[REPLACE 14]</em></div>
+          <p class="note">[REPLACE 4 활성 · 7 저장만 · 3 후보.]</p>
+        </div>
+
+        <div class="stat">
+          <div class="label">Match rate</div>
+          <div class="value good">[REPLACE 62%]</div>
+          <p class="note">[REPLACE 코호트 중위 +18% · 강한 일치.]</p>
+        </div>
+        <div class="stat">
+          <div class="label">Repurchase</div>
+          <div class="value"><em>[REPLACE 3]</em></div>
+          <p class="note">[REPLACE / 7 시즌 구매 중. 단골 흐름.]</p>
+        </div>
+        <div class="stat">
+          <div class="label">Discounted only</div>
+          <div class="value bad">[REPLACE 4]</div>
+          <p class="note">[REPLACE 시즌오프 의존 ↓ 정상 구매 권장.]</p>
+        </div>
+
+        <div class="stat">
+          <div class="label">Shared with friends</div>
+          <div class="value"><em>[REPLACE 214]</em></div>
+          <p class="note">[REPLACE 친구 공유 = 가장 좋은 큐레이션 자산.]</p>
+        </div>
+        <div class="stat">
+          <div class="label">Avg basket</div>
+          <div class="value"><em>₩[REPLACE 214]<span style="font-size:32px;">K</span></em></div>
+          <p class="note">[REPLACE 코호트 +18% · 객단가 우수.]</p>
+        </div>
+        <div class="stat">
+          <div class="label">Store visits</div>
+          <div class="value bad">[REPLACE 4]</div>
+          <p class="note">[REPLACE / 매장 12회 초대. 다음 주 성수점 예약.]</p>
+        </div>
+      </section>
+
+      <!-- ─── 매칭 아이템 차트 — 최근 30일, 마지막 2일 액센트 ─── -->
+      <section class="panel" data-od-id="bars">
+        <div class="panel-head">
+          <h3>matched items — <em>last 30 days</em></h3>
+          <div class="meta">[REPLACE ↑ TRENDING UP · +14 MATCHED LOOKS THIS MONTH · TWO FROM 27SS DROP]</div>
+        </div>
+        <svg viewBox="0 0 720 220" preserveAspectRatio="none" aria-hidden="true">
+          <g fill="#1f1c14">
+            <rect x="6"   y="170" width="14" height="50"></rect>
+            <rect x="30"  y="158" width="14" height="62"></rect>
+            <rect x="54"  y="146" width="14" height="74"></rect>
+            <rect x="78"  y="172" width="14" height="48"></rect>
+            <rect x="102" y="162" width="14" height="58"></rect>
+            <rect x="126" y="138" width="14" height="82"></rect>
+            <rect x="150" y="120" width="14" height="100"></rect>
+            <rect x="174" y="148" width="14" height="72"></rect>
+            <rect x="198" y="132" width="14" height="88"></rect>
+            <rect x="222" y="108" width="14" height="112"></rect>
+            <rect x="246" y="118" width="14" height="102"></rect>
+            <rect x="270" y="154" width="14" height="66"></rect>
+            <rect x="294" y="130" width="14" height="90"></rect>
+            <rect x="318" y="100" width="14" height="120"></rect>
+            <rect x="342" y="86"  width="14" height="134"></rect>
+            <rect x="366" y="116" width="14" height="104"></rect>
+            <rect x="390" y="138" width="14" height="82"></rect>
+            <rect x="414" y="92"  width="14" height="128"></rect>
+            <rect x="438" y="74"  width="14" height="146"></rect>
+            <rect x="462" y="106" width="14" height="114"></rect>
+            <rect x="486" y="84"  width="14" height="136"></rect>
+            <rect x="510" y="124" width="14" height="96"></rect>
+            <rect x="534" y="98"  width="14" height="122"></rect>
+            <rect x="558" y="68"  width="14" height="152"></rect>
+            <rect x="582" y="80"  width="14" height="140"></rect>
+            <rect x="606" y="46"  width="14" height="174" fill="#c14a2b"></rect>
+            <rect x="630" y="60"  width="14" height="160" fill="#c14a2b"></rect>
+            <rect x="654" y="92"  width="14" height="128"></rect>
+            <rect x="678" y="76"  width="14" height="144"></rect>
+            <rect x="702" y="90"  width="14" height="130"></rect>
+          </g>
+        </svg>
+        <div class="axis">
+          <span>[REPLACE MAR 18]</span>
+          <span>[REPLACE MAR 25]</span>
+          <span>[REPLACE APR 1]</span>
+          <span>[REPLACE APR 8]</span>
+          <span>[REPLACE APR 15]</span>
+          <span>TODAY</span>
+        </div>
+      </section>
+
+      <!-- ─── 트렌드 패널 — 최근 12주 + 해석 ─── -->
+      <section class="panel lower-panel" data-od-id="trend">
+        <div class="panel-head">
+          <h3>style match rate — <em>last 12 weeks</em></h3>
+          <div class="meta">[REPLACE STEADY CLIMB FROM 38% → 62%. ATTRIBUTABLE TO ONE LOOKBOOK SAVE (27SS · WK 4).]</div>
+        </div>
+        <p class="lede">[REPLACE 큐레이션은 분위기가 아닌 일치율로 말합니다.] <b>[REPLACE 27SS 룩북 한 번의 저장]</b>[REPLACE 이 4개월간의 위시리스트 편집보다 매칭률을 더 올렸습니다 — 같은 컬렉션 안에서 더 봐주세요.]</p>
+      </section>
+    </main>
+  </div>
+</body>
+</html>

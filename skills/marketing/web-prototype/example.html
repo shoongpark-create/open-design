@@ -1,9 +1,13 @@
 <!doctype html>
-<html lang="en">
+<!--
+  K-패션 자사몰 웹 프로토타입 예시 — 마뗑킴(MATIN KIM) 27SS 룩북 페이지.
+  CSS 토큰·레이아웃은 원본 SaaS 랜딩과 동일. 카피·헤드라인·CTA·이미지 자리만 K-패션화.
+-->
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tomato — focused work timer</title>
+  <title>27SS LOOKBOOK — MATIN KIM</title>
   <style>
     :root {
       --bg: #fafaf9; --fg: #1c1b1a; --muted: #6b6964; --border: #e6e4e0;
@@ -36,46 +40,53 @@
   </style>
 </head>
 <body>
+  <!-- 자사몰 topnav -->
   <header data-od-id="topnav">
-    <span class="logo">🍅 Tomato</span>
+    <span class="logo">MATIN KIM</span>
     <nav>
-      <a href="#features">Features</a>
-      <a href="#pricing">Pricing</a>
-      <a href="#login">Sign in</a>
+      <a href="#shop">SHOP</a>
+      <a href="#lookbook">LOOKBOOK</a>
+      <a href="#journal">JOURNAL</a>
+      <a href="#members">MEMBERS</a>
     </nav>
   </header>
   <main>
+    <!-- 히어로: 시즌 헤드라인 + 데크 + 사전예약/룩북 CTA -->
     <section class="hero" data-od-id="hero">
-      <h1>Twenty-five minutes at a time.</h1>
-      <p>The pomodoro timer that actually keeps your hands off Slack. Block notifications, log every cycle, ship more before lunch.</p>
+      <h1>On Spring, and Silence.</h1>
+      <p>27SS, 마뗑킴이 봄을 가장 조용히 입는 방법. 사전예약은 05/22까지, MEMBERS GOLD 이상 24시간 우선.</p>
       <div class="cta">
-        <button class="btn-primary">Start a session</button>
-        <button class="btn-secondary">See how it works</button>
+        <button class="btn-primary">사전예약 신청</button>
+        <button class="btn-secondary">룩북 보기</button>
       </div>
     </section>
-    <section class="features" id="features">
-      <div class="feature" data-od-id="feature-block">
+
+    <!-- 키 아이템 트리플렛 — 시즌 핵심 3개 아이템 -->
+    <section class="features" id="key-items">
+      <div class="feature" data-od-id="key-shirt">
         <div class="icon"></div>
-        <h3>Block on, not off</h3>
-        <p>Slack and email go quiet for 25 minutes. They come back loud at the break, with a digest.</p>
+        <h3>사일런트 코튼 셔츠</h3>
+        <p>봄날의 가장 조용한 한 벌. 코튼 100%, 워싱 후 결이 자연스럽게 번지는 디자이너 시그니처.</p>
       </div>
-      <div class="feature" data-od-id="feature-stats">
+      <div class="feature" data-od-id="key-trouser">
         <div class="icon"></div>
-        <h3>Stats that don't lie</h3>
-        <p>Weekly review tells you which days you actually shipped versus which you only seemed busy.</p>
+        <h3>슬로 베이지 트라우저</h3>
+        <p>매트하게 떨어지는 면 100% 트라우저. 봄의 네 가지 색 — 아이보리·오트밀·세이지·블랙.</p>
       </div>
-      <div class="feature" data-od-id="feature-team">
+      <div class="feature" data-od-id="key-cardigan">
         <div class="icon"></div>
-        <h3>Team-friendly silences</h3>
-        <p>Your status auto-updates so teammates know when to ask, when to wait, and when you're done.</p>
+        <h3>매트 김 니트 카디건</h3>
+        <p>매트 김의 시그니처 실루엣. 6년째 매 시즌 돌아오는 캐리오버 — 27SS는 라이트 그레이 신규.</p>
       </div>
     </section>
+
+    <!-- 사전예약 CTA 마무리 -->
     <section class="closing" data-od-id="closing">
-      <h2>Stop measuring meetings. Start measuring focus.</h2>
-      <p>Free for solo. $4/mo per teammate after that.</p>
-      <button class="btn-primary">Try Tomato free</button>
+      <h2>27SS, 가장 먼저 입어보세요.</h2>
+      <p>프리오더는 05/22까지. MEMBERS GOLD부터 24시간 우선 신청, PLATINUM은 48시간 우선.</p>
+      <button class="btn-primary">사전예약 신청</button>
     </section>
   </main>
-  <footer>© Tomato Labs · Made for people who'd rather be making.</footer>
+  <footer>© MATIN KIM · 매트 김이 만드는 봄의 가장 조용한 옷들. · contact@matinkim.com</footer>
 </body>
 </html>

@@ -1,84 +1,74 @@
-# Fashion Concept Board Checklist
+# 컨셉 보드 자체 검수 체크리스트
 
-A concept board is upstream of every other season artifact — if it is vague,
-the whole season inherits the vagueness. Run this gate before emitting.
+컨셉 보드는 모든 다른 시즌 산출물의 상위. 이 문서가 모호하면 시즌 전체가 모호함을 상속받습니다. 출력 직전 한 항목씩 직접 확인하세요.
 
-## P0 — Must pass
+## P0 — 통과 필수
 
-- The artifact is a single self-contained HTML file. The only external
-  references are local images under `images/` accessed by relative paths.
-- All mood / cover / seed images are project-local. **No external URLs.**
-- The cover and every mood image either ships a real generated PNG or shows
-  the styled fallback with the original imagegen prompt. No empty placeholder
-  ships as final.
-- The thesis is one sentence and includes both **primary tonality** and
-  **tension/contrast tonality** — not just a single mood word.
-- The keyword cloud has **5–10** keywords. Loud-weight keywords (`kw-loud`)
-  are the season's load-bearing words; there are at most 3 loud keywords.
-- The mood grid has **9–16 images** with `data-image-role` tagging across
-  these roles: scene / gesture / texture / light / garment-fragment.
-- **No more than 25%** of the mood grid is full-outfit / model-styled imagery.
-  A concept board is not a lookbook preview.
-- Color seeds use **emotional names** (e.g. "humid linen ivory"), not pure
-  HEX labels or generic "Pantone TPG 12-3434".
-- Material seeds describe **hand-feel / drape / finish**, not just
-  composition (e.g. "washed cotton with body" is fine; "cotton 100%" alone
-  is not).
-- Silhouette seeds are pinned to **category** (shirts / outer / pants /
-  knit / etc.). A floating "boxy" without category is rejected.
-- Anti-territory has 3–7 explicit "no" items. An empty anti-territory means
-  the season has no point of view.
-- Open Questions has at least 3 next decisions with a date or week.
-- Active `DESIGN.md` tokens are translated into the `:root` variables.
-- No fake brand logos, no readable generated text inside images, no
-  watermark, no AI-generated catalog-style poses.
-- Every major section has `data-od-id`.
+- [ ] 산출물이 단일 자기완결 HTML 파일. 외부 참조는 `images/` 하위 로컬 이미지(상대 경로)뿐
+- [ ] 모든 무드 / 커버 / 시드 이미지가 프로젝트 로컬. **외부 URL 절대 금지**
+- [ ] 커버와 모든 무드 이미지는 실제 생성된 PNG 또는 폴백 블록(원본 imagegen 프롬프트 표시) 보유. 빈 placeholder 출고 금지
+- [ ] thesis가 한 문장이며 **primary 톤** + **tension/contrast 톤** 둘 다 포함. 단일 무드 단어만 금지
+- [ ] 키워드 클라우드에 **5~10개** 키워드. Loud 가중치(`kw-loud`)는 시즌의 load-bearing 단어. Loud 키워드는 최대 3개
+- [ ] 무드 그리드에 **9~16장 이미지** + 다음 역할 태그(`data-image-role`): scene / gesture / texture / light / garment-fragment
+- [ ] 무드 그리드의 **25% 이하**만 풀 아웃핏 / 모델 스타일링 이미지. 컨셉 보드는 룩북 프리뷰 아님
+- [ ] 컬러 시드가 **감성 이름** 사용 (`humid linen ivory`). 순수 HEX 라벨 또는 제너릭 `Pantone TPG 12-3434` 금지
+- [ ] 소재 시드가 **핸드필 / 드레이프 / 마감** 기술. 조성만 적은 `코튼 100%`는 거절
+- [ ] 실루엣 시드가 **카테고리에 핀** (셔츠 / 아우터 / 팬츠 / 니트 등). 카테고리 없는 부유 `박시` 거절
+- [ ] Anti-territory에 3~7 명시적 "no" 항목. 빈 Anti-territory는 시즌이 관점 없음을 의미
+- [ ] Open Questions에 최소 3개 다음 결정 + 일자 또는 주
+- [ ] `DESIGN.md` 토큰이 `:root` 변수로 번역됨
+- [ ] 가짜 브랜드 로고 없음, 이미지 내 읽을 수 있는 생성 텍스트 없음, 워터마크 없음, AI 생성 카탈로그 스타일 포즈 없음
+- [ ] 모든 주요 섹션에 `data-od-id`(OpenDesign 환경) 또는 일반 `id` 속성
 
-## P1 — Strong concept board
+## P1 — 강한 컨셉 보드
 
-- The thesis explicitly names the **customer moment** (who, where, when,
-  doing what) — not just an aesthetic adjective.
-- The mood grid feels like *territory* rather than a Pinterest pull —
-  someone unfamiliar with the brand could describe the season's atmosphere
-  from the grid alone.
-- The reference shelf includes at least one Korean / East-Asian anchor (a
-  Korean designer, photographer, era, or location) — concept boards for
-  Korean young-casual brands that reference only Western culture feel
-  imported.
-- Tone dials are **specific decisions**, not balanced 50/50 placeholders.
-  At least 3 of the dials lean clearly to one side.
-- Color seeds, material seeds, silhouette seeds, and detail seeds are
-  internally consistent — a "humid commute" thesis with "satin chiffon"
-  material seeds is rejected.
-- The board shows **one clear contrast** somewhere (e.g. soft material seed
-  paired with industrial detail seed) — too much agreement is suspicious.
-- Mood grid lighting / color temperature is coherent — not 12 unrelated
-  imagegen outputs glued together.
+- [ ] thesis가 **고객 모멘트** 명시 (누가, 어디서, 언제, 무엇을 하는). 단순 미학 형용사 아님
+- [ ] 무드 그리드가 *territory* 느낌 (Pinterest pull 아님). 브랜드를 모르는 사람도 그리드만 보고 시즌 분위기 묘사 가능
+- [ ] 레퍼런스 셸프에 최소 1개 한국 / 동아시아 앵커(한국 디자이너, 사진작가, 시대, 장소) 포함 — 한국 영캐주얼 브랜드 컨셉 보드가 서양 문화만 참조하면 수입품 느낌
+- [ ] 톤 다이얼이 **구체적 결정**, 균형 50/50 placeholder 아님. 최소 3 다이얼이 한쪽으로 명확히 기움
+- [ ] 컬러 시드, 소재 시드, 실루엣 시드, 디테일 시드가 내부 일관성. `습한 출근길` thesis + `새틴 시폰` 소재 시드는 거절
+- [ ] 보드 어딘가에 **명확한 대비 1개**(예: 소프트 소재 시드 + 인더스트리얼 디테일 시드). 모두 동의는 의심스러움
+- [ ] 무드 그리드 라이팅 / 컬러 온도 일관 — 12장 무관한 imagegen 출력 붙여넣기 아님
+- [ ] **한국 K-패션 컨텍스트인 경우** 본문 카피가 한국 패션 비즈니스 등록(register)을 따름
 
-## P2 — Polish
+## P2 — 다듬기
 
-- Cover image has breathing room for title overlay; the title does not
-  collide with image focal points.
-- Keyword cloud spacing varies organically (no obvious grid).
-- Dial positions feel deliberate — no two dials sit at the exact same
-  position.
-- Reference shelf cards balance Western and East-Asian anchors.
-- The board is printable on A3 landscape without breaking the mood grid
-  flow (CSS print media query honors the section boundaries).
-- Mobile reflow keeps mood images above their captions, and seed lists
-  retain readability without horizontal scroll.
+- [ ] 커버 이미지에 타이틀 오버레이용 breathing room. 타이틀이 이미지 focal point와 충돌 금지
+- [ ] 키워드 클라우드 스페이싱이 유기적 (명백한 그리드 없음)
+- [ ] 다이얼 위치가 의도적 — 두 다이얼이 정확히 동일 위치 금지
+- [ ] 레퍼런스 셸프 카드가 서양 + 동아시아 앵커 균형
+- [ ] A3 가로 인쇄에서 무드 그리드 흐름이 깨지지 않음 (CSS print 미디어 쿼리가 섹션 경계 존중)
+- [ ] 모바일 reflow가 무드 이미지를 캡션 위에 유지, 시드 리스트가 가로 스크롤 없이 가독
 
-## Image-role coverage table (P0 verification helper)
+## 이미지 역할 커버리지 표 (P0 검증 헬퍼)
 
-When reviewing the mood grid, count by role and confirm coverage:
+무드 그리드 검토 시 역할별 카운트 + 커버리지 확인:
 
-| Role | Required count | Notes |
-| --- | --- | --- |
-| scene | 2–3 | place / time / weather, no model focus |
-| gesture | 2–3 | body fragment, mid-action |
-| texture | 2–3 | material close-up, no full garment |
-| light | 2–3 | window / wall / sky / lamp — pure color/temp |
-| garment-fragment | 1–2 | collar / cuff / hem detail |
-| anti-territory | 0–1 | optional contrast, must be small |
+| 역할 | 필요 카운트 | 노트 |
+|---|---|---|
+| scene | 2~3 | 장소 / 시간 / 날씨, 모델 포커스 없음 |
+| gesture | 2~3 | 신체 단편, mid-action |
+| texture | 2~3 | 소재 클로즈업, 풀 가먼트 없음 |
+| light | 2~3 | 창 / 벽 / 하늘 / 램프 — 순수 컬러/온도 |
+| garment-fragment | 1~2 | 칼라 / 헴 / 커프스 디테일 |
+| anti-territory | 0~1 | 선택 대비, 작게 유지 |
 
-If any required category is missing, regenerate before emitting.
+필요 카테고리 누락 시 재생성 후 출력.
+
+## K-DTC 컨텍스트 특화 검수
+
+- [ ] thesis가 한국 영캐주얼 영역과 정합 (`드라이 팝`, `습한 출근길`, `미니멀 위트` 등 한국적 표현)
+- [ ] 컬러 시드가 한국 D2C 채널(무신사·29CM·W컨셉)에서 작동 가능한 수준
+- [ ] 실루엣 시드의 카테고리가 한국 영캐주얼 표준 카테고리(셔츠·아우터·팬츠·니트·원피스·ACC)
+- [ ] 레퍼런스 셸프에 최소 1개 한국 / 동아시아 앵커 (예: `안성수 25SS`, `90년대 강남 거리`, `홍대 카페 6am`, `이세영 작가`)
+- [ ] Anti-territory가 한국 K-패션 트렌드 사이클 반영 (`24FW 마뗑킴 미니백 노스탤지어` 등 시점 구체)
+- [ ] 디스플레이 폰트 선택이 산출물 무드와 정합 (로맨틱 톤 = `--font-display-romance`, 스트릿 톤 = `--font-display-street`)
+
+## 검수 실행 흐름
+
+1. 산출물 HTML을 브라우저(또는 미리보기 환경)에서 열어 시각적으로 점검
+2. P0 항목을 차례로 확인. 미통과 시 작업으로 되돌아가 수정
+3. P1·P2는 시간 여유에 따라 다듬기
+4. 최종 검수 통과 후 헤더 상태를 `locked`로
+
+검수 통과 후 사용자에게 산출물 외에 별도 보고는 하지 않습니다 (출력 규약).

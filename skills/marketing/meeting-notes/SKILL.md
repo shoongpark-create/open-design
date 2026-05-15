@@ -1,47 +1,220 @@
 ---
 name: meeting-notes
 description: |
-  Meeting notes page — title bar with attendees, agenda checklist, decisions
-  block, action items table with owners + dates, and a "next meeting" footer.
-  Use when the brief mentions "meeting notes", "minutes", "1:1 notes",
-  "all-hands recap", or "会议纪要".
+  K-패션 브랜드의 **품평회 노트 / 시즌 회의록**을 단일 HTML 페이지로 생성하는 스킬입니다.
+  헤더(미팅 제목·일시·장소·참석자), 아젠다 체크리스트, 결정 사항 패널,
+  액션 아이템 표(오너 + 기한 + 상태), 미결 이슈, 다음 미팅 정보 구조.
+  한국 패션기업 표준 양식인 1차/2차 품평회, 시즌 발주 회의, 콜라보 미팅,
+  IMC 캘린더 회의에 사용합니다. OK/NG 결정 사유(목표 원가 준수, 크로스 코디 적합성,
+  컬러웨이 적정성)를 명시적으로 기록합니다.
+  사용자가 "품평회 노트", "1차 품평회", "시즌 회의록", "발주 회의",
+  "콜라보 미팅", "meeting notes", "minutes"를 언급하면 활성화하세요.
 triggers:
+  - "품평회 노트"
+  - "1차 품평회"
+  - "2차 품평회"
+  - "시즌 회의록"
+  - "발주 회의"
+  - "콜라보 미팅"
+  - "시즌 킥오프 회의"
   - "meeting notes"
   - "minutes"
   - "1:1 notes"
-  - "all-hands recap"
-  - "会议纪要"
 od:
   mode: prototype
   platform: desktop
   scenario: operations
+  category: fashion
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Write up notes from a 60-minute Growth squad weekly — agenda, decisions, action items with owners, next meeting."
+  example_prompt: "와키윌리 27SS 1차 품평회 회의록을 작성해주세요. 일시 = 27년 1월 25일 14:00~17:00. 장소 = 본사 디자인실. 참석자 = 디자인 실장(박경), 수석 디자이너(장원, 수영), MD실장(민혜), 대표. 아젠다 = SKU별 1차 샘플 22장 OK/NG 결정. 결정 사항 = 18 SKU OK / 3 SKU 수정 후 재샘플 / 1 SKU NG. NG 사유는 목표 원가 초과 + 크로스 코디 부적합."
 ---
 
-# Meeting Notes Skill
+# 패션 품평회 노트 / 시즌 회의록 스킬
 
-Produce a single-screen meeting notes page.
+K-패션 브랜드의 **품평회 노트 / 시즌 회의록**을 단일 HTML 페이지로 생성합니다. 한국 패션기업에서 가장 빈번하게 작성되는 운영 문서로, 시즌 사이클의 핵심 결정 포인트인 1차/2차 품평회, 발주 회의, 콜라보 미팅, 디자인 킥오프, IMC 캘린더 합의 회의에 사용됩니다.
 
-## Workflow
+이 산출물의 청중은 **품평회 참석자 전원 + 결정 영향 부서 + 차주 인수 담당자**입니다. 한국 패션기업 실무에서 품평회 노트가 단순 회의록과 다른 점은: (1) **SKU별 OK/NG 결정과 사유 명시** (목표 원가 준수, 크로스 코디 적합성, 컬러웨이 적정성 등), (2) **재샘플/수정 지시의 데드라인**, (3) **발주 수량·LOT·OEM 합의 사항**이 포함된다는 점입니다.
 
-1. Read DESIGN.md.
-2. Layout:
-   - Header: meeting title, date, time, location/Zoom, attendees row.
-   - Agenda checklist (4–6 items).
-   - Decisions panel — bulleted list with strong styling.
-   - Action items table with owner, due date, status.
-   - "Open questions" + "next meeting" footer.
-3. Subdued colour palette, clear hierarchy.
+## 환경 호환성
 
-## Output contract
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 본문의 `data-od-id` 속성으로 인라인 코멘트 기능을 사용할 수 있습니다. 그 외 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 작업 흐름은 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 `DESIGN.md` 경로나 기본 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 품평회 노트의 등록(register)을 따릅니다.
+
+- 미팅 제목·아젠다는 한국어 + 영문 혼용 자연스럽게. 예: "27SS 1차 품평회 · UNI 라인 22 SKU".
+- 결정 사항(decisions) 블록은 **결정문 형식**으로 명사구 또는 평서문. 예: "WW-27SS-OUT-005 (데님 자켓) — OK 결정, 발주 수량 1,200장(인디고 800 / 라이트워시 400), 발주 LOCK 27/02/05".
+- 산업용어 유지: SKU, BTA, OEM, LOT, MOQ, QR, SPOT, 컬러웨이, 캐리오버, 사입가율, 정상판매율.
+- 상태 칩(pill): `미진행` (To do) / `진행 중` (In progress) / `블락` (Blocked) / `완료` (Done) — 한국어 권장.
+- NG 사유는 짧고 구체적으로: "목표 원가 초과 8%", "크로스 코디 부적합", "컬러 발색 미흡".
+
+## 폴더 구조
 
 ```
-<artifact identifier="notes-name" type="text/html" title="Meeting Notes">
-<!doctype html>...</artifact>
+meeting-notes/
+├── SKILL.md       ← 이 파일
+└── example.html   ← 작성 예시 (와키윌리 27SS 1차 품평회 회의록)
 ```
+
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. `example.html`을 처음부터 끝까지 읽어 헤더 + 아젠다 + 결정 패널 + 액션 아이템 표 + 미결/다음 미팅 구조를 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 파일이 자동 주입되지 않는 환경이라면 사용자에게 경로나 기본 톤을 묻고 진행합니다.
+
+### Step 1 — 분류 및 정보 수집
+
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
+
+- 미팅 종류 (1차 품평회 / 2차 품평회 / 발주 회의 / 시즌 킥오프 / 콜라보 미팅 / IMC 캘린더 합의)
+- 브랜드명 + 시즌 + 일시 + 장소
+- 참석자 (디자인 실장, 수석 디자이너 N명, MD실장, MD, 대표, 마케팅 실장 등)
+- 작성자 (보통 MD 또는 디자인실 어시스턴트)
+- 아젠다 (4~6 항목) — 각 항목당 짧은 설명 + 할당 시간
+- 결정 사항 (3~6 결정) — 결정 사유 명시 권장
+- 액션 아이템 (3~6 항목) — 오너 + 기한 + 상태
+- 미결 이슈 (1~3 항목)
+- 다음 미팅 정보
+
+"Topic A / Topic B" 같은 플레이스홀더 금지 — 실제 K-패션 SKU/결정 사유로 작성합니다.
+
+### Step 2 — 레이아웃
+
+세로 한 컬럼 구조 (max-width 920px):
+
+- **헤더**: 크럼(브랜드/시즌/회의 종류) + 미팅 제목 H1 + 메타(일시·시간·장소·작성자) + 참석자 아바타 행 + 결석자 메모
+- **아젠다 섹션**: 4~6개 아젠다 아이템. 체크박스 + 제목 + 짧은 설명 + 할당 시간
+- **결정 사항 섹션**: 액센트 컬러 좌측 보더가 있는 패널. 3~6개 결정 (불릿 리스트). 결정 사유 명시
+- **액션 아이템 섹션**: 표(Action / 오너 / 기한 / 상태). 상태 칩 색상 매핑
+- **미결 이슈 + 다음 미팅 섹션**: 2컬럼 그리드. 좌측 미결 질문, 우측 다음 미팅 정보
+- **푸터**: 브랜드/문서 버전 + 작성 일자 + 파일 위치
+
+### Step 3 — 작성
+
+1. 단일 HTML 문서로 작성, CSS는 인라인 `<style>` 한 블록.
+2. 본문 디스플레이 폰트는 한국 패션 매거진 톤(본명조 또는 Charter 등 세리프) 또는 운영 톤(Pretendard 산세리프) 중 선택.
+3. 시맨틱 HTML: `<header>`, `<section>` × 4~5, `<table>`, `<footer>`.
+4. 주요 영역에 식별용 속성. OpenDesign 환경에서는 `data-od-id`, 그 외에서는 `id`.
+5. 액션 아이템 상태 칩 4종 (미진행 회색 / 진행 중 액센트 / 블락 빨강 / 완료 녹색) 모두 등장하도록.
+
+### Step 4 — 자체 검수
+
+- 모든 색상은 `:root` 토큰에서 옴 — 임의 hex 금지
+- 참석자 아바타에 한국 패션기업 직책 명시 (디자인 실장, MD 실장, 수석 디자이너 등)
+- 결정 사항은 단순 보고가 아닌 **결정문 형식**: "X SKU OK 결정 / 발주 수량 N / LOCK 일자 명시"
+- NG 사유는 구체적이고 짧게 (원가, 핏, 컬러, 코디 적합성 등)
+- 액션 아이템 표에 오너·기한·상태 모두 채워짐
+- 다음 미팅 정보에 일시·작성자(로테이션) 명시
+- 모바일 폴백: 미결/다음 미팅 그리드 1열, 패딩 줄임
+
+## 한국 K-패션 품평회 표준 (참고)
+
+품평회 노트 작성 시 참고할 한국 패션기업 실무 표준.
+
+### 1차 품평회 (시즌 시작 4개월 전 · 1월)
+
+- **참석자**: 디자인 실장 + 수석 디자이너 + MD실장 + 대표 (선택)
+- **아젠다**: 1차 샘플 SKU 전체 OK/NG 결정
+- **OK 결정 사유** (예시): "핏 적정 + 목표 원가 준수 + 시즌 컬러 적합 + 크로스 코디 OK"
+- **NG 결정 사유** (예시): "목표 원가 초과 N%", "핏 미흡 (오버사이즈 부적정)", "컬러 발색 미흡", "크로스 코디 부적합", "OEM 일정 부적합"
+- **결과**: 18 SKU OK / 3 SKU 수정 후 재샘플 / 1 SKU NG (총 22 SKU 기준)
+
+### 2차 품평회 (시즌 시작 3개월 전 · 2월)
+
+- **참석자**: 1차 동일 + MD + 영업기획 팀장 + 생산실장
+- **아젠다**: 재샘플 OK/NG + 컬러웨이 확정 + 발주 수량 확정
+- **결과**: 라인업 LOCK + 발주 시작
+
+### 발주 회의 (LOCK 직후 · 2월 말)
+
+- **참석자**: MD실장 + MD + 생산실장 + 영업기획 팀장
+- **아젠다**: SKU별 발주 수량·LOT·OEM·납기 확정
+- **결과**: 발주서 발행 → OEM 본생산 시작
+
+### 콜라보 미팅 (시즌 외 진행)
+
+- **참석자**: 대표 + 디자인 실장 + MD실장 + 마케팅 실장 + 협업 브랜드 측
+- **아젠다**: 콜라보 컨셉 합의, 제품 라인업, 발매 일정, 채널, 마케팅
+- **결과**: 콜라보 MOU 또는 발매 일정 LOCK
+
+## 한국 K-패션 브랜드 품평회 톤 사례 (참고)
+
+| 브랜드 | 품평회 특징 |
+|---|---|
+| **와키윌리** | 캐릭터 그래픽 적용 여부 별도 라운드 (디자인실 + 브랜드 디렉터) |
+| **마뗑킴** | 시그니처 로고 적용 SKU 우선 결정, 컬러웨이 5색 기본 |
+| **마르디 메크르디** | 플라워 그래픽 SKU 별도 라인업, 정판율 90% 목표 기준 결정 |
+| **아더에러** | 콘셉트 적합성 우선, 원가는 후순위 검토 |
+| **무신사 스탠다드** | 베이직 회전율 우선, 핏 시험 다수 라운드 |
+
+## 한국 패션기업 조직 R&R 메모
+
+품평회 노트의 작성·소비·집행 흐름.
+
+- **작성자**: MD 또는 디자인실 어시스턴트 (회의록 작성 표준 역할)
+- **결정 권한**: 대표 (최종) + MD 실장 (발주 수량) + 디자인 실장 (디자인 OK/NG)
+- **집행 책임**: MD (발주) + 디자인실 (재샘플) + 생산실 (OEM 컨택)
+- **수신 부서**: 영업기획 (입고 일정 인지), 마케팅실 (룩북·캠페인 일정 조율)
+
+품평회 직후 노트를 24시간 내에 슬랙·노션·카카오워크에 공유하는 것이 한국 패션기업 표준 실무입니다.
+
+## 시즌 사이클 내 위치
+
+품평회 노트는 **시즌 사이클의 결정 포인트마다 발생**합니다.
+
+```
+[fashion-concept-board / fashion-color-story] (시즌 시작 5개월 전)
+    ↓ 디자인 킥오프 미팅 → meeting-notes
+[fashion-fabric-board / 1차 디자인] (시즌 시작 4~5개월 전)
+    ↓ 1차 품평회 → meeting-notes (OK/NG 결정)
+[2차 샘플 발주] (시즌 시작 3개월 전)
+    ↓ 2차 품평회 → meeting-notes (LOCK 결정)
+[fashion-new-lineup / fashion-key-item-sheet]
+    ↓ 발주 회의 → meeting-notes (수량 결정)
+[OEM 본생산]
+    ↓ 입고 검수 회의 → meeting-notes (선택)
+[입고 · S1 판매]
+```
+
+## 채널 연계
+
+품평회 노트의 배포·보관 채널.
+
+- **노션 / 컨플루언스 / 카카오워크 위키** — 본 노트 보관
+- **슬랙 / 카카오워크 채널** — 노트 공유 + 액션 아이템 발신
+- **사내 ERP** — SKU OK/NG + 발주 수량 입력
+- **OEM 협력업체** — 발주서 형식으로 후속 전달
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="meeting-notes-27ss-1st" type="text/html" title="품평회 회의록 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "와키윌리 27SS 1차 품평회 회의록을 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

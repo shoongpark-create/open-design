@@ -1,45 +1,54 @@
-# Styling Board Checklist
+# 스타일링 보드 자체 검수 체크리스트
 
-Run before emitting `<artifact>`. Hard gates are P0; do not ship without them.
+산출물 출력 직전에 한 항목씩 확인하세요. **P0**는 통과해야 하는 하드 게이트.
 
-## P0 — Hard gates
+## P0 — 통과 필수
 
-- [ ] Header strip lists season, selling period (S#), month range, category
-  line, look count, and lock status (v1 / v2 / locked).
-- [ ] One-line period thesis is present and names at least one anchor item.
-- [ ] Axis track strip is rendered above the look grid with all four labels:
-  BASIC, NEW BASIC, TREND, ACCENT.
-- [ ] Every look has an axis dot, a look number (zero-padded `01`…`NN`),
-  and a 1-line caption that mentions an anchor item or a styling move.
-- [ ] Every `<img src="images/look-NN-AXIS.png">` resolves to a file the
-  agent actually wrote in `images/` this run. No orphan references.
-- [ ] If any image generation failed, the matching `<figure>` falls back to
-  the styled placeholder block (CSS in template) — never a broken `<img>`.
-- [ ] Axis count summary numbers add up to the total look count declared in
-  the header strip.
-- [ ] No external image URLs, no base64 data URIs, no absolute paths. All
-  imagery is project-local under `images/`.
-- [ ] No logos or readable brand text on any styling figure (verify the
-  prompt's `Constraints:` line was honored).
+- [ ] 헤더 스트립에 시즌, 판기(S#), 월 범위, 카테고리 라인, 룩 개수, 락 상태(v1/v2/locked) 모두 표기
+- [ ] 1줄 판기 명제 존재 + 최소 1개 앵커 아이템 명명
+- [ ] 축 트랙 스트립이 룩 그리드 위에 4개 라벨 모두 렌더: BASIC, NEW BASIC, TREND, ACCENT
+- [ ] 모든 룩에 축 도트 + 룩 번호(zero-padded `01`~`NN`) + 1줄 캡션 (앵커 아이템 또는 스타일링 무브 언급)
+- [ ] 모든 `<img src="images/look-NN-AXIS.png">` 이 이번 실행에서 실제로 `images/`에 쓴 파일로 해소됨. 고아 참조 없음
+- [ ] 이미지 생성 실패 시 해당 `<figure>`가 폴백 블록(템플릿의 CSS)으로 노출. 깨진 `<img>` 없음
+- [ ] 축 카운트 요약 합계 = 헤더에 명시된 룩 총 개수
+- [ ] 외부 이미지 URL, base64, 절대 경로 없음. 모든 이미지가 `images/` 하위 프로젝트 로컬
+- [ ] 스타일링 피규어에 로고 또는 읽히는 브랜드 텍스트 없음 (프롬프트의 `Constraints:` 줄 honored 확인)
 
-## P1 — Quality bars
+## P1 — 강력 권장
 
-- [ ] Each look's color chip strip carries 3–4 colors from the active
-  palette only — no improvised shades.
-- [ ] ACCENT axis carries no more than 20% of looks (target: 10–15%).
-- [ ] No two looks share the same anchor item *and* same axis. (Two
-  identical jumpers in BASIC = one to drop.)
-- [ ] Carryover map exists when at least one look is marked as carried
-  from a prior period; otherwise omit the section, do not stub it.
-- [ ] Captions are concrete, not generic — "boxy fit cotton zip-up over
-  washed denim" beats "casual layering".
+- [ ] 각 룩의 컬러 칩 스트립이 active 팔레트의 3~4개 컬러만 사용 — 즉흥 색조 금지
+- [ ] **ACCENT 축이 룩의 20% 이하** (타겟: 10~15%). 과도한 ACCENT는 시즌 정체성 흐림
+- [ ] 동일한 앵커 아이템 + 동일한 축의 룩 2개 금지 (BASIC에 동일 점퍼 2개 = 1개 드롭 후보)
+- [ ] 이전 판기에서 캐리오버한 룩이 있을 때만 캐리오버 맵 존재. 없으면 섹션 자체 삭제 (빈 헤딩 금지)
+- [ ] 캡션이 구체적, 제너릭 아님 — "박시 핏 코튼 집업 + 워시드 데님" > "캐주얼 레이어링"
 
-## P2 — Polish
+## P2 — 다듬기
 
-- [ ] All figures use the same lighting / background treatment so the
-  silhouettes read as one set.
-- [ ] Track strip dot colors come from the active design system palette
-  (no rainbow defaults).
-- [ ] Open / next decisions list has owner + date for every entry, or the
-  section is omitted.
-- [ ] Period thesis is one sentence, not a paragraph.
+- [ ] 모든 피규어가 일관된 라이팅 / 배경 처리 → 실루엣이 하나의 세트로 읽힘
+- [ ] 트랙 스트립 도트 컬러가 active 디자인 시스템 팔레트에서 옴 (레인보우 기본값 금지)
+- [ ] Open / Next Decisions 항목마다 owner + 일자 존재. 없으면 섹션 자체 삭제
+- [ ] 판기 명제가 1문장 (단락 금지)
+
+## K-패션 비즈니스 특화 검수
+
+- [ ] **판기 분할이 K-young-casual 표준** — S1 (1-2월), S2 (3-4월), S3 (5월), S4 (6-7월). 다른 분할 사용 시 명시적 사유 기재
+- [ ] **축 분포가 정상판매율 데이터와 정합** — BASIC/NEW BASIC이 매출 견인 카테고리에 충분히 할당됨. BTA 분포 25/25/35/15가 기본, 정상판매율에 따라 조정
+- [ ] **앵커 아이템이 시즌 전략(`fashion-season-strategy`)의 hero category와 매칭** — 시즌 hero가 가방이면 ACC 보드에 가방 앵커 필수
+- [ ] **컬러가 시즌 컬러 스토리(`fashion-color-story`)의 락된 팔레트에서만 옴** — 즉흥 컬러 추가 금지
+- [ ] **소재 / 패브릭 언급이 시즌 패브릭 보드(`fashion-fabric-board`)와 정합** — 새 패브릭 발명 금지
+- [ ] **그래픽이 포함된 룩은 `fashion-graphic-direction`과 정합** — TREND/ACCENT 룩의 그래픽이 시즌 그래픽 디렉션과 일치
+- [ ] **캐리오버 비율이 현실적** — K-young-casual 일반적으로 시즌당 캐리오버 20~40%. 너무 높으면 신규성 부족, 너무 낮으면 정상판매 안정성 부족
+- [ ] **UNI vs WOMEN 룩 개수 적정** — UNI 13개 기본, WOMEN 15개 기본. ACC 라인은 8~10개
+- [ ] **시즌 사이클 위치 정합** — 시즌 시작 3~4개월 전 락. 룩북(`fashion-lookbook`)이 이 보드의 룩만 화보화하는지 확인
+- [ ] **디스플레이 폰트가 운영 자료 톤** — `--font-display-report` 기본
+
+## 검수 실행 흐름
+
+1. 산출물 HTML을 브라우저에서 열어 시각적으로 점검 (피규어 정렬, 축 도트 컬러)
+2. P0 항목을 차례로 확인. 미통과 시 작업으로 되돌아가 수정
+3. 축 카운트 요약 합계 수동 계산 → 룩 총 개수와 일치 확인
+4. ACCENT 비율 계산 → 20% 이하 확인
+5. P1·P2는 시간 여유에 따라 다듬기
+6. 최종 검수 통과 후 헤더 상태를 `locked`로 표기
+
+검수 통과 후 사용자에게 산출물 외에 별도 보고는 하지 않습니다 (출력 규약).

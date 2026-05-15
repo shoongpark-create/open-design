@@ -1,22 +1,29 @@
 ---
 name: finance-report
 description: |
-  Quarterly / monthly financial report — masthead with KPIs, revenue and
-  burn charts, P&L summary table, top-line highlights, and an outlook
-  paragraph. Use when the brief mentions "financial report", "Q3 report",
-  "MRR review", "P&L", or "财报".
+  K-패션 브랜드의 **시즌 매출 결산 / 판기별 매출 리포트**를 단일 HTML 파일로
+  생성하는 스킬입니다. 마스트헤드(브랜드/시즌/Confidential 배지) + KPI 4종
+  (시즌 GMV · 정상판매율 · 재고자산회전율 · AOV) + 매출 추이 차트 + 비용 분해 +
+  P&L 요약 표 + TOP SKU 표 + 다음 시즌 아웃룩 문단 구조. 영업기획·MD실·CFO/CEO
+  대상 시즌 결산 문서이며, S1~S4 판기별 또는 월별 리뷰에 사용합니다.
+  사용자가 "시즌 매출 리포트", "판기 결산", "시즌 결산", "P&L 시즌",
+  "정판율 리뷰", "매출 보고서", "monthly review"를 언급하면 활성화하세요.
 triggers:
+  - "시즌 매출 리포트"
+  - "판기 결산"
+  - "시즌 결산"
+  - "정판율 리뷰"
+  - "매출 보고서"
+  - "월별 매출 리뷰"
+  - "P&L 시즌"
   - "financial report"
   - "finance report"
   - "quarterly report"
-  - "p&l"
-  - "mrr review"
-  - "财报"
-  - "财务报告"
 od:
   mode: prototype
   platform: desktop
   scenario: finance
+  category: fashion
   featured: 10
   preview:
     type: html
@@ -24,37 +31,164 @@ od:
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Build me a Q3 financial report for an early-stage SaaS — MRR, burn, gross margin, top accounts."
+  example_prompt: "와키윌리 27SS S1 판기(5-6월) 매출 결산 리포트를 만들어주세요. KPI는 시즌 GMV / 정상판매율 / 재고자산회전율 / AOV. 매출 추이는 5~6월 주별, 비용 분해는 사입원가/마케팅/물류/인건비/시스템. P&L 표는 27SS vs 26SS QoQ + 27SS vs 26FW MoM. TOP 5 SKU와 시즌 아웃룩 포함."
 ---
 
-# Finance Report Skill
+# 패션 시즌 결산 보고서 스킬
 
-Produce a single-screen financial report in one self-contained HTML file.
+K-패션 브랜드의 **시즌·판기 매출 결산 리포트**를 단일 HTML 파일로 생성합니다. 영업기획팀이 매판기(S1~S4) 종료 시 또는 월별로 발행하는 내부 결산 문서. 마스트헤드 + KPI 4종 + 매출 추이 차트 + 비용 분해 + P&L 요약 + TOP SKU + 다음 시즌 아웃룩의 7개 섹션 구조.
 
-## Workflow
+이 산출물의 청중은 **대표/CFO/CEO, MD 실장, 마케팅 실장, 디자인 실장**입니다. 한국 패션기업에서는 보통 영업기획팀이 작성하고 MD 실장이 검토한 뒤 대표가 컨펌하는 흐름을 따릅니다. 분기 IR 자료의 원본 데이터로도 사용됩니다.
 
-1. **Read the active DESIGN.md.** Tables, KPI cards, and chart strokes use
-   palette tokens — never invent new ones.
-2. **Classify** the period (monthly / quarterly / yearly) and entity
-   (startup, division, project) from the brief. If unspecified, assume a
-   quarterly SaaS report and pick believable numbers.
-3. **Layout** the page in this order:
-   - Masthead: company / period / "Confidential — Finance" badge.
-   - Headline KPI strip (4 cards): Revenue, Net new MRR, Gross margin, Cash runway.
-   - Revenue trend chart (inline SVG line + area).
-   - Cost breakdown chart (inline SVG bar) with a 2–3 bullet caption.
-   - P&L summary table (Revenue / Gross profit / Opex / Net) with current vs prior period.
-   - Top accounts table with logo placeholders, plan, ARR, status badge.
-   - Outlook paragraph + footer with author + signature line.
-4. **Write** one self-contained HTML doc (CSS in one inline `<style>` block).
-5. **Self-check**: every number ties to a labelled chart or table; deltas
-   show direction and percentage; accent colour used at most twice.
+## 환경 호환성
 
-## Output contract
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 `data-od-id` 속성으로 인라인 코멘트 기능 사용. 그 외에는 일반 `id` 속성으로 대체합니다.
+
+본문 작업 흐름은 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 `DESIGN.md` 경로나 기본 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 결산 보고서의 등록(register)을 따릅니다.
+
+- 회계/재무 표기는 한국 표준: 매출(Revenue), 사입원가(COGS), 매출총이익(Gross Profit), 판관비(SG&A), 영업이익(Operating Income), 마진율(Margin), 사입가율(Cost Ratio).
+- 한국 패션 KPI 표기 유지: 정상판매율(정판율), 재고자산회전율, GMV, AOV, ROAS, SKU, BTA, LOT.
+- 시즌·판기 표기: 27SS / 26FW / S1 판기 / S2 판기 / 5월 / 6월.
+- 통화 단위: 원/억/만원 (예: "12.4억", "98,400원"). USD 환산 금지(국내 보고서).
+- 변동 표기: ▲/▼ + 한국 비교 단위(QoQ → 전판기 대비, YoY → 전년 동기 대비, MoM → 전월 대비). pp는 percentage point.
+- 본문은 명사구·문장형 혼용 — 임원 보고는 명사구 종결 권장 ("정판율 호조, 회전율 개선, 캐리오버 감소").
+
+## 폴더 구조
 
 ```
-<artifact identifier="finance-report-q3" type="text/html" title="Q3 Finance Report">
-<!doctype html>
-<html>...</html>
-</artifact>
+finance-report/
+├── SKILL.md       ← 이 파일
+└── example.html   ← 작성 예시 (와키윌리 27SS S1 판기 매출 결산)
 ```
+
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. `example.html`을 처음부터 끝까지 읽어 마스트헤드 + KPI + 차트 + P&L + TOP SKU + 아웃룩 구조를 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요.
+
+### Step 1 — 분류 및 정보 수집
+
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
+
+- 브랜드명 + 시즌·판기 코드 (예: 와키윌리 27SS S1 판기, 마뗑킴 26FW)
+- 보고 기간 (판기 / 월 / 분기 / 시즌 전체)
+- 핵심 KPI 4종 (기본 권장: **시즌 GMV · 정상판매율 · 재고자산회전율 · AOV**)
+- 비용 분해 항목 (사입원가 · 마케팅비 · 물류비 · 인건비 · 시스템/SaaS · 임차료)
+- TOP SKU 개수 (기본 5개)
+- 다음 시즌 아웃룩 (어느 판기 / 어떤 카테고리 / 어떤 캠페인 예정인지)
+
+데이터가 누락되면 그럴듯한 K-패션 평균치로 작성하되, 추정값임을 사용자에게 알립니다.
+
+### Step 2 — 레이아웃 순서
+
+1. **마스트헤드** — 브랜드명 · 시즌·판기 코드 · 발행일 · "Confidential — 영업기획" 배지
+2. **시즌 요약 한 줄** — lede 문단 (예: "27SS S1 판기는 정판율과 매출 모두 계획 초과")
+3. **KPI 4종** — 시즌 GMV / 정상판매율 / 재고자산회전율 / AOV (각 큰 숫자 + Δ)
+4. **매출 추이 차트** — 주별/일별 GMV 라인 차트 (인라인 SVG, plan 대비 실적)
+5. **비용 분해** — 사입원가 / 마케팅 / 물류 / 인건비 / 시스템 (인라인 SVG 바 또는 horizontal bar)
+6. **P&L 요약 표** — 매출 / 사입원가 / 매출총이익 / 판관비 / 영업이익 — 현재 판기 vs 전판기 vs 전년 동기
+7. **TOP SKU 표** — 로고 placeholder + SKU명 + 카테고리 + BTA + 판매수량 + GMV + 정판율 배지
+8. **아웃룩 + 사인오프** — 다음 판기 전망 풀쿼트 + 작성자(영업기획) 시그니처 + 푸터
+
+### Step 3 — 작성
+
+1. 단일 HTML 문서(`<!doctype html>` ~ `</html>`)로 작성, CSS는 인라인 `<style>` 한 블록.
+2. 시맨틱 HTML: `<header class="masthead">`, `<table>`, `<footer>`.
+3. 모든 색상은 `:root` CSS 변수로 바인딩 — 임의 hex 금지.
+4. 차트는 인라인 SVG (라인 + 영역 채움). 외부 JS 라이브러리 금지.
+5. 표의 숫자는 모노 폰트(`var(--mono)`)로 우측 정렬.
+
+### Step 4 — 자체 검수
+
+- 모든 숫자가 차트나 표에 라벨되어 있음
+- Δ(변동)는 방향(▲/▼)과 % 또는 pp 표기
+- 액센트 컬러는 최대 2번 사용 (마스트헤드 액센트 + 차트 강조)
+- 정판율은 60~85% 범위, 재고자산회전율은 시즌 단위로 합리적 (4~20회)
+- 통화 단위는 원/억/만원 (USD 금지)
+- 아웃룩 문단은 명사구 종결 권장
+- 작성자 시그니처에 부서(영업기획 / MD실) 표시
+
+## 한국 K-패션 KPI 표준 (참고)
+
+결산 리포트 작성 시 사용할 표준 지표.
+
+| 지표 | 한국 패션 평균 | 우수 사례 |
+|---|---|---|
+| **정상판매율** | 60~75% | 마르디 메크르디 85%+ |
+| **재고자산회전율** | 3~4회/년 | 마르디 메크르디 20회 (업계 1위) |
+| **사입가율** | 25~35% | 영캐주얼 기준 |
+| **마진율** | 50~60% (정상가 기준) | 컨템포러리 65%+ |
+| **AOV** | 8만~15만원 | 컨템포러리 18만~25만원 |
+| **GMV 시즌 성장률** | 10~30% YoY | 신생 100%+ |
+| **할인율** | 시즌 말 15~30% | 정판 강한 브랜드 10% 이하 |
+
+위 사례는 카피·예시 참고용. 실데이터가 없으면 사용자에게 묻거나 "illustrative" 라벨로 표시.
+
+## 한국 패션기업 조직 R&R 메모
+
+결산 리포트의 작성·검토 흐름.
+
+- **영업기획팀**: 데이터 집계, 차트·표 작성, 리포트 발행 주체
+- **MD 실장**: 정판율·회전율·재고 흐름 검토, 카테고리 의사결정 사인오프
+- **이커머스팀**: 채널별 GMV·AOV 데이터 제공
+- **디자인실장**: BTA 비중과 시즌 라인업 정합성 검토
+- **마케팅실장**: ROAS·캠페인 효과 데이터 제공
+- **CFO/CEO**: 최종 컨펌, IR/투자자 대상 발표 자료로 활용
+
+## 시즌 사이클 내 위치
+
+결산 리포트는 **판기 종료 시점**에 발행됩니다.
+
+```
+[S1 판기 (5-6월) 종료 → 7월 초 S1 결산 리포트 발행]
+[S2 판기 (7월) 종료 → 8월 초 S2 결산 리포트 발행]
+[S3 판기 (8월) 종료 → 9월 초 S3 결산 리포트 발행]
+[S4 판기 (9월) 종료 → 10월 초 S4 결산 리포트 발행]
+[시즌 전체 종료 → 10월 중순 27SS 시즌 종합 결산]
+```
+
+연결 산출물:
+- `dashboard` (시즌 진행 중 데이터 모니터링) → `finance-report` (판기 종료 시 결산)
+- `fashion-season-deck` (다음 시즌 기획 시 회고 챕터로 통합)
+- `fashion-imc-calendar` (캠페인 ROAS 분석 시 연동)
+
+## 채널 연계
+
+이 리포트는 다음 데이터 소스를 종합합니다.
+
+- **자사몰** (카페24 / 쇼피파이) — GMV, AOV, 회원 매출
+- **무신사 / 29CM / W컨셉 / SSF샵 / 한섬몰** — 입점채널별 매출
+- **광고 플랫폼** (메타 / 구글 / 네이버 / 카카오) — ROAS, 마케팅비
+- **3PL 물류 시스템** — 물류비 데이터
+- **회계 시스템** — 사입원가, 인건비, 시스템 비용
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="finance-report-slug" type="text/html" title="시즌 결산 리포트 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "와키윌리 27SS S1 판기 매출 결산 리포트를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

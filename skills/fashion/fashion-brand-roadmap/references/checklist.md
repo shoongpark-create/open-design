@@ -1,33 +1,46 @@
-# Brand Roadmap Checklist
+# 브랜드 로드맵 자체 검수 체크리스트
 
-P0 are hard gates.
+산출물 출력 직전에 한 항목씩 직접 확인하세요. **P0**는 통과해야 하는 하드 게이트, **P1**은 강력 권장, **P2**는 다듬기.
 
-## P0
+## P0 — 통과 필수
 
-- [ ] Header carries brand, effective year, status, lock date.
-- [ ] All 4 tiers (North Star / Principles / Characters / Foundation) are
-  present and carry text content.
-- [ ] North Star reads as aspirational ("we want customers to feel ___"),
-  not operational ("ship 100 SKUs").
-- [ ] Principles read as action verbs / verb phrases (팬덤, 존중,
-  새로운시도, 트렌드리딩) — not adjectives.
-- [ ] Characters read as adjectives or short phrases customers would
-  actually say ("재미있는", "따라하고 싶은") — not internal jargon.
-- [ ] Foundation lists founding keywords; if a keyword was added after
-  founding, mark "(evolved)" in the cell.
-- [ ] Cross-reference list names ≥ 3 downstream artifacts.
-- [ ] Revision log carries at least one row (the current version).
+- [ ] 헤더에 브랜드명 · 효력 연도 · 상태(locked/draft) · 락 일자가 모두 표기됨
+- [ ] 4단(북극성 / 행동원칙 / 캐릭터 / 파운데이션) 모두 존재하며, 각 단에 텍스트 콘텐츠 보유
+- [ ] **북극성**은 **추상적 지향**으로 읽힘 — "고객이 ~을 느끼게 하고 싶다" 형식. 운영 KPI("100 SKU 출시", "QR 30%")로 빠지지 않음
+- [ ] **행동원칙**은 **행동 동사·동사구**(팬덤, 존중, 새로운시도, 트렌드리딩 등)로 읽힘. 형용사 아님
+- [ ] **캐릭터**는 **고객이 실제로 말할 만한 형용사·짧은 구절**(재미있는, 따라하고 싶은 등). 내부 마케팅 용어가 아님
+- [ ] **파운데이션**은 **창업 키워드** 위주. 창업 후 추가된 키워드는 셀에 "(evolved)" 또는 "(추가)" 표시
+- [ ] 교차 참조 리스트에 **최소 3개 이상의 시즌 산출물**(포지셔닝 맵, 시즌 전략, 시즌 컨셉 보드, 그래픽 디렉션, 룩북, IMC 캘린더 등) 명명
+- [ ] 리비전 로그에 **최소 1행**(현재 버전) 존재. 일자는 ISO `YYYY-MM-DD` 형식
 
-## P1
+## P1 — 강력 권장
 
-- [ ] Highlighted tier (effective-year emphasis) carries an accent
-  treatment that differs from the other tiers.
-- [ ] Per-tier rail / annotation paragraphs are concrete examples or
-  anchors, not generic restatements of the tier name.
-- [ ] Brand wordmark uses the brand's canonical spelling.
+- [ ] 효력 연도에 강조하는 단(보통 캐릭터)이 **다른 단과 시각적으로 구분되는 액센트 처리**(배경색, 보더, 폰트 굵기 등)를 받음
+- [ ] 각 단별 레일/어노테이션 단락이 **구체적 예시·앵커**를 담고 있음. 단순히 단 이름을 재진술하는 수준 아님
+- [ ] 브랜드 워드마크 표기가 브랜드의 정식 표기와 일치 (대소문자, 띄어쓰기, 특수문자)
+- [ ] 한국 K-패션 브랜드 컨텍스트인 경우, 단별 콘텐츠가 **한국 패션 비즈니스 등록(register)**을 따름 — 영어 산업용어는 그대로 유지, 한국어는 명사구 종결
+- [ ] 부서별 검토자(디자인 실장, MD 실장, 마케팅 실장 등)가 리비전 로그에 명시됨
 
-## P2
+## P2 — 다듬기
 
-- [ ] Pyramid is centered and balanced; no tier overhangs the next.
-- [ ] Korean tier content uses the brand's working spelling.
-- [ ] Revision log dates use ISO `YYYY-MM-DD` format.
+- [ ] 피라미드가 시각적으로 **중심 정렬**되고, 위 단이 아래 단을 침범(overhang)하지 않음
+- [ ] 한국어 단별 콘텐츠가 브랜드의 실제 사용 표기를 따름 (예: "와키윌리"와 "WACKYWILLY" 중 정식 표기 일관)
+- [ ] 리비전 로그 일자가 ISO `YYYY-MM-DD` 형식
+- [ ] 어노테이션 단락이 60~120자 사이로 적정 (너무 길지도, 너무 짧지도 않음)
+- [ ] 화면 768px 이하 뷰포트에서 피라미드가 자연스럽게 스택(스택드 블록 리듬으로 폴백)됨
+
+## K-패션 비즈니스 특화 검수 (선택)
+
+- [ ] 4단의 콘텐츠가 한국 패션기업 **부서 R&R**과 정합성 있음 — 디자인실(캐릭터·파운데이션), MD실(행동원칙·캐릭터), 마케팅실(캐릭터·교차 참조)
+- [ ] 교차 참조 리스트가 **시즌 사이클 순서**(시즌 전략 → 컨셉 → 컬러 → 패브릭 → 스타일링 → 라인업 → 룩북 → IMC)를 의식한 흐름
+- [ ] 캐릭터 단에 **한국 K-패션 시장 컨텍스트**(예: "MZ 친화적", "K-아이돌 무드", "데일리 컨템포러리")가 자연스럽게 녹아 있음
+- [ ] 디스플레이 폰트가 산출물 성격에 맞음 (로드맵은 보통 `--font-display-report`)
+
+## 검수 실행 흐름
+
+1. 산출물 HTML을 브라우저(또는 미리보기 환경)에서 열어 시각적으로 점검
+2. P0 항목을 차례로 확인. 미통과 시 작업으로 되돌아가 수정
+3. P1·P2는 시간 여유에 따라 다듬기
+4. 최종 검수 통과 후 헤더 상태를 `locked`로, 리비전 로그에 락 일자 기록
+
+검수 통과 후 사용자에게 산출물 외에 별도 보고는 하지 않습니다 (출력 규약).

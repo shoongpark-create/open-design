@@ -1,39 +1,52 @@
-# Fashion Lookbook Checklist
+# 패션 룩북 자체 검수 체크리스트
 
-## P0 — Must pass
+산출물 출력 직전에 한 항목씩 직접 확인하세요. **P0**는 통과해야 하는 하드 게이트, **P1**은 강력 권장, **P2**는 다듬기.
 
-- The artifact is a single self-contained HTML file, except for local images in
-  `images/` referenced by relative paths.
-- All referenced lookbook images are project-local. No external image URLs.
-- The cover and every look image were generated or selected intentionally; no
-  empty generic placeholder is shipped as final.
-- Every look has garment-specific copy: item family, color, material, and
-  merchandising role.
-- Each look includes semantic buying/search data: fit, occasion, delivery, price
-  tier, and tags.
-- The chosen trend lens is visible in silhouette, color, texture, copy, and
-  imagegen prompts.
-- Active DESIGN.md tokens are translated into the `:root` variables.
-- The palette reads as apparel/fabric names, not only raw UI hex labels.
-- No fake brand logos, no unreadable generated text inside images, no watermark.
-- Every major section has `data-od-id`.
+## P0 — 통과 필수
 
-## P1 — Strong lookbook quality
+- [ ] 산출물이 단일 HTML 파일. 단, 로컬 이미지(`images/` 폴더 내부 상대 경로) 참조는 허용
+- [ ] 모든 룩북 이미지가 프로젝트 로컬. 외부 이미지 URL · base64 · 임시 폴더 참조 없음
+- [ ] 커버와 모든 룩 이미지가 의도적으로 생성/선택됨. 빈 제너릭 폴백을 최종으로 출하 금지
+- [ ] 모든 룩에 의류 특화 카피 (아이템 패밀리, 컬러, 소재, MD 역할) 존재
+- [ ] 모든 룩에 시맨틱 구매 / 검색 데이터 (핏, occasion, drop, 가격대, 검색 태그) 존재
+- [ ] 선택한 트렌드 렌즈가 실루엣, 컬러, 텍스처, 카피, 이미지 프롬프트에 일관되게 반영
+- [ ] `DESIGN.md` 토큰이 `:root` CSS 변수로 바인딩됨
+- [ ] 팔레트의 컬러명이 의류/패브릭 이름처럼 읽힘 (UI 토큰명 금지)
+- [ ] 가짜 브랜드 로고, 이미지 안 안 읽히는 텍스트, 워터마크 없음
+- [ ] 주요 섹션에 식별 속성(`data-od-id` 또는 `id`) 존재
 
-- The collection has one clear seasonal thesis.
-- Silhouette, material, color, and styling notes agree with each other.
-- The generated images share a coherent photographic world: lighting, backdrop,
-  crop, model distance, and color temperature.
-- The lookbook balances emotion and commerce: editorial story first, product
-  proof and range-plan data after.
-- Look numbers create a real range: hero look, commercial look, layering look,
-  statement look, entry look, closing look.
-- The line-up table can support a buyer/MD conversation without extra context.
+## P1 — 룩북 품질
 
-## P2 — Polish
+- [ ] 컬렉션이 시즌 명제 1개로 명확하게 정의됨
+- [ ] 실루엣, 소재, 컬러, 스타일링 노트가 서로 일관됨 (충돌 없음)
+- [ ] 생성된 이미지들이 일관된 포토그래픽 월드 공유 (라이팅, 배경, 크롭, 모델 거리, 컬러 온도)
+- [ ] 룩북이 감정과 커머스의 균형 — 에디토리얼 스토리가 먼저, 상품 증명 + 라인업 데이터가 그 다음
+- [ ] 룩 번호들이 실제 레인지 구성 — 히어로 / 커머셜 / 레이어링 / 스테이트먼트 / 엔트리 / 클로징 역할 분배
+- [ ] 라인업 테이블이 추가 컨텍스트 없이 바이어/MD 대화를 지원
 
-- Cover image has breathing room for title/caption in adjacent layout.
-- At least one campaign line is memorable enough to use in a launch email.
-- Material descriptions include tactile language: crisp, brushed, washed,
-  compact, fluid, sheer, waxed, paper-touch, etc.
-- Mobile reflow keeps images above their related notes.
+## P2 — 다듬기
+
+- [ ] 커버 이미지가 인접 레이아웃에서 타이틀/캡션이 숨쉴 공간 확보
+- [ ] 캠페인 라인 중 최소 1개가 론칭 이메일에 사용할 만큼 기억에 남음
+- [ ] 소재 설명에 촉각적 언어 포함: crisp, brushed, washed, compact, fluid, sheer, waxed, paper-touch 등
+- [ ] 모바일 리플로우 시 이미지가 관련 노트 위에 유지됨
+
+## K-패션 비즈니스 특화 검수
+
+- [ ] **채널 정합성** — 룩북이 명시된 채널(자사몰 / 무신사 / 29CM / 바이어)의 톤매너 + UI 컨벤션과 맞물림
+- [ ] **검색 태그가 한국 e-커머스 친화적** — `봄재킷`, `출근룩`, `신학기`, `데일리`, `여행룩` 등 무신사·29CM 검색 키워드 의식
+- [ ] **가격대 표기가 한국 표준** — `25만원대`, `25,000원`, `KRW 250,000` 중 일관된 표기 사용
+- [ ] **drop 일정이 판기(S1~S4)와 정합** — S1(1-2월), S2(3-4월), S3(5월), S4(6-7월) 분기와 맞물림
+- [ ] **카테고리명이 K-young-casual 컨벤션** — UNI / WOMEN / KIDS / ACC 4 라인 구분
+- [ ] **MD 노트가 캐리오버/QR/SPOT 의식** — 정상판매율, 회전율 의식한 라인업 구성
+- [ ] **디스플레이 폰트가 룩북 톤에 맞음** — 로맨틱 → romance, 스트릿 → street, 위트 → play, MD 운영 → report
+
+## 검수 실행 흐름
+
+1. 산출물 HTML을 브라우저(또는 미리보기 환경)에서 열어 시각적으로 점검
+2. P0 항목을 차례로 확인. 미통과 시 작업으로 되돌아가 수정
+3. 이미지 생성 실패한 룩이 있다면 폴백 블록이 정상 노출되는지 확인
+4. P1·P2는 시간 여유에 따라 다듬기
+5. 최종 검수 통과 후 헤더 상태를 `locked`로 표기
+
+검수 통과 후 사용자에게 산출물 외에 별도 보고는 하지 않습니다 (출력 규약).

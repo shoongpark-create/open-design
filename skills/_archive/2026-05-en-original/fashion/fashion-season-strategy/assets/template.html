@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE Season] Strategy · [REPLACE Line]</title>
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
+  :root {
+    --ink:        #1f2933;
+    --paper:      #fafaf7;
+    --rule:       #e7e3da;
+    --muted:      #6b7280;
+    --accent:     #b8443a;
+
+    --pillar-bg-1: #ecf0e8;
+    --pillar-bg-2: #f3eadc;
+    --pillar-bg-3: #ebd9d6;
+
+    --hero-bg-1:   #d8e8d8;
+    --hero-bg-2:   #f5e6d3;
+    --hero-bg-3:   #d8d3e8;
+
+    --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
+
+    --font-display-report: "Paperlogy", "Wanted Sans Variable", "SUIT Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
+
+    --font-display-street: "Black Han Sans", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-play: "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-romance: "Grandiflora One", "Diphylleia", "Hahmlet", "Noto Serif KR", "Source Serif 4", ui-serif, Georgia, serif;
+
+    --font-display: var(--font-display-report);
+    --font-text: var(--font-sans);
+    --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: var(--font-text); }
+  body { padding: 40px 40px 64px; }
+
+  .ss-header { border-bottom: 1px solid var(--rule); padding-bottom: 16px; margin-bottom: 24px; }
+  .ss-meta { display: flex; gap: 16px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .ss-meta .date { margin-left: auto; }
+  .title { font-family: var(--font-display); font-size: 24px; margin: 12px 0 0; }
+
+  .block-header { margin: 24px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--rule); }
+  .block-header h2 { font-family: var(--font-display); font-size: 16px; letter-spacing: 0.04em; margin: 0; }
+
+  .pillars-row, .heroes-row { display: grid; gap: 16px; }
+  .pillars-row { grid-template-columns: repeat(3, 1fr); margin-bottom: 28px; }
+  .heroes-row { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin-bottom: 32px; }
+
+  .pillar-card { padding: 16px; border-radius: 10px; display: flex; flex-direction: column; gap: 8px; min-height: 160px; }
+  .pillar-card[data-pillar="01"] { background: var(--pillar-bg-1); }
+  .pillar-card[data-pillar="02"] { background: var(--pillar-bg-2); }
+  .pillar-card[data-pillar="03"] { background: var(--pillar-bg-3); }
+  .pillar-tag { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+  .pillar-title { font-family: var(--font-display); font-size: 18px; margin: 0; }
+  .pillar-desc { font-size: 12px; line-height: 1.5; color: #374151; margin: 0; }
+  .pillar-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; }
+  .chip { font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,0.06); color: var(--ink); }
+  .chip--dark { background: var(--ink); color: #fff; }
+  .chip--accent { background: var(--accent); color: #fff; }
+
+  .hero-card { padding: 16px; border-radius: 10px; display: flex; flex-direction: column; gap: 8px; }
+  .hero-card[data-category="bag"]   { background: var(--hero-bg-1); }
+  .hero-card[data-category="cap"]   { background: var(--hero-bg-2); }
+  .hero-card[data-category="shoes"] { background: var(--hero-bg-3); }
+  .hero-card[data-category="outer"] { background: var(--hero-bg-1); }
+  .hero-card[data-category="top"]   { background: var(--hero-bg-2); }
+  .hero-name { font-family: var(--font-display); font-size: 16px; margin: 0; }
+  .hero-line { font-family: var(--font-display); font-size: 14px; font-weight: 500; margin: 0 0 4px; }
+  .hero-tactics { margin: 0; padding-left: 18px; font-size: 12px; line-height: 1.55; }
+
+  /* Stack-and-grid (rhythm B) */
+  .ss-grid--stack-and-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 24px; }
+  .pillars-stack { display: flex; flex-direction: column; gap: 12px; }
+  .heroes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* Print (rhythm C) */
+  .pillars-stack--print, .heroes-stack--print { display: flex; flex-direction: column; gap: 10px; }
+
+  /* Tail */
+  .alignment-table, .open-decisions { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--rule); }
+  .alignment-table h2, .open-decisions h2 { font-family: var(--font-display); font-size: 14px; margin: 0 0 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  table { border-collapse: collapse; font-size: 12px; }
+  th, td { padding: 6px 12px; text-align: center; border-bottom: 1px solid var(--rule); }
+  th:first-child, td:first-child { text-align: left; }
+  th { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--muted); }
+  ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.6; }
+
+  @media (max-width: 900px) {
+    .pillars-row { grid-template-columns: 1fr; }
+    .ss-grid--stack-and-grid { grid-template-columns: 1fr; }
+    .heroes-grid { grid-template-columns: 1fr; }
+  }
+  @media print { body { padding: 16px; } .pillar-card, .hero-card { break-inside: avoid; } }
+</style>
+</head>
+<body>
+  <main id="season-strategy">
+    <!-- PASTE one rhythm + tail blocks from references/layouts.md. -->
+  </main>
+</body>
+</html>

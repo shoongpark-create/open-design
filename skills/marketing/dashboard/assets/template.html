@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 브랜드] · [REPLACE 시즌] 운영 대시보드</title>
+<!--
+  K-패션 시즌 매출 / 운영 대시보드 시드.
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+       (--accent = 시즌 키 컬러, --font-display = --font-display-report 권장)
+    4) references/layouts.md에서 리듬 1개를 골라 <main id="content">에 붙여 넣기
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude (Claude.ai · Claude Code): <artifact identifier type="text/html"> 로 감쌈
+    - 그 외 (ChatGPT · Gemini · Grok · 일반 채팅): 표준 ```html 코드 블록
+    - OpenDesign: 주요 영역에 data-od-id 사용. 그 외에는 id 속성으로 대체.
+
+  K-패션 컨텍스트:
+    - KPI 4종 기본: 정상판매율(정판율) · 재고자산회전율 · 시즌 GMV · AOV
+    - 정판율은 60~85% 범위, 재고자산회전율은 카테고리별 3~20회 범위
+    - 채널 표기: 무신사 / 29CM / W컨셉 / 자사몰 / 지그재그 / SSF샵 / 한섬몰
+    - BTA 비중: Basic 40~50% / Trend 30~40% / Accent 10~20%
+    - 통화: 원/만원/억 표준 표기. USD 환산 금지.
+    - 외부 이미지 URL·아이콘 파일 금지. 인라인 SVG만 사용.
+-->
+<style>
+  /* 한국 K-패션 표준 폰트 시스템 */
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Wanted+Sans:wght@400;500;600&display=swap");
+
+  :root {
+    /* 색상 토큰 — DESIGN.md에서 오버라이드 */
+    --bg:         #f7f6f3;
+    --surface:    #ffffff;
+    --surface-2:  #fafaf8;
+    --fg:         #1c1b1a;
+    --muted:      #76736d;
+    --muted-2:    #9b9892;
+    --border:     #e6e3dd;
+    --border-2:   #ededea;
+    --accent:     #c96442;   /* 와키윌리 27SS 톤 */
+    --accent-soft: color-mix(in oklch, var(--accent) 10%, transparent);
+    --good:       #2f7d4a;
+    --warn:       #c79321;
+    --bad:        #b53a2a;
+    --basic:      #6b6964;   /* BTA · Basic */
+    --trend:      #1f6dbc;   /* BTA · Trend */
+    --accent-bta: #c96442;   /* BTA · Accent */
+
+    /* 폰트 토큰 — 운영 대시보드는 report 톤 */
+    --font-sans:
+      "Pretendard Variable", Pretendard,
+      "Apple SD Gothic Neo", "Noto Sans KR",
+      system-ui, sans-serif;
+    --font-display-report:
+      "Pretendard Variable", "Wanted Sans Variable",
+      "SUIT Variable", sans-serif;
+    --font-display: var(--font-display-report);
+    --font-mono:
+      "JetBrains Mono", "IBM Plex Mono", "SF Mono",
+      ui-monospace, Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.5;
+    display: grid;
+    grid-template-columns: 232px 1fr;
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  body * { font-variant-numeric: tabular-nums; }
+
+  /* ─── 좌측 사이드바 ─── */
+  aside.sidebar {
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    padding: 18px 14px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+  }
+  .brand {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    padding: 6px 10px 22px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .brand .dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--accent);
+  }
+  nav.nav { display: flex; flex-direction: column; gap: 2px; }
+  nav.nav a {
+    padding: 8px 10px;
+    border-radius: 8px;
+    color: var(--fg);
+    text-decoration: none;
+    font-size: 13.5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  nav.nav a:hover { background: var(--surface-2); }
+  nav.nav a.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 500;
+  }
+  nav.nav .group {
+    font-size: 10.5px;
+    color: var(--muted-2);
+    padding: 18px 10px 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  nav.nav .count {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* ─── 메인 영역 ─── */
+  main { padding: 0 30px 64px; }
+
+  /* ─── 상단바 ─── */
+  header.topbar {
+    padding: 18px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 5;
+  }
+  .topbar h1 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    margin: 0;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  .topbar .crumb {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 4px;
+  }
+  .topbar .right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  button, .btn { font: inherit; cursor: pointer; padding: 8px 14px; border-radius: 8px; font-weight: 500; }
+  .btn-primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+  .btn-secondary { background: transparent; color: var(--fg); border: 1px solid var(--border); }
+
+  /* ─── KPI Row ─── */
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .kpi .label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  .kpi .value {
+    font-family: var(--font-display);
+    font-size: 30px;
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .kpi .delta { font-size: 12px; }
+  .kpi .delta.up   { color: var(--good); }
+  .kpi .delta.flat { color: var(--muted); }
+  .kpi .delta.down { color: var(--bad); }
+  .kpi .sub {
+    margin-top: 6px;
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+
+  /* ─── Panels ─── */
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+  }
+  .panel h3 {
+    font-family: var(--font-display);
+    margin: 0 0 14px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .panel h3 .meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+  }
+  .panels-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .panels-row.three {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .panels-row.full { grid-template-columns: 1fr; }
+
+  /* ─── 차트 ─── */
+  .chart { position: relative; overflow: hidden; }
+  .chart svg { width: 100%; display: block; }
+  .legend {
+    display: flex;
+    gap: 14px;
+    margin-top: 12px;
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+  .legend .sw { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+
+  /* ─── 도넛 BTA ─── */
+  .donut-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+    align-items: center;
+  }
+  .donut-legend { font-size: 12.5px; color: var(--muted); }
+  .donut-legend li { list-style: none; padding: 4px 0; display: flex; justify-content: space-between; align-items: center; }
+  .donut-legend li b { color: var(--fg); font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  .donut-legend ul { padding: 0; margin: 0; }
+
+  /* ─── 테이블 ─── */
+  table { width: 100%; border-collapse: collapse; }
+  th, td {
+    text-align: left;
+    padding: 10px 8px;
+    border-top: 1px solid var(--border-2);
+  }
+  th {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    border-top: 0;
+  }
+  td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+
+  .pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    padding: 3px 9px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    letter-spacing: 0.04em;
+  }
+  .pill.good { color: var(--good); border-color: color-mix(in oklch, var(--good) 30%, transparent); background: color-mix(in oklch, var(--good) 8%, transparent); }
+  .pill.warn { color: var(--warn); border-color: color-mix(in oklch, var(--warn) 30%, transparent); background: color-mix(in oklch, var(--warn) 8%, transparent); }
+  .pill.bad  { color: var(--bad);  border-color: color-mix(in oklch, var(--bad)  30%, transparent); background: color-mix(in oklch, var(--bad)  8%, transparent); }
+  .pill.basic { color: var(--basic); }
+  .pill.trend { color: var(--trend); border-color: color-mix(in oklch, var(--trend) 25%, transparent); }
+  .pill.accent { color: var(--accent-bta); border-color: color-mix(in oklch, var(--accent-bta) 30%, transparent); }
+
+  /* ─── QR 콜아웃 ─── */
+  .callout {
+    border: 1px dashed var(--accent);
+    border-radius: 12px;
+    padding: 16px 18px;
+    background: var(--accent-soft);
+    margin-bottom: 14px;
+  }
+  .callout h4 {
+    margin: 0 0 6px;
+    font-size: 13px;
+    color: var(--accent);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .callout p { margin: 0; color: var(--fg); }
+
+  /* 반응형 */
+  @media (max-width: 1020px) {
+    body { grid-template-columns: 1fr; }
+    aside.sidebar { position: relative; height: auto; border-right: 0; border-bottom: 1px solid var(--border); }
+    .kpis, .panels-row, .panels-row.three { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 640px) {
+    .kpis, .panels-row, .panels-row.three { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <!-- 좌측 사이드바 — 운영 메뉴 -->
+  <aside class="sidebar" data-od-id="sidebar">
+    <div class="brand"><span class="dot"></span> [REPLACE WACKYWILLY]</div>
+    <nav class="nav">
+      <a href="#overview" class="active">시즌 개요<span class="count">S1</span></a>
+      <a href="#revenue">매출 분석<span class="count">12.4억</span></a>
+      <a href="#inventory">재고 / 회전율<span class="count">8.2x</span></a>
+      <a href="#channels">채널별 GMV<span class="count">5</span></a>
+      <span class="group">상품</span>
+      <a href="#category">카테고리</a>
+      <a href="#bta">BTA 비중</a>
+      <a href="#sku">SKU 매니저<span class="count">214</span></a>
+      <a href="#qr">QR 후보<span class="count">3</span></a>
+      <span class="group">고객</span>
+      <a href="#member">회원 / VIP</a>
+      <a href="#crm">알림톡</a>
+      <a href="#settings">설정</a>
+    </nav>
+  </aside>
+
+  <main id="content">
+    <!--
+      references/layouts.md에서 리듬 1개를 골라 여기에 붙여 넣으세요.
+
+      리듬 A · 시즌 개요 대시보드 (KPI · 매출추이 · BTA 도넛 · 카테고리 테이블)
+      리듬 B · 채널 다각화 대시보드 (채널별 GMV/AOV/회원 비교)
+      리듬 C · 재고 / QR 결정 대시보드 (정판율 추이 · 재고회전율 · QR 후보 카드)
+      리듬 D · 임원 보기 (위클리 1페이지 요약 — KPI + 무신사 베스트 + 결정 콜아웃)
+
+      모든 리듬은 다음 구조를 따릅니다:
+      - 상단바 (제목 + 기간 필터 + 리포트 내보내기 CTA)
+      - KPI 4종
+      - 차트/패널 2~3행 (인라인 SVG 한정)
+      - 하단 테이블 (카테고리 / SKU / 채널 중 1개 이상)
+    -->
+  </main>
+</body>
+</html>

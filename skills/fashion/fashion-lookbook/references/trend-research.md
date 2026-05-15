@@ -1,97 +1,88 @@
-# Fashion Lookbook Trend Research
+# 패션 룩북 트렌드 리서치
 
-Use this as the taste and commerce filter for modern fashion lookbooks. The
-goal is not to copy trends blindly; it is to make the generated collection feel
-current, shoppable, and editorially literate.
+이 문서는 현대 패션 룩북의 **테이스트 + 커머스 필터**입니다. 트렌드를 맹목적으로 따라하는 게 아니라, 생성되는 컬렉션이 **현재 시점에 적합하고 살 만하고 에디토리얼하게 정제되어 있도록** 만드는 기준입니다.
 
-## 2026 Fashion Direction
+## 2026 패션 디렉션
 
-### 1. Trendless is a signal, not a void
+### 1. "트렌드리스"는 공백이 아니라 시그널
 
-Recent runway and retail commentary points away from one dominant aesthetic and
-toward individuality, self-expression, and emotionally specific styling. A good
-lookbook should therefore declare a point of view rather than chase a vague
-"on trend" mood.
+런웨이/리테일 코멘트는 하나의 지배적 미학에서 벗어나 개인성·자기표현·정서적으로 구체적인 스타일링으로 이동 중. 룩북은 모호한 "on trend" 무드를 좇기보다 **관점(point of view)을 선언**해야 합니다.
 
-Practical rule: choose one collection thesis and let every look prove it.
+실무 규칙: 컬렉션 명제 1개를 정하고 모든 룩이 그것을 증명하게 하세요.
 
-### 2. Soft femininity keeps evolving
+### 2. 소프트 페미니티는 계속 진화 중
 
-Romantic blouses, bows, lace, soft volume, babydoll proportions, and delicate
-embroideries are important SS26 cues. They should be handled with restraint:
-one romantic signal per look is stronger than piling on every cue.
+로맨틱 블라우스, 보우, 레이스, 소프트 볼륨, 베이비돌 비례, 섬세한 자수 — SS26 핵심 큐. 절제와 함께 다뤄야 합니다. 룩 1개당 로맨틱 시그널 1개가 모든 큐를 쌓는 것보다 강합니다.
 
-Imagegen cues: airy fabric, blouse volume, lace trim, ribbon detail, soft
-pastels, natural movement, daylight, gentle shadow.
+이미지 큐: airy fabric, blouse volume, lace trim, ribbon detail, soft pastels, natural movement, daylight, gentle shadow.
 
-### 3. Dark romance adds tension
+K-패션 적용: 마르디 메크르디 + 키르시 톤. WOMEN 라인에 적합. 봄/여름 판기에 자연스럽게 녹음.
 
-The darker counterpart to romance uses sheer layers, frayed hems, distressed or
-hand-finished edges, boudoir references, and theatrical styling. This should
-feel crafted and intentional, not costume.
+### 3. 다크 로맨스는 텐션을 더함
 
-Imagegen cues: sheer black layer, handkerchief hem, dark lace, deconstructed
-tailoring, smoky studio, controlled direct flash, no gothic cliché props.
+로맨스의 어두운 카운터파트 — 시어 레이어, 프레이드 헴, 디스트레스/핸드피니쉬 엣지, 부두아르 레퍼런스, 시어트리컬 스타일링. 코스튬이 아니라 의도적인 크래프트로 느껴져야 합니다.
 
-### 4. Spots, checks, and animal-coded prints are commercially useful
+이미지 큐: sheer black layer, handkerchief hem, dark lace, deconstructed tailoring, smoky studio, controlled direct flash, no gothic cliché props.
 
-Polka dots, gingham, windowpane, Prince of Wales checks, zebra, tiger, and
-snakeskin can make minimalist outfits feel current. Use them as one decisive
-print moment, not as wallpaper.
+K-패션 적용: 아더에러 컨셉추얼 톤. 글로벌 편집숍 진출 브랜드에 적합.
 
-Imagegen cues: one print hero garment, quiet base layers, print scale visible,
-plain backdrop, no noisy all-over pattern collision unless requested.
+### 4. 점·체크·애니멀 코드 프린트는 상업적으로 유용
 
-### 5. Fitted and cinched replaces endless oversize
+폴카 도트, 깅엄, 윈도페인, 프린스 오브 웨일즈 체크, 제브라, 타이거, 스네이크스킨. 미니멀 아웃핏을 현재적으로 만듭니다. 단, **하나의 결정적 프린트 모먼트**로 사용. 벽지로 깔지 말 것.
 
-Structured shoulders, nipped waists, fitted jackets, fitted blouses, pencil
-skirts, cropped trenches, and calibrated proportions are rising. The modern
-version is wearable and adjustable rather than stiff.
+이미지 큐: one print hero garment, quiet base layers, print scale visible, plain backdrop, no noisy all-over pattern collision unless requested.
 
-Imagegen cues: defined shoulder, waist shaping, pencil skirt, cropped outerwear,
-sculptural but practical, full garment visible.
+K-패션 적용: 와키윌리 폴카 도트 시리즈, 마르디 플라워 그래픽. 시즌 IP 그래픽으로 활용 가능.
 
-### 6. Color is expressive but still disciplined
+### 5. 핏티드 + 신치드 = 끝없는 오버사이즈 대체
 
-Key directions include icy blue, baby blue, cerulean, ultramarine, powder pink,
-butter yellow, dusty pastels, plum, merlot, sangria, and selective purple.
-Neutrals still matter, but the fresh move is a restrained neutral base with one
-clear emotional color.
+구조적 어깨, 잘록한 허리, 핏티드 재킷, 핏티드 블라우스, 펜슬 스커트, 크롭드 트렌치, 캘리브레이트된 비례. 현대 버전은 stiff하지 않고 wearable + adjustable.
 
-Practical rule: name colors like materials or apparel, not UI tokens:
-"chalk cotton", "iced blue poplin", "butter voile", "sangria satin".
+이미지 큐: defined shoulder, waist shaping, pencil skirt, cropped outerwear, sculptural but practical, full garment visible.
 
-### 7. Smarter minimalism beats sterile quiet luxury
+K-패션 적용: 무신사 스탠다드 한국적 핏. WOMEN 컨템포러리 라인에 적합.
 
-Minimal fashion imagery remains relevant, but it should be intentional:
-negative space, sculptural light, visible texture, natural grain, and garment
-detail. Avoid sterile product-grid flatness.
+### 6. 컬러는 표현적이지만 여전히 절제된
 
-Imagegen cues: clean studio, single directional light, fabric folds sharp,
-film-like texture, no excessive retouching, no crowded set.
+핵심 디렉션: 아이시 블루, 베이비 블루, 세룰리언, 울트라마린, 파우더 핑크, 버터 옐로우, 더스티 파스텔, 플럼, 메를로, 상그리아, 선택적 퍼플. 뉴트럴은 여전히 중요하지만, **절제된 뉴트럴 베이스 + 명확한 정서적 컬러 1개**의 조합이 새 무브.
 
-### 8. Well-being and ease are brand-story material
+실무 규칙: 컬러명을 소재/의류처럼 명명. UI 토큰처럼 부르지 마세요.
+- "chalk cotton", "iced blue poplin", "butter voile", "sangria satin"
 
-Consumers are drawn to identity, emotional connection, value, and well-being.
-Fashion lookbooks can express this through comfort, movement, climate, care,
-longevity, versatility, and real-life rituals.
+### 7. 스마트 미니멀리즘 > 멸균된 콰이엇 럭셔리
 
-Copy cues: "commute", "humid morning", "after-work", "travel fold", "wash
-finish", "all-day layer", "soft structure", "repairable", "re-wear".
+미니멀 패션 이미지는 여전히 유효하지만 의도적이어야 합니다 — 네거티브 스페이스, 조각적 라이트, 보이는 텍스처, 자연 그레인, 가먼트 디테일. 멸균된 product-grid flatness를 피하세요.
 
-## Digital Lookbook And AI Commerce Rules
+이미지 큐: clean studio, single directional light, fabric folds sharp, film-like texture, no excessive retouching, no crowded set.
 
-### 1. Make it shoppable, even if it is only a prototype
+K-패션 적용: 마뗑킴 미니멀 시크. 자사몰 D2C 톤에 적합.
 
-A modern digital lookbook should blend inspiration with buying or merchandising
-decisions. Every look needs a product role: hero item, commercial anchor,
-entry price, layering piece, statement piece, accessory driver, or styling add.
+### 8. 웰빙 + 이즈 = 브랜드 스토리 머티리얼
 
-### 2. Add semantic product metadata
+소비자는 정체성, 정서적 연결, 가치, 웰빙에 끌립니다. 룩북은 이를 안락함, 무브먼트, 기후, 케어, 내구성, 다용도성, 실생활 의식을 통해 표현할 수 있습니다.
 
-AI-assisted shopping and discovery increasingly depend on machine-readable,
-well-structured product content. Include data that an AI shopper, buyer, or
-search system can parse:
+카피 큐: "출퇴근", "습한 아침", "퇴근 후", "여행 폴드", "워시 피니쉬", "올데이 레이어", "soft structure", "재착용 가능", "수선 가능".
+
+K-패션 적용: 한국 4계절 + 장마/폭염 의식. "에어컨 사무실 ↔ 습한 거리 전환"같은 한국 일상 모먼트를 카피에 녹이세요.
+
+---
+
+## 디지털 룩북 + AI 커머스 규칙
+
+### 1. 프로토타입이라도 살 수 있게 만드세요
+
+현대 디지털 룩북은 인스피레이션과 구매/MD 결정을 융합해야 합니다. 모든 룩에 상품 역할 부여:
+- **히어로 아이템** (시즌 명제 대표)
+- **커머셜 앵커** (정상판매 견인)
+- **엔트리 가격** (진입 장벽 낮춤)
+- **레이어링 피스** (시즌 이행)
+- **스테이트먼트 피스** (액센트)
+- **액세서리 드라이버** (객단가 상승)
+- **스타일링 추가** (코디 완성도)
+
+### 2. 시맨틱 상품 메타데이터 추가
+
+AI 어시스턴트 쇼핑/검색은 점점 머신리더블한 잘 구조화된 상품 콘텐츠에 의존합니다. AI 쇼퍼, 바이어, 검색 시스템이 파싱할 수 있는 데이터 포함:
 
 - look number
 - item family
@@ -101,28 +92,43 @@ search system can parse:
 - silhouette / fit
 - occasion
 - delivery drop
-- price tier
-- styling role
-- search tags
+- 가격대 (KRW)
+- 스타일링 역할
+- 검색 태그 (한국 e-커머스 키워드)
 
-In HTML, put these in visible tables and add `data-*` attributes on look cards
-where practical.
+HTML에서 visible table에 넣고, 룩 카드에 가능한 한 `data-*` 속성으로도 노출하세요.
 
-### 3. Balance AI imagery with human taste
+### 3. AI 이미지 + 인간 테이스트의 균형
 
-Use imagegen to create campaign images, but keep human-level constraints:
-coherent model distance, consistent lighting, realistic garment construction,
-no impossible seams, no fake logos, no generated text on garments unless the
-brief requires it.
+이미지 생성 도구로 캠페인 이미지를 만들되 인간 수준 제약 유지:
+- 일관된 모델 거리
+- 일관된 라이팅
+- 현실적인 가먼트 구조
+- 불가능한 시밍 금지
+- 가짜 로고 금지
+- 가먼트 위 생성 텍스트는 브리프에서 요구하지 않는 한 금지
 
-### 4. Editorial photography should show fit and motion
+### 4. 에디토리얼 사진은 핏과 모션을 보여야
 
-Avoid images that only sell mood. A lookbook needs at least one image or note
-that proves fit, fabric weight, and movement. Full-body or three-quarter crops
-are preferred for look grids.
+무드만 파는 이미지를 피하세요. 룩북은 **핏, 패브릭 무게, 무브먼트**를 증명하는 이미지 또는 노트가 최소 1개 필요합니다. 룩 그리드는 풀바디 또는 3/4 크롭 선호.
 
-### 5. The strongest lookbooks sequence decisions
+### 5. 가장 강한 룩북은 의사결정을 시퀀싱
 
-Use this order: thesis → mood → looks → detail/proof → palette/materials →
-range plan → action. This lets a viewer feel the collection first, then evaluate
-it like a buyer.
+순서: 명제 → 무드 → 룩 → 디테일/증명 → 팔레트/소재 → 라인 시트 → 액션.
+
+이 순서가 시청자가 컬렉션을 **먼저 느끼고**, **그 다음 바이어처럼 평가**하게 만듭니다.
+
+---
+
+## K-패션 룩북 톤 매핑 (참고)
+
+| 브랜드 톤 | 권장 트렌드 렌즈 | 디스플레이 폰트 토큰 |
+|---|---|---|
+| 마뗑킴 (미니멀 시크) | 스마트 미니멀리즘 | `--font-display-romance` 또는 `report` |
+| 마르디 메크르디 (사랑스러운 컬러) | 점/체크/애니멀 + 소프트 페미니티 | `--font-display-romance` |
+| 아더에러 (컨셉추얼 글로벌) | 다크 로맨스 + 스마트 미니멀 | `--font-display-street` |
+| 키르시 (영 컬처 비비드) | 점/체크 + 핏티드 | `--font-display-play` |
+| 와키윌리 (위트 + IP) | 점/체크 + 핏티드 + 웰빙 | `--font-display-play` 또는 `street` |
+| 무신사 스탠다드 (가성비 베이직) | 스마트 미니멀 + 웰빙 | `--font-display-report` |
+
+룩북 작성 시 사용자 브랜드의 톤에 맞춰 트렌드 렌즈 + 폰트 토큰을 선택하세요.

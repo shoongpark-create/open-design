@@ -5,6 +5,8 @@
 > 이미 설치된 코드 에이전트 CLI(Claude Code, Cursor, Copilot, Codex, Gemini, OpenCode, Qwen)를 자동 감지해 디자인 엔진으로 변환합니다. 사용자가 디자인 브리프를 입력하면, 에이전트가 샌드박스된 브라우저 미리보기에 프로덕션 가능한 HTML 산출물을 스트리밍합니다.
 >
 > 본 fork는 일반 Open Design에서 한 걸음 더 나아가, **K-young-casual 패션 브랜드(예: WACKYWILLY)의 시즌 디자인 파이프라인**(컨셉 → 컬러 → 원단 → 핏/그래픽 → 라인업 → 스타일링 → 룩북 → IMC → 종합 덱)을 풀 커버하는 15개 패션 스킬과 5게이트 `quality-gate`(BTA/3B/Logo/Preset/Evidence)를 main에 정식 통합했습니다.
+>
+> **2026-05 업데이트 — K-패션 마이그레이션 완료.** 패션 + 마케팅 46개 스킬 전체가 한국어 우선 비즈니스 등록으로 일괄 업그레이드. 4파일 표준 구조(`SKILL.md` + `assets/template.html` + `references/{layouts,checklist}.md`), Pretendard Variable + 4종 디스플레이 폰트 토큰(`--font-display-{romance,play,street,report}`), LLM-agnostic 출력 규약(Claude `<artifact>` *와* GPT / Gemini / Grok / Codex / OpenDesign 환경용 표준 HTML 코드블록 폴백 동시 제공)을 갖췄습니다. K-패션 비즈니스 맥락 — BTA(Basic/Trend/Accent), S1~S4 판기, QR/SPOT 리오더, 부서 R&R(MD실·디자인실·생산실·영업기획실·마케팅실·이커머스팀), 무신사·29CM·W컨셉·지그재그·카페24 자사몰·카카오톡 채널 — 이 모든 스킬에 내장됐습니다.
 
 [English](./README.md) · **한국어** · [中文](./README.zh-CN.md) · [심화 가이드](./docs/open-design-overview.ko.md)
 
@@ -33,7 +35,10 @@ pnpm tools-dev
 |---|---|
 | 패션 시즌 디자인 스킬 | **15개** (컨셉 → 종합 덱까지 풀 커버) |
 | 마케팅/일반 스킬 | **31개** (랜딩, 대시보드, 덱, 문서, 모바일 등) |
+| 데이터/인텔리전스 스킬 | **7개** (musinsa-ranking, sales-analysis, trend-radar, demand-optimizer, …) |
 | UI 마스터 스킬 | **1개** (`impeccable` — 디자인/리디자인/비평/감사) |
+| 스킬 등록(register) | **K-패션(한국어 우선·LLM-agnostic)** — 2026-05 마이그레이션 완료 |
+| 스킬 구조 | `SKILL.md` + `assets/template.html` + `references/{layouts,checklist}.md` |
 | 디자인 시스템 | **72개** (Linear, Stripe, Apple, Nike, Xiaohongshu, …) |
 | 코드 에이전트 CLI | **7종 + Anthropic API 폴백** |
 | `quality-gate` 게이트 | **5** (BTA/3B/Logo+Color/Preset/Evidence) |

@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Critique · [REPLACE 산출물 제목 / 시즌 코드]</title>
+<!--
+  K-패션 5차원 비평 보고서 시드 (룩북 / 상세페이지 / 시즌 합본 덱 / 자사몰 메인 / 콜라보 랜딩).
+
+  사용 방법:
+    1) 이 파일을 index.html(또는 critique.html)로 복사
+    2) [REPLACE ...] 토큰을 실제 산출물 정보로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+       (없으면 중성 라이트 톤 기본값 사용)
+    4) references/layouts.md에서 비평 리듬 1개를 골라 본문 구조 결정
+    5) Step 5 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude 환경(Claude.ai · Claude Code): <artifact> 태그로 감싸 출력
+    - 그 외 환경(ChatGPT · Gemini · Grok): 표준 마크다운 HTML 코드 블록
+    - OpenDesign 환경: 주요 섹션에 data-od-id 속성 추가 시
+      인라인 코멘트 모드 사용 가능. 그 외 환경에서는 일반 id 속성 대체.
+
+  K-패션 컨텍스트:
+    - 5차원: 브랜드 톤 정합성 / 시각 위계 / 디테일 실행 / 콘텐츠 기능성 / 시즌 차별성
+    - 점수 0-10. 인플레 금지. 평균 8+ 의심스러움.
+    - 근거에는 룩 번호·SKU 코드·페이지·클래스명 인용 필수.
+    - 카피는 명사구 종결 (`톤 일관성 부족`, `MD 검토 필요`).
+    - 액션 리스트는 Keep / Fix / Quick-win 3개 카드.
+-->
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Hahmlet:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+  :root {
+    --bg:        #f5f3ee;
+    --paper:     #ffffff;
+    --ink:       #1a1a1c;
+    --muted:     #6b6964;
+    --rule:      #e2dfd7;
+    --accent:    #c96442;   /* 액션 컬러 — 시즌 키 컬러로 교체 가능 */
+    --good:      #4a7a3f;
+    --warn:      #c96442;
+    --bad:       #a83a2a;
+    --info:      #2c4d6e;
+
+    --serif:
+      "Hahmlet", "Source Serif 4",
+      "Noto Serif KR", Georgia, serif;
+    --sans:
+      "Pretendard Variable", Pretendard,
+      -apple-system, BlinkMacSystemFont,
+      "Apple SD Gothic Neo", "Noto Sans KR",
+      system-ui, sans-serif;
+    --mono:
+      "IBM Plex Mono", "JetBrains Mono",
+      ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 56px 40px 96px;
+  }
+
+  /* ─── Header ─── */
+  header.hd {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 40px;
+  }
+  .hd h1 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(34px, 4.4vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.015em;
+    margin: 10px 0 0;
+  }
+  .hd-meta {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .hd-verdict {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 18px;
+    line-height: 1.45;
+    color: var(--muted);
+    max-width: 36ch;
+    text-align: right;
+  }
+  .hd-verdict strong { color: var(--ink); font-style: normal; font-weight: 600; }
+
+  /* ─── Top: radar + score table ─── */
+  .top {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 48px;
+    margin-bottom: 64px;
+    align-items: center;
+  }
+  .radar-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 24px;
+    text-align: center;
+  }
+  .radar-card .lbl {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .radar-card svg { width: 100%; height: auto; max-width: 300px; }
+  .radar-card .overall {
+    font-family: var(--serif);
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 18px;
+  }
+  .radar-card .overall .n {
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  /* Score table */
+  .scores { display: flex; flex-direction: column; gap: 14px; }
+  .score-row {
+    display: grid;
+    grid-template-columns: 22ch 1fr 6ch 14ch;
+    gap: 16px;
+    align-items: center;
+    padding: 14px 0;
+    border-top: 1px solid var(--rule);
+  }
+  .score-row:first-child { border-top: 0; }
+  .score-name {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 17px;
+  }
+  .score-name .en {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+  .score-bar {
+    position: relative;
+    height: 4px;
+    background: var(--rule);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  .score-bar-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    background: var(--ink);
+  }
+  .score-num {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    text-align: right;
+  }
+  .score-num .denom {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .score-band {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: right;
+  }
+  .band-broken      { color: var(--bad); }
+  .band-functional  { color: var(--muted); }
+  .band-strong      { color: var(--good); }
+  .band-exceptional { color: var(--accent); }
+
+  /* ─── 5 dimension cards ─── */
+  .section-title {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: -0.005em;
+    margin: 64px 0 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .section-title .en {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    margin-left: 10px;
+  }
+  .dim-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .dim {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 22px 24px;
+  }
+  .dim-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+  }
+  .dim-name {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 19px;
+  }
+  .dim-name .en {
+    display: block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    margin-top: 2px;
+  }
+  .dim-score {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -0.02em;
+  }
+  .dim-score .denom {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+  .dim-evidence {
+    font-family: var(--sans);
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: #2d2d30;
+    margin: 10px 0 16px;
+  }
+  .dim-evidence code,
+  .dim-evidence em {
+    font-family: var(--mono);
+    font-style: normal;
+    font-size: 0.88em;
+    background: var(--rule);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+  .dim-tags {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .tag-row {
+    display: grid;
+    grid-template-columns: 78px 1fr;
+    gap: 12px;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    color: var(--paper);
+    align-self: start;
+    text-align: center;
+  }
+  .tag-keep { background: var(--good); }
+  .tag-fix  { background: var(--warn); }
+  .tag-qw   { background: var(--info); }
+
+  /* ─── Action lists ─── */
+  .lists-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .list-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 22px 24px;
+  }
+  .list-head {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .list-head.keep { color: var(--good); }
+  .list-head.fix  { color: var(--warn); }
+  .list-head.qw   { color: var(--info); }
+  .list-head .ct {
+    font-size: 14px;
+    font-family: var(--serif);
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    font-weight: 600;
+    text-transform: none;
+  }
+  .list-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .list-card li {
+    display: grid;
+    grid-template-columns: 18px 1fr;
+    gap: 10px;
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .list-card li::before {
+    content: "";
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    border: 1.5px solid var(--rule);
+    margin-top: 4px;
+  }
+  .list-card li code {
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: var(--bg);
+    padding: 1px 6px;
+    border-radius: 3px;
+  }
+
+  /* ─── 품평회 평가표 (옵션, 4기준) ─── */
+  .review-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .review-cell {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 16px 18px;
+  }
+  .review-cell .crit {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .review-cell .verdict {
+    font-family: var(--serif);
+    font-size: 15px;
+    line-height: 1.5;
+  }
+  .review-cell .badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-top: 8px;
+    text-transform: uppercase;
+  }
+  .badge.ok      { background: var(--good); color: var(--paper); }
+  .badge.revise  { background: var(--info); color: var(--paper); }
+  .badge.ng      { background: var(--bad);  color: var(--paper); }
+
+  /* ─── Footer ─── */
+  footer.ft {
+    margin-top: 80px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .ft .br { color: var(--ink); font-weight: 600; }
+
+  @media (max-width: 900px) {
+    .top         { grid-template-columns: 1fr; }
+    .dim-grid    { grid-template-columns: 1fr; }
+    .lists-grid  { grid-template-columns: 1fr; }
+    .review-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <!--
+      references/layouts.md에서 비평 리듬 1개를 골라 본문 구조를 결정하세요.
+
+      리듬 A · 룩북 1차 비평 (5차원 + Keep/Fix/Quick-win)
+      리듬 B · 상세페이지 검수 (5차원 + 채널별 패스 게이트)
+      리듬 C · 시즌 합본 덱 사전 점검 (5차원 + 의사결정 사항 한 페이지)
+      리듬 D · 품평회 4기준 평가표 (목표 원가 / 크로스 코디 / 매장 디스플레이 / 시즌 톤)
+
+      모든 리듬은 다음 섹션 골격을 따릅니다:
+      1) Header (검토 대상 + 검토자 + 일자 + 1줄 종합 평가)
+      2) Radar (5축 SVG) + Score table (5행)
+      3) 5 Dimension cards (점수 + 근거 + Keep/Fix/Quick-win)
+      4) Action lists (Keep / Fix / Quick wins 3개 카드)
+      5) (옵션) 품평회 4기준 평가표
+      6) Footer (스킬 버전 + 5차원 라벨)
+    -->
+  </div>
+</body>
+</html>

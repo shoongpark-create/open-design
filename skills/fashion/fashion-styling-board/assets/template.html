@@ -1,9 +1,23 @@
 <!doctype html>
 <!--
-  fashion-styling-board template
-  Copy to <project>/index.html, replace [REPLACE] tokens, bind active
-  DESIGN.md tokens into :root, paste the chosen rhythm from
-  references/layouts.md into <main id="styling-board">.
+  K-패션 스타일링 보드 시작 템플릿.
+  사용 방법:
+    1) 이 파일을 <project>/index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+    4) references/layouts.md에서 리듬 A/B/C 중 하나를 골라
+       <main id="styling-board"> 안에 붙여넣기
+    5) 공통 꼬리 블록 (Axis count + Carryover + Open Decisions) 추가
+
+  환경 호환성:
+    - Claude 환경: <artifact> 태그로 감싸 출력
+    - 그 외 환경: 표준 HTML 코드 블록으로 출력
+    - OpenDesign 환경: 주요 섹션에 data-od-id 속성 추가하면 인라인 코멘트 모드 사용 가능
+
+  이미지 생성:
+    - LLM 환경에서 사용 가능한 이미지 생성 도구를 사용 (../_shared/imagegen.md 참고)
+    - 풀바디 컷아웃, 투명/뉴트럴 배경, 4:5 vertical
+    - 외부 URL · base64 · 임시 폴더 참조 금지. 반드시 프로젝트 내 상대 경로 사용
 -->
 <html lang="ko">
 <head>
@@ -11,32 +25,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>[REPLACE Season] [REPLACE Period] Styling Board · [REPLACE Brand]</title>
 <style>
+  /* 한국 K-패션 표준 폰트 시스템 */
   @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
   @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
   :root {
-    /* Bind from active DESIGN.md */
+    /* 색상 토큰 (프로젝트 DESIGN.md에서 오버라이드) */
     --ink:        #1f2933;
     --paper:      #fafaf7;
     --rule:       #e7e3da;
     --muted:      #6b7280;
     --accent:     #b8443a;
 
-    /* Axis dot colors — bound from active DESIGN.md when possible */
+    /* 4축 도트 컬러 — 가능하면 active DESIGN.md에서 바인딩 */
     --axis-basic:     #d6d2c4;
     --axis-new-basic: #8aa6c8;
     --axis-trend:     #5b8169;
     --axis-accent:    var(--accent);
 
+    /* 폰트 토큰 */
     --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
-
     --font-display-report: "Paperlogy", "Wanted Sans Variable", "SUIT Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
-
     --font-display-street: "Black Han Sans", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
-
     --font-display-play: "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
-
     --font-display-romance: "Grandiflora One", "Diphylleia", "Hahmlet", "Noto Serif KR", "Source Serif 4", ui-serif, Georgia, serif;
 
+    /* 스타일링 보드는 MD/디자인 운영 자료 — 기본값 report */
     --font-display: var(--font-display-report);
     --font-text: var(--font-sans);
     --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
@@ -58,7 +71,7 @@
   .board-meta .status { margin-left: auto; }
   .thesis { font-family: var(--font-display); font-size: 32px; line-height: 1.15; margin: var(--gap-3) 0 0; max-width: 60ch; }
 
-  /* Track strip */
+  /* 트랙 스트립 */
   .track-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-2); margin: var(--gap-4) 0 var(--gap-3); padding: var(--gap-2) 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
   .track-strip--paired { grid-template-columns: repeat(2, 1fr); }
   .axis-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 6px 10px; border-radius: 999px; background: rgba(0,0,0,0.025); position: relative; }
@@ -68,7 +81,7 @@
   .axis-label[data-axis="trend"]     { color: var(--axis-trend); }
   .axis-label[data-axis="accent"]    { color: var(--axis-accent); }
 
-  /* Look grid */
+  /* 룩 그리드 */
   .look-grid { display: grid; gap: var(--gap-3); margin-bottom: var(--gap-5); }
   .look-grid--row { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); align-items: end; }
 
@@ -88,13 +101,13 @@
   .chip-strip { display: flex; gap: 3px; }
   .chip { width: 10px; height: 10px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.08); }
 
-  /* Axis blocks (rhythm C) */
+  /* 축 블록 (리듬 C) */
   .axis-block { margin-bottom: var(--gap-5); border-top: 1px solid var(--rule); padding-top: var(--gap-3); }
   .axis-header { display: flex; align-items: baseline; gap: var(--gap-3); margin-bottom: var(--gap-3); }
   .axis-header h2 { font-family: var(--font-display); font-size: 20px; margin: 0; letter-spacing: 0.05em; }
   .axis-note { color: var(--muted); font-size: 13px; margin: 0; }
 
-  /* Tail blocks */
+  /* 꼬리 블록 */
   .axis-summary, .carryover-map, .open-decisions { margin-top: var(--gap-5); padding-top: var(--gap-4); border-top: 1px solid var(--rule); }
   .axis-summary h2, .carryover-map h2, .open-decisions h2 { font-family: var(--font-display); font-size: 16px; margin: 0 0 var(--gap-3); letter-spacing: 0.05em; text-transform: uppercase; }
   table { border-collapse: collapse; font-size: 13px; }
@@ -109,7 +122,19 @@
 </head>
 <body>
   <main id="styling-board">
-    <!-- PASTE one rhythm from references/layouts.md here, then the always-on tail blocks. -->
+    <!--
+      references/layouts.md에서 리듬 A/B/C 중 하나를 골라 여기에 붙여넣고,
+      마지막에 공통 꼬리 블록 (Axis count + Carryover + Open Decisions) 추가.
+
+      필수 섹션 (순서대로):
+        1. 헤더 스트립 (시즌 + 판기 + 라인 + 룩 개수 + 상태)
+        2. 판기 명제 (1줄 + 앵커 아이템)
+        3. 축 트랙 스트립 (BASIC / NEW BASIC / TREND / ACCENT)
+        4. 룩 그리드 (피규어 + 축 도트 + 번호 + 캡션 + 컬러 칩)
+        5. 축 카운트 요약 (count + % + target + Δ)
+        6. 캐리오버 맵 (있을 때만)
+        7. Open / Next Decisions
+    -->
   </main>
 </body>
 </html>

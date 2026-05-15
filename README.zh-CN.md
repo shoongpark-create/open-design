@@ -5,6 +5,8 @@
 > 自动检测你已安装的代码 agent CLI（Claude Code、Cursor、Copilot、Codex、Gemini、OpenCode、Qwen），把它变成设计引擎。输入设计 brief，agent 会把可上线的 HTML 产物以流式渲染到沙箱化的浏览器预览中。
 >
 > 本 fork 在上游 Open Design 的基础上更进一步：将 **15 个时装季节设计 skill 流水线**（concept → color → fabric → fit/graphic → lineup → styling → lookbook → IMC → 综合 deck）和 **5 道 `quality-gate` 闸门**（BTA / 3B / Logo / Preset / Evidence）正式合并到 `main`，专为 WACKYWILLY 等 K-young-casual 品牌调优。
+>
+> **2026-05 更新 — K-fashion 迁移完成。** 全部 46 个 fashion + marketing skill 已升级为韩语优先的业务 register：统一 4 文件结构（`SKILL.md` + `assets/template.html` + `references/{layouts,checklist}.md`）、Pretendard Variable + 4 个 display 字体 token（`--font-display-{romance,play,street,report}`）、完全 LLM-agnostic 的输出契约（Claude `<artifact>` *与* 适用于 GPT / Gemini / Grok / Codex / OpenDesign 的标准 HTML 代码块 fallback 并存）。每个 skill 都内置了 K-fashion 业务上下文：BTA（Basic/Trend/Accent）、S1~S4 销售档期、QR/SPOT 补单循环、韩国服饰企业组织结构（MD室·设计室·生产室·营销室·电商组），以及韩国渠道矩阵（무신사 / 29CM / W컨셉 / 지그재그 / 카페24 自有商城 / 카카오톡 채널）。
 
 [English](./README.md) · [한국어](./README.ko.md) · **中文** · [深度指南（韩文）](./docs/open-design-overview.ko.md)
 
@@ -33,7 +35,10 @@ pnpm tools-dev
 |---|---|
 | 时装季节设计 skill | **15 个**（concept → 综合 deck，端到端） |
 | 营销/通用 skill | **31 个**（landing、dashboard、deck、文档、移动端等） |
+| 数据/情报 skill | **7 个**（musinsa-ranking、sales-analysis、trend-radar、demand-optimizer……） |
 | UI 大师 skill | **1 个**（`impeccable` — 设计 / 重设计 / 评审 / 审计） |
+| Skill register | **K-fashion（韩语优先、LLM-agnostic）** — 2026-05 迁移完成 |
+| Skill 结构 | `SKILL.md` + `assets/template.html` + `references/{layouts,checklist}.md` |
 | 品牌设计系统 | **72 个**（Linear、Stripe、Apple、Nike、小红书……） |
 | 代码 agent CLI | **7 种 + Anthropic API 回退** |
 | `quality-gate` 闸门 | **5**（BTA / 3B / Logo+Color / Preset / Evidence） |

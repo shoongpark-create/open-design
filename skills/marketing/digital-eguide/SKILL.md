@@ -1,27 +1,30 @@
 ---
 name: digital-eguide
 description: |
-  A two-spread digital e-guide preview — page 1 is a cover (display title,
-  author, "What's inside" stats, table of contents teaser); page 2 is a
-  spread (lesson body with pull-quote and a step list). Lifestyle / creator
-  brand tone. Use when the brief asks for an "e-guide", "digital guide",
-  "lookbook", "lead magnet", "creator guide", "playbook", "PDF guide",
-  or "电子指南".
+  K-패션 브랜드의 **시즌 스타일링 가이드 / 룩북 인터랙티브 / VIP 회원 가이드 / 데일리 핏 마스터하기**를
+  2-스프레드 디지털 e-가이드 미리보기로 생성하는 스킬입니다. 페이지 1은 표지(디스플레이 제목,
+  저자, "What's inside" 통계, 목차 티저), 페이지 2는 스프레드(레슨 본문, 풀쿼트, 단계 리스트)입니다.
+  K-패션 라이프스타일/디자이너 브랜드 톤 — 여백, 세리프 디스플레이, 정밀한 컬럼 리듬.
+  사용자가 "스타일링 가이드", "룩북 가이드", "시즌 가이드", "PDF 가이드", "VIP 회원 가이드",
+  "데일리 핏", "e-guide", "lookbook PDF", "digital guide"를 언급하면 활성화하세요.
 triggers:
+  - "스타일링 가이드"
+  - "시즌 스타일링 가이드"
+  - "룩북 가이드"
+  - "룩북 인터랙티브"
+  - "PDF 가이드"
+  - "VIP 회원 가이드"
+  - "데일리 핏 가이드"
+  - "Spring Layering"
   - "e-guide"
   - "digital guide"
-  - "lead magnet"
   - "lookbook"
-  - "creator guide"
   - "playbook"
-  - "pdf guide"
-  - "ebook"
-  - "电子指南"
-  - "电子书"
 od:
   mode: prototype
   platform: desktop
   scenario: marketing
+  category: marketing
   featured: 2
   preview:
     type: html
@@ -29,63 +32,205 @@ od:
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Design ‘The Creator's Style & Format Guide’ — cover page and one inside spread, lifestyle creator brand."
+  example_prompt: "마뗑킴(MATIN KIM) 27SS Spring Layering 101 디지털 스타일링 가이드. 표지에 '봄, 가장 조용한 레이어링' 제목. '챕터 02 · LAYER — 봄을 천천히 입는 다섯 단계.' 스프레드에 4단계 리스트 + 풀쿼트 + EXERCISE 콜아웃."
 ---
 
-# Digital E-Guide Skill
+# K-패션 디지털 e-가이드 스킬
 
-Produce a two-page digital guide preview side-by-side. Cover on the left,
-inside spread on the right. Lifestyle creator tone, lots of negative space,
-serif display headings, careful column rhythm.
+K-패션 브랜드의 **시즌 스타일링 가이드 / 룩북 PDF / VIP 회원 가이드 / 데일리 핏 마스터하기**를 2개 페이지(표지 + 스프레드 한 면) 디지털 e-가이드 미리보기로 생성합니다. 좌측에 표지, 우측에 본문 스프레드가 나란히 놓인 책 메타포 — K-패션 라이프스타일 / 디자이너 브랜드 톤. 여백이 많고, 세리프 디스플레이 헤딩, 정밀한 컬럼 리듬을 유지합니다.
 
-## Workflow
+이 스킬의 산출물은 **마케팅실(에디터) + 디자인실(그래픽팀)** 합작이며, 시즌 사이클상 다음 시점에 활용합니다.
 
-1. **Read the active DESIGN.md** (injected above). Pick a serif display
-   token for the title (italic ligatures encouraged), a body serif for
-   long-form, and a mono token for stats / labels.
-2. **Pick the topic + author** from the brief. Generate a real title (e.g.
-   "The Creator's Style & Format Guide"), a real subtitle, and a one-line
-   author byline.
-3. **Layout** — center two pages on a tinted backdrop:
-   - **Page 1 — cover**:
-     - Eyebrow ("STYLE & FORMAT GUIDE FOR CREATORS").
-     - Display title with mixed weights and one italic flourish word
-       ("The Creator's Style & Format guide" — `&` and `guide` italic).
-     - 3-cell stat row ("16 PRINCIPLES OF STYLE", "38 DOS & DON'TS",
-       "1 BLOCK, ZERO TEMPLATES") in mono, separated by `·`.
-     - "What's inside" header with a 2-column TOC (chapters + page numbers
-       in mono, leader dots).
-     - Footer: "FIND YOUR VOICE" + page 01 mono.
-     - Subtle decorative dot or sticker (CSS) in a corner.
-   - **Page 2 — spread**:
-     - Eyebrow with chapter number + name ("CHAPTER 02 · TONE").
-     - Display sub-title ("Write like you talk — only sharper.").
-     - 2-column body: opening paragraph + a numbered 4-step list ("01 Pick
-       the rule", "02 Drop the filler"…).
-     - Pull-quote pinned right-side: large italic display, accent color, with
-       attribution.
-     - Bottom strip with "EXERCISE" callout (mono label + 1 sentence prompt
-       in italic).
-     - Footer: chapter title + page 18 mono.
-4. **Write** a single HTML document:
-   - `<!doctype html>` through `</html>`, CSS inline.
-   - Pages are 600×860 paper-tone cards with 6px shadow, slight rotation
-     opposing each other (±0.6deg) for a magazine-on-desk feel.
-   - `data-od-id` on cover, spread, toc, pull-quote, exercise.
-5. **Self-check**:
-   - Type hierarchy is editorial — title owns page 1, sub-title owns page 2.
-   - Italic accent appears once per page.
-   - Mono used only for labels, stats, and TOC numbers.
+- **시즌 시작 1개월 전** — 시즌 스타일링 가이드 (룩북 공개 + 신상 발매와 함께)
+- **시즌 중반** — 데일리 핏 마스터 가이드, 키 아이템 스타일링 가이드
+- **VIP 멤버 가입 직후** — VIP 회원 전용 시즌 가이드 (리드 마그넷)
+- **연 1~2회** — 브랜드 스타일 매뉴얼 (북극성 문서 확장형)
 
-## Output contract
+발행 채널은 PDF 다운로드(자사몰 회원 라운지), 자사몰 매거진 페이지, 카카오톡 채널 친구톡 첨부, 무신사·29CM 큐레이션 가이드, 인스타그램 캐러셀(8~10장)로 다용도 활용됩니다.
 
-Emit between `<artifact>` tags:
+## 환경 호환성
+
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기를 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 워크플로는 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 스타일링 가이드 등록을 따릅니다.
+
+- 영문 산업용어 유지: SS · FW · LAYER · STYLING · LOOK · FIT · COLORWAY · CAPSULE · LOOKBOOK · CHAPTER.
+- 챕터 번호 + 챕터명: `CHAPTER 02 · LAYER`, `CHAPTER 04 · FIT`. mono 영문 대문자.
+- **포엣코어 톤**: 직설 스타일링 팁 ❌ → 감각적·계절감 있는 서술 ⭕.
+- 표지 제목은 영문 디스플레이 + 한국어 부제 권장: `Spring Layering 101 — 봄, 가장 조용한 레이어링`, `The Daily Fit Manual — 매일의 핏을 다듬는 다섯 가지 방법`.
+- 단계 리스트 항목은 영문 + 한국어 혼용 권장: `01 Drop the shoulder. — 어깨를 떨어뜨리세요.`, `02 Pick the lightest layer. — 가장 가벼운 한 겹을 고르세요.`
+- EXERCISE 콜아웃(또는 TIP 콜아웃)은 디자이너/스타일리스트 1인칭 또는 시적 명령문.
+
+## 타이포그래피
+
+K-패션 가이드는 세리프 디스플레이 + 한국어 본문(Pretendard) + mono 라벨의 조합이 표준입니다.
+
+| 위치 | 권장 폰트 (예시) |
+|---|---|
+| 표지 제목 (큰 디스플레이) | Hahmlet, Recoleta, Instrument Serif (이탤릭 리거처 권장) |
+| 스프레드 서브 타이틀 | 같은 디스플레이 (작은 사이즈) |
+| 본문 (롱폼) | Pretendard Variable, Noto Sans KR, Spoqa Han Sans Neo |
+| 풀쿼트 (이탤릭) | 디스플레이 세리프 이탤릭 |
+| 챕터 번호 / 통계 / 페이지 번호 / TOC 점선 | mono — IBM Plex Mono |
+
+페이지 비율은 약 600×860 (책 한 페이지 비율). 두 페이지를 나란히 놓고 약 ±0.6deg 정도 살짝 기울여 책상 위에 펼쳐진 책 메타포를 살립니다.
+
+## 폴더 구조
 
 ```
-<artifact identifier="eguide-slug" type="text/html" title="E-Guide — Title">
-<!doctype html>
-<html>...</html>
-</artifact>
+digital-eguide/
+├── SKILL.md          ← 이 파일
+└── example.html      ← 참고 예시 (표지 + 본문 스프레드)
 ```
 
-One sentence before the artifact, nothing after.
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. 이 스킬 폴더의 `example.html`을 끝까지 읽어 두 페이지 카드(표지 / 스프레드), 통계 행, TOC, 풀쿼트, EXERCISE 콜아웃 구조를 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰)를 읽고 색상·타이포 토큰을 `:root` CSS 변수에 바인딩하세요. 자동 주입되지 않는 환경이라면 사용자에게 톤을 묻고 진행합니다.
+3. 사용자 브리프에서 **주제 + 시즌 + 저자(스타일리스트/디자이너) + 표지 통계 3개 + 챕터 번호 + 4단계 리스트**가 빠져 있으면 함께 물어보세요.
+
+### Step 1 — 주제 + 저자 결정
+
+K-패션 가이드의 4가지 표준 주제:
+
+- **시즌 스타일링 가이드** — `27SS Styling Guide`, `Spring Layering 101`
+- **데일리 핏 매뉴얼** — `매일의 핏을 다듬는 다섯 가지 방법`, `The Daily Fit Manual`
+- **VIP 회원 가이드** — `MATIN KIM VIP — A Year of Quiet Style`
+- **시즌 룩북 인터랙티브** — `27SS LOOKBOOK — 5 Looks, 5 Stories`
+
+저자 바이라인은 브랜드 디렉터, 마케팅 디렉터, 외부 스타일리스트, 또는 브랜드 이름 단독 ("MATIN KIM STYLING DESK")으로 명시.
+
+### Step 2 — 레이아웃
+
+두 페이지를 가운데 정렬, 틴티드 배경 위에 600×860 종이톤 카드로 배치합니다.
+
+#### 페이지 1 — 표지
+
+1. **아이브로우** — 작은 mono 영문 대문자 (`STYLING GUIDE · 27SS · MATIN KIM`).
+2. **디스플레이 제목** — 디스플레이 폰트, 혼합 굵기 + 이탤릭 1단어. 예: `Spring *Layering* 101.` (`Layering` 이탤릭), `봄, 가장 조용한 *레이어링*.` (`레이어링` 이탤릭).
+3. **3-셀 통계 행** — 가이드의 "What's inside" 통계. mono, `·` 구분. 예:
+   - `04 CHAPTERS · 12 LOOKS · 1 MAGAZINE`
+   - `16 STYLING PRINCIPLES · 38 DOS & DON'TS · 5 KEY ITEMS`
+   - `5 LAYERS · 3 COLORWAYS · 27SS DROP 02`
+4. **"What's inside" 헤더 + 2단 TOC** — 챕터 번호 + 챕터명 + 페이지 번호 (mono, 리더 도트). 예:
+   - `01 · STILLNESS — 가장 조용한 한 겹 .................... 04`
+   - `02 · LAYER — 봄을 천천히 입는 다섯 단계 ................. 08`
+   - `03 · COLOR — ivory · sage · ash ......................... 12`
+   - `04 · FIT — 어깨에서 시작하는 핏 ......................... 18`
+5. **푸터** — `FIND YOUR QUIET STYLE.` + `01` 페이지 번호 mono.
+6. **모서리 데코레이션** — 미세한 도트 또는 작은 스티커. 시즌 시그니처 모티프(꽃·체리·캐릭터).
+
+#### 페이지 2 — 스프레드
+
+1. **아이브로우** — 챕터 번호 + 챕터명 (`CHAPTER 02 · LAYER`).
+2. **디스플레이 서브 타이틀** — 시적 명령문 또는 진술 (`봄을 천천히 입는 다섯 단계.`, `Layer like you speak — only quieter.`).
+3. **2단 본문**:
+   - **좌측 컬럼** — 오프닝 단락 (3~4문장, 챕터의 의도/관점/맥락)
+   - **우측 컬럼** — 4단계 번호 리스트:
+     - `01 Drop the shoulder. — 어깨를 떨어뜨리세요.`
+     - `02 Pick the lightest layer first. — 가장 가벼운 한 겹을 먼저.`
+     - `03 Mix Cool Linen with cotton voile. — Cool Linen과 코튼 보일을 함께.`
+     - `04 Tuck once, leave the rest. — 한 번만 넣고, 나머지는 그대로.`
+4. **풀쿼트** — 우측에 핀. 큰 이탤릭 디스플레이, 액센트 컬러, 디자이너/스타일리스트 인용 + 어트리뷰션.
+5. **하단 EXERCISE 콜아웃** — mono 라벨 + 이탤릭 1문장 프롬프트 (`EXERCISE — 옷장에서 가장 가벼운 한 겹을 꺼내, 오늘 가장 조용한 룩으로 입어 보세요.`)
+6. **푸터** — 챕터 타이틀 + `18` 페이지 번호 mono.
+
+### Step 3 — HTML 작성
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`)로 작성합니다.
+
+- CSS는 인라인. 두 페이지 카드는 600×860 종이톤, 6px 섀도, 각 페이지가 서로 반대 방향으로 ±0.6deg 정도 살짝 기울어 있어 책 메타포가 살아나도록.
+- 외부 이미지 URL 금지.
+- 주요 요소에 식별 속성:
+  - **OpenDesign 환경**: `data-od-id="cover"`, `data-od-id="spread"`, `data-od-id="toc"`, `data-od-id="pull-quote"`, `data-od-id="exercise"`
+  - **그 외 환경**: 일반 `id` 속성으로 충분합니다.
+
+### Step 4 — 자체 검수
+
+- [ ] 타입 위계가 에디토리얼 — 표지에서는 디스플레이 제목이 페이지를 지배, 스프레드에서는 서브 타이틀이 지배
+- [ ] 이탤릭 액센트는 페이지당 정확히 1회 (표지 제목 1단어 + 스프레드 서브 타이틀 1단어)
+- [ ] mono 폰트는 라벨·통계·TOC 번호·페이지 번호에만 사용
+- [ ] 표지 통계 3개 + TOC 4~6개 챕터가 채워짐
+- [ ] 스프레드 4단계 리스트 + 풀쿼트 1개 + EXERCISE 콜아웃이 모두 채워짐
+- [ ] 카피 톤이 포엣코어 — 직설 스타일링 팁이 아니라 감각·계절감 있는 서술
+- [ ] 두 페이지 카드가 살짝 반대 방향으로 기울어 있어 책 메타포가 살아남
+
+## 한국 K-패션 브랜드 가이드 사례 (참고)
+
+| 브랜드 | 가이드 톤 | 활용 |
+|---|---|---|
+| **마뗑킴 (Matin Kim)** | 미니멀, 챕터 4~6개, 절제된 본문 | 시즌 스타일링 가이드 PDF, VIP 회원 가이드 |
+| **마르디 메크르디 (Mardi Mercredi)** | 컬러풀, 영불 혼용, 시적 챕터 | 시즌 룩북 인터랙티브 |
+| **아더에러 (ADER ERROR)** | 영문 100%, 컨셉추얼 | 글로벌 브랜드 매뉴얼 |
+| **와키윌리 (WACKYWILLY)** | 위트, 캐릭터 IP 활용 | 캐릭터 굿즈 가이드, 시즌 스타일 가이드 |
+| **무신사 스탠다드** | 정보 + 가성비 강조 | 베이직 핏 매뉴얼, 사이즈 가이드 |
+| **시야쥬 (CHYAJU)** | 절제·여백, 명상적 | VIP 가이드, 시즌 룩북 |
+
+### 가이드 챕터 패턴 예시
+
+- 시즌 스타일링 가이드 (4 챕터): `STILLNESS / LAYER / COLOR / FIT`
+- 데일리 핏 매뉴얼 (5 챕터): `STAND / DRAPE / TUCK / FOLD / LET GO`
+- VIP 가이드 (6 챕터): `ARRIVAL / WARDROBE / RITUAL / TRAVEL / EVENING / RETURN`
+- 룩북 인터랙티브 (5 챕터): `LOOK 01 ~ LOOK 05` + 각 룩의 스토리
+
+## 한국 패션기업 부서 R&R + 채널 연계
+
+| 부서 | 역할 |
+|---|---|
+| **마케팅실 (에디터)** | 가이드 기획, 챕터 구조, 카피라이팅 |
+| **디자인실(그래픽팀)** | 표지 디자인, 스프레드 레이아웃, 일러스트·룩북 컷 |
+| **디자인실 (디자이너/스타일리스트)** | 챕터 본문의 의도·인용, 4단계 스타일링 노하우 |
+| **이커머스팀** | PDF 변환·QA, 자사몰 회원 라운지에 적재, 다운로드 흐름 운영 |
+| **VIP 매니저 (있는 경우)** | VIP 회원 전용 가이드 발송, 1:1 친구톡 첨부 |
+
+### 채널 연계
+
+- **자사몰 회원 라운지** — PDF 다운로드(로그인 게이트)
+- **카카오톡 채널 친구톡** — 신규 회원/VIP에게 첨부 발송
+- **이메일 마케팅** — 신상 발매 이메일에 첨부 또는 다운로드 링크 포함
+- **인스타그램 캐러셀** — 8~10장으로 재크롭, 챕터 1장씩
+- **무신사·29CM 큐레이션** — 큐레이션 페이지에 인터랙티브 임베드 또는 다운로드 링크
+
+## 시즌 사이클 내 위치
+
+```
+[시즌 시작 5개월 전]   컨셉 보드, 컬러 스토리
+[시즌 시작 3개월 전]   라인업 LOCK, 키 아이템 시트, 스타일링 보드 (디자인실 내부)
+[시즌 시작 2개월 전]   룩북 촬영 / IMC 캘린더 확정
+[시즌 시작 1개월 전]   ▶ 시즌 스타일링 가이드 / 룩북 인터랙티브 작성 (이 스킬)
+                       신상 발매 이메일 / 알림톡
+[시즌 시작]            S1~S4 판기 발매, 가이드 PDF 다운로드 시작
+[시즌 중반]            ▶ 데일리 핏 매뉴얼, 키 아이템 스타일링 가이드 (이 스킬)
+                       QR 추가 발매 알림
+```
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="eguide-slug" type="text/html" title="E-Guide — 가이드 제목 / 시즌 코드">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "마뗑킴 27SS Spring Layering 101 디지털 스타일링 가이드를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

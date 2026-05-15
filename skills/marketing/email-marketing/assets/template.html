@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 브랜드] [REPLACE 시즌 코드] · [REPLACE 헤드라인]</title>
+<!--
+  K-패션 신상 발매 / 사전예약 이메일 시드.
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+    4) references/layouts.md에서 리듬 1개를 골라 .email-body 안에 붙여넣기
+    5) HTML 본문 끝에 카카오톡 알림톡 카피 2~3안 보조 블록 추가 (또는 별도 마크다운)
+
+  레이아웃 메모:
+    - 가운데 정렬 600~680px 단일 컬럼 (가장 보수적인 메일 클라이언트 호환)
+    - 페이지 배경은 페이퍼톤 틴트, 본문 박스는 흰색 또는 surface 색
+    - 480px 폭 미디어 쿼리에서 컬럼 리플로우 + 타입 한 단계 축소
+    - 외부 이미지 URL 금지 — 인라인 SVG + 라디얼/리니어 그라데이션으로 제품 비주얼 표현
+
+  환경 호환성:
+    - Claude 환경: <artifact> 태그로 감싸 출력
+    - 그 외 환경: 표준 마크다운 HTML 코드 블록
+    - OpenDesign 환경: data-od-id 속성 사용 가능. 그 외 환경에서는 일반 id로 대체.
+
+  카피 톤 (포엣코어):
+    - 기능 직설(`늘어나는 코튼`) ❌
+    - 감각 서술(`구름의 감촉, 부드럽게 몸을 감싸는 실루엣`) ⭕
+    - 영문/국문 혼용 권장. 영문 슬로건은 그대로 유지, 한국어 직역 금지.
+-->
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Bagel+Fat+One&display=swap");
+
+  :root {
+    /* 색상 — DESIGN.md에서 오버라이드 */
+    --paper:    #f3eee2;  /* 페이지 배경, 페이퍼톤 */
+    --surface:  #ffffff;  /* 이메일 본문 박스 */
+    --fg:       #1c1b1a;
+    --muted:    #6b6964;
+    --border:   #e7e3da;
+    --accent:   #6e8b6a;  /* 시즌 키 컬러 (마뗑킴 sage 톤) */
+    --accent-soft: color-mix(in oklch, var(--accent) 14%, transparent);
+
+    /* 폰트 */
+    --font-sans:
+      "Pretendard Variable", Pretendard,
+      -apple-system, BlinkMacSystemFont,
+      "Apple SD Gothic Neo", "Noto Sans KR",
+      system-ui, sans-serif;
+
+    --font-display-romance: "Hahmlet", "Instrument Serif", "Noto Serif KR", ui-serif, Georgia, serif;
+    --font-display-play:    "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", sans-serif;
+    --font-display-street:  "Black Han Sans", "Gmarket Sans", "Pretendard Variable", sans-serif;
+    --font-display-report:  "Pretendard Variable", "Wanted Sans Variable", "SUIT Variable", sans-serif;
+
+    /* 신상 발매·사전예약은 보통 romance (마뗑킴·시야쥬 톤) 기본 */
+    --font-display: var(--font-display-romance);
+    --font-mono:    "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 48px 16px 64px;
+    background: var(--paper);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 15.5px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── 이메일 본문 컨테이너 ─── */
+  .email {
+    max-width: 640px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  /* ─── 마스트헤드 ─── */
+  .masthead {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .masthead .wordmark {
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .masthead .mark {
+    display: inline-block;
+    width: 14px; height: 14px;
+    background: var(--accent);
+    transform: skew(-12deg);
+  }
+  .masthead nav {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .masthead nav span { margin-left: 14px; }
+
+  /* ─── 히어로 블록 ─── */
+  .hero {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    background:
+      radial-gradient(60% 60% at 30% 40%, var(--accent-soft), transparent 70%),
+      linear-gradient(160deg, color-mix(in oklch, var(--accent) 8%, var(--surface)) 0%, var(--surface) 65%);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .hero .stamp {
+    position: absolute; top: 18px; left: 22px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--fg);
+    opacity: 0.7;
+  }
+  .hero .colorway {
+    position: absolute; bottom: 16px; left: 22px;
+    display: flex; gap: 6px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .hero .colorway span {
+    padding: 4px 9px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+  }
+  .hero .drop {
+    position: absolute; bottom: 16px; right: 22px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ─── 본문 텍스트 영역 ─── */
+  .body {
+    padding: 32px 28px 28px;
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+  }
+  .headline {
+    font-family: var(--font-display);
+    font-size: 38px;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    margin: 0 0 18px;
+    font-weight: 600;
+  }
+  .headline .accent {
+    transform: skew(-6deg);
+    display: inline-block;
+    color: var(--accent);
+    font-style: italic;
+  }
+  .lede {
+    font-size: 15.5px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin: 0 0 26px;
+  }
+
+  /* ─── 메인 CTA (1개만) ─── */
+  .cta-block { padding: 0 28px 8px; }
+  .cta {
+    display: block;
+    width: 100%;
+    padding: 16px 22px;
+    background: var(--accent);
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+  }
+
+  /* ─── 스펙 그리드 (2×2 또는 2×3) ─── */
+  .specs {
+    margin-top: 28px;
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .specs .cell {
+    padding: 18px 22px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .specs .cell:nth-child(2n) { border-right: 0; }
+  .specs .cell .num {
+    font-family: var(--font-mono);
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .specs .cell .label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ─── 푸터 ─── */
+  .pagefoot {
+    padding: 22px 28px;
+    background: color-mix(in oklch, var(--accent) 4%, var(--surface));
+    border-top: 1px solid var(--border);
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .pagefoot a { color: var(--muted); text-decoration: underline; }
+  .pagefoot .wordmark {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--fg);
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* ─── 카카오톡 알림톡 보조 블록 (페이지 아래) ─── */
+  .alimtalk {
+    max-width: 640px;
+    margin: 24px auto 0;
+    padding: 18px 22px;
+    background: #FFEB3B;
+    border-radius: 14px;
+    color: #1c1b1a;
+    font-family: var(--font-sans);
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .alimtalk h4 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 8px;
+    opacity: 0.7;
+  }
+  .alimtalk .msg {
+    background: #fff;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    white-space: pre-wrap;
+  }
+
+  /* ─── 480px 폭 미디어 쿼리 (모바일) ─── */
+  @media (max-width: 480px) {
+    body { padding: 24px 8px 40px; }
+    .body { padding: 24px 20px 22px; }
+    .headline { font-size: 28px; }
+    .specs { grid-template-columns: 1fr; }
+    .specs .cell { border-right: 0; }
+    .masthead { padding: 16px 20px; }
+    .cta-block { padding: 0 20px 8px; }
+  }
+</style>
+</head>
+<body>
+  <!--
+    이메일 본문 영역.
+    references/layouts.md에서 리듬 1개를 골라 .email 안에 붙여 넣으세요.
+
+    리듬 A · 단일 키 아이템 발매 (마뗑킴 신상 드롭 톤) — 기본값
+    리듬 B · 시즌 룩북 공개 (룩북 5컷 동반)
+    리듬 C · VIP 회원 전용 사전예약 (24시간 우선)
+    리듬 D · 콜라보 발매 알림 (D-day 카운트다운)
+  -->
+  <div class="email" data-od-id="email">
+    <!-- references/layouts.md에서 붙여넣기 -->
+  </div>
+
+  <!-- 카카오톡 알림톡 카피 2~3안. 페이지 아래 보조 블록. -->
+  <aside class="alimtalk" data-od-id="alimtalk">
+    <h4>카카오톡 알림톡 · 친구톡 카피 (2~3안)</h4>
+    <div class="msg">[REPLACE 알림톡 안 1 — 200자 이내, 호칭·발매 일자·키 아이템·CTA URL placeholder]</div>
+    <div class="msg">[REPLACE 알림톡 안 2 — 톤 변주]</div>
+    <div class="msg">[REPLACE 알림톡 안 3 — 짧은 푸시 버전 (80자 이내)]</div>
+  </aside>
+</body>
+</html>

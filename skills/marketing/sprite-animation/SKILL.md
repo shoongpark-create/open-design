@@ -1,29 +1,30 @@
 ---
 name: sprite-animation
 description: |
-  A pixel / sprite-style animated explainer slide — full-bleed cream stage,
-  bold display year, animated pixel-art mascot (e.g. Hanafuda card, mushroom,
-  or 8-bit console), kinetic Japanese display type, ticking timeline ribbon.
-  Reads like a single frame of an educational motion video — looping CSS
-  keyframes, no JS, ready to be screen-recorded into a vertical video.
-  Use when the brief asks for a "sprite animation", "pixel-art video",
-  "8-bit explainer", "history of X explainer", "kinetic typography history",
-  "Nintendo-style", "精灵图动画", "像素动画", or "复古动画".
+  K-패션 브랜드의 **시즌 키비주얼 모션 / 신상 발매 카운트다운 / 로딩 페이지
+  애니메이션**을 단일 HTML 파일로 생성하는 스킬입니다. 풀-블리드 크림 스테이지,
+  큼지막한 시즌·연도 디스플레이, 픽셀 아트 또는 시그니처 모티프 스프라이트,
+  키네틱 한글/영문 디스플레이 타이포, 하단 티커 리본. CSS 키프레임 루핑 애니메이션
+  (외부 JS 없음), 화면 녹화 후 세로형 영상으로 컨버전 가능한 한 프레임 구성.
+  사용자가 "시즌 키비주얼 모션", "신상 카운트다운", "발매 애니메이션",
+  "로딩 페이지 인터랙션", "캠페인 모션", "프리오더 카운터", "쇼츠용 비주얼"을
+  언급하면 활성화하세요.
 triggers:
+  - "시즌 키비주얼 모션"
+  - "신상 카운트다운"
+  - "발매 애니메이션"
+  - "캠페인 모션"
+  - "프리오더 카운터"
+  - "쇼츠용 비주얼"
+  - "로딩 페이지 모션"
   - "sprite animation"
   - "pixel art animation"
-  - "8-bit explainer"
-  - "retro animation"
   - "kinetic typography"
-  - "history explainer"
-  - "nintendo style"
-  - "精灵图"
-  - "像素动画"
-  - "复古动画"
 od:
   mode: prototype
   platform: desktop
   scenario: marketing
+  category: fashion
   featured: 8
   preview:
     type: html
@@ -31,65 +32,176 @@ od:
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Create a sprite-based animation introducing trivia about Nintendo's history. Combine pixel mascots, animated text, and a Hanafuda accent. Use color and type that feel like the Nintendo brand."
+  example_prompt: "와키윌리 27SS 캐릭터 IP 캡슐 컬렉션 발매 카운트다운 모션을 만들어주세요. 메인 디스플레이 = '27SS', 시그니처 모티프 = 윌리 캐릭터 픽셀 카드, 한글 키네틱 = '윌리'와 '등장', 하단 리본은 발매 일정 (27.05.01 LOOKBOOK · 27.05.10 사전예약 · 27.05.15 발매)."
 ---
-# Sprite Animation Skill
 
-Produce a single animated frame of an educational explainer — the kind you
-might screen-record into a vertical video. Pixel-art mascots, big year
-display, looping CSS animations, kinetic Japanese / English display type.
+# 패션 스프라이트 애니메이션 스킬
 
-## Workflow
+K-패션 브랜드의 **시즌 키비주얼 모션 / 신상 발매 카운트다운 / 캠페인 인트로 모션**을 단일 HTML 파일로 생성합니다. 화면 녹화 후 인스타 릴스·틱톡·유튜브 쇼츠로 컨버전할 수 있는 한 프레임 구성. 픽셀 아트 또는 브랜드 시그니처 모티프 스프라이트, 큼지막한 시즌·연도 디스플레이, 키네틱 한글/영문 디스플레이 타이포, 하단 발매 일정 티커 리본을 결합합니다.
 
-1. **Read the active DESIGN.md** (injected above). Pick the loudest serif
-   token for the year, a sturdy sans for headlines, and a mono token for
-   timeline / index labels.
-2. **Pick the topic** from the brief (e.g. "Nintendo · 1889 — Hanafuda").
-   You always need: a year, a one-line headline, an animated subject (a
-   pixel sprite — character, object, or icon), and a short caption.
-3. **Stage** — full-bleed cream / off-white background (`#f5efe2`) with a
-   subtle paper grain. Keep margins generous; this is one beat of a video.
-4. **Top bar** — small mono row:
-   - Left: title slug ("名次の/番組" or "EP. 01 / NINTENDO")
-   - Right: progress dots ("01 / 12") and a "REC" stamp
-5. **Subject animations** — at least three independent looping animations
-   on the page:
-   - **Big year**: the headline year (e.g. "1889年") fills the lower-left,
-     in a serif display weight. It has a subtle vertical glitch / scanline
-     animation (clip-path keyframes), and a 1-frame "pop" every loop.
-   - **Pixel sprite card**: a 96×128 pixel-art card or character (use an
-     inline SVG with crisp `shape-rendering: crispEdges` rectangles, or a
-     `box-shadow` pixel grid). Subtle bobbing animation (±4px, 1.6s).
-   - **Kinetic kana**: 1–2 Japanese / kanji characters that fade-and-slide
-     in sync with the bob (e.g. "花" — *hana* — flower).
-   - **Tick ribbon**: bottom of the stage, a tape/ribbon with year ticks
-     (1889 · 1907 · 1949 · 1977 · 1985 · 2006 · 2017) sliding left at a
-     slow constant speed.
-6. **Caption block** — small mono caption explaining the trivia:
-   "Nintendo started as a Hanafuda playing-card maker in Kyoto, 1889.
-    Mario didn't show up for another ninety-six years."
-7. **Write** a single HTML document:
-   - `<!doctype html>` through `</html>`, CSS inline, no external JS.
-   - All animations use `@keyframes` + `animation: ... infinite`.
-   - Stage uses a fixed canvas ratio (e.g. 16:9 letterboxed) so the loop
-     reads as a single frame from a video.
-   - `data-od-id` on stage, year, sprite, caption, and tick ribbon.
-8. **Self-check**:
-   - The page is one cohesive scene, not a collage. The eye lands on the
-     year first, then the sprite, then the caption.
-   - At least 3 independent looping animations are visible.
-   - The color palette is restrained (cream + a single accent red + ink).
-   - No external assets — all sprites are inline SVG or CSS.
+이 산출물의 청중은 **마케팅실, 그래픽팀, 외부 영상 프로덕션, 인플루언서 협업 파트너**입니다. 한국 K-패션 마케팅에서는 보통 마케팅실이 컨셉을 정의하고 그래픽팀이 비주얼 시안을 만든 뒤 영상 프로덕션이 모션그래픽을 시즌 메인 영상으로 확장하는 흐름을 따릅니다.
 
-## Output contract
+## 환경 호환성
 
-Emit between `<artifact>` tags:
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 `data-od-id` 속성으로 인라인 코멘트. 그 외에는 `id` 속성으로 대체합니다.
+
+본문 작업 흐름은 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 `DESIGN.md` 경로나 기본 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 캠페인 모션의 등록(register)을 따릅니다.
+
+- 디스플레이 타이포는 한글·영문 자유 혼용 — 한국 패션 캠페인에서 매우 흔함. 예: "27SS" / "GET READY" / "PREORDER" / "발매" / "오픈" / "윌리 등장".
+- 시즌 코드는 영문 표기 유지(27SS, 26FW). 연도는 한글·영문 모두 OK ("2027년" 또는 "2027").
+- 키네틱 한글은 1~3자 단음절어 권장 ("봄", "꽃", "원", "윌리", "오늘"). 길어지면 모션 리듬이 깨집니다.
+- 캡션은 한글 본문 + 영문 키워드 혼용 자연스러움 ("프렌치 시크의 봄 / Spring Drift").
+- 하단 리본 티커는 발매 일정 또는 시즌 이벤트 — 한국 날짜 표기(27.05.15) 또는 영문(MAY 15) OK.
+- 디스플레이 폰트는 브랜드 캐릭터를 따릅니다. 마뗑킴=Inter/Pretendard 굵게 / 마르디=세리프(본명조) / 와키윌리=BlackHanSans·BagelFatOne / 아더에러=영문 산세 / 키르시=한손글씨.
+
+## 폴더 구조
 
 ```
-<artifact identifier="sprite-anim-slug" type="text/html" title="Sprite animation — Title">
-<!doctype html>
-<html>...</html>
-</artifact>
+sprite-animation/
+├── SKILL.md       ← 이 파일
+└── example.html   ← 작성 예시 (와키윌리 27SS 캐릭터 IP 발매 카운트다운)
 ```
 
-One sentence before the artifact, nothing after.
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. `example.html`을 처음부터 끝까지 읽어 스테이지 + 토프바 + 큰 연도 + 스프라이트 카드 + 키네틱 한글 + 캡션 + 리본 구조를 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 산출물 성격에 맞는 디스플레이 폰트 1개를 골라 `--font-display`에 바인딩합니다.
+
+### Step 1 — 정보 수집
+
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
+
+- 브랜드명 + 시즌·캠페인 코드 (예: 와키윌리 27SS, 마뗑킴 SPRING DRIFT)
+- 메인 디스플레이 — 시즌 코드("27SS") 또는 연도("2027") 또는 캠페인명("BLOOM")
+- 시그니처 모티프 — 픽셀 카드 / 캐릭터 IP / 브랜드 심볼(체리·꽃·테트라이트 등)
+- 키네틱 한글 1~3자 (예: "봄", "꽃", "윌리")
+- 캡션 1~2문장 (시즌 컨셉 또는 발매 정보)
+- 하단 리본 티커 항목 5~8개 (시즌 이벤트, 발매 일정, 또는 시그니처 키워드)
+- 액센트 컬러 1개 (브랜드 컬러)
+
+### Step 2 — 스테이지 구성
+
+풀-블리드 크림/오프화이트 배경(`#f5efe2` 또는 브랜드 컬러) + 미세한 페이퍼 그레인. 16:9 또는 9:16 종횡비. 한 프레임이 영상 1초 정도로 읽혀야 합니다.
+
+다음 구성 요소를 배치:
+
+- **상단 토프바** (작은 모노 줄):
+  - 좌: 캠페인 슬러그 ("27SS · EP.01 / 윌리 등장")
+  - 우: 진행 도트 (01 / 12) + "REC" 또는 "LIVE" 스탬프
+- **메인 큰 디스플레이** (좌하단 또는 중앙): 시즌 코드 / 연도. 미세한 vertical glitch + 1프레임 "pop" 애니메이션. 디스플레이 폰트 + 옅은 글리치.
+- **스프라이트 카드** (우측): 96×128 또는 168×252 픽셀 카드 또는 브랜드 시그니처 SVG. 부드러운 bobbing 애니메이션 (±4~8px, 1.6~2.4s).
+- **키네틱 한글** (우상단 또는 중앙): 1~3자 큰 디스플레이. fade-and-slide in 애니메이션, 각 글자 stagger.
+- **캡션 블록** (좌하단): 모노 또는 sans + 한 줄 큰 카피 + 짧은 설명.
+- **하단 리본 티커**: 풀-블리드 검정 또는 액센트 바, 발매 일정 / 시그니처 키워드가 좌측으로 천천히 흐름.
+- **코너 등록 마크** (선택): 정렬용 작은 L자 마크 4개.
+
+### Step 3 — 애니메이션
+
+최소 3개 독립 루핑 애니메이션이 동시에 보여야 합니다.
+
+- `@keyframes`만 사용. JS 금지.
+- 글리치(year): 4초 주기, 1초만 깜빡.
+- bobbing(스프라이트 카드): 2.4초 ease-in-out, ±8px.
+- 키네틱 한글: 4초 주기 fade-up + fade-down, 글자별 0.4초 stagger.
+- 티커 리본: 22초 linear, 무한 스크롤 (두 번 복제 후 `translateX(-50%)`로 끊김 없이).
+- "REC" 도트: 1.2초 step 깜빡임.
+
+### Step 4 — 작성
+
+1. 단일 HTML 문서(`<!doctype html>` ~ `</html>`)로 작성, CSS는 인라인 `<style>` 한 블록.
+2. 외부 JS·라이브러리 금지. 모든 그래픽은 인라인 SVG 또는 CSS.
+3. 주요 영역(stage, topbar, year, sprite, kana, caption, ribbon)에 식별용 속성. OpenDesign 환경은 `data-od-id`, 그 외는 `id`.
+4. 스테이지는 고정 종횡비(16:9 권장). 부모 컨테이너의 배경은 어둡게(`#1a1816`) 두어 영상 프레임처럼 보이게.
+
+### Step 5 — 자체 검수
+
+- 한 응집된 장면 (콜라주 아님). 시선이 큰 연도 → 스프라이트 → 캡션 순서로 흐름
+- 최소 3개 독립 루핑 애니메이션 보임
+- 컬러 팔레트 제한 (크림 + 단일 액센트 + 잉크)
+- 외부 에셋 없음 (모든 스프라이트는 인라인 SVG 또는 CSS)
+- 한글 키네틱 글자 수 1~3자
+- 시즌 코드 표기 정확 (27SS / 26FW 등)
+
+## 한국 K-패션 캠페인 모션 사례 (참고)
+
+스프라이트 애니메이션 작성 시 참고할 K-패션 브랜드 톤 패턴.
+
+| 브랜드 | 메인 디스플레이 톤 | 시그니처 모티프 | 키네틱 한글 후보 |
+|---|---|---|---|
+| **마뗑킴** | 미니멀 sans, 굵게 ("27SS" 큼지막) | 텍스트 로고 자체 | "쿨" / "매일" / "오늘" |
+| **마르디 메크르디** | 세리프 디스플레이, 우아함 ("SPRING") | 꽃 일러스트 (시그니처 plant) | "봄" / "꽃" / "원" |
+| **아더에러** | 영문 산세, 컨셉추얼 ("DISTORTION") | 테트라이트 / 블루 그리드 | "왜곡" / "지금" / "새로움" |
+| **키르시** | 한손글씨 디스플레이 | 체리 심볼 (붉은 체리) | "체리" / "달콤" / "오늘" |
+| **와키윌리** | 위트 sans (BlackHanSans), 굵게 | 윌리 캐릭터 픽셀 카드 | "윌리" / "등장" / "오늘" |
+| **무신사 스탠다드** | 베이직 sans, 굵게 | 무신사 ◐ 심볼 | "표준" / "데일리" / "지금" |
+
+위 사례는 톤 참고용. 실제 산출물은 사용자 브랜드 시그니처 모티프로 작성하세요.
+
+## 한국 패션기업 조직 R&R 메모
+
+스프라이트 애니메이션 산출물의 작성·검토 흐름.
+
+- **마케팅실**: 캠페인 컨셉 정의, 카피·티커 일정 락업, 채널별 사이즈/포맷 결정
+- **디자인실 (그래픽팀)**: 비주얼 시안, 시그니처 모티프 일러스트레이션, 색감 락업
+- **영상 프로덕션 (외부 또는 인하우스)**: 한 프레임 모션을 1분 릴스/15초 쇼츠로 확장
+- **이커머스팀 / CRM 담당**: 자사몰 메인 페이지·앱 스플래시·카카오톡 알림톡 썸네일로 활용
+- **외부 인플루언서 / 앰배서더**: 발매 카운트다운 영상 공유
+
+## 시즌 사이클 내 위치
+
+스프라이트 애니메이션은 **시즌 시작 1~2개월 전**에 제작되어 캠페인 시즌 전체에 사용됩니다.
+
+```
+[fashion-imc-calendar — 시즌 시작 2개월 전 캠페인 일정 락업]
+    ↓
+[스프라이트 애니메이션 / 키비주얼 모션 제작 — 시즌 시작 1~2개월 전]
+    ↓ 다음 채널로 분배
+[자사몰 메인 스플래시 / 앱 로딩]
+[인스타 릴스 / 틱톡 / 유튜브 쇼츠]
+[카카오톡 알림톡 썸네일]
+[퍼포먼스 광고 소재]
+[fashion-lookbook 인트로 영상 첫 컷]
+```
+
+## 채널 연계
+
+이 산출물은 다음 채널에서 사용됩니다.
+
+- **자사몰 메인 페이지** — 시즌 인트로 KV, 풀스크린 로딩
+- **앱 스플래시** — 시즌 전환 시 첫 화면 모션
+- **인스타그램 릴스** (9:16 세로) — 화면 녹화 후 트림
+- **틱톡 / 유튜브 쇼츠** (9:16 세로)
+- **무신사 / 29CM 상세페이지 인트로** — 시즌 신상 도입부
+- **카카오톡 알림톡** — 발매 알림 첨부 이미지
+- **퍼포먼스 광고** (메타·구글·네이버) — 동영상 소재
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="sprite-anim-slug" type="text/html" title="스프라이트 모션 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "와키윌리 27SS 캐릭터 IP 캡슐 발매 카운트다운 모션을 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

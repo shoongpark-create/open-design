@@ -1,46 +1,58 @@
-# Mobile app checklist
+# K-패션 의류 쇼핑 앱 화면 자체 검수 체크리스트
 
-Run this before emitting `<artifact>`. P0 must pass.
+산출물 출력 직전에 한 줄씩 직접 확인하세요. **P0**는 통과 필수 (anti-fake-device), **P1**은 강력 권장, **P2**는 다듬기.
 
-## P0 — must pass
+## P0 — 통과 필수
 
-- [ ] **Frame looks like a phone, not a generic card.** Dynamic Island visible, status bar SVG icons present (signal/wifi/battery), home indicator at bottom. The seed already does this — verify you didn't accidentally delete the island/rails/indicator markup.
-- [ ] **Status bar shows real glyphs**, not text like `· · · 5G · 100%`. Use the SVG icons from the seed.
-- [ ] **Home indicator is the last visible thing.** Anything below it (e.g. extra padding, accidental `<div>`) breaks the illusion.
-- [ ] **Content scrolls, frame doesn't.** `<main class="content">` has `overflow-y: auto`; the surrounding `.device` does not. The page background never moves.
-- [ ] **Tap targets ≥ 44px tall.** The seed's `.btn-primary` (48px), `.tab` (~50px), `.icon-btn` (36px ≥ touch with padding), `.list-row` (≥48px with padding) all pass. Don't ship a button under 44px.
-- [ ] **Body text ≥ 14px.** `--fs-body: 15px` already enforces this on most copy. List-row sub text uses 13px max — that's the floor.
-- [ ] **One accent, used at most twice on the screen.** Typically: one active tab + one CTA, OR one accent card + one tab. Never three.
-- [ ] **No external image URLs.** Use the `.ph-img` placeholder class. External CDN images break the OD preview iframe and look fake when they 404.
-- [ ] **Tab bar matches the screen kind.** Onboarding / detail / checkout: drop the `<nav class="tabbar">` entirely. Feed / focus / profile: keep it.
-- [ ] **Display headlines use `var(--font-display)` (serif).** The seed binds this via `.h1`, `.h2`, `.header h1`. Don't override headings to system-sans — it instantly looks like a stock template.
-- [ ] **No emoji icons in the UI.** SVG monoline only. Emoji in copy is fine ("9:41 ☀️ Tuesday" is not, but "Sunny day in Berlin" is).
-- [ ] **`data-od-id` on the device, content, header, and any major sections.**
+- [ ] **프레임이 진짜 폰처럼 보임. 일반 카드가 아님.** Dynamic Island가 보이고, 상태 바 SVG 아이콘(시그널/와이파이/배터리)이 있고, 홈 인디케이터가 하단에 있습니다. 시드가 이미 모두 그려두었으니 — 실수로 island/rails/indicator 마크업을 삭제하지 않았는지 확인.
+- [ ] **상태 바에 진짜 글리프 표시**, 텍스트(`· · · 5G · 100%`) 아님. 시드의 SVG 아이콘을 사용하세요.
+- [ ] **홈 인디케이터가 보이는 마지막 요소.** 그 아래 어떤 것(여분 패딩, 실수로 추가된 `<div>`)도 환상을 깹니다.
+- [ ] **콘텐츠가 스크롤하고, 프레임은 스크롤하지 않음.** `<main class="content">`에 `overflow-y: auto`. 둘러싼 `.device`는 스크롤 없음. 페이지 배경은 절대 움직이지 않음.
+- [ ] **탭 타깃 ≥ 44px.** 시드의 `.btn-primary`(48px), `.tab`(~50px), `.icon-btn`(36px ≥ 패딩 포함 터치), `.list-row`(패딩 포함 ≥48px) 모두 통과. 44px 이하 버튼 금지.
+- [ ] **본문 텍스트 ≥ 14px.** `--fs-body: 15px`가 대부분의 카피에서 이미 강제. list-row sub 텍스트는 13px가 최저선.
+- [ ] **액센트 1개, 화면에서 최대 2회 사용.** 보통: 활성 탭 1개 + CTA 1개, 또는 액센트 카드 1개 + 탭 1개. 세 번 절대 금지.
+- [ ] **외부 이미지 URL 없음.** `.ph-img` 플레이스홀더 클래스 사용. 외부 CDN 이미지는 OD 미리보기 iframe을 깨뜨리고, 404 시 가짜처럼 보입니다.
+- [ ] **탭 바가 화면 종류와 일치.** 온보딩 / 상세 / 체크아웃: `<nav class="tabbar">` 전체 삭제. 피드 / 포커스 / 프로필: 유지.
+- [ ] **디스플레이 헤딩이 `var(--font-display)` (세리프) 사용.** 시드가 `.h1`, `.h2`, `.header h1`을 통해 바인딩. 헤딩을 시스템 산세리프로 오버라이드하지 마세요 — 즉시 스톡 템플릿처럼 보입니다.
+- [ ] **UI에 이모지 아이콘 없음.** SVG monoline only. 카피 안의 이모지는 괜찮음 (`"9:41 ☀️ 화요일"`은 안 되지만 `"오늘 베를린 맑음"`은 가능).
+- [ ] **`data-od-id`가 디바이스 · 콘텐츠 · 헤더 · 주요 섹션에 있음** (OpenDesign 환경에서 사용 시). 그 외 환경에서는 일반 `id` 속성으로 대체 가능.
 
-## P1 — should pass
+## P1 — 강력 권장
 
-- [ ] **One screen, one job.** A profile screen does profile things. Don't graft a checkout form onto a feed.
-- [ ] **Caption above the device** names the screen (e.g. "FILEBASE · INBOX"). The seed already has the slot — fill it.
-- [ ] **Status bar time is `9:41`** (Apple convention) unless the brief asks otherwise.
-- [ ] **Mono font for numerics** — counts, prices, durations, dates. The seed's `.num` class binds this.
-- [ ] **Real, specific copy.** "Mira Hassan · CTO" beats "User Name". "$1,920" beats "$X,XXX".
-- [ ] **First-screen content fits inside the 844px frame** without requiring scroll for the primary action. If the CTA is below the fold, it's the wrong layout.
+- [ ] **한 화면, 한 가지 일.** 프로필 화면은 프로필 일만 합니다. 피드에 체크아웃 폼을 그래프트하지 마세요.
+- [ ] **디바이스 위 캡션**이 화면 이름을 명명 (예: `MATIN KIM · 27SS 신상 피드`, `WACKYWILLY · VIP 라운지`). 시드에 이미 슬롯 있음 — 채우세요.
+- [ ] **상태 바 시간은 `9:41`** (Apple 컨벤션) — 브리프가 다르게 요청하지 않는 한.
+- [ ] **숫자에 mono 폰트** — 가격(₩), 포인트(P), 재고, 일자. 시드의 `.num` 클래스가 바인딩.
+- [ ] **진짜 K-패션 카피.** "매트 김 · GOLD 회원"이 "유저명"보다 우월. "₩108,800"이 "₩XXX,XXX"보다 우월.
+- [ ] **첫 화면 콘텐츠가 844px 프레임 안에 핏** — 메인 액션이 스크롤 없이 보일 것. CTA가 폴드 아래 있으면 잘못된 레이아웃입니다.
+- [ ] **한국어 카피 자연스러움.** 어색한 직역 금지. K-패션 현장 등록(register)을 따름 — 영문 산업용어 유지 (`SKU`, `BTA`, `DROP`, `LOOKBOOK`, `VIP`).
+- [ ] **K-패션 금액 표기.** `₩128,000` 또는 `128,000원` 우선. `$128.00`처럼 달러 표기 금지 (글로벌 자사몰 화면이 아닌 한).
 
-## P2 — nice to have
+## P2 — 다듬기
 
-- [ ] **Subtle accent radial gradient on the page background** (already in seed). Removing it makes the device feel pasted onto a flat sheet.
-- [ ] **Backdrop-blurred tab bar** (already in seed via `backdrop-filter`).
-- [ ] **At most one image placeholder per screen.** Two placeholders on a small canvas competes for attention.
-- [ ] **Subtle metallic side rails on the bezel** (already in seed via `::before`/`::after`).
+- [ ] **페이지 배경에 미세한 액센트 라디얼 그라데이션** (이미 시드에 있음). 제거하면 디바이스가 평평한 시트 위에 붙여넣은 것처럼 보입니다.
+- [ ] **백드롭 블러된 탭 바** (이미 시드에 있음, `backdrop-filter`).
+- [ ] **화면당 이미지 플레이스홀더 최대 1개.** 작은 캔버스에 2개는 주의를 놓고 경쟁합니다.
+- [ ] **베젤의 미세한 메탈릭 사이드 레일** (이미 시드에 있음, `::before`/`::after`).
+- [ ] 푸시 알림 카피가 친근한 호칭 (`매트 김 회원님`) + 200자 이내 + 이모지 절제 (1~2개 또는 0개).
 
-## Anti-fake-device checklist
+## Anti-fake-device 체크리스트
 
-If any of these are true, the screen looks like a *card pretending to be a phone* rather than a phone:
+다음 중 하나라도 해당하면, 화면이 *카드가 폰인 척*하는 것처럼 보일 수 있습니다.
 
-- The device's outer corners aren't visibly more rounded (~56px) than the inner screen (~44px).
-- There's no Dynamic Island gap at the top centre.
-- The status bar text is grey or low-opacity (it should be `var(--fg)` at full strength).
-- The home indicator is missing.
-- The bottom tab bar has no top border or no backdrop blur.
+- 디바이스 바깥 모서리가 안쪽 스크린(~44px)보다 눈에 띄게 더 둥글지(~56px) 않음.
+- 상단 중앙에 Dynamic Island 갭이 없음.
+- 상태 바 텍스트가 회색 또는 저투명도 (`var(--fg)` 풀 강도여야 함).
+- 홈 인디케이터가 누락.
+- 하단 탭 바에 상단 보더 또는 백드롭 블러 없음.
 
-The seed prevents all of these — the most common regression is the agent rewriting the frame with `border-radius: 24px` and losing the depth.
+시드가 이 모든 것을 막아줍니다 — 가장 흔한 회귀(regression)는 에이전트가 프레임을 `border-radius: 24px`로 다시 쓰고 깊이감을 잃는 것입니다.
+
+## K-패션 특화 검수 (선택)
+
+- [ ] 카피·라벨에 K-패션 현장 영문 산업용어 사용 (SKU, BTA, LOOKBOOK, DROP, VIP, MEMBERS ONLY, NEW)
+- [ ] 가격·포인트는 mono 폰트 + 한국 표준 표기 (`₩128,000`, `+50P`)
+- [ ] 알림 / 푸시 카피가 친근한 한국어 톤 (`매트 김 회원님`, `~ 시작합니다`)
+- [ ] 탭 바 라벨이 한국어 (`홈`, `카테고리`, `좋아요`, `마이`) 또는 영문 (브랜드 톤에 따라)
+- [ ] 시즌 코드 표기 일관성 (`27SS`, `27FW`)
+- [ ] 색상이 시즌 컬러 토큰과 정합성 (액센트 = 시즌 키 컬러)

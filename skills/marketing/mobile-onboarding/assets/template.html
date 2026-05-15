@@ -1,0 +1,477 @@
+<!doctype html>
+<!--
+  K-패션 자사몰 앱 mobile-onboarding 시드.
+
+  3개 iPhone 프레임(스플래시 / 밸류프롭 / 사인인 또는 스타일 진단)이
+  가로로 정렬된 픽셀 정확 온보딩 플로우.
+  Dynamic Island · 상태 바 · 홈 인디케이터 · 페이지 인디케이터 모두 그려져 있음.
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 토큰을 프로젝트 DESIGN.md 와 바인딩
+       (--accent = 브랜드 키컬러, --font-display = 브랜드 톤 폰트)
+    4) references/layouts.md 에서 3번째 스크린 패턴 1개 선택해
+       <section class="phone phone-3">의 .phone-body 안에 붙여넣기
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude (Claude.ai · Claude Code): <artifact> 태그로 감싸 출력
+    - 기타 (ChatGPT · Gemini · Grok): 표준 마크다운 HTML 코드블록
+    - OpenDesign: data-od-id 속성 사용 가능. 그 외는 id 속성으로 대체.
+-->
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>[REPLACE 브랜드] · [REPLACE 캠페인 또는 시즌] · 모바일 온보딩</title>
+  <style>
+    @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+    @import url("https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+    :root {
+      --canvas:  #efece4;
+      --paper:   #ffffff;
+      --ink:     #1a1816;
+      --muted:   #76715f;
+      --line:    #e6e2d8;
+      --accent:  #c66e3a;
+      --warm:    #e8a76e;
+
+      --font-sans:
+        "Pretendard Variable", Pretendard,
+        -apple-system, BlinkMacSystemFont,
+        "Apple SD Gothic Neo", system-ui, sans-serif;
+      --font-display-romance: "Hahmlet", "Instrument Serif", "Noto Serif KR", Georgia, serif;
+      --font-display-clean:   "Pretendard Variable", "Wanted Sans Variable", sans-serif;
+      --font-display: var(--font-display-romance);
+      --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      background: var(--canvas);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── 스테이지 ─── */
+    .stage {
+      min-height: 100vh;
+      padding: 56px 32px 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(232,167,110,0.32), transparent 70%),
+        radial-gradient(ellipse 80% 50% at 50% 110%, rgba(198,110,58,0.14), transparent 70%),
+        var(--canvas);
+    }
+    .stage-caption {
+      text-align: center;
+      max-width: 60ch;
+    }
+    .stage-caption h1 {
+      font-family: var(--font-display);
+      font-size: 26px;
+      margin: 0 0 6px;
+      letter-spacing: -0.005em;
+      font-weight: 600;
+    }
+    .stage-caption p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 14px;
+    }
+    .stage-caption .meta {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    /* ─── 폰 그리드 ─── */
+    .phones {
+      display: grid;
+      grid-template-columns: repeat(3, auto);
+      gap: 28px;
+      align-items: center;
+    }
+
+    /* 픽셀 정확 iPhone 프레임 */
+    .phone {
+      width: 320px;
+      aspect-ratio: 9 / 19.5;
+      background: linear-gradient(160deg, #2a2a2c 0%, #1a1a1c 50%, #0e0e10 100%);
+      border-radius: 44px;
+      padding: 9px;
+      position: relative;
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.04) inset,
+        0 0 0 2px #000 inset,
+        0 28px 60px -12px rgba(0,0,0,0.30),
+        0 12px 18px -6px rgba(0,0,0,0.18);
+    }
+    .phone .island {
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 28px;
+      background: #000;
+      border-radius: 999px;
+      z-index: 5;
+    }
+
+    .screen {
+      width: 100%;
+      height: 100%;
+      background: var(--paper);
+      border-radius: 36px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      color: var(--ink);
+    }
+
+    /* 상태 바 */
+    .statusbar {
+      flex: 0 0 44px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 16px 22px 0;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+    }
+    .statusbar .right { display: inline-flex; align-items: center; gap: 5px; }
+    .statusbar svg { width: 14px; height: 9px; fill: var(--ink); }
+    .statusbar .battery { width: 21px; }
+
+    .phone-body {
+      flex: 1 1 auto;
+      padding: 6px 22px 16px;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+    .phone-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 24px;
+    }
+    .skip {
+      font-size: 13px;
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    /* 히어로 영역 (스크린 1·2) */
+    .hero {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 0;
+    }
+    .hero .art {
+      width: 200px;
+      height: 200px;
+    }
+
+    /* 카피 영역 */
+    .copy {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 14px 2px;
+    }
+    .copy h2 {
+      font-family: var(--font-display);
+      font-size: 28px;
+      line-height: 1.12;
+      margin: 0;
+      letter-spacing: -0.01em;
+      font-weight: 700;
+    }
+    .copy p {
+      color: var(--muted);
+      margin: 0;
+      font-size: 14.5px;
+      line-height: 1.55;
+    }
+
+    /* 페이지 인디케이터 */
+    .pager {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 14px 0 8px;
+    }
+    .pager span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(26,24,22,0.18);
+    }
+    .pager span.active {
+      width: 22px;
+      background: var(--accent);
+      border-radius: 999px;
+    }
+
+    /* CTA */
+    .cta {
+      background: var(--ink);
+      color: #fef9ee;
+      padding: 15px 22px;
+      border-radius: 999px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cta.accent { background: var(--accent); }
+    .alt {
+      text-align: center;
+      color: var(--muted);
+      padding-top: 12px;
+      font-size: 13px;
+    }
+    .alt a { color: var(--accent); font-weight: 600; cursor: pointer; }
+
+    /* 스크린 3 — 사인인 옵션 */
+    .signin-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .opt {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      font-weight: 500;
+      font-size: 14.5px;
+      cursor: pointer;
+      min-height: 48px;
+    }
+    .opt .glyph {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .opt.kakao .glyph { background: #fee500; color: #3c1e1e; }
+    .opt.apple .glyph { background: #000; }
+    .opt.naver .glyph { background: #03c75a; }
+    .opt.email .glyph { background: var(--accent); }
+
+    .terms {
+      font-size: 11px;
+      color: var(--muted);
+      text-align: center;
+      padding-top: 12px;
+      line-height: 1.5;
+    }
+    .terms a { color: var(--accent); }
+
+    /* 스크린 3 — 스타일 진단 (취향 키워드 칩) */
+    .chip-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .chip {
+      padding: 11px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      text-align: center;
+      font-size: 13px;
+      cursor: pointer;
+      background: var(--paper);
+    }
+    .chip.on {
+      background: rgba(198,110,58,0.10);
+      border-color: var(--accent);
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    /* 홈 인디케이터 */
+    .home-indicator {
+      flex: 0 0 22px;
+      position: relative;
+    }
+    .home-indicator::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: 6px;
+      transform: translateX(-50%);
+      width: 110px;
+      height: 4px;
+      background: var(--ink);
+      border-radius: 999px;
+      opacity: 0.85;
+    }
+
+    /* mono 숫자 */
+    .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+
+    /* 반응형 — 좁은 뷰포트에서 세로 스택 */
+    @media (max-width: 1100px) {
+      .phones { grid-template-columns: 1fr; }
+      .phone { width: 92vw; max-width: 360px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage" data-od-id="stage">
+    <div class="stage-caption" data-od-id="stage-caption">
+      <p class="meta">[REPLACE 27SS · ONBOARDING]</p>
+      <h1>[REPLACE 마뗑킴] · [REPLACE 자사몰 앱 온보딩]</h1>
+      <p>[REPLACE 3개 스크린, 하나의 톤. 스플래시 → 회원 사전예약 안내 → 카카오 사인인.]</p>
+    </div>
+
+    <div class="phones" data-od-id="phones">
+
+      <!-- ─── 스크린 1 · 스플래시 / 웰컴 ─── -->
+      <div class="phone phone-1" data-od-id="phone-splash">
+        <span class="island" aria-hidden></span>
+        <div class="screen">
+          <div class="statusbar">
+            <span class="num">9:41</span>
+            <span class="right">
+              <svg viewBox="0 0 14 9" aria-hidden><rect x="0" y="6" width="2" height="3" rx="0.4"/><rect x="3.5" y="4" width="2" height="5" rx="0.4"/><rect x="7" y="2" width="2" height="7" rx="0.4"/><rect x="10.5" y="0" width="2" height="9" rx="0.4"/></svg>
+              <svg viewBox="0 0 14 9" aria-hidden><path d="M7 1C5 1 3 2 1.5 3.5L2.5 4.5C3.7 3.3 5.3 2.6 7 2.6c1.7 0 3.3 0.7 4.5 1.9L12.5 3.5C11 2 9 1 7 1z"/></svg>
+              <svg class="battery" viewBox="0 0 21 9" aria-hidden><rect x="0.5" y="0.5" width="17.5" height="8" rx="2" fill="none" stroke="currentColor" stroke-opacity="0.45"/><rect x="18.5" y="3" width="1.2" height="3" rx="0.3" fill="currentColor" fill-opacity="0.45"/><rect x="2" y="2" width="14.5" height="5" rx="1"/></svg>
+            </span>
+          </div>
+          <div class="phone-body">
+            <div class="phone-top"><span class="skip">건너뛰기</span></div>
+            <div class="hero" data-od-id="hero-1">
+              <!-- [REPLACE 브랜드 시그니처 일러스트 / 시즌 KV] -->
+              <svg class="art" viewBox="0 0 220 220" aria-hidden>
+                <defs>
+                  <radialGradient id="moon1" cx="50%" cy="40%" r="60%">
+                    <stop offset="0%" stop-color="#fcebd0"/>
+                    <stop offset="100%" stop-color="#e8a76e"/>
+                  </radialGradient>
+                </defs>
+                <circle cx="110" cy="110" r="78" fill="url(#moon1)"/>
+                <circle cx="146" cy="92" r="14" fill="#fff" opacity="0.6"/>
+                <circle cx="78" cy="74" r="3" fill="#c66e3a" opacity="0.7"/>
+                <circle cx="60" cy="120" r="2" fill="#c66e3a" opacity="0.5"/>
+                <path d="M 30 200 Q 110 170 200 200 L 200 220 L 30 220 Z" fill="#c66e3a" opacity="0.18"/>
+              </svg>
+            </div>
+            <div class="copy">
+              <h2>[REPLACE 쿨하게, 매일.]</h2>
+              <p>[REPLACE 마뗑킴이 제안하는 데일리 럭셔리. 매일의 일상에 쿨한 무드 한 스푼.]</p>
+            </div>
+            <div class="pager"><span class="active"></span><span></span><span></span></div>
+            <div class="cta">시작하기</div>
+          </div>
+          <div class="home-indicator" aria-hidden></div>
+        </div>
+      </div>
+
+      <!-- ─── 스크린 2 · 밸류프롭 ─── -->
+      <div class="phone phone-2" data-od-id="phone-value">
+        <span class="island" aria-hidden></span>
+        <div class="screen">
+          <div class="statusbar">
+            <span class="num">9:41</span>
+            <span class="right">
+              <svg viewBox="0 0 14 9" aria-hidden><rect x="0" y="6" width="2" height="3" rx="0.4"/><rect x="3.5" y="4" width="2" height="5" rx="0.4"/><rect x="7" y="2" width="2" height="7" rx="0.4"/><rect x="10.5" y="0" width="2" height="9" rx="0.4"/></svg>
+              <svg viewBox="0 0 14 9" aria-hidden><path d="M7 1C5 1 3 2 1.5 3.5L2.5 4.5C3.7 3.3 5.3 2.6 7 2.6c1.7 0 3.3 0.7 4.5 1.9L12.5 3.5C11 2 9 1 7 1z"/></svg>
+              <svg class="battery" viewBox="0 0 21 9" aria-hidden><rect x="0.5" y="0.5" width="17.5" height="8" rx="2" fill="none" stroke="currentColor" stroke-opacity="0.45"/><rect x="18.5" y="3" width="1.2" height="3" rx="0.3" fill="currentColor" fill-opacity="0.45"/><rect x="2" y="2" width="14.5" height="5" rx="1"/></svg>
+            </span>
+          </div>
+          <div class="phone-body">
+            <div class="phone-top"><span class="skip">건너뛰기</span></div>
+            <div class="hero" data-od-id="hero-2">
+              <!-- [REPLACE 회원 사전예약 + 시즌 KV 시각화] -->
+              <svg class="art" viewBox="0 0 220 220" aria-hidden>
+                <rect x="38" y="48" width="144" height="100" rx="14" fill="#fff" stroke="#c66e3a" stroke-width="1.5"/>
+                <rect x="56" y="68" width="56" height="6" rx="3" fill="#c66e3a"/>
+                <rect x="56" y="84" width="100" height="4" rx="2" fill="#76715f" opacity="0.4"/>
+                <rect x="56" y="96" width="80" height="4" rx="2" fill="#76715f" opacity="0.4"/>
+                <rect x="56" y="116" width="40" height="20" rx="10" fill="#c66e3a"/>
+                <circle cx="170" cy="160" r="22" fill="#e8a76e"/>
+                <path d="M 162 160 L 168 166 L 178 154" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="copy">
+              <h2>[REPLACE 회원만의 사전예약, 먼저 만나보세요.]</h2>
+              <p>[REPLACE 27SS 신상 사전예약 · 무료 배송 · 시즌 룩북 다운로드. 회원이 되면 모든 혜택을 누릴 수 있습니다.]</p>
+            </div>
+            <div class="pager"><span></span><span class="active"></span><span></span></div>
+            <div class="cta">계속</div>
+          </div>
+          <div class="home-indicator" aria-hidden></div>
+        </div>
+      </div>
+
+      <!-- ─── 스크린 3 · 사인인 또는 스타일 취향 진단 ─── -->
+      <!-- references/layouts.md 의 패턴 A (사인인) 또는 패턴 B (스타일 진단)을 선택해 .phone-body 내부 교체 -->
+      <div class="phone phone-3" data-od-id="phone-signin">
+        <span class="island" aria-hidden></span>
+        <div class="screen">
+          <div class="statusbar">
+            <span class="num">9:41</span>
+            <span class="right">
+              <svg viewBox="0 0 14 9" aria-hidden><rect x="0" y="6" width="2" height="3" rx="0.4"/><rect x="3.5" y="4" width="2" height="5" rx="0.4"/><rect x="7" y="2" width="2" height="7" rx="0.4"/><rect x="10.5" y="0" width="2" height="9" rx="0.4"/></svg>
+              <svg viewBox="0 0 14 9" aria-hidden><path d="M7 1C5 1 3 2 1.5 3.5L2.5 4.5C3.7 3.3 5.3 2.6 7 2.6c1.7 0 3.3 0.7 4.5 1.9L12.5 3.5C11 2 9 1 7 1z"/></svg>
+              <svg class="battery" viewBox="0 0 21 9" aria-hidden><rect x="0.5" y="0.5" width="17.5" height="8" rx="2" fill="none" stroke="currentColor" stroke-opacity="0.45"/><rect x="18.5" y="3" width="1.2" height="3" rx="0.3" fill="currentColor" fill-opacity="0.45"/><rect x="2" y="2" width="14.5" height="5" rx="1"/></svg>
+            </span>
+          </div>
+          <div class="phone-body">
+            <div class="phone-top"><span class="skip">도움말</span></div>
+            <!-- 기본값: 사인인 (패턴 A). 스타일 진단을 원하면 layouts.md 의 패턴 B 로 교체. -->
+            <div style="padding: 18px 0 6px;" data-od-id="copy-3">
+              <h2 style="font-family: var(--font-display); font-size: 28px; margin: 0 0 8px; letter-spacing: -0.01em; line-height: 1.1; font-weight: 700;">[REPLACE 자리를 마련해 두었어요.]</h2>
+              <p style="margin: 0; color: var(--muted); font-size: 14.5px;">[REPLACE 기기 간 위시리스트와 주문 내역이 함께. 알림은 회원님이 원할 때만.]</p>
+            </div>
+            <div class="signin-options" data-od-id="signin-options">
+              <div class="opt kakao"><span class="glyph">K</span>카카오로 시작하기</div>
+              <div class="opt apple"><span class="glyph"></span>Apple로 계속하기</div>
+              <div class="opt naver"><span class="glyph">N</span>네이버로 계속하기</div>
+              <div class="opt email"><span class="glyph">@</span>이메일로 계속하기</div>
+            </div>
+            <div style="flex: 1;"></div>
+            <div class="terms">계속하면 <a>이용약관</a>과 <a>개인정보처리방침</a>에 동의하게 됩니다.</div>
+            <div class="pager"><span></span><span></span><span class="active"></span></div>
+          </div>
+          <div class="home-indicator" aria-hidden></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+</html>

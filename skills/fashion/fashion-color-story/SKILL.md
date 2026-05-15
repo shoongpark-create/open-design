@@ -1,29 +1,24 @@
 ---
 name: fashion-color-story
 description: |
-  Locked seasonal color palette as a single HTML reference sheet. Converts
-  the exploratory color seeds from a concept board into a definitive working
-  palette: Pantone TCX codes, fabric pairings, main/season/accent hierarchy
-  with 60/30/10 proportion, category × color distribution matrix, and
-  dyeing-lot QC notes. Use when the brief asks for a "color story",
-  "color palette", "season palette", "Pantone reference", "컬러 스토리",
-  "시즌 팔레트", "컬러 팔레트", or "컬러 차트", or any artifact that
-  *locks* a season's colors after concept work and before line-up build.
+  K-패션 브랜드의 **시즌 컬러 스토리**를 단일 HTML 레퍼런스 시트로 LOCK하는 스킬입니다.
+  컨셉 보드의 탐색적 컬러 시드를 확정 작업 팔레트로 전환합니다 — Pantone TCX 코드,
+  패브릭 페어링, Main/Season/Accent 60/30/10 계층, 카테고리 × 컬러 분포 매트릭스,
+  염색 LOT QC 노트. 사용자가 "컬러 스토리", "시즌 팔레트", "컬러 팔레트", "팬톤 레퍼런스",
+  "TCX 팔레트", "컬러 차트", "컬러 가이드"를 언급하거나 컨셉 작업 후 라인업 빌드 전에
+  컬러를 *LOCK*해야 하는 산출물을 요청하면 활성화하세요.
 triggers:
-  - "color story"
-  - "color palette"
-  - "seasonal palette"
-  - "season palette"
-  - "Pantone reference"
-  - "TCX palette"
-  - "color guide"
-  - "color chart"
   - "컬러 스토리"
   - "컬러 팔레트"
   - "시즌 팔레트"
   - "팬톤"
+  - "TCX"
   - "컬러 차트"
   - "컬러 가이드"
+  - "color story"
+  - "color palette"
+  - "Pantone reference"
+  - "TCX palette"
 od:
   mode: prototype
   platform: desktop
@@ -36,258 +31,250 @@ od:
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Lock the 27SS color palette for a Seoul young-casual brand: 8 colors total (3 main carryover, 4 season, 1 dry pop accent), Pantone TCX codes, fabric pairings, category × color distribution for shirts/outer/pants/knits/dresses."
+  example_prompt: "마뗑킴(Matin Kim) 27SS 컬러 스토리를 LOCK해주세요. 총 8컬러(메인 캐리오버 3 + 시즌 4 + 드라이 팝 액센트 1), Pantone TCX 코드, 패브릭 페어링, 셔츠/아우터/팬츠/니트/원피스 카테고리별 분포 매트릭스 포함."
 ---
 
-# Fashion Color Story Skill
+# 패션 컬러 스토리 스킬
 
-Produce a single-file HTML **season color story** — the document a design
-studio uses to *lock* a season's color palette after the concept board
-exploration. The color story is the **source of truth** for which colors
-appear in the season, what their Pantone TCX codes are, what proportion
-they hold, how they distribute across categories, and what tolerance the
-dyeing supplier must hit.
+K-패션 브랜드의 **시즌 컬러 스토리**를 단일 HTML 파일로 생성합니다. 컨셉 보드의 탐색적 컬러 시드를 **LOCK된 확정 팔레트**로 전환하는 산출물입니다. 컬러 스토리는 이번 시즌에 어떤 컬러가 나타나는지, 각 컬러의 Pantone TCX 코드는 무엇인지, 비중은 얼마인지, 카테고리 간 분포는 어떻게 되는지, 염색 공장이 맞춰야 할 tolerance는 얼마인지에 대한 **단일 진실(single source of truth)**입니다.
 
-A color story serves three audiences:
+컬러 스토리의 청중 3그룹:
 
-1. **Designer + MD** — to align on what colors will exist this season and
-   in what proportion.
-2. **Dyeing supplier / fabric mill** — to send the exact TCX codes with
-   approved tolerance ranges.
-3. **Internal QC + production** — to compare against received fabric
-   batches at lot approval.
+1. **디자이너 + MD** — 이번 시즌에 어떤 컬러가 어떤 비중으로 존재할지 정렬
+2. **염색 공장 / 패브릭 밀** — 승인된 tolerance 범위와 함께 정확한 TCX 코드 송부
+3. **내부 QC + 생산실** — 입고된 패브릭 배치를 LOT 승인 시점에 비교
 
-If the concept board's color section had **seeds** ("humid linen ivory",
-"6am sky blue"), this document has **locked codes** ("Pantone 11-0507 TCX
-Pristine", "Pantone 16-4109 TCX Stone Blue") with the seeds preserved as
-naming.
+컨셉 보드의 컬러 섹션이 **시드(seed)**(예: "humid linen ivory", "6am sky blue")를 담는다면, 이 문서는 **LOCK된 코드**(예: `Pantone 11-0507 TCX Pristine`, `Pantone 16-4109 TCX Stone Blue`)를 담고, 시드를 컬러 이름으로 보존합니다.
 
-## Output language
+## 환경 호환성
 
-Keep this skill's instructions in English. For user-facing artifact copy,
-default to a Korean fashion-business register when the user writes in Korean or
-the brand/context is Korean. Do not fully translate every label into Korean.
-Use natural Korean noun-phrase report style for strategy, rationale, caveats,
-owner notes, and decisions; keep established industry English or mixed terms when they are
-the normal working language. Typical terms to keep include SKU, new lineup,
-mood, lookbook, styling, fit, silhouette, colorway, carryover, target lot, drop,
-bridge, category, item, setup, BASIC/TREND/ACCENT, BTA, UNI/WOMEN, S1~S4,
-fabric/graphic names, season codes, and file paths. Section labels and table
-headers may be mixed, e.g. `Category × SKU Plan`, `Bridge Map`, `Open
-Decisions`, `Anti-pattern · 하지 않을 것`. Avoid awkward literal Hangulization
-such as `락 리뷰` when `LOCK REVIEW` is clearer. Image-generation prompts may
-stay in English; visible captions and fallback text should match the artifact
-register: Korean phrases with accepted fashion-business English terms. For
-report-style artifacts, prefer noun-phrase endings in Korean body copy, table
-interpretation, HTML comments, revision logs, and decision notes (e.g. `적용`, `전환`, `확보 사유`, `사용 금지`,
-`owner 확인`, `sample check 완료`, `Local ComfyUI 미사용`) instead of stiff
-finite endings such as `~이다`, `~한다`, or `~하였다`.
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
 
-## Typography
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 본문에서 권장하는 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기 기능을 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
 
-Use the active `DESIGN.md` WACKYWILLY type system. Keep `Pretendard Variable`
-as the default body, table, UI, and decision-log font. Choose exactly one point
-font token per artifact and bind `--font-display` to it: `--font-display-report`
-for operational decks, line-up docs, roadmaps, and internal presentations;
-`--font-display-romance` for WACKYLILY, romantic street, soft editorial,
-lookbook, and mood-board artifacts; `--font-display-street` for strong street,
-launch, promo, and key-visual directions; `--font-display-play` for character
-IP, fandom goods, and witty campaign moments. Do not use point fonts for table
-body, long notes, revision logs, SKU rows, code, dates, filenames, or owner/by
-fields; keep those in `--font-sans` or `--font-mono`.
+본문 작업 흐름은 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면, 사용자에게 `DESIGN.md` 경로나 기본 톤을 묻고 진행하세요.
 
-## Resource map
+## 출력 언어 정책
+
+사용자가 한국어로 작성하거나 브랜드/맥락이 한국 K-패션이라면, 산출물 카피는 **한국 패션 비즈니스 등록(register)**을 따릅니다.
+
+- 모든 라벨을 한국어로 직역하지 마세요. 한국 패션 현장에서 실제로 쓰는 영어 산업용어는 그대로 유지합니다.
+- 유지하는 용어 예시: TCX · TPG · ΔE · 컬러웨이 · 컬러 티어 · BASIC/SEASON/ACCENT · 랩딥(lab-dip) · 스트라이크 · 캐리오버 · 사입가율 · LOT · MCQ · 정상판매율.
+- 컬러 이름은 영문 그대로 유지(`humid linen ivory`, `Stone Blue`, `Tawny Orange` 등)하거나 한국어와 영어 혼용 가능(`도시 그레이 · Urban Grey`).
+- 섹션 라벨과 표 헤더는 영문 혼용 허용: `Category × Color Matrix`, `Anti-palette`, `Open Decisions` 등.
+- 이미지 생성 프롬프트는 영어로 작성해도 됩니다. 화면 캡션·폴백 텍스트는 한국 패션 등록을 따릅니다.
+- 본문 카피, 표 해석, HTML 주석, 결정 노트는 **명사구 종결**을 선호합니다. 예: `적용`, `사용 금지`, `tolerance ΔE ≤ 1.5`, `랩딥 strike 1 송부`. 딱딱한 `~이다`, `~한다`, `~하였다`는 피하세요.
+
+## 타이포그래피
+
+프로젝트 루트의 `DESIGN.md` 타이포그래피 토큰을 사용하세요. 본문·테이블·UI·결정 로그 기본 폰트는 **Pretendard Variable**.
+
+산출물 1개당 디스플레이 폰트 하나를 골라 `--font-display` CSS 변수로 바인딩합니다. 컬러 스토리는 산출물 성격에 따라 권장이 갈립니다.
+
+| 산출물 성격 | 권장 디스플레이 폰트 토큰 |
+|---|---|
+| 컬러 스토리(에디토리얼·룩북 무드 강함) — 기본 | `--font-display-romance` (Grandiflora One, 본명조, Hahmlet) |
+| 컬러 스토리(운영 덱 성격) | `--font-display-report` (Paperlogy, Wanted Sans) |
+| 컬러 스토리(스트릿·캠페인 액센트 강조) | `--font-display-street` (Black Han Sans, G마켓 산스) |
+
+코드 테이블(HEX / TCX / Coloro)·LOT 번호·날짜는 디스플레이 폰트를 쓰지 말고 `--font-mono` 유지가 필수(현장 산업 표준 — 한눈에 코드 복사·검증 가능).
+
+## 폴더 구조
 
 ```
 fashion-color-story/
-├── SKILL.md
+├── SKILL.md              ← 이 파일
 ├── assets/
-│   └── template.html
+│   └── template.html     ← 시작 템플릿 (복사해서 index.html로 사용)
 └── references/
-    ├── trend-research.md
-    ├── layouts.md
-    └── checklist.md
+    ├── trend-research.md ← 시즌 트렌드 인풋, K-DTC 컬러 현실, TCX/TPG, 염색 QC
+    ├── layouts.md        ← 12개 섹션 레이아웃
+    └── checklist.md      ← 자체 검수 기준
 ```
 
-## Workflow
+## 작업 흐름
 
-### Step 0 — Pre-flight
+### Step 0 — 사전 점검
 
-1. Read `assets/template.html` end-to-end.
-2. Read [`../_shared/imagegen.md`](../_shared/imagegen.md) — the shared
-   project imagegen policy (used only if the user requests Step 8 mood
-   thumbnails; default is no imagery).
-3. Read `references/trend-research.md` for season trend inputs (WGSN/Coloro
-   key colors, K-DTC saturation rules, TCX vs. TPG decisions).
-4. Read `references/layouts.md` and pick a section set before writing.
-5. Read `references/checklist.md`.
-5. Read the active `DESIGN.md` and translate its tokens into `:root`.
-   Important: a color story's accent color comes from *the season palette
-   itself*, not from the design system. Bind the design system fonts and
-   spacing, but leave color tokens to be derived from the locked palette.
-6. **Read the season's concept board if one exists.** A color story without
-   a concept board behind it is guessing. If the user has a concept-board
-   artifact, ask for its file path or paste; map every locked color back to
-   one of the concept board's color seeds.
+1. 이 스킬 폴더의 `assets/template.html`을 처음부터 끝까지 읽으세요.
+2. `references/trend-research.md`를 읽고 시즌 트렌드 인풋(WGSN/Coloro 핵심 컬러, K-DTC saturation 규칙, TCX vs. TPG 결정)을 인지하세요.
+3. `references/layouts.md`를 읽고 사용할 섹션 세트를 가늠하세요.
+4. `references/checklist.md`를 읽어 P0/P1/P2 검수 기준을 미리 인지하세요.
+5. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고, 타이포그래피·스페이싱 토큰을 `:root` CSS 변수로 바인딩하세요. **중요**: 컬러 스토리의 액센트 컬러는 *시즌 팔레트 자체*에서 가져옵니다. 디자인 시스템에서는 폰트와 스페이싱만 바인딩하고, 컬러는 LOCK된 팔레트로부터 유도합니다.
+6. **시즌 컨셉 보드가 있다면 반드시 읽으세요.** 컨셉 보드 없는 컬러 스토리는 추측입니다. 사용자가 컨셉 보드 산출물을 보유하고 있다면 파일 경로 또는 페이스트를 요청하세요. 모든 LOCK된 컬러를 컨셉 보드의 컬러 시드 중 하나로 역추적할 수 있어야 합니다.
+7. 이미지 생성은 **기본 비사용**입니다. 컬러 스토리는 칩 + 코드가 산출물이며 이미지가 없어도 됩니다. 사용자가 명시적으로 컬러당 무드 썸네일 1장(Step 8)을 요청한 경우에만 생성하세요.
 
-### Step 1 — Clarify the palette
+### Step 1 — 팔레트 정보 수집
 
-Ask in the first discovery form if not provided:
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
 
-- Season / capsule name (e.g. 27SS, 27SS Capsule 1)
-- Brand identity colors that are mandatory carryover (e.g. "navy 19-3911 is
-  the brand's permanent main")
-- Concept board source (file path, paste, or "no concept board — derive")
-- Total color count target (8–12 typical for K-young-casual)
-- Hierarchy structure: default 60/30/10 (main / season / accent) but allow
-  50/35/15 (bolder season) or 70/25/5 (conservative)
-- Categories to distribute across (shirts / outer / pants / knits /
-  dresses / accessories — minimum 4)
-- Whether colors will appear on printed materials (TPG codes needed) or
-  fabric-only (TCX only)
-- Dyeing supplier(s) and any known tolerance constraints (e.g. ΔE ≤ 1.5)
-- Carryover count from previous season (typical 30–40% for young-casual)
+- 시즌 / 캡슐 명 (예: 27SS, 27SS Capsule 1)
+- 브랜드 정체성 컬러 — 의무 캐리오버 (예: "네이비 19-3911은 브랜드 영구 메인")
+- 컨셉 보드 소스 (파일 경로, 페이스트, 또는 "컨셉 보드 없음 — 유도")
+- 총 컬러 수 목표 (한국 영캐주얼 기준 8~12개 일반적)
+- 계층 구조 — 기본 60/30/10 (메인 / 시즌 / 액센트), 더 볼드한 시즌은 50/35/15, 보수적은 70/25/5
+- 분포할 카테고리 (셔츠 / 아우터 / 팬츠 / 니트 / 원피스 / 액세서리 — 최소 4개)
+- 컬러가 인쇄물에 나타날지 여부 (TPG 코드 필요) 또는 패브릭 전용 (TCX만)
+- 염색 공장 + 알려진 tolerance 제약 (예: ΔE ≤ 1.5)
+- 이전 시즌 캐리오버 수 (영캐주얼은 30~40% 일반적)
 
-### Step 2 — Pick the palette structure
+### Step 2 — 팔레트 구조 선택
 
-Default young-casual structure:
+영캐주얼 기본 구조:
 
-| Tier | Share | Role | Typical count |
-| --- | --- | --- | --- |
-| **Main** | 55–65% | Brand-safe, high carryover, basics-friendly | 3–4 colors |
-| **Season** | 25–35% | The season's mood colors — the new bets | 3–5 colors |
-| **Accent** | 5–15% | One or two pop colors per season | 1–2 colors |
+| 티어 | 비중 | 역할 | 일반 컬러 수 |
+|---|---|---|---|
+| **Main** | 55~65% | 브랜드 세이프, 높은 캐리오버, 베이직 친화 | 3~4컬러 |
+| **Season** | 25~35% | 시즌의 무드 컬러 — 이번 시즌의 새로운 베팅 | 3~5컬러 |
+| **Accent** | 5~15% | 시즌당 팝 컬러 1~2개 | 1~2컬러 |
 
-State the chosen structure in one sentence before writing.
+선택한 구조를 한 문장으로 선언하세요. 예: "27SS 팔레트: 60/30/10 — 메인 캐리오버 3 + 시즌 4 + 드라이 팝 액센트 1."
 
-> "27SS palette: 60/30/10 — 3 main carryover, 4 season, 1 dry pop accent."
+### Step 3 — 컬러별 LOCK
 
-### Step 3 — Lock each color
+모든 컬러에 대해 다음 항목을 순서대로 기록하세요.
 
-For every color, record (in this order):
+1. **감성 이름(emotional name)** — 디자인팀이 쓰는 이름 (`humid linen ivory`이지 `Color 03`이 아님). 컨셉 보드 시드에서 가져옴
+2. **HEX** — 디지털 / 웹 표시용
+3. **Pantone TCX 코드 + 이름** — 염색 패브릭의 작업 표준. 형식: `19-3911 TCX · Iron`. 실제 TCX 책과 대조해 검증 — 가짜 코드는 오색 배치의 #1 원인
+4. **Coloro 코드** *(선택)* — WGSN 트렌드 데이터 사용 시 7자리 코드 (예: `125-28-38`)
+5. **NCS / RAL** *(선택)* — 하드웨어 / 비섬유 부자재용
+6. **티어** — main / season / accent
+7. **패브릭 페어링** — 이 컬러가 어떤 소재에 나타나는지 (예: `워시드 코튼, 린넨 블렌드, 라이트 데님`). 사용 가능한 패브릭 보드와 연결
+8. **캐리오버 상태** — new / 26FW에서 캐리오버 / 26SS에서 캐리오버. 캐리오버 시 이전 시즌 LOCK 문서 링크
+9. **사용 규칙** — `사용 / 회피` 1줄 노트. 예: `브래스 하드웨어와 페어`, `새틴 팝 액센트와 절대 페어 금지`
 
-1. **Emotional name** — the name the design team uses ("humid linen ivory",
-   not "Color 03"). Pulled from the concept-board seed when one exists.
-2. **HEX** — for digital / web display.
-3. **Pantone TCX code + name** — the working standard for dyed fabric.
-   Format: `19-3911 TCX · Iron`. Verify the code against an actual TCX book
-   if uncertain — fabricated codes downstream of dyeing supplier briefs are
-   the #1 cause of off-color batches.
-4. **Coloro code** *(optional)* — WGSN-aligned 7-digit code if the brand
-   uses WGSN trend data (e.g. `125-28-38`).
-5. **NCS / RAL** *(optional)* — for hardware / non-fabric components.
-6. **Tier** — main / season / accent.
-7. **Fabric pairings** — which materials this color appears on, e.g.
-   "*washed cotton, linen blend, light denim*". Pull from the active
-   material list when one exists.
-8. **Carryover status** — new / carryover-from-26FW / carryover-from-26SS.
-   When carryover, link to the prior season's lock document if available.
-9. **Use rules** — a one-line "use when / avoid when" note. Examples:
-   "*pair with brass hardware*", "*never with satin pop accent*".
+### Step 4 — 카테고리 × 컬러 매트릭스
 
-### Step 4 — Build the category × color matrix
+한국 영캐주얼 시즌은 보통 카테고리별로 컬러를 불균등 분포합니다. 톱(상의)이 가장 많은 컬러웨이, 아우터가 가장 적은 컬러웨이. 매트릭스를 작성해 다음을 확인합니다.
 
-A K-young-casual season usually distributes colors unevenly across
-categories. Tops carry the most colorways; outer carries the fewest. Build
-the matrix:
+- 빈 셀 발견 (카테고리 사용이 전혀 없는 컬러는 드롭 후보)
+- 과밀 행 발견 (한 카테고리가 7개 이상 컬러를 운영하면 MD 어려움)
+- 액센트 유출 발견 (액센트는 총 2~3 스타일로 제한)
 
-| Category | Main palette colors used | Season colors | Accent | Total colorways |
-| --- | --- | --- | --- | --- |
-| Shirts | All 3 main | 3 of 4 season | accent for 1 style | …
+### Step 5 — QC + Tolerance 노트
 
-Use it to:
+염색 공장 대상으로 다음을 기록합니다.
 
-- Spot empty cells (a color with zero category usage is a candidate to
-  drop).
-- Spot overcrowded rows (a category running 7+ colors is hard to
-  merchandise).
-- Spot accent leakage (accent should be limited to 2–3 styles total).
-
-### Step 5 — Write QC + tolerance notes
-
-Capture for the dyeing supplier:
-
-- **Working standard** — Pantone TCX (fabric). State explicitly.
-- **TPG use** — only for printed lookbook / paper deliverables, never
-  fabric matching. (TPG runs ~15% lighter than TCX on the same code; see
-  trend-research for citations.)
-- **Tolerance** — typical ΔE ≤ 1.5–2.0 for fashion. Set per-color if any
-  are stricter (e.g. brand main navy must be ΔE ≤ 1.0).
-- **Lot approval procedure** — first lot lab-dip 3 strikes, top-2 approved
-  gets bulk-dyed, every bulk lot needs head-to-head comparison vs. master
-  TCX swatch under D65 / TL84 lighting.
-- **What to do on a near-miss** — accept (within tolerance), re-strike
-  (~5–7 day delay), or reject (full re-dye, ~10–14 day delay, +cost).
+- **작업 표준** — Pantone TCX (패브릭). 명시적으로 선언
+- **TPG 사용** — 인쇄 룩북 / 종이 산출물 전용. 절대 패브릭 매칭 금지. (TPG는 같은 코드에서 TCX보다 약 15% 밝게 인쇄됨)
+- **Tolerance** — 패션 일반 ΔE ≤ 1.5~2.0. 더 엄격한 컬러는 개별 설정 (예: 브랜드 메인 네이비 ΔE ≤ 1.0)
+- **LOT 승인 절차** — 첫 LOT 랩딥 3 strike, top 2 승인 후 벌크 염색, 모든 벌크 LOT은 D65 / TL84 조명 하에서 마스터 TCX 스와치와 head-to-head 비교
+- **near-miss 대처** — 수용 (tolerance 내), 재스트라이크 (5~7일 지연), 거절 (전체 재염색, 10~14일 지연 + 비용 추가)
 
 ### Step 6 — Anti-palette
 
-3–7 explicit "no" entries. Reasons may include:
+3~7개의 명시적 "no" 항목을 작성합니다. 사유 예시:
 
-- Already used (26FW Powder Pink → not 27SS)
-- Wrong saturation for territory ("no fluorescents")
-- Brand-conflict (clashes with logo color)
-- Channel-conflict (Musinsa thumbnails wash out a tone)
+- 이미 사용 (26FW Powder Pink → 27SS 사용 금지)
+- 영역 부적합 saturation (`형광 색 금지`)
+- 브랜드 충돌 (로고 컬러와 충돌)
+- 채널 충돌 (무신사 썸네일에서 톤이 워시아웃)
 
-Anti-palette saves trim/embroidery decisions later — when in doubt, the
-team checks if the color is in or out.
+Anti-palette는 이후 트림·자수 결정 시점에 도움을 줍니다 — 의문 시 팀이 컬러가 in인지 out인지 체크할 수 있는 기준.
 
-### Step 7 — Compose
+### Step 7 — 구성
 
-Copy `assets/template.html` to `index.html`. Replace `[REPLACE]` tokens,
-bind `DESIGN.md` tokens into `:root` (only typography / spacing — palette
-comes from the locked colors), then paste sections from
-`references/layouts.md` into `<main id="color-story">`.
+`assets/template.html`을 `index.html`로 복사한 뒤:
 
-Required sections, in order:
+1. `[REPLACE …]` 토큰을 사용자 입력으로 치환
+2. `DESIGN.md` 토큰을 `:root`에 바인딩 (타이포그래피 / 스페이싱만 — 팔레트는 LOCK된 컬러에서 옴)
+3. `references/layouts.md`의 섹션을 복사해 `<main id="color-story">` 안에 붙임
 
-1. **Cover** — season + brand + palette name + status (v1 / v2 / locked) +
-   lock date.
-2. **Thesis** — one paragraph on why this palette serves this season's
-   thesis (linked back to concept board).
-3. **Master grid** — all colors at a glance with name + HEX + TCX in one
-   chip.
-4. **Hierarchy with proportion bar** — visual 60/30/10 bar above the tier
-   blocks; main / season / accent grouped sections.
-5. **Per-color detail spreads** — one wide spread per color: large swatch,
-   codes table, fabric pairings, carryover status, use rules, optional
-   imagegen mood image (1 small image per color is enough; no full looks).
-6. **Category × color matrix** — the merchandising distribution table.
-7. **Colorway count per style** — rule of thumb table (shirts 3–4 colorways,
-   outer 1–2, knit 2–3, etc.).
-8. **TCX vs. TPG note** — short reference paragraph.
-9. **Dyeing QC + tolerance** — supplier-facing notes block.
-10. **Anti-palette** — 3–7 bullets.
-11. **Carryover from previous season** — short table cross-linking to
-    prior-season lock document.
-12. **Open / next decisions** — what still needs to be locked, by when.
+**필수 섹션 (순서대로):**
 
-### Step 8 — Optional: mood thumbnails
+1. **커버** — 시즌 + 브랜드 + 팔레트 명 + 상태(v1 / v2 / locked) + LOCK 일자
+2. **테제(Thesis)** — 한 단락: 컨셉 보드와 연결된 이번 시즌 thesis 설명
+3. **마스터 그리드** — 모든 컬러 + 이름 + HEX + TCX를 하나의 칩에 표시
+4. **계층 + 비율 바** — 60/30/10 시각 비율 바 + 메인/시즌/액센트 그룹 블록
+5. **컬러별 디테일 스프레드** — 컬러 1개당 1 와이드 스프레드: 큰 스와치, 코드 표, 패브릭 페어링, 캐리오버 상태, 사용 규칙, 선택적 무드 이미지
+6. **카테고리 × 컬러 매트릭스** — MD 분포 표
+7. **스타일당 컬러웨이 수** — Rule of thumb 표 (셔츠 3~4 컬러웨이, 아우터 1~2 등)
+8. **TCX vs. TPG 노트** — 짧은 참조 단락
+9. **염색 QC + Tolerance** — 공장 대상 노트 블록
+10. **Anti-palette** — 3~7개 bullet
+11. **이전 시즌 캐리오버** — 짧은 표, 이전 시즌 LOCK 문서와 cross-link
+12. **Open / Next Decisions** — 아직 LOCK되지 않은 결정, by when
 
-A color story does **not** need full mood imagery (that's the concept
-board's job). At most 1 small mood image per locked color is helpful — and
-only if the user explicitly asks. Default: pure CSS chips, no imagery.
+**OpenDesign 환경에서 사용 시:** 각 섹션에 `data-od-id` 속성을 추가하면 인라인 코멘트 모드를 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
 
-If imagery is requested, follow the shared project imagegen policy in
-[`../_shared/imagegen.md`](../_shared/imagegen.md): use the built-in
-authenticated `image_gen` path only, then save project-local copies under
-`images/color-XX.png`.
+### Step 8 — (선택) 무드 썸네일
 
-### Step 9 — Self-check
+컬러 스토리는 풀 무드 이미지가 **필요 없습니다** (그건 컨셉 보드의 일). 사용자가 명시적으로 요청한 경우에 한해 LOCK된 컬러당 작은 무드 이미지 1장 정도. 기본은 순수 CSS 칩, 이미지 없음. 이미지 생성이 가능한 환경이라면 결과는 `images/color-XX.png`에 저장.
 
-Run `references/checklist.md` before emitting. Every color must have HEX +
-TCX, every category in the matrix must have at least one color, anti-palette
-must list at least 3 items, and the proportion bar visual must match the
-declared structure.
+### Step 9 — 자체 검수
 
-## Output contract
+`references/checklist.md`의 P0/P1/P2 기준을 한 항목씩 직접 확인하세요. 모든 컬러는 HEX + TCX를 보유해야 하며, 매트릭스의 모든 카테고리는 최소 1개 컬러를 보유해야 하고, Anti-palette는 최소 3개 항목을 나열해야 합니다. 비율 바 시각이 선언된 구조와 일치해야 합니다.
 
-Emit between `<artifact>` tags:
+## 한국 K-패션 브랜드 사례 (참고)
+
+컬러 스토리 작성 시 참고할 K-패션 브랜드 컬러 운영 패턴.
+
+| 브랜드 | 메인 캐리오버 | 시즌 무드 | 액센트 패턴 |
+|---|---|---|---|
+| **마뗑킴 (Matin Kim)** | 블랙, 화이트, 네이비 | 도시적 그레이·차콜 | 시즌 1컬러 (베이지·로즈) |
+| **마르디 메크르디 (Mardi Mercredi)** | 아이보리, 라이트 핑크 | 다채로운 4~5컬러 | 비비드 플라워 액센트 |
+| **아더에러 (ADER ERROR)** | 화이트, 블루(시그니처) | 그레이·차콜 | 블루 시그니처 컬러 항상 메인 |
+| **키르시 (KIRSH)** | 체리 레드(시그니처) | 비비드 4~5컬러 | 옐로우·라임 팝 |
+| **무신사 스탠다드** | 블랙·화이트·네이비·차콜 (베이직 4) | 그레이, 베이지 | 시즌별 액센트 1 |
+| **시야쥬 (CHYAJU)** | 아이보리, 슬레이트 | 더스티 미드톤 | 에디토리얼 액센트 |
+
+위 사례는 카피·예시 참고용입니다. 실제 산출물은 사용자 브랜드의 실제 컬러 운영 정책으로 작성하세요.
+
+## 한국 패션기업 조직 R&R 메모
+
+컬러 스토리는 **디자인실(컬러리스트)**이 작성하고 MD실·생산실과 합의하는 한국 패션기업 표준 흐름.
+
+- **디자인실 컬러리스트 / 수석 디자이너**: 컬러 시드 → TCX LOCK, 패브릭 페어링 결정
+- **디자인 실장**: 시즌 thesis와 정합성 검토, Anti-palette 승인
+- **MD실**: 카테고리 × 컬러 분포 매트릭스 검토, 컬러웨이 수 결정
+- **생산실 / 패브릭 담당**: 염색 공장 tolerance 협의, 랩딥 일정 관리
+- **마케팅실**: 무신사·29CM 등 채널별 컬러 렌더링 리스크 검토
+
+산출물 헤더에 `status: locked` 표시 시 위 모든 검토자의 확인 완료를 의미합니다.
+
+## 시즌 사이클 내 위치
+
+컬러 스토리는 **시즌 시작 약 5개월 전**에 작성합니다 (컨셉 보드 직후, 패브릭 보드 동시 또는 직전).
 
 ```
-<artifact identifier="fashion-color-story-slug" type="text/html" title="Season Color Story Title">
-<!doctype html>
-<html>...</html>
-</artifact>
+[시즌 시작 6개월 전] fashion-season-strategy
+       ↓
+[시즌 시작 5~6개월 전] fashion-concept-board (컬러 시드 정의)
+       ↓
+[시즌 시작 4~5개월 전] ★ fashion-color-story (이 문서 — 컬러 LOCK)
+                      fashion-fabric-board (패브릭과 동시 LOCK)
+       ↓
+[시즌 시작 3~4개월 전] fashion-styling-board, fashion-new-lineup
+       ↓
+[시즌 시작 3개월 전] 라인업 LOCK → 발주 → 랩딥 strike 1 송부
+       ↓
+[시즌 시작 2개월 전] 본생산 시작 (벌크 염색 + LOT QC)
+       ↓
+[시즌 시작 1~2개월 전] fashion-lookbook (LOCK된 컬러로 화보)
 ```
 
-One sentence before the artifact, nothing after.
+컬러 스토리 LOCK 후에는 **염색 공장으로 TCX 브리프 송부 → 3 strike 랩딥 → 벌크 LOT 승인** 흐름으로 진행됩니다.
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="fashion-color-story-slug" type="text/html" title="시즌 컬러 스토리 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약을, 뒤에는 아무것도 덧붙이지 마세요.

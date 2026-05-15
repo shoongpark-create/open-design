@@ -1,44 +1,49 @@
 <!doctype html>
 <!--
-  OD replit-deck seed.
+  K-패션 replit-deck 씨드.
 
-  Single-file horizontal-swipe HTML deck in the style of Replit Slides's
-  landing-page template gallery (replit.com/slides). One deck picks ONE
-  theme via `<body data-theme="...">`. All 8 themes ship as tokens below;
-  never override per-slide.
+  단일 파일 가로 스와이프 HTML 덱. Replit Slides 랜딩 페이지 갤러리
+  (replit.com/slides) 스타일. 덱 하나가 `<body data-theme="...">`로 ONE 테마
+  선택. 8개 테마가 아래 토큰으로 함께 ship; 슬라이드별 오버라이드 금지.
 
-  Themes:
-    helix       Modern minimal · light grey + ink + electric blue
-    holm        Editorial serif · cream + ink + deep chestnut
-    vance       Gallery · black/cream bars + cream serif
-    bevel       Y2K editorial · black + Y2K display type
-    world-dark  Finance dark · deep green + mint + neon yellow
-    world-mint  Finance light · mint + deep green + neon yellow
-    atlas       Museum · black + ivory + vermilion + serif
-    bluehouse   Consumer · deep navy + peach/coral gradient cards
+  테마 (K-패션 적용 시나리오):
+    helix       모던 미니멀 · 라이트 그레이 + 잉크 + 일렉트릭 블루
+                → 디자인실 시즌 기획 합본, 라인업 리뷰, MD 사업 보고
+    holm        에디토리얼 세리프 · 크림 + 잉크 + 딥 체스넛
+                → 콜라보 제안서, IR 메모, 시즌 사업 메모
+    vance       갤러리 · 블랙/크림 바 + 크림 세리프
+                → 룩북 인덱스, 화보 카탈로그, 시즌 아카이브
+    bevel       Y2K 에디토리얼 · 블랙 + Y2K 디스플레이 타입
+                → 27SS 캠페인 발표, 룩북 발표 (위트/스트릿)
+    world-dark  파이낸스 다크 · 딥 그린 + 민트 + 네온 옐로우
+                → 매출 결산, IR 분기 보고, 임원 보고
+    world-mint  파이낸스 라이트 · 민트 + 딥 그린 + 네온 옐로우
+                → ESG / 지속가능 / 윤리 패션 리포트
+    atlas       박물관 · 블랙 + 아이보리 + 버밀리언 + 세리프
+                → 시즌 합본 챕터, 브랜드 히스토리, 5주년/10주년 리뷰
+    bluehouse   컨슈머 · 딥 네이비 + 피치/코랄 그라데이션 카드
+                → 컨슈머 제품 쇼케이스, VIP 라운지 발표, 컬러풀 콜라보 발매
 
-  DO NOT rewrite the `<script>` at the bottom. It reuses the five-rule
-  pattern from `skills/simple-deck` that solves:
-    1. real-scroller detection (the deck root is the scroller, not window —
-       inside the daemon's iframe, window.scroll* is a different surface)
-    2. dual listeners (keydown fires on window AND document; without
-       deduping, one press advances two slides)
-    3. auto-focus (iframe must grab focus on load, or keyboard nav dies
-       silently until the user clicks inside the deck)
-    4. no `scrollIntoView` (it yanks the parent page if the iframe is
-       embedded — we compute offsets manually instead)
-    5. position persistence (reloading the iframe would reset to slide 1;
-       we persist the current slide index in localStorage, keyed by
-       pathname — so two decks on the same origin don't steal each
-       other's position)
-  See `skills/simple-deck/assets/template.html` for the derivation.
-  Rewriting the script reintroduces all five bugs in the daemon preview.
+  하단 `<script>`를 다시 작성하지 마세요. `skills/simple-deck`의 5-룰 패턴 재사용:
+    1. 실제 스크롤러 감지 (덱 루트가 스크롤러, window 아님 — iframe 내부에서
+       window.scroll*은 다른 surface)
+    2. 듀얼 리스너 (keydown은 window AND document에 발생; dedupe 없으면 1번 눌렀는데
+       2 슬라이드 이동)
+    3. 자동 focus (iframe이 load 시 focus를 잡지 않으면 키보드 nav가 조용히 죽고
+       사용자가 덱 내부 클릭 전까지 동작 안 함)
+    4. `scrollIntoView` 없음 (iframe 임베드 시 부모 페이지를 끌어내림 — 오프셋을
+       수동 계산)
+    5. 위치 유지 (iframe 새로고침이 슬라이드 1로 리셋 — localStorage로 저장/복원)
+
+  카피는 K-패션 등록을 따릅니다: 한국어 우선, 영문 키워드 혼용 자유,
+  시즌 코드 영문 (27SS/26FW), 판기 한국어 (S1~S4), 통화 원/억/만원,
+  채널 한국 표준 (무신사/29CM/자사몰).
 -->
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>[REPLACE] Deck title · subtitle</title>
+  <title>[REPLACE] 덱 제목 · 부제</title>
   <style>
     /* ─── font stacks (system-only; no external fonts) ─────────────── */
     :root {
@@ -365,55 +370,55 @@
 <body data-theme="helix">
   <!--
     ┌─────────────────────────────────────────────────────────────────┐
-    │  Set data-theme on <body> above ONCE. Never override per-slide. │
-    │  Paste layouts from references/layouts.md between this comment  │
-    │  and the chrome divs below.                                     │
+    │  <body> 위에 data-theme을 ONCE 설정. 슬라이드별 오버라이드 금지.   │
+    │  references/layouts.md의 레이아웃을 이 주석과                       │
+    │  하단 크롬 div 사이에 붙이세요.                                     │
     │                                                                 │
-    │  Every slide needs:                                             │
-    │    • class="slide" + optional "center"                          │
-    │    • data-screen-label="NN Name"                                │
+    │  모든 슬라이드 필수:                                                │
+    │    • class="slide" + 선택적 "center"                              │
+    │    • data-screen-label="NN 이름" (한국어 라벨 권장)                 │
     └─────────────────────────────────────────────────────────────────┘
   -->
 
-  <section class="slide center" data-screen-label="01 Cover">
+  <section class="slide center" data-screen-label="01 표지">
     <div class="meta-bar">
-      <span>[REPLACE] brand · context</span>
-      <span>[REPLACE] page / total</span>
+      <span>[REPLACE] 브랜드 · 컨텍스트</span>
+      <span>[REPLACE] 페이지 / 총수</span>
     </div>
     <div>
-      <p class="eyebrow" style="margin-bottom: 24px;">[REPLACE] Eyebrow · season / no.</p>
-      <h1 class="h-hero">[REPLACE] The cover headline.</h1>
-      <p class="lead" style="margin-top: 24px;">[REPLACE] One subhead — concrete, not corporate.</p>
+      <p class="eyebrow" style="margin-bottom: 24px;">[REPLACE] 키커 · 시즌 / 번호</p>
+      <h1 class="h-hero">[REPLACE] 표지 헤드라인.</h1>
+      <p class="lead" style="margin-top: 24px;">[REPLACE] 한 줄 서브 카피 — 구체적, 추상 금지.</p>
     </div>
   </section>
 
-  <section class="slide" data-screen-label="02 Body">
+  <section class="slide" data-screen-label="02 본문">
     <div class="meta-bar">
-      <span>[REPLACE] brand · section</span>
+      <span>[REPLACE] 브랜드 · 섹션</span>
       <span>02</span>
     </div>
     <div style="margin-top: auto; margin-bottom: auto;">
-      <p class="eyebrow" style="margin-bottom: 24px;">[REPLACE] Section eyebrow</p>
-      <h2 class="h-xl" style="max-width: 16ch;">[REPLACE] Body-slide headline.</h2>
-      <p class="lead" style="margin-top: 20px;">[REPLACE] Two sentences explaining the idea. No more.</p>
+      <p class="eyebrow" style="margin-bottom: 24px;">[REPLACE] 섹션 키커</p>
+      <h2 class="h-xl" style="max-width: 16ch;">[REPLACE] 본문 슬라이드 헤드라인.</h2>
+      <p class="lead" style="margin-top: 20px;">[REPLACE] 아이디어를 설명하는 두 문장. 그 이상 금지.</p>
     </div>
   </section>
 
-  <section class="slide center" data-screen-label="03 Closing">
+  <section class="slide center" data-screen-label="03 마무리">
     <div class="meta-bar">
-      <span>[REPLACE] brand</span>
-      <span>[REPLACE] end</span>
+      <span>[REPLACE] 브랜드</span>
+      <span>[REPLACE] 마무리</span>
     </div>
     <div>
-      <p class="eyebrow" style="margin-bottom: 24px;">[REPLACE] Eyebrow</p>
-      <h2 class="h-hero">[REPLACE] The take-away.</h2>
+      <p class="eyebrow" style="margin-bottom: 24px;">[REPLACE] 키커</p>
+      <h2 class="h-hero">[REPLACE] 핵심 메시지.</h2>
     </div>
   </section>
 
-  <!-- chrome (do not move) -->
+  <!-- 크롬 (이동 금지) -->
   <div class="deck-progress" id="deck-progress" aria-hidden></div>
   <div class="deck-counter"  id="deck-counter">1 / 3</div>
-  <div class="deck-hint">← / → · scroll · swipe</div>
+  <div class="deck-hint">← / → · 스크롤 · 스와이프</div>
 
   <script>
     /*

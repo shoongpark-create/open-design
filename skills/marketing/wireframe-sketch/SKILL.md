@@ -1,26 +1,35 @@
 ---
 name: wireframe-sketch
 description: |
-  A hand-drawn wireframe exploration — graph-paper background, marker /
-  pencil tone, multiple tab labels for variants, sticky-note annotations,
-  scribbled chart placeholders, hatched fills. Reads like a designer's
-  whiteboard before any pixels are committed. Use when the brief asks for
-  "wireframe", "sketch wireframe", "hand-drawn", "lo-fi", "whiteboard",
-  "草稿", or "手绘原型".
+  K-패션 자사몰 / 무신사 입점 페이지 / 룩북 페이지 / 캠페인 페이지의 **손그림 와이어프레임**을
+  단일 HTML 페이지로 생성하는 스킬입니다. 그래프 페이퍼 배경 + 마커·연필 톤 +
+  복수 탭 라벨(A/B/C 시안) + 스티커 메모 + 손그림 차트 + 해칭 일러스트로 구성된
+  v0.1 초기 스케치 산출물. 디자인실(그래픽팀)이 픽셀 단위 디자인에 들어가기 전,
+  품평회·기획 회의에서 빠르게 공유하는 디자인 탐색 단계 문서입니다.
+  사용자가 "상세페이지 와이어프레임", "룩북 페이지 스케치", "캠페인 페이지 초안",
+  "와이어프레임", "스케치", "v0.1", "wireframe", "lo-fi", "손그림"을 언급하면 활성화하세요.
 triggers:
+  - "상세페이지 와이어프레임"
+  - "룩북 페이지 와이어프레임"
+  - "캠페인 페이지 와이어프레임"
+  - "자사몰 페이지 스케치"
+  - "와이어프레임"
+  - "스케치"
+  - "v0.1"
+  - "초안"
+  - "lo-fi 시안"
+  - "손그림 시안"
   - "wireframe"
   - "sketch wireframe"
   - "lo-fi mockup"
   - "hand drawn"
   - "whiteboard sketch"
   - "low fidelity"
-  - "手绘原型"
-  - "草图"
-  - "线框图"
 od:
   mode: prototype
   platform: desktop
   scenario: design
+  category: marketing
   fidelity: wireframe
   preview:
     type: html
@@ -28,70 +37,180 @@ od:
   design_system:
     requires: false
     sections: [color, typography, layout, components]
-  example_prompt: "Sketch a hand-drawn wireframe v0.1 for a portal — four tabbed variants on graph paper, marker headlines, sticky-note annotations, hatched chart placeholders."
+  example_prompt: "와키윌리 27SS 그래픽 티셔츠 무신사 상세페이지 와이어프레임 v0.1. 4개 탭 시안 (00 ALL / 01 A·정보형 / 02 B·매거진형 / 03 C·룩북형). 활성 = B. 상단 후크 카피 → 모델 컷 → 스펙 그리드 → 사이즈 가이드 → 코디 추천. 스티커 메모로 '여백은 무신사 톤보다 +20%', 'p.1 / 5 — MD 검토 후'."
 ---
 
-# Wireframe Sketch Skill
+# K-패션 와이어프레임 스케치 스킬
 
-Produce a single hand-drawn wireframe page. The whole point is "this is a
-sketch" — looseness is the brand. Lean into pencil/marker tones, hatched
-fills, dashed borders, slight rotations.
+K-패션 브랜드의 **자사몰 상세페이지 / 무신사 입점 상세페이지 / 룩북 페이지 / 캠페인 페이지 / 팝업 안내 페이지**의 **손그림 와이어프레임 v0.1**을 단일 HTML 페이지로 생성합니다. 픽셀 단위 디자인이 시작되기 *전*, 디자인실(그래픽팀)·이커머스팀·MD실이 **품평회나 1차 기획 회의에서 빠르게 시안을 공유**하기 위한 초기 탐색 문서입니다.
 
-## Workflow
+이 스킬의 핵심은 **"이것은 스케치다"라는 신호**입니다. 그래프 페이퍼, 마커·연필 톤, 해칭, 살짝 기울어진 카드, 형광펜 스와이프, 스티커 메모로 "아직 확정 아님"을 명시합니다. 픽셀 정확한 산출물을 원한다면 `web-prototype` 스킬을 사용하세요.
 
-1. **Skip the DESIGN.md** if it pushes for finished UI. This skill explicitly
-   wants a low-fidelity look. Only honor type tokens loosely (system serif
-   for headlines, mono for annotations, marker font fallback).
-2. **Pick the screen variants** from the brief — typically 3–4 tab labels
-   like "01 · A · ORGANIZED", "02 · B · DASHBOARD", etc. One is "active",
-   the rest are inactive sketch tabs.
-3. **Layout**, in order:
-   - **Page header** — bold serif title with a fake "WIREFRAME v0.1" tag
-     pinned next to it (dashed border, slight rotation). Below: one-line
-     subtitle in marker italic + a date / device / fidelity dateline on
-     the right in mono.
-   - **Tab strip** — 4–5 labels with marker check-square glyphs. The active
-     one has a highlighter swipe behind it (yellow / orange tint + slight
-     skew).
-   - **Sketch canvas** — a graph-paper card (background: 24px × 24px grid
-     drawn with `linear-gradient` lines), with a thick rounded border drawn
-     to look like a sharpie line.
-   - **Browser chrome row** — three sketched circles + a fake URL bar with
-     a hand-written-style URL.
-   - **Sidebar nav** — sketched checkbox + label for each nav item, marker
-     italic. One has a highlighter line through it (active).
-   - **KPI tiles** — 3–4 boxes, each with a chunky scribbled number in a
-     marker-style stroke, a tiny accent stamp, and a one-line label.
-   - **Chart placeholder** — a card with a hand-drawn axis and a wobbly
-     polyline. Add 3–4 dot markers.
-   - **Bar chart placeholder** — a card with hatched-fill rectangles of
-     varying heights.
-   - **Sticky notes** — 1–2 yellow / pink notes with marker text, taped
-     with a slightly rotated band, pinned over key regions to call out
-     "next step", "page-1", or "needs review".
-4. **Write** a single HTML document:
-   - `<!doctype html>` through `</html>`, CSS inline.
-   - Use the system's available "Caveat", "Patrick Hand", or "Architects
-     Daughter" fonts via Google Fonts; otherwise fall back to italic serif.
-   - Slight rotations everywhere (`transform: rotate(-0.6deg)`) to break
-     the grid and feel hand-drawn.
-   - `data-od-id` on header, tabs, sidebar, KPIs, chart, bar-chart,
-     sticky notes.
-5. **Self-check**:
-   - The page should *not* look pixel-perfect. If it does, you over-rendered.
-   - Marker / pencil + graph paper + hatched fills + sticky notes are all
-     present; if any is missing, add it.
-   - The active tab has the highlighter swipe; the others don't.
+산출물 청중은 **디자인실장 / 그래픽 디렉터 / MD실장 / 마케팅 실장**이며, 한국 패션기업 시즌 사이클상 **시즌 시작 4~5개월 전** (룩북 페이지) 또는 **시즌 시작 2~3개월 전** (상세페이지)에 활용합니다.
 
-## Output contract
+## 환경 호환성
 
-Emit between `<artifact>` tags:
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기를 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 워크플로는 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일(`DESIGN.md`)은 **이 스킬에서는 무시**합니다 — 와이어프레임은 의도적으로 저해상도이며 픽셀 디자인을 끌어들이지 않습니다.
+
+## 출력 언어 정책
+
+K-패션 디자인실 등록을 따릅니다.
+
+- 스케치 자체는 **디자이너의 메모 톤** — 짧고 단호하게. `여백 +20%`, `모델컷 우선`, `MD 검토 후 확정`, `B안 선호`, `필 텍스트 추가`.
+- 탭 라벨 영문 + 한국어 혼용: `01 · A · 정보형`, `02 · B · 매거진형`, `03 · C · 룩북형`. 짧은 라벨 우선.
+- 스티커 메모는 손글씨 톤. **명사구 종결** 권장: `여백 충분히`, `B안과 비교`, `p.1 / 5`, `MD 검토 필요`.
+- KPI 타일 라벨: `발매가`, `정상판매율 타겟`, `LOT`, `사이즈 풀`, `컬러웨이`, `발매일`.
+- 본문 자리표시자(`레이아웃 박스 A`, `이미지 자리`, `차트 자리`) 같은 디자이너 메모도 허용.
+- 절대 픽셀 정확한 카피라이팅을 시도하지 마세요. 와이어프레임은 **구조 탐색**이지 카피 확정이 아닙니다.
+
+## 타이포그래피
+
+| 위치 | 권장 폰트 |
+|---|---|
+| 페이지 제목 (`.head h1`) | 디스플레이 세리프 — DM Serif Display, Recoleta, Hahmlet |
+| 손글씨 (`var(--hand)`) | Patrick Hand, Caveat, Architects Daughter (구글 폰트 또는 시스템 폴백) |
+| 메타 / 일자 / 디바이스 | mono — IBM Plex Mono |
+
+폰트는 의도적으로 **시스템 폴백** 우선. 회의에서 빠르게 띄우는 문서이므로 외부 폰트 미로드 시에도 무너지지 않게 합니다.
+
+## 폴더 구조
 
 ```
-<artifact identifier="wireframe-slug" type="text/html" title="Wireframe — Title">
-<!doctype html>
-<html>...</html>
-</artifact>
+wireframe-sketch/
+├── SKILL.md          ← 이 파일
+└── example.html      ← 참고 예시 (4탭 상세페이지 와이어프레임 1편)
 ```
 
-One sentence before the artifact, nothing after.
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. 이 스킬 폴더의 `example.html`을 끝까지 읽어 head / 탭 / 캔버스 / 사이드바 / KPI / 차트 / 스티커 구조를 파악하세요.
+2. **DESIGN.md는 건너뜁니다.** 이 스킬은 의도적으로 저해상도입니다. 디자인 토큰을 정확히 적용하면 와이어프레임이 아닌 픽셀 디자인이 됩니다.
+3. 사용자 브리프에서 다음을 확인하세요. 빠지면 함께 물어보세요.
+   - 와이어프레임 대상 (상세페이지 / 룩북 페이지 / 캠페인 페이지 / 팝업 안내 등)
+   - 브랜드 + 시즌 코드 (예: `와키윌리 27SS`)
+   - 시안 수 (보통 3~4개: A/B/C/D 안)
+   - 현재 활성 시안 (제안하는 안)
+   - 페이지 주요 섹션 4~6개 (후크 → 모델컷 → 스펙 → 사이즈 가이드 → 코디 → CTA)
+   - 디자이너 메모 1~2건 (스티커 메모로 들어갈 내용)
+
+### Step 1 — 시안 변형 선택
+
+사용자 브리프에서 K-패션 페이지 종류 한 가지를 고르고, 그에 맞는 탭 라벨 패턴을 사용합니다.
+
+| 페이지 종류 | 추천 탭 라벨 패턴 |
+|---|---|
+| **상세페이지** | `00 ALL` / `01 A · 정보형` / `02 B · 매거진형` / `03 C · 룩북형` / `04 D · 스토리형` |
+| **룩북 페이지** | `00 ALL` / `01 A · 그리드` / `02 B · 스크롤 시네마` / `03 C · 매거진형` / `04 D · 페이지별 룩` |
+| **캠페인 페이지** | `00 ALL` / `01 A · 키비주얼 우선` / `02 B · 라인업 우선` / `03 C · 매거진 우선` |
+| **팝업 안내 페이지** | `00 ALL` / `01 A · 정보형` / `02 B · 카운트다운` / `03 C · 매거진형` |
+| **콜라보 페이지** | `00 ALL` / `01 A · 스토리 우선` / `02 B · 컬렉션 우선` / `03 C · 카운트다운` |
+
+활성 시안 1개에 형광펜 스와이프, 나머지는 비활성 탭으로 둡니다.
+
+### Step 2 — 레이아웃 (순서대로)
+
+1. **페이지 헤더** — 디스플레이 세리프 제목 + `WIREFRAME v0.1` 핀 (대시 보더, 약간 회전). 아래에 부제 한 줄 (마커 이탤릭). 우측에 일자·디바이스·해상도·시안 단계 mono 메타 (`DATE 2026-05-15 · DEVICE DESKTOP 1440 · STAGE v0.1`).
+2. **탭 스트립** — 4~5개 시안 라벨. 마커 체크박스 글리프 포함. 활성 시안 뒤에 형광펜 스와이프(노란색·살짝 스큐).
+3. **스케치 캔버스** — 그래프 페이퍼 카드 (24px 그리드, `linear-gradient`로 그림). 두꺼운 라운드 보더 (샤피 펜 느낌).
+4. **무신사/29CM/자사몰 URL 행** — 세 개 동그라미 + 가짜 URL 바 (`musinsa.com/products/...` 또는 `matinkim.com/products/27ss-knit-tee`).
+5. **사이드바 메뉴** — 스케치 체크박스 + 라벨 (마커 이탤릭). 활성 메뉴 1개에 형광펜 줄.
+   - 상세페이지 사이드바: `상품 정보` / `사이즈 가이드` / `소재 / 케어` / `모델 / 룩` / `리뷰` / `Q&A` / `배송 / 반품`
+   - 룩북 페이지 사이드바: `히어로` / `S/S 룩` / `F/W 룩` / `컬러` / `BTS`
+6. **KPI 타일 3~4개** — 굵은 손글씨 숫자(마커 스트로크), 작은 액센트 도장, 한 줄 라벨. K-패션 KPI 예시:
+   - `발매가 ₩128,000`
+   - `정상판매율 65% (타겟)`
+   - `LOT 1차 800`
+   - `컬러웨이 3`
+   - `사이즈 풀 XS-XL`
+   - `발매일 D-12`
+7. **차트 자리표시자** — 손그림 축 + 휘어진 폴리라인 + 3~4개 도트 (가격 변화·재고 변화·구매 전환 곡선). 또는 해칭 채움 막대 차트 (사이즈별 재고 / 컬러별 판매).
+8. **스티커 메모 1~2개** — 노랑·핑크. 마커 텍스트, 살짝 회전된 테이프. 디자이너 의도를 핀: `여백은 무신사 톤 +20%`, `p.1 / 5`, `MD 검토 후 확정`, `B안 선호 — 매거진 톤`, `필 텍스트 추가`.
+
+### Step 3 — HTML 작성
+
+단일 HTML 문서로 작성합니다.
+
+- `<!doctype html>` ~ `</html>`, CSS 인라인.
+- 손글씨 폰트는 Google Fonts에서 `Caveat`, `Patrick Hand`, `Architects Daughter` 로드. 폴백은 italic serif.
+- 살짝 회전(`transform: rotate(-0.6deg)`)을 KPI·탭·캔버스에 흩뿌려 그리드를 깨고 손그림 톤을 강화합니다.
+- 주요 요소 식별 속성:
+  - **OpenDesign 환경**: `data-od-id="head"`, `data-od-id="tabs"`, `data-od-id="canvas"`, `data-od-id="sidebar"`, `data-od-id="kpis"`, `data-od-id="chart"`, `data-od-id="bars"`, `data-od-id="sticky-1"`, `data-od-id="sticky-2"`
+  - **그 외 환경**: 일반 `id` 속성으로 충분합니다.
+
+### Step 4 — 자체 검수
+
+- [ ] 페이지가 **픽셀 정확하지 않다.** 픽셀 정확하다면 와이어프레임이 아닙니다 — `web-prototype` 스킬을 사용하세요.
+- [ ] 마커·연필 톤 + 그래프 페이퍼 + 해칭 채움 + 스티커 메모가 모두 존재.
+- [ ] 활성 탭에만 형광펜 스와이프, 나머지 탭은 비활성.
+- [ ] 손글씨 폰트가 적용 (시스템 폴백이라도 italic serif).
+- [ ] 스티커 메모에 실제 디자이너 메모 (한국 디자인실 톤). `Note here` 같은 영문 일반 텍스트 금지.
+- [ ] KPI가 K-패션 등록 (`발매가`, `정상판매율`, `LOT`, `컬러웨이`, `발매일`, `사이즈 풀`).
+- [ ] URL 행이 한국 K-패션 도메인 (`musinsa.com`, `29cm.co.kr`, `matinkim.com`, `mardimercredi.com` 등).
+- [ ] 페이지 제목에 시즌 코드 (`27SS`, `26FW`) + 페이지 종류 + `WIREFRAME v0.1` 핀.
+
+## K-패션 와이어프레임 6가지 사례 패턴 (참고)
+
+| 페이지 종류 | 와이어프레임 활용 시점 | 핵심 결정 |
+|---|---|---|
+| **무신사 상세페이지** | 시즌 시작 2~3개월 전 | 후크 카피·모델컷 위치·스펙 그리드 형태·코디 추천 슬롯 |
+| **29CM 상세페이지** | 시즌 시작 2~3개월 전 | 매거진 톤 인트로·디자이너 의도·룩북 사진 비율 |
+| **자사몰 상세페이지** | 시즌 시작 2개월 전 | 풀스크린 키비주얼·스토리·코디 캐러셀·후기 |
+| **자사몰 룩북 페이지** | 시즌 시작 4~5개월 전 | 그리드 vs 스크롤 시네마, 룩별 페이지 vs 시즌 한 페이지 |
+| **캠페인 페이지** (콜라보) | 시즌 시작 1~2개월 전 | 스토리 → 컬렉션 → 카운트다운 → CTA 순서 |
+| **팝업 안내 페이지** | 팝업 1~2개월 전 | 위치 지도·운영 시간·라인업·예약·SNS 인증 가이드 |
+
+## 한국 패션기업 부서 R&R + 와이어프레임 단계
+
+| 단계 | 부서 | 산출물 |
+|---|---|---|
+| **v0.1 와이어프레임** (이 스킬) | 디자인실(그래픽팀) | 손그림 시안 3~4안 |
+| **v0.5 시안 리뷰** | 디자인실 + MD실 + 마케팅실 | 활성 시안 1개 선택 |
+| **v1.0 픽셀 디자인** | 디자인실(그래픽팀) | Figma 또는 web-prototype 스킬 |
+| **v1.5 카피 + 모델컷** | 마케팅실 + 디자인실 | 실제 카피·룩북 컷 적재 |
+| **v2.0 개발** | 이커머스팀(디지털팀) | 카페24/쇼피파이 / 무신사 입점 페이지 적재 |
+
+이 스킬은 **v0.1 단계에서만** 사용합니다. v1.0 이후로는 `web-prototype` 스킬을 사용하세요.
+
+## 시즌 사이클 내 위치
+
+```
+[시즌 시작 5개월 전]   ▶ 룩북 페이지 와이어프레임 v0.1 (이 스킬)
+                       컨셉 보드 / 컬러 스토리 확정
+[시즌 시작 4개월 전]   v0.5 룩북 페이지 시안 리뷰
+[시즌 시작 3개월 전]   ▶ 상세페이지 와이어프레임 v0.1 (이 스킬)
+                       라인업 LOCK
+[시즌 시작 2개월 전]   v1.0 상세페이지 픽셀 디자인 (web-prototype 스킬)
+                       룩북 촬영
+[시즌 시작 1~2개월 전] ▶ 캠페인 페이지 와이어프레임 v0.1 (이 스킬)
+                       v1.0 캠페인 페이지 픽셀 디자인
+[시즌 시작]            상세페이지·룩북 페이지 적재 완료
+```
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="wireframe-slug" type="text/html" title="와이어프레임 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "와키윌리 27SS 그래픽 티셔츠 상세페이지 와이어프레임 v0.1을 4탭 시안으로 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

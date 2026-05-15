@@ -1,19 +1,35 @@
 <!doctype html>
 <!--
-  OD fashion-lookbook seed.
+  K-패션 룩북 시작 템플릿.
+  사용 방법:
+    1) 이 파일을 <project>/index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+    4) references/layouts.md에서 섹션 7종 중 필요한 것을
+       <main id="lookbook"> 안에 붙여넣기
+    5) 생성된 룩 이미지는 <project>/images/ 폴더에 저장하고 상대 경로로 참조
 
-  Copy this file to <project>/index.html. Generated look imagery should be
-  saved under <project>/images/ and referenced with relative paths.
+  환경 호환성:
+    - Claude 환경: <artifact> 태그로 감싸 출력
+    - 그 외 환경: 표준 HTML 코드 블록으로 출력
+    - OpenDesign 환경: 주요 섹션에 data-od-id 속성 추가하면
+      인라인 코멘트 모드 사용 가능. 다른 환경에서는 일반 id 속성으로 충분.
+
+  이미지 생성:
+    - LLM 환경에서 사용 가능한 이미지 생성 도구를 사용 (../_shared/imagegen.md 참고)
+    - 외부 URL · base64 · 임시 폴더 참조 금지. 반드시 프로젝트 내 상대 경로 사용
 -->
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>[REPLACE] Collection Lookbook</title>
   <style>
+  /* 한국 K-패션 표준 폰트 시스템 */
   @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
   @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
     :root {
+      /* 색상 토큰 (프로젝트 DESIGN.md에서 오버라이드) */
       --bg: #f5f1ea;
       --paper: #fffdf8;
       --ink: #17130f;
@@ -22,11 +38,15 @@
       --accent: #b86b3f;
       --accent-soft: color-mix(in oklch, var(--accent) 16%, transparent);
       --shadow: rgba(32, 25, 18, 0.12);
+
+      /* 폰트 토큰 */
       --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
       --font-display-report: "Paperlogy", "Wanted Sans Variable", "SUIT Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
       --font-display-street: "Black Han Sans", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
       --font-display-play: "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
       --font-display-romance: "Grandiflora One", "Diphylleia", "Hahmlet", "Noto Serif KR", "Source Serif 4", ui-serif, Georgia, serif;
+
+      /* 룩북은 보통 에디토리얼 성격 — 기본값 romance. 톤에 따라 변경 */
       --font-display: var(--font-display-romance);
       --font-body: var(--font-sans);
       --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
@@ -212,12 +232,23 @@
 <body>
   <div class="page-shell">
     <header class="topline" data-od-id="topline">
-      <span>[REPLACE] Studio / Brand</span>
-      <span>[REPLACE] Season</span>
-      <span>[REPLACE] Channel</span>
+      <span>[REPLACE 스튜디오 / 브랜드 — 예: 와키윌리]</span>
+      <span>[REPLACE 시즌 — 예: 27SS]</span>
+      <span>[REPLACE 채널 — 예: 자사몰 + 무신사]</span>
     </header>
     <main id="lookbook">
-      <!-- Paste sections from references/layouts.md here. -->
+      <!--
+        references/layouts.md에서 섹션을 골라 여기에 붙여넣으세요.
+
+        필수 섹션 (순서대로):
+        1. 커버 (.hero-grid)
+        2. 스토리 스프레드 (.story-grid)
+        3. 6 룩 그리드 (.look-grid)
+        4. 디테일 스트립 (.detail-strip)
+        5. 팔레트 / 소재 보드 (.board)
+        6. 라인업 / 라인 시트 (.line-sheet)
+        7. 클로징 CTA (.cta)
+      -->
     </main>
   </div>
 </body>

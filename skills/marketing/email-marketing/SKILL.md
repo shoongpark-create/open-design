@@ -1,24 +1,30 @@
 ---
 name: email-marketing
 description: |
-  A brand product-launch email — masthead with wordmark, hero image block,
-  headline lockup with skewed-italic accent, body copy, primary CTA, and a
-  specifications grid. Pure HTML email layout (centered single column, table
-  fallback). Use when the brief asks for an "email", "newsletter blast",
-  "MJML", "product launch email", or "email template".
+  K-패션 브랜드의 **신상 발매 이메일** + **카카오톡 알림톡** 메시지를 단일 HTML로 생성하는 스킬입니다.
+  마스트헤드(워드마크) · 히어로 이미지 블록 · 스큐 이탤릭 액센트가 들어간 헤드라인 락업 · 본문 카피 · 메인 CTA ·
+  스펙 그리드 구조를 따르는 순수 HTML 이메일(가운데 정렬 단일 컬럼, 테이블 폴백)입니다.
+  자사몰(카페24/쇼피파이) 회원 대상 신상 발매 알림, 사전예약 안내, 시즌 룩북 공개, VIP 회원 전용 혜택 등에 사용합니다.
+  사용자가 "이메일", "뉴스레터", "신상 발매 메일", "사전예약 메일", "회원 안내", "카카오톡 알림톡",
+  "친구톡", "MJML"을 언급하면 활성화하세요.
 triggers:
+  - "이메일"
+  - "신상 발매 이메일"
+  - "사전예약 이메일"
+  - "뉴스레터"
+  - "회원 안내 메일"
+  - "카카오톡 알림톡"
+  - "알림톡"
+  - "친구톡"
   - "email"
-  - "email template"
   - "newsletter"
-  - "email blast"
   - "product launch email"
   - "mjml"
-  - "邮件营销"
-  - "邮件模板"
 od:
   mode: prototype
   platform: desktop
   scenario: marketing
+  category: marketing
   featured: 3
   preview:
     type: html
@@ -26,60 +32,224 @@ od:
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Design a launch email for a sporty running shoe brand — masthead, hero, big headline lockup, specs grid, CTA."
+  example_prompt: "마뗑킴(Matin Kim) 27SS S2 판기 신상 발매 이메일을 만들어주세요. 히어로 아이템은 '플로럴 빅 셔츠 블라우스'(컬러웨이 3종 — ivory, sage, ash). 회원 사전예약 24시간 전용. 마스트헤드 + 히어로 + 헤드라인 락업 + 스펙 그리드 + CTA. 카카오톡 알림톡 200자 버전도 함께 제안."
 ---
 
-# Email Marketing Skill
+# 패션 이메일 마케팅 스킬
 
-Produce a single HTML email — centered, single column, no chrome around the
-email body. Treat it like a marketing artifact: one big idea, one CTA.
+K-패션 브랜드의 **신상 발매 / 사전예약 / VIP 안내 이메일**을 단일 HTML 문서로 생성합니다. 가운데 정렬 단일 컬럼, 페이지 주변 크롬(chrome) 없이 이메일 본문만 떠 있는 마케팅 산출물처럼 보이는 구조입니다. **하나의 큰 발매 메시지 + 하나의 CTA** 원칙을 따릅니다.
 
-## Workflow
+이 스킬은 두 가지 산출물을 함께 다룹니다.
 
-1. **Read the active DESIGN.md** (injected above). Email leans on the display
-   font more than any other surface — pick the loudest type token in the DS
-   for the headline lockup.
-2. **Pick the brand + product** from the brief. Generate a real wordmark, a
-   real product name, and one real benefit sentence — no placeholders.
-3. **Layout**, in order, all centered inside a 600–680px column on a tinted
-   page background (so the email body looks like an email, not the page):
-   - **Masthead** — wordmark on the left + 3 short nav links (SHOP, JOURNAL,
-     MEMBERS) on the right. Thin underline.
-   - **Hero block** — a 16:9 product image placeholder. Use a DS-tinted
-     gradient or a stylized SVG silhouette of the product (shoe, bottle,
-     headphones, whatever the brief implies). Add a tiny brand stamp on the
-     top-left and a colorway tag on the bottom-left.
-   - **Eyebrow** — small caps, accent color, separated by `·` characters
-     (e.g. "NEW · MAX-CUSHION TRAINER · EMBER FLARE").
-   - **Headline lockup** — 2–3 line headline using the display font, all caps,
-     extra-tight tracking. Apply a slight skew (`transform: skew(-6deg)`) on
-     one accent word to give it a sporty parallelogram feel.
-   - **Body** — 2–3 sentence paragraph, left-aligned, body font.
-   - **Primary CTA** — solid pill or block button. One only.
-   - **Specs grid** — 2×2 grid of (big number + unit + label) callouts using
-     the display font for the numbers.
-   - **Footer** — wordmark, address line, unsubscribe + view-in-browser links.
-4. **Write** a single HTML document:
-   - `<!doctype html>` through `</html>`, CSS inline.
-   - Center the column with `margin: 0 auto`. Set `body { background: <tint> }`
-     so the email-on-page metaphor reads.
-   - No external images — use inline SVG or DS-tinted gradient blocks for the
-     product photo.
-   - `data-od-id` on the masthead, hero, headline, CTA, specs.
-5. **Self-check**:
-   - Email reads top to bottom in 8–10 seconds.
-   - One CTA. Accent appears at most twice (eyebrow + CTA, or headline word).
-   - Looks legible on a 480px window (column reflows, type drops one step).
+1. **HTML 이메일** — 자사몰(카페24/쇼피파이/네이버 스마트스토어) 회원 발송용. 미국형 마케팅 이메일 톤이 아니라 K-패션 매거진 톤(여백, 영문/국문 혼용, 포엣코어 카피)을 따릅니다.
+2. **카카오톡 알림톡 / 친구톡 카피** — 같은 발매에 연결되는 200자 이내 짧은 메시지. HTML 본문 아래 보조 블록으로 제안합니다.
 
-## Output contract
+산출물 작성 주체는 **마케팅실 + 이커머스팀(디지털팀)**이며, 키 아이템·컬러웨이 정보는 **MD실 + 디자인실**이 제공한 라인업 시트에서 가져옵니다. 시즌 사이클상 **시즌 시작 1~2개월 전**(룩북 촬영 직후, 상세페이지 제작과 병행)에 작성합니다.
 
-Emit between `<artifact>` tags:
+## 환경 호환성
+
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 본문에서 권장하는 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기를 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 작업 흐름은 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면, 사용자에게 `DESIGN.md` 경로나 기본 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+사용자가 한국어로 작성하거나 브랜드/맥락이 한국 K-패션이라면, 산출물 카피는 **한국 패션 비즈니스 등록(register)**을 따릅니다.
+
+- 한국 패션 현장에서 실제로 쓰는 영어 산업용어는 그대로 유지: SKU · BTA · 컬러웨이 · 룩북 · 핏 · 실루엣 · 사이즈 · 캐리오버 · QR · SPOT · 사전예약 · 프리오더 · 정상가 · 회원가 · LOOKBOOK · DROP.
+- 섹션 라벨·태그는 영문 혼용 허용: `NEW DROP`, `MEMBERS ONLY`, `SPRING 27`, `EARLY ACCESS`, `SHOP NOW`.
+- 카피 톤은 **포엣코어(Poetcore)**를 따릅니다. 기능 직설("늘어나는 코튼", "구김 방지 원단") 대신 감각 서술 ("구름의 감촉, 부드럽게 몸을 감싸는 실루엣", "정원의 잔향이 머무는 봄날의 하루")을 우선합니다.
+- 영문/국문 혼용은 자연스럽게 허용하고 권장합니다. 예: `Spring Bloom — 봄의 첫 호흡`, `Quiet Linen — 정제된 하루`.
+- 보고용 메모·HTML 주석·리비전 로그는 **명사구 종결**(`적용`, `회원 사전예약`, `Local 카카오 미연동`)을 선호합니다.
+
+## 타이포그래피
+
+프로젝트 루트의 `DESIGN.md` 타이포그래피 토큰을 사용하세요. **Pretendard Variable**을 본문·UI·발송 메타 기본 폰트로 두는 것을 권장합니다.
+
+디스플레이 폰트는 산출물 1개당 하나만 골라 `--font-display` CSS 변수에 바인딩합니다. 이메일 헤드라인 락업은 디스플레이 폰트가 가장 강하게 드러나는 자리입니다.
+
+| 산출물 성격 | 권장 디스플레이 폰트 토큰 (예시) |
+|---|---|
+| 컨템포러리·미니멀 신상 발매 (마뗑킴·시야쥬·인사일런스 톤) | `--font-display-romance` (Hahmlet, 본명조, Recoleta) |
+| 영캐주얼·위트·캐릭터 발매 (와키윌리·키르시 톤) | `--font-display-play` (Bagel Fat One, 한손글씨 폰트) |
+| 스트릿·캠페인 론칭 (아더에러·콜라보 톤) | `--font-display-street` (G마켓산스, Druk, Inter) |
+| VIP·멤버십·정기 안내 | `--font-display-report` (Pretendard, Wanted Sans, SUIT) |
+
+`DESIGN.md`에 디스플레이 토큰이 정의되어 있지 않다면 위 표를 참고해 사용자에게 톤을 확인한 뒤 결정합니다.
+
+## 폴더 구조
 
 ```
-<artifact identifier="email-slug" type="text/html" title="Email — Subject Line">
-<!doctype html>
-<html>...</html>
-</artifact>
+email-marketing/
+├── SKILL.md              ← 이 파일
+└── example.html          ← 참고 예시 (시즌 신상 발매 이메일 한 통)
 ```
 
-One sentence before the artifact, nothing after.
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. 이 스킬 폴더의 `example.html`을 끝까지 읽어 마스트헤드 / 히어로 / 헤드라인 락업 / CTA / 스펙 그리드 / 푸터의 구조와 CSS 변수 사용법을 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고, 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 파일이 없거나 자동 주입되지 않는 환경이라면 사용자에게 톤을 묻고 진행합니다.
+3. 사용자 브리프에서 **브랜드 + 시즌 + 키 아이템 + 컬러웨이 + 발매 일자 + CTA 목적지(자사몰/입점 플랫폼)**가 빠져 있으면 함께 물어보세요.
+
+### Step 1 — 브랜드·키 아이템 결정
+
+브리프에서 다음 항목을 확정합니다.
+
+- 브랜드명 + 워드마크 표기 (예: `MATIN KIM`, `WACKYWILLY`, `KIRSH`)
+- 시즌 코드 (`27SS S1`, `27FW S4` 등) + 발매 판기
+- **키 아이템** — 1개. 제품명 + 컬러웨이 + 가격 + SKU 코드
+- 발매 일자 + 사전예약 종료 일자 (있다면)
+- 발송 대상 (회원 전체 / VIP / 신규 가입 / 사전예약 신청자)
+- CTA 1개 — 도착지 URL은 자사몰 상세페이지 / 무신사 상세페이지 / 29CM 큐레이션 / 룩북 페이지 중 하나
+- 동반 채널 — 카카오톡 알림톡, 친구톡, 인스타그램 캐러셀 연동 여부
+
+플레이스홀더 카피는 금지합니다. `[제품명]`이 아니라 실제 제품명을 쓰세요.
+
+### Step 2 — 레이아웃 구성 (순서대로)
+
+가운데 정렬 600~680px 컬럼 안에 다음 순서대로 배치합니다. 페이지 배경은 베이지·아이보리 같은 페이퍼톤 틴트로 두어 "이메일 본문이 페이지 위에 떠 있는" 메타포를 살립니다.
+
+1. **마스트헤드** — 좌측 워드마크 + 우측 짧은 내비(`SHOP · LOOKBOOK · MEMBERS`). 하단 1px 헤어라인 보더. 워드마크 옆 작은 마크(스큐 처리한 사각형 등)는 K-패션 브랜드 시그니처 IP(예: 마르디의 꽃, 키르시의 체리)에서 영감을 받아 단순한 SVG로 대체 가능합니다.
+2. **히어로 블록** — 16:9 또는 4:3 제품 비주얼 자리. 외부 이미지 URL을 쓰지 말고, DS 컬러 기반 라디얼/리니어 그라데이션 + 인라인 SVG로 제품 실루엣을 표현하세요. 좌상단에 작은 브랜드 스탬프, 좌하단에 컬러웨이 태그(`IVORY`, `SAGE`, `ASH`), 우하단에 드롭 정보(`DROP 02 · 04—2027`)를 배치합니다.
+3. **아이브로우** — 작은 영문 대문자, 액센트 컬러, `·`로 구분 (예: `NEW DROP · LINEN SHIRT · SPRING 27`).
+4. **헤드라인 락업** — 2~3줄, 디스플레이 폰트, 대문자(영문) 또는 큰 한글 디스플레이. 액센트 단어 하나에 `transform: skew(-6deg)` 또는 이탤릭을 적용해 시즌의 무드를 강조합니다. 영문/국문 혼용 권장:
+   - `Bloom Quietly. / 봄, 천천히 피어나다.`
+   - `EMBER OF SPRING. / 봄의 잔향.`
+   - `Mardi en Fleur. / 꽃이 피는 수요일.`
+5. **본문(Body)** — 2~3 문장, 좌측 정렬, 본문 폰트. **포엣코어 톤**을 따릅니다. 직설적 기능 설명 금지. 감각·라이프스타일·계절감 우선.
+6. **메인 CTA** — 솔리드 필 또는 블록 버튼 1개. `SHOP NOW`, `사전예약 시작`, `LOOKBOOK 보기`, `자사몰에서 보기` 중 하나.
+7. **스펙 그리드** — 2×2 또는 2×3. 큰 숫자 + 단위 + 라벨. K-패션 컨텍스트에서는:
+   - `3 COLORS` / `컬러웨이 3종`
+   - `SIZE XS — XL` / `사이즈 5단계`
+   - `KRW 128,000` / `회원가 RRP −15%`
+   - `FABRIC LINEN 100%` / `리넨 100, Cool Linen 가공`
+   - `MADE IN KOREA` / `국내 봉제`
+8. **푸터** — 워드마크 + 사업자 정보 1줄 + 수신거부 + 브라우저에서 보기 링크. 한국 이커머스 표준상 사업자등록번호·통신판매업신고번호 라인을 포함해도 좋습니다(보조 메타로 작게).
+
+### Step 3 — 카카오톡 알림톡 / 친구톡 카피 동반 제안
+
+HTML 이메일 외에, 같은 발매에 사용할 **알림톡 200자 이내 카피 2~3 안**을 본문 끝(`</html>` 뒤가 아니라 본문 안의 보조 섹션)이나 별도 마크다운 블록으로 함께 제안합니다.
+
+알림톡 톤 가이드:
+
+- **호칭**: `${고객명}님` 또는 `매트 회원님` 같이 친근하지만 과하지 않은 표현
+- **길이**: 80~200자
+- **이모지**: 1~2개 절제 사용 (또는 0개)
+- **포함 요소**: 발매 일자 + 키 아이템 한 줄 + CTA URL placeholder
+- **금지**: `짱` `대박` 같은 과한 감탄, `${} ${}`처럼 변수가 노출되는 표기 (실제 발송 시 카페24/카카오 비즈센터에서 치환됨)
+
+예시 알림톡 카피 (마뗑킴 27SS 플로럴 셔츠 발매):
+
+```
+매트 김 회원님, 안녕하세요.
+27SS의 첫 호흡, 플로럴 빅 셔츠가 오늘 밤 10시 회원 사전예약을 시작합니다.
+컬러웨이 ivory · sage · ash 3종.
+
+▶ 사전예약 바로가기: ${shop_link}
+```
+
+### Step 4 — HTML 작성
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`)로 작성합니다.
+
+- CSS는 인라인(`<style>`). 가운데 정렬은 `margin: 0 auto`. `body { background: <tint> }`로 이메일 본문이 페이지 위에 떠 있는 메타포를 살립니다.
+- 외부 이미지 URL 금지. 인라인 SVG와 DS 컬러 그라데이션으로 제품 비주얼을 표현하세요.
+- 모바일 480px 폭에서 컬럼이 리플로우되고 타입이 한 단계 작아지도록 미디어 쿼리를 포함합니다.
+- 주요 섹션에 식별용 속성을 추가:
+  - **OpenDesign 환경**: `data-od-id="masthead"`, `data-od-id="hero"`, `data-od-id="headline"`, `data-od-id="cta"`, `data-od-id="specs"`, `data-od-id="footer"`
+  - **그 외 환경**: 일반 `id="masthead"` 등으로 충분합니다.
+
+### Step 5 — 자체 검수
+
+다음 항목을 한 줄씩 직접 확인하세요.
+
+- [ ] 이메일이 위에서 아래로 8~10초 안에 읽힘
+- [ ] CTA 1개만 존재. 액센트 컬러는 아이브로우 + CTA 또는 헤드라인 액센트 단어 등에 **최대 2회**만 사용
+- [ ] 480px 폭에서 컬럼이 리플로우되고 타입이 한 단계 작아짐
+- [ ] 외부 이미지 URL 없음 (CDN, base64 blob, /tmp 경로 모두 금지)
+- [ ] 헤드라인이 포엣코어 톤 — 기능 직설이 아니라 감각·계절감·라이프스타일 서술
+- [ ] 영문 산업용어(BTA·SKU·LOOKBOOK·DROP 등)는 그대로 유지, 한국어 인스트럭션은 명사구 종결
+- [ ] 카카오톡 알림톡 카피 2~3안이 본문 또는 별도 블록으로 함께 제안됨
+- [ ] 발송 대상(회원 전체 / VIP / 사전예약 신청자)이 명확
+- [ ] 푸터에 수신거부 + 브라우저에서 보기 링크 존재
+
+## 한국 K-패션 브랜드 사례 (참고)
+
+이메일 카피·발송 시점 결정에 참고할 K-패션 브랜드 패턴.
+
+| 브랜드 | 발송 톤 | 대표 사용 시점 | 시그니처 표기 |
+|---|---|---|---|
+| **마뗑킴 (Matin Kim)** | 미니멀, 텍스트 절제, 모델 포즈 + 로고만 | 신상 드롭(특정 시각 기습 발매) 24시간 전 사전 안내 | `MATIN KIM` 워드마크, 로고 단독 강조 |
+| **마르디 메크르디 (Mardi Mercredi)** | 프렌치 컨템포러리, 컬러풀, 친근 | 시즌 룩북 공개 + 신상 입고 알림 | 플라워 마르디 그래픽, 영불/국문 혼용 |
+| **아더에러 (ADER ERROR)** | 컨셉추얼, 영문 100%, 글로벌 톤 | 글로벌 드롭 발매 안내, 콜라보 알림 | 블루 키컬러, 테트라이트 로고, 영어 카피 only |
+| **키르시 (KIRSH)** | 영캐주얼, 비비드, 위트 | 신상 발매, 콜라보, 팝업 안내 | 체리 심볼, `cherry on top` 류 카피 |
+| **와키윌리 (WACKYWILLY)** | 위트, K-아이돌 친화, 캐릭터 IP 강조 | 신상 + 캐릭터 굿즈 + 팬덤 이벤트 안내 | 캐릭터 IP 일러스트, `WACKY` 강조 |
+| **무신사 스탠다드** | 베이직, 가성비, 정보 우선 | 회원 등급 안내, 입고/재입고 알림 | 단정한 워드마크, 정보 위주 |
+| **시야쥬 (CHYAJU)** | 미니멀 컨템포러리, 절제 | 시즌 룩북, 정제된 신상 안내 | 여백 + 본명조 |
+
+## 한국 패션기업 부서 R&R + 발송 워크플로
+
+이메일 + 알림톡 1통이 발송되기까지 보통 다음 부서가 관여합니다.
+
+| 부서 | 역할 |
+|---|---|
+| **MD실** | 키 아이템·컬러웨이·가격·발매 일자·발송 대상(회원 등급) 결정 |
+| **디자인실(그래픽팀)** | 히어로 비주얼·룩북 컷·배너 디자인 제공 |
+| **마케팅실** | 카피라이팅(헤드라인·본문·알림톡), 톤매너 통제, 발송 일정 |
+| **이커머스팀(디지털팀)** | HTML 이메일 제작·QA, 카페24/쇼피파이/Stibee/Mailchimp 발송 시스템 적재, 카카오톡 비즈센터 알림톡 발송 |
+| **영업기획** | 발송 결과(오픈율·CTR·매출 전환) 모니터링 → 다음 발송 학습 |
+
+산출물 상단에 `발송 대상: 회원 전체` `발송 일자: 2027-04-22 22:00` 같은 메타를 (HTML 주석 또는 별도 마크다운 보조 블록으로) 명시하면 운영에 유리합니다.
+
+## 시즌 사이클 내 위치
+
+```
+[시즌 시작 6개월 전]   시즌 전략 / 컨셉 보드 (디자인실)
+[시즌 시작 4개월 전]   컬러 스토리 / 패브릭 보드
+[시즌 시작 3개월 전]   라인업 LOCK / 키 아이템 시트
+[시즌 시작 2개월 전]   룩북 촬영 / IMC 캘린더 확정
+[시즌 시작 1~2개월 전] ▶ 신상 발매 이메일 + 알림톡 카피 작성 (이 스킬)
+                       상세페이지 제작 / 자사몰 입점
+[시즌 시작]            S1~S4 판기 발매
+[판기 중반]            QR 추가 입고 알림 이메일 / 재입고 알림톡
+[판기 종료]            시즌오프 / 마크다운 안내
+```
+
+## 채널 연계
+
+이 스킬의 산출물은 다음 채널로 발송·게재됩니다.
+
+- **자사몰 회원 이메일** — 카페24 메일, Stibee, Channel.io, Mailchimp 등에서 HTML 그대로 발송
+- **카카오톡 알림톡** — 카카오 비즈센터 등록 후 알리고 / 비즈톡 등 API로 발송
+- **카카오톡 친구톡** — 마케팅성 메시지(이미지 + CTA)
+- **무신사 푸시 알림** — 무신사 입점 브랜드의 경우 별도 운영
+- **29CM 큐레이션 알림** — 29CM에 입점한 디자이너 브랜드의 경우 큐레이션 페이지 연동
+
+CTA 도착지 URL은 발송 채널에 맞게 분기하세요 (자사몰 회원에게는 자사몰 상세, 무신사 입점 시는 무신사 상세).
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요. HTML 본문 안 또는 별도 마크다운 보조 블록으로 **카카오톡 알림톡 카피 2~3안**을 함께 제안합니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="email-slug" type="text/html" title="Email — 헤드라인 / 시즌 코드">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "마뗑킴 27SS 플로럴 셔츠 사전예약 이메일과 알림톡 3안을 작성했습니다.")을, 뒤에는 알림톡 카피 외에 아무것도 덧붙이지 마세요.

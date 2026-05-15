@@ -1,88 +1,220 @@
 ---
 name: magazine-poster
 description: |
-  An editorial-style poster — newsprint paper, dateline, oversized serif
-  headline with a struck-through word and italic accent, a 2-column body
-  block, and 6 numbered sections with annotated pull-quote captions.
-  Reads like a Sunday-paper full-page essay or a thoughtful launch poster.
-  Use when the brief asks for "magazine poster", "editorial poster",
-  "newsprint", "essay layout", or "manifesto".
+  K-패션 브랜드의 **시즌 캠페인 포스터 / 시즌 매니페스토 / 팝업스토어 안내 / 브랜드 출범 선언**을
+  단일 HTML 매거진 포스터 1장으로 생성하는 스킬입니다. 신문 인쇄 종이 텍스처, 데이트라인,
+  오버사이즈 세리프 헤드라인(취소선 + 이탤릭 액센트), 2단 본문, 6개 번호 섹션 구조를 따릅니다.
+  일요일판 신문 한 면처럼 진중하면서도 시각적으로 강한 시즌 메니페스토 또는 캠페인 포스터를 만듭니다.
+  사용자가 "시즌 매니페스토", "캠페인 포스터", "팝업 안내", "브랜드 매니페스토", "에디토리얼 포스터",
+  "신문 포스터", "magazine poster"를 언급하면 활성화하세요.
 triggers:
+  - "시즌 매니페스토"
+  - "브랜드 매니페스토"
+  - "캠페인 포스터"
+  - "팝업 안내"
+  - "팝업스토어 포스터"
+  - "에디토리얼 포스터"
+  - "신문 포스터"
+  - "27SS 매니페스토"
   - "magazine poster"
   - "editorial poster"
   - "newsprint"
-  - "newspaper layout"
-  - "essay"
   - "manifesto"
-  - "long-form poster"
-  - "杂志海报"
-  - "报纸版式"
 od:
   mode: prototype
   platform: desktop
   scenario: marketing
+  category: marketing
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Design an editorial magazine-style poster — ‘You don't need a designer to ship your first draft anymore.’ Newsprint paper, six numbered sections."
+  example_prompt: "마뗑킴(MATIN KIM) 27SS BLOOM 시즌 매니페스토 포스터. 헤드라인 '우리는 봄을 외치지 않는다.' (외치지 않는다에 취소선 + 입는다에 이탤릭 액센트). 데이트라인 '01 · A · MATIN KIM JOURNAL · 2027.04.10'. 6개 번호 섹션 + 각 섹션에 '이 시즌의 약속' 인용 박스."
 ---
 
-# Magazine Poster Skill
+# 패션 매거진 포스터 스킬
 
-Produce a single-page editorial poster — looks like a tear-out from a
-Sunday paper. Long-form, deliberate, type-driven.
+K-패션 브랜드의 **시즌 매니페스토 / 캠페인 포스터 / 팝업스토어 안내 포스터**를 단일 HTML 페이지 1장으로 생성합니다. 일요일판 신문에서 뜯어낸 듯한 에디토리얼 1면 — 긴 호흡, 의도된 무게, 타입 위주의 구성을 따릅니다.
 
-## Workflow
+이 스킬의 산출물은 **마케팅실 + 브랜드 디렉터** 합작이며, 시즌 사이클상 다음 시점에 활용합니다.
 
-1. **Read the active DESIGN.md** (injected above). Pick the heaviest serif
-   token in the DS for the headline, the body serif for the columns, and
-   a typewriter / mono token for the section eyebrows and annotations.
-2. **Pick the topic** from the brief. Write a real, opinionated headline —
-   one with a struck-through word ("a designer", "the template hunt") and
-   an italic accent on a key noun ("first draft", "mood", "specifics").
-3. **Layout**, in order:
-   - **Top rule** — thin black hairline + a dateline ("01 · A · YOUR LAB"
-     left, "DD · MMM · YYYY" right). Light typewriter font.
-   - **Top eyebrow** — a single mono tag like "POSTED TODAY".
-   - **Headline** — 2–3 lines, oversized serif. One word struck through
-     with `text-decoration: line-through; text-decoration-thickness: 2px`.
-     One word italic, in accent color.
-   - **Deck** — a 1–2 sentence subhead in italic serif at ~60% size of
-     the headline, with a dash separator and a `— what works` callout
-     fragment in accent.
-   - **Accent rule** — short horizontal accent-colored bar (~80px).
-   - **Body grid** — six numbered cells in a 2×3 (or 3×2) grid. Each cell:
-     - eyebrow (`01 · SHIP FAST`) in mono, accent color.
-     - bold serif sub-headline.
-     - 2–3 sentence body in body serif.
-     - one annotated callout — a quoted "use this prompt" line on a tinted
-       background block, set in mono.
-   - **Footer band** — rule above, three cells: handle / role / date, with a
-     small "PRO TIP" plate on the left containing one closing line.
-4. **Write** a single HTML document:
-   - `<!doctype html>` through `</html>`, CSS inline.
-   - Background uses a creamy paper tint (`#f3eee2` or DS canvas) plus a
-     subtle paper noise (`radial-gradient` dots at low opacity).
-   - 2-column body grid via CSS Grid; min-width 1100px page.
-   - `data-od-id` on header, headline, deck, each cell, footer.
-5. **Self-check**:
-   - Type hierarchy is unmistakable — headline owns the page.
-   - Strikethrough + italic accent both appear, exactly once each.
-   - Body reads like real opinion, not lorem ipsum.
-   - Looks intentional at 1280–1440px wide.
+- **시즌 시작 1~2개월 전** — 시즌 매니페스토 포스터 (룩북 공개와 함께)
+- **시즌 시작 1개월 전 / 시즌 중** — 팝업스토어 안내 포스터
+- **시즌 무관** — 브랜드 출범 선언, 콜라보 발표, 리포지셔닝 선언
 
-## Output contract
+발행 채널은 인쇄용 A2/A3 포스터(매장·팝업), 자사몰 매거진 1면 비주얼, 인스타그램 첫 장 캐러셀(`@4:5 또는 1:1로 크롭`), 카카오톡 채널 친구톡 이미지로 다용도 활용됩니다.
 
-Emit between `<artifact>` tags:
+## 환경 호환성
+
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기를 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 워크플로는 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 매거진 포스터 등록을 따릅니다.
+
+- 영문 산업용어는 그대로 유지: SS · FW · LOOKBOOK · DROP · CAMPAIGN · COLLAB · MANIFESTO · POP-UP · LOCK.
+- **포엣코어(Poetcore) 톤**: 헤드라인은 짧고 의도적인 한 문장 또는 영문/국문 혼용 한 줄.
+- **취소선 + 이탤릭 액센트 패턴**: 헤드라인에서 한 단어에 취소선(`text-decoration: line-through`), 다른 한 단어에 이탤릭 액센트 컬러를 적용해 의도를 시각화. 예:
+  - `우리는 봄을 외치지 않는다. 입는다.` (`외치지 않는다`에 취소선, `입는다`에 이탤릭 액센트)
+  - `Spring is not a noun. It is a verb.` (`noun`에 취소선, `verb`에 이탤릭)
+  - `We don't follow trends. We carry seasons.` (`follow trends`에 취소선, `carry seasons`에 이탤릭)
+- 6개 번호 섹션의 아이브로우는 mono 영문 대문자: `01 · COLOR`, `02 · SILHOUETTE`, `03 · FABRIC`, `04 · POP-UP`, `05 · CAMPAIGN`, `06 · PROMISE`.
+- 본문 카피는 명사구 종결 또는 자연스러운 한국어 문장. 신문 사설처럼 차분하게.
+
+## 타이포그래피
+
+매거진 포스터는 **헤드라인이 페이지를 지배**합니다. 두꺼운 세리프가 핵심.
+
+| 위치 | 권장 폰트 (예시) |
+|---|---|
+| 헤드라인 (가장 무거운 세리프) | Hahmlet, 본명조, Recoleta, Playfair Display |
+| 본문 (가독성 우선 세리프) | Hahmlet 본문 굵기, Noto Serif KR |
+| 섹션 아이브로우 / 어노테이션 / 데이트라인 | 타이프라이터 mono — IBM Plex Mono, Courier Prime |
+| 액센트 단어 (이탤릭) | 같은 세리프의 이탤릭체 |
+
+배경은 크림 페이퍼 톤(`#f3eee2`, `#f5f2eb`, `#ede8dc`) + 미세한 페이퍼 노이즈(라디얼 그라데이션 도트 저투명도).
+
+## 폴더 구조
 
 ```
-<artifact identifier="poster-slug" type="text/html" title="Poster Title">
-<!doctype html>
-<html>...</html>
-</artifact>
+magazine-poster/
+├── SKILL.md          ← 이 파일
+└── example.html      ← 참고 예시 (시즌 매니페스토 포스터 1장)
 ```
 
-One sentence before the artifact, nothing after.
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. 이 스킬 폴더의 `example.html`을 끝까지 읽어 데이트라인 / 헤드라인 / 데크 / 6개 섹션 그리드 / 풋터 구조와 CSS 사용법을 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 매거진 포스터는 보통 종이톤 배경 + 단일 액센트 컬러 1개로 충분합니다.
+3. 사용자 브리프에서 **주제(매니페스토/팝업/콜라보) + 시즌 + 헤드라인(취소선·이탤릭 단어 포함) + 6개 섹션의 짧은 주제**가 빠져 있으면 함께 물어보세요.
+
+### Step 1 — 주제·헤드라인 결정
+
+브리프에서 4가지 표준 패턴 중 하나를 선택합니다.
+
+- **시즌 매니페스토** — `27SS 우리는 봄을 외치지 않는다. 입는다.`
+- **팝업스토어 안내** — `MATIN KIM SEOUL · BLOOM POP-UP · 04.22 → 05.06`
+- **브랜드 출범 선언** — `WACKYWILLY — 즐거움은 디자인의 첫 약속이다.`
+- **콜라보 발매** — `WACKYWILLY × XX — 두 번째 만남.`
+
+헤드라인은 **2~3줄, 오버사이즈 세리프**. 다음 두 가지를 정확히 1회씩 적용:
+
+- **취소선** 1개 단어 (`text-decoration: line-through; text-decoration-thickness: 2px`) — 부정·반전의 단어
+- **이탤릭 액센트** 1개 단어 (액센트 컬러 + 이탤릭) — 핵심 주장 단어
+
+### Step 2 — 레이아웃 (순서대로)
+
+1. **상단 룰** — 얇은 검정 헤어라인 + 데이트라인 ("01 · A · MATIN KIM JOURNAL" 좌측 / "DD · MMM · YYYY" 우측). 라이트 타입라이터 폰트.
+2. **상단 아이브로우** — 단일 mono 태그 (`POSTED TODAY`, `BLOOM 27SS`, `POP-UP SEOUL`).
+3. **헤드라인** — 2~3줄, 오버사이즈 세리프. 취소선 1단어 + 이탤릭 액센트 1단어 (Step 1).
+4. **데크(subhead)** — 1~2문장 보조 헤드라인. 이탤릭 세리프, 헤드라인의 ~60% 크기. 대시 구분자(`—`) + 마지막에 액센트 콜아웃 (`— 그래서, 입는다`, `— 봄의 약속`).
+5. **액센트 룰** — 짧은 가로 액센트 컬러 바(~80px).
+6. **본문 그리드 (6개 번호 섹션)** — 2×3 또는 3×2. 각 셀:
+   - **아이브로우** (`01 · COLOR`) — mono, 액센트 컬러
+   - **볼드 세리프 서브 헤드라인** (5~12자)
+   - **2~3문장 본문 세리프** (한국어 약 80~150자)
+   - **어노테이트 콜아웃** — 따옴표 인용문 1줄, 틴티드 배경 박스, mono 폰트 (`"이 시즌의 약속은 — 봄을 가장 조용히 입는 것."`)
+7. **풋터 밴드** — 위에 룰. 3개 셀: 발신자/역할/일자 + 좌측 작은 "PRO TIP" 또는 "BRAND VOICE" 플레이트에 한 줄 마무리.
+
+### Step 3 — HTML 작성
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`)로 작성합니다.
+
+- CSS는 인라인. 배경은 크림 페이퍼 톤(`#f3eee2` 또는 DS canvas) + 약한 페이퍼 노이즈(`radial-gradient` 도트 저투명도).
+- 6개 섹션 본문은 **2단 CSS Grid**. min-width 1100px 페이지 권장 (인쇄용 포스터 비율).
+- 외부 이미지 URL 금지. 시각 요소는 룰·도트·콜아웃 박스로 충분.
+- 주요 요소에 식별 속성:
+  - **OpenDesign 환경**: `data-od-id="header"`, `data-od-id="headline"`, `data-od-id="deck"`, `data-od-id="cell-1"` ~ `data-od-id="cell-6"`, `data-od-id="footer"`
+  - **그 외 환경**: 일반 `id` 속성으로 충분합니다.
+
+### Step 4 — 자체 검수
+
+- [ ] 타입 위계가 분명 — 헤드라인이 페이지를 지배함
+- [ ] 취소선 + 이탤릭 액센트 각 정확히 1회만 등장
+- [ ] 본문이 진짜 의견·서술 — `lorem ipsum`, 플레이스홀더 카피 금지
+- [ ] 1280~1440px 폭에서 의도된 매거진 1면처럼 보임
+- [ ] 6개 섹션 모두 채워짐 (아이브로우·서브 헤드라인·본문·콜아웃 박스)
+- [ ] 액센트 컬러는 헤드라인 액센트 단어 + 액센트 룰 + 6개 콜아웃 박스 액센트 외 추가 사용 자제
+- [ ] 데이트라인 / 풋터 / 아이브로우가 mono 타입라이터 톤
+- [ ] 인쇄 포스터로 출력해도 무리 없는 톤(과한 그라데이션·다중 컬러 자제)
+
+## 한국 K-패션 브랜드 매니페스토 사례 (참고)
+
+| 브랜드 | 매니페스토 톤 | 발신 시점 |
+|---|---|---|
+| **마뗑킴 (Matin Kim)** | 차분한 1인칭, "우리는 ~을 약속한다" 톤 | 시즌 매니페스토, 팝업 안내 |
+| **마르디 메크르디 (Mardi Mercredi)** | 프렌치 톤, 시적, 영불 혼용 | 시즌 캠페인, 콜라보 발표 |
+| **아더에러 (ADER ERROR)** | 영문 only, 컨셉추얼, 짧고 단호 | 글로벌 캠페인, 출범 선언 |
+| **와키윌리 (WACKYWILLY)** | 위트 + 진중함, "즐거움은 약속이다" 톤 | 브랜드 출범, 캐릭터 IP 발표 |
+| **시야쥬 (CHYAJU)** | 절제·여백, 명상적 1인칭 | 시즌 매니페스토 |
+| **무신사 스탠다드** | 정보 + 차분한 약속 | 시즌 베이직 리뉴얼 안내 |
+
+### 헤드라인 예시 (포엣코어 + 취소선·이탤릭 패턴)
+
+- 마뗑킴 27SS: `우리는 봄을 ~~외치지 않는다.~~ 입는다.` (`입는다` 이탤릭 액센트)
+- 마르디 메크르디 26FW: `Le hiver n'est pas une saison. C'est ~~une attente.~~ Une fête.` (`Une fête` 이탤릭)
+- 와키윌리 출범: `즐거움은 ~~선택~~ 사항이 아니다. 첫 약속이다.` (`첫 약속` 이탤릭)
+- 아더에러 27SS: `Spring is ~~a noun.~~ It is a verb.` (`a verb` 이탤릭)
+
+## 한국 패션기업 부서 R&R + 채널 연계
+
+| 부서 | 역할 |
+|---|---|
+| **브랜드 디렉터** | 매니페스토 본문 1인칭 작성, 헤드라인 결정 |
+| **마케팅실 (에디터)** | 6개 섹션의 본문 카피, 콜아웃 인용, 발행 일정 |
+| **디자인실(그래픽팀)** | 인쇄용 A2/A3 레이아웃, 페이퍼톤·도트 텍스처 조정 |
+| **VMD** | 매장·팝업 포스터 인쇄·게재 |
+| **이커머스팀** | 자사몰 매거진 1면 배치, SEO 메타, 인스타그램 크롭(1:1, 4:5) |
+
+### 채널 연계
+
+- **매장 / 팝업 인쇄 포스터** — A2 / A3 / B1 출력
+- **자사몰 매거진 1면** — 시즌 매니페스토 페이지 (`journal/27ss-bloom`)
+- **인스타그램 첫 장 캐러셀** — 1:1 또는 4:5 크롭. 본문 6개 섹션은 캐러셀 2~7장으로 분기 가능
+- **카카오톡 채널 친구톡 이미지** — 헤드라인 + CTA 크롭본 1장
+- **무신사 브랜드 페이지 배너** — 헤드라인 크롭본
+- **PR 이메일 첨부** — 매거진사·인플루언서 발송용
+
+## 시즌 사이클 내 위치
+
+```
+[시즌 시작 4~5개월 전] 컨셉 보드 (디자인실)
+[시즌 시작 3개월 전]   라인업 LOCK
+[시즌 시작 2개월 전]   룩북 촬영 / IMC 캘린더 확정
+[시즌 시작 1~2개월 전] ▶ 시즌 매니페스토 포스터 (이 스킬)
+                       룩북 공개 / 매거진 컬럼 (blog-post 스킬)
+[시즌 시작 1개월 전]   ▶ 팝업스토어 안내 포스터 (이 스킬)
+                       신상 발매 이메일 / 알림톡
+[시즌 시작]            S1~S4 판기 발매
+```
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="poster-slug" type="text/html" title="포스터 제목 / 시즌 코드">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "마뗑킴 27SS BLOOM 시즌 매니페스토 포스터를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

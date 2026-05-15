@@ -1,0 +1,103 @@
+<!doctype html>
+<!--
+  fashion-positioning-map template
+  Copy to <project>/index.html, replace [REPLACE] tokens, bind active
+  DESIGN.md tokens into :root, paste a rhythm + tail block from
+  references/layouts.md into <main id="positioning-map">.
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE Brand] Positioning Map · [REPLACE Season]</title>
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
+  :root {
+    --ink:        #1f2933;
+    --paper:      #fafaf7;
+    --rule:       #e7e3da;
+    --muted:      #6b7280;
+    --accent:     #b8443a;
+    --self-bg:    rgba(184,68,58,0.08);
+
+    --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
+
+    --font-display-report: "Paperlogy", "Wanted Sans Variable", "SUIT Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
+
+    --font-display-street: "Black Han Sans", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-play: "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-romance: "Grandiflora One", "Diphylleia", "Hahmlet", "Noto Serif KR", "Source Serif 4", ui-serif, Georgia, serif;
+
+    --font-display: var(--font-display-report);
+    --font-text: var(--font-sans);
+    --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: var(--font-text); }
+  body { padding: 40px 40px 64px; }
+
+  .pm-header { border-bottom: 1px solid var(--rule); padding-bottom: 20px; margin-bottom: 32px; }
+  .pm-meta { display: flex; gap: 16px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .pm-meta .date { margin-left: auto; }
+  .intent { font-family: var(--font-display); font-size: 18px; line-height: 1.4; margin: 12px 0 0; max-width: 80ch; font-weight: 500; }
+
+  .pm-grid--map-and-side { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); gap: 32px; align-items: start; }
+
+  .pm-map { padding: 12px; }
+  .pm-map--full { width: 100%; }
+  .map-frame { position: relative; width: 100%; aspect-ratio: 4/3; background: rgba(255,255,255,0.6); border: 1px solid var(--rule); border-radius: 8px; padding: 56px; }
+
+  .axis-label { position: absolute; font-family: var(--font-mono); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; color: #fff; background: var(--ink); padding: 6px 12px; border-radius: 3px; font-weight: 600; }
+  .axis-label--top    { top: 0;    left: 50%; transform: translate(-50%, -50%); }
+  .axis-label--bottom { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+  .axis-label--left   { left: 0;   top: 50%;  transform: translate(-50%, -50%); }
+  .axis-label--right  { right: 0;  top: 50%;  transform: translate(50%, -50%); }
+
+  .crosshair-h, .crosshair-v { position: absolute; background: var(--rule); }
+  .crosshair-h { left: 56px; right: 56px; top: 50%; height: 1px; }
+  .crosshair-v { top: 56px; bottom: 56px; left: 50%; width: 1px; }
+
+  .brand-point { position: absolute; left: var(--x, 50%); top: var(--y, 50%); transform: translate(-50%, -50%); font-family: var(--font-display); font-size: 13px; line-height: 1.1; padding: 4px 8px; white-space: nowrap; color: var(--ink); }
+  .brand-point--self { font-weight: 700; padding: 6px 12px; background: var(--self-bg); border: 1px solid var(--accent); border-radius: 999px; color: var(--accent); }
+
+  /* Center cluster shading (where WACKYWILLY sits in the standard layout) */
+  .map-frame::before { content: ""; position: absolute; left: 50%; top: 50%; width: 22%; height: 24%; background: rgba(0,0,0,0.04); border-radius: 50%; transform: translate(-50%, -50%); pointer-events: none; }
+
+  .pm-notes h2, .pm-table h2, .pm-neighbors h2, .open-decisions h2 { font-family: var(--font-display); font-size: 14px; margin: 0 0 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  .pm-notes article { padding: 12px 0; border-bottom: 1px solid var(--rule); }
+  .pm-notes h3 { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--muted); margin: 0 0 4px; letter-spacing: 0.06em; }
+  .pm-notes p { font-size: 13px; line-height: 1.5; margin: 0; }
+
+  /* Tail blocks */
+  .pm-table, .pm-neighbors, .open-decisions { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--rule); }
+  table { border-collapse: collapse; font-size: 12px; width: 100%; }
+  th, td { padding: 6px 12px; text-align: left; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--muted); }
+
+  .neighbor-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+  .neighbor-card { padding: 12px; border: 1px solid var(--rule); border-radius: 6px; background: rgba(255,255,255,0.5); }
+  .neighbor-card h3 { font-family: var(--font-display); font-size: 14px; margin: 0 0 4px; }
+  .neighbor-note { font-size: 12px; color: #374151; margin: 0 0 6px; }
+  .neighbor-diff { font-size: 12px; margin: 0; color: var(--accent); }
+
+  ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.6; }
+
+  @media (max-width: 1024px) {
+    .pm-grid--map-and-side { grid-template-columns: 1fr; }
+  }
+  @media print {
+    body { padding: 16px; }
+    .map-frame { padding: 40px; }
+  }
+</style>
+</head>
+<body>
+  <main id="positioning-map">
+    <!-- PASTE one rhythm from references/layouts.md, then tail block. -->
+  </main>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<!--
+  fashion-new-lineup template
+  Copy to <project>/index.html, replace [REPLACE] tokens, bind active
+  DESIGN.md tokens into :root, paste a rhythm + tail blocks from
+  references/layouts.md into <main id="new-lineup">.
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE Lineup Name] · [REPLACE Season] [REPLACE Line]</title>
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
+  :root {
+    --ink:        #1f2933;
+    --paper:      #fafaf7;
+    --rule:       #e7e3da;
+    --muted:      #6b7280;
+    --accent:     #b8443a;
+
+    --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
+
+    --font-display-report: "Paperlogy", "Wanted Sans Variable", "SUIT Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
+
+    --font-display-street: "Black Han Sans", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-play: "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-romance: "Grandiflora One", "Diphylleia", "Hahmlet", "Noto Serif KR", "Source Serif 4", ui-serif, Georgia, serif;
+
+    --font-display: var(--font-display-report);
+    --font-text: var(--font-sans);
+    --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: var(--font-text); }
+  body { padding: 40px 40px 64px; }
+
+  .nl-header { border-bottom: 1px solid var(--rule); padding-bottom: 20px; margin-bottom: 32px; }
+  .nl-meta { display: flex; gap: 16px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .nl-meta .date { margin-left: auto; }
+  .lineup-name { font-family: var(--font-display); font-size: 36px; line-height: 1.1; margin: 12px 0 8px; }
+  .thesis { font-size: 14px; line-height: 1.6; color: #374151; max-width: 80ch; margin: 0; }
+
+  /* Mosaic */
+  .nl-mosaic { display: grid; grid-template-columns: repeat(6, 1fr); grid-auto-rows: 120px; gap: 8px; margin-bottom: 32px; }
+  .mosaic-tile { margin: 0; }
+  .mosaic-tile .image-frame { width: 100%; height: 100%; background: #efeae0; border-radius: 4px; overflow: hidden; }
+  .mosaic-tile .image-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .mosaic-tile--lg { grid-column: span 4; grid-row: span 2; }
+  .mosaic-tile--md { grid-column: span 3; grid-row: span 1; }
+  .mosaic-tile--sm { grid-column: span 2; grid-row: span 1; }
+
+  /* Chip strip */
+  .nl-chip-strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 36px; }
+  .chip-card { background: rgba(255,255,255,0.6); border-radius: 6px; padding: 10px; text-align: center; }
+  .chip-thumb { aspect-ratio: 1/1; background: #efeae0; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+  .chip-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .chip-card h3 { font-family: var(--font-display); font-size: 13px; margin: 0; }
+  .chip-card .sku { font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin: 2px 0 0; }
+
+  /* Hero */
+  .nl-hero { margin-bottom: 32px; }
+  .hero-frame { aspect-ratio: 3/2; background: #efeae0; border-radius: 8px; overflow: hidden; }
+  .hero-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-note { font-family: var(--font-mono); font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; margin: 8px 0 0; }
+
+  /* Item grid */
+  .nl-item-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 36px; }
+  .nl-item-grid--dense { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+  .item-card { background: rgba(255,255,255,0.6); border-radius: 6px; padding: 10px; }
+  .item-card .image-frame { aspect-ratio: 4/5; background: #efeae0; border-radius: 4px; overflow: hidden; margin-bottom: 8px; }
+  .item-card .image-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .item-card h3 { font-family: var(--font-display); font-size: 13px; margin: 0 0 4px; }
+  .item-card .item-note { font-size: 11px; line-height: 1.4; color: #374151; margin: 0; }
+  .item-card--dense h3 { font-size: 12px; }
+  .item-card--dense .item-note { font-size: 10px; }
+
+  /* Fallback */
+  .image-frame[data-fallback]:not(:has(img[src]:not([src=""])))::after { content: attr(data-fallback); display: block; padding: 6px; font-size: 9px; line-height: 1.3; color: var(--muted); font-family: var(--font-mono); text-align: center; }
+
+  /* Tail blocks */
+  .sku-table, .bridge-map, .anti-pattern, .open-decisions { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--rule); }
+  .sku-table h2, .bridge-map h2, .anti-pattern h2, .open-decisions h2 { font-family: var(--font-display); font-size: 16px; margin: 0 0 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  table { border-collapse: collapse; font-size: 12px; }
+  th, td { padding: 6px 12px; text-align: left; border-bottom: 1px solid var(--rule); }
+  th { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--muted); }
+  tr.total td { font-weight: 600; border-bottom: none; }
+  ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.6; }
+
+  @media print { body { padding: 24px; } .item-card, .chip-card, .mosaic-tile { break-inside: avoid; } }
+</style>
+</head>
+<body>
+  <main id="new-lineup">
+    <!-- PASTE one rhythm + tail blocks from references/layouts.md. -->
+  </main>
+</body>
+</html>

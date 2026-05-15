@@ -1,0 +1,390 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 브랜드] MEMBERS · 등급 페이지</title>
+<!--
+  K-패션 멤버십 / 정기배송 플랜 / 시즌 프리오더 가격 페이지 시드.
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+       (--accent = 추천 등급 컬러, --serif-display = 디스플레이 세리프)
+    4) references/layouts.md에서 페이지 변형 1개를 골라
+       <main> 안에 본문을 구성
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude 환경(Claude.ai · Claude Code): <artifact> 태그로 감싸 출력
+    - 그 외 환경(ChatGPT · Gemini · Grok): 표준 마크다운 HTML 코드 블록
+    - OpenDesign 환경: 주요 섹션에 data-od-id 속성 추가 시 인라인 코멘트 사용 가능
+
+  K-패션 멤버십 컨텍스트:
+    - 등급명 영문 표준: BASIC / SILVER / GOLD / PLATINUM / VIP
+    - 등급 컬러: BASIC(회색) → SILVER(차가운 그레이) → GOLD(따뜻한 골드) → PLATINUM(딥 차콜) → VIP(브랜드 액센트)
+    - 추천 등급 1개만 액센트 보더 + MOST POPULAR 배지
+    - 가격 표기: ₩128,000 또는 128,000원 (둘 중 하나로 통일)
+    - 적립률 단계: 0.5% → 1% → 2% → 3% → 5%
+    - 시즌 사전예약 우선권: 12시간 → 24시간 → 48시간 → 1주
+    - 카피 톤: 신뢰감 + 친근감. SaaS 톤(`지금 가입`) 금지. K-패션 톤(`매트 김 회원이 되어주세요`).
+-->
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&display=swap");
+
+  :root {
+    --bg:       #fafaf9;
+    --surface:  #ffffff;
+    --fg:       #1c1b1a;
+    --muted:    #6b6964;
+    --border:   #e6e4e0;
+    --accent:   #c96442;   /* 추천 등급 액센트 — 브랜드 시즌 키 컬러로 교체 */
+    --accent-soft: color-mix(in oklch, var(--accent) 8%, transparent);
+
+    /* 등급별 컬러 토큰 (K-패션 표준) */
+    --tier-basic:    #8a8580;   /* 무채색 */
+    --tier-silver:   #6f7378;   /* 차가운 메탈릭 그레이 */
+    --tier-gold:     #b08842;   /* 따뜻한 골드 */
+    --tier-platinum: #2a2826;   /* 딥 차콜·블랙 */
+    --tier-vip:      var(--accent);
+
+    --serif-display:
+      "Hahmlet", "Instrument Serif",
+      "Noto Serif KR",
+      "Iowan Old Style", Georgia, serif;
+    --sans:
+      "Pretendard Variable", Pretendard,
+      -apple-system, BlinkMacSystemFont,
+      "Apple SD Gothic Neo", "Noto Sans KR",
+      system-ui, sans-serif;
+    --mono:
+      "IBM Plex Mono", "JetBrains Mono",
+      ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 64px 32px 96px; }
+
+  /* ─── 헤더 (Hero) ─── */
+  header.hero {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+  header.hero .eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  header.hero h1 {
+    font-family: var(--serif-display);
+    font-size: clamp(40px, 5.4vw, 64px);
+    letter-spacing: -0.02em;
+    line-height: 1.05;
+    margin: 0 0 18px;
+  }
+  header.hero p.lede {
+    font-size: 18px;
+    color: var(--muted);
+    margin: 0 auto;
+    max-width: 52ch;
+  }
+  header.hero .toggle {
+    display: inline-flex;
+    margin-top: 28px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface);
+    overflow: hidden;
+  }
+  header.hero .toggle button {
+    font: inherit;
+    cursor: pointer;
+    padding: 8px 18px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  header.hero .toggle button.active {
+    background: var(--fg);
+    color: var(--surface);
+  }
+
+  /* ─── 등급 카드 (Tiers) ─── */
+  section.tiers {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 64px;
+  }
+  .tier {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  .tier.featured {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent-soft);
+  }
+  .tier h2 {
+    margin: 0 0 6px;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .tier .tier-color {
+    width: 32px;
+    height: 4px;
+    border-radius: 2px;
+    margin-bottom: 14px;
+  }
+  .tier[data-tier="basic"]    .tier-color { background: var(--tier-basic); }
+  .tier[data-tier="silver"]   .tier-color { background: var(--tier-silver); }
+  .tier[data-tier="gold"]     .tier-color { background: var(--tier-gold); }
+  .tier[data-tier="platinum"] .tier-color { background: var(--tier-platinum); }
+  .tier[data-tier="vip"]      .tier-color { background: var(--tier-vip); }
+
+  .tier .desc {
+    color: var(--muted);
+    font-size: 14px;
+    margin: 0 0 24px;
+  }
+  .tier .price {
+    font-family: var(--serif-display);
+    font-size: 30px;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .tier .price small {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    display: block;
+    margin-top: 6px;
+    text-transform: uppercase;
+  }
+  .tier ul {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 28px;
+    font-size: 14px;
+    flex: 1;
+  }
+  .tier ul li {
+    padding: 8px 0;
+    color: var(--fg);
+    border-top: 1px solid var(--border);
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .tier ul li::before {
+    content: '✓';
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+  .tier ul li:first-child { border-top: none; }
+
+  button.cta {
+    font: inherit;
+    cursor: pointer;
+    padding: 12px 18px;
+    border-radius: 8px;
+    width: 100%;
+    font-weight: 500;
+  }
+  .cta-primary {
+    background: var(--accent);
+    color: var(--surface);
+    border: 1px solid var(--accent);
+  }
+  .cta-secondary {
+    background: transparent;
+    color: var(--fg);
+    border: 1px solid var(--border);
+  }
+  .featured-pill {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: var(--surface);
+    margin-bottom: 14px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    align-self: flex-start;
+  }
+
+  /* ─── 혜택 비교표 (Compare) ─── */
+  section.compare {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 56px;
+  }
+  section.compare h3 {
+    padding: 24px 28px;
+    margin: 0;
+    font-family: var(--serif-display);
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    border-bottom: 1px solid var(--border);
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  table th,
+  table td {
+    padding: 14px 18px;
+    text-align: left;
+    border-top: 1px solid var(--border);
+  }
+  table thead th {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    background: var(--bg);
+  }
+  table td.has  { color: var(--accent); font-weight: 500; }
+  table td.no   { color: var(--muted); }
+  table tr.group-head td {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    background: var(--bg);
+    padding-top: 14px;
+    padding-bottom: 8px;
+    border-top: 2px solid var(--border);
+  }
+
+  /* ─── FAQ ─── */
+  section.faq { margin-bottom: 64px; }
+  section.faq h3 {
+    font-family: var(--serif-display);
+    font-size: 28px;
+    letter-spacing: -0.01em;
+    margin: 0 0 24px;
+  }
+  details {
+    padding: 16px 0;
+    border-top: 1px solid var(--border);
+  }
+  details:last-of-type { border-bottom: 1px solid var(--border); }
+  details summary {
+    font-weight: 500;
+    cursor: pointer;
+    list-style: none;
+    position: relative;
+    padding-right: 28px;
+  }
+  details summary::-webkit-details-marker { display: none; }
+  details summary::after {
+    content: '+';
+    position: absolute;
+    right: 0;
+    top: -2px;
+    font-size: 22px;
+    color: var(--muted);
+    transition: transform 0.2s;
+  }
+  details[open] summary::after { content: '−'; }
+  details p {
+    margin: 12px 0 0;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* ─── 푸터 CTA ─── */
+  section.closing {
+    background: var(--accent);
+    color: var(--surface);
+    text-align: center;
+    padding: 64px 32px;
+    border-radius: 14px;
+  }
+  section.closing h2 {
+    font-family: var(--serif-display);
+    font-size: clamp(28px, 4vw, 40px);
+    letter-spacing: -0.015em;
+    margin: 0 0 14px;
+  }
+  section.closing p {
+    opacity: 0.85;
+    margin: 0 0 28px;
+    max-width: 48ch;
+    margin-inline: auto;
+  }
+  section.closing button {
+    font: inherit;
+    cursor: pointer;
+    padding: 14px 28px;
+    border-radius: 8px;
+    background: var(--surface);
+    color: var(--accent);
+    border: none;
+    font-weight: 600;
+  }
+
+  /* ─── 반응형 ─── */
+  @media (max-width: 980px) {
+    section.tiers { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    section.tiers { grid-template-columns: 1fr; }
+    table { font-size: 13px; }
+    table th, table td { padding: 10px 12px; }
+  }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <!--
+      references/layouts.md에서 페이지 변형 1개를 골라 본문을 채워 넣으세요.
+
+      변형 A · 4단 영구 멤버십 (BASIC / SILVER / GOLD / PLATINUM) — 기본값
+      변형 B · 5단 멤버십 + VIP 초청 (BASIC / SILVER / GOLD / PLATINUM / VIP)
+      변형 C · 시즌 프리오더 가격 (얼리버드 / 정상 / VIP 한정)
+      변형 D · 정기배송 플랜 (스타킹·이너 정기배송 2~3단)
+
+      모든 변형은 다음 5섹션 순서를 따릅니다:
+      1) header.hero — 페이지 타이틀 + 데크 + (옵션) 토글
+      2) section.tiers — 등급 카드 (3~5단)
+      3) section.compare — 혜택 비교표 (적립·할인 / 배송·CS / 시즌 혜택)
+      4) section.faq — 4~6개 접이식 Q&A
+      5) section.closing — 푸터 CTA (액센트 밴드)
+    -->
+  </main>
+</body>
+</html>

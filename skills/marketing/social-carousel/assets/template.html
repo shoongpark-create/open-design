@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 브랜드] [REPLACE 시리즈 제목] · 캐러셀 3장</title>
+<!--
+  K-패션 인스타그램 3-카드 캐러셀 시드.
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 카피로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+       (--stage = 다크 스테이지, --accent = 시즌 키 컬러)
+    4) references/layouts.md에서 패턴 1개를 골라 .cards 안에 붙여넣기
+
+  카드 메모:
+    - 1080×1080 정사각형 3장 (인스타그램 1:1 표준)
+    - 가로 일렬 (flex row), 1180px 이하에서 세로 스택
+    - 헤드라인 시리즈를 연속해서 읽으면 한 문장 (예: Quiet. · Steady. · Now.)
+    - 배경은 그라데이션 only (외부 이미지 URL 금지)
+    - 카드 3장은 도미넌트 컬러가 분명히 달라야 함
+
+  환경 호환성:
+    - Claude 환경: <artifact> 태그로 감싸 출력
+    - 그 외 환경: 표준 마크다운 HTML 코드 블록
+    - OpenDesign 환경: data-od-id 속성 사용 가능. 그 외 환경에서는 일반 id로 대체.
+-->
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Bagel+Fat+One&family=Hahmlet:wght@400;500;600;700&display=swap");
+
+  :root {
+    /* 다크 스테이지 + 카드 키 컬러 */
+    --stage:     #0a0a0a;
+    --stage-2:   #141414;
+    --ink:       #ffffff;
+    --muted:     #9c9990;
+    --rule:      rgba(255, 255, 255, 0.12);
+    --accent:    #d9b27b;  /* 시즌 키 컬러 — 시즌별 교체 */
+
+    /* 카드 3장 도미넌트 컬러 — 카드 1·2·3이 분명히 달라야 함 */
+    --card-1-from: #2a4a3a;   /* 새벽 sage 톤 */
+    --card-1-to:   #0d1a14;
+    --card-2-from: #c96442;   /* 정오 벽돌 톤 */
+    --card-2-to:   #4a1f13;
+    --card-3-from: #1a2a4d;   /* 저녁 네이비 톤 */
+    --card-3-to:   #08101f;
+
+    /* 폰트 */
+    --font-body:
+      "Pretendard Variable", Pretendard,
+      -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", system-ui, sans-serif;
+
+    --font-display-romance: "Instrument Serif", "Hahmlet", "Noto Serif KR", ui-serif, Georgia, serif;
+    --font-display-play:    "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", sans-serif;
+    --font-display-street:  "Black Han Sans", "Gmarket Sans", "Pretendard Variable", sans-serif;
+    --font-display-report:  "Pretendard Variable", "Wanted Sans Variable", sans-serif;
+
+    /* 시즌·톤에 맞게 1개 선택 */
+    --font-display: var(--font-display-romance);
+    --font-mono:    "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--stage);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* ─── 스테이지 ─── */
+  .stage {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 48px 32px 64px;
+  }
+
+  /* ─── 스테이지 헤더 ─── */
+  .stage-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 32px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--rule);
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .stage-head .title {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-style: italic;
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+    font-weight: 400;
+  }
+  .stage-head .sub {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    max-width: 56ch;
+    line-height: 1.6;
+  }
+  .stage-head .badge {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 6px 14px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  /* ─── 카드 컨테이너 ─── */
+  .cards {
+    display: flex;
+    flex-direction: row;
+    gap: 22px;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ─── 단일 카드 ─── */
+  .card {
+    position: relative;
+    width: clamp(280px, 30vw, 380px);
+    aspect-ratio: 1 / 1;
+    border-radius: 14px;
+    border: 1px solid var(--rule);
+    overflow: hidden;
+    box-shadow:
+      0 24px 60px -20px rgba(0, 0, 0, 0.5),
+      0 8px 24px -12px rgba(0, 0, 0, 0.4);
+    color: var(--ink);
+    isolation: isolate;
+  }
+  .card[data-index="1"] {
+    background:
+      radial-gradient(70% 80% at 30% 25%, color-mix(in oklch, var(--card-1-from) 80%, white 0%), transparent 60%),
+      linear-gradient(165deg, var(--card-1-from) 0%, var(--card-1-to) 100%);
+  }
+  .card[data-index="2"] {
+    background:
+      radial-gradient(70% 80% at 70% 30%, color-mix(in oklch, var(--card-2-from) 80%, white 0%), transparent 60%),
+      linear-gradient(155deg, var(--card-2-from) 0%, var(--card-2-to) 100%);
+  }
+  .card[data-index="3"] {
+    background:
+      radial-gradient(70% 80% at 30% 70%, color-mix(in oklch, var(--card-3-from) 80%, white 0%), transparent 60%),
+      linear-gradient(195deg, var(--card-3-from) 0%, var(--card-3-to) 100%);
+  }
+
+  /* 카드 안 요소 공통 */
+  .card .chip {
+    position: absolute;
+    top: 18px; left: 18px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 12px 7px 11px;
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 999px;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .card .chip .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .card .idx {
+    position: absolute;
+    top: 62px; left: 22px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .card .lockup {
+    position: absolute;
+    left: 22px; bottom: 56px;
+    right: 22px;
+  }
+  .card .lockup h2 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 4.4vw, 64px);
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+    margin: 0;
+    font-weight: 600;
+  }
+  .card .lockup h2 .accent-word {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .card .loop {
+    position: absolute;
+    bottom: 22px; right: 22px;
+    padding: 5px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 9.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.85);
+  }
+  .card .caption {
+    position: absolute;
+    bottom: 22px; left: 22px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 60%;
+  }
+  .card .caption .kr {
+    display: block;
+    margin-top: 4px;
+    font-family: var(--font-body);
+    font-size: 10.5px;
+    color: rgba(255, 255, 255, 0.6);
+    letter-spacing: 0;
+    text-transform: none;
+  }
+
+  /* 시각 보조 — 카드 안 추상 실루엣 (선택) */
+  .card .silhouette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.35;
+    z-index: -1;
+  }
+
+  /* ─── 스테이지 풋터 ─── */
+  .stage-foot {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  /* ─── 반응형 ─── */
+  @media (max-width: 1180px) {
+    .cards { gap: 18px; }
+    .card { width: 100%; max-width: 480px; }
+    .cards { flex-direction: column; align-items: center; }
+    .card .lockup h2 { font-size: clamp(34px, 8vw, 48px); }
+  }
+  @media (max-width: 640px) {
+    .stage { padding: 28px 18px 40px; }
+    .stage-head { flex-direction: column; align-items: flex-start; }
+    .stage-head .title { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+  <div class="stage" data-od-id="stage">
+    <header class="stage-head" data-od-id="stage-head">
+      <div>
+        <h1 class="title">[REPLACE Three posts. One series.]</h1>
+        <p class="sub">[REPLACE 1080×1080 · 시네마틱 비주얼 · 미니멀 타이포. 인스타그램·릴스·페이스북에 그대로 사용.]</p>
+      </div>
+      <span class="badge">[REPLACE SERIES · 01 → 03]</span>
+    </header>
+
+    <section class="cards" data-od-id="cards">
+      <!--
+        references/layouts.md에서 패턴 1개를 골라 카드 3장을 여기에 붙여 넣으세요.
+
+        패턴 A · 시즌 컨셉 시리즈 (마뗑킴·시야쥬 톤 · 기본값)
+        패턴 B · 신상 발매 시리즈 (영캐주얼·위트 톤)
+        패턴 C · 콜라보 발매 시리즈 (아더에러·콜라보 톤)
+        패턴 D · 룩북 공개 시리즈 (마르디 메크르디 톤)
+
+        각 카드는 다음 요소를 포함:
+        - chip (좌상단, 브랜드 워드마크 + 액센트 도트)
+        - idx (chip 아래, 27SS · 01 / 03)
+        - lockup (좌하단, 헤드라인 + 액센트 단어)
+        - loop (우하단, 1× LOOP 스탬프)
+        - caption (좌하단 헤드라인 위, mono 캡션)
+      -->
+    </section>
+
+    <footer class="stage-foot" data-od-id="stage-foot">
+      <span>[REPLACE INSTAGRAM · LOOPS · K-FASHION CAROUSEL]</span>
+      <span>[REPLACE 27SS · DROP 02 · 1080×1080]</span>
+    </footer>
+  </div>
+</body>
+</html>

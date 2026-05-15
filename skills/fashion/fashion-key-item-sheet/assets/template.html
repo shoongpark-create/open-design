@@ -1,15 +1,27 @@
 <!doctype html>
 <!--
-  fashion-key-item-sheet template
-  Copy to <project>/index.html, replace [REPLACE] tokens, bind active
-  DESIGN.md tokens into :root, paste a composition from
-  references/layouts.md into <main id="key-item-sheet">.
+  K-패션 키 아이템 시트 시작 템플릿 (앵커 아이템 1개당 1페이지).
+
+  사용 방법:
+    1) 이 파일을 <project>/index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+    4) references/layouts.md에서 컴포지션 A/B 중 하나를 골라
+       <main id="key-item-sheet"> 안에 붙여넣기
+    5) 공통 꼬리 블록(Production/Merch 노트 + Open Decisions) 추가
+    6) Worn 레퍼런스·슬라이스 이미지는 <project>/images/ 폴더에 저장
+
+  환경 호환성:
+    - Claude 환경: <artifact> 태그로 감싸 출력
+    - 그 외 환경: 표준 HTML 코드 블록으로 출력
+    - OpenDesign 환경: 주요 섹션에 data-od-id 속성 추가하면
+      인라인 코멘트 모드 사용 가능. 다른 환경에서는 일반 id 속성으로 충분.
 -->
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>[REPLACE Season] [REPLACE Item Name] · Key Item Sheet</title>
+<title>[REPLACE 시즌] [REPLACE 아이템 이름] · Key Item Sheet</title>
 <style>
   @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
   @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
@@ -103,7 +115,14 @@
 </head>
 <body>
   <main id="key-item-sheet">
-    <!-- PASTE one composition from references/layouts.md, then tail blocks. -->
+    <!--
+      references/layouts.md에서 컴포지션 1개를 골라 여기에 붙여넣으세요.
+
+      컴포지션 A · 50/50 분할 (기본, 3 슬라이스 이하)
+      컴포지션 B · 40/60 분할 (4 슬라이스, 히어로 아이템)
+
+      그리고 항상 공통 꼬리 블록(Production/Merch 노트 + Open Decisions)을 추가하세요.
+    -->
   </main>
 </body>
 </html>

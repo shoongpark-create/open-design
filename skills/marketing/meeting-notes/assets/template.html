@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 브랜드] · [REPLACE 시즌] [REPLACE 미팅 종류] · 회의록</title>
+<!--
+  K-패션 품평회 노트 / 시즌 회의록 시드.
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+    4) references/layouts.md에서 리듬 1개를 골라
+       <div class="page" id="content"> 안에 붙여 넣기
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude (Claude.ai · Claude Code): <artifact identifier type="text/html"> 로 감쌈
+    - 그 외 (ChatGPT · Gemini · Grok · 일반 채팅): 표준 ```html 코드 블록
+    - OpenDesign: 주요 영역에 data-od-id 사용. 그 외에는 id 속성으로 대체.
+
+  K-패션 컨텍스트:
+    - 미팅 종류: 1차/2차 품평회 · 발주 회의 · 시즌 킥오프 · 콜라보 미팅 · IMC 캘린더 합의
+    - 작성자: MD 또는 디자인실 어시스턴트 (회의록 표준 역할)
+    - 청중: 참석자 전원 + 결정 영향 부서 + 차주 인수 담당자
+    - 5섹션 구조: 헤더 → 아젠다 → 결정 사항 → 액션 아이템 → 미결+다음 미팅
+    - 품평회 OK/NG 결정은 SKU 코드 + 사유(원가/핏/컬러/코디) 명시
+    - 액션 아이템 상태 칩 4종 (미진행/진행 중/블락/완료) 모두 등장
+    - 24시간 내 슬랙/노션 공유가 한국 패션기업 표준
+-->
+<style>
+  /* 한국 K-패션 표준 폰트 시스템 */
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;600;700&display=swap");
+
+  :root {
+    /* 색상 토큰 — DESIGN.md에서 오버라이드 */
+    --bg:           #fafaf8;
+    --paper:        #ffffff;
+    --ink:          #1a1d24;
+    --muted:        #5d6371;
+    --muted-2:      #8b91a0;
+    --line:         #e8e9ed;
+    --accent:       #2c5fae;     /* 회의록 액센트 — 디시전 블루 */
+    --accent-soft:  color-mix(in oklch, var(--accent) 10%, transparent);
+    --positive:     #2c8a4f;
+    --warn:         #b58522;
+    --danger:       #b13b3b;
+
+    /* 폰트 토큰 — 회의록은 매거진 톤 또는 운영 톤 선택 */
+    --font-sans:
+      "Pretendard Variable", Pretendard,
+      "Apple SD Gothic Neo", "Noto Sans KR",
+      -apple-system, system-ui, sans-serif;
+    --font-display-report:
+      "Pretendard Variable", "Wanted Sans Variable",
+      "SUIT Variable", sans-serif;
+    --font-display-romance:
+      "Hahmlet", "Noto Serif KR", "Charter",
+      ui-serif, Georgia, serif;
+    /* 회의록은 디시전 문서 — 운영 톤(report) 기본값. 콜라보 미팅이면 romance로 교체 */
+    --font-display: var(--font-display-report);
+    --font-mono:
+      "JetBrains Mono", "IBM Plex Mono", "SF Mono",
+      ui-monospace, Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  body * { font-variant-numeric: tabular-nums; }
+
+  .page {
+    max-width: 920px;
+    margin: 24px auto;
+    padding: 48px 56px 64px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+
+  /* ─── 헤더 ─── */
+  header.head {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 22px;
+    margin-bottom: 28px;
+  }
+  .crumb {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: 32px;
+    margin: 6px 0 14px;
+    letter-spacing: -0.005em;
+    font-weight: 700;
+  }
+  .meta-row {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .meta-row strong {
+    color: var(--ink);
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  /* ─── 참석자 ─── */
+  .attendees {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 18px;
+    padding: 14px 16px;
+    background: var(--bg);
+    border-radius: 8px;
+    flex-wrap: wrap;
+  }
+  .attendees-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+  .av-row { display: flex; }
+  .av {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    border: 2px solid var(--paper);
+    margin-left: -8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .av:first-child { margin-left: 0; }
+  /* 직책별 아바타 컬러 — 한국 패션기업 표준 */
+  .a-ceo { background: linear-gradient(135deg, #2c5fae, #6e9bf0); }   /* 대표 */
+  .a-ds  { background: linear-gradient(135deg, #d6336c, #ff7a9b); }   /* 디자인 실장 */
+  .a-md  { background: linear-gradient(135deg, #b58522, #f1b13a); }   /* MD 실장 */
+  .a-d1  { background: linear-gradient(135deg, #1a8e8e, #56c1c1); }   /* 수석 디자이너 1 */
+  .a-d2  { background: linear-gradient(135deg, #5b3df0, #a991ff); }   /* 수석 디자이너 2 */
+  .a-mk  { background: linear-gradient(135deg, #c2521a, #ec8b5b); }   /* 마케팅 실장 */
+  .a-mfg { background: linear-gradient(135deg, #2c8a4f, #5cc283); }   /* 생산 실장 */
+  .away { color: var(--muted); font-size: 12.5px; }
+
+  /* ─── 섹션 ─── */
+  section { margin-top: 36px; }
+  h2 {
+    font-family: var(--font-display);
+    font-size: 21px;
+    margin: 0 0 14px;
+    letter-spacing: -0.005em;
+    font-weight: 600;
+  }
+
+  /* ─── 아젠다 ─── */
+  .agenda { display: flex; flex-direction: column; gap: 8px; }
+  .agenda-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    background: var(--bg);
+  }
+  .agenda-item .check {
+    flex: 0 0 18px;
+    width: 18px; height: 18px;
+    border-radius: 4px;
+    border: 1.5px solid var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: transparent;
+    margin-top: 2px;
+  }
+  .agenda-item.done .check {
+    background: var(--positive);
+    border-color: var(--positive);
+    color: white;
+  }
+  .agenda-item .body { flex: 1; }
+  .agenda-item .body strong { font-weight: 600; }
+  .agenda-item .body small {
+    color: var(--muted);
+    display: block;
+    margin-top: 2px;
+    font-size: 12.5px;
+  }
+  .agenda-item .time {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    padding-top: 3px;
+  }
+
+  /* ─── 결정 사항 패널 ─── */
+  .decisions {
+    padding: 22px 24px;
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 6px;
+  }
+  .decisions h3 {
+    font-family: var(--font-display);
+    font-size: 15px;
+    margin: 0 0 12px;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .decisions ul {
+    padding-left: 18px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+  }
+  .decisions li::marker { color: var(--accent); }
+
+  /* ─── 액션 아이템 표 ─── */
+  table { width: 100%; border-collapse: collapse; }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    font-size: 13.5px;
+    vertical-align: top;
+  }
+  th {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  tr:last-child td { border-bottom: none; }
+  td.owner { display: flex; align-items: center; gap: 8px; }
+  .pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .pill-todo {
+    background: var(--bg);
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+  .pill-progress {
+    background: color-mix(in oklch, var(--accent) 12%, transparent);
+    color: var(--accent);
+  }
+  .pill-blocked {
+    background: color-mix(in oklch, var(--danger) 12%, transparent);
+    color: var(--danger);
+  }
+  .pill-done {
+    background: color-mix(in oklch, var(--positive) 12%, transparent);
+    color: var(--positive);
+  }
+
+  /* ─── 미결 + 다음 미팅 ─── */
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .panel {
+    padding: 20px 22px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  .panel h3 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    margin: 0 0 8px;
+    font-weight: 600;
+  }
+  .panel p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+  .next-meeting {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-size: 13.5px;
+    margin-top: 10px;
+  }
+  .next-meeting strong {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    display: block;
+    font-weight: 500;
+  }
+
+  /* ─── 푸터 ─── */
+  footer {
+    margin-top: 40px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+
+  /* ─── 반응형 ─── */
+  @media (max-width: 720px) {
+    .page { padding: 28px 24px; margin: 0; border-radius: 0; }
+    .grid { grid-template-columns: 1fr; }
+    h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="page" id="content">
+  <!--
+    references/layouts.md에서 리듬 1개를 골라 여기에 붙여 넣으세요.
+
+    리듬 A · 1차 품평회 회의록 (시즌 4개월 전 · SKU OK/NG 결정 — 기본값)
+    리듬 B · 2차 품평회 + 발주 회의 (시즌 3개월 전 · LOCK + 발주 수량 확정)
+    리듬 C · 콜라보 미팅 (협업 브랜드 + 마케팅실 · 컨셉/일정/MOU)
+    리듬 D · 시즌 킥오프 + IMC 캘린더 회의 (시즌 6개월 전 · 캠페인 일정 합의)
+
+    모든 리듬은 5개 섹션 순서를 유지합니다:
+      1) 헤더 (크럼 + H1 + 일시/장소/샘플/작성자) + 참석자 아바타 행 + 결석자
+      2) 아젠다 (4~6개 · 체크박스 + 제목 + 짧은 설명 + 할당 시간)
+      3) 결정 사항 (액센트 보더 패널 · 3~6개 결정 · OK/NG 사유 명시)
+      4) 액션 아이템 (표 · 액션 + 오너 + 기한 + 상태 4종 칩)
+      5) 미결 이슈 + 다음 미팅 (2컬럼 그리드)
+  -->
+</div>
+</body>
+</html>

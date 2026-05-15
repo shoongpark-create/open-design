@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Growth Squad · Sprint 38 Board</title>
+<title>와키윌리 · 27SS S/S 시즌 진척 보드</title>
 <style>
   :root {
     --bg: #f7f7f9;
@@ -49,7 +49,7 @@
   .members .av:first-child { margin-left: 0; }
 
   /* Board */
-  .board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; align-items: flex-start; }
+  .board { display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; align-items: flex-start; }
   .col { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 12px; min-height: 460px; display: flex; flex-direction: column; gap: 10px; }
   .col-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 4px 8px; border-bottom: 1px dashed var(--line); }
   .col-name { font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 8px; }
@@ -58,25 +58,29 @@
   .swatch.violet { background: var(--accent); }
   .swatch.amber { background: var(--amber); }
   .swatch.green { background: var(--green); }
+  .swatch.teal { background: var(--teal); }
+  .swatch.pink { background: var(--pink); }
   .col-count { font-family: var(--mono); font-size: 10.5px; color: var(--muted); padding: 2px 6px; background: var(--bg); border-radius: 999px; }
 
   /* Cards */
   .card { padding: 12px 14px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; display: flex; flex-direction: column; gap: 10px; cursor: grab; transition: border-color 0.15s, box-shadow 0.15s; }
   .card:hover { border-color: var(--accent); box-shadow: 0 4px 12px rgba(91,61,240,0.06); }
   .card-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; font-weight: 600; }
-  .tag-bug { background: rgba(214,51,108,0.12); color: var(--pink); }
-  .tag-feat { background: rgba(91,61,240,0.12); color: var(--accent); }
-  .tag-design { background: rgba(26,142,142,0.12); color: var(--teal); }
-  .tag-chore { background: rgba(94,100,120,0.12); color: var(--muted); }
-  .tag-research { background: rgba(181,133,34,0.12); color: var(--amber); }
+  /* BTA 태그: B(Basic) · T(Trend) · A(Accent) — 한국 패션 표준 분류 */
+  .tag-basic { background: rgba(94,100,120,0.12); color: var(--muted); }
+  .tag-trend { background: rgba(91,61,240,0.12); color: var(--accent); }
+  .tag-accent { background: rgba(214,51,108,0.12); color: var(--pink); }
+  .tag-carry { background: rgba(26,142,142,0.12); color: var(--teal); }
+  .tag-qr { background: rgba(181,133,34,0.12); color: var(--amber); }
   .card-title { font-size: 13.5px; font-weight: 500; line-height: 1.4; }
   .card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 11.5px; color: var(--muted); }
   .card-meta .left { display: flex; gap: 8px; align-items: center; }
+  /* 디자이너/MD 이니셜 아바타 — 한국 패션기업 관행상 한글 두 글자 이니셜 */
   .av-sm { width: 22px; height: 22px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #a991ff); color: white; font-size: 10px; font-weight: 700; display: inline-flex; align-items: center; justify-content: center; }
-  .av-mira { background: linear-gradient(135deg, #d6336c, #ff7a9b); }
-  .av-cale { background: linear-gradient(135deg, #1a8e8e, #56c1c1); }
-  .av-pri { background: linear-gradient(135deg, #b58522, #f1b13a); }
-  .av-dev { background: linear-gradient(135deg, #2c8a4f, #66c285); }
+  .av-jw { background: linear-gradient(135deg, #d6336c, #ff7a9b); }
+  .av-mh { background: linear-gradient(135deg, #1a8e8e, #56c1c1); }
+  .av-sy { background: linear-gradient(135deg, #b58522, #f1b13a); }
+  .av-pk { background: linear-gradient(135deg, #2c8a4f, #66c285); }
   .pts { font-family: var(--mono); padding: 2px 7px; border: 1px solid var(--line); border-radius: 999px; font-size: 10.5px; color: var(--muted); }
   .progress { height: 4px; background: var(--bg); border-radius: 999px; overflow: hidden; }
   .progress > span { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
@@ -95,6 +99,9 @@
   .pill-block { padding: 16px; border-radius: 10px; background: rgba(214,51,108,0.07); border: 1px solid rgba(214,51,108,0.2); }
   .pill-block strong { color: var(--pink); }
 
+  @media (max-width: 1380px) {
+    .board { grid-template-columns: repeat(3, 1fr); }
+  }
   @media (max-width: 1180px) {
     .app { grid-template-columns: 1fr; }
     aside.sidebar { border-left: none; border-top: 1px solid var(--line); }
@@ -106,161 +113,213 @@
 <body>
 <div class="app">
   <main>
+    <!-- 상단바: 브랜드/시즌 크럼 + 시즌 펄스 칩(D-카운트다운) + 검색 + 액션 -->
     <div class="topbar">
-      <span class="crumb">Northwind / Growth squad</span>
-      <span class="sprint-chip"><span class="dot"></span>Sprint 38 · Day 6 of 10</span>
+      <span class="crumb">WACKYWILLY / 27SS S/S 시즌</span>
+      <span class="sprint-chip"><span class="dot"></span>S1 판기 D-42 · LOCK 75%</span>
       <div class="topbar-spacer"></div>
-      <input class="search" placeholder="Search tickets…" />
-      <button class="icon-btn">⌘ Filter</button>
-      <button class="icon-btn">+ New</button>
+      <input class="search" placeholder="SKU·룩 검색…" />
+      <button class="icon-btn">⌘ 필터</button>
+      <button class="icon-btn">+ 신규 SKU</button>
     </div>
 
+    <!-- 필터바: 디자이너/MD 아바타 + BTA·라인 라벨 칩 -->
     <div class="filterbar">
-      <span class="filter-label">Members</span>
+      <span class="filter-label">담당자</span>
       <div class="members">
-        <span class="av av-mira">MR</span>
-        <span class="av av-cale">CA</span>
-        <span class="av av-pri">PB</span>
-        <span class="av av-dev">DP</span>
-        <span class="av" style="background: #c8cdd9; color: #5e6478;">+1</span>
+        <span class="av av-jw" title="장원 디자이너">JW</span>
+        <span class="av av-mh" title="민혜 MD">MH</span>
+        <span class="av av-sy" title="수영 디자이너">SY</span>
+        <span class="av av-pk" title="박경 디자인실장">PK</span>
+        <span class="av" style="background: #c8cdd9; color: #5e6478;">+2</span>
       </div>
-      <span class="filter-label" style="margin-left: 18px;">Labels</span>
+      <span class="filter-label" style="margin-left: 18px;">BTA</span>
       <div class="chip-row">
-        <span class="chip active">Active sprint</span>
-        <span class="chip">Bug</span>
-        <span class="chip">Feature</span>
-        <span class="chip">Research</span>
+        <span class="chip active">All</span>
+        <span class="chip">Basic</span>
+        <span class="chip">Trend</span>
+        <span class="chip">Accent</span>
       </div>
       <div class="spacer"></div>
-      <span class="chip">Group · Status</span>
-      <span class="chip">Sort · Priority</span>
+      <span class="chip">Group · 라인 (UNI/WOMEN)</span>
+      <span class="chip">Sort · LOCK 우선</span>
     </div>
 
+    <!-- 6단 칸반: 컨셉 · 1차 샘플 · 품평회 · LOCK · 발주·생산 · 입고·판매 -->
     <div class="board">
+      <!-- 1) 컨셉 — 시즌 시작 6~5개월 전, 1차 디자인 일러스트 단계 -->
       <div class="col">
-        <div class="col-head"><div class="col-name"><span class="swatch gray"></span>Backlog</div><span class="col-count">5</span></div>
+        <div class="col-head"><div class="col-name"><span class="swatch gray"></span>컨셉</div><span class="col-count">3</span></div>
         <div class="card">
-          <span class="card-tag tag-feat">Feature</span>
-          <div class="card-title">Add empty-state illustration to onboarding step 2</div>
-          <div class="card-meta"><div class="left"><span class="av-sm av-dev">DP</span><span class="pts">3 pts</span></div><span>NW-241</span></div>
+          <span class="card-tag tag-accent">A · Accent</span>
+          <div class="card-title">윌리 캐릭터 그래픽 티셔츠 (WACKY series)</div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-jw">JW</span><span class="pts">UNI</span></div><span>WW-27SS-TOP-018</span></div>
         </div>
         <div class="card">
-          <span class="card-tag tag-design">Design</span>
-          <div class="card-title">Refresh notification settings page tokens</div>
-          <div class="card-meta"><div class="left"><span class="av-sm av-mira">MR</span><span class="pts">2 pts</span></div><span>NW-237</span></div>
+          <span class="card-tag tag-trend">T · Trend</span>
+          <div class="card-title">발레코어 무드 셔링 미니 원피스</div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-sy">SY</span><span class="pts">WOMEN</span></div><span>WW-27SS-OPS-005</span></div>
         </div>
         <div class="card">
-          <span class="card-tag tag-research">Research</span>
-          <div class="card-title">Interview 5 new Enterprise admins about 2FA enforcement</div>
-          <div class="card-meta"><div class="left"><span class="av-sm av-pri">PB</span><span class="pts">5 pts</span></div><span>NW-225</span></div>
+          <span class="card-tag tag-trend">T · Trend</span>
+          <div class="card-title">크롭 워크 셔츠 (피그먼트 가공)</div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-jw">JW</span><span class="pts">UNI</span></div><span>WW-27SS-TOP-022</span></div>
         </div>
-        <div class="card">
-          <span class="card-tag tag-chore">Chore</span>
-          <div class="card-title">Migrate legacy auth logs to new schema</div>
-          <div class="card-meta"><div class="left"><span class="av-sm av-cale">CA</span><span class="pts">3 pts</span></div><span>NW-219</span></div>
-        </div>
-        <div class="card">
-          <span class="card-tag tag-bug">Bug</span>
-          <div class="card-title">CSV export drops emoji from project names</div>
-          <div class="card-meta"><div class="left"><span class="av-sm">+</span><span class="pts">1 pt</span></div><span>NW-244</span></div>
-        </div>
-        <div class="add-card">+ New card</div>
+        <div class="add-card">+ 신규 디자인</div>
       </div>
 
+      <!-- 2) 1차 샘플 — 시즌 4개월 전, 핏 체크 진행 중 -->
       <div class="col">
-        <div class="col-head"><div class="col-name"><span class="swatch violet"></span>In progress</div><span class="col-count">4</span></div>
+        <div class="col-head"><div class="col-name"><span class="swatch teal"></span>1차 샘플</div><span class="col-count">4</span></div>
         <div class="card">
-          <span class="card-tag tag-feat">Feature</span>
-          <div class="card-title">TOTP enrollment UI in member settings</div>
-          <div class="progress"><span style="width: 70%"></span></div>
-          <div class="card-meta"><div class="left"><span class="av-sm av-dev">DP</span><span class="pts">5 pts</span></div><span>NW-201</span></div>
+          <span class="card-tag tag-basic">B · Basic</span>
+          <div class="card-title">와이드 데님 팬츠 (인디고 / 라이트 워시)</div>
+          <div class="progress"><span style="width: 60%"></span></div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-mh">MH</span><span class="pts">UNI</span></div><span>WW-27SS-BTM-001</span></div>
         </div>
         <div class="card">
-          <span class="card-tag tag-feat">Feature</span>
-          <div class="card-title">Recovery codes — generate, download, regenerate</div>
+          <span class="card-tag tag-trend">T · Trend</span>
+          <div class="card-title">시어서커 셋업 (반팔 셔츠 + 와이드 쇼츠)</div>
           <div class="progress"><span style="width: 45%"></span></div>
-          <div class="card-meta"><div class="left"><span class="av-sm av-pri">PB</span><span class="pts">3 pts</span></div><span>NW-202</span></div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-sy">SY</span><span class="pts">UNI</span></div><span>WW-27SS-SET-003</span></div>
         </div>
         <div class="card">
-          <span class="card-tag tag-bug">Bug</span>
-          <div class="card-title">Fix focus-trap regression in command bar</div>
+          <span class="card-tag tag-accent">A · Accent</span>
+          <div class="card-title">윌리 자수 메쉬 캡 (3 컬러웨이)</div>
           <div class="progress"><span style="width: 80%"></span></div>
-          <div class="card-meta"><div class="left"><span class="av-sm av-cale">CA</span><span class="pts">2 pts</span></div><span>NW-238</span></div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-jw">JW</span><span class="pts">ACC</span></div><span>WW-27SS-ACC-011</span></div>
         </div>
         <div class="card">
-          <span class="card-tag tag-design">Design</span>
-          <div class="card-title">2FA challenge step — visual + microcopy</div>
+          <span class="card-tag tag-basic">B · Basic</span>
+          <div class="card-title">코튼 라운드 반팔 티 (5 컬러)</div>
+          <div class="progress"><span style="width: 70%"></span></div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-pk">PK</span><span class="pts">UNI</span></div><span>WW-27SS-TOP-002</span></div>
+        </div>
+      </div>
+
+      <!-- 3) 품평회 — 1차 품평 진행, OK/NG 결정 단계 -->
+      <div class="col">
+        <div class="col-head"><div class="col-name"><span class="swatch amber"></span>품평회</div><span class="col-count">3</span></div>
+        <div class="card">
+          <span class="card-tag tag-trend">T · Trend</span>
+          <div class="card-title">발레 슈즈 (메리제인 스트랩 · 2 컬러)</div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-mh">MH</span><span class="pts">ACC</span></div><span>WW-27SS-SHO-007</span></div>
+        </div>
+        <div class="card">
+          <span class="card-tag tag-basic">B · Basic</span>
+          <div class="card-title">린넨 셔츠 (오버핏, 화이트/베이지/네이비)</div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-jw">JW</span><span class="pts">UNI</span></div><span>WW-27SS-TOP-009</span></div>
+        </div>
+        <div class="card">
+          <span class="card-tag tag-accent">A · Accent</span>
+          <div class="card-title">윌리 캐릭터 가디건 (니트 자카드)</div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-sy">SY</span><span class="pts">UNI</span></div><span>WW-27SS-KNT-014</span></div>
+        </div>
+      </div>
+
+      <!-- 4) LOCK — 라인업/컬러웨이/발주 수량 확정 -->
+      <div class="col">
+        <div class="col-head"><div class="col-name"><span class="swatch violet"></span>LOCK</div><span class="col-count">4</span></div>
+        <div class="card">
+          <span class="card-tag tag-carry">Carryover</span>
+          <div class="card-title">와이드 슬랙스 (26FW 캐리오버 · 컬러 추가)</div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-mh">MH</span><span class="pts">UNI</span></div><span>WW-26FW-BTM-008</span></div>
+        </div>
+        <div class="card">
+          <span class="card-tag tag-trend">T · Trend</span>
+          <div class="card-title">크롭 가디건 (5 컬러웨이 LOCK)</div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-sy">SY</span><span class="pts">WOMEN</span></div><span>WW-27SS-KNT-002</span></div>
+        </div>
+        <div class="card">
+          <span class="card-tag tag-basic">B · Basic</span>
+          <div class="card-title">베이직 후드집업 (UNI · 6 컬러)</div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-pk">PK</span><span class="pts">UNI</span></div><span>WW-27SS-OUT-001</span></div>
+        </div>
+        <div class="card">
+          <span class="card-tag tag-trend">T · Trend</span>
+          <div class="card-title">플리츠 미디 스커트 (3 컬러)</div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-jw">JW</span><span class="pts">WOMEN</span></div><span>WW-27SS-BTM-019</span></div>
+        </div>
+      </div>
+
+      <!-- 5) 발주·생산 — OEM 발주 완료, 본생산 진행 중 -->
+      <div class="col">
+        <div class="col-head"><div class="col-name"><span class="swatch pink"></span>발주·생산</div><span class="col-count">4</span></div>
+        <div class="card">
+          <span class="card-tag tag-basic">B · Basic</span>
+          <div class="card-title">베이직 화이트 티 (8 컬러 · LOT 5,000)</div>
+          <div class="progress"><span style="width: 65%"></span></div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-mh">MH</span><span class="pts">UNI</span></div><span>WW-27SS-TOP-001</span></div>
+        </div>
+        <div class="card">
+          <span class="card-tag tag-trend">T · Trend</span>
+          <div class="card-title">오버사이즈 데님 자켓 (인디고)</div>
+          <div class="progress"><span style="width: 50%"></span></div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-pk">PK</span><span class="pts">UNI</span></div><span>WW-27SS-OUT-005</span></div>
+        </div>
+        <div class="card">
+          <span class="card-tag tag-accent">A · Accent</span>
+          <div class="card-title">윌리 그래픽 후디 (시즌 키 아이템)</div>
+          <div class="progress"><span style="width: 80%"></span></div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-jw">JW</span><span class="pts">UNI</span></div><span>WW-27SS-OUT-011</span></div>
+        </div>
+        <div class="card">
+          <span class="card-tag tag-qr">QR · 추가발주</span>
+          <div class="card-title">크롭 카디건 컬러 추가 (소라/페일핑크)</div>
           <div class="progress"><span style="width: 30%"></span></div>
-          <div class="card-meta"><div class="left"><span class="av-sm av-mira">MR</span><span class="pts">3 pts</span></div><span>NW-205</span></div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-sy">SY</span><span class="pts">WOMEN</span></div><span>WW-27SS-KNT-002Q</span></div>
         </div>
       </div>
 
+      <!-- 6) 입고·판매 — 입고 완료, 자사몰/무신사 송출 중 -->
       <div class="col">
-        <div class="col-head"><div class="col-name"><span class="swatch amber"></span>In review</div><span class="col-count">3</span></div>
-        <div class="card">
-          <span class="card-tag tag-feat">Feature</span>
-          <div class="card-title">Audit-log entries for 2FA setup events</div>
-          <div class="card-meta"><div class="left"><span class="av-sm av-pri">PB</span><span class="pts">2 pts</span></div><span>NW-198</span></div>
+        <div class="col-head"><div class="col-name"><span class="swatch green"></span>입고·판매</div><span class="col-count">4</span></div>
+        <div class="card" style="opacity: 0.92;">
+          <span class="card-tag tag-basic">B · Basic</span>
+          <div class="card-title">오버핏 셔츠 (S1 입고 · 자사몰/무신사)</div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-mh">MH</span><span class="pts">UNI</span></div><span>WW-27SS-TOP-003</span></div>
         </div>
-        <div class="card">
-          <span class="card-tag tag-design">Design</span>
-          <div class="card-title">Settings nav restructure (left rail)</div>
-          <div class="card-meta"><div class="left"><span class="av-sm av-mira">MR</span><span class="pts">3 pts</span></div><span>NW-189</span></div>
+        <div class="card" style="opacity: 0.92;">
+          <span class="card-tag tag-trend">T · Trend</span>
+          <div class="card-title">와이드 데님 (S1 출시, 무신사 베스트 12위)</div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-pk">PK</span><span class="pts">UNI</span></div><span>WW-27SS-BTM-002</span></div>
         </div>
-        <div class="card">
-          <span class="card-tag tag-bug">Bug</span>
-          <div class="card-title">Workspace switcher resets scroll on close</div>
-          <div class="card-meta"><div class="left"><span class="av-sm av-cale">CA</span><span class="pts">1 pt</span></div><span>NW-233</span></div>
+        <div class="card" style="opacity: 0.92;">
+          <span class="card-tag tag-accent">A · Accent</span>
+          <div class="card-title">윌리 키링 (ACC · 자사몰 단독)</div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-jw">JW</span><span class="pts">ACC</span></div><span>WW-27SS-ACC-001</span></div>
         </div>
-      </div>
-
-      <div class="col">
-        <div class="col-head"><div class="col-name"><span class="swatch green"></span>Done</div><span class="col-count">6</span></div>
-        <div class="card" style="opacity: 0.85;">
-          <span class="card-tag tag-feat">Feature</span>
-          <div class="card-title">Workspace 2FA enforcement policy (admin)</div>
-          <div class="card-meta"><div class="left"><span class="av-sm av-dev">DP</span><span class="pts">5 pts</span></div><span>NW-181</span></div>
-        </div>
-        <div class="card" style="opacity: 0.85;">
-          <span class="card-tag tag-chore">Chore</span>
-          <div class="card-title">Bump auth library to 4.2.0</div>
-          <div class="card-meta"><div class="left"><span class="av-sm av-cale">CA</span><span class="pts">1 pt</span></div><span>NW-176</span></div>
-        </div>
-        <div class="card" style="opacity: 0.85;">
-          <span class="card-tag tag-research">Research</span>
-          <div class="card-title">2FA usability sessions (n=8)</div>
-          <div class="card-meta"><div class="left"><span class="av-sm av-pri">PB</span><span class="pts">3 pts</span></div><span>NW-172</span></div>
-        </div>
-        <div class="card" style="opacity: 0.85;">
-          <span class="card-tag tag-design">Design</span>
-          <div class="card-title">Settings tokens audit</div>
-          <div class="card-meta"><div class="left"><span class="av-sm av-mira">MR</span><span class="pts">2 pts</span></div><span>NW-168</span></div>
+        <div class="card" style="opacity: 0.92;">
+          <span class="card-tag tag-carry">Carryover</span>
+          <div class="card-title">베이직 후드 (26FW 캐리오버 · 정상판매 78%)</div>
+          <div class="card-meta"><div class="left"><span class="av-sm av-sy">SY</span><span class="pts">UNI</span></div><span>WW-26FW-OUT-002</span></div>
         </div>
       </div>
     </div>
   </main>
 
+  <!-- 우측 사이드바: 시즌 펄스 · LOCK 진행률 · Top 디자이너 · 블락 -->
   <aside class="sidebar">
     <div class="pulse">
       <div>
-        <h4>Sprint pulse</h4>
-        <div class="pulse-stat"><span>Completed</span><strong>22 of 38 pts</strong></div>
-        <div class="pulse-bar" style="margin-top: 6px;"><span style="width: 58%"></span></div>
+        <h4>시즌 펄스</h4>
+        <div class="pulse-stat"><span>LOCK 완료</span><strong>15 of 22 SKU</strong></div>
+        <div class="pulse-bar" style="margin-top: 6px;"><span style="width: 68%"></span></div>
       </div>
       <div>
-        <h4>Top contributors</h4>
+        <h4>Top 디자이너 (이번 시즌)</h4>
         <div class="top-list">
-          <div class="top-row"><span class="av-sm av-dev">DP</span><span>Devon Park</span><strong>9 pts</strong></div>
-          <div class="top-row"><span class="av-sm av-mira">MR</span><span>Mira Reddy</span><strong>5 pts</strong></div>
-          <div class="top-row"><span class="av-sm av-pri">PB</span><span>Priya Banerjee</span><strong>5 pts</strong></div>
-          <div class="top-row"><span class="av-sm av-cale">CA</span><span>Caleb Renner</span><strong>3 pts</strong></div>
+          <div class="top-row"><span class="av-sm av-jw">JW</span><span>장원 (그래픽 · 키 아이템)</span><strong>7 SKU</strong></div>
+          <div class="top-row"><span class="av-sm av-sy">SY</span><span>수영 (WOMEN 라인)</span><strong>5 SKU</strong></div>
+          <div class="top-row"><span class="av-sm av-mh">MH</span><span>민혜 MD (BTA 전체 관리)</span><strong>5 SKU</strong></div>
+          <div class="top-row"><span class="av-sm av-pk">PK</span><span>박경 디자인실장</span><strong>3 SKU</strong></div>
         </div>
       </div>
       <div>
-        <h4>Blocked</h4>
+        <h4>블락된 샘플</h4>
         <div class="pill-block">
-          <strong>1 ticket needs unblock.</strong>
-          <p style="margin: 6px 0 0; color: var(--muted); font-size: 12.5px;">NW-205 (2FA challenge design) is waiting on a copy review from Brand. Mention @Sasha or move it back to backlog.</p>
+          <strong>1건 · 원단 미입고로 1차 샘플 지연.</strong>
+          <p style="margin: 6px 0 0; color: var(--muted); font-size: 12.5px;">WW-27SS-SET-003 (시어서커 셋업) — 원단공장 입고가 27/01/15에서 27/01/29로 지연. MD실장(박경)과 OEM에 컨택 필요. 지연 시 LOCK 일정 1주 슬립.</p>
         </div>
       </div>
     </div>

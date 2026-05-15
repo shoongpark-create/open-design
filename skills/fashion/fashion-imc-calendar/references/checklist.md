@@ -1,37 +1,38 @@
-# IMC Calendar Checklist
+# IMC 캘린더 자체 검수 체크리스트
 
-P0 are hard gates.
+산출물 출력 직전 한 항목씩 직접 확인하세요. **P0**는 통과해야 하는 하드 게이트.
 
-## P0
+## P0 — 통과 필수
 
-- [ ] Header carries season, line, status, lock date.
-- [ ] Category band block carries 2–5 bands. Each band has KPI line
-  (SKU + 생산금액 + 비중 with deltas), strategic chip, and ≥ 2 bullet
-  tactics.
-- [ ] 비중 totals across all bands sum to ≥ 100% (or 100% ± 1% for
-  rounding).
-- [ ] Month track carries the months declared in Step 1 (typical SS:
-  Jan-Jul).
-- [ ] Hero IMC tile count equals the count declared in Step 1.
-- [ ] Each hero tile carries name + item-type tag + image / icon.
-- [ ] Bottom rollout banner is present at the visual foot.
-- [ ] Every `<img src="...">` (if hero icons used) resolves to a file
-  the agent wrote in `images/`. No orphan references.
-- [ ] If any image generation failed, the matching tile falls back to
-  the styled placeholder.
+- [ ] 헤더에 시즌, 라인, 상태, LOCK 일자 표기
+- [ ] 카테고리 밴드 블록에 2~5 밴드. 각 밴드에 KPI 라인(SKU + 생산금액 + 비중 + 델타), 전략 칩, ≥2 bullet 택틱
+- [ ] 모든 밴드의 비중 총합이 ≥100% (반올림 ±1% 허용)
+- [ ] 월 트랙이 Step 1에서 선언된 월 보유 (일반 SS: 1~7월)
+- [ ] 히어로 IMC 타일 수가 Step 1에서 선언된 수와 일치
+- [ ] 각 히어로 타일에 이름 + 아이템 타입 태그 + 이미지/아이콘
+- [ ] 하단 롤아웃 배너가 시각적 풋에 위치
+- [ ] 히어로 아이콘 사용 시 모든 `<img src="...">`가 `images/` 폴더 실제 파일 참조. 고아 참조 없음
+- [ ] 이미지 생성 실패 시 해당 타일이 폴백 텍스트로 자연스럽게 폴백
 
-## P1
+## P1 — 강한 IMC 캘린더
 
-- [ ] Hero tiles fall in months consistent with the band's strategic
-  chip (e.g. bag's "신학기 리뉴얼" hero falls in Jan-Feb).
-- [ ] Pillar names from `fashion-season-strategy` (if it exists) show
-  up in either the strategic chips or the rollout banner — the IMC
-  calendar is its tactical extension, not an independent doc.
-- [ ] YoY deltas use canonical sign convention (`-22 SKU`, `+4%p`).
+- [ ] 히어로 타일이 밴드 전략 칩과 정합한 월에 배치 (예: 가방 `신학기 리뉴얼` 히어로가 1~2월에 배치)
+- [ ] `fashion-season-strategy` 필러 이름(존재 시)이 전략 칩 또는 롤아웃 배너에 등장 — IMC 캘린더는 시즌 전략의 택틱 확장
+- [ ] YoY 델타가 canonical 부호 컨벤션 사용 (`-22 SKU`, `+4%p`)
+- [ ] **한국 K-패션 컨텍스트** 본문 카피가 한국 패션 비즈니스 등록 따름
 
-## P2
+## P2 — 다듬기
 
-- [ ] Month axis labels are full month names; tile alignment to month
-  is visually clear (gridlines, ticks).
-- [ ] Open / next decisions list has owner + date for every entry, or
-  the section is omitted entirely.
+- [ ] 월 축 라벨이 full 월 이름; 타일의 월 정렬이 시각적으로 명확 (그리드 라인, 틱)
+- [ ] Open / Next Decisions 리스트의 모든 항목에 owner + 일자, 또는 섹션 전체 생략
+
+## K-DTC 컨텍스트 특화 검수
+
+- [ ] 무신사 무진장 세일(4월·11월), 자사몰 매월 드롭 등 한국 K-패션 채널 이벤트와 정합
+- [ ] 인플루언서·앰배서더 슬롯이 캐스팅 일정 (시즌 시작 2개월 전 협상) 정합
+- [ ] 팝업스토어 일정(시즌 중반 2~3개월차) 포함 시 VMD 일정과 정합
+- [ ] 룩북 공개 시점(시즌 시작 1~2개월 전)과 IMC 1차 KV 점화 시점 정합
+- [ ] 시즌 후반(S3~S4 판기) QR/SPOT IMC 추가 슬롯 여유 보유
+- [ ] 카카오톡 알림톡 시나리오 (회원 사전 알림 → 일반 공개 → 리마인드)와 매월 드롭 정합
+
+검수 통과 후 사용자에게 산출물 외에 별도 보고는 하지 않습니다 (출력 규약).

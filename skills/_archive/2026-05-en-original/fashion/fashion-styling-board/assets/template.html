@@ -1,0 +1,115 @@
+<!doctype html>
+<!--
+  fashion-styling-board template
+  Copy to <project>/index.html, replace [REPLACE] tokens, bind active
+  DESIGN.md tokens into :root, paste the chosen rhythm from
+  references/layouts.md into <main id="styling-board">.
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE Season] [REPLACE Period] Styling Board · [REPLACE Brand]</title>
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
+  :root {
+    /* Bind from active DESIGN.md */
+    --ink:        #1f2933;
+    --paper:      #fafaf7;
+    --rule:       #e7e3da;
+    --muted:      #6b7280;
+    --accent:     #b8443a;
+
+    /* Axis dot colors — bound from active DESIGN.md when possible */
+    --axis-basic:     #d6d2c4;
+    --axis-new-basic: #8aa6c8;
+    --axis-trend:     #5b8169;
+    --axis-accent:    var(--accent);
+
+    --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
+
+    --font-display-report: "Paperlogy", "Wanted Sans Variable", "SUIT Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
+
+    --font-display-street: "Black Han Sans", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-play: "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-romance: "Grandiflora One", "Diphylleia", "Hahmlet", "Noto Serif KR", "Source Serif 4", ui-serif, Georgia, serif;
+
+    --font-display: var(--font-display-report);
+    --font-text: var(--font-sans);
+    --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+    --gap-1: 4px;
+    --gap-2: 8px;
+    --gap-3: 16px;
+    --gap-4: 24px;
+    --gap-5: 40px;
+    --gap-6: 64px;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: var(--font-text); }
+  body { padding: var(--gap-5) var(--gap-5) var(--gap-6); }
+
+  .board-header { border-bottom: 1px solid var(--rule); padding-bottom: var(--gap-4); margin-bottom: var(--gap-4); }
+  .board-meta { display: flex; gap: var(--gap-3); font-family: var(--font-mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .board-meta .status { margin-left: auto; }
+  .thesis { font-family: var(--font-display); font-size: 32px; line-height: 1.15; margin: var(--gap-3) 0 0; max-width: 60ch; }
+
+  /* Track strip */
+  .track-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap-2); margin: var(--gap-4) 0 var(--gap-3); padding: var(--gap-2) 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .track-strip--paired { grid-template-columns: repeat(2, 1fr); }
+  .axis-label { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 6px 10px; border-radius: 999px; background: rgba(0,0,0,0.025); position: relative; }
+  .axis-label::before { content: ""; display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; vertical-align: middle; background: currentColor; opacity: 0.55; }
+  .axis-label[data-axis="basic"]     { color: var(--axis-basic); }
+  .axis-label[data-axis="new-basic"] { color: var(--axis-new-basic); }
+  .axis-label[data-axis="trend"]     { color: var(--axis-trend); }
+  .axis-label[data-axis="accent"]    { color: var(--axis-accent); }
+
+  /* Look grid */
+  .look-grid { display: grid; gap: var(--gap-3); margin-bottom: var(--gap-5); }
+  .look-grid--row { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); align-items: end; }
+
+  .figure-card { display: flex; flex-direction: column; align-items: center; gap: var(--gap-2); padding: var(--gap-2); border-radius: 6px; background: rgba(255,255,255,0.6); position: relative; }
+  .axis-dot { position: absolute; top: 6px; right: 6px; width: 10px; height: 10px; border-radius: 50%; background: var(--axis-basic); }
+  .figure-card[data-axis="basic"]     .axis-dot { background: var(--axis-basic); }
+  .figure-card[data-axis="new-basic"] .axis-dot { background: var(--axis-new-basic); }
+  .figure-card[data-axis="trend"]     .axis-dot { background: var(--axis-trend); }
+  .figure-card[data-axis="accent"]    .axis-dot { background: var(--axis-accent); }
+  .look-number { font-family: var(--font-mono); font-size: 11px; color: var(--muted); align-self: flex-start; padding-left: 4px; }
+  .image-frame { width: 100%; aspect-ratio: 4/5; background: linear-gradient(180deg, #f3efe6 0%, #ebe6db 100%); border-radius: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .image-frame img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .image-frame:not(:has(img))::after,
+  .image-frame img[src=""] + ::after { content: attr(data-fallback); display: block; padding: 8px; font-size: 10px; line-height: 1.3; color: var(--muted); font-family: var(--font-mono); text-align: center; }
+  .image-frame[data-fallback]:not(:has(img[src]))::after { content: attr(data-fallback); padding: 8px; font-size: 10px; line-height: 1.3; color: var(--muted); font-family: var(--font-mono); text-align: center; }
+  figcaption { font-size: 11px; line-height: 1.35; color: var(--ink); text-align: center; max-width: 22ch; }
+  .chip-strip { display: flex; gap: 3px; }
+  .chip { width: 10px; height: 10px; border-radius: 50%; border: 1px solid rgba(0,0,0,0.08); }
+
+  /* Axis blocks (rhythm C) */
+  .axis-block { margin-bottom: var(--gap-5); border-top: 1px solid var(--rule); padding-top: var(--gap-3); }
+  .axis-header { display: flex; align-items: baseline; gap: var(--gap-3); margin-bottom: var(--gap-3); }
+  .axis-header h2 { font-family: var(--font-display); font-size: 20px; margin: 0; letter-spacing: 0.05em; }
+  .axis-note { color: var(--muted); font-size: 13px; margin: 0; }
+
+  /* Tail blocks */
+  .axis-summary, .carryover-map, .open-decisions { margin-top: var(--gap-5); padding-top: var(--gap-4); border-top: 1px solid var(--rule); }
+  .axis-summary h2, .carryover-map h2, .open-decisions h2 { font-family: var(--font-display); font-size: 16px; margin: 0 0 var(--gap-3); letter-spacing: 0.05em; text-transform: uppercase; }
+  table { border-collapse: collapse; font-size: 13px; }
+  th, td { padding: 6px 12px; text-align: left; border-bottom: 1px solid var(--rule); }
+  th { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--muted); }
+  tr.total td { font-weight: 600; border-bottom: none; }
+  ul { margin: 0; padding-left: 18px; }
+  li { font-size: 13px; line-height: 1.5; }
+
+  @media print { body { padding: 24px; } .figure-card { break-inside: avoid; } }
+</style>
+</head>
+<body>
+  <main id="styling-board">
+    <!-- PASTE one rhythm from references/layouts.md here, then the always-on tail blocks. -->
+  </main>
+</body>
+</html>

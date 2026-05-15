@@ -1,81 +1,60 @@
-# Fashion Color Story Checklist
+# 컬러 스토리 자체 검수 체크리스트
 
-A color story is downstream of the concept board and upstream of every
-sample. If the codes drift here, the entire season drifts. Run this gate
-before emitting.
+컬러 스토리는 컨셉 보드 하위 산출물이자 모든 샘플의 상위 산출물입니다. 여기서 코드가 드리프트하면 시즌 전체가 드리프트합니다. 출력 직전 한 항목씩 직접 확인하세요.
 
-## P0 — Must pass
+## P0 — 통과 필수
 
-- The artifact is a single self-contained HTML file. The only external
-  references are local images under `images/` accessed by relative paths.
-- Every locked color has **HEX + Pantone TCX code with TCX color name**
-  (e.g. `19-3911 TCX · Iron`). Missing TCX is a P0 failure.
-- Every TCX code uses the format `XX-XXXX TCX` (5 digits, hyphenated, TCX
-  suffix). `Pantone 19-3911` without `TCX` is rejected.
-- Color count is between **6 and 12** total. Fewer than 6 is a thin
-  palette; more than 12 is unmerchandisable for K-young-casual.
-- Every color is assigned **exactly one tier**: main / season / accent.
-- The hierarchy proportion bar visually matches the declared structure
-  (60/30/10 declared = 60/30/10 rendered).
-- The category × color matrix has at least 4 categories and every category
-  has at least one non-empty cell. A category with zero colorways is a
-  matrix error.
-- The accent tier appears in **2 or fewer** categories — accent leakage
-  across all categories breaks accent function.
-- Anti-palette has **3 or more** explicit "no" entries with reasons.
-- Active `DESIGN.md` typography / spacing tokens are bound into `:root`.
-  Color tokens are derived from the locked palette, not the design system.
-- Every major section has `data-od-id`.
-- No fake brand logos, no readable generated text inside any chip, no
-  watermark.
+- [ ] 산출물이 단일 자기완결 HTML 파일. 외부 참조는 `images/` 하위 로컬 이미지(상대 경로)뿐
+- [ ] 모든 LOCK 컬러가 **HEX + Pantone TCX 코드 + TCX 컬러 이름**을 보유 (예: `19-3911 TCX · Iron`). TCX 누락은 P0 실패
+- [ ] 모든 TCX 코드가 `XX-XXXX TCX` 형식 (5자리, 하이픈, TCX 접미사). `Pantone 19-3911` (TCX 누락)은 거절
+- [ ] 총 컬러 수가 **6~12개** 사이. 6 미만은 빈약한 팔레트, 12 초과는 한국 영캐주얼 기준 MD 불가능
+- [ ] 모든 컬러가 **정확히 하나의 티어**에 할당: main / season / accent
+- [ ] 계층 비율 바가 선언된 구조와 시각적으로 일치 (60/30/10 선언 = 60/30/10 렌더)
+- [ ] 카테고리 × 컬러 매트릭스에 최소 4개 카테고리, 모든 카테고리가 최소 1개 비어 있지 않은 셀 보유. 컬러웨이 0인 카테고리는 매트릭스 오류
+- [ ] 액센트 티어가 **2개 이하 카테고리**에만 등장. 전 카테고리 액센트 유출은 액센트 기능 파괴
+- [ ] Anti-palette에 **3개 이상** 명시적 "no" 항목 + 사유
+- [ ] `DESIGN.md` 타이포그래피 / 스페이싱 토큰이 `:root`에 바인딩됨. 컬러 토큰은 LOCK 팔레트에서 유도, 디자인 시스템 아님
+- [ ] 모든 주요 섹션에 `data-od-id`(OpenDesign 환경) 또는 일반 `id` 속성
+- [ ] 가짜 브랜드 로고 없음, 칩 안의 읽을 수 있는 생성 텍스트 없음, 워터마크 없음
 
-## P1 — Strong color story
+## P1 — 강한 컬러 스토리
 
-- Every locked color has a **fabric pairings** list with at least 2
-  materials. Colors without fabric context are abstract.
-- Every locked color has at least one **use rule** — a "use when" or
-  "avoid when" line. Without a rule, downstream decisions guess.
-- Color names are emotional + memorable (e.g. "humid linen ivory", not
-  "Color 03" or just the TCX name).
-- Carryover colors are explicitly tagged as carryover with prior-season
-  source ("from 26FW", "from 26SS").
-- The QC section specifies tolerance per tier (main ≤ 1.0, season ≤ 1.5,
-  accent ≤ 2.0 typical) — a single global tolerance is a P1 weakness.
-- The QC section names the lab-dip approval flow (3-strike with D65 +
-  TL84 light boxes).
-- Linkage to concept board is explicit — the thesis paragraph names the
-  concept-board territory or seed it derives from.
-- TCX vs. TPG distinction is correctly stated (TCX for fabric only).
+- [ ] 모든 LOCK 컬러가 **패브릭 페어링 리스트**를 보유 (최소 2개 소재). 패브릭 컨텍스트 없는 컬러는 추상적
+- [ ] 모든 LOCK 컬러가 최소 1개 **사용 규칙** 보유 — `사용 / 회피` 라인. 규칙 없는 컬러는 하위 결정에서 추측 유발
+- [ ] 컬러 이름이 감성적·기억성 있음 (`humid linen ivory`이지 `Color 03` 또는 TCX 이름 그대로 아님)
+- [ ] 캐리오버 컬러가 명시적으로 캐리오버 태그 + 이전 시즌 출처 (`from 26FW`, `from 26SS`)
+- [ ] QC 섹션이 티어별 tolerance 명시 (메인 ≤ 1.0, 시즌 ≤ 1.5, 액센트 ≤ 2.0 일반). 단일 글로벌 tolerance는 P1 약점
+- [ ] QC 섹션이 랩딥 승인 흐름 명명 (D65 + TL84 라이트박스 + 3-strike)
+- [ ] 컨셉 보드와의 연결이 명시적 — thesis 단락이 컨셉 보드 영역 또는 시드를 명명
+- [ ] TCX vs. TPG 구분이 정확하게 명시 (TCX는 패브릭 전용)
+- [ ] **한국 K-패션 컨텍스트인 경우** 본문 카피가 한국 패션 비즈니스 등록(register)을 따름 — 영어 산업용어 유지, 한국어 명사구 종결
 
-## P2 — Polish
+## P2 — 다듬기
 
-- Master grid chips are visually generous (≥ 80px swatch height) so the
-  document is scan-readable on a wall print.
-- Per-color detail spreads use a wide swatch (≥ 280px height) so the team
-  can compare against printed TCX swatch under retail lighting.
-- The proportion bar uses tier-coded colors that the eye can map to the
-  master grid quickly.
-- Code tables use a monospace font for HEX / TCX / Coloro codes (the
-  industry standard so codes can be copy-paste verified at a glance).
-- The print CSS media query keeps each color detail spread on its own
-  page — color story is regularly printed for wall reference.
-- Mobile reflow keeps swatch + code side-by-side at minimum width 480px;
-  below that, swatch stacks above code.
-- One imagegen mood thumbnail is included **only** for accent or season
-  colors that benefit from textile context. Main carryover tier should
-  not need imagery — code + fabric pairing list is enough.
+- [ ] 마스터 그리드 칩이 시각적으로 풍부함 (≥ 80px 스와치 높이) — 벽 인쇄에서 스캔 가독성
+- [ ] 컬러별 디테일 스프레드가 와이드 스와치 사용 (≥ 280px 높이) — 매장 조명 하 인쇄 TCX 스와치 비교 가능
+- [ ] 비율 바가 티어 컬러 코드 사용 — 마스터 그리드 매핑이 시각적으로 빠름
+- [ ] 코드 테이블이 HEX / TCX / Coloro에 monospace 폰트 사용 (산업 표준 — 한눈에 복사·검증)
+- [ ] print 미디어 쿼리가 컬러 디테일 스프레드를 페이지 단위로 분리 (컬러 스토리는 벽 레퍼런스용 인쇄 자주 함)
+- [ ] 모바일 reflow가 480px 최소 너비에서 스와치 + 코드 나란히 유지, 이하에서는 코드 위에 스와치 스택
+- [ ] 무드 썸네일은 액센트 또는 시즌 컬러 중 패브릭 컨텍스트가 도움될 때만 포함. 메인 캐리오버 티어는 이미지 불요 — 코드 + 패브릭 페어링 리스트로 충분
 
-## Domain-specific gotchas to verify
+## K-DTC 도메인 특화 검수
 
-- **TCX vs. TPG** — every code labeled `TPG` must be flagged "paper /
-  lookbook only — never fabric matching".
-- **Coloro codes** — if shown, they are reference, not production. State
-  this where Coloro appears.
-- **Carryover sell-through cue** — if available from prior-season data,
-  cite a real number ("26FW navy: 78% sell-through, top-3"). If not
-  available, write "(sell-through pending)".
-- **Anti-palette specificity** — vague "no bright colors" is rejected.
-  "no fluorescents because Musinsa thumbnail wash" is accepted.
-- **Brand main carryover** — if the brand has a permanent main color
-  (e.g. brand-defining navy), the master grid must include it. Skipping
-  brand-main breaks brand continuity even if the season pivots elsewhere.
+- [ ] **TCX vs. TPG** — `TPG` 라벨이 붙은 모든 코드는 `인쇄·룩북 전용 — 절대 패브릭 매칭 금지` 플래그
+- [ ] **Coloro 코드** — 표시 시 참조용임을 명시 (생산 표준 아님)
+- [ ] **캐리오버 정상판매율(sell-through) 큐** — 이전 시즌 데이터 사용 가능 시 실제 수치 인용 (`26FW 네이비: 78% 정상판매율, top-3`). 미가용 시 `정상판매율 pending` 표기
+- [ ] **Anti-palette 구체성** — `밝은 컬러 금지` 같은 모호한 표현 거절. `형광 컬러 금지 — 무신사 썸네일 워시아웃` 같은 구체 사유 채택
+- [ ] **브랜드 메인 캐리오버** — 브랜드가 영구 메인 컬러를 보유한 경우 (예: 브랜드 정의 네이비), 마스터 그리드에 반드시 포함. 브랜드 메인 스킵은 시즌이 방향 전환해도 브랜드 연속성 파괴
+- [ ] 카테고리별 컬러웨이 수가 K-DTC rule of thumb 따름 (셔츠 3~4, 아우터 1~2, 팬츠 2~3, 니트 3~5, 원피스 1~2, ACC 2~3)
+- [ ] 무신사 썸네일 친화 컬러 1개 이상 포함 (드라이 팝 액센트 역할)
+- [ ] 랩딥 strike 일정이 시즌 사이클과 정합 (시즌 시작 4~5개월 전 LOCK → 3개월 전 본생산)
+
+## 검수 실행 흐름
+
+1. 산출물 HTML을 브라우저(또는 미리보기 환경)에서 열어 시각적으로 점검
+2. P0 항목을 차례로 확인. 미통과 시 작업으로 되돌아가 수정
+3. P1·P2는 시간 여유에 따라 다듬기
+4. 최종 검수 통과 후 헤더 상태를 `locked`로, LOCK 일자 기록
+
+검수 통과 후 사용자에게 산출물 외에 별도 보고는 하지 않습니다 (출력 규약).

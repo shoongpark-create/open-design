@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 브랜드] [REPLACE 시즌] [REPLACE 판기] 매출 결산 리포트</title>
+<!--
+  K-패션 시즌 매출 결산 / 판기별 매출 리포트 시드.
+  마스트헤드 + KPI 4종 + 매출 추이 + 비용 분해 + P&L 표 + TOP SKU + 아웃룩 구조.
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 토큰 바인딩
+    4) references/layouts.md에서 리듬 1개를 골라 <main id="report"> 안에 붙여 넣기
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude: <artifact>
+    - 그 외: ```html 코드 블록
+    - OpenDesign: data-od-id
+
+  K-패션 결산 보고서 표준 구조:
+    - 마스트헤드 (브랜드/시즌/판기 + Confidential 배지)
+    - 시즌 요약 lede 1문단
+    - KPI 4종 (정판율 / 회전율 / GMV / AOV)
+    - 매출 추이 차트 (주별 또는 월별)
+    - 비용 분해 (사입원가 / 마케팅 / 물류 / 인건비 / 시스템)
+    - P&L 요약 표 (현재 판기 vs 전판기 vs 전년 동기)
+    - TOP SKU 표 (5~10개)
+    - 다음 시즌 아웃룩 + 사인오프
+-->
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+  :root {
+    --bg:         #f7f6f3;
+    --paper:      #ffffff;
+    --surface:    #ffffff;
+    --surface-2:  #faf9f5;
+    --fg:         #1c1b1a;
+    --muted:      #76736d;
+    --muted-2:    #9b9892;
+    --border:     #e6e3dd;
+    --border-2:   #ededea;
+    --accent:     #c96442;
+    --accent-soft: color-mix(in oklch, var(--accent) 12%, transparent);
+    --good:       #2f7d4a;
+    --warn:       #c79321;
+    --bad:        #b53a2a;
+    --basic:      #6b6964;
+    --trend:      #1f6dbc;
+    --accent-bta: #c96442;
+
+    --font-sans:
+      "Pretendard Variable", Pretendard,
+      "Apple SD Gothic Neo", "Noto Sans KR",
+      system-ui, sans-serif;
+    --font-display-report:
+      "Pretendard Variable", "Wanted Sans Variable",
+      "SUIT Variable", sans-serif;
+    --font-display: var(--font-display-report);
+    --font-mono:
+      "JetBrains Mono", "IBM Plex Mono", "SF Mono",
+      ui-monospace, Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  body * { font-variant-numeric: tabular-nums; }
+
+  .page {
+    max-width: 1080px;
+    margin: 40px auto;
+    background: var(--paper);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 56px 64px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+  }
+
+  /* ─── 마스트헤드 ─── */
+  header.masthead {
+    border-bottom: 2px solid var(--fg);
+    padding-bottom: 22px;
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 18px;
+    align-items: end;
+  }
+  .masthead .brand {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .masthead .crumb {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .masthead .title {
+    font-family: var(--font-display);
+    font-size: 32px;
+    letter-spacing: -0.025em;
+    margin: 8px 0 0;
+    font-weight: 600;
+    line-height: 1.15;
+  }
+  .masthead .right {
+    text-align: right;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .badge-confidential {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  /* ─── lede ─── */
+  .lede {
+    font-size: 18px;
+    line-height: 1.55;
+    margin: 0 0 36px;
+    max-width: 70ch;
+    color: var(--fg);
+  }
+  .lede b { color: var(--accent); font-weight: 600; }
+
+  /* ─── KPI ─── */
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 36px;
+  }
+  .kpi {
+    padding: 22px 24px;
+    border-right: 1px solid var(--border);
+  }
+  .kpi:last-child { border-right: 0; }
+  .kpi .label {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  .kpi .value {
+    font-family: var(--font-display);
+    font-size: 34px;
+    letter-spacing: -0.025em;
+    line-height: 1;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .kpi .delta { font-size: 12px; }
+  .kpi .delta.up { color: var(--good); }
+  .kpi .delta.down { color: var(--bad); }
+  .kpi .sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  /* ─── 섹션 헤더 ─── */
+  .section { margin-bottom: 40px; }
+  .section h2 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin: 0 0 18px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+    font-weight: 600;
+  }
+  .section h2 small {
+    float: right;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── 차트 ─── */
+  .chart svg { width: 100%; display: block; }
+
+  /* ─── 비용 분해 (수평 바) ─── */
+  .cost-bar {
+    display: grid;
+    grid-template-columns: 140px 1fr 110px;
+    align-items: center;
+    gap: 14px;
+    padding: 8px 0;
+    border-top: 1px solid var(--border-2);
+  }
+  .cost-bar:first-of-type { border-top: 0; }
+  .cost-bar .name { font-size: 13.5px; }
+  .cost-bar .track {
+    background: var(--border-2);
+    height: 10px;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .cost-bar .track > i {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+  }
+  .cost-bar .track > i.alt { background: var(--basic); }
+  .cost-bar .value {
+    text-align: right;
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 13px;
+  }
+  .cost-bar .value small { color: var(--muted); font-size: 11px; }
+
+  /* ─── 표 ─── */
+  table { width: 100%; border-collapse: collapse; }
+  th, td {
+    text-align: left;
+    padding: 11px 8px;
+    border-top: 1px solid var(--border-2);
+    font-size: 14px;
+  }
+  th {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    border-top: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  td.num {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+  }
+  tr.total td {
+    border-top: 2px solid var(--fg);
+    font-weight: 600;
+  }
+  tr.subtotal td {
+    background: var(--surface-2);
+  }
+
+  .pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    padding: 2px 9px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    letter-spacing: 0.06em;
+  }
+  .pill.good { color: var(--good); border-color: color-mix(in oklch, var(--good) 30%, transparent); }
+  .pill.warn { color: var(--warn); border-color: color-mix(in oklch, var(--warn) 30%, transparent); }
+  .pill.bad  { color: var(--bad);  border-color: color-mix(in oklch, var(--bad)  30%, transparent); }
+  .pill.basic { color: var(--basic); }
+  .pill.trend { color: var(--trend); }
+  .pill.accent { color: var(--accent-bta); }
+
+  /* ─── 아웃룩 + 사인오프 ─── */
+  .outlook {
+    background: var(--surface-2);
+    border-left: 3px solid var(--accent);
+    padding: 22px 26px;
+    margin-bottom: 28px;
+    border-radius: 0 6px 6px 0;
+  }
+  .outlook h3 {
+    margin: 0 0 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .outlook p {
+    margin: 0 0 8px;
+    font-size: 15.5px;
+    line-height: 1.6;
+    color: var(--fg);
+    max-width: 70ch;
+  }
+
+  footer.signoff {
+    border-top: 1px solid var(--border);
+    padding-top: 22px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  footer.signoff .signer {
+    font-family: var(--font-display);
+    font-size: 15px;
+    color: var(--fg);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  footer.signoff .dept {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* SKU 로고 placeholder */
+  .sku-logo {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--accent-soft), transparent);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    color: var(--muted);
+    letter-spacing: 0;
+  }
+
+  /* 반응형 */
+  @media (max-width: 820px) {
+    .page { padding: 32px 24px; margin: 16px; }
+    .kpis { grid-template-columns: 1fr 1fr; }
+    .kpi { border-right: 0; border-top: 1px solid var(--border); }
+    .kpi:nth-child(odd) { border-right: 1px solid var(--border); }
+    .cost-bar { grid-template-columns: 1fr; }
+    .cost-bar .value { text-align: left; }
+  }
+</style>
+</head>
+<body>
+  <article class="page">
+    <main id="report">
+      <!--
+        references/layouts.md에서 리듬 1개를 골라 여기에 붙여 넣으세요.
+
+        리듬 A · 판기 결산 (S1·S2·S3·S4 판기 단위) — 기본값
+        리듬 B · 월별 매출 리뷰 (단일 월 결산)
+        리듬 C · 시즌 종합 결산 (S1~S4 시즌 전체 합본)
+        리듬 D · 분기 IR 자료 (회계 분기 단위, 외부 보고)
+
+        모든 리듬은 다음 섹션 순서를 따릅니다:
+        1) 마스트헤드
+        2) 시즌 요약 lede 1문단
+        3) KPI 4종
+        4) 매출 추이 차트
+        5) 비용 분해
+        6) P&L 요약 표
+        7) TOP SKU 표
+        8) 아웃룩 + 사인오프
+      -->
+    </main>
+  </article>
+</body>
+</html>

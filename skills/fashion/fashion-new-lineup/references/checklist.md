@@ -1,46 +1,53 @@
-# New Lineup Checklist
+# 신규 라인업 자체 검수 체크리스트
 
-Run before emitting `<artifact>`. P0 are hard gates.
+산출물 출력 직전에 한 항목씩 확인하세요. **P0**는 통과해야 하는 하드 게이트.
 
-## P0 — Hard gates
+## P0 — 통과 필수
 
-- [ ] Header carries season, line, lineup name, status, lock date.
-- [ ] Lineup thesis paragraph names the anchor + bridge role + what
-  this series replaces.
-- [ ] Categories spread carries 3+ categories (target 5–8).
-- [ ] Each category in the spread has at least 2 reference images
-  *and* a chip-strip / item-card entry.
-- [ ] Every `<img src="...">` resolves to a file the agent wrote in
-  `images/`. No orphan references.
-- [ ] If any image generation failed, the matching `<figure>` falls
-  back to the styled placeholder.
-- [ ] SKU table totals match the SKU target stated in the thesis.
-- [ ] Anti-pattern lists ≥ 3 explicit "no" entries.
-- [ ] No external image URLs, no base64, no absolute paths.
-- [ ] Color references use color-story names; fabric references use
-  fabric-board names; graphic references use graphic-direction names.
-  No invented vocabulary.
+- [ ] 헤더에 시즌, 라인(UNI/WOMEN/KIDS/ACC), 라인업 이름, 상태(concept/v1/locked), 락 일자가 모두 표기됨
+- [ ] 라인업 명제 단락이 **앵커 + 브릿지 역할 + 무엇을 대체하는지** 명명
+- [ ] 카테고리 전개에 **3개 이상의 카테고리** (권장 5~8개)
+- [ ] 전개의 모든 카테고리에 **최소 2개의 레퍼런스 이미지** + 칩 스트립 / 아이템 카드 엔트리
+- [ ] 모든 `<img src="...">` 가 `images/` 폴더 내 파일로 해소됨. 고아 참조 없음
+- [ ] 이미지 생성 실패 시 해당 `<figure>` 가 폴백 블록(CSS 그라데이션 + `data-fallback` 메시지)으로 표시
+- [ ] SKU 표 합계가 명제에 명시된 SKU 타겟과 일치
+- [ ] Anti-pattern에 **명시적 "아니다" 항목 최소 3개**
+- [ ] 외부 이미지 URL, base64, 절대 경로(`$CODEX_HOME` 등) 없음
+- [ ] 컬러 참조는 color-story의 컬러명, 패브릭 참조는 fabric-board의 소재명, 그래픽 참조는 graphic-direction의 그래픽명 사용. **새 어휘 발명 금지**
 
-## P1 — Quality bars
+## P1 — 강력 권장
 
-- [ ] Lineup name appears in the brand's own language (Korean if
-  Korean brand) — do not auto-translate.
-- [ ] Anchor (motif / detail / silhouette / function) is concrete, not
-  generic ("ribbon detail at neckline" beats "feminine accent").
-- [ ] Bridge map exists when Step 1 named bridge items; otherwise the
-  section is omitted, not stubbed.
-- [ ] Per-category notes are construction-specific ("scallop hem on
-  denim short", "all-over polka dot at 3mm scale on cotton") not
-  mood-only.
-- [ ] Carryover ratio in the thesis is honored by the SKU table's
-  carryover column.
+- [ ] 라인업 이름이 **브랜드의 실제 표기**(예: "폴카 도트 시리즈"). 영문 자동 번역 금지
+- [ ] 앵커가 **구체적** ("네크라인에 리본 디테일"). "여성스러운 액센트" 같은 추상 카피 아님
+- [ ] Step 1에서 브릿지 아이템을 명명한 경우만 Bridge Map 섹션이 존재. 없는 경우 섹션 자체를 삭제 (빈 헤딩 금지)
+- [ ] 카테고리별 노트가 **구조 특화** ("코튼 위 3mm all-over 폴카 도트", "데님 쇼츠에 스캘롭 헴"). 무드 카피 아님
+- [ ] 명제의 캐리오버 비율이 SKU 표의 캐리오버 컬럼과 일관됨
 
-## P2 — Polish
+## P2 — 다듬기
 
-- [ ] All lineup imagery shares lighting / framing so the series reads
-  as one set.
-- [ ] No more than two categories carry the same color tier (BASIC /
-  TREND / ACCENT) without a documented reason.
-- [ ] Open / next decisions list has owner + date for every entry, or
-  the section is omitted entirely.
-- [ ] Lineup thesis paragraph is one paragraph (≤ 5 sentences).
+- [ ] 모든 라인업 이미지가 일관된 라이팅 / 프레이밍 공유 → 시리즈가 하나의 세트로 읽힘
+- [ ] BTA 티어가 적절히 분산 — 2개 이상의 카테고리가 같은 티어에 몰리지 않음 (문서화된 이유 없으면)
+- [ ] Open / Next Decisions 항목마다 owner + 일자 존재. 없으면 섹션 자체 삭제
+- [ ] 라인업 명제가 한 문단(5문장 이내)
+
+## K-패션 비즈니스 특화 검수
+
+- [ ] **캐리오버 정책이 정상판매율 의식** — 26FW 정상판매율 낮았던 SKU를 대체하는 의도가 명제에 명시
+- [ ] **target lot이 QR/SPOT 정책 의식** — 1차 발주 lot + QR 추가 발주 가능성 표기 (예: "1,500 pcs 초도 + 800 pcs QR 대기")
+- [ ] **BTA(Basic/Trend/Accent) 티어 정합성** — 시리즈 전체가 한 BTA에 몰리지 않음. 보통 BASIC 30% + NEW BASIC 30% + TREND 30% + ACCENT 10% 권장
+- [ ] **UNI ↔ WOMEN 브릿지 정합성** — 브릿지 아이템의 핏 차이가 명시됨 (예: UNI 박시, WOMEN 슬림)
+- [ ] **라인업 이름이 브랜드 정체성과 정합** — 와키윌리(폴카, 리본) vs 마뗑킴(미니멀, 워시드) vs 아더에러(컨셉추얼) 톤 차이 의식
+- [ ] **자사몰 + 무신사 동시 운영 의식** — 라인업이 두 채널 모두에 적용 가능한 SKU 구성인지 확인 (무신사는 카테고리 분리, 자사몰은 시리즈 페이지 가능)
+- [ ] **시즌 사이클 위치 정합** — 시즌 시작 3개월 전 락 기준. 너무 늦으면 생산 리드타임(TT) 부족, 너무 빠르면 트렌드 반영 부족
+- [ ] **디스플레이 폰트가 라인업 톤에 맞음** — 위트/캐릭터 → play, 로맨틱/우먼 → romance, 스트릿 → street, MD 운영 → report
+
+## 검수 실행 흐름
+
+1. 산출물 HTML을 브라우저에서 열어 시각적으로 점검
+2. P0 항목을 차례로 확인. 미통과 시 작업으로 되돌아가 수정
+3. 이미지 생성 실패한 카테고리가 있다면 폴백 블록이 정상 노출되는지 확인
+4. SKU 표 합계 계산 (수동) → 명제 SKU 타겟과 비교
+5. P1·P2는 시간 여유에 따라 다듬기
+6. 최종 검수 통과 후 헤더 상태를 `locked`로 표기
+
+검수 통과 후 사용자에게 산출물 외에 별도 보고는 하지 않습니다 (출력 규약).

@@ -1,16 +1,22 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tomato — focus screen</title>
+  <title>MATIN KIM — 27SS DROP 02 카운트다운 (Focus 아키타입)</title>
+  <!--
+    K-패션 의류 쇼핑 앱 예시 — Focus 아키타입(F).
+    마뗑킴(MATIN KIM) 자사몰 앱의 27SS Floral Big Shirt 발매 카운트다운 화면.
+    CSS는 원본 Tomato Focus 예시와 동일. 카피·라벨·시계 숫자만 K-패션 컨텍스트로 교체.
+    경고: 이 예시는 단순 시드 — 실제 사용 시 assets/template.html을 복사해 시작하세요.
+  -->
   <style>
     :root {
-      --bg: #fafaf9; --fg: #1c1b1a; --muted: #6b6964; --border: #e6e4e0;
-      --accent: #c96442; --surface: #ffffff;
+      --bg: #f5f2eb; --fg: #1c1b1a; --muted: #6b6964; --border: #e0dcd1;
+      --accent: #6b7a4f; --surface: #ffffff;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; min-height: 100vh; background: var(--bg); display: flex; align-items: center; justify-content: center; padding: 32px; font: 14px/1.5 -apple-system, system-ui, sans-serif; color: var(--fg); }
+    body { margin: 0; min-height: 100vh; background: var(--bg); display: flex; align-items: center; justify-content: center; padding: 32px; font: 14px/1.5 'Pretendard Variable', -apple-system, system-ui, sans-serif; color: var(--fg); }
     .frame { width: 390px; height: 844px; background: black; border-radius: 56px; padding: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.18); position: relative; }
     .frame::before { content: ''; position: absolute; top: 22px; left: 50%; transform: translateX(-50%); width: 124px; height: 36px; background: black; border-radius: 999px; z-index: 5; }
     .screen { width: 100%; height: 100%; background: var(--bg); border-radius: 44px; overflow: hidden; display: flex; flex-direction: column; }
@@ -18,20 +24,20 @@
     .status .right { display: flex; gap: 6px; align-items: center; }
     .header { padding: 56px 24px 24px; }
     .header .greeting { color: var(--muted); font-size: 14px; margin: 0 0 4px; }
-    .header h1 { margin: 0; font-size: 22px; letter-spacing: -0.01em; }
+    .header h1 { margin: 0; font-size: 22px; letter-spacing: -0.01em; font-family: 'Hahmlet', 'Noto Serif KR', serif; font-weight: 500; }
     .timer-card { margin: 12px 24px; background: var(--accent); color: white; border-radius: 24px; padding: 28px 24px; text-align: center; }
     .timer-card .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; opacity: 0.85; margin: 0 0 4px; }
-    .timer-card .countdown { font-size: 64px; line-height: 1; letter-spacing: -0.03em; font-weight: 600; margin: 6px 0 18px; font-variant-numeric: tabular-nums; }
+    .timer-card .countdown { font-size: 56px; line-height: 1; letter-spacing: -0.03em; font-weight: 600; margin: 6px 0 18px; font-variant-numeric: tabular-nums; font-family: ui-monospace, 'IBM Plex Mono', monospace; }
     .timer-card .progress { height: 6px; background: rgba(255,255,255,0.25); border-radius: 999px; overflow: hidden; margin-bottom: 16px; }
     .timer-card .progress > span { display: block; width: 38%; height: 100%; background: white; }
     .timer-card .actions { display: flex; gap: 10px; justify-content: center; }
     .timer-card button { font: inherit; cursor: pointer; padding: 10px 22px; border-radius: 999px; border: 1px solid rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); color: white; font-weight: 500; }
     .timer-card button.primary { background: white; color: var(--accent); border-color: white; }
     .section { padding: 18px 24px 0; }
-    .section .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin: 0 0 10px; }
+    .section .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0 0 10px; }
     .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
     .stat { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 12px; }
-    .stat .v { font-size: 22px; letter-spacing: -0.01em; line-height: 1; margin-bottom: 4px; }
+    .stat .v { font-size: 20px; letter-spacing: -0.01em; line-height: 1; margin-bottom: 4px; font-family: ui-monospace, 'IBM Plex Mono', monospace; }
     .stat .l { font-size: 11px; color: var(--muted); }
     .tasks { padding: 18px 24px 8px; }
     .task { display: flex; align-items: center; gap: 12px; padding: 14px 0; border-top: 1px solid var(--border); }
@@ -42,7 +48,7 @@
     .task .body { flex: 1; }
     .task .title { font-size: 14.5px; line-height: 1.3; }
     .task.done .title { color: var(--muted); text-decoration: line-through; }
-    .task .meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+    .task .meta { font-size: 11px; color: var(--muted); margin-top: 2px; font-family: ui-monospace, monospace; }
     .tabbar { margin-top: auto; display: grid; grid-template-columns: repeat(4, 1fr); padding: 10px 16px 28px; border-top: 1px solid var(--border); background: var(--surface); }
     .tab { text-align: center; color: var(--muted); font-size: 11px; padding: 6px 0; }
     .tab.active { color: var(--accent); font-weight: 500; }
@@ -54,37 +60,37 @@
     <div class="screen">
       <div class="status"><span>9:41</span><span class="right">·· 5G · 100%</span></div>
       <div class="header" data-od-id="header">
-        <p class="greeting">Tuesday · April 22</p>
-        <h1>Two pomodoros to lunch.</h1>
+        <p class="greeting">화요일 · 4월 22일</p>
+        <h1>발매까지 2시간.</h1>
       </div>
       <div class="timer-card" data-od-id="timer">
-        <p class="label">Focus session</p>
-        <div class="countdown">15:42</div>
+        <p class="label">27SS DROP 02 · 회원 사전예약</p>
+        <div class="countdown">02:15:42</div>
         <div class="progress"><span></span></div>
         <div class="actions">
-          <button>Skip</button>
-          <button class="primary">Pause</button>
+          <button>알림 받기</button>
+          <button class="primary">룩북 보기</button>
         </div>
       </div>
       <div class="section" data-od-id="stats">
-        <p class="label">Today</p>
+        <p class="label">오늘의 마일리지</p>
         <div class="stats">
-          <div class="stat"><div class="v">3</div><div class="l">Sessions</div></div>
-          <div class="stat"><div class="v">75m</div><div class="l">Focused</div></div>
-          <div class="stat"><div class="v">2</div><div class="l">Tasks done</div></div>
+          <div class="stat"><div class="v">3</div><div class="l">출석 일</div></div>
+          <div class="stat"><div class="v">+120P</div><div class="l">획득 포인트</div></div>
+          <div class="stat"><div class="v">GOLD</div><div class="l">회원 등급</div></div>
         </div>
       </div>
       <div class="tasks" data-od-id="tasks">
-        <p class="section label" style="padding: 0;">Up next</p>
-        <div class="task done"><div class="check"></div><div class="body"><div class="title">Review Q2 OKRs</div><div class="meta">25m · completed</div></div></div>
-        <div class="task"><div class="check"></div><div class="body"><div class="title">Draft sync-engine post</div><div class="meta">2 sessions estimated</div></div></div>
-        <div class="task"><div class="check"></div><div class="body"><div class="title">1:1 prep with Mira</div><div class="meta">1 session</div></div></div>
+        <p class="section label" style="padding: 0;">곧 발매</p>
+        <div class="task done"><div class="check"></div><div class="body"><div class="title">매트 김 인터뷰 · 27SS 컨셉 비하인드</div><div class="meta">읽음 · 04.10</div></div></div>
+        <div class="task"><div class="check"></div><div class="body"><div class="title">Floral Big Shirt · ivory · M</div><div class="meta">22:00 발매 · 사전예약</div></div></div>
+        <div class="task"><div class="check"></div><div class="body"><div class="title">Floral Big Shirt · sage · M</div><div class="meta">23:30 발매 · 일반</div></div></div>
       </div>
       <nav class="tabbar" data-od-id="tabbar">
-        <div class="tab active"><div class="icon">⏱</div>Focus</div>
-        <div class="tab"><div class="icon">✓</div>Tasks</div>
-        <div class="tab"><div class="icon">📊</div>Stats</div>
-        <div class="tab"><div class="icon">⚙</div>Settings</div>
+        <div class="tab active"><div class="icon">⏱</div>발매</div>
+        <div class="tab"><div class="icon">★</div>좋아요</div>
+        <div class="tab"><div class="icon">★</div>VIP</div>
+        <div class="tab"><div class="icon">★</div>마이</div>
       </nav>
     </div>
   </div>

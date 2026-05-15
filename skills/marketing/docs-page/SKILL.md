@@ -1,73 +1,247 @@
 ---
 name: docs-page
 description: |
-  A documentation page — left nav, scrollable article body, right-rail
-  table of contents. Use when the brief mentions "docs", "documentation",
-  "guide", "API reference", or "tutorial".
+  K-패션 브랜드의 **내부 위키 / 운영 매뉴얼 / 디자인 시스템 문서**를
+  단일 HTML 페이지로 생성하는 스킬입니다. 좌측 사이드 네비, 본문 article,
+  우측 TOC 3컬럼 레이아웃. 브랜드 가이드라인, 무신사 입점 매뉴얼,
+  자사몰 운영 매뉴얼, 발주 SOP, 시즌 전환 체크리스트, 디자인 토큰 문서
+  같은 한국 패션기업 표준 운영 문서에 사용합니다. 신입 디자이너/MD가
+  1주차에 읽는 공식 문서 톤.
+  사용자가 "브랜드 가이드라인", "운영 매뉴얼", "입점 매뉴얼",
+  "디자인 시스템 문서", "신입 가이드", "docs", "guide"를 언급하면 활성화하세요.
 triggers:
+  - "브랜드 가이드라인"
+  - "운영 매뉴얼"
+  - "입점 매뉴얼"
+  - "디자인 시스템 문서"
+  - "신입 가이드"
+  - "발주 SOP"
+  - "시즌 전환 체크리스트"
   - "docs"
   - "documentation"
   - "guide"
-  - "tutorial"
-  - "api reference"
-  - "文档"
 od:
   mode: prototype
   platform: desktop
-  scenario: engineering
+  scenario: operations
+  category: fashion
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
+  example_prompt: "와키윌리 무신사 입점 매뉴얼을 만들어주세요. 신규 디자이너/MD 입사자가 1주차에 읽는 공식 문서. 섹션 = (1) 무신사 셀러센터 가입, (2) 상품 등록 (SKU 명명 규칙·상세페이지 가이드·키워드), (3) 가격·할인 정책, (4) 무신사 베스트 로직, (5) 리뷰·문의 응대 SOP. 좌측 네비는 4그룹 (시작하기 / 상품 등록 / 운영 / 정산), 우측 TOC는 H2 5개."
 ---
 
-# Docs Page Skill
+# 패션 내부 위키 / 운영 매뉴얼 스킬
 
-Produce a single, three-column documentation page in one HTML file.
+K-패션 브랜드의 **내부 위키 / 운영 매뉴얼 / 디자인 시스템 문서**를 단일 HTML 페이지로 생성합니다. 3컬럼 구조 — 좌측 그룹화된 네비게이션, 중앙 본문 article, 우측 "이 페이지에서" TOC — 의 표준 docs 사이트 톤입니다.
 
-## Workflow
+이 산출물의 청중은 **신규 입사자(디자이너 / MD / 영업기획), 외주 디자이너, 협력업체, 사내 부서 간 인계**입니다. 한국 패션기업에서 가장 흔히 작성되는 운영 매뉴얼 종류:
 
-1. **Read the active DESIGN.md** (injected above). Use the body type token for
-   prose; the mono token for code; respect line-height and max-width rules.
-2. **Pick a topic** from the brief — the page should look like real docs, not
-   a generic wireframe. Concrete API names, command examples, plausible
-   parameters.
-3. **Lay out** three regions:
-   - **Left nav** (240–280px, sticky): grouped link list, current page bolded
-     with a left-edge accent stripe. 3–5 groups of 4–8 links.
-   - **Article body** (max-width ~720px, centered in the middle column):
-     H1, lede paragraph, H2 sections, code blocks, callout boxes (note /
-     warning), inline links, lists.
-   - **Right TOC** (200–240px, sticky): "On this page" with the H2/H3
-     anchors, current section highlighted as the user scrolls.
-4. **Write** a single HTML document:
-   - `<!doctype html>` through `</html>`, all CSS inline.
-   - CSS Grid for the three columns; sticky positioning for the rails.
-   - Code blocks: monospace token, soft surface fill, copy-button affordance
-     (visual only — no JS needed).
-   - Anchor IDs on every H2/H3 so the TOC links work.
-   - `data-od-id` on the nav, article, and TOC.
-5. **Prose**: write at least 350 words of believable docs. Include at least
-   one shell command, one code snippet (5–15 lines), one callout, one table.
-6. **Self-check**:
-   - Body text wraps at the DS line-length sweet spot (60–75 chars).
-   - Code uses the DS mono token, not generic `monospace`.
-   - Accent is restrained — used for active nav item, links, one callout
-     border. Not on body text.
-   - Page is readable at 1280w and collapses gracefully below 900w (TOC drops
-     out, nav becomes a top drawer).
+- **브랜드 가이드라인** — 로고 사용 규칙, 컬러·타이포 토큰, 톤매너
+- **무신사·29CM·W컨셉 입점 매뉴얼** — 셀러센터 가입, 상품 등록, 베스트 로직 이해, 리뷰 응대
+- **자사몰 운영 매뉴얼** — 카페24/쇼피파이 상품 등록 SOP, 상세페이지 가이드, 알림톡 운영
+- **발주 SOP** — 발주서 작성, OEM 컨택, MOQ·LOT 표준, 입고 검수
+- **시즌 전환 체크리스트** — 시즌 입고·페이지 교체·캠페인 송출
+- **디자인 시스템 문서** — 디자인 토큰, 그래픽 가이드, 룩북 표준
 
-## Output contract
+## 환경 호환성
 
-Emit between `<artifact>` tags:
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 본문의 `data-od-id` 속성으로 인라인 코멘트 기능을 사용할 수 있습니다. 그 외 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 작업 흐름은 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 `DESIGN.md` 경로나 기본 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 내부 위키의 등록(register)을 따릅니다.
+
+- 페이지 제목·H1·H2는 한국어. 영문이 표준인 도구·플랫폼명은 영문 유지: 무신사 · 29CM · 카페24 · 쇼피파이 · ERP · Figma.
+- 산업용어 유지: SKU, BTA, OEM, MOQ, LOT, QR, SPOT, 컬러웨이, 정상판매율, 사입가율, 무신사 베스트, 알림톡.
+- 코드 블록은 한국어 주석 허용. 명령어 자체는 영문 유지. 예: `# 신규 SKU 등록 (필수 컬럼)`.
+- 콜아웃 라벨: `참고` / `주의` / `중요` / `금지` — 한국어 권장.
+- 본문 톤: 사내 운영 매뉴얼 톤(존댓말 없는 명사구·평서문 혼용). 예: "신규 디자이너는 첫 주에 본 문서를 끝까지 읽어주세요. 1주차 종료 시 디자인 실장과 1:1로 운영 확인 진행."
+
+## 폴더 구조
 
 ```
-<artifact identifier="docs-slug" type="text/html" title="Docs — Page Title">
-<!doctype html>
-<html>...</html>
-</artifact>
+docs-page/
+├── SKILL.md       ← 이 파일
+└── example.html   ← 작성 예시 (와키윌리 무신사 입점 매뉴얼)
 ```
 
-One sentence before the artifact, nothing after.
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. `example.html`을 처음부터 끝까지 읽어 상단바 + 좌측 사이드 네비 + 본문 article + 우측 TOC + 푸터 페이저 구조를 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 본문 typo는 body 토큰, 코드 블록은 mono 토큰 사용. 파일이 자동 주입되지 않는 환경이라면 사용자에게 경로나 기본 톤을 묻고 진행합니다.
+
+### Step 1 — 분류 및 정보 수집
+
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
+
+- 문서 종류 (브랜드 가이드라인 / 입점 매뉴얼 / 자사몰 운영 / 발주 SOP / 시즌 전환 체크리스트 / 디자인 시스템 중 하나)
+- 브랜드명 + 문서 제목 + 버전
+- 청중 (신규 입사자, 외주 디자이너, 협력업체 등)
+- 좌측 네비 그룹 (3~5 그룹, 그룹당 3~6 링크)
+- 본문 H2 섹션 4~5개 (각 섹션마다 짧은 설명 + 코드 블록 또는 표 1개 이상)
+- 우측 TOC (H2 4~5개 anchors)
+- 콜아웃 1~2개 (참고 / 주의)
+
+"Section A / Topic B" 같은 플레이스홀더 금지 — 실제 K-패션 SKU·플랫폼·운영 용어로 작성합니다.
+
+### Step 2 — 레이아웃
+
+3컬럼 구조 (좌 240~280 + 가운데 1fr + 우 200~240):
+
+- **상단바**: 브랜드 로고/워드마크 + 검색 인풋 ("⌘K")
+- **좌측 사이드 네비** (sticky, 240~280px): 그룹화된 링크 리스트. 현재 페이지는 액센트 배경 + 좌측 보더. 그룹 라벨은 작은 mono 텍스트.
+- **중앙 article** (max-width 720~760px, 중앙 정렬): 크럼 + H1 + lede 문단 + H2 섹션 4~5개. 각 섹션마다 코드 블록 또는 표 또는 콜아웃. 페이저 (이전/다음 페이지).
+- **우측 TOC** (sticky, 200~240px): "이 페이지에서" 라벨 + H2 anchors. 현재 섹션 액센트.
+
+본문에는 다음 요소 모두 포함:
+- 본문 350자 이상의 실제 사용 가능한 매뉴얼 카피
+- 한국어 주석이 있는 코드 블록 1~2개 (CSV 명명 규칙, SKU 코드 패턴, 명령어 등)
+- 표 1개 (예: BTA 분포 기준, 발주 LOT 표준, 무신사 카테고리 분류)
+- 콜아웃 1~2개 (참고 / 주의 / 금지)
+
+### Step 3 — 작성
+
+1. 단일 HTML 문서로 작성, CSS는 인라인 `<style>` 한 블록.
+2. CSS Grid로 3컬럼. sticky positioning으로 사이드 네비 + TOC.
+3. 시맨틱 HTML: `<header>`, `<nav>`, `<article>`, `<aside>`, `<footer>`.
+4. 본문 H2/H3마다 anchor id 부여 → 우측 TOC 링크 연결.
+5. 주요 영역에 식별용 속성. OpenDesign 환경에서는 `data-od-id`, 그 외에서는 `id`.
+6. 코드 블록은 mono 토큰 + 옅은 surface fill. 복사 버튼 시각만 (JS 불필요).
+
+### Step 4 — 자체 검수
+
+- 모든 색상은 `:root` 토큰에서 옴 — 임의 hex 금지
+- 본문 텍스트는 60~75자 라인 길이에서 wrap
+- 코드 블록은 mono 토큰 사용 (일반 `monospace` 아님)
+- 액센트 컬러 절제 — 현재 네비 아이템 + 링크 + 콜아웃 보더 정도. body 텍스트 금지
+- 1280w에서 읽기 좋고, 900w 이하에서 TOC 사라지고, 720w 이하에서 사이드 네비가 상단 드로어 형태로 (CSS만으로 OK)
+- 콜아웃에 실제 K-패션 운영 시나리오 명시 (예: "무신사 베스트 진입 SKU는 자사몰 동시 sell-out 위험 → 자사몰 재고 확인 후 노출 조정")
+
+## 한국 K-패션 운영 매뉴얼 카탈로그 (참고)
+
+### 브랜드 가이드라인 (HR 온보딩 + 외주 시 사용)
+
+- 로고 & 워드마크 사용 규칙
+- 컬러·타이포 토큰 (시즌 토큰 vs 영구 토큰)
+- 톤매너 (인스타그램 / 알림톡 / 룩북 등 채널별)
+- 그래픽 가이드 (캐릭터 IP 적용 규칙)
+
+### 무신사 입점 매뉴얼
+
+- 셀러센터 가입 + 초기 설정
+- 상품 등록 SOP (SKU 명명, 상세페이지, 키워드, 카테고리)
+- 무신사 베스트 로직 이해 (판매량 + 리뷰 + 트래픽)
+- 가격 정책 + 할인 정책 (정상가 / 시즌 종료 할인)
+- 리뷰 응대 SOP + Q&A 응대 톤
+
+### 자사몰 운영 매뉴얼 (카페24 기준)
+
+- 상품 등록 SOP
+- 상세페이지 표준 템플릿 (키비주얼 → 디테일 → 사이즈표 → 소재 → 케어)
+- 회원 등급 + 적립 정책
+- 알림톡 운영 (가입·구매·발송 알림)
+- 채널톡 응대 SOP
+
+### 발주 SOP
+
+- 시즌 발주 일정 (LOCK → 발주 → 본생산 → 입고)
+- 발주서 작성 표준 (P/O 양식)
+- OEM 협력업체 컨택 정보
+- MOQ · LOT · TT 표준
+- 입고 검수 체크리스트
+
+### 시즌 전환 체크리스트
+
+- 시즌 입고 일정
+- 자사몰 페이지 시즌 교체 일정
+- 무신사 상세페이지 교체
+- 시즌 캠페인 송출 일정
+- 이전 시즌 캐리오버 결정
+
+### 디자인 시스템 문서
+
+- 디자인 토큰 (색상 / 타이포 / 간격 / 모션)
+- 그래픽 가이드 (캐릭터 IP / 시즌 그래픽)
+- 룩북 촬영 표준 (모델 선정 / 컷 종류 / 후보정 톤)
+- 인스타그램 콘텐츠 표준
+- 상세페이지 시각 가이드
+
+## 한국 K-패션 브랜드 위키 톤 사례 (참고)
+
+| 브랜드 | 운영 매뉴얼 특징 |
+|---|---|
+| **와키윌리** | 캐릭터 IP 적용 규칙 별도 챕터, 그래픽 OK/NG 사례 다수 |
+| **마뗑킴** | 로고 사용 규칙 매우 엄격, 컬러웨이 5색 표준 |
+| **마르디 메크르디** | 플라워 그래픽 적용 규칙 + 글로벌 PR 가이드 |
+| **아더에러** | 콘셉트 문서 강함, 운영 매뉴얼은 상대적으로 가벼움 |
+| **무신사 스탠다드** | 한국적 핏 USP 매뉴얼화, 베이직 카테고리별 SOP |
+
+## 한국 패션기업 조직 R&R 메모
+
+위키 문서의 작성·소유·운영 흐름.
+
+- **작성 주체**: 각 부서 실장 또는 위임 받은 시니어 (디자인실 / MD실 / 마케팅실 / 영업기획)
+- **검토자**: 대표 또는 부서간 인접 실장
+- **운영 주체**: 인사팀 (신규 입사자 온보딩 자료) + 각 부서 (전문 영역 매뉴얼)
+- **갱신 주기**: 시즌마다 1회 (시즌 전환 시) + 큰 정책 변경 시 즉시
+- **공유 채널**: 노션 / 컨플루언스 / 카카오워크 위키 + 신규 입사자 1:1 송부
+
+## 시즌 사이클 내 위치
+
+운영 매뉴얼은 **시즌 사이클과 무관한 영구 문서**이지만, 시즌 전환 시 업데이트가 필요합니다.
+
+```
+[시즌 전환 시점 — F/W → S/S 또는 그 반대]
+    ↓ 매뉴얼 일괄 업데이트
+[docs-page — 시즌 전환 체크리스트 + 매뉴얼 갱신]
+    ↓ 신규 시즌 시작
+[fashion-season-strategy / fashion-imc-calendar]
+    ↓ 시즌 운영
+[운영 매뉴얼이 weekly-update / meeting-notes / kanban-board와 연결]
+    ↓ 신규 입사자 발생 시
+[hr-onboarding — 1주차 onboarding 가이드 + 위키 송부]
+```
+
+## 채널 연계
+
+위키 문서의 보관·접근 채널.
+
+- **노션** — 가장 보편적. 페이지 권한 관리 용이
+- **컨플루언스** — 대기업·중견 패션기업 표준
+- **카카오워크 위키** — 카카오워크 사용 기업 표준
+- **사내 인트라넷** — 보안 관리가 강한 기업
+- **이메일 / 알림톡** — 신규 매뉴얼 발행 시 전사 공지
+- **슬랙 채널** — 운영 매뉴얼 갱신 공지
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="docs-musinsa-manual" type="text/html" title="무신사 입점 매뉴얼">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "와키윌리 무신사 입점 매뉴얼을 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

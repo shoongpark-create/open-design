@@ -1,51 +1,211 @@
 ---
 name: eng-runbook
 description: |
-  An engineering runbook — service overview, alerts table, dashboards
-  links, common procedures with copy-pasteable commands, on-call rotation,
-  and an incident-response checklist. Use when the brief mentions
-  "runbook", "ops doc", "on-call guide", "SRE doc", or "运维手册".
+  K-패션 브랜드의 **발주/생산 운영 매뉴얼(런북)**을 단일 HTML 파일로 생성하는
+  스킬입니다. 시즌별 발주 SOP, 시즌 전환 체크리스트, 입고/QC 매뉴얼, 생산실
+  대응 절차서. 서비스 개요 + 의존성(원단/부자재/공장) + 알람 표(품질/납기 이슈)
+  + 자주 쓰는 절차 블록(발주 진행, 클레임 처리, 컬러 락 변경 등) + 담당자 로테이션
+  + 사고 대응 체크리스트 7개 섹션 구조. 생산실/MD실이 작성하며, 시즌 시작
+  2~3개월 전 라인업 LOCK 직후 발행. 사용자가 "발주 매뉴얼", "생산 운영 SOP",
+  "입고 QC 체크리스트", "시즌 전환 매뉴얼", "런북"을 언급하면 활성화하세요.
 triggers:
+  - "발주 매뉴얼"
+  - "발주 SOP"
+  - "생산 운영 매뉴얼"
+  - "생산 SOP"
+  - "QC 매뉴얼"
+  - "QC 체크리스트"
+  - "입고 검수"
+  - "시즌 전환 매뉴얼"
+  - "런북"
+  - "ops 매뉴얼"
   - "runbook"
   - "ops doc"
-  - "on-call"
-  - "sre doc"
-  - "service runbook"
-  - "运维手册"
 od:
   mode: prototype
   platform: desktop
-  scenario: engineering
+  scenario: operations
+  category: fashion
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Write a runbook for our auth service — alerts, dashboards, common procedures, on-call rotation."
+  example_prompt: "와키윌리 27SS 1차 발주 운영 매뉴얼을 만들어주세요. 의존성 = 메인 원단 공장(대구 인견)·부자재(서울 단추)·OEM 공장 3곳·QC 외주실. 알람 = 입고 지연/컬러 색차/사이즈 스펙 어긋남/원단 결품. 절차 = 발주 진행/컬러 락 변경/클레임 처리/입고 검수. 담당자 로테이션은 1차 락업(5월) 기준. 사고 대응 5단계 체크리스트 포함."
 ---
 
-# Engineering Runbook Skill
+# 패션 발주·생산 운영 매뉴얼 스킬
 
-Produce a single-page engineering runbook.
+K-패션 브랜드의 **시즌별 발주·생산·입고 운영 매뉴얼(런북)**을 단일 HTML 파일로 생성합니다. 생산실 또는 MD실이 시즌 시작 2~3개월 전 라인업 LOCK 직후 발행하며, 발주 진행 중 발생하는 표준 절차·이슈 대응을 한 페이지에 압축한 **실무용 SOP 문서**입니다.
 
-## Workflow
+이 산출물의 청중은 **생산실 PD, MD실 RMD, OEM 공장 담당자, QC 외주실, 물류팀**입니다. 시즌 발주 사이클 동안 자주 참조하는 문서이므로 **터미널/코드 톤이 아니라 한국 패션 OEM 현장의 등록(register)**을 따릅니다. 명령어 블록은 그대로 유지하되, 그 자리에 **공장 연락처·견본 코드·로트 번호·발주 단계 코드** 같은 K-패션 운영 식별자를 넣습니다.
 
-1. Read DESIGN.md.
-2. Identify the service from the brief.
-3. Layout:
-   - Header: service name, owner team, severity tier, version.
-   - Service summary paragraph + dependency list.
-   - Alerts table: alert name / severity / what it means / first response.
-   - Dashboards & links list.
-   - Common procedures block (3–4) with code blocks (deploy, rollback, rotate keys).
-   - On-call rotation table (week / primary / secondary / backup).
-   - Incident response checklist (5 numbered steps).
-4. One inline `<style>`, semantic HTML, monospace for code blocks.
+런북은 다섯 가지 질문에 동시에 답합니다.
 
-## Output contract
+1. **무엇을 만드는가?** (서비스 요약 — 시즌 + 라인업 카테고리 + 1차/2차 발주 수량)
+2. **누구에게 의존하는가?** (의존성 — 원단·부자재 공장, OEM 공장, 외주 QC, 물류 3PL)
+3. **어떤 이슈가 우리를 깨우는가?** (알람 — 색차/사이즈/납기/원단 결품)
+4. **반복되는 작업은 어떻게 하는가?** (절차 — 발주 진행, 컬러 락 변경, 클레임, 입고 검수)
+5. **사고가 났을 때 어떻게 움직이는가?** (사고 대응 — 5단계 체크리스트)
+
+## 환경 호환성
+
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 `data-od-id` 속성으로 인라인 코멘트 사용. 다른 환경에서는 일반 `id` 속성으로 대체합니다.
+
+본문 작업 흐름은 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 `DESIGN.md` 경로나 기본 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 발주·생산 운영 매뉴얼의 등록(register)을 따릅니다.
+
+- 한국 패션 OEM 산업용어 유지: 발주서(P/O) · 거래명세서 · 사입가 · 사입가율 · LOT · MOQ · QC · 색차 · 컬러웨이 · 컬러 락 · 라인업 락(LOCK) · 핏 · 그레이딩 · 견본 · 견본 확인 · CON(컨퍼) · 어소트 · 검사관 · A품/B품 · 클레임 · 출고 · 입고.
+- 공장·거래처 호칭: "메인 공장", "대구 인견 공장", "단추 거래처", "사가공", "외주 봉제실", "QC 외주실", "3PL".
+- 시즌·판기 표기: 27SS / 26FW / 1차 발주 / 2차 발주 / S1 판기 / S2 판기. 영문 코드(SS/FW)와 한국어 판기 코드 모두 사용 가능.
+- 단위: 수량은 장(枚) 또는 PCS, 원단은 마(yard)·m, 통화는 원/만원/억.
+- 명령어 블록(`<pre>`) 안의 영문 명령어는 유지하되, 변수에 K-패션 코드를 사용합니다. 예: `nw deploy` → `po submit`, `auth-service` → `27SS-PO1-WOMEN`, `v4.7.2` → `LOT-27SS-W001`.
+- 표·검수 항목은 한국 패션 등록 명사구 종결: "색차 ΔE 1.5 이상 → 클레임 등록", "사이즈 스펙 ±0.5cm 초과 → 재단 재검", "입고 검수 통과", "재발주 결정".
+
+## 폴더 구조
 
 ```
-<artifact identifier="runbook-name" type="text/html" title="Service Runbook">
-<!doctype html>...</artifact>
+eng-runbook/
+├── SKILL.md       ← 이 파일
+└── example.html   ← 작성 예시 (와키윌리 27SS 1차 발주 운영 매뉴얼)
 ```
+
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. `example.html`을 처음부터 끝까지 읽어 헤더 + 서비스 요약 + 의존성 + 알람 표 + 절차 블록 + 담당자 로테이션 + 사고 대응의 구조를 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요.
+
+### Step 1 — 정보 수집
+
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
+
+- **시즌·발주 차수**: 27SS / 26FW / 1차 발주 / 2차 발주 / SPOT 발주
+- **카테고리 범위**: UNI / WOMEN / 액세서리 / 슈즈
+- **발주 수량 규모**: 총 SKU 수, 전체 PCS, 총 사입금액(억)
+- **의존성**: 원단 공장 명단, 부자재 거래처, OEM 공장 명단(메인/예비), QC 외주실, 3PL
+- **알람 항목**: 색차 / 사이즈 스펙 / 납기 / 원단 결품 / 부자재 결품 / 봉제 결함
+- **표준 절차 3~4건**: 발주 진행, 컬러 락 변경, 클레임 처리, 입고 검수
+- **담당자 로테이션 기간**: 1차 락업(5월) ~ 입고(8월) 기준 주차별 PD/RMD/QC 배치
+- **사고 등급**: SEV-1(라인 전체 정지) / SEV-2(부분 지연) / SEV-3(품질 이슈)
+
+### Step 2 — 레이아웃 순서
+
+1. **헤더 스트립** — 브랜드 + 시즌·차수 코드(예: `27SS · 1차 발주`) + 담당 부서(`@생산실` 또는 `@MD실`) + 발행일 + Tier 등급(0: 시즌 메인 발주 / 1: SPOT / 2: 캐리오버)
+2. **서비스 요약** — 이번 발주의 목적, 범위, 총 SKU·PCS·사입금액. 다운되면 안 되는 이유(시즌 시작 일자, 입고 마감일).
+3. **의존성 리스트** — 원단/부자재/OEM/QC/물류. 각 항목에 현재 상태(`정상` / `지연` / `결품`).
+4. **알람 표** — 알람 이름 / 심각도 / 의미 / 1차 대응. 예: `색차 ΔE > 1.5` / SEV-2 / "컬러 락 대비 색차 초과" / "공장에 재염색 요청, 견본 재제출 요구".
+5. **절차 블록** — 3~4건. 각 절차에 한국 패션 OEM 명령어 톤(`po submit --season 27SS --line WOMEN-1`)과 변수(공장 코드, LOT 번호)를 포함.
+6. **담당자 로테이션 표** — 주차별 PD(생산 담당) / RMD(머천다이저) / QC(검수) 배치.
+7. **사고 대응 체크리스트** — 첫 30분: 알람 확인 → 채널 개설 → 상태 스냅샷 → 우선 대응 → 인수인계.
+8. **푸터** — 작성 부서·매뉴얼 버전·소스 파일 경로.
+
+### Step 3 — 작성
+
+1. 단일 HTML 문서(`<!doctype html>` ~ `</html>`)로 작성, CSS는 인라인 `<style>` 한 블록.
+2. 시맨틱 HTML: `<header class="head">`, `<table>`, `<footer>`.
+3. 모든 색상은 `:root` CSS 변수로 바인딩 — 임의 hex 금지.
+4. 절차 블록의 명령어 영역은 모노 폰트(`var(--mono)`), 변수에 K-패션 코드.
+5. 알람 표의 심각도 배지는 색상으로 구분(SEV-1 빨강, SEV-2 노랑, SEV-3 녹색).
+
+### Step 4 — 자체 검수
+
+- 의존성 리스트에 원단/부자재/OEM/QC/물류 중 최소 4종 포함
+- 알람 표는 최소 4행 이상, 각 행에 1차 대응 명시
+- 절차 블록은 최소 3건, 각 절차의 명령어 영역에 변수(공장 코드/LOT 번호)가 들어있음
+- 담당자 로테이션은 최소 4주차 분량
+- 사고 대응 체크리스트는 5단계, 각 단계의 첫 행동이 한국 패션 운영 등록으로 작성됨
+- 통화·수량 단위는 원/만원/억/PCS/장/마 (USD·dollar 금지)
+- 시즌 표기는 27SS, 26FW 등 한국 패션 표준 형식
+
+## 한국 K-패션 발주·생산 사이클 (참고)
+
+런북 작성 시 참고할 시즌 발주 사이클.
+
+| 시점 | 단계 | 주요 활동 |
+|---|---|---|
+| 시즌 시작 6개월 전 | 라인업 LOCK | 라인업 시트 확정, BTA 비중 확정 |
+| 시즌 시작 4~5개월 전 | 원단 발주 | 원단 공장 발주, 컬러 락 |
+| 시즌 시작 3개월 전 | **1차 발주** | OEM 공장에 본생산 발주, 견본 확인 |
+| 시즌 시작 2~3개월 전 | **이 런북 작성** | 발주 SOP, QC 체크리스트, 입고 매뉴얼 발행 |
+| 시즌 시작 2개월 전 | 견본 컨퍼(CON) | 견본 확인, 컬러 락 최종, 사이즈 스펙 락 |
+| 시즌 시작 1.5개월 전 | 본생산 | OEM 공장 본생산, QC 외주실 검수 시작 |
+| 시즌 시작 1개월 전 | 입고 검수 | 3PL 입고, A품/B품 분리, 클레임 등록 |
+| 시즌 시작 | 매장 입고 | 자사몰/무신사/29CM 입점, 매장 행거 |
+
+## 한국 K-패션 알람 표준 (참고)
+
+| 알람 | 심각도 | 의미 | 1차 대응 |
+|---|---|---|---|
+| 색차 ΔE > 1.5 | SEV-2 | 컬러 락 대비 색차 초과 | 공장에 재염색 요청, 견본 재제출 |
+| 사이즈 스펙 ±0.5cm 초과 | SEV-2 | 그레이딩 어긋남 | 재단 재검, 사이즈 재측정 |
+| 납기 지연 > 3일 | SEV-2 | 입고 일정 지연 | OEM 공장에 사유 요청, 예비 공장 검토 |
+| 원단 결품 | SEV-1 | 원단 부족으로 본생산 정지 | 대체 원단 협의, 가용 LOT 확인 |
+| 부자재 결품 | SEV-2 | 단추/지퍼 등 부자재 부족 | 거래처 재발주, 대체 부자재 검토 |
+| 봉제 결함 5% 초과 | SEV-1 | 본생산 품질 문제 | 본생산 정지, 외주 QC 전수 검사 |
+| 입고 후 클레임 | SEV-3 | 매장/소비자 클레임 | 클레임 등록, A품/B품 재분류 |
+
+## 한국 패션기업 조직 R&R 메모
+
+발주 런북의 작성·검토 흐름.
+
+- **생산실 PD**: 매뉴얼 작성 주체, 공장 의존성·절차 블록 작성
+- **MD 실장**: 알람 항목·우선순위 검토, 라인업 LOCK과의 정합성
+- **RMD(머천다이저)**: 절차 블록의 변수 검토 (LOT/SKU 코드 정합성)
+- **QC 외주실 리더**: 검수 절차 블록 작성·검토
+- **물류팀**: 입고·출고 절차 검토
+- **CFO**: 사입금액·클레임 처리 비용 검토
+
+## 시즌 사이클 내 위치
+
+런북은 **시즌 시작 2~3개월 전 라인업 LOCK 직후** 발행됩니다.
+
+```
+[fashion-new-lineup] (시즌 시작 3개월 전, 라인업 LOCK)
+    ↓
+[eng-runbook] (시즌 시작 2~3개월 전, 이 산출물)
+    ↓ 발주 진행 중 참조
+[invoice] (발주서·거래명세서 발행)
+[critique] (입고 후 룩북 1차 비평 시 QC 결과 연동)
+[finance-report] (판기 종료 후 결산 시 클레임·사입비 반영)
+```
+
+## 채널 연계
+
+이 런북은 다음 시스템·채널과 연동됩니다.
+
+- **ERP / 발주 시스템** — 자체 ERP 또는 자라남·이지어드민·메이크샵
+- **공장 연락 채널** — 카카오톡 단톡방 / 위챗(중국 공장) / 메일
+- **QC 검수 시스템** — 외주실 검수 결과 시트(구글 시트), 사진 첨부
+- **3PL 물류** — 굿스플로 / 두손컴퍼니 / CJ대한통운 출고 데이터
+- **자사 의사결정 채널** — 슬랙 #생산-27ss, 노션 시즌 보드
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="runbook-slug" type="text/html" title="런북 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "와키윌리 27SS 1차 발주 운영 매뉴얼을 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Northwind — Q3 Financial Report</title>
+<title>와키윌리 — 27SS S1 판기 매출 결산</title>
 <style>
   :root {
     --bg: #f7f6f2;
@@ -17,7 +17,7 @@
     --positive: #1f8c5c;
     --negative: #b13b3b;
     --display: 'Iowan Old Style', 'Charter', 'Iowan', Georgia, serif;
-    --body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, sans-serif;
+    --body: -apple-system, BlinkMacSystemFont, 'Pretendard Variable', 'Segoe UI', Inter, sans-serif;
     --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
   }
   * { box-sizing: border-box; }
@@ -74,7 +74,7 @@
 
   /* Bars */
   .bars { display: flex; flex-direction: column; gap: 8px; margin-top: 12px; }
-  .bar-row { display: grid; grid-template-columns: 110px 1fr 60px; gap: 10px; align-items: center; font-size: 12.5px; }
+  .bar-row { display: grid; grid-template-columns: 110px 1fr 70px; gap: 10px; align-items: center; font-size: 12.5px; }
   .bar-row .label { color: var(--muted); }
   .bar-track { background: var(--accent-soft); border-radius: 4px; height: 10px; position: relative; overflow: hidden; }
   .bar-fill { background: var(--accent); height: 100%; border-radius: 4px; }
@@ -109,46 +109,50 @@
 </head>
 <body>
 <div class="page">
+  <!-- 마스트헤드: 브랜드 + 시즌·판기 + 발행 정보 -->
   <header class="masthead">
     <div class="mast-left">
-      <div class="mast-meta">Northwind Trading · Q3 FY25</div>
-      <div class="mast-co">Quarterly Financial Report</div>
-      <div class="mast-meta">Prepared by Finance · Issued 14 October 2025</div>
+      <div class="mast-meta">WACKYWILLY · 27SS S1 판기 (5-6월)</div>
+      <div class="mast-co">시즌 매출 결산 리포트</div>
+      <div class="mast-meta">작성: 영업기획팀 · 발행 2027.07.05</div>
     </div>
     <div class="mast-badge">Confidential</div>
   </header>
 
-  <p class="lede">Q3 closed ahead of plan on revenue and gross margin, with cash runway extending to 27 months on the back of a leaner cost base. Mid-market and enterprise both expanded; SMB churn remains the watch item heading into Q4.</p>
+  <!-- 시즌 요약 한 줄 (lede) -->
+  <p class="lede">27SS S1 판기는 정판율 78.4%로 계획(72%) 초과, 시즌 GMV 12.4억으로 26SS 대비 34.6% 성장. 캐릭터 IP 그래픽 라인이 매출을 견인했으며 무신사 및 자사몰 회원 매출이 채널 비중 70% 이상 확보. S2 판기 진입 시 캐리오버 결정과 워시드 데님 셋업 리오더 의사결정 필요.</p>
 
-  <h2>Headline KPIs</h2>
+  <!-- 헤드라인 KPI 4종 -->
+  <h2>핵심 지표</h2>
   <div class="kpis">
     <div class="kpi">
-      <div class="label">Revenue</div>
-      <div class="value">$8.42M</div>
-      <div class="delta up">▲ 14.6% QoQ</div>
+      <div class="label">시즌 GMV</div>
+      <div class="value">12.4억</div>
+      <div class="delta up">▲ 34.6% YoY</div>
     </div>
     <div class="kpi">
-      <div class="label">Net new MRR</div>
-      <div class="value">$184k</div>
-      <div class="delta up">▲ 22.0% QoQ</div>
+      <div class="label">정상판매율</div>
+      <div class="value">78.4%</div>
+      <div class="delta up">▲ 6.2 pp YoY</div>
     </div>
     <div class="kpi">
-      <div class="label">Gross margin</div>
-      <div class="value">82%</div>
-      <div class="delta up">▲ 3 pp YoY</div>
+      <div class="label">재고자산회전율</div>
+      <div class="value">8.2회</div>
+      <div class="delta up">▲ 1.8회 YoY</div>
     </div>
     <div class="kpi">
-      <div class="label">Cash runway</div>
-      <div class="value">27 mo</div>
-      <div class="delta up">▲ 4 mo QoQ</div>
+      <div class="label">AOV (객단가)</div>
+      <div class="value">98,400원</div>
+      <div class="delta up">▲ 7,200원</div>
     </div>
   </div>
 
-  <h2>Revenue & costs</h2>
+  <!-- 매출 추이 + 비용 분해 -->
+  <h2>매출 추이 · 비용 분해</h2>
   <div class="chart-row">
     <div class="card">
-      <h3>Revenue · trailing 12 months</h3>
-      <div class="sub">USD millions, monthly</div>
+      <h3>주별 GMV · 5월 1주 ~ 6월 4주</h3>
+      <div class="sub">단위: 천만원, 점선은 시즌 plan</div>
       <div class="chart">
         <svg viewBox="0 0 720 200" preserveAspectRatio="none">
           <defs>
@@ -165,77 +169,81 @@
           <circle cx="680" cy="40" r="3.5" fill="var(--accent)"/>
         </svg>
         <div class="legend">
-          <span><span class="swatch a"></span>Revenue</span>
+          <span><span class="swatch a"></span>실적</span>
           <span><span class="swatch b"></span>Plan</span>
         </div>
       </div>
     </div>
     <div class="card">
-      <h3>Operating costs</h3>
-      <div class="sub">USD thousands, Q3</div>
+      <h3>비용 분해</h3>
+      <div class="sub">27SS S1 판기 · 단위: 백만원</div>
       <div class="bars">
-        <div class="bar-row"><span class="label">R&amp;D</span><div class="bar-track"><div class="bar-fill" style="width: 78%"></div></div><span class="bar-value">$1.42M</span></div>
-        <div class="bar-row"><span class="label">Sales & GTM</span><div class="bar-track"><div class="bar-fill" style="width: 60%"></div></div><span class="bar-value">$1.10M</span></div>
-        <div class="bar-row"><span class="label">G&amp;A</span><div class="bar-track"><div class="bar-fill" style="width: 36%"></div></div><span class="bar-value">$660k</span></div>
-        <div class="bar-row"><span class="label">Marketing</span><div class="bar-track"><div class="bar-fill" style="width: 28%"></div></div><span class="bar-value">$510k</span></div>
-        <div class="bar-row"><span class="label">Infrastructure</span><div class="bar-track"><div class="bar-fill" style="width: 18%"></div></div><span class="bar-value">$330k</span></div>
+        <div class="bar-row"><span class="label">사입원가</span><div class="bar-track"><div class="bar-fill" style="width: 88%"></div></div><span class="bar-value">412</span></div>
+        <div class="bar-row"><span class="label">마케팅</span><div class="bar-track"><div class="bar-fill" style="width: 42%"></div></div><span class="bar-value">198</span></div>
+        <div class="bar-row"><span class="label">물류</span><div class="bar-track"><div class="bar-fill" style="width: 28%"></div></div><span class="bar-value">132</span></div>
+        <div class="bar-row"><span class="label">인건비</span><div class="bar-track"><div class="bar-fill" style="width: 36%"></div></div><span class="bar-value">170</span></div>
+        <div class="bar-row"><span class="label">시스템 / 입점수수료</span><div class="bar-track"><div class="bar-fill" style="width: 22%"></div></div><span class="bar-value">102</span></div>
       </div>
     </div>
   </div>
 
-  <h2>P&amp;L summary</h2>
+  <!-- P&L 요약 표 -->
+  <h2>P&amp;L 요약</h2>
   <table>
     <thead>
       <tr>
-        <th>Line item</th>
-        <th class="num">Q3 FY25</th>
-        <th class="num">Q2 FY25</th>
+        <th>항목</th>
+        <th class="num">27SS S1</th>
+        <th class="num">26FW S4</th>
         <th class="num">Δ QoQ</th>
-        <th class="num">Q3 FY24</th>
+        <th class="num">26SS S1</th>
         <th class="num">Δ YoY</th>
       </tr>
     </thead>
     <tbody>
-      <tr><td>Revenue</td><td class="num">$8.42M</td><td class="num">$7.34M</td><td class="num" style="color: var(--positive);">+14.6%</td><td class="num">$5.92M</td><td class="num" style="color: var(--positive);">+42.2%</td></tr>
-      <tr><td>Cost of revenue</td><td class="num">($1.51M)</td><td class="num">($1.46M)</td><td class="num" style="color: var(--negative);">+3.4%</td><td class="num">($1.18M)</td><td class="num" style="color: var(--negative);">+28.0%</td></tr>
-      <tr><td>Gross profit</td><td class="num">$6.91M</td><td class="num">$5.88M</td><td class="num" style="color: var(--positive);">+17.5%</td><td class="num">$4.74M</td><td class="num" style="color: var(--positive);">+45.8%</td></tr>
-      <tr><td>Operating expenses</td><td class="num">($4.02M)</td><td class="num">($4.18M)</td><td class="num" style="color: var(--positive);">−3.8%</td><td class="num">($3.66M)</td><td class="num" style="color: var(--negative);">+9.8%</td></tr>
-      <tr class="total"><td>Operating income</td><td class="num">$2.89M</td><td class="num">$1.70M</td><td class="num" style="color: var(--positive);">+70.0%</td><td class="num">$1.08M</td><td class="num" style="color: var(--positive);">+167.5%</td></tr>
+      <tr><td>매출 (GMV)</td><td class="num">12.40억</td><td class="num">10.82억</td><td class="num" style="color: var(--positive);">+14.6%</td><td class="num">9.21억</td><td class="num" style="color: var(--positive);">+34.6%</td></tr>
+      <tr><td>사입원가</td><td class="num">(4.12억)</td><td class="num">(3.78억)</td><td class="num" style="color: var(--negative);">+9.0%</td><td class="num">(3.06억)</td><td class="num" style="color: var(--negative);">+34.6%</td></tr>
+      <tr><td>매출총이익</td><td class="num">8.28억</td><td class="num">7.04억</td><td class="num" style="color: var(--positive);">+17.6%</td><td class="num">6.15억</td><td class="num" style="color: var(--positive);">+34.6%</td></tr>
+      <tr><td>판관비 (SG&amp;A)</td><td class="num">(6.02억)</td><td class="num">(5.84억)</td><td class="num" style="color: var(--negative);">+3.1%</td><td class="num">(4.92억)</td><td class="num" style="color: var(--negative);">+22.4%</td></tr>
+      <tr class="total"><td>영업이익</td><td class="num">2.26억</td><td class="num">1.20억</td><td class="num" style="color: var(--positive);">+88.3%</td><td class="num">1.23억</td><td class="num" style="color: var(--positive);">+83.7%</td></tr>
     </tbody>
   </table>
 
-  <h2>Top accounts</h2>
+  <!-- TOP SKU 표 -->
+  <h2>TOP 5 SKU · 정판율 상위</h2>
   <table>
     <thead>
       <tr>
-        <th>Customer</th>
-        <th>Plan</th>
-        <th>Region</th>
-        <th class="num">ARR</th>
-        <th>Status</th>
+        <th>SKU</th>
+        <th>카테고리</th>
+        <th>BTA</th>
+        <th class="num">판매수량</th>
+        <th class="num">GMV</th>
+        <th>정판율</th>
       </tr>
     </thead>
     <tbody>
-      <tr><td><span class="logo"></span>Pioneer Robotics</td><td>Enterprise</td><td>EMEA</td><td class="num">$612k</td><td><span class="badge green">Renewed</span></td></tr>
-      <tr><td><span class="logo"></span>Atlas Cooperative</td><td>Enterprise</td><td>APAC</td><td class="num">$486k</td><td><span class="badge green">Expanded</span></td></tr>
-      <tr><td><span class="logo"></span>Foundry Group</td><td>Team Plus</td><td>NA</td><td class="num">$320k</td><td><span class="badge amber">In renewal</span></td></tr>
-      <tr><td><span class="logo"></span>Voltage Co.</td><td>Enterprise</td><td>NA</td><td class="num">$298k</td><td><span class="badge green">Renewed</span></td></tr>
-      <tr><td><span class="logo"></span>Lattice Health</td><td>Team Plus</td><td>EMEA</td><td class="num">$214k</td><td><span class="badge red">At risk</span></td></tr>
+      <tr><td><span class="logo"></span>플라워 와키 원피스</td><td>WOMEN · 원피스</td><td>Trend</td><td class="num">2,840</td><td class="num">1.84억</td><td><span class="badge green">정판 89%</span></td></tr>
+      <tr><td><span class="logo"></span>윌리 캐릭터 반팔티 (그래픽)</td><td>UNI · 그래픽 티</td><td>Accent</td><td class="num">4,210</td><td class="num">1.42억</td><td><span class="badge green">정판 87%</span></td></tr>
+      <tr><td><span class="logo"></span>윌리 미니 토트백</td><td>ACC · 백</td><td>Trend</td><td class="num">1,680</td><td class="num">0.86억</td><td><span class="badge green">정판 84%</span></td></tr>
+      <tr><td><span class="logo"></span>워시드 데님 셋업 (재킷)</td><td>UNI · 셋업</td><td>Basic</td><td class="num">920</td><td class="num">0.74억</td><td><span class="badge amber">정판 71%</span></td></tr>
+      <tr><td><span class="logo"></span>크롭 셔켓 (블루)</td><td>WOMEN · 아우터</td><td>Basic</td><td class="num">540</td><td class="num">0.48억</td><td><span class="badge red">정판 58%</span></td></tr>
     </tbody>
   </table>
 
-  <h2>Outlook · Q4</h2>
+  <!-- 아웃룩 + 사인오프 -->
+  <h2>S2 판기 아웃룩</h2>
   <div class="outlook">
-    <div class="quote">"We're entering Q4 with the strongest pipeline coverage of the year — 3.4× plan — and the operating leverage to convert it without expanding the cost base."</div>
+    <div class="quote">"S1 판기는 캐릭터 IP가 매출 35% 견인. S2 판기는 윌리 미니 토트 컬러웨이 확장 + 그래픽 티 시즌2 캡슐로 동력 이어갑니다."</div>
     <div class="signoff">
-      <strong>Mira Okafor, CFO</strong>
-      We expect revenue of $9.1–9.4M, net new MRR of $200–220k, and gross margin holding above 80%. The two open items are SMB churn (we'll publish a recovery plan with the November update) and the EMEA infra migration, which moves to GA in mid-November.
+      <strong>김영기, 영업기획 팀장</strong>
+      S2 판기(7월) GMV 8.5~9.2억, 정판율 75%+ 유지 목표. 캐리오버 후보는 윌리 미니 토트와 그래픽 반팔티. 7월 셋째주 1차 QR 발주 검토 필요 (워시드 데님 셋업, 정판율 71% → 추가 사이즈 보강).
     </div>
   </div>
 
   <footer>
-    <span>Northwind Trading · Q3 FY25 · Internal use only</span>
-    <span>Page 1 of 1</span>
+    <span>WACKYWILLY · 27SS S1 결산 · 내부 사용 한정</span>
+    <span>Page 1 / 1</span>
   </footer>
 </div>
 </body>

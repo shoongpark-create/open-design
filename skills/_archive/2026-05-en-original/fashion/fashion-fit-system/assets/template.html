@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE Brand] Fit System · [REPLACE Version]</title>
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
+  :root {
+    --ink:        #1f2933;
+    --paper:      #fafaf7;
+    --rule:       #e7e3da;
+    --muted:      #6b7280;
+    --accent:     #b8443a;
+    --flag-bg:    #fff3e0;
+    --flag-fg:    #b8651a;
+
+    --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
+
+    --font-display-report: "Paperlogy", "Wanted Sans Variable", "SUIT Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
+
+    --font-display-street: "Black Han Sans", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-play: "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-romance: "Grandiflora One", "Diphylleia", "Hahmlet", "Noto Serif KR", "Source Serif 4", ui-serif, Georgia, serif;
+
+    --font-display: var(--font-display-report);
+    --font-text: var(--font-sans);
+    --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: var(--font-text); }
+  body { padding: 40px 40px 64px; }
+
+  .fs-header { padding-bottom: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--rule); }
+  .fs-meta { display: flex; gap: 16px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .fs-meta .date { margin-left: auto; }
+  .title { font-family: var(--font-display); font-size: 22px; margin: 12px 0 6px; }
+  .thesis { font-size: 13px; line-height: 1.55; color: #374151; max-width: 80ch; margin: 0; }
+
+  .fs-grid--two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .fs-state { padding: 16px; border: 1px solid var(--rule); border-radius: 8px; background: rgba(255,255,255,0.5); overflow-x: auto; }
+  .fs-state h2 { font-family: var(--font-display); font-size: 14px; margin: 0 0 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+  .fit-matrix { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .fit-matrix th, .fit-matrix td { padding: 6px; text-align: center; border: 1px solid var(--rule); vertical-align: middle; }
+  .fit-matrix thead th { background: rgba(0,0,0,0.04); font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+  .fit-matrix tbody th { background: rgba(0,0,0,0.04); font-family: var(--font-display); font-weight: 600; }
+  .fit-matrix td.flag { background: var(--flag-bg); color: var(--flag-fg); font-weight: 600; }
+
+  .fit-matrix .image-frame { aspect-ratio: 4/5; background: #efeae0; border-radius: 4px; overflow: hidden; min-height: 80px; max-height: 140px; }
+  .fit-matrix .image-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .image-frame[data-fallback]:not(:has(img[src]:not([src=""])))::after { content: attr(data-fallback); display: block; padding: 4px; font-size: 8px; line-height: 1.2; color: var(--muted); font-family: var(--font-mono); text-align: center; }
+
+  /* Per-category sheets (rhythm C) */
+  .category-section { margin-bottom: 28px; padding-bottom: 16px; border-bottom: 1px solid var(--rule); }
+  .category-section h2 { font-family: var(--font-display); font-size: 18px; margin: 0 0 12px; }
+  .fit-strip { display: flex; gap: 12px; overflow-x: auto; }
+  .fit-fig { margin: 0; min-width: 130px; flex: 0 0 auto; }
+  .fit-fig .image-frame { aspect-ratio: 4/5; background: #efeae0; border-radius: 4px; overflow: hidden; }
+  .fit-fig .image-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .fit-fig figcaption { font-family: var(--font-mono); font-size: 10px; text-align: center; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+  /* Tail */
+  .naming-rules, .open-decisions { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--rule); }
+  .naming-rules h2, .open-decisions h2 { font-family: var(--font-display); font-size: 14px; margin: 0 0 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.7; }
+  ul li strong { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-right: 6px; }
+
+  @media (max-width: 1024px) {
+    .fs-grid--two-col { grid-template-columns: 1fr; }
+  }
+  @media print { body { padding: 12px; } .fs-state { break-inside: avoid; } }
+</style>
+</head>
+<body>
+  <main id="fit-system">
+    <!-- PASTE one rhythm + tail blocks from references/layouts.md. -->
+  </main>
+</body>
+</html>

@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Filebase — sync that respects your bandwidth</title>
+  <title>WACKYWILLY × SANRIO — 27SS 콜라보 발매 사전예약</title>
   <style>
     :root {
       --bg: #fafaf9; --fg: #1c1b1a; --muted: #6b6964; --border: #e6e4e0;
@@ -39,10 +39,10 @@
     @media (max-width: 800px) { .tiers { grid-template-columns: 1fr; } }
     .tier { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 32px; }
     .tier.featured { border-color: var(--accent); position: relative; }
-    .tier.featured::before { content: 'Recommended'; position: absolute; top: -12px; left: 24px; background: var(--accent); color: white; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 500; }
+    .tier.featured::before { content: 'RECOMMENDED'; position: absolute; top: -12px; left: 24px; background: var(--accent); color: white; padding: 3px 10px; border-radius: 999px; font-size: 11px; font-weight: 500; letter-spacing: 0.06em; }
     .tier h3 { margin: 0 0 8px; font-size: 18px; }
-    .tier .price { font-size: 40px; letter-spacing: -0.02em; margin: 6px 0 16px; }
-    .tier .price small { font-size: 14px; color: var(--muted); font-weight: 400; }
+    .tier .price { font-size: 40px; letter-spacing: -0.02em; margin: 6px 0 16px; font-family: ui-monospace, monospace; }
+    .tier .price small { font-size: 14px; color: var(--muted); font-weight: 400; font-family: -apple-system, system-ui, sans-serif; }
     .tier ul { list-style: none; padding: 0; margin: 16px 0 24px; color: var(--muted); font-size: 14px; }
     .tier ul li { padding: 5px 0; border-top: 1px solid var(--border); }
     .tier ul li:first-child { border-top: none; }
@@ -55,99 +55,107 @@
 </head>
 <body>
   <div class="wrap">
+    <!-- 헤더 — 워드마크 + 네비 + 사이드 CTA. 와키윌리 자사몰 표준 톤. -->
     <header data-od-id="topnav">
-      <span class="logo">◰ Filebase</span>
+      <span class="logo">◰ WACKYWILLY</span>
       <nav>
-        <a href="#features">Features</a>
-        <a href="#pricing">Pricing</a>
-        <a href="#docs">Docs</a>
-        <button class="btn-secondary" style="margin-left: 12px;">Sign in</button>
+        <a href="#collection">COLLECTION</a>
+        <a href="#lookbook">LOOKBOOK</a>
+        <a href="#store">STORE</a>
+        <button class="btn-secondary" style="margin-left: 12px;">로그인</button>
       </nav>
     </header>
+    <!-- 히어로 — 콜라보 발매 키비주얼. 슬로건은 영문 권장, 서브카피는 한국어. -->
     <section class="hero" data-od-id="hero">
-      <h1>File sync that doesn't eat your bandwidth.</h1>
-      <p>Block-level deltas, end-to-end encryption, and a pricing model that doesn't punish you for working with video.</p>
+      <h1>오늘의 즐거움이 내일의 시그니처로.</h1>
+      <p>WACKYWILLY × SANRIO. 27SS 콜라보 캡슐 컬렉션. 후디·백·키링 3종. 3월 14일 사전예약 시작, 4월 11일 정식 발매.</p>
       <div class="cta">
-        <button class="btn-primary">Get Filebase</button>
-        <button class="btn-link">Read the whitepaper →</button>
+        <button class="btn-primary">사전예약 시작</button>
+        <button class="btn-link">LOOKBOOK 보기 →</button>
       </div>
     </section>
   </div>
 
-  <section class="features" id="features" data-od-id="features">
+  <!-- 시그니처 아이템 그리드 — 정확히 3개. 콜라보 컬렉션 3종. -->
+  <section class="features" id="collection" data-od-id="features">
     <div class="wrap feature-grid">
       <div class="feature">
-        <span class="num">01</span>
-        <h3>Block-level diffs</h3>
-        <p>Edit a 4 GB Final Cut project? We sync the 200 KB you changed. Not the whole file.</p>
+        <span class="num">01 · HOODIE</span>
+        <h3>COLLAB HOODIE — 산리오 자수 후드</h3>
+        <p>옥스포드 코튼 12oz. 산리오 캐릭터 자수 6종. 유니 사이즈 1·2·3. ₩148,000.</p>
       </div>
       <div class="feature">
-        <span class="num">02</span>
-        <h3>End-to-end encrypted</h3>
-        <p>Files are encrypted on your laptop before they leave. We can't read them. Neither can law enforcement, by design.</p>
+        <span class="num">02 · BAG</span>
+        <h3>COLLAB CROSS BAG — 캐릭터 패치 백</h3>
+        <p>나일론 + 가죽 트림. 핸드페인팅 캐릭터 패치 4종 어소트. ₩98,000.</p>
       </div>
       <div class="feature">
-        <span class="num">03</span>
-        <h3>Honest pricing</h3>
-        <p>One flat rate for unlimited storage. No "fair use" clauses. No throttling at 90%.</p>
+        <span class="num">03 · KEYRING</span>
+        <h3>COLLAB KEYRING — 캐릭터 키링 세트</h3>
+        <p>아크릴 키링 + 메탈 후크. 캐릭터 6종 랜덤 + 시크릿 1종. ₩28,000.</p>
       </div>
     </div>
   </section>
 
+  <!-- 소셜프루프 — 매거진 영문 워드마크 5종. -->
   <section class="proof wrap" data-od-id="proof">
-    <h2>Used by teams at</h2>
-    <div class="logos"><span>Anthropic</span><span>Stripe</span><span>Linear</span><span>Vercel</span><span>Cursor</span></div>
+    <h2>RECOMMENDED BY</h2>
+    <div class="logos"><span>VOGUE KOREA</span><span>W KOREA</span><span>DAZED KOREA</span><span>ELLE KOREA</span><span>HARPER'S BAZAAR KR</span></div>
   </section>
 
+  <!-- 회원 등급 — 콜라보 사전예약 혜택을 회원 등급별로 차등. 가운데(GOLD)가 추천. -->
   <section class="pricing wrap" id="pricing" data-od-id="pricing">
-    <h2>Pricing</h2>
-    <p class="lede">Pick a tier. Switch or cancel any time.</p>
+    <h2>회원 등급 · 사전예약 혜택</h2>
+    <p class="lede">콜라보 컬렉션은 회원 전용 사전예약. 등급에 따라 우선 발송 순서가 달라집니다.</p>
     <div class="tiers">
       <div class="tier">
-        <h3>Solo</h3>
-        <div class="price">$8<small>/mo</small></div>
-        <p style="color: var(--muted); margin: 0;">For individuals.</p>
+        <h3>SILVER</h3>
+        <div class="price">1<small>% 적립</small></div>
+        <p style="color: var(--muted); margin: 0;">신규 가입 ~ 누적 ₩200,000.</p>
         <ul>
-          <li>1 TB storage</li>
-          <li>Block-level sync</li>
-          <li>Email support</li>
+          <li>사전예약 일반 순서 발송</li>
+          <li>신규 가입 ₩5,000 쿠폰</li>
+          <li>이메일 / 카카오톡 알림</li>
         </ul>
-        <button class="btn-secondary" style="width: 100%;">Choose Solo</button>
+        <button class="btn-secondary" style="width: 100%;">SILVER 시작</button>
       </div>
       <div class="tier featured">
-        <h3>Team</h3>
-        <div class="price">$14<small>/seat/mo</small></div>
-        <p style="color: var(--muted); margin: 0;">For teams up to 50.</p>
+        <h3>GOLD</h3>
+        <div class="price">3<small>% 적립</small></div>
+        <p style="color: var(--muted); margin: 0;">누적 ₩200,000 ~ ₩800,000.</p>
         <ul>
-          <li>5 TB pooled storage</li>
-          <li>Shared folders & roles</li>
-          <li>Priority support</li>
-          <li>Audit log</li>
+          <li>사전예약 24시간 우선 오픈</li>
+          <li>콜라보 사은품(엽서 세트)</li>
+          <li>5만원 이상 무료배송</li>
+          <li>생일 ₩10,000 쿠폰</li>
         </ul>
-        <button class="btn-primary" style="width: 100%;">Choose Team</button>
+        <button class="btn-primary" style="width: 100%;">GOLD 사전예약</button>
       </div>
       <div class="tier">
-        <h3>Enterprise</h3>
-        <div class="price">Custom</div>
-        <p style="color: var(--muted); margin: 0;">SSO, on-prem keys, SLA.</p>
+        <h3>PLATINUM</h3>
+        <div class="price">5<small>% 적립</small></div>
+        <p style="color: var(--muted); margin: 0;">누적 ₩800,000 이상.</p>
         <ul>
-          <li>Unlimited storage</li>
-          <li>SAML / SCIM</li>
-          <li>Dedicated support</li>
+          <li>사전예약 48시간 최우선 오픈</li>
+          <li>시크릿 캐릭터 확정 1종</li>
+          <li>전 상품 무료배송</li>
+          <li>VIP 룩북 PDF + 매장 초대</li>
         </ul>
-        <button class="btn-secondary" style="width: 100%;">Talk to sales</button>
+        <button class="btn-secondary" style="width: 100%;">PLATINUM 안내</button>
       </div>
     </div>
   </section>
 
+  <!-- 클로징 CTA — 키컬러 풀폭 밴드. 발매 카운트다운 + 메인 CTA. -->
   <section class="closing" data-od-id="closing">
     <div class="wrap">
-      <h2>Sync less, ship more.</h2>
-      <p>14-day free trial. No credit card needed.</p>
-      <button>Get Filebase</button>
+      <h2>D-28 · 사전예약 진행 중.</h2>
+      <p>3월 14일 14:00 사전예약 시작 · 4월 11일 11:00 정식 발매. 회원만 사전예약 가능.</p>
+      <button>회원 사전예약 시작</button>
     </div>
   </section>
 
-  <footer class="wrap" data-od-id="footer">© Filebase · Privacy · Terms · Status</footer>
+  <!-- 푸터 — 미니멀. -->
+  <footer class="wrap" data-od-id="footer">© WACKYWILLY · 개인정보처리방침 · 이용약관 · CS · INSTAGRAM</footer>
 </body>
 </html>

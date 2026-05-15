@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>27SS Concept Board · Humid Commute</title>
+  <style>
+    :root {
+      --bg: #efeae1;
+      --paper: #faf6ee;
+      --paper-deep: #e8e1d3;
+      --ink: #161210;
+      --ink-soft: #2c2520;
+      --muted: #6e655a;
+      --muted-soft: #94897b;
+      --line: #d8cebf;
+      --line-soft: #e6ddcd;
+      --accent: #4a5d76;
+      --accent-soft: color-mix(in oklch, var(--accent) 16%, transparent);
+      --accent-loud: #b8754a;
+      --shadow: rgba(28, 22, 16, 0.10);
+      --shadow-deep: rgba(28, 22, 16, 0.18);
+      --font-display: "Iowan Old Style", "Charter", Georgia, serif;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
+      --container: 1200px;
+      --gutter: clamp(18px, 4vw, 48px);
+      --radius: 6px;
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 85% 12%, color-mix(in oklch, var(--accent) 8%, transparent), transparent 30%),
+        radial-gradient(circle at 12% 88%, color-mix(in oklch, var(--accent-loud) 6%, transparent), transparent 26%),
+        linear-gradient(180deg, var(--bg), color-mix(in oklch, var(--paper) 60%, var(--bg)));
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img, svg { display: block; max-width: 100%; }
+    p, h1, h2, h3 { margin: 0; text-wrap: pretty; }
+    .page-shell { max-width: var(--container); margin-inline: auto; padding: clamp(28px, 5vw, 72px) var(--gutter); }
+    .topline { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--line); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+    .topline-status { color: var(--accent-loud); }
+    .section { padding: clamp(48px, 7vw, 96px) 0; border-bottom: 1px solid var(--line); }
+    .section:last-child { border-bottom: 0; }
+    .kicker { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-loud); margin-bottom: 14px; }
+    .display { font-family: var(--font-display); font-size: clamp(52px, 9vw, 124px); line-height: 0.92; letter-spacing: -0.035em; font-weight: 400; }
+    .h2 { font-family: var(--font-display); font-size: clamp(32px, 4.6vw, 58px); line-height: 1.02; letter-spacing: -0.022em; font-weight: 400; }
+    .lead { max-width: 680px; color: var(--muted); font-size: clamp(16px, 1.6vw, 20px); line-height: 1.5; }
+    .meta { font-family: var(--font-mono); color: var(--muted); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .cover-grid { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(320px, 1.05fr); gap: clamp(28px, 5vw, 72px); align-items: end; }
+    .thesis { font-family: var(--font-display); font-size: clamp(22px, 2.4vw, 32px); line-height: 1.25; color: var(--ink-soft); max-width: 30ch; margin-top: 26px; letter-spacing: -0.01em; }
+    .cover-meta { margin-top: 28px; display: inline-flex; gap: 14px; flex-wrap: wrap; }
+    .image-frame { position: relative; overflow: hidden; border-radius: var(--radius); background: linear-gradient(135deg, var(--accent-soft), color-mix(in oklch, var(--paper) 90%, var(--ink))); border: 1px solid var(--line); box-shadow: 0 22px 60px var(--shadow); min-height: 320px; }
+    .image-frame::before { content: attr(data-fallback); position: absolute; inset: 0; display: grid; place-items: center; padding: 26px; color: var(--muted); font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; text-align: center; line-height: 1.5; }
+    .cover-image { aspect-ratio: 4 / 5; }
+    .keyword-cloud { padding-top: clamp(36px, 5vw, 72px); padding-bottom: clamp(36px, 5vw, 72px); }
+    .kw-grid { display: flex; flex-wrap: wrap; gap: clamp(14px, 2vw, 28px) clamp(20px, 3vw, 40px); align-items: baseline; max-width: 1000px; }
+    .kw { font-family: var(--font-display); letter-spacing: -0.02em; line-height: 0.95; transition: color 0.2s ease; }
+    .kw-loud { font-size: clamp(48px, 7vw, 92px); color: var(--ink); font-weight: 400; }
+    .kw-mid { font-size: clamp(34px, 4.5vw, 56px); color: var(--ink-soft); }
+    .kw-soft { font-size: clamp(22px, 2.6vw, 34px); color: var(--muted); font-style: italic; }
+    .thesis-block { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(28px, 6vw, 86px); align-items: start; }
+    .thesis-copy { display: grid; gap: 22px; max-width: 60ch; }
+    .thesis-copy p { color: var(--muted); }
+    .thesis-copy p.lead { color: var(--ink-soft); }
+    .mood-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .mood-card { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+    .mood-card .image-frame { aspect-ratio: 1 / 1; min-height: 180px; border-radius: var(--radius); box-shadow: 0 12px 30px var(--shadow); }
+    .mood-card[data-image-role="scene"] .image-frame { aspect-ratio: 4 / 3; }
+    .mood-card[data-image-role="gesture"] .image-frame { aspect-ratio: 4 / 5; }
+    .mood-card figcaption { display: grid; gap: 4px; padding: 0 4px; }
+    .role-tag { align-self: start; font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); padding: 3px 7px; border: 1px solid var(--accent-soft); border-radius: 3px; }
+    .mood-card figcaption p { font-size: 13px; color: var(--muted); line-height: 1.4; }
+    .reference-shelf { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+    .reference-card { padding: 22px; border: 1px solid var(--line); border-radius: var(--radius); background: color-mix(in oklch, var(--paper) 96%, white); display: grid; gap: 10px; min-height: 168px; }
+    .ref-title { font-family: var(--font-display); font-size: 22px; line-height: 1.05; letter-spacing: -0.015em; }
+    .reference-card p { color: var(--muted); font-size: 13px; line-height: 1.5; }
+    .dials .dial-list { display: grid; gap: 30px; max-width: 720px; }
+    .dial { display: grid; gap: 10px; }
+    .dial-axis { display: flex; justify-content: space-between; }
+    .dial-track { position: relative; height: 4px; background: var(--line); border-radius: 999px; }
+    .dial-marker { position: absolute; left: calc(var(--dial-pos, 50) * 1%); top: 50%; width: 16px; height: 16px; border-radius: 999px; background: var(--ink); transform: translate(-50%, -50%); box-shadow: 0 4px 14px var(--shadow-deep); }
+    .dial-note { color: var(--muted); font-size: 13px; }
+    .seed-block { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(24px, 5vw, 64px); align-items: start; }
+    .seed-chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .seed-chip { border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); padding: 14px; display: grid; grid-template-rows: auto 1fr; gap: 10px; min-height: 132px; }
+    .swatch { height: 64px; border-radius: 4px; background: var(--accent); border: 1px solid rgba(0, 0, 0, 0.08); }
+    .seed-meta { display: grid; gap: 4px; }
+    .seed-name { font-family: var(--font-display); font-size: 17px; letter-spacing: -0.01em; color: var(--ink); }
+    .seed-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
+    .seed-list li { display: grid; grid-template-columns: 200px 1fr; gap: 22px; padding: 16px 0; border-bottom: 1px solid var(--line-soft); align-items: baseline; }
+    .seed-list li:last-child { border-bottom: 0; }
+    .seed-list .seed-name { font-size: 18px; }
+    .seed-detail { color: var(--muted); font-size: 14px; line-height: 1.45; }
+    .anti-territory { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(24px, 5vw, 64px); align-items: start; }
+    .anti-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; max-width: 60ch; }
+    .anti-list li { padding: 14px 18px; border: 1px dashed var(--line); border-radius: var(--radius); color: var(--ink-soft); font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; background: color-mix(in oklch, var(--paper) 80%, white); }
+    .anti-list li::before { content: "× "; color: var(--accent-loud); font-weight: 600; }
+    .open-questions { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(24px, 5vw, 64px); align-items: start; }
+    .next-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; max-width: 60ch; }
+    .next-list li { display: grid; grid-template-columns: 110px 1fr; gap: 16px; padding: 14px 0; border-bottom: 1px solid var(--line-soft); }
+    .next-when { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .next-what { color: var(--ink-soft); font-size: 15px; line-height: 1.5; }
+    @media (max-width: 1024px) {
+      .mood-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .reference-shelf { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 800px) {
+      .cover-grid, .thesis-block, .seed-block, .anti-territory, .open-questions { grid-template-columns: 1fr; }
+      .mood-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .seed-chips { grid-template-columns: repeat(2, 1fr); }
+      .reference-shelf { grid-template-columns: 1fr; }
+      .seed-list li { grid-template-columns: 1fr; gap: 6px; }
+      .topline { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topline">
+      <span>NEXU STUDIO</span>
+      <span>27 Spring / Summer — Concept Board</span>
+      <span class="topline-status">v2 · 2026.09.18</span>
+    </header>
+
+    <main id="concept-board">
+
+      <!-- 1. Cover -->
+      <section class="section cover-grid" data-od-id="cover">
+        <div>
+          <p class="kicker">27SS · Concept Board</p>
+          <h1 class="display">Humid<br/>Commute</h1>
+          <p class="thesis">27SS는 새벽 6시 서울의 통근 — 살짝 축축하고, 마른 광택이 한 점 박힌 시즌.</p>
+          <p class="meta cover-meta">
+            <span>NEXU Studio</span>
+            <span>Author · Lead Designer</span>
+            <span>2026.09.18</span>
+            <span>Status · v2 draft</span>
+          </p>
+        </div>
+        <figure class="image-frame cover-image" data-fallback="images/cover-mood.png · 6am Seoul subway platform, milky-white sky, brushed concrete, no model">
+          <img src="images/cover-mood.png" alt="Cover mood image" />
+        </figure>
+      </section>
+
+      <!-- 2. Keyword cloud -->
+      <section class="section keyword-cloud" data-od-id="keywords">
+        <p class="kicker">Season keywords</p>
+        <div class="kw-grid">
+          <span class="kw kw-loud">humid</span>
+          <span class="kw kw-loud">commute</span>
+          <span class="kw kw-mid">dry pop</span>
+          <span class="kw kw-mid">milky sky</span>
+          <span class="kw kw-soft">brushed concrete</span>
+          <span class="kw kw-soft">half-eaten umbrella</span>
+          <span class="kw kw-soft">washed cotton</span>
+        </div>
+      </section>
+
+      <!-- 3. Thesis statement -->
+      <section class="section thesis-block" data-od-id="thesis">
+        <div>
+          <p class="kicker">Territory</p>
+          <h2 class="h2">통근 시간의 미세한 습기와 한 점의 마른 광택.</h2>
+        </div>
+        <div class="thesis-copy">
+          <p class="lead">고객은 27세 전후, 서울 4호선 이용권, 출근 전 카페 들렀다 이어폰 끼고 발걸음 빠르게 걷는 사람. 6월의 6시 반, 셔츠가 살짝 손목에 닿는 그 1초에 시즌이 살아있다.</p>
+          <p>Primary tonality는 <em>humid commute / urban sweat</em> — 화려하지 않고, 습기 머금은 도시 이동의 톤. Tension은 <em>dry industrial</em> — 한 군데 마른 광택(brass, 폴리, 새틴 패치)을 박아 톤의 평형을 무너뜨린다.</p>
+          <p>왜 27SS인가: 26FW의 어둡고 두꺼운 무게에서 가벼워지되, 25SS의 밝고 가벼운 톤으로 후퇴하지 않는다. 이번엔 <em>가볍지만 끈적한</em> 영역. 무신사·29CM 셀-스루 데이터에서 26SS 셔츠/얇은 자켓군이 약했던 이유는 너무 깨끗했기 때문 — 27SS는 그 결을 흐려서 다시 시도한다.</p>
+        </div>
+      </section>
+
+      <!-- 4. Mood grid -->
+      <section class="section" data-od-id="mood-grid">
+        <p class="kicker">Mood territory</p>
+        <h2 class="h2" style="margin-bottom: 28px;">12장 — 룩북 프리뷰가 아니라 시즌의 mood 영역.</h2>
+        <div class="mood-grid">
+          <figure class="mood-card" data-image-role="scene"><div class="image-frame" data-fallback="images/mood-01.png · Seoul subway platform 6:20am, fluorescent overhead, brushed concrete floor"><img src="images/mood-01.png" alt="" /></div><figcaption><span class="role-tag">scene</span><p>4호선 충무로역 6시 20분, 형광등 윗빛.</p></figcaption></figure>
+          <figure class="mood-card" data-image-role="scene"><div class="image-frame" data-fallback="images/mood-02.png · convenience store aisle 5am, yellow-green light, condensation on cold drink shelf"><img src="images/mood-02.png" alt="" /></div><figcaption><span class="role-tag">scene</span><p>새벽 5시 GS25, 음료 진열대 결로.</p></figcaption></figure>
+          <figure class="mood-card" data-image-role="gesture"><div class="image-frame" data-fallback="images/mood-03.png · close-up hand gripping subway handrail, faint sweat, no face"><img src="images/mood-03.png" alt="" /></div><figcaption><span class="role-tag">gesture</span><p>지하철 손잡이를 잡은 손, 살짝 땀.</p></figcaption></figure>
+          <figure class="mood-card" data-image-role="gesture"><div class="image-frame" data-fallback="images/mood-04.png · folded umbrella tip on damp pavement, mid-step shoe blur"><img src="images/mood-04.png" alt="" /></div><figcaption><span class="role-tag">gesture</span><p>접어 든 우산 끝과 보도 블록.</p></figcaption></figure>
+          <figure class="mood-card" data-image-role="texture"><div class="image-frame" data-fallback="images/mood-05.png · close-up washed cotton with body, slight shine where it folds"><img src="images/mood-05.png" alt="" /></div><figcaption><span class="role-tag">texture</span><p>워시드 코튼이 접히는 자리.</p></figcaption></figure>
+          <figure class="mood-card" data-image-role="texture"><div class="image-frame" data-fallback="images/mood-06.png · technical nylon dry hand, matte sheen, fold edge"><img src="images/mood-06.png" alt="" /></div><figcaption><span class="role-tag">texture</span><p>마른 손맛의 테크니컬 나일론.</p></figcaption></figure>
+          <figure class="mood-card" data-image-role="light"><div class="image-frame" data-fallback="images/mood-07.png · milky overcast sky over rooftop antennas"><img src="images/mood-07.png" alt="" /></div><figcaption><span class="role-tag">light</span><p>옅게 흐린 하늘, 옥탑 안테나.</p></figcaption></figure>
+          <figure class="mood-card" data-image-role="light"><div class="image-frame" data-fallback="images/mood-08.png · single window slice of soft daylight on concrete wall"><img src="images/mood-08.png" alt="" /></div><figcaption><span class="role-tag">light</span><p>창에 잘린 한 줄의 부드러운 빛.</p></figcaption></figure>
+          <figure class="mood-card" data-image-role="texture"><div class="image-frame" data-fallback="images/mood-09.png · brass button on canvas placket, slightly oxidized"><img src="images/mood-09.png" alt="" /></div><figcaption><span class="role-tag">texture</span><p>살짝 산화된 황동 단추, 캔버스.</p></figcaption></figure>
+          <figure class="mood-card" data-image-role="garment-fragment"><div class="image-frame" data-fallback="images/mood-10.png · shirt cuff with single dart and visible stitching"><img src="images/mood-10.png" alt="" /></div><figcaption><span class="role-tag">fragment</span><p>한 줄 다트가 잡힌 셔츠 커프.</p></figcaption></figure>
+          <figure class="mood-card" data-image-role="garment-fragment"><div class="image-frame" data-fallback="images/mood-11.png · raw selvedge hem on light denim"><img src="images/mood-11.png" alt="" /></div><figcaption><span class="role-tag">fragment</span><p>옅은 데님의 셀비지 헴.</p></figcaption></figure>
+          <figure class="mood-card" data-image-role="gesture"><div class="image-frame" data-fallback="images/mood-12.png · bag strap over shoulder, half-frame, neutral background"><img src="images/mood-12.png" alt="" /></div><figcaption><span class="role-tag">gesture</span><p>어깨에 걸친 가방끈, 반신.</p></figcaption></figure>
+        </div>
+      </section>
+
+      <!-- 5. Reference shelf -->
+      <section class="section" data-od-id="references">
+        <p class="kicker">Reference shelf</p>
+        <h2 class="h2" style="margin-bottom: 28px;">이 영역이 만들어진 게 아니라는 증거 6가지.</h2>
+        <div class="reference-shelf">
+          <article class="reference-card"><span class="meta">Seoul · 2010s</span><h3 class="ref-title">노매뉴얼 24FW</h3><p>새벽 광장시장의 빛과 바닥 톤을 그대로 캠페인에 옮긴 K-DTC 사례. 우리도 이 결을 빌린다.</p></article>
+          <article class="reference-card"><span class="meta">Tokyo · 1990s</span><h3 class="ref-title">Eiko Hosoe / 早朝の都市</h3><p>이른 아침 도시 통근의 다큐멘터리 톤. 인물보다 환경이 먼저 보이는 시선.</p></article>
+          <article class="reference-card"><span class="meta">Copenhagen · 1900s</span><h3 class="ref-title">Vilhelm Hammershøi</h3><p>실내광의 정적함. 인물이 있어도 인물이 주체가 아닌, 빛과 표면의 mood.</p></article>
+          <article class="reference-card"><span class="meta">USA · 2016</span><h3 class="ref-title">Frank Ocean — Blonde</h3><p>밝은 듯 우울한 mid-tone, 분명한 무드 컬러 한 점, 절제된 디테일.</p></article>
+          <article class="reference-card"><span class="meta">Tokyo · 2010s–</span><h3 class="ref-title">AURALEE / Workshop tone</h3><p>일본 워크룸의 마른 craft. 제품이 아니라 작업 자체의 텍스처.</p></article>
+          <article class="reference-card"><span class="meta">Seoul · 2020s</span><h3 class="ref-title">서울 6시반의 4호선 — 직접 답사</h3><p>27SS 시작점이자 가장 진실한 레퍼런스. 9월 19일 직접 촬영본 6장 확보.</p></article>
+        </div>
+      </section>
+
+      <!-- 6. Tone dials -->
+      <section class="section dials" data-od-id="tone-dials">
+        <p class="kicker">Tone dials</p>
+        <h2 class="h2" style="margin-bottom: 28px;">팀이 합의한 5개 축의 위치.</h2>
+        <div class="dial-list">
+          <div class="dial" style="--dial-pos: 28;">
+            <div class="dial-axis"><span class="meta dial-left">muted</span><span class="meta dial-right">saturated</span></div>
+            <div class="dial-track"><div class="dial-marker"></div></div>
+            <p class="dial-note">메인 톤은 muted. WGSN Luminous Blue도 한 단계 dusty로 끌어내림.</p>
+          </div>
+          <div class="dial" style="--dial-pos: 65;">
+            <div class="dial-axis"><span class="meta dial-left">structured</span><span class="meta dial-right">fluid</span></div>
+            <div class="dial-track"><div class="dial-marker"></div></div>
+            <p class="dial-note">셔츠/팬츠는 fluid 쪽, 그러나 어깨 라인 한 군데는 structured.</p>
+          </div>
+          <div class="dial" style="--dial-pos: 38;">
+            <div class="dial-axis"><span class="meta dial-left">quiet</span><span class="meta dial-right">loud</span></div>
+            <div class="dial-track"><div class="dial-marker"></div></div>
+            <p class="dial-note">시즌 전체는 quiet. Loud는 dry pop accent 한 점만.</p>
+          </div>
+          <div class="dial" style="--dial-pos: 72;">
+            <div class="dial-axis"><span class="meta dial-left">retro</span><span class="meta dial-right">contemporary</span></div>
+            <div class="dial-track"><div class="dial-marker"></div></div>
+            <p class="dial-note">90s 통근 이미지는 차용하되 표현은 동시대적으로.</p>
+          </div>
+          <div class="dial" style="--dial-pos: 70;">
+            <div class="dial-axis"><span class="meta dial-left">romantic</span><span class="meta dial-right">industrial</span></div>
+            <div class="dial-track"><div class="dial-marker"></div></div>
+            <p class="dial-note">Industrial 우위. Romantic은 한 룩의 셔츠 칼라 한 군데로 한정.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. Color seeds -->
+      <section class="section seed-block" data-od-id="color-seeds">
+        <div>
+          <p class="kicker">Color seeds</p>
+          <h2 class="h2">탐색 컬러 — 락된 팔레트가 아님.</h2>
+          <p class="lead" style="margin-top: 14px;">최종 팔레트는 fashion-color-story에서 확정. 여기는 우리가 보고 있는 방향.</p>
+        </div>
+        <div class="seed-chips">
+          <div class="seed-chip"><div class="swatch" style="background:#e8e1d2;"></div><div class="seed-meta"><span class="seed-name">humid linen ivory</span><span class="meta">washed cotton / linen</span></div></div>
+          <div class="seed-chip"><div class="swatch" style="background:#7e8fa3;"></div><div class="seed-meta"><span class="seed-name">6am sky blue</span><span class="meta">poplin / brushed</span></div></div>
+          <div class="seed-chip"><div class="swatch" style="background:#a08172;"></div><div class="seed-meta"><span class="seed-name">weathered terracotta</span><span class="meta">canvas / heavy cotton</span></div></div>
+          <div class="seed-chip"><div class="swatch" style="background:#3a3631;"></div><div class="seed-meta"><span class="seed-name">industrial charcoal</span><span class="meta">technical nylon</span></div></div>
+          <div class="seed-chip"><div class="swatch" style="background:#bd6c3d;"></div><div class="seed-meta"><span class="seed-name">dry pop accent</span><span class="meta">satin / brass</span></div></div>
+          <div class="seed-chip"><div class="swatch" style="background:#d3c9b1;"></div><div class="seed-meta"><span class="seed-name">milky overcast</span><span class="meta">silk-cotton blend</span></div></div>
+        </div>
+      </section>
+
+      <!-- 8. Material seeds -->
+      <section class="section seed-block" data-od-id="material-seeds">
+        <div>
+          <p class="kicker">Material seeds</p>
+          <h2 class="h2">패브릭 의도 — 벤더 미확정.</h2>
+        </div>
+        <ul class="seed-list">
+          <li><span class="seed-name">Washed cotton (body)</span><span class="seed-detail">살짝 무겁게 떨어지는 워시드 코튼. 셔츠/팬츠 코어. 동대문 종합시장 1차 답사 예정.</span></li>
+          <li><span class="seed-name">Technical nylon (dry)</span><span class="seed-detail">광택 죽인 마른 손맛의 나일론. 자켓 1, 미니 백 1. 협력 밀에 소량 개발 의뢰.</span></li>
+          <li><span class="seed-name">Silk-cotton blend</span><span class="seed-detail">옅은 투명도, body 있는 살짝의 광택. 블라우스/셔츠 1. PIS 8월 답사에서 후보 픽.</span></li>
+          <li><span class="seed-name">Light denim (raw selvedge)</span><span class="seed-detail">10oz 전후, raw selvedge 마감. 데님 팬츠/스커트.</span></li>
+          <li><span class="seed-name">Brushed wool tropical</span><span class="seed-detail">서머 트로피컬 울. 가벼운 자켓/팬츠 셋업.</span></li>
+          <li><span class="seed-name">Satin patch (accent)</span><span class="seed-detail">트림으로만 사용 — 포켓 안감, 라벨, 한 점 패치.</span></li>
+        </ul>
+      </section>
+
+      <!-- 9. Silhouette seeds -->
+      <section class="section seed-block" data-od-id="silhouette-seeds">
+        <div>
+          <p class="kicker">Silhouette seeds</p>
+          <h2 class="h2">실루엣 방향, 카테고리에 핀.</h2>
+        </div>
+        <ul class="seed-list">
+          <li><span class="seed-name">Shirts</span><span class="seed-detail">Relaxed boxy, 어깨 라인 한 단계 정의. 26SS의 너무 깨끗한 핏을 한 클릭 흐림.</span></li>
+          <li><span class="seed-name">Outer</span><span class="seed-detail">Quiet structured short coat. 길이 92~96cm, 어깨 자연스럽게 박힘.</span></li>
+          <li><span class="seed-name">Pants</span><span class="seed-detail">Trouser, not too tapered. 허벅지 여유 + 발목 살짝 넓게. 베이스 핏 블록 v3.</span></li>
+          <li><span class="seed-name">Skirts / Dresses</span><span class="seed-detail">Column-shape, 무릎 아래로 떨어지는 직선. 한 점만 슬릿.</span></li>
+          <li><span class="seed-name">Knit</span><span class="seed-detail">14게이지 미들 게이지, 살짝 헐렁한 boxy crew. 셔츠 위 레이어 가능 사이징.</span></li>
+          <li><span class="seed-name">Bag / Accessory</span><span class="seed-detail">Mini structured, 한 손에 잡히는 사이즈. 테크니컬 나일론 베이스.</span></li>
+        </ul>
+      </section>
+
+      <!-- 10. Detail seeds -->
+      <section class="section seed-block" data-od-id="detail-seeds">
+        <div>
+          <p class="kicker">Detail seeds</p>
+          <h2 class="h2">시즌이 탐색하는 디테일 무브.</h2>
+        </div>
+        <ul class="seed-list">
+          <li><span class="seed-name">Closure</span><span class="seed-detail">황동 단추(살짝 산화), 플라스틱 단추 사용 금지. 메인 자켓.</span></li>
+          <li><span class="seed-name">Hem</span><span class="seed-detail">Raw selvedge hem 한 룩에 하나만. 데님 팬츠 1.</span></li>
+          <li><span class="seed-name">Pocket</span><span class="seed-detail">Single visible utility pocket — 자켓·셔츠 중 하나만. 카고는 27SS 안 함.</span></li>
+          <li><span class="seed-name">Stitch</span><span class="seed-detail">대비 색 스티치 한 룩 한 군데 — 통근 movement에 어울리는 수공 흔적.</span></li>
+          <li><span class="seed-name">Label / Tag</span><span class="seed-detail">사틴 라벨, 외부 노출형 1cm. 안감/케어 라벨도 색 톤 통일.</span></li>
+          <li><span class="seed-name">Embroidery / Print</span><span class="seed-detail">시즌 전체에 한 점만 — 그래픽 티 아닌 셔츠 어깨 한 줄 자수.</span></li>
+        </ul>
+      </section>
+
+      <!-- 11. Anti-territory -->
+      <section class="section anti-territory" data-od-id="anti-territory">
+        <div>
+          <p class="kicker">Anti-territory</p>
+          <h2 class="h2">27SS가 의도적으로 하지 않는 것.</h2>
+        </div>
+        <ul class="anti-list">
+          <li>no Y2K nostalgia</li>
+          <li>no Pinterest cottagecore</li>
+          <li>no logo-on-front merchandise tee</li>
+          <li>no fluorescents (하이비스 옐로우, 핑크)</li>
+          <li>no oversized boxy fit beyond shirts (자켓·팬츠는 핏 잡음)</li>
+          <li>no cargo pocket for 27SS</li>
+          <li>no resort / vacation coding</li>
+        </ul>
+      </section>
+
+      <!-- 12. Open questions / next decisions -->
+      <section class="section open-questions" data-od-id="next-decisions">
+        <div>
+          <p class="kicker">Open / next</p>
+          <h2 class="h2">다음 무엇을 언제까지.</h2>
+        </div>
+        <ol class="next-list">
+          <li><span class="next-when">2026.10.01</span><span class="next-what">Color story v1 락 (Pantone TCX 코드 확정).</span></li>
+          <li><span class="next-when">2026.10.08</span><span class="next-what">동대문 종합시장 1차 답사 — washed cotton·denim 후보 6종 픽.</span></li>
+          <li><span class="next-when">2026.10.15</span><span class="next-what">협력 밀 technical nylon 개발 sample request 발송.</span></li>
+          <li><span class="next-when">2026.10.22</span><span class="next-what">실루엣 시드 → 도식화 1차 30장 (셔츠 8, 자켓 5, 팬츠 8, 니트 5, 기타 4).</span></li>
+          <li><span class="next-when">2026.11.05</span><span class="next-what">라인업 매트릭스 v1 — MD 합의.</span></li>
+          <li><span class="next-when">2026.11.20</span><span class="next-what">1차 샘플 작업지시서 발송.</span></li>
+        </ol>
+      </section>
+
+    </main>
+  </div>
+</body>
+</html>

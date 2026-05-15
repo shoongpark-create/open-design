@@ -1,51 +1,43 @@
-# Key Item Sheet Checklist
+# 키 아이템 시트 자체 검수 체크리스트
 
-Run before emitting `<artifact>`. P0 are hard gates.
+산출물 출력 직전 한 항목씩 직접 확인하세요. **P0**는 통과해야 하는 하드 게이트.
 
-## P0 — Hard gates
+## P0 — 통과 필수
 
-- [ ] Header strip lists season, item family, brand item name, selling
-  period, carryover status, and lock state.
-- [ ] Item thesis is present and names target colorway count + target lot.
-- [ ] Exactly **one** item family is on the page. Multiple items = split
-  into multiple sheets.
-- [ ] Slice subset has 2–4 entries (not 0, not 5). Each slice cluster
-  carries 3–4 tiles.
-- [ ] Each slice cluster's tiles obey its slice-shape rule from
-  `references/slices.md` (Color = full garment hanger/flat-lay; Detail =
-  macro construction; Pattern = swatch scale; Fabric = swatch close-up;
-  Artwork = isolated graphic study).
-- [ ] Worn-reference grid carries 5–6 figures, each with a 1-line
-  takeaway.
-- [ ] Every `<img src="...">` resolves to a file the agent actually wrote
-  in `images/`. No orphan references.
-- [ ] If any image generation failed, the matching `<figure>` falls back
-  to the styled placeholder block — never a broken `<img>`.
-- [ ] No external image URLs, no base64 data URIs, no absolute paths.
-- [ ] All color references match the active `fashion-color-story` palette
-  (or active `DESIGN.md` palette when no color story exists). No
-  improvised TCX codes.
+- [ ] 헤더 스트립에 시즌, 아이템 패밀리, 브랜드 아이템 이름, 판기, 캐리오버 상태, LOCK 상태 표기
+- [ ] 아이템 thesis 존재 + 타겟 컬러웨이 수 + 타겟 LOT 명명
+- [ ] 페이지에 **정확히 1개** 아이템 패밀리. 복수 아이템 = 복수 시트로 분리
+- [ ] 슬라이스 서브셋이 2~4 항목 (0, 5 금지). 각 슬라이스 클러스터에 3~4 타일
+- [ ] 각 슬라이스 클러스터 타일이 `references/slices.md`의 슬라이스 형태 규칙 준수 (Color = 풀 가먼트 행거/플랫레이; Detail = 매크로 구성; Pattern = 스와치 스케일; Fabric = 스와치 클로즈업; Artwork = 고립 그래픽 스터디)
+- [ ] Worn 레퍼런스 그리드에 5~6 figure, 각각 1줄 takeaway
+- [ ] 모든 `<img src="...">`가 `images/` 폴더 실제 파일 참조. 고아 참조 없음
+- [ ] 이미지 생성 실패 시 해당 `<figure>`가 폴백 텍스트 블록으로 자연스럽게 폴백 — 깨진 `<img>` 금지
+- [ ] 외부 이미지 URL 없음, base64 데이터 URI 없음, 절대 경로 없음
+- [ ] 모든 컬러 참조가 `fashion-color-story` 팔레트(없으면 `DESIGN.md` 팔레트)와 일치. 임의 TCX 코드 금지
 
-## P1 — Quality bars
+## P1 — 강한 키 아이템 시트
 
-- [ ] Slice selection follows the recommended composition for the item
-  family in `references/slices.md`, *or* the agent stated a deliberate
-  reason for diverging in the thesis.
-- [ ] No banned slice combinations (Detail × Artwork on tees, Color ×
-  Pattern when patterns include color variation).
-- [ ] Production / merch note carries all five `<dt>` rows or omits
-  unknown ones with `[TBD]` placeholder (never guesses suppliers).
-- [ ] Worn references all use the same lighting / background treatment
-  so they read as one set.
-- [ ] Slice cluster titles use the canonical 5 names (Color / Detail /
-  Pattern / Fabric / Artwork) or the documented synonym mapping.
+- [ ] 슬라이스 선택이 `references/slices.md`의 아이템 패밀리별 권장 컴포지션 따름, *또는* 분기 시 thesis에 의도적 사유 명시
+- [ ] 금지 슬라이스 조합 회피 (티에 Detail × Artwork, 패턴이 컬러 변형 포함 시 Color × Pattern)
+- [ ] Production / Merch 노트가 5개 `<dt>` 행 모두 보유, 또는 미확정은 `[TBD]` placeholder (공급사 임의 추측 금지)
+- [ ] Worn 레퍼런스가 동일 라이팅 / 배경 처리 — 하나의 세트로 읽힘
+- [ ] 슬라이스 클러스터 타이틀이 canonical 5 이름(Color / Detail / Pattern / Fabric / Artwork) 또는 문서화된 동의어 매핑 사용
+- [ ] **한국 K-패션 컨텍스트** 본문 카피가 한국 패션 비즈니스 등록 따름
 
-## P2 — Polish
+## P2 — 다듬기
 
-- [ ] Item name appears in the brand's own language (Korean if Korean
-  brand) — do not auto-translate.
-- [ ] One-line takeaways under worn figures are concrete construction
-  notes, not mood adjectives.
-- [ ] Thesis paragraph is one paragraph (≤ 5 sentences), not a treatise.
-- [ ] Open / next decisions list has owner + date for every entry, or
-  the section is omitted entirely.
+- [ ] 아이템 이름이 브랜드 자체 언어로 표기 (한국 브랜드면 한국어) — 자동 번역 금지
+- [ ] Worn figure 1줄 takeaway가 구체 구성 노트, 무드 형용사 아님 (`shoulder 릴랙스, hem 힙본 위치` 같은)
+- [ ] thesis 단락이 1 단락 (≤5 문장), 논문 아님
+- [ ] Open / Next Decisions 리스트의 모든 항목에 owner + 일자, 또는 섹션 전체 생략
+
+## K-DTC 컨텍스트 특화 검수
+
+- [ ] 키 아이템이 시즌 IMC 캘린더의 히어로 슬롯에 매핑 (디자인실 + MD실 + 마케팅실 합작 정합)
+- [ ] 타겟 LOT이 MOQ 기준 이상 + 사입가율 정합
+- [ ] 시그니처 디테일이 `fashion-graphic-direction`의 시즌 테마 또는 브랜드 영구 IP와 정합
+- [ ] 패브릭 슬라이스 사용 시 기능성 패브릭 (Sorona, Askin, Cool Cotton, 라이트 나일론) 또는 시즌 시그니처 패브릭 (와플, 슬럽, 우라기리) 명시
+- [ ] 판기(S1~S4) 배치가 입고 일정 + 시즌 사이클 정합
+- [ ] 캐리오버 결정 시 이전 시즌 정상판매율 데이터 인용 가능 (예: `26FW 코튼 집업 정상판매율 78%, top-5`)
+
+검수 통과 후 사용자에게 산출물 외에 별도 보고는 하지 않습니다 (출력 규약).

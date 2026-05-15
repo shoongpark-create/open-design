@@ -1,48 +1,195 @@
 ---
 name: invoice
 description: |
-  A printable invoice page — sender + recipient block, line items table,
-  tax breakdown, totals, and payment instructions. Use when the brief
-  mentions "invoice", "bill", "billing statement", or "发票".
+  K-패션 브랜드의 **발주서(P/O) / 거래명세서 / OEM 계약서**를 단일 HTML
+  파일로 생성하는 스킬입니다. 한국 사업자 형식의 발주서·세금계산서 톤
+  (사업자등록번호, 종사업장 정보, 공급자/공급받는자 블록), 발주 라인
+  아이템 표(SKU · 카테고리 · 컬러웨이 · 사이즈 · LOT · 수량 · 사입가 · 합계),
+  부가세 표기, 결제 조건(40% 선급 / 60% 입고 시), 입금 계좌, 사인 라인 구조.
+  생산실/MD실이 OEM 공장에 발행하는 시즌 발주 표준 양식. 통화 단위는 원/만원/억.
+  사용자가 "발주서", "P/O", "거래명세서", "OEM 발주", "세금계산서"를 언급하면
+  활성화하세요.
 triggers:
+  - "발주서"
+  - "P/O"
+  - "PO 발행"
+  - "거래명세서"
+  - "OEM 발주"
+  - "OEM 계약서"
+  - "세금계산서"
+  - "발주 양식"
   - "invoice"
   - "bill"
-  - "billing statement"
-  - "发票"
-  - "账单"
 od:
   mode: prototype
   platform: desktop
   scenario: finance
+  category: fashion
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Create an invoice from a freelance design studio billing a client for a brand identity project — three line items, 10% retainer, 9% sales tax."
+  example_prompt: "와키윌리 27SS 1차 발주서를 만들어주세요. 공급받는자 = WACKYWILLY (사업자등록번호 123-45-67890), 공급자 = OEM 공장 A. 라인 아이템 4건 (재킷·블라우스·팬츠·니트). 컬러웨이·사이즈·LOT·수량·사입가 포함. 결제 조건 40% 선급 / 60% 입고 시. MOQ 200장 · 사입가율 28%."
 ---
 
-# Invoice Skill
+# 패션 발주서·거래명세서 스킬
 
-Produce a single-page printable invoice.
+K-패션 브랜드의 **시즌 발주서(P/O), 거래명세서, OEM 계약서**를 단일 HTML 파일로 생성합니다. 한국 사업자 양식과 패션 OEM 표준을 결합한 인쇄용 문서. 시즌 1차/2차 발주, SPOT 발주, 캐리오버 발주 등 모든 발주 차수에 사용 가능.
 
-## Workflow
+이 산출물의 청중은 **OEM 공장 책임자, 자사 생산실, 자사 회계팀, 거래처 세무 담당**입니다. 한국 패션기업에서는 보통 생산실이 ERP에서 P/O를 발행하고, 거래명세서는 회계팀이 입고 검수 완료 후 발행합니다.
 
-1. Read DESIGN.md.
-2. Layout:
-   - Top band: studio brand on the left, "INVOICE" + number + date + due date on the right.
-   - Two columns: From (sender) / Bill to (recipient) with addresses.
-   - Project ref + payment-terms strip.
-   - Line items table: description / qty / unit / amount.
-   - Right-aligned totals block: subtotal, retainer, tax, total due.
-   - Payment instructions (bank, wire, ACH).
-   - Thank-you note + signature line.
-3. Print stylesheet @media print to remove backgrounds.
+## 환경 호환성
 
-## Output contract
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 `data-od-id` 속성으로 인라인 코멘트 사용 가능.
+
+## 출력 언어 정책
+
+K-패션 발주서·거래명세서의 한국 사업자 등록(register)을 따릅니다.
+
+- **통화 단위**: 원 / 만원 / 억. KRW 표기는 보조 (예: `₩72,000,000` 또는 `72,000,000원` 또는 `7,200만원`). USD 환산 금지.
+- **사업자 정보 필드** (한국 표준): 상호 / 사업자등록번호 / 대표자 / 사업장 주소 / 업태 / 종목 / 연락처. 종사업장이 있으면 별도 표시.
+- **발주 라인 아이템 필드**: SKU 코드 / 품명(카테고리) / 컬러웨이 / 사이즈 어소트(S/M/L) / LOT 번호 / 수량(장) / 사입단가(원) / 공급가액(원).
+- **부가세 표기**: 공급가액(VAT 별도) + 부가세 10% + 합계금액. OEM 거래는 일반과세자 기준.
+- **MOQ·사입가율**: K-패션 표준 필드 — MOQ(최소발주수량) 200~500장, 사입가율 25~35%.
+- **결제 조건**: 한국 패션 OEM 표준 — `40% 선급 + 60% 입고 시` 또는 `30/30/40` 또는 `Net 30 / Net 60`.
+- **시즌 코드**: 27SS / 26FW / 1차 발주 / 2차 발주 / SPOT.
+- 명사구 종결 권장: "발주 확정", "선급 입금 완료", "입고 검수 통과".
+
+## 폴더 구조
 
 ```
-<artifact identifier="invoice-name" type="text/html" title="Invoice">
-<!doctype html>...</artifact>
+invoice/
+├── SKILL.md       ← 이 파일
+└── example.html   ← 작성 예시 (와키윌리 27SS 1차 발주서)
 ```
+
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. `example.html`을 처음부터 끝까지 읽어 상단 발주 헤더 + 공급자/공급받는자 블록 + 라인 아이템 표 + 부가세·합계 + 결제 조건 + 사인 라인 구조를 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요.
+
+### Step 1 — 정보 수집
+
+다음 항목이 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
+
+- **문서 유형**: 발주서(P/O) / 거래명세서 / OEM 계약서
+- **발주 코드**: 예: `PO-27SS-W001`, `발주번호 2026-0142`
+- **시즌·차수**: 27SS / 26FW / 1차 / 2차 / SPOT / 캐리오버
+- **공급자**(자사): 상호, 사업자등록번호, 대표자, 주소, 연락처
+- **공급받는자**(OEM 공장) 또는 그 반대: 같은 필드 셋
+- **발주 라인 아이템**: SKU · 품명 · 컬러웨이 · 사이즈 어소트 · LOT · 수량 · 사입단가 (최소 3행)
+- **결제 조건**: 선급/잔금 비율, 입금일, 입금 계좌
+- **부가세 적용 여부** (보통 10% 일반과세)
+- **참고 사항**: MOQ, 사입가율, 컬러 락 코드, 견본 컨퍼(CON) 완료일
+
+### Step 2 — 레이아웃 순서
+
+1. **상단 브랜드 바** — 좌측 자사 워드마크 + 우측 "발주서" / "거래명세서" 라벨 + 발주번호 + 발행일 + 입고 예정일
+2. **공급자 / 공급받는자 블록** — 좌측 "공급자" (또는 자사 = "발주처"), 우측 "공급받는자" (또는 = "수주처"). 상호·사업자등록번호·대표자·주소·업태·종목 포함
+3. **프로젝트 참조 스트립** — 발주 프로젝트명, 시즌 코드, 결제 조건 (예: "Net 30 · 원" 또는 "40% 선급 / 60% 입고 시")
+4. **라인 아이템 표** — 헤더: SKU / 품명 · 카테고리 / 컬러웨이 / 사이즈 어소트 / LOT / 수량(장) / 사입단가(원) / 공급가액(원). 4~10행 권장
+5. **합계 블록** — 우측 정렬: 공급가액 / 부가세 10% / 합계금액. 좌측 결제 조건 박스(MSA·MOQ·CON 일자 등)
+6. **결제 정보** — 우측: 입금 계좌(은행/계좌번호/예금주), 결제 마감일. 좌측: 결제 방식(계좌 이체 / 어음 / 외상 매입)
+7. **사인 라인** — 좌측 감사 인사 + 우측 자필 서명 + 직무 표시 (예: "생산실 PD 김도하")
+
+### Step 3 — 작성
+
+1. 단일 HTML 문서(`<!doctype html>` ~ `</html>`)로 작성.
+2. `@media print` 스타일로 배경 제거, 인쇄용 폰트 사이즈 조정.
+3. 표의 숫자는 모노 폰트(`var(--mono)`), 우측 정렬, `font-variant-numeric: tabular-nums`.
+4. 통화는 한국 표준 천 단위 콤마 + "원" 접미사 (예: `72,000,000원`).
+5. 사업자등록번호 placeholder는 `123-45-67890` 형식.
+
+### Step 4 — 자체 검수
+
+- 통화 단위는 원/KRW (USD/$/€ 금지)
+- 사업자등록번호 형식 `xxx-xx-xxxxx` 양쪽 모두 표기
+- 부가세 10% 별도 또는 포함 명시
+- MOQ·사입가율 정보 명시
+- 결제 조건은 한국 패션 OEM 표준 (40/60, 30/30/40, Net 30)
+- LOT 번호와 SKU 코드 매칭 (예: `LOT-27SS-W001`)
+- 시즌 코드 형식 (예: `27SS`, `26FW`)
+- 사인 라인에 직무명 + 이름
+
+## 한국 K-패션 발주 표준 (참고)
+
+발주서·거래명세서 작성 시 참고할 표준.
+
+| 항목 | K-패션 표준 |
+|---|---|
+| **MOQ** | 200~500장 (영캐주얼), 100~300장 (컨템포러리), 1,000장+ (대량 베이직) |
+| **사입가율** | 25~35% (영캐주얼), 28~32% (와키윌리 톤), 30~40% (컨템포러리) |
+| **결제 조건** | `40% 선급 / 60% 입고 시` (1차), `30/30/40` (장기), `Net 30~60` (대형 OEM) |
+| **부가세** | 10% 일반과세 (OEM 거래 표준) |
+| **사이즈 어소트** | S/M/L 또는 1/2/3, 어소트 비율 명시 (예: S:M:L = 2:3:2) |
+| **컬러웨이 코드** | CW01 / CW02 또는 컬러명 (예: OAT, CHARCOAL, NAVY) |
+| **LOT 번호** | `LOT-{시즌}-{라인}-{차수}` (예: `LOT-27SS-W001`) |
+| **납기** | 본생산 8주, 견본 컨퍼 후 6주 표준 |
+
+## 한국 패션기업 조직 R&R 메모
+
+발주서 발행·승인 흐름.
+
+- **생산실 PD**: 발주서 초안 작성, ERP 등록, 공장 송부
+- **MD 실장**: 발주 수량·사입가·LOT 어소트 검토, 사인오프
+- **회계팀**: 입금 처리, 거래명세서 발행, 부가세 처리
+- **CFO**: 1억 이상 발주 시 컨펌
+- **OEM 공장 책임자**: 발주서 수신, 견본 컨퍼 일자 동의, 본생산 시작 사인
+- **세무 담당** (외부): 세금계산서 발행·신고
+
+## 시즌 사이클 내 위치
+
+발주서는 **시즌 시작 2~3개월 전**부터 차수별로 발행됩니다.
+
+```
+[fashion-new-lineup] (라인업 LOCK)
+    ↓
+[eng-runbook] (발주 SOP 배포)
+    ↓
+[invoice · 1차 P/O] (시즌 시작 2~3개월 전, 본생산 발주)
+    ↓ 견본 CON → 본생산
+[invoice · 거래명세서] (입고 검수 후 발행)
+    ↓
+[invoice · SPOT P/O] (시즌 중 추가 발주, 매출 추이 보고 결정)
+    ↓
+[finance-report] (판기 결산에 사입금액·클레임 반영)
+```
+
+## 채널 연계
+
+발주서 발행은 다음 시스템과 연동됩니다.
+
+- **자체 ERP / 자라남 / 이지어드민 / 메이크샵** — P/O 자동 발행
+- **국세청 홈택스** — 세금계산서 전자 발행
+- **은행 펌뱅킹** — 선급금 자동 이체
+- **카카오톡 / 위챗 / 이메일** — OEM 공장 송부
+- **회계 시스템** — 더존 / 케이뱅크 / 영림원
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="invoice-slug" type="text/html" title="발주서 / 거래명세서 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "와키윌리 27SS 1차 발주서를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

@@ -1,0 +1,516 @@
+<!doctype html>
+<!--
+  K-패션 시즌 키비주얼 / 신상 발매 카운트다운 / 캠페인 인트로 스프라이트 애니메이션 시드.
+
+  화면 녹화 후 인스타 릴스·틱톡·유튜브 쇼츠로 컨버전 가능한 한 프레임 구성.
+  16:9 풀-블리드 스테이지, 크림/오프화이트 배경 + 미세한 페이퍼 그레인.
+
+  레이어 구조:
+    1) 다크 외곽 (영상 프레임 톤)
+    2) 16:9 스테이지 (크림 페이퍼)
+    3) 코너 정렬 마크 4개 (L자)
+    4) 상단 토프바 (캠페인 슬러그 + 진행 도트 + LIVE/REC)
+    5) 키네틱 한글 (우상단, 1~3자, stagger 페이드)
+    6) 메인 큰 디스플레이 (좌하단, 시즌 코드, 1초 글리치 액센트)
+    7) 스프라이트 카드 (우측, 픽셀 아트 또는 SVG, bobbing)
+    8) 캡션 블록 (좌하단)
+    9) 하단 리본 티커 (무한 스크롤 일정)
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 토큰 바인딩 — --accent (브랜드 키컬러), --display (디스플레이 폰트)
+    4) references/layouts.md 에서 스프라이트 패턴 선택
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude (Claude.ai · Claude Code): <artifact> 태그로 감싸 출력
+    - 기타 (ChatGPT · Gemini · Grok): 표준 마크다운 HTML 코드블록
+    - OpenDesign: data-od-id 사용. 그 외는 id 속성 대체.
+
+  하드 룰:
+    - JavaScript 절대 금지 (모든 모션 @keyframes only)
+    - 외부 이미지 URL 금지 (인라인 SVG + CSS만)
+    - 최소 3개 독립 루핑 애니메이션 동시 가시
+    - 컬러 팔레트 제한 (크림 + 단일 액센트 + 잉크)
+    - 한글 키네틱 글자 수 1~3자
+    - 시즌 코드 정확 (27SS, 27FW)
+-->
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>[REPLACE 브랜드] · [REPLACE 시즌 코드] [REPLACE 캠페인명] — sprite animation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Bagel+Fat+One&family=DM+Serif+Display:ital@0;1&family=Hahmlet:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+    :root {
+      --paper:   #f5efe2;
+      --paper-2: #ede4d0;
+      --ink:     #181612;
+      --accent:  #d92b1c;
+      --muted:   #6f6a60;
+
+      --font-serif:   "DM Serif Display", "Hahmlet", "Iowan Old Style", Georgia, serif;
+      --font-display-street:   "Black Han Sans", "Bagel Fat One", "Pretendard Variable", sans-serif;
+      --font-display-romance:  "Hahmlet", "DM Serif Display", "Noto Serif KR", Georgia, serif;
+      --font-display-clean:    "Pretendard Variable", "Wanted Sans Variable", sans-serif;
+      --font-display: var(--font-display-street);
+      --font-mono:    "IBM Plex Mono", ui-monospace, Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body {
+      min-height: 100vh;
+      background: #1a1816;
+      color: var(--ink);
+      font: 14px/1.5 -apple-system, system-ui, "Pretendard Variable", sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* ─── 16:9 스테이지 — 크림 페이퍼 + 그레인 ─── */
+    .stage {
+      width: min(1280px, 100%);
+      aspect-ratio: 16 / 9;
+      position: relative;
+      overflow: hidden;
+      background: var(--paper);
+      background-image:
+        radial-gradient(rgba(120,90,40,0.06) 1px, transparent 1px),
+        radial-gradient(rgba(120,90,40,0.04) 1px, transparent 1px);
+      background-size: 4px 4px, 7px 7px;
+      background-position: 0 0, 2px 3px;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(0,0,0,0.05);
+      border-radius: 4px;
+    }
+    .stage::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.04) 0%, transparent 8%, transparent 92%, rgba(0,0,0,0.05) 100%);
+      pointer-events: none;
+    }
+
+    /* ─── 상단 토프바 ─── */
+    .topbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      padding: 22px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font: 11px/1 var(--font-mono);
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .topbar .slug {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .topbar .slug .kr {
+      font-family: var(--font-display);
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      text-transform: none;
+      font-size: 16px;
+    }
+    .topbar .slug .en { color: var(--muted); }
+    .topbar .progress {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .topbar .progress .dots {
+      display: inline-flex;
+      gap: 4px;
+    }
+    .topbar .progress .dots i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--ink);
+      display: inline-block;
+      opacity: 0.18;
+    }
+    .topbar .progress .dots i.on { opacity: 1; }
+    .topbar .rec {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+    }
+    .topbar .rec::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: blink 1.2s steps(2) infinite;
+    }
+    @keyframes blink {
+      50% { opacity: 0.2; }
+    }
+
+    /* ─── 메인 큰 디스플레이 ─── */
+    .year {
+      position: absolute;
+      left: 6%;
+      bottom: 14%;
+      font: 700 200px/0.85 var(--font-display);
+      color: var(--ink);
+      letter-spacing: -0.03em;
+    }
+    .year .num {
+      display: inline-block;
+      position: relative;
+    }
+    .year .num .glitch {
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--accent);
+      clip-path: inset(0 0 70% 0);
+      animation: glitch 4s steps(8) infinite;
+      mix-blend-mode: multiply;
+    }
+    @keyframes glitch {
+      0%, 88%, 100% { clip-path: inset(0 0 100% 0); transform: translate(0,0); opacity: 0; }
+      89% { clip-path: inset(20% 0 60% 0); transform: translate(2px, -1px); opacity: 0.7; }
+      91% { clip-path: inset(60% 0 20% 0); transform: translate(-2px, 1px); opacity: 0.7; }
+      94% { clip-path: inset(40% 0 40% 0); transform: translate(1px, 0); opacity: 0.6; }
+      97% { clip-path: inset(0 0 100% 0); transform: translate(0,0); opacity: 0; }
+    }
+    .year .kr-suffix {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.6em;
+      vertical-align: 0.16em;
+      margin-left: 0.04em;
+      color: var(--accent);
+    }
+    .year-label {
+      position: absolute;
+      left: 6%;
+      bottom: calc(14% + 200px + 12px);
+      font: 11px/1.2 var(--font-mono);
+      letter-spacing: 0.22em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .year-label::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--ink);
+      vertical-align: middle;
+      margin-right: 10px;
+      opacity: 0.5;
+    }
+
+    /* ─── 스프라이트 카드 ─── */
+    .sprite-stack {
+      position: absolute;
+      right: 12%;
+      top: 22%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+      animation: bob 2.4s ease-in-out infinite;
+    }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .sprite-card {
+      width: 168px;
+      height: 252px;
+      background: var(--paper-2);
+      border: 4px solid var(--ink);
+      border-radius: 10px;
+      box-shadow: 8px 8px 0 var(--ink);
+      position: relative;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      image-rendering: pixelated;
+    }
+    .sprite-card::before,
+    .sprite-card::after {
+      content: '';
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      height: 4px;
+      background: var(--ink);
+    }
+    .sprite-card::before { top: 14px; }
+    .sprite-card::after  { bottom: 14px; }
+    .sprite-card svg {
+      display: block;
+      image-rendering: pixelated;
+      shape-rendering: crispEdges;
+      margin-top: 18px;
+    }
+    .sprite-tag {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 28px;
+      color: var(--accent);
+      margin-top: auto;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+    .sprite-tag small {
+      display: block;
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 10px;
+      color: var(--muted);
+      letter-spacing: 0.18em;
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    /* ─── 키네틱 한글 ─── */
+    .kana {
+      position: absolute;
+      right: 6%;
+      top: 12%;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 96px;
+      color: var(--ink);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+    .kana span {
+      display: inline-block;
+      opacity: 0;
+      animation: kana-in 4s ease-in-out infinite;
+    }
+    .kana span:nth-child(1) { animation-delay: 0s; }
+    .kana span:nth-child(2) { animation-delay: 0.4s; }
+    .kana span:nth-child(3) { animation-delay: 0.8s; }
+    @keyframes kana-in {
+      0%   { opacity: 0; transform: translateY(-12px); }
+      18%, 78% { opacity: 1; transform: translateY(0); }
+      100% { opacity: 0; transform: translateY(8px); }
+    }
+
+    /* ─── 캡션 블록 ─── */
+    .caption {
+      position: absolute;
+      left: 6%;
+      right: 50%;
+      bottom: 6%;
+      font: 12px/1.5 var(--font-mono);
+      color: var(--ink);
+      letter-spacing: 0.04em;
+      max-width: 32ch;
+    }
+    .caption strong {
+      display: block;
+      font-family: var(--font-serif);
+      font-weight: 400;
+      font-style: italic;
+      font-size: 18px;
+      letter-spacing: -0.005em;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    /* ─── 하단 리본 티커 ─── */
+    .ribbon {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 36px;
+      background: var(--ink);
+      color: var(--paper);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .ribbon-track {
+      display: inline-flex;
+      gap: 64px;
+      padding: 0 32px;
+      animation: scroll-left 22s linear infinite;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .ribbon-track .tick {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font: 11px/1 var(--font-mono);
+      letter-spacing: 0.22em;
+    }
+    .ribbon-track .tick .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+    .ribbon-track .tick .label { color: var(--paper); }
+    .ribbon-track .tick .note {
+      color: rgba(245,239,226,0.55);
+      text-transform: uppercase;
+    }
+    @keyframes scroll-left {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── 코너 정렬 마크 ─── */
+    .reg {
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border: 1px solid var(--ink);
+      opacity: 0.35;
+    }
+    .reg.tl { top: 14px;    left: 14px;  border-right: none; border-bottom: none; }
+    .reg.tr { top: 14px;    right: 14px; border-left: none;  border-bottom: none; }
+    .reg.bl { bottom: 50px; left: 14px;  border-right: none; border-top: none; }
+    .reg.br { bottom: 50px; right: 14px; border-left: none;  border-top: none; }
+
+    @media (max-width: 900px) {
+      .year { font-size: 120px; bottom: 18%; }
+      .year-label { bottom: calc(18% + 120px + 8px); }
+      .kana { font-size: 64px; }
+      .sprite-stack { right: 8%; top: 26%; }
+      .sprite-card { width: 124px; height: 184px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stage" data-od-id="stage">
+
+    <!-- 코너 정렬 마크 -->
+    <span class="reg tl"></span>
+    <span class="reg tr"></span>
+    <span class="reg bl"></span>
+    <span class="reg br"></span>
+
+    <!-- 상단 토프바: 캠페인 슬러그 + 진행 도트 + LIVE/REC -->
+    <div class="topbar" data-od-id="topbar">
+      <div class="slug">
+        <span class="kr">[REPLACE 와키윌리 27SS]</span>
+        <span class="en">[REPLACE · EP.01 · 윌리 캡슐 발매]</span>
+      </div>
+      <div class="progress">
+        <span class="dots">
+          <i class="on"></i><i></i><i></i><i></i><i></i><i></i>
+          <i></i><i></i><i></i><i></i><i></i><i></i>
+        </span>
+        <span>[REPLACE 01 / 12]</span>
+        <span class="rec">[REPLACE LIVE]</span>
+      </div>
+    </div>
+
+    <!-- 키네틱 한글: 1~3자 -->
+    <div class="kana" data-od-id="kana">
+      <span>[REPLACE 윌리]</span><span>[REPLACE 등장]</span>
+    </div>
+
+    <!-- 메인 큰 디스플레이: 시즌 코드 또는 연도 -->
+    <div class="year-label" data-od-id="year-label">[REPLACE CHAPTER 01 · 캐릭터 IP · 그래픽 캡슐 발매]</div>
+    <div class="year" data-od-id="year">
+      <span class="num">
+        [REPLACE 27SS]
+        <span class="glitch" aria-hidden="true">[REPLACE 27SS]</span>
+      </span><span class="kr-suffix">·</span>
+    </div>
+
+    <!--
+      스프라이트 카드 — 브랜드 시그니처 모티프 픽셀 아트 또는 SVG.
+      교체 옵션:
+        - 와키윌리: 캐릭터 IP 픽셀
+        - 마뗑킴: 워드마크 카드 + 시그니처 그래픽
+        - 마르디: 꽃 일러스트 픽셀
+        - 키르시: 체리 픽셀
+        - 아더에러: 추상 그리드 픽셀
+    -->
+    <div class="sprite-stack" data-od-id="sprite">
+      <div class="sprite-card">
+        <svg width="120" height="160" viewBox="0 0 24 32" xmlns="http://www.w3.org/2000/svg" aria-label="[REPLACE 시그니처 모티프]">
+          <!-- 배경 -->
+          <rect x="0" y="0" width="24" height="32" fill="#f5efe2"/>
+          <!-- 머리 그림자 -->
+          <rect x="6" y="4" width="12" height="2" fill="#1a1614"/>
+          <!-- 얼굴 -->
+          <rect x="5" y="6" width="14" height="10" fill="#fcd7b0"/>
+          <!-- 눈 -->
+          <rect x="8" y="9" width="2" height="2" fill="#1a1614"/>
+          <rect x="14" y="9" width="2" height="2" fill="#1a1614"/>
+          <!-- 입 -->
+          <rect x="10" y="13" width="4" height="1" fill="#d92b1c"/>
+          <!-- 볼터치 -->
+          <rect x="6" y="12" width="2" height="1" fill="#ff6b5e" opacity="0.6"/>
+          <rect x="16" y="12" width="2" height="1" fill="#ff6b5e" opacity="0.6"/>
+          <!-- 옷 (체크 셔츠) -->
+          <rect x="4" y="16" width="16" height="12" fill="#d92b1c"/>
+          <rect x="4" y="18" width="16" height="1" fill="#f7c95b"/>
+          <rect x="4" y="22" width="16" height="1" fill="#f7c95b"/>
+          <rect x="4" y="26" width="16" height="1" fill="#f7c95b"/>
+          <rect x="9" y="16" width="1" height="12" fill="#f7c95b"/>
+          <rect x="14" y="16" width="1" height="12" fill="#f7c95b"/>
+          <!-- 다리 -->
+          <rect x="7" y="28" width="3" height="4" fill="#3b6b3b"/>
+          <rect x="14" y="28" width="3" height="4" fill="#3b6b3b"/>
+        </svg>
+        <div class="sprite-tag">[REPLACE 윌리]<small>[REPLACE WILLY · 캐릭터 IP]</small></div>
+      </div>
+    </div>
+
+    <!-- 캡션: 발매 정보 또는 시즌 컨셉 -->
+    <div class="caption" data-od-id="caption">
+      <strong>[REPLACE 윌리, 27SS에 등장합니다.]</strong>
+      [REPLACE 와키윌리 시그니처 캐릭터 IP가 그래픽 티 · 미니 토트백 · 모자 9가지 아이템으로 돌아옵니다. 회원 사전예약 5월 10일 오픈.]
+    </div>
+
+    <!-- 하단 리본: 발매 일정 (무한 스크롤) -->
+    <div class="ribbon" data-od-id="ribbon">
+      <div class="ribbon-track">
+        <!-- 발매 일정 7개 (1차 세트) -->
+        <div class="tick"><span class="dot"></span><span class="label">[REPLACE 04.25]</span><span class="note">[REPLACE LOOKBOOK 공개]</span></div>
+        <div class="tick"><span class="dot"></span><span class="label">[REPLACE 05.01]</span><span class="note">[REPLACE 자사몰 티저 오픈]</span></div>
+        <div class="tick"><span class="dot"></span><span class="label">[REPLACE 05.10]</span><span class="note">[REPLACE 회원 사전예약]</span></div>
+        <div class="tick"><span class="dot"></span><span class="label">[REPLACE 05.15]</span><span class="note">[REPLACE 전체 발매]</span></div>
+        <div class="tick"><span class="dot"></span><span class="label">[REPLACE 05.22]</span><span class="note">[REPLACE 성수 팝업 오픈]</span></div>
+        <div class="tick"><span class="dot"></span><span class="label">[REPLACE 06.05]</span><span class="note">[REPLACE 무신사 단독 컬러]</span></div>
+        <div class="tick"><span class="dot"></span><span class="label">[REPLACE 06.20]</span><span class="note">[REPLACE 시즌2 캡슐 예고]</span></div>
+
+        <!-- 2차 세트 (무한 스크롤 부드러움 위해 복제) -->
+        <div class="tick"><span class="dot"></span><span class="label">[REPLACE 04.25]</span><span class="note">[REPLACE LOOKBOOK 공개]</span></div>
+        <div class="tick"><span class="dot"></span><span class="label">[REPLACE 05.01]</span><span class="note">[REPLACE 자사몰 티저 오픈]</span></div>
+        <div class="tick"><span class="dot"></span><span class="label">[REPLACE 05.10]</span><span class="note">[REPLACE 회원 사전예약]</span></div>
+        <div class="tick"><span class="dot"></span><span class="label">[REPLACE 05.15]</span><span class="note">[REPLACE 전체 발매]</span></div>
+        <div class="tick"><span class="dot"></span><span class="label">[REPLACE 05.22]</span><span class="note">[REPLACE 성수 팝업 오픈]</span></div>
+        <div class="tick"><span class="dot"></span><span class="label">[REPLACE 06.05]</span><span class="note">[REPLACE 무신사 단독 컬러]</span></div>
+        <div class="tick"><span class="dot"></span><span class="label">[REPLACE 06.20]</span><span class="note">[REPLACE 시즌2 캡슐 예고]</span></div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

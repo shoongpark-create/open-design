@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE Brand] Roadmap · [REPLACE Year]</title>
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
+  :root {
+    --ink:        #1f2933;
+    --paper:      #fafaf7;
+    --rule:       #e7e3da;
+    --muted:      #6b7280;
+    --accent:     #b8443a;
+
+    --tier-north:  #e9655c;
+    --tier-princ:  #fff3c7;
+    --tier-charac: #d8e8ee;
+    --tier-found:  #ebe6db;
+
+    --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
+
+    --font-display-report: "Paperlogy", "Wanted Sans Variable", "SUIT Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
+
+    --font-display-street: "Black Han Sans", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-play: "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-romance: "Grandiflora One", "Diphylleia", "Hahmlet", "Noto Serif KR", "Source Serif 4", ui-serif, Georgia, serif;
+
+    --font-display: var(--font-display-report);
+    --font-text: var(--font-sans);
+    --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: var(--font-text); }
+  body { padding: 40px 40px 64px; }
+
+  .br-header { border-bottom: 1px solid var(--rule); padding-bottom: 16px; margin-bottom: 32px; }
+  .br-meta { display: flex; gap: 16px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .br-meta .date { margin-left: auto; }
+
+  .br-grid { display: grid; gap: 32px; }
+  .br-grid--rail-and-pyramid { grid-template-columns: minmax(260px, 1fr) minmax(0, 2fr); align-items: center; }
+  .br-grid--annotation-and-pyramid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+
+  .br-rail { display: flex; flex-direction: column; gap: 24px; }
+  .rail-row { display: grid; grid-template-columns: max-content 1fr; gap: 12px; align-items: baseline; }
+  .rail-label { font-family: var(--font-display); font-size: 18px; font-weight: 600; }
+  .rail-note { font-size: 12px; line-height: 1.45; color: var(--muted); }
+
+  /* Pyramid (rhythm A) */
+  .br-pyramid { display: flex; flex-direction: column; align-items: center; gap: 0; }
+  .tier { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 14px; }
+
+  .tier--apex { width: 35%; background: var(--tier-north); color: #fff; clip-path: polygon(50% 0, 100% 100%, 0 100%); padding: 28px 20px 14px; min-height: 120px; }
+  .apex-callout p { margin: 2px 0; font-family: var(--font-display); font-size: 11px; font-weight: 600; line-height: 1.3; text-align: center; }
+
+  .tier--principles { width: 60%; background: var(--tier-princ); clip-path: polygon(15% 0, 85% 0, 100% 100%, 0 100%); }
+  .tier--principles .cell { font-family: var(--font-display); font-size: 14px; font-weight: 600; padding: 8px 14px; }
+
+  .tier--characters { width: 85%; background: var(--tier-charac); clip-path: polygon(8% 0, 92% 0, 100% 100%, 0 100%); flex-wrap: wrap; }
+  .tier--characters .cell { font-family: var(--font-display); font-size: 13px; font-weight: 500; padding: 6px 12px; }
+  .tier--characters .cell--side { color: var(--muted); font-weight: 400; }
+
+  .tier--foundation { width: 100%; background: var(--tier-found); justify-content: space-around; padding: 22px 14px; }
+  .tier--foundation .circle { width: 80px; height: 80px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 13px; font-weight: 600; text-align: center; }
+
+  /* Stacked-blocks pyramid (rhythm B) */
+  .br-pyramid--blocks { gap: 12px; }
+  .block-tier { width: 100%; padding: 16px; border-radius: 8px; }
+  .block-tier[data-tier="north-star"]  { background: var(--tier-north); color: #fff; }
+  .block-tier[data-tier="principles"]  { background: var(--tier-princ); }
+  .block-tier[data-tier="characters"]  { background: var(--tier-charac); }
+  .block-tier[data-tier="foundation"]  { background: var(--tier-found); }
+  .block-tier h3 { font-family: var(--font-display); font-size: 16px; margin: 0 0 8px; }
+  .block-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
+  .block-grid > * { padding: 8px 12px; background: rgba(255,255,255,0.7); border-radius: 4px; font-family: var(--font-display); font-size: 13px; }
+
+  /* Annotation stack (rhythm C) */
+  .annotation-stack { display: flex; flex-direction: column; gap: 16px; }
+  .annotation-stack article { padding: 14px; border-left: 4px solid var(--rule); }
+  .annotation-stack article[data-tier="north-star"]  { border-color: var(--tier-north); }
+  .annotation-stack article[data-tier="principles"]  { border-color: #c8a64a; }
+  .annotation-stack article[data-tier="characters"]  { border-color: #6790a3; }
+  .annotation-stack article[data-tier="foundation"]  { border-color: #a39782; }
+  .annotation-stack h3 { font-family: var(--font-display); font-size: 16px; margin: 0 0 6px; }
+  .annotation-stack p { font-size: 13px; line-height: 1.55; margin: 0; }
+
+  /* Tail */
+  .cross-reference, .revision-log { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--rule); }
+  .cross-reference h2, .revision-log h2 { font-family: var(--font-display); font-size: 14px; margin: 0 0 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.6; }
+  table { border-collapse: collapse; font-size: 12px; }
+  th, td { padding: 6px 12px; text-align: left; border-bottom: 1px solid var(--rule); }
+  th { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--muted); }
+
+  @media (max-width: 1024px) {
+    .br-grid--rail-and-pyramid, .br-grid--annotation-and-pyramid { grid-template-columns: 1fr; }
+  }
+  @media print { body { padding: 24px; } .tier { break-inside: avoid; } }
+</style>
+</head>
+<body>
+  <main id="brand-roadmap">
+    <!-- PASTE one rhythm + tail blocks from references/layouts.md. -->
+  </main>
+</body>
+</html>

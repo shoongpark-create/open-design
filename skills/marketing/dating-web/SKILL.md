@@ -1,93 +1,238 @@
 ---
 name: dating-web
 description: |
-  A consumer-feeling dating / matchmaking dashboard — left rail navigation,
-  ticker bar of community signals, headline KPIs, a 30-day mutual-matches
-  bar chart, and a match-rate trend block. Editorial typography, restrained
-  accent. Use when the brief asks for a "dating site", "matchmaking",
-  "community dashboard", "social network dashboard", or any consumer
-  product where the data is the story.
+  K-패션 브랜드 **VIP 멤버 라운지 / 퍼스널 스타일 매칭 대시보드**를 단일 HTML
+  파일로 생성하는 스킬입니다. 좌측 레일 네비게이션 + 상단 티커(회원 등급·다음 등급
+  기준) + 본문 KPI 그리드(좋아요·매칭 아이템·재구매·등급 진척 등) + 매칭 아이템
+  히스토리 차트 + 추천 룩 트렌드 패널. 신문/매거진 톤 에디토리얼 타이포 + 절제된
+  키컬러. 마뗑킴 VIP 라운지, 29CM 큐레이션 페이지, W컨셉 VIP 페이지, 무신사 골드/
+  다이아 회원 마이페이지 톤을 다룹니다. 데이팅·매칭 클리셰는 사용하지 않습니다.
+  사용자가 "VIP 라운지", "VIP 대시보드", "스타일 매칭 대시보드", "퍼스널 스타일 진단",
+  "회원 마이페이지", "VIP 큐레이션", "프리미엄 회원 페이지", "fashion VIP dashboard"를
+  언급하면 활성화하세요.
 triggers:
-  - "dating app"
-  - "dating site"
-  - "matchmaking"
-  - "social dashboard"
-  - "community dashboard"
-  - "consumer dashboard"
-  - "约会应用"
-  - "婚恋"
+  - "VIP 라운지"
+  - "VIP 대시보드"
+  - "VIP 마이페이지"
+  - "회원 마이페이지"
+  - "스타일 매칭 대시보드"
+  - "퍼스널 스타일 진단"
+  - "스타일 큐레이션"
+  - "VIP 큐레이션"
+  - "프리미엄 회원 페이지"
+  - "인플루언서 매칭 대시보드"
+  - "fashion vip dashboard"
+  - "personal styling dashboard"
+  - "loyalty dashboard"
 od:
   mode: prototype
   platform: desktop
-  scenario: personal
-  featured: 1
+  scenario: marketing
+  category: marketing
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Design ‘mutuals’ — a dating site for X posters. Daily digest dashboard with stats, mutual-matches bar chart, and a community ticker."
+  example_prompt: "마뗑킴(Matin Kim) VIP 라운지 대시보드. 회원 = '@minji_27ss', 등급 PLATINUM. 다음 등급(VVIP)까지 누적 ₩2,400,000 남음. KPI 9개(좋아요한 아이템 수·매칭 룩 수·이번 시즌 구매·재구매율·적립 포인트 등). 매칭 아이템 차트 = 최근 30일 좋아요·구매. 트렌드 패널 = 최근 12주 스타일 일치율. 톤은 디자이너 브랜드 매거진 에디토리얼, 데이팅 클리셰 사용 금지."
 ---
 
-# Dating Web Skill
+# K-패션 VIP 멤버 라운지 / 스타일 매칭 대시보드 스킬
 
-Produce a single-screen consumer dashboard that feels like a Sunday-paper
-dating column rendered as software. Editorial type, single restrained
-accent, lots of negative space, *no* swipe deck or hookup tropes.
+K-패션 브랜드의 **VIP 멤버 마이페이지 라운지 + 퍼스널 스타일 매칭 대시보드**를 단일 HTML 파일로 생성합니다. 디자이너 브랜드(마뗑킴, 마르디 메크르디, 아더에러, 사일런트 단톤) 자사몰의 VIP 마이페이지 톤과 29CM 큐레이션 페이지, W컨셉 VIP 페이지, 무신사 골드/다이아 회원 마이페이지 톤을 다룹니다.
 
-## Workflow
+이 산출물은 **마케팅실(CRM팀) + 이커머스팀(디지털팀) + 디자인실(그래픽팀)** 합작으로, 자사몰 회원 시스템과 연동되는 **로그인 후 첫 화면**에 해당합니다.
 
-1. **Read the active DESIGN.md** (injected above). Lean into a serif display
-   token for the metric numerals — these screens live or die on numerals.
-2. **Pick a brand voice** — wry, observational, slightly literary. Generate
-   real, specific copy. Examples: "the people who'd text back within a day",
-   "manageable. two are now friends.", "your single greatest compatibility
-   asset."
-3. **Layout**, in order:
-   - **Top ticker** — single-row horizontal strip across the top in a
-     sans-serif eyebrow style: tagline left, "NEXT TIER AT 2,080 MUTUALS"
-     right, both in mono caps with letter-spacing. Thin rule below.
-   - **Left rail** — 220–260px sidebar. Brand wordmark in serif italic at
-     top. User card (avatar / handle / ratio / tier). Three groups of nav:
-     "TODAY" (specimen, inbox, queue, notifications), "YOU" (your stats,
-     mutuals & communities, blocked, settings), "ARCHIVE" (past issues,
-     expired matches). Active item gets accent text + accent dot.
-   - **Main content**:
-     - **KPI grid** — 3 columns × 3 rows (or 9 cells). Each cell: small
-       caps mono label, an oversized serif numeral (use accent or muted
-       green for positive, muted red for caution), one-line italic
-       footnote. Plausible specifics — "1,842 ↑ 41 this wk · healthy
-       growth.", "14% above median for your cohort.", "4 / exes in your
-       circle · manageable. two are now friends."
-     - **Bar chart panel** — "mutuals — last 30 days". Tall thin black
-       bars, last two days highlighted in accent. Caption above with
-       "↑ TRENDING UP · +3 CLOSE MUTUALS THIS MONTH · TWO VIA THE SAME
-       OFFSITE" in mono.
-     - **Trend panel** — "match rate — last 12 weeks". One line of body
-       copy below ("STEADY CLIMB FROM 8% → 14%. ATTRIBUTABLE TO ONE
-       COMMUNITY JOIN…"). Footer rule.
-4. **Write** a single HTML document:
-   - `<!doctype html>` through `</html>`, CSS inline.
-   - Background creamy off-white, body serif, mono labels everywhere.
-   - Use `font-feature-settings: 'tnum'` on the metric numerals.
-   - SVG bar chart with ~30 bars, varied heights.
-   - `data-od-id` on ticker, sidebar, kpi grid, chart, trend.
-5. **Self-check**:
-   - Reads as restrained, editorial, slightly funny — not horny.
-   - Single accent token used in 3–4 places max (one KPI, two highlight
-     bars, one nav active state).
-   - No swipe deck, no hearts, no fire emoji.
+- **VIP 멤버 라운지** — PLATINUM/VVIP 등급 회원에게만 보이는 라운지. 매장 초대, 시크릿 세일, 룩북 PDF 다운로드, 1:1 스타일링 상담 진입점
+- **퍼스널 스타일 매칭 결과** — 첫 가입 시 스타일 진단 후 결과 대시보드. AI/MD 추천 룩 + 매칭 아이템
+- **인플루언서 매칭 대시보드** — 브랜드의 인플루언서 협업 페이지, 인플루언서별 매칭 룩 큐레이션 (와키윌리·키르시 톤)
 
-## Output contract
+작성 주체는 **마케팅실 CRM팀** + **이커머스팀(자사몰 마이페이지 UI 책임)** + **디자인실(그래픽팀, 매거진 톤 비주얼 디렉션)** 3자 합작이며, 산출물은 자사몰의 `/account/lounge` 또는 `/styling/match` 같은 URL에 배치됩니다.
 
-Emit between `<artifact>` tags:
+## 환경 호환성
+
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 본문에서 권장하는 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기 기능을 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 워크플로는 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면, 사용자에게 `DESIGN.md` 경로나 기본 톤(매거진 페이퍼 톤 / 미니멀 모노톤 / 디자이너 세리프 등)을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 비즈니스 등록(register)을 따릅니다.
+
+- 모든 라벨을 한국어로 직역하지 마세요. 한국 패션 현장에서 실제로 쓰는 영어 산업용어는 그대로 유지합니다.
+- 유지하는 용어 예시: VIP · VVIP · PLATINUM · GOLD · SILVER · POINT · LOOKBOOK · STYLING · MATCH · WISHLIST · CART · RECOMMENDED · MEMBERS ONLY.
+- KPI 카드 라벨은 영문 SMALL CAPS(`MATCHED LOOKS`, `WISHLIST ITEMS`, `THIS SEASON BUY`), 보조 노트는 한국어 짧은 명사구 (`이번 시즌 베스트 컬렉션`, `다음 등급까지 ₩240,000`).
+- 금액은 `₩XXX,XXX`. 큰 숫자는 mono 폰트로 (`font-feature-settings: 'tnum'` 권장).
+- 카피 톤은 **관조적·매거진 에디토리얼**. 데이팅 클리셰(`Find your perfect match`, `Sparkle`, `Spark`, 하트·불꽃 이모지) 사용 금지.
+- 대신 사용 가능한 톤: `당신의 취향이 만든 컬렉션입니다.`, `최근 좋아요 한 14개의 아이템에서 추출.`, `이번 시즌, 당신은 이 라인업의 중심입니다.`
+- 네비게이션 라벨 예시: `TODAY` / `YOU` / `ARCHIVE` 그룹 안에 — `오늘의 추천`, `위시리스트`, `매칭 룩`, `최근 본 아이템`, `회원 정보`, `포인트 내역`, `과거 룩북`, `만료된 쿠폰`.
+
+## 타이포그래피
+
+프로젝트 루트의 `DESIGN.md` 타이포그래피 토큰을 사용하세요. 이 산출물은 **매거진 에디토리얼 톤**이므로 디스플레이 세리프 폰트와 mono 폰트 조합이 필수입니다.
+
+| 위치 | 권장 폰트 |
+|---|---|
+| 디스플레이 헤딩 / KPI 큰 숫자 | **세리프 디스플레이** — Hahmlet, 본명조, Noto Serif KR, DM Serif Display, Grandiflora One |
+| 본문 / 노트 / 캡션 | 세리프 본문(DM Serif Text, 본명조) 또는 Pretendard Variable |
+| 라벨 / 티커 / 네비 / 축 텍스트 (mono uppercase) | IBM Plex Mono, Geist Mono, JetBrains Mono |
+| 금액·숫자 | mono + `font-feature-settings: 'tnum'` |
+
+`DESIGN.md`에 디스플레이 토큰이 정의되어 있지 않다면 위 표를 참고해 사용자에게 톤을 확인한 뒤 결정합니다.
+
+## 폴더 구조
 
 ```
-<artifact identifier="dating-slug" type="text/html" title="Dating Dashboard — Title">
-<!doctype html>
-<html>...</html>
-</artifact>
+dating-web/
+├── SKILL.md          ← 이 파일을 읽고 있습니다
+└── example.html      ← 시드 + 참고 산출물 (마뗑킴 VIP 라운지 대시보드)
 ```
 
-One sentence before the artifact, nothing after.
+`example.html`은 단일 파일 시드입니다. 복사해 `index.html`로 사용한 뒤 카피·SVG 막대·KPI 값을 교체합니다.
+
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. 이 스킬 폴더의 `example.html`을 처음부터 끝까지 `<style>` 블록 포함 읽으세요. 상단 티커, 좌측 레일(브랜드 + 회원 카드 + 3개 네비 그룹 + 상태), 본문 KPI 9개 그리드, SVG 막대 차트 ~30개, 트렌드 패널이 모두 정의되어 있습니다.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰)를 읽고, 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 페이퍼 톤(`--paper`)과 키컬러(`--accent`) 그리고 GOOD/BAD 색을 디자인 시스템에서 가져옵니다.
+3. 데이팅 클리셰(하트 이모지, 불꽃 이모지, "Match", "Spark", "Find your perfect match" 등)를 사용하지 않는다는 점을 명시적으로 인식하세요.
+
+### Step 1 — 라운지 정보 수집
+
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
+
+- **브랜드명** + 워드마크 (예: matin kim, mardi mercredi, ADER ERROR)
+- **회원 핸들 / 닉네임** (예: `@minji_27ss`)
+- **현재 등급** + 다음 등급 + 다음 등급까지 남은 누적 금액
+- **KPI 9개** — 좋아요한 아이템, 매칭 룩 수, 이번 시즌 구매, 재구매율, 적립 포인트, 위시리스트 아이템, 매장 방문, 평균 객단가, 가입 후 개월 등 중 선택
+- **매칭 차트 데이터** — 최근 30일 좋아요/매칭 일별 데이터 (대략 30개 막대)
+- **트렌드 데이터** — 최근 12주 스타일 일치율(또는 재구매율) 추세 + 1줄 해석
+- **네비 라벨** — `TODAY`/`YOU`/`ARCHIVE` 그룹 각각의 항목 3~5개
+- **톤 옵션** — 디자이너 매거진(세리프) / 모노톤 미니멀 / 컬러풀 영캐주얼 중 1개
+
+### Step 2 — 레이아웃 구성
+
+`example.html`을 `index.html`로 복사한 뒤, **필수 구조 (순서대로)**:
+
+1. **상단 티커** — 좌측: 브랜드 슬로건 짧은 절(`당신의 취향이 만든 라운지`) + `리뉴얼 매주 월요일` 같은 작은 보조 라벨 / 우측: `다음 등급 VVIP까지 ₩2,400,000` (mono uppercase). 아래 1px 검정 룰
+2. **좌측 레일** (232~260px) —
+   - 워드마크(세리프 이탤릭 + 액센트 닷)
+   - 회원 카드 (아바타 + `@핸들` + `등급 · 누적금액 또는 적립금`)
+   - **TODAY 그룹** — `오늘의 추천`, `위시리스트`, `최근 본 아이템`, `알림함`
+   - **YOU 그룹** — `회원 정보`, `매칭 룩 & 컬렉션`, `차단 브랜드`, `설정` (활성 항목 1개에 액센트 닷)
+   - **ARCHIVE 그룹** — `과거 룩북`, `만료된 쿠폰`
+   - 하단 상태(`온라인 · 마지막 활동 11분 전 · `브랜드명` v.X.Y.Z`)
+3. **본문 KPI 그리드** — 3열 × 3행 = 9칸. 각 칸:
+   - 라벨(SMALL CAPS mono)
+   - 큰 세리프 숫자 (액센트/머티드 그린 = 긍정, 머티드 레드 = 주의)
+   - 한 줄 이탤릭 노트
+4. **매칭 아이템 차트 패널** — `MATCHED ITEMS — LAST 30 DAYS`. 30개 검정 막대 + 마지막 2일 액센트 하이라이트. 위 캡션 mono `↑ TRENDING UP · +14 MATCHED LOOKS THIS MONTH · TWO FROM 27SS DROP`. 아래 축 라벨 (날짜)
+5. **트렌드 패널** — `STYLE MATCH RATE — LAST 12 WEEKS`. 한 줄 이탤릭 본문(`STEADY CLIMB FROM 38% → 62%. ATTRIBUTABLE TO ONE LOOKBOOK SAVE…`) + 본문 1~2문장 해석
+
+**OpenDesign 환경에서 사용 시:** 각 섹션에 `data-od-id` 속성을 추가하면 인라인 코멘트 모드를 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다. 예: `<aside class="rail" data-od-id="rail">` 또는 `<aside class="rail" id="rail">`.
+
+### Step 3 — 카피 채우기
+
+- **티커 슬로건**: 짧은 절. `당신의 취향이 만든 라운지`, `이번 시즌의 라인업, 당신 중심으로 큐레이션`, `최근 좋아요에서 추출된 추천`.
+- **KPI 노트**: 이탤릭 한 줄. `이번 주 +12 · 건강한 증가`, `평균 ₩214,000 · 코호트 중위 +18%`, `최근 30일 12회 방문 · 단골 흐름.`. 데이팅 클리셰(`who'd text back`, `exes in your circle`) 절대 사용 금지.
+- **차트 캡션**: mono uppercase. `↑ TRENDING UP`, `↓ COOL DOWN`, `STEADY`. 옆에 짧은 영문 + 한국어 혼용 (`+14 LOOKS · 두 룩은 같은 컬렉션`).
+- **트렌드 해석**: 한국어 본문 1~2문장 + 영문 mono 캡션. `한 번의 LOOKBOOK 저장이 4개월간의 위시리스트 편집보다 매칭률을 더 올렸습니다. 같은 컬렉션 안에서 계속 봐주세요.`
+
+### Step 4 — 자체 검수
+
+다음 체크리스트를 한 항목씩 직접 확인하세요.
+
+- 데이팅 클리셰 0개 (하트, 불꽃, "spark", "match"가 데이트 의미로 쓰이지 않음 — "스타일 매칭"은 OK)
+- 액센트 컬러 사용 3~4회 (KPI 1개 + 차트 최근 2일 막대 + 네비 활성 1개 + 트렌드 강조 1개 정도)
+- 9개 KPI 모두 구체적·수치. lorem ipsum 금지
+- 차트 막대 ~30개 (일별), 마지막 2일 액센트
+- 매거진/에디토리얼 톤 유지 (세리프 디스플레이 + mono 라벨 조합)
+- 모든 숫자에 `font-feature-settings: 'tnum'` 적용
+- 모바일 1100w 이하에서 레일이 위로 스택되는지 확인
+
+### Step 5 — 산출물 출력
+
+- **Claude 환경**:
+  ```
+  <artifact identifier="kfashion-vip-lounge-slug" type="text/html" title="VIP 라운지 — 브랜드명">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경**: 표준 마크다운 HTML 코드 블록.
+
+출력 앞에 한 문장 요약(예: "마뗑킴 VIP 라운지 대시보드를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.
+
+## 하드 룰
+
+- **데이팅 클리셰 절대 금지.** 하트·불꽃·"spark"·"match"(데이트 의미)·"Find your perfect match"·"sparkling"·이모지 ❤️🔥💘 모두 사용 금지. "스타일 매칭"은 패션 큐레이션 용어이므로 사용 가능 (단, 데이팅 톤이 아닌 큐레이션 톤으로).
+- **매거진 에디토리얼 톤.** 신문 일요판 컬럼처럼 차분하고 관조적. 호들갑·과장 금지.
+- **액센트 3~4회.** 키컬러 사용을 한 페이지에 4번 이상 쓰면 매거진 톤이 깨집니다.
+- **숫자는 세리프 디스플레이.** 본문은 세리프(또는 sans), 라벨은 mono. 이 3폰트 조합이 핵심.
+- **9개 KPI 모두 구체적.** "활동 양호" 같은 모호한 노트 금지. "최근 30일 +14 룩 · 같은 컬렉션에서 8회" 같은 구체적 수치.
+- **외부 이미지 URL 없음.** 차트는 모두 SVG 인라인.
+
+## K-패션 멤버십 라운지 사례 (참고)
+
+| 브랜드/플랫폼 | 라운지 특성 | 시그니처 UI 패턴 |
+|---|---|---|
+| **마뗑킴 VIP 라운지** | 자사몰 PLATINUM 이상 전용 | 매장 초대 · 시즌 룩북 PDF · 1:1 스타일링 채널톡 |
+| **무신사 골드/다이아** | 무신사 자사 멤버십 페이지 | 등급별 적립률 · 단독 할인 · 무료배송 횟수 |
+| **29CM VIP** | 29CM 단골/VIP 페이지 | 시크릿 세일 · 큐레이션 우선 알림 · 무료배송 |
+| **W컨셉 PLUS/VIP** | 디자이너 브랜드 사전예약 | 디자이너 사전예약 · 5% 적립 · 등급별 쿠폰 |
+| **마르디 메크르디 VIP** | 자사몰 VIP 페이지 | 시즌 한정 · 매장 초대 · 사은품 |
+| **아더에러 ADER FRIENDS** | 자사 멤버십 | 콜라보 우선 발매 · 이벤트 초대 · 한정 굿즈 |
+
+위 사례는 카피·예시 참고용입니다. 실제 산출물은 사용자 브랜드의 실제 라운지 컨셉으로 작성하세요.
+
+## 한국 패션기업 부서 R&R + 채널 연계
+
+| 부서 | 역할 |
+|---|---|
+| **마케팅실 (CRM팀)** | 회원 등급 정책, 라운지 카피, 큐레이션 알림 메시지, 적립 정책 |
+| **이커머스팀(디지털팀)** | 자사몰 마이페이지 UI 빌드, 매칭 알고리즘(또는 MD 큐레이션) 연동 |
+| **MD실** | VIP 추천 룩 큐레이션 (상위 회원 대상 1:1 또는 1:N 큐레이션) |
+| **디자인실(그래픽팀)** | 매거진 톤 비주얼 디렉션, 룩북 PDF 디자인 |
+| **CS실** | 1:1 스타일링 상담(채널톡) 응대 스크립트, VIP 매장 초대 운영 |
+
+### 채널 연계
+
+- **자사몰 마이페이지** — 카페24/쇼피파이/자체 개발 자사몰의 `/account/lounge`
+- **카카오톡 채널** — VIP 등급 회원에게 알림톡 단독 발송 (`사전예약 24시간 우선 오픈`)
+- **채널톡(Channel.io)** — 1:1 스타일링 상담 진입점 (라운지 우측 또는 하단)
+- **인스타그램 DM** — 인플루언서 매칭 대시보드의 경우 인스타 DM 진입점
+- **매장 시스템** — PLATINUM/VVIP 등급 회원의 매장 방문 시 자동 알림 (포스 연동)
+
+## 시즌 사이클 내 위치
+
+```
+[연중 상시 운영]   VIP 라운지는 상시 운영, 시즌 사이클과 무관
+[시즌 시작 4주 전] ▶ 라운지 키비주얼 + 시즌 추천 룩 큐레이션 교체
+[시즌 시작 2주 전]   사전예약 우선 오픈 알림 (VIP 등급에만 우선 노출)
+[시즌 시작]         시즌 매칭 룩 큐레이션 본격화
+[판기 중반]         시크릿 세일 노출 (VIP 등급에만)
+[판기 종료]         시즌오프 큐레이션 + 다음 시즌 사전예약 안내
+```
+
+매칭 차트의 30일 윈도우와 트렌드의 12주 윈도우는 시즌 사이클과 무관하게 회원의 활동 기반으로 갱신됩니다.
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**:
+  ```
+  <artifact identifier="kfashion-vip-lounge-slug" type="text/html" title="VIP 라운지 — 브랜드명">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록.
+
+출력 앞에 한 문장 요약(예: "마뗑킴 VIP 라운지 대시보드를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

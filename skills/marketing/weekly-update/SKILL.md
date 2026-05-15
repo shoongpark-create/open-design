@@ -1,50 +1,212 @@
 ---
 name: weekly-update
 description: |
-  Single-file horizontal-swipe slide deck for a weekly team update —
-  shipped, in flight, blocked, metrics, asks. 6–8 slides. Use when the
-  brief mentions "weekly update", "team update slides", "weekly status",
-  "周报演示".
+  K-패션 브랜드의 **시즌 위클리 매출 리포트**를 단일 파일 가로 스와이프 슬라이드 덱으로
+  생성하는 스킬입니다. 영업기획팀이 매주 월요일 발행하는 한국 패션기업 표준 양식.
+  6~8장 슬라이드 구조 — 표지 / 헤드라인 숫자(주간 GMV·정판율) / 무신사 베스트 /
+  인기 SKU / QR·SPOT 결정 / KPI 그래프 / 다음 주 액션 / 클로징.
+  무신사 베스트 진입·이탈, 자사몰 회원 추이, 콜라보 효과, 채널별 GMV 등
+  한국 패션 영업 데이터를 그대로 사용합니다.
+  사용자가 "위클리 매출 리포트", "주간 매출", "W12 리포트",
+  "무신사 베스트 위클리", "weekly update"를 언급하면 활성화하세요.
 triggers:
+  - "위클리 매출 리포트"
+  - "주간 매출 리포트"
+  - "주간 영업 리포트"
+  - "W12 리포트"
+  - "위클리 인사이트"
+  - "무신사 베스트 위클리"
   - "weekly update"
   - "team update slides"
   - "weekly status"
-  - "weekly review"
-  - "周报演示"
 od:
   mode: deck
   scenario: operations
+  category: fashion
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Make a weekly update deck for the Growth squad — what shipped, in flight, blocked, metrics, asks for next week."
+  example_prompt: "와키윌리 27SS W12(5월 셋째 주) 위클리 매출 리포트를 만들어주세요. 작성자 = 영업기획팀 지훈. 헤드라인 = 주간 GMV +28% WoW. 무신사 베스트 TOP30 진입 SKU 2개. 인기 아이템 TOP5와 QR 결정 1건 (윌리 후디 → QR 1,500장). 다음 주 액션은 마케팅실에 인스타 광고 예산 추가 요청 + 디자인실에 후디 컬러 추가 검토."
 ---
 
-# Weekly Update Deck Skill
+# 패션 시즌 위클리 매출 리포트 스킬
 
-Produce a single-file horizontal-swipe HTML deck for a weekly team update.
+K-패션 브랜드의 **시즌 위클리 매출 리포트**를 가로 스와이프 형식의 단일 HTML 슬라이드 덱으로 생성합니다. 한국 패션기업에서 영업기획팀이 매주 월요일 오전 발행하고, MD실·디자인실·마케팅실에 공유하는 표준 양식입니다.
 
-## Workflow
+이 산출물의 청중은 **MD 실장, 디자인 실장, 마케팅 실장, 대표/임원**입니다. 한 주 매출 현황과 핵심 의사결정(QR / SPOT 추가 발주, 컬러웨이 확대, 마케팅 예산 추가)을 빠르게 공유하는 데 사용합니다. 단순 보고가 아니라 **다음 주 결정 사항**이 명확히 포함되어야 한국 패션기업 실무에서 가치를 가집니다.
 
-1. Read DESIGN.md.
-2. Identify squad name, week range, and audience (squad-internal vs cross-functional).
-3. Slides:
-   1. Cover (squad + week + author + date)
-   2. Headline (one sentence + one number that matters this week)
-   3. What shipped (3–5 items, link-style affordance)
-   4. In flight (3–5 items, owner avatars)
-   5. Blocked (1–3 items + clear ask)
-   6. Metrics that matter (1–2 inline charts)
-   7. Asks for next week (named owners)
-   8. Closing + thanks
-4. Arrow keys or click navigation. Each slide is 100vw wide.
+## 환경 호환성
 
-## Output contract
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 본문의 `data-od-id` 속성으로 인라인 코멘트 기능을 사용할 수 있습니다. 그 외 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 작업 흐름은 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 `DESIGN.md` 경로나 기본 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 위클리 매출 리포트의 등록(register)을 따릅니다.
+
+- 표지·표제는 한국어 + 영문 혼용 자연스럽게. 예: "27SS W12 매출 리포트", "주간 GMV 28% UP".
+- 채널 표기는 한국 표준: 무신사 / 29CM / W컨셉 / 자사몰 / 한섬몰 / 에이블리 / 지그재그.
+- 산업용어 유지: GMV, AOV, SKU, BTA, QR, SPOT, LOT, MOQ, WoW, MoM.
+- 한국어 표기 우선: 정상판매율(정판율), 무신사 베스트, 회원, 알림톡, 룩북.
+- 슬라이드 헤드라인은 짧고 결정 지향적 — "QR 결정 1건" / "마케팅 예산 +500만원 요청" / "후디 컬러 추가 검토 필요".
+- 본문 카피는 한국어 명사구 종결 또는 평서문 혼용 자연스럽게.
+
+## 폴더 구조
 
 ```
-<artifact identifier="weekly-update-w42" type="text/html" title="Weekly Update — Growth · W42">
-<!doctype html>...</artifact>
+weekly-update/
+├── SKILL.md       ← 이 파일
+└── example.html   ← 작성 예시 (와키윌리 27SS W12 매출 리포트)
 ```
+
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. `example.html`을 처음부터 끝까지 읽어 8장 슬라이드 구조(표지 / 헤드라인 / 무신사 베스트 / 인기 SKU / QR 결정 / 메트릭스 / 다음 주 액션 / 클로징)를 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 파일이 자동 주입되지 않는 환경이라면 사용자에게 경로나 기본 톤을 묻고 진행합니다.
+
+### Step 1 — 분류 및 정보 수집
+
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
+
+- 브랜드명 + 시즌 코드 + 주차 (예: 와키윌리 27SS W12, 마뗑킴 26FW W08)
+- 작성자 (영업기획팀 담당자)
+- 헤드라인 숫자 (주간 GMV · 전주 대비 변화 · 시즌 진행률 등 핵심 수치 1개)
+- 무신사 베스트 진입/이탈 SKU 리스트 (TOP100 기준)
+- 이번 주 인기 SKU TOP5 (GMV 또는 판매 수량 기준)
+- QR / SPOT 결정 사항 (추가 발주 SKU, 컬러웨이 추가, 발주 수량)
+- 주요 KPI 차트 2개 (정판율 추이, 일별 GMV, 채널 비중 등)
+- 다음 주 액션 / 협조 요청 (마케팅실·디자인실·생산실 별 요청 사항)
+
+"Number A / Item B" 같은 플레이스홀더 금지 — 실제 K-패션 SKU/숫자/채널명을 사용합니다.
+
+### Step 2 — 슬라이드 8장 구성
+
+1. **표지** — 브랜드 워드마크 + 시즌 W주차 + 발행 일자 + 작성자(영업기획팀)
+2. **헤드라인** — 한 줄 메시지 + 핵심 숫자(예: "+28% WoW")
+3. **무신사 베스트** — TOP30 진입 SKU + 이탈 SKU 표/리스트
+4. **인기 SKU TOP5** — 채널별 매출 + BTA + QR 후보 마킹
+5. **QR / SPOT 결정** — 결정 1~2건 + 발주 수량 + 데드라인 (콜아웃 블록)
+6. **KPI 차트** — 정판율 추이 + 일별 GMV (인라인 SVG 2개)
+7. **다음 주 액션** — 디자인실 / MD실 / 마케팅실 별 요청 사항 (오너 명시)
+8. **클로징** — 한 줄 메시지 + 영업기획팀 서명 + 다음 주 리포트 발행 일자
+
+각 슬라이드는 100vw, 가로 스와이프(arrow keys + 클릭 도트 네비).
+
+### Step 3 — 작성
+
+1. 단일 HTML 문서로 작성, CSS는 인라인 `<style>` 한 블록.
+2. `display: flex; scroll-snap-type: x mandatory;`로 가로 스냅 스크롤.
+3. JavaScript는 도트 네비 + 화살표 키 핸들러만 (15줄 이하).
+4. 시맨틱 HTML: `<section class="slide">` 8개.
+5. 주요 영역에 식별용 속성. OpenDesign 환경에서는 `data-od-id`, 그 외에서는 `id`.
+6. 헤드라인 숫자는 대형 폰트(120~220px), 짙은 액센트 컬러. 차트는 인라인 SVG.
+
+### Step 4 — 자체 검수
+
+- 모든 색상은 `:root` 토큰에서 옴 — 임의 hex 금지
+- 8장 슬라이드 모두 빠지지 않음, 각 슬라이드에 페이지 번호(01 / 08 등)
+- 무신사 베스트 슬라이드에 TOP30 진입 SKU + 이탈 SKU 모두 명시
+- QR / SPOT 결정 슬라이드는 단순 보고가 아닌 **결정**: 발주 수량 + 데드라인 + 결정 오너
+- 다음 주 액션 슬라이드는 오너(디자인실/MD실/마케팅실) 명시
+- 한국 K-패션 수치 현실치: 정판율 60~85%, 주간 GMV 변화 ±30%p 이내가 자연스러움
+- 모바일 폴백: padding 줄이고 차트 그리드 1열
+
+## 한국 K-패션 영업 데이터 표준 (참고)
+
+| 데이터 | 출처 | 갱신 주기 |
+|---|---|---|
+| 자사몰 GMV·AOV·회원 | 자사몰 어드민 (카페24 / 쇼피파이) | 매일 |
+| 무신사 GMV·베스트 랭킹 | 무신사 셀러센터 | 매일 |
+| 29CM GMV·큐레이션 노출 | 29CM 입점관리자 | 매일 |
+| 정상판매율(정판율) | 사내 ERP | 매일 |
+| 재고·재고자산회전율 | 사내 ERP | 매주 |
+| BTA 비중 | 영업기획 분석 | 매주 |
+| 광고 ROAS | 메타·구글·네이버 광고 관리자 | 매일 |
+| 알림톡 오픈율 | 카카오톡 비즈니스 | 매일 |
+
+## 한국 K-패션 브랜드 위클리 톤 사례 (참고)
+
+| 브랜드 | 위클리 톤 | 결정 빈도 |
+|---|---|---|
+| **와키윌리** | 캐릭터 굿즈 + 그래픽 후디 QR 결정 자주 | 주 1~2건 |
+| **마뗑킴** | 로고 아이템 컬러웨이 추가 자주, 시즌 베스트 안정 | 주 0~1건 |
+| **마르디 메크르디** | 플라워 그래픽 QR 거의 매주 | 주 2~3건 |
+| **시야쥬** | 트렌드 반응 빠름, SPOT 다수 | 주 3건+ |
+| **무신사 스탠다드** | 베이직 회전 안정, 결정 적음 | 격주 1건 |
+
+위 사례는 카피·예시 참고용입니다. 실제 산출물은 사용자 브랜드의 실데이터로 작성하세요.
+
+## 한국 패션기업 조직 R&R 메모
+
+위클리 매출 리포트의 작성·소비·결정 흐름.
+
+- **영업기획팀** (작성 주체): 매주 월요일 오전 발행. 데이터 정리, 헤드라인 작성, QR 후보 마킹
+- **MD 실장** (의사결정자): QR / SPOT 발주 수량 결정. 컬러웨이 추가 검토
+- **디자인 실장**: 컬러 추가 / 신규 그래픽 추가 검토
+- **마케팅 실장**: 광고 예산 / 캠페인 추가 검토
+- **이커머스팀**: 자사몰 노출·상세페이지 운영 결정
+- **대표/임원**: 시즌 흐름 모니터링 (이메일 또는 슬랙 채널 구독)
+
+화요일 또는 수요일에 위클리 리포트 기반 결정 미팅을 30분 진행하는 것이 한국 패션기업 표준 운영 방식입니다.
+
+## 시즌 사이클 내 위치
+
+위클리 리포트는 **시즌 시작 직후부터 시즌 종료까지 매주 발행**됩니다.
+
+```
+[시즌 시작 (S1 판기 시작)]
+    ↓ 매일 데이터 수집
+[dashboard — 시즌 매출 대시보드 (상시 운영)]
+    ↓ 매주 월요일 영업기획 발행
+[weekly-update — 위클리 매출 리포트, 가로 스와이프 덱]
+    ↓ 결정 사항 칸반 보드로 이동
+[kanban-board — QR / SPOT 결정 카드 추가]
+    ↓ 발주 → 입고
+[디자인실 컬러 추가 / 생산실 추가 발주]
+    ↓ 판기 종료 시
+[finance-report — 판기 결산 보고]
+    ↓ 시즌 종료
+[fashion-season-deck — 회고 챕터 통합]
+```
+
+## 채널 연계
+
+리포트의 데이터 소스.
+
+- **자사몰** (카페24 / 쇼피파이 / 자체 구축) — 자사 GMV, AOV, 회원
+- **무신사 셀러센터** — 무신사 GMV + 베스트 랭킹 + 리뷰
+- **29CM 입점관리자** — 29CM 매출 + 큐레이션 노출
+- **광고 관리자** (메타 / 구글 / 네이버) — ROAS, 전환
+- **카카오 비즈니스** — 알림톡 오픈율
+- **사내 ERP** — 정상판매율, 재고, 발주 잔량
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="weekly-update-w12" type="text/html" title="27SS W12 매출 리포트">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "와키윌리 27SS W12 위클리 매출 리포트를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

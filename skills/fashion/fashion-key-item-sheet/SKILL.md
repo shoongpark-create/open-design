@@ -1,25 +1,25 @@
 ---
 name: fashion-key-item-sheet
 description: |
-  Single-page **key item sheet** for one season anchor item, built as the
-  Korean apparel-studio "Color / Detail / Pattern / Fabric / Artwork" 5-slice
-  spread used inside an internal design plan. Left side carries the human
-  composition (5-6 worn references + mood collage); right side carries the
-  selected slice clusters. Use when the brief asks for a "key item sheet",
-  "키 아이템", "코튼 집업 시트", "그래픽 티 시트", "데님 셋업", "가디건
-  시트", or any single-item deep dive that drives sample-room briefing.
+  K-패션 브랜드의 **시즌 키 아이템 시트(앵커 아이템 1개당 1페이지)**를 단일 HTML 파일로 생성하는 스킬입니다.
+  한국 의류 스튜디오의 `컬러 / 디테일 / 패턴 / 패브릭 / 아트워크` 5-슬라이스 스프레드 형식.
+  좌측에 인물 컴포지션(워크 레퍼런스 5~6장 + 무드 콜라주), 우측에 선택 슬라이스 클러스터.
+  사용자가 "키 아이템", "키 아이템 시트", "코튼 집업 시트", "그래픽 티 시트", "데님 셋업", "가디건 시트"를
+  언급하거나 샘플실 브리핑을 견인하는 단일 아이템 딥 다이브를 요청하면 활성화하세요.
 triggers:
-  - "key item"
-  - "key item sheet"
-  - "anchor item"
-  - "item deep dive"
   - "키 아이템"
+  - "키 아이템 시트"
   - "아이템 시트"
   - "코튼 집업"
   - "그래픽 티"
   - "데님 셋업"
   - "가디건 시트"
   - "스웻 셋업"
+  - "앵커 아이템"
+  - "key item"
+  - "key item sheet"
+  - "anchor item"
+  - "item deep dive"
 od:
   mode: prototype
   platform: desktop
@@ -32,253 +32,252 @@ od:
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Build a 27SS key-item sheet for WACKYWILLY 'cotton zip-up jumper': 6 worn references on the left, slices = Washing / Pattern / Artwork on the right, palette pulled from the active 27SS color story."
+  example_prompt: "와키윌리 27SS '코튼 집업 점퍼' 키 아이템 시트를 만들어주세요. 좌측 worn 레퍼런스 6장, 우측 슬라이스 = Washing / Pattern / Artwork. 컬러는 27SS 컬러 스토리에서 가져오기."
 ---
 
-# Fashion Key Item Sheet Skill
+# 패션 키 아이템 시트 스킬
 
-Produce a single-file HTML **key item sheet** — one anchor item, one page,
-the document a Korean apparel design studio hands to the sample room before
-the first proto is cut. It is **internal-facing**: the audience is the
-designer, the merchandiser, and the supplier sample-room manager — not the
-buyer or the consumer.
+K-패션 브랜드의 **키 아이템 시트**를 단일 HTML 파일로 생성합니다. 앵커 아이템 1개당 1페이지 — 한국 의류 디자인 스튜디오가 1차 프로토 커팅 전에 샘플실에 핸드오프하는 문서. **내부용** — 청중은 디자이너, MD, 공급사 샘플실 매니저 (바이어·소비자 아님).
 
-The key item sheet answers four questions about a single item:
+키 아이템 시트가 단일 아이템에 대해 답하는 4가지 질문:
 
-1. **What is the worn reality of this item?** (5–6 figures wearing variants
-   — silhouette, fit, layering — pulled from competitor / inspiration set)
-2. **Which design dimensions are we exploring?** (a chosen subset of:
-   Color, Detail, Pattern, Fabric, Artwork)
-3. **What is the visual evidence for each dimension?** (3–4 reference
-   images per slice, each with a one-line "what we are taking from this")
-4. **What is the merch/production note?** (target colorways, target lots,
-   carryover decision, signature detail to keep)
+1. **이 아이템의 worn reality는 무엇인가?** (5~6 figure가 변형 입은 — 실루엣, 핏, 레이어링 — 경쟁사/영감 세트에서 풀)
+2. **어떤 디자인 차원을 탐색하는가?** ({Color, Detail, Pattern, Fabric, Artwork} 중 선택 서브셋)
+3. **각 차원에 대한 시각 증거는?** (슬라이스당 3~4 레퍼런스 이미지 + 각각 `여기서 무엇을 가져갈 것인지` 1줄)
+4. **MD/생산 노트는?** (타겟 컬러웨이, 타겟 LOT, 캐리오버 결정, 유지할 시그니처 디테일)
 
-It is a **single item** document — never combine two items into one sheet.
-Use one sheet per item; chain them in `fashion-season-deck` if needed.
+**단일 아이템 문서** — 2개 아이템을 한 시트에 절대 합치지 마세요. 아이템당 1 시트, 필요 시 `fashion-season-deck`에서 체인.
 
-## Output language
+## 환경 호환성
 
-Keep this skill's instructions in English. For user-facing artifact copy,
-default to a Korean fashion-business register when the user writes in Korean or
-the brand/context is Korean. Do not fully translate every label into Korean.
-Use natural Korean noun-phrase report style for strategy, rationale, caveats,
-owner notes, and decisions; keep established industry English or mixed terms when they are
-the normal working language. Typical terms to keep include SKU, new lineup,
-mood, lookbook, styling, fit, silhouette, colorway, carryover, target lot, drop,
-bridge, category, item, setup, BASIC/TREND/ACCENT, BTA, UNI/WOMEN, S1~S4,
-fabric/graphic names, season codes, and file paths. Section labels and table
-headers may be mixed, e.g. `Category × SKU Plan`, `Bridge Map`, `Open
-Decisions`, `Anti-pattern · 하지 않을 것`. Avoid awkward literal Hangulization
-such as `락 리뷰` when `LOCK REVIEW` is clearer. Image-generation prompts may
-stay in English; visible captions and fallback text should match the artifact
-register: Korean phrases with accepted fashion-business English terms. For
-report-style artifacts, prefer noun-phrase endings in Korean body copy, table
-interpretation, HTML comments, revision logs, and decision notes (e.g. `적용`, `전환`, `확보 사유`, `사용 금지`,
-`owner 확인`, `sample check 완료`, `Local ComfyUI 미사용`) instead of stiff
-finite endings such as `~이다`, `~한다`, or `~하였다`.
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
 
-## Typography
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 본문에서 권장하는 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기 기능을 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
 
-Use the active `DESIGN.md` WACKYWILLY type system. Keep `Pretendard Variable`
-as the default body, table, UI, and decision-log font. Choose exactly one point
-font token per artifact and bind `--font-display` to it: `--font-display-report`
-for operational decks, line-up docs, roadmaps, and internal presentations;
-`--font-display-romance` for WACKYLILY, romantic street, soft editorial,
-lookbook, and mood-board artifacts; `--font-display-street` for strong street,
-launch, promo, and key-visual directions; `--font-display-play` for character
-IP, fandom goods, and witty campaign moments. Do not use point fonts for table
-body, long notes, revision logs, SKU rows, code, dates, filenames, or owner/by
-fields; keep those in `--font-sans` or `--font-mono`.
+본문 작업 흐름은 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면, 사용자에게 `DESIGN.md` 경로나 기본 톤을 묻고 진행하세요.
 
-## Resource map
+## 출력 언어 정책
+
+사용자가 한국어로 작성하거나 브랜드/맥락이 한국 K-패션이라면, 산출물 카피는 **한국 패션 비즈니스 등록(register)**을 따릅니다.
+
+- 유지하는 용어: SKU · 컬러웨이 · 타겟 LOT · 캐리오버 · 시그니처 디테일 · 워싱 · 핏 · 실루엣 · 셋업 · 프로토 · 1차 샘플 · 사입가율 · 정상판매율 · 판기 S1~S4 · BTA · UNI/WOMEN.
+- 슬라이스 이름은 영문 유지: Color / Detail / Pattern / Fabric / Artwork. 또는 한국어 매핑(Washing → 컬러 서브, Embroidery → 아트워크).
+- 아이템 이름은 한국어 우선: `코튼 집업 점퍼`, `시그니처 그래픽 티셔츠`, `데님라이크 스웻 셋업`, `러플 원피스`.
+- 본문 카피, 표 해석, HTML 주석은 **명사구 종결** 선호. 예: `타겟 LOT 1,200`, `프로토 마감일 적용`, `signature embroidery 유지`, `Sorona Cool 적용`.
+
+## 타이포그래피
+
+프로젝트 루트의 `DESIGN.md` 타이포그래피 토큰 사용. 본문·테이블·UI 기본 폰트는 **Pretendard Variable**. 키 아이템 시트는 **운영 덱 성격**이므로 디스플레이 폰트는 `--font-display-report`를 기본값으로 사용합니다.
+
+테이블 본문, MD 노트, 컬러웨이 수치, owner/by 필드에는 디스플레이 폰트를 쓰지 말고 `--font-sans` 또는 `--font-mono` 유지.
+
+## 폴더 구조
 
 ```
 fashion-key-item-sheet/
-├── SKILL.md
+├── SKILL.md              ← 이 파일
 ├── assets/
 │   └── template.html
 └── references/
-    ├── slices.md
-    ├── layouts.md
-    └── checklist.md
+    ├── slices.md         ← 5 슬라이스 라이브러리 + 아이템 패밀리별 권장 조합
+    ├── layouts.md        ← 컴포지션 2종
+    └── checklist.md      ← 자체 검수 기준
 ```
 
-## Workflow
+## 작업 흐름
 
-### Step 0 — Pre-flight
+### Step 0 — 사전 점검
 
-1. Read `assets/template.html` end-to-end.
-2. Read [`../_shared/imagegen.md`](../_shared/imagegen.md) — the shared
-   project imagegen policy.
-3. Read `references/slices.md` to understand which slices apply to which
-   item families.
-4. Read `references/layouts.md` and pick a slice composition.
-5. Read `references/checklist.md`.
-6. Read the active `DESIGN.md`, `fashion-color-story` (if any), and
-   `fashion-fabric-board` (if any). Slice content must reference the
-   already-locked palette and material names — do not invent new ones here.
+1. 이 스킬 폴더의 `assets/template.html`을 처음부터 끝까지 읽으세요.
+2. `references/slices.md`를 읽고 어떤 슬라이스가 어떤 아이템 패밀리에 적용되는지 인지하세요.
+3. `references/layouts.md`를 읽고 슬라이스 컴포지션을 가늠하세요.
+4. `references/checklist.md`를 읽으세요.
+5. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)와 가용한 `fashion-color-story`, `fashion-fabric-board`를 읽으세요. 슬라이스 콘텐츠는 이미 LOCK된 팔레트와 소재 이름을 참조해야 — 여기서 신규 발명 금지. 파일이 자동 주입되지 않는 환경이라면 사용자에게 경로를 물어 진행합니다.
+6. Worn 레퍼런스·슬라이스 이미지 생성은 환경별 가용 도구 사용. 미생성 시 폴백 텍스트로 자연스럽게 대체.
 
-### Step 1 — Clarify the item
+### Step 1 — 아이템 정보 수집
 
-Ask in the first discovery form if not provided:
+다음이 빠지면 첫 발견 폼에서 물어보세요.
 
-- Season name (e.g. 27SS)
-- Item family — pick one and only one:
-  - Outer (cotton zip-up jumper, windbreaker, jacket…)
-  - Top (signature graphic tee, vintage graphic tee, henley, polo…)
-  - Knit (cardigan, sweater, vest…)
-  - Bottom (denim, easy denim setup, sweatpant, shorts…)
-  - Setup (denim-like sweat setup, easy-denim setup, twin-set…)
-  - Dress / skirt
-- Item name in the brand's own words (e.g. "코튼 집업 점퍼", "시그니처
-  그래픽 티셔츠", "데님라이크 스웻 셋업")
-- One-line item thesis (e.g. "신학기 매출 전환을 노리는 캐주얼 아우터")
-- Selling period (S1/S2/S3/S4) and target lot
-- Carryover decision — new development / carryover from prior season /
-  signature evolution
-- Slice selection — pick **2–4 slices** from {Color, Detail, Pattern,
-  Fabric, Artwork}; do not select all 5 unless the item is a hero
-- Worn-reference count target — default 5–6 figures
-- Hard constraints (must use signature detail X, must keep brand color Y,
-  banned references)
+- 시즌 코드 (예: 27SS)
+- 아이템 패밀리 — **단 1개만** 선택:
+  - 아우터 (코튼 집업 점퍼, 윈드브레이커, 재킷 등)
+  - 톱 (시그니처 그래픽 티, 빈티지 그래픽 티, 헨리, 폴로 등)
+  - 니트 (가디건, 스웨터, 베스트 등)
+  - 하의 (데님, 이지 데님 셋업, 스웻팬츠, 쇼츠 등)
+  - 셋업 (데님라이크 스웻 셋업, 이지 데님 셋업, 트윈 셋 등)
+  - 원피스 / 스커트
+- 브랜드의 자체 표기 아이템 이름 (예: `코튼 집업 점퍼`, `시그니처 그래픽 티셔츠`, `데님라이크 스웻 셋업`)
+- 1줄 아이템 thesis (예: `신학기 매출 전환을 노리는 캐주얼 아우터`)
+- 판기 (S1/S2/S3/S4) + 타겟 LOT
+- 캐리오버 결정 — 신규 개발 / 이전 시즌 캐리오버 / 시그니처 진화
+- 슬라이스 선택 — {Color, Detail, Pattern, Fabric, Artwork} 중 **2~4 슬라이스** 선택. 히어로 아이템이 아니면 5개 모두 선택 금지
+- Worn 레퍼런스 수 목표 — 기본 5~6 figure
+- 하드 제약 (시그니처 디테일 X 유지, 브랜드 컬러 Y 유지, 금지 레퍼런스)
 
-### Step 2 — Pick a slice composition
+### Step 2 — 슬라이스 컴포지션 선택
 
-Pick the right slice subset from `references/slices.md` based on item
-family. State the chosen composition in one sentence:
+`references/slices.md`에서 아이템 패밀리 기반으로 슬라이스 서브셋 선택. 선택한 컴포지션을 한 문장으로 선언:
 
-> "27SS cotton zip-up jumper: slices = Washing + Pattern + Artwork; 6
-> worn references on the left, 4 swatches per slice on the right."
+> "27SS 코튼 집업 점퍼: 슬라이스 = Washing + Pattern + Artwork; 좌측 worn 레퍼런스 6장, 우측 슬라이스당 swatch 4장."
 
-Recommended defaults (override only with reason):
+권장 기본값 (사유 있을 때만 오버라이드):
 
-| Item family | Default slices |
+| 아이템 패밀리 | 기본 슬라이스 |
 |---|---|
-| Outer (cotton zip-up, jacket) | Washing · Pattern · Artwork |
-| Top (signature graphic tee) | Artwork · Fabric |
-| Top (vintage graphic tee) | Graphic · Fabric (uses Pigment Dyeing as fabric note) |
-| Knit (cardigan, sweater) | Color · Pattern · Detail · Fabric |
-| Bottom / Setup (easy-denim, sweat setup) | Color · Detail · Fabric |
-| Dress / Skirt | Color · Detail · Pattern |
+| 아우터 (코튼 집업, 재킷) | Washing · Pattern · Artwork |
+| 톱 (시그니처 그래픽 티) | Artwork · Fabric |
+| 톱 (빈티지 그래픽 티) | Graphic · Fabric (Pigment Dyeing 패브릭 노트) |
+| 니트 (가디건, 스웨터) | Color · Pattern · Detail · Fabric |
+| 하의 / 셋업 (이지 데님, 스웻 셋업) | Color · Detail · Fabric |
+| 원피스 / 스커트 | Color · Detail · Pattern |
 
-### Step 3 — Generate worn-reference figures (left side)
+### Step 3 — Worn 레퍼런스 figure 생성 (좌측)
 
-The left side is a **mood collage** of 5–6 figures wearing the item or
-close variants. The goal is silhouette / fit / layering reading at a
-glance — not catalog beauty.
+좌측은 5~6 figure의 **무드 콜라주**로, 아이템 또는 근접 변형을 입은 상태. 목표는 한눈에 실루엣 / 핏 / 레이어링 가독 — 카탈로그 뷰티 아님.
 
-Use the shared project imagegen policy: generate each worn-reference figure
-with the built-in authenticated `image_gen` path only. Save project-local
-copies into `images/` with names matching the role:
+이미지 생성이 가능한 환경에서 `images/` 폴더에 저장:
 
 ```
 images/worn-01.png … images/worn-06.png
 ```
 
-Prompt shape per figure (tweak per item family):
+figure당 영문 프롬프트 예시 (아이템 패밀리별 조정):
 
 ```
 Use case: design / key-item-sheet
 Asset type: worn-reference figure (cut-out, full-body) for one anchor item
 Primary subject: a single fashion model standing, full-length, neutral pose,
   arms relaxed, eye-level camera
-Anchor item (must be worn): [REPLACE — e.g. cotton zip-up jumper, brushed
+Anchor item (must be worn): [REPLACE — 예: cotton zip-up jumper, brushed
   cotton, semi-relaxed fit, washed wash-3]
 Outfit balance:
-  - Top/inner: [REPLACE — keep neutral so the anchor item reads]
+  - Top/inner: [REPLACE — 앵커 아이템이 읽히도록 중립 유지]
   - Bottom: [REPLACE]
   - Footwear: [REPLACE]
-  - Headwear: [optional]
+  - Headwear: [선택]
 Style/medium: editorial cut-out, transparent background or seamless paper
   beige #ebe6db, soft daylight
 Composition/framing: vertical 4:5, full body in frame
-Color palette: [pull from active color story; keep accent scarce]
+Color palette: [컬러 스토리에서 가져옴; 액센트는 희소하게 유지]
 Constraints: no logos, no readable text, no watermark, no distorted hands,
   no extra limbs, no face beauty retouching, single subject
 Avoid: catalog-pose, runway crowd, half-body crop, mid-stride pose
 ```
 
-If the user attaches their own product photo or supplier reference,
-treat it as edit / extend reference per imagegen rules — do not
-re-imagine.
+사용자가 자체 상품 사진 또는 공급사 레퍼런스 첨부 시 edit / extend 레퍼런스로 처리 — 재상상 금지.
 
-### Step 4 — Generate slice clusters (right side)
+### Step 4 — 슬라이스 클러스터 생성 (우측)
 
-For each chosen slice, generate **3–4 reference images**. Slice prompts
-are tighter / closer than worn figures. Use square `1024x1024` by
-default; slice-specific defaults below.
+선택한 슬라이스당 **3~4 레퍼런스 이미지** 생성. 슬라이스 프롬프트는 worn figure보다 더 타이트·근접. 기본 정사각 1024×1024.
 
-Save with names matching slice + index:
+파일명:
 
 ```
 images/slice-color-01.png … images/slice-color-04.png
-images/slice-detail-01.png … images/slice-detail-04.png
-images/slice-pattern-01.png … images/slice-pattern-04.png
-images/slice-fabric-01.png … images/slice-fabric-04.png
-images/slice-artwork-01.png … images/slice-artwork-04.png
+images/slice-detail-01.png …
+images/slice-pattern-01.png …
+images/slice-fabric-01.png …
+images/slice-artwork-01.png …
 ```
 
-Per-slice prompt shape:
+슬라이스별 프롬프트 형태:
 
-- **Color** (1024x1024): full garment shot on hanger or flat-lay, single
-  color per image, swatch-clean lighting, color name + TCX in alt text.
-- **Detail** (1024x1024): macro close-up of one constructional element
-  (cuff, hem, pocket, drawcord, stitching, raw selvedge, zipper pull).
-  No full garment in frame.
-- **Pattern** (1024x1024): woven / printed pattern at swatch scale; if
-  the pattern is structural (waffle, cable, ribbed knit), shoot at
-  fabric-board angle showing weave.
-- **Fabric** (1024x1024): fabric swatch close-up showing hand and drape;
-  optional micro-tag of the fabric name overlay (e.g. "Cool Cotton",
-  "Askin", "Sorona").
-- **Artwork** (1024x1024): graphic / embroidery / patch / print study —
-  the artwork itself, isolated on garment area or flat-lay.
+- **Color** (1024×1024): 행거 또는 플랫레이 풀 가먼트 컷, 이미지당 단일 컬러, 스와치 클린 라이팅, alt 텍스트에 컬러 이름 + TCX
+- **Detail** (1024×1024): 1 구성 요소 매크로 클로즈업 (커프스, 헴, 포켓, 드로코드, 스티칭, 로 셀비지, 지퍼 풀). 프레임에 풀 가먼트 없음
+- **Pattern** (1024×1024): 스와치 스케일 직조/프린트 패턴. 구조 패턴(와플, 케이블, 립 니트)은 위브 표시 패브릭 보드 앵글
+- **Fabric** (1024×1024): 핸드와 드레이프 표시 패브릭 스와치 클로즈업. 선택 패브릭 이름 마이크로 태그 오버레이 (예: `Cool Cotton`, `Askin`, `Sorona`)
+- **Artwork** (1024×1024): 그래픽 / 자수 / 패치 / 프린트 스터디 — 아트워크 자체, 가먼트 영역 또는 플랫레이에 고립
 
-For each image, include:
+모든 이미지 프롬프트에 포함:
 
 ```
-Constraints: no logos (unless artwork itself is the brand mark), no
+Constraints: no logos (아트워크가 브랜드 마크인 경우 제외), no
   readable third-party brand text, no watermark, no distorted features
 Avoid: aggressive saturation, fake gradient lighting, AI-slop sparkle
 ```
 
-### Step 5 — Compose the sheet
+### Step 5 — 시트 구성
 
-Copy `assets/template.html` to `index.html`. Replace `[REPLACE]` tokens,
-bind active `DESIGN.md` tokens into `:root`, then paste the chosen
-composition from `references/layouts.md` into `<main id="key-item-sheet">`.
+`assets/template.html`을 `index.html`로 복사. `[REPLACE]` 토큰 치환, `DESIGN.md` 토큰을 `:root`에 바인딩, 선택 컴포지션을 `references/layouts.md`에서 `<main id="key-item-sheet">` 안에 붙임.
 
-Required sections, in order:
+**필수 섹션 (순서대로):**
 
-1. **Header strip** — season + item family + brand item name + selling
-   period + carryover status + lock state.
-2. **Item thesis** — one paragraph: why this item, what it replaces /
-   evolves from, target colorway count and target lot.
-3. **Worn-reference grid (left)** — 5–6 figure cards, each with a 1-line
-   takeaway ("relaxed shoulder, hem hits hipbone").
-4. **Slice clusters (right)** — one labeled cluster per chosen slice, 3–4
-   tiles per cluster, each tile with image + 1-line note.
-5. **Production / merch note** — target colorways list, signature detail
-   to keep, expected supplier (if known), proto deadline.
-6. **Open / next decisions** — what still needs locking, owner, by when.
+1. **헤더 스트립** — 시즌 + 아이템 패밀리 + 브랜드 아이템 이름 + 판기 + 캐리오버 상태 + LOCK 상태
+2. **아이템 thesis** — 한 단락: 왜 이 아이템, 무엇을 대체/진화하는지, 타겟 컬러웨이 수, 타겟 LOT
+3. **Worn 레퍼런스 그리드 (좌측)** — 5~6 figure 카드, 각각 1줄 takeaway (`relaxed shoulder, hem 힙본에 위치`)
+4. **슬라이스 클러스터 (우측)** — 선택 슬라이스당 1 라벨 클러스터, 클러스터당 3~4 타일, 각 타일 이미지 + 1줄 노트
+5. **Production / Merch 노트** — 타겟 컬러웨이 리스트, 유지할 시그니처 디테일, 예상 공급사(알려진 경우), 프로토 마감일
+6. **Open / Next Decisions** — LOCK 필요한 것, owner, by when
 
-### Step 6 — Self-check
+**OpenDesign 환경에서 사용 시:** 각 섹션에 `data-od-id` 속성을 추가하면 인라인 코멘트 모드를 사용할 수 있습니다.
 
-Run `references/checklist.md` before emitting. Every cluster must match
-its slice's image-shape rules; every worn figure must have a 1-line
-takeaway; the page must still render if any image fails by showing the
-styled fallback.
+### Step 6 — 자체 검수
 
-## Output contract
+`references/checklist.md`의 기준을 한 항목씩 직접 확인하세요. 모든 클러스터가 해당 슬라이스의 이미지 형태 규칙 준수. 모든 worn figure에 1줄 takeaway. 이미지 실패 시 폴백 텍스트로 페이지 작동 확인.
 
-Emit between `<artifact>` tags:
+## 한국 K-패션 브랜드 사례 (참고)
+
+키 아이템 시트 작성 시 참고할 K-패션 브랜드 키 아이템 운영 패턴.
+
+| 브랜드 | 시즌 히어로 키 아이템 패턴 | 슬라이스 운영 |
+|---|---|---|
+| **마뗑킴** | 미니백, 텍스트 로고 후디 | Color · Detail (텍스트 로고 워싱) |
+| **마르디 메크르디** | 플라워 마르디 카디건/스웻 | Artwork · Color · Pattern (시그니처 그래픽) |
+| **아더에러** | 오버사이즈 코트, 블루 시그니처 아이템 | Color · Detail (테트라이트 로고) |
+| **키르시** | 체리 그래픽 티, 패딩 | Artwork · Fabric |
+| **와키윌리** | 코튼 집업, 신학기 백팩, 시그니처 그래픽 티 | Washing · Pattern · Artwork (점퍼), Color · Detail (백팩) |
+| **무신사 스탠다드** | 베이직 티, 데님 셋업 | Color · Detail · Fabric (기능성 행택) |
+| **시야쥬** | 린넨 셔츠, 워시드 코튼 베이직 | Color · Fabric · Detail |
+
+## 한국 패션기업 조직 R&R 메모
+
+키 아이템 시트는 **디자인실 + MD실 + 마케팅실 합작** 작성 (시즌 히어로 아이템).
+
+- **수석 디자이너 / 디자인실장**: 슬라이스 큐레이션, 시그니처 디테일 결정, worn 레퍼런스 큐레이션
+- **MD 실장**: 타겟 컬러웨이 수, 타겟 LOT, 사입가율 검토
+- **마케팅 실장**: 키 아이템 IMC 캘린더 활용 계획 (시즌 히어로로 푸시할지)
+- **생산실**: 공급사 선정, 프로토 마감일 합의, MOQ 검증
+- **패턴실**: 핏 시스템 정합 검토, 1차 샘플 핏 검수
+
+키 아이템 = MD실 + 디자인실 + 마케팅실 합작 (NotebookLM 리서치 인사이트). 노출 빈도 조절로 판매 유도.
+
+## 시즌 사이클 내 위치
+
+키 아이템 시트는 **시즌 시작 약 3개월 전** 작성 (라인업 LOCK 시점과 동시).
 
 ```
-<artifact identifier="fashion-key-item-sheet-slug" type="text/html" title="Item Sheet Title">
-<!doctype html>
-<html>...</html>
-</artifact>
+[시즌 시작 5~6개월 전] fashion-concept-board (영역)
+       ↓
+[시즌 시작 4~5개월 전] fashion-color-story (컬러 LOCK), fashion-fabric-board (소재 LOCK)
+       ↓
+[시즌 시작 3~4개월 전] fashion-styling-board (스타일링 보드)
+       ↓
+[시즌 시작 3개월 전] ★ fashion-key-item-sheet (이 문서, 시즌 히어로 1개당 1 시트)
+                      fashion-new-lineup (전체 라인업)
+                      fashion-accessory-lineup (ACC 라인업)
+                      → 라인업 LOCK + 1차 샘플 발주
+       ↓
+[시즌 시작 2~3개월 전] fashion-graphic-direction (아트워크 슬라이스 그래픽 LOCK)
+       ↓
+[시즌 시작 1~2개월 전] fashion-lookbook (키 아이템 화보)
+       ↓
+[시즌 시작 2개월 전] fashion-imc-calendar (키 아이템 IMC 슬롯 배치)
 ```
 
-One sentence before the artifact, nothing after.
+## 출력 규약
+
+단일 HTML 문서를 결과물로 출력하세요.
+
+- **Claude 환경**: `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="fashion-key-item-sheet-slug" type="text/html" title="키 아이템 시트 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+
+출력 앞에 한 문장 요약을, 뒤에는 아무것도 덧붙이지 마세요.

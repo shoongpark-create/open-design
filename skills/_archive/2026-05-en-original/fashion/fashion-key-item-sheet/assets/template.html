@@ -1,0 +1,109 @@
+<!doctype html>
+<!--
+  fashion-key-item-sheet template
+  Copy to <project>/index.html, replace [REPLACE] tokens, bind active
+  DESIGN.md tokens into :root, paste a composition from
+  references/layouts.md into <main id="key-item-sheet">.
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE Season] [REPLACE Item Name] · Key Item Sheet</title>
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
+  :root {
+    --ink:        #1f2933;
+    --paper:      #fafaf7;
+    --rule:       #e7e3da;
+    --muted:      #6b7280;
+    --accent:     #b8443a;
+
+    --slice-color:   #b8a890;
+    --slice-detail:  #5a6b7c;
+    --slice-pattern: #6b8e6b;
+    --slice-fabric:  #8a7e6b;
+    --slice-artwork: var(--accent);
+
+    --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
+
+    --font-display-report: "Paperlogy", "Wanted Sans Variable", "SUIT Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
+
+    --font-display-street: "Black Han Sans", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-play: "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-romance: "Grandiflora One", "Diphylleia", "Hahmlet", "Noto Serif KR", "Source Serif 4", ui-serif, Georgia, serif;
+
+    --font-display: var(--font-display-report);
+    --font-text: var(--font-sans);
+    --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: var(--font-text); }
+  body { padding: 40px 40px 64px; }
+
+  .kis-header { border-bottom: 1px solid var(--rule); padding-bottom: 20px; margin-bottom: 28px; }
+  .kis-meta { display: flex; gap: 16px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .kis-meta .status { margin-left: auto; }
+  .item-name { font-family: var(--font-display); font-size: 36px; line-height: 1.1; margin: 12px 0 8px; }
+  .thesis { font-size: 14px; line-height: 1.55; max-width: 80ch; color: #374151; margin: 0; }
+
+  .kis-grid { display: grid; gap: 32px; }
+  .kis-grid--50-50 { grid-template-columns: 1fr 1fr; }
+  .kis-grid--40-60 { grid-template-columns: 2fr 3fr; }
+
+  .cluster-title { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin: 0 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--rule); }
+
+  .worn-collage__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .worn-collage__grid--column { grid-template-columns: 1fr; }
+  .worn-tile { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+  .worn-tile .image-frame { aspect-ratio: 4/5; background: linear-gradient(180deg, #f3efe6, #ebe6db); border-radius: 4px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .worn-tile .image-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .worn-tile figcaption { font-size: 11px; line-height: 1.35; color: var(--ink); }
+
+  .slice-stack { display: flex; flex-direction: column; gap: 24px; }
+  .slice-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .slice-cluster { background: rgba(255,255,255,0.6); border-radius: 6px; padding: 12px; }
+  .slice-cluster[data-slice="color"]   .cluster-title { color: var(--slice-color); }
+  .slice-cluster[data-slice="washing"] .cluster-title { color: var(--slice-color); }
+  .slice-cluster[data-slice="detail"]  .cluster-title { color: var(--slice-detail); }
+  .slice-cluster[data-slice="pattern"] .cluster-title { color: var(--slice-pattern); }
+  .slice-cluster[data-slice="fabric"]  .cluster-title { color: var(--slice-fabric); }
+  .slice-cluster[data-slice="artwork"] .cluster-title { color: var(--slice-artwork); }
+  .slice-cluster[data-slice="graphic"] .cluster-title { color: var(--slice-artwork); }
+
+  .slice-cluster__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .slice-tile { margin: 0; display: flex; flex-direction: column; gap: 4px; }
+  .slice-tile .image-frame { aspect-ratio: 1/1; background: #efeae0; border-radius: 3px; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .slice-tile .image-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .slice-tile figcaption { font-size: 10px; line-height: 1.3; color: var(--muted); }
+
+  /* Fallback: when an image-frame contains no <img> with a real src, show the prompt */
+  .image-frame[data-fallback]:not(:has(img[src]:not([src=""])))::after { content: attr(data-fallback); display: block; padding: 6px; font-size: 9px; line-height: 1.3; color: var(--muted); font-family: var(--font-mono); text-align: center; }
+
+  .merch-note, .open-decisions { margin-top: 36px; padding-top: 20px; border-top: 1px solid var(--rule); }
+  .merch-note h2, .open-decisions h2 { font-family: var(--font-display); font-size: 14px; margin: 0 0 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 24px; font-size: 13px; }
+  dt { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--muted); }
+  dd { margin: 0; }
+  ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.5; }
+
+  @media (max-width: 900px) {
+    .kis-grid--50-50, .kis-grid--40-60 { grid-template-columns: 1fr; }
+    .worn-collage__grid { grid-template-columns: repeat(2, 1fr); }
+    .slice-cluster__grid { grid-template-columns: repeat(2, 1fr); }
+    .slice-grid-2x2 { grid-template-columns: 1fr; }
+  }
+  @media print { body { padding: 24px; } .slice-cluster, .worn-tile { break-inside: avoid; } }
+</style>
+</head>
+<body>
+  <main id="key-item-sheet">
+    <!-- PASTE one composition from references/layouts.md, then tail blocks. -->
+  </main>
+</body>
+</html>

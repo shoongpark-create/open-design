@@ -1,21 +1,23 @@
 <!doctype html>
-<html lang="en" data-mode="light">
+<html lang="ko" data-mode="light">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>[ARTIFACT TITLE] · Tweaks</title>
+  <title>[산출물 제목] · Tweaks</title>
   <style>
     /* =========================================================
-       TWEAKS · WRAP TEMPLATE
+       TWEAKS · WRAP TEMPLATE (K-패션 시즌·캠페인 토큰 오버라이드)
        =========================================================
-       This file is a skeleton. Workflow:
-         1. Replace [ARTIFACT TITLE] in <title>.
-         2. Update STORAGE_KEY in the script (tweaks-<artifact-slug>).
-         3. Decide which knobs apply (1-5 from KNOBS_LIBRARY).
-         4. Paste artifact CSS into the [ARTIFACT_STYLE] region.
-         5. Paste artifact body into the [ARTIFACT_BODY] region.
-         6. Lift hard-coded #hex / Npx / Nrem values to custom
-            properties so the knobs actually move.
+       이 파일은 스켈레톤. 작업 순서:
+         1. <title>의 [산출물 제목] 교체.
+         2. 스크립트의 STORAGE_KEY를 tweaks-<artifact-slug>로 갱신.
+         3. 어떤 노브를 노출할지 결정 (1~5개 중 부분 집합).
+         4. 산출물 CSS를 [ARTIFACT_STYLE] 영역에 페이스트.
+         5. 산출물 body를 [ARTIFACT_BODY] 영역에 페이스트.
+         6. 하드코딩 값(#hex / Npx / Nrem)을 커스텀 프로퍼티로
+            리프트해야 노브가 실제로 동작.
+         7. ACCENT_PRESETS를 K-패션 시즌·캠페인 컬러로 교체
+            (27SS / 26FW / 콜라보 / 시그니처 등).
        ========================================================= */
 
     :root {
@@ -238,54 +240,54 @@
        ========================================================= -->
 
   <!-- =========================================================
-       PANEL  — knob controls (drop the rows you don't ship)
+       패널 — 노브 컨트롤 (필요 없는 행은 삭제)
        ========================================================= -->
-  <aside class="tw-panel" id="tw-panel" aria-label="Tweak panel">
+  <aside class="tw-panel" id="tw-panel" aria-label="시즌 토큰 패널">
     <header class="tw-head">
-      <span class="ttl">Tweaks</span>
-      <button class="toggle" id="tw-close" aria-label="Hide panel" title="Hide (T)">×</button>
+      <span class="ttl">Tweaks · 시즌 토큰</span>
+      <button class="toggle" id="tw-close" aria-label="패널 닫기" title="닫기 (T)">×</button>
     </header>
     <div class="tw-body">
 
-      <!-- Accent -->
+      <!-- 시즌·캠페인 컬러 -->
       <div class="tw-row">
-        <span class="lbl">Accent</span>
-        <div class="tw-swatches" id="tw-accent" role="radiogroup" aria-label="Accent color"></div>
+        <span class="lbl">시즌 컬러</span>
+        <div class="tw-swatches" id="tw-accent" role="radiogroup" aria-label="시즌·캠페인 컬러"></div>
       </div>
 
-      <!-- Mode -->
+      <!-- 라이트 / 다크 -->
       <div class="tw-row">
-        <span class="lbl">Mode</span>
-        <div class="tw-seg" id="tw-mode" role="radiogroup" aria-label="Color mode">
+        <span class="lbl">모드</span>
+        <div class="tw-seg" id="tw-mode" role="radiogroup" aria-label="컬러 모드">
           <button data-val="light" aria-pressed="true">Light</button>
           <button data-val="dark" aria-pressed="false">Dark</button>
         </div>
       </div>
 
-      <!-- Scale -->
+      <!-- 타이포 스케일 -->
       <div class="tw-row">
-        <span class="lbl">Type scale</span>
-        <div class="tw-seg" id="tw-scale" role="radiogroup" aria-label="Type scale">
+        <span class="lbl">타이포</span>
+        <div class="tw-seg" id="tw-scale" role="radiogroup" aria-label="타이포 스케일">
           <button data-val="0.85" aria-pressed="false">Compact</button>
           <button data-val="1" aria-pressed="true">Normal</button>
           <button data-val="1.15" aria-pressed="false">Generous</button>
         </div>
       </div>
 
-      <!-- Density -->
+      <!-- 여백 -->
       <div class="tw-row">
-        <span class="lbl">Density</span>
-        <div class="tw-seg" id="tw-density" role="radiogroup" aria-label="Density">
+        <span class="lbl">여백</span>
+        <div class="tw-seg" id="tw-density" role="radiogroup" aria-label="여백">
           <button data-val="0.75" aria-pressed="false">Tight</button>
           <button data-val="1" aria-pressed="true">Normal</button>
           <button data-val="1.4" aria-pressed="false">Roomy</button>
         </div>
       </div>
 
-      <!-- Motion -->
+      <!-- 모션 -->
       <div class="tw-row">
-        <span class="lbl">Motion</span>
-        <div class="tw-seg" id="tw-motion" role="radiogroup" aria-label="Motion">
+        <span class="lbl">모션</span>
+        <div class="tw-seg" id="tw-motion" role="radiogroup" aria-label="모션">
           <button data-val="0" aria-pressed="false">Off</button>
           <button data-val="1" aria-pressed="true">Subtle</button>
           <button data-val="1.6" aria-pressed="false">Lively</button>
@@ -293,26 +295,27 @@
       </div>
     </div>
     <footer class="tw-foot">
-      <span><kbd>T</kbd> hide · <kbd>R</kbd> reset</span>
+      <span><kbd>T</kbd> 숨김 · <kbd>R</kbd> 리셋</span>
       <button id="tw-reset" type="button">Reset</button>
     </footer>
   </aside>
 
-  <button class="tw-restore" id="tw-restore" aria-label="Show panel" title="Show panel (T)">T</button>
+  <button class="tw-restore" id="tw-restore" aria-label="패널 표시" title="패널 표시 (T)">T</button>
 
   <script>
     // =========================================================
-    // BRIDGE  — binds knobs ↔ CSS custom props ↔ localStorage
+    // 브리지 — 노브 ↔ CSS 커스텀 프로퍼티 ↔ localStorage 바인딩
     // =========================================================
-    // CHANGE THIS to a unique slug per artifact you wrap.
+    // 산출물별 고유 slug로 변경. 예: tweaks-wackywilly-27ss-lookbook
     const STORAGE_KEY = 'tweaks-default';
 
+    // K-패션 시즌·캠페인 컬러 프리셋. 산출물 톤에 맞춰 교체.
     const ACCENT_PRESETS = [
-      { id: 'rust',     val: '#c96442' },
-      { id: 'cobalt',   val: '#2c4d8e' },
-      { id: 'sage',     val: '#4a7a3f' },
-      { id: 'plum',     val: '#7a3f6a' },
-      { id: 'graphite', val: '#3a3a3a' },
+      { id: '27ss-bloom',      val: '#c96442' },  // 27SS BLOOM (Rust)
+      { id: '26fw-ember',      val: '#7a3f2a' },  // 26FW EMBER (Wine)
+      { id: 'wacky-signature', val: '#d32a2a' },  // 와키 시그니처 RED
+      { id: 'collab-pastel',   val: '#e8b8c4' },  // 와키x마뗑킴 PASTEL
+      { id: 'mono-graphite',   val: '#3a3a3a' },  // 모노 GRAPHITE
     ];
 
     const DEFAULTS = {

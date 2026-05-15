@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Growth squad weekly · 14 Oct notes</title>
+<title>와키윌리 · 27SS 1차 품평회 · 회의록</title>
 <style>
   :root {
     --bg: #fafaf8;
@@ -35,11 +35,12 @@
   .av-row { display: flex; }
   .av { width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--paper); margin-left: -8px; font-size: 11px; font-weight: 700; color: white; display: inline-flex; align-items: center; justify-content: center; }
   .av:first-child { margin-left: 0; }
-  .a-dp { background: linear-gradient(135deg, #2c5fae, #6e9bf0); }
-  .a-mr { background: linear-gradient(135deg, #d6336c, #ff7a9b); }
-  .a-pb { background: linear-gradient(135deg, #b58522, #f1b13a); }
-  .a-ca { background: linear-gradient(135deg, #1a8e8e, #56c1c1); }
-  .a-sl { background: linear-gradient(135deg, #5b3df0, #a991ff); }
+  /* 직책 컬러 — 한국 패션기업 표준 */
+  .a-ceo { background: linear-gradient(135deg, #2c5fae, #6e9bf0); }      /* 대표 */
+  .a-ds  { background: linear-gradient(135deg, #d6336c, #ff7a9b); }      /* 디자인 실장 */
+  .a-md  { background: linear-gradient(135deg, #b58522, #f1b13a); }      /* MD 실장 */
+  .a-d1  { background: linear-gradient(135deg, #1a8e8e, #56c1c1); }      /* 수석 디자이너 1 */
+  .a-d2  { background: linear-gradient(135deg, #5b3df0, #a991ff); }      /* 수석 디자이너 2 */
   .away { color: var(--muted); font-size: 12.5px; }
 
   section { margin-top: 36px; }
@@ -91,143 +92,151 @@
 </head>
 <body>
 <div class="page">
+  <!-- 헤더: 크럼 + 미팅 제목 + 일시·장소·작성자 + 참석자 -->
   <header class="head">
-    <div class="crumb">Northwind / Growth squad / Weeklies</div>
-    <h1>Growth squad weekly · W42</h1>
+    <div class="crumb">WACKYWILLY / 27SS / 1차 품평회</div>
+    <h1>27SS 1차 품평회 · UNI 라인 22 SKU</h1>
     <div class="meta-row">
-      <span><strong>Date</strong>Tuesday, 14 October 2025</span>
-      <span><strong>Time</strong>10:00 – 11:00 PT</span>
-      <span><strong>Where</strong>Zoom · meet.northwind/growth-weekly</span>
-      <span><strong>Notes by</strong>Devon Park</span>
+      <span><strong>일시</strong>27년 1월 25일 (월) 14:00 – 17:00</span>
+      <span><strong>장소</strong>본사 디자인실 (3F)</span>
+      <span><strong>샘플</strong>22 SKU (UNI 14 / WOMEN 6 / ACC 2)</span>
+      <span><strong>작성자</strong>민혜 (MD실)</span>
     </div>
     <div class="attendees">
-      <span class="attendees-label">Present</span>
+      <span class="attendees-label">참석</span>
       <div class="av-row">
-        <span class="av a-dp" title="Devon Park">DP</span>
-        <span class="av a-mr" title="Mira Reddy">MR</span>
-        <span class="av a-pb" title="Priya Banerjee">PB</span>
-        <span class="av a-ca" title="Caleb Renner">CA</span>
-        <span class="av a-sl" title="Sasha Lin">SL</span>
+        <span class="av a-ceo" title="대표 윌리">대표</span>
+        <span class="av a-ds" title="박경 디자인 실장">PK</span>
+        <span class="av a-md" title="민혜 MD 실장">MH</span>
+        <span class="av a-d1" title="장원 수석 디자이너 (그래픽)">JW</span>
+        <span class="av a-d2" title="수영 수석 디자이너 (WOMEN)">SY</span>
       </div>
-      <span class="away">Apologies — Alvaro M. (PTO)</span>
+      <span class="away">결석 — 영업기획 지훈 (회의록 사후 송부)</span>
     </div>
   </header>
 
+  <!-- 아젠다: 1차 품평 절차 -->
   <section>
-    <h2>Agenda</h2>
+    <h2>아젠다</h2>
     <div class="agenda">
       <div class="agenda-item done">
         <div class="check">✓</div>
-        <div class="body"><strong>Sprint 38 mid-sprint check</strong><small>Walk the board column by column. Reset what's stuck.</small></div>
-        <div class="time">10:00 · 15m</div>
+        <div class="body"><strong>오프닝 · 시즌 키 아이템 우선 검토 합의</strong><small>윌리 후디 + 와이드 데님 + 코튼 티 라인 먼저</small></div>
+        <div class="time">14:00 · 15분</div>
       </div>
       <div class="agenda-item done">
         <div class="check">✓</div>
-        <div class="body"><strong>2FA workstream — M2 risk</strong><small>Brand microcopy review is the open dependency.</small></div>
-        <div class="time">10:15 · 10m</div>
+        <div class="body"><strong>UNI 라인 14 SKU 1차 OK/NG 결정</strong><small>핏 시착 + 원가표 + 크로스 코디 확인</small></div>
+        <div class="time">14:15 · 75분</div>
       </div>
       <div class="agenda-item done">
         <div class="check">✓</div>
-        <div class="body"><strong>Onboarding metrics review</strong><small>Activation up 9 pp WoW; debrief the empty-state work.</small></div>
-        <div class="time">10:25 · 10m</div>
+        <div class="body"><strong>WOMEN 라인 6 SKU OK/NG 결정</strong><small>플리츠 스커트 + 크롭 가디건 + 미니 원피스</small></div>
+        <div class="time">15:30 · 45분</div>
       </div>
       <div class="agenda-item done">
         <div class="check">✓</div>
-        <div class="body"><strong>Pioneer security review prep</strong><small>Sales loop-in for Thursday's call.</small></div>
-        <div class="time">10:35 · 10m</div>
+        <div class="body"><strong>ACC 라인 2 SKU 결정</strong><small>윌리 메쉬 캡 + 윌리 키링</small></div>
+        <div class="time">16:15 · 20분</div>
       </div>
       <div class="agenda-item done">
         <div class="check">✓</div>
-        <div class="body"><strong>Q4 roadmap sneak peek</strong><small>Devon shares the proposed shape; we vote on top-3 themes.</small></div>
-        <div class="time">10:45 · 12m</div>
+        <div class="body"><strong>2차 샘플 발주 SKU + 일정 합의</strong><small>재샘플 3 SKU + LOCK 일정 2월 5일</small></div>
+        <div class="time">16:35 · 20분</div>
       </div>
       <div class="agenda-item">
         <div class="check"></div>
-        <div class="body"><strong>Open thread — anything else</strong><small>Pushed to async — see #growth-squad.</small></div>
-        <div class="time">10:57 · 3m</div>
+        <div class="body"><strong>오픈 토픽 — 컬러웨이 추가 검토</strong><small>린넨 셔츠 5컬러 확장 안건은 2차 품평회로 이월</small></div>
+        <div class="time">16:55 · 5분</div>
       </div>
     </div>
   </section>
 
+  <!-- 결정 사항: OK/NG 결정 + 사유 명시 -->
   <section>
-    <h2>Decisions</h2>
+    <h2>결정 사항</h2>
     <div class="decisions">
-      <h3>What we agreed to, on the record</h3>
+      <h3>SKU별 1차 품평 결과 (22 SKU 기준)</h3>
       <ul>
-        <li><strong>M2 (2FA challenge step)</strong> stays at Nov 18 unless brand review slips past Wednesday EOD; Devon owns the escalation.</li>
-        <li><strong>Empty-state experiment</strong> rolls to 100% on Thursday after one more 24h hold; no follow-up control needed.</li>
-        <li><strong>Q4 themes</strong>: (1) Enterprise-readiness (auth + audit), (2) Onboarding 2.0, (3) Mobile-first settings. Sasha to write up the one-pagers.</li>
-        <li><strong>Weekly format</strong>: starting next week, demos move to Friday async-video; Tuesday is decisions + board only.</li>
+        <li><strong>OK 결정 · 18 SKU</strong> — 핏 적정 + 목표 원가 준수 + 시즌 컬러 적합. 2차 샘플 발주 진행. 컬러웨이는 디자인실(SY) 1주 내 확정 후 2차 품평회에서 LOCK.</li>
+        <li><strong>WW-27SS-SET-003 (시어서커 셋업) · 수정 후 재샘플</strong> — 셔츠 사이드 다트 위치 1cm 위 조정 + 쇼츠 인심 2cm 늘림. 재샘플 일정 2월 1일.</li>
+        <li><strong>WW-27SS-OPS-005 (셔링 미니 원피스) · 수정 후 재샘플</strong> — 셔링 디테일 과도, 단정한 무드로 1단계 축소. 컬러 발색 미흡 (라이트 핑크 → 페일핑크로 변경). 재샘플 2월 3일.</li>
+        <li><strong>WW-27SS-TOP-018 (윌리 캐릭터 티) · 수정 후 재샘플</strong> — 캐릭터 그래픽 크기 후면도 추가, 단가 8% 절감 OEM 협의(현 단가 목표 초과). 재샘플 2월 2일.</li>
+        <li><strong>WW-27SS-BTM-019 (플리츠 미디 스커트) · NG 결정</strong> — 시즌 코디 매칭 부적합 + 목표 원가 12% 초과. 27FW 시즌으로 이월 검토. 디자인실 SY 11월 재기획.</li>
+        <li><strong>LOCK 일정</strong> — 2월 5일 (목) 2차 품평회 직후 라인업 LOCK. 발주서 발행 2월 7일. OEM 합천·진주 본생산 시작 2월 12일.</li>
       </ul>
     </div>
   </section>
 
+  <!-- 액션 아이템: 오너·기한·상태 -->
   <section>
-    <h2>Action items</h2>
+    <h2>액션 아이템</h2>
     <table>
-      <thead><tr><th>Action</th><th>Owner</th><th>Due</th><th>Status</th></tr></thead>
+      <thead><tr><th>액션</th><th>오너</th><th>기한</th><th>상태</th></tr></thead>
       <tbody>
         <tr>
-          <td>Escalate brand microcopy review to Sasha + Brand lead</td>
-          <td class="owner"><span class="av a-dp">DP</span>Devon</td>
-          <td>Wed Oct 15</td>
-          <td><span class="pill pill-progress">In progress</span></td>
+          <td>2차 샘플 발주서 작성 (3 SKU · OEM 합천)</td>
+          <td class="owner"><span class="av a-md">MH</span>민혜 MD</td>
+          <td>27/01/27 (수)</td>
+          <td><span class="pill pill-progress">진행 중</span></td>
         </tr>
         <tr>
-          <td>Roll empty-state to 100% (with monitoring window)</td>
-          <td class="owner"><span class="av a-mr">MR</span>Mira</td>
-          <td>Thu Oct 16</td>
-          <td><span class="pill pill-todo">To do</span></td>
+          <td>윌리 티 그래픽 단가 8% 절감 OEM 협의</td>
+          <td class="owner"><span class="av a-d1">JW</span>장원</td>
+          <td>27/01/29 (금)</td>
+          <td><span class="pill pill-todo">미진행</span></td>
         </tr>
         <tr>
-          <td>Pair with Sales on Pioneer call prep</td>
-          <td class="owner"><span class="av a-pb">PB</span>Priya</td>
-          <td>Thu Oct 16</td>
-          <td><span class="pill pill-todo">To do</span></td>
+          <td>OK SKU 18장 컬러웨이 확정 + 컬러 카드 송부</td>
+          <td class="owner"><span class="av a-d2">SY</span>수영</td>
+          <td>27/02/01 (월)</td>
+          <td><span class="pill pill-todo">미진행</span></td>
         </tr>
         <tr>
-          <td>Draft Q4 theme one-pagers (3)</td>
-          <td class="owner"><span class="av a-sl">SL</span>Sasha</td>
-          <td>Mon Oct 20</td>
-          <td><span class="pill pill-todo">To do</span></td>
+          <td>플리츠 스커트 27FW 시즌 재기획 (NG SKU 이월)</td>
+          <td class="owner"><span class="av a-d2">SY</span>수영</td>
+          <td>27/11월</td>
+          <td><span class="pill pill-todo">미진행</span></td>
         </tr>
         <tr>
-          <td>Audit-writer backlog dashboard</td>
-          <td class="owner"><span class="av a-ca">CA</span>Caleb</td>
-          <td>Tue Oct 21</td>
-          <td><span class="pill pill-blocked">Blocked · awaiting Grafana ACL</span></td>
+          <td>재샘플 입고 검수 (3 SKU · 2/1~2/3)</td>
+          <td class="owner"><span class="av a-ds">PK</span>박경 디자인 실장</td>
+          <td>27/02/04 (목)</td>
+          <td><span class="pill pill-blocked">블락 · OEM 일정 확인</span></td>
         </tr>
         <tr>
-          <td>Switch weekly format to demos-on-Friday</td>
-          <td class="owner"><span class="av a-dp">DP</span>Devon</td>
-          <td>Mon Oct 20</td>
-          <td><span class="pill pill-done">Done</span></td>
+          <td>1차 품평회 회의록 슬랙/노션 공유 (24시간 내)</td>
+          <td class="owner"><span class="av a-md">MH</span>민혜 MD</td>
+          <td>27/01/26 (화) 오전</td>
+          <td><span class="pill pill-done">완료</span></td>
         </tr>
       </tbody>
     </table>
   </section>
 
+  <!-- 미결 + 다음 미팅 -->
   <section>
-    <h2>Open questions &amp; next meeting</h2>
+    <h2>미결 이슈 &amp; 다음 미팅</h2>
     <div class="grid">
       <div class="panel">
-        <h3>Open questions</h3>
-        <p>Do we want a customer in the Q4 mobile-first kickoff (Pioneer would say yes), or do we keep the first session internal?</p>
-        <p style="margin-top: 8px;">Should the Friday demo video be capped at 5 min, or open-ended?</p>
+        <h3>미결 이슈</h3>
+        <p>린넨 셔츠 (WW-27SS-TOP-009) 컬러웨이 — 현재 3컬러(화이트/베이지/네이비) → 5컬러(+올리브/페일핑크) 확장 검토. 사입가율 영향 + S2 판기 적합성 확인 후 2차 품평회에서 결정.</p>
+        <p style="margin-top: 8px;">캐리오버 SKU 4장 (26FW 베스트) — 27SS 컬러 추가만 진행 vs 핏 일부 수정 진행 결정 필요. MD실 데이터 분석 후 회신.</p>
       </div>
       <div class="panel">
-        <h3>Next meeting</h3>
-        <div class="next-meeting"><strong>Date</strong>Tuesday, 21 October 2025</div>
-        <div class="next-meeting"><strong>Time</strong>10:00 – 11:00 PT · Zoom</div>
-        <div class="next-meeting"><strong>Pre-read</strong>Sasha's Q4 one-pagers (Mon EOD)</div>
-        <div class="next-meeting"><strong>Notes by</strong>Mira Reddy (rotation)</div>
+        <h3>다음 미팅 · 2차 품평회</h3>
+        <div class="next-meeting"><strong>일시</strong>27년 2월 5일 (목) 14:00 – 18:00</div>
+        <div class="next-meeting"><strong>장소</strong>본사 디자인실 (3F)</div>
+        <div class="next-meeting"><strong>아젠다</strong>재샘플 OK/NG 확정 · 컬러웨이 LOCK · 발주 수량 합의 · 라인업 LOCK</div>
+        <div class="next-meeting"><strong>추가 참석</strong>지훈 (영업기획) · 생산실장</div>
+        <div class="next-meeting"><strong>작성자</strong>장원 디자이너 (로테이션)</div>
       </div>
     </div>
   </section>
 
   <footer>
-    <span>Northwind Growth squad · Notes v1</span>
-    <span>Filed in #growth-squad · 15 Oct 2025</span>
+    <span>WACKYWILLY 디자인실 · 회의록 v1</span>
+    <span>저장 위치 · 노션 / 27SS 시즌 폴더 · 27.01.26</span>
   </footer>
 </div>
 </body>

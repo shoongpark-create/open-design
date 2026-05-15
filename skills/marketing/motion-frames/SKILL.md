@@ -1,27 +1,31 @@
 ---
 name: motion-frames
 description: |
-  A single-frame motion-design composition with looping CSS animations —
-  rotating type ring, animated globe, ticking timer, parallax labels.
-  Renders as a hero video poster you can hand straight to HyperFrames or
-  any keyframe-based exporter. Use when the brief asks for "motion design",
-  "animated hero", "loop", "video poster", "title card", or pairs Open
-  Claude Design with HyperFrames for a kinetic export.
+  K-패션 브랜드의 **시즌 키비주얼 모션 포스터 / 캠페인 영상 포스터 / 브랜드 인트로**를 단일 HTML 모션 컴포지션으로 생성하는 스킬입니다.
+  CSS 키프레임 애니메이션만으로 16:9 풀블리드 시즌 비주얼을 만듭니다 — 회전하는 타입 링, 시그니처 IP 모노그램, 패럴랙스 라벨,
+  서서히 드러나는 헤드라인. 인스타그램 릴스(9:16 재크롭), 무신사 라이브, 자사몰 메인 영상 포스터로 활용 가능합니다.
+  HyperFrames·Lottie·After Effects 등 키프레임 익스포터로 그대로 캡처할 수 있도록 JavaScript 없이 CSS만 사용합니다.
+  사용자가 "시즌 키비주얼 모션", "캠페인 영상 포스터", "브랜드 인트로", "릴스 모션",
+  "motion poster", "kinetic typography", "hyperframes"를 언급하면 활성화하세요.
 triggers:
+  - "시즌 키비주얼 모션"
+  - "키비주얼 모션"
+  - "캠페인 영상 포스터"
+  - "캠페인 모션"
+  - "브랜드 인트로"
+  - "릴스 모션"
+  - "27SS 모션"
+  - "팝업 인트로"
   - "motion design"
-  - "motion graphic"
-  - "animated hero"
-  - "loop animation"
-  - "video poster"
-  - "title card"
+  - "motion poster"
   - "hyperframes"
   - "kinetic typography"
-  - "动态设计"
-  - "动效"
+  - "video poster"
 od:
   mode: prototype
   platform: desktop
   scenario: marketing
+  category: marketing
   featured: 6
   preview:
     type: html
@@ -29,62 +33,184 @@ od:
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Design an animated hero — a rotating type ring around a wireframe globe, with the headline ‘Reach every country.’ Loop at 12s, ready for HyperFrames export."
+  example_prompt: "마뗑킴(MATIN KIM) 27SS BLOOM 시즌 키비주얼 모션 포스터. 회전하는 타입 링(봄의 다섯 가지 색: ivory · sage · ash · 봄 · BLOOM), 중앙 정원 모노그램, 헤드라인 'Bloom Quietly. 봄, 천천히 피어나다.' 12초 루프, 인스타 릴스 9:16 재크롭 가능."
 ---
 
-# Motion Frames Skill
+# 패션 모션 프레임 스킬
 
-Produce a single full-bleed motion composition. Inline CSS animations only —
-the page is the loop. Treat it as a poster frame that an exporter (HyperFrames,
-Lottie, etc.) can capture into a video.
+K-패션 브랜드의 **시즌 키비주얼 모션 포스터**를 단일 HTML로 생성합니다. 페이지 자체가 루프이며, 별도의 JavaScript 없이 CSS 키프레임 애니메이션만 사용합니다. HyperFrames·Lottie·After Effects 등의 키프레임 익스포터가 결정론적으로 캡처할 수 있는 포스터 프레임으로 동작합니다.
 
-## Workflow
+이 스킬의 산출물은 **마케팅실 + 디자인실(그래픽팀)** 합작이며, 시즌 사이클상 **시즌 시작 2~3개월 전**(룩북 촬영 직후, IMC 캘린더 확정 단계)에 작성합니다. 자사몰 메인 슬라이드 영상, 인스타그램 릴스(9:16 재크롭), 무신사 라이브 인트로, 팝업스토어 입구 디스플레이 모니터 영상 등으로 다용도 활용됩니다.
 
-1. **Read the active DESIGN.md** (injected above). Motion lives or dies on
-   typography contrast — pick the most expressive serif / display token in
-   the DS for the headline; the body / mono token labels everything else.
-2. **Compose** the canvas as a 16:9 hero with these layers, back to front:
-   - **Stage** — full-bleed `<main>`. Off-white or DS-canvas background, very
-     subtle dotted grid texture (CSS background, `radial-gradient` dots at
-     22–32px intervals).
-   - **Concentric rings** — 2–3 SVG circles radiating from a focal point.
-     Ultra-thin strokes (0.5–1px) in DS-foreground at low opacity. These
-     rotate at different speeds (60s, 90s, 180s).
-   - **Focal mark** — a wireframe globe, a stylized object, or a typographic
-     monogram drawn as inline SVG. ~28% of the canvas wide.
-   - **Ring labels** — short words / phonetic tokens placed around one of
-     the rings (e.g. "Hola · Bonjour · 你好 · नमस्ते"). They co-rotate with
-     the ring, with `<text>` paths counter-rotated so the words stay upright.
-   - **Headline** — bottom-left or center-bottom. Display serif, italic
-     accent on one word. Add a subtle `letterSpacing` + opacity reveal
-     animation (`@keyframes type-in`).
-   - **Frame chrome** — corner stamps (top-left lab tag, top-right brand or
-     issue number) and a thin baseline rule. Static.
-3. **Animate** with `@keyframes` only — no JS:
-   - `rotate-slow`, `rotate-med`, `rotate-fast` for rings.
-   - `globe-spin` for the focal mark.
-   - `pulse` for the focal dot, ~2s, easing.
-   - `marquee-fade` to reveal headline once on load.
-4. **Write** a single HTML document:
-   - `<!doctype html>` through `</html>`, CSS inline.
-   - All motion uses CSS — no scripts, so HyperFrames or any frame-grabber
-     can capture it deterministically.
-   - `data-od-id` on stage, focal, ring, headline, chrome.
-5. **Self-check**:
-   - The composition still reads as a poster with motion paused at frame 0.
-   - At least 3 layers move at different speeds (depth comes from delta
-     velocity, not parallax tricks).
-   - Accent appears once — usually the italic word in the headline.
+## 환경 호환성
 
-## Output contract
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
 
-Emit between `<artifact>` tags:
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기를 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 워크플로는 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 캠페인 영상 카피 등록을 따릅니다.
+
+- **헤드라인**은 영문/국문 혼용 권장. 짧고 시적. `Bloom Quietly. 봄, 천천히 피어나다.`, `Quiet Energy. 정제된 하루.`, `Wacky 27SS. 즐거움, 매일.`
+- **타입 링 단어**(회전하는 링 위 텍스트)는 시즌의 키워드 5~8개. 한국어 + 영문 + 가능하다면 다국어(`봄 · BLOOM · 春 · Printemps`).
+- 영문 산업용어 유지: SS · FW · CAMPAIGN · LOOKBOOK · DROP · SERIES · LOOP.
+- 모서리 스탬프(코너 라벨)는 mono 영문 대문자: `MATIN KIM · STUDIO`, `27SS · ISSUE 01`, `LOOP · 12s`.
+- 액센트는 헤드라인의 이탤릭 단어 1개에만 적용.
+
+## 타이포그래피
+
+모션은 **타입 콘트라스트로 산다**. 가장 표현력 있는 세리프/디스플레이 폰트를 헤드라인에, mono를 라벨·스탬프에.
+
+| 위치 | 권장 폰트 (예시) |
+|---|---|
+| 헤드라인 (큰 디스플레이) | Hahmlet, Recoleta, Playfair Display, Instrument Serif |
+| 타입 링 단어 | 같은 디스플레이 폰트 (이탤릭 권장) |
+| 모서리 스탬프 / 라벨 | mono — IBM Plex Mono, Geist Mono |
+| 데이트라인 / 작은 메타 | 같은 mono |
+
+배경은 오프-화이트 또는 DS canvas 색. 미세한 점 그리드(`radial-gradient` 22~32px 간격).
+
+## 폴더 구조
 
 ```
-<artifact identifier="motion-slug" type="text/html" title="Motion — Title">
-<!doctype html>
-<html>...</html>
-</artifact>
+motion-frames/
+├── SKILL.md          ← 이 파일
+└── example.html      ← 참고 예시 (시즌 키비주얼 모션 1장)
 ```
 
-One sentence before the artifact, nothing after.
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. 이 스킬 폴더의 `example.html`을 끝까지 읽어 스테이지 / 동심원 링 / 포컬 마크 / 링 라벨 / 헤드라인 / 코너 크롬의 레이어 구조와 `@keyframes` 사용법을 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰)를 읽고 색상·타이포 토큰을 `:root` CSS 변수에 바인딩하세요. 자동 주입되지 않는 환경이라면 사용자에게 톤을 묻고 진행합니다.
+3. 사용자 브리프에서 **브랜드 + 시즌 + 헤드라인(이탤릭 단어 1개 포함) + 타입 링 키워드 5~8개 + 중앙 포컬 모티프(시그니처 IP, 모노그램, 식물, 추상 형태 등)**가 빠져 있으면 함께 물어보세요.
+
+### Step 1 — 컴포지션 결정
+
+브리프에서 4가지 표준 패턴 중 하나를 선택합니다.
+
+- **시즌 키비주얼 모션** — 시즌의 핵심 단어들이 링 위에서 회전, 중앙에는 시즌 모노그램 또는 식물 일러스트
+- **캠페인 영상 포스터** — 모델 실루엣을 중앙에, 캠페인 카피를 회전 라벨로
+- **브랜드 인트로** — 워드마크가 중앙에, 브랜드 슬로건이 링 위에서 회전
+- **팝업 입구 디스플레이** — 팝업 일자·장소·키워드를 회전, 중앙은 팝업 그래픽
+
+### Step 2 — 레이어 구성 (뒤에서 앞으로)
+
+1. **스테이지** — 풀블리드 `<main>`. 오프-화이트 또는 DS canvas 배경. 미세한 점 그리드 텍스처(`radial-gradient` 22~32px 간격, 매우 낮은 대비).
+2. **동심원 링** — 2~3개의 SVG 원이 포컬 포인트에서 방사. 초얇은 스트로크(0.5~1px), DS-foreground 컬러 저투명도. 다른 속도로 회전(60s / 90s / 180s).
+3. **포컬 마크** — 중앙 모티프. 와이어프레임 식물(꽃·잎), 추상 모노그램, 시그니처 IP 그래픽(마르디의 꽃, 키르시의 체리, 와키윌리의 캐릭터). 캔버스 너비의 ~28% 크기. 인라인 SVG.
+4. **링 라벨** — 한 링을 따라 단어/시즌 키워드를 배치. 시즌 키워드 5~8개를 자연스럽게 분산 (`Spring · BLOOM · 봄 · Printemps · Frühling · 春 · 27SS · Quiet`). `<text>` 패스를 링 회전에 동기화하되, 각 텍스트는 counter-rotate해서 글자가 수직으로 유지됩니다.
+5. **헤드라인** — 하단 좌측 또는 하단 중앙. 디스플레이 세리프. 이탤릭 액센트 1개 단어. `@keyframes type-in`으로 로드 시 한 번 글자가 천천히 드러나는 페이드인.
+6. **프레임 크롬** — 코너 스탬프 (좌상단 스튜디오 태그 `MATIN KIM · STUDIO`, 우상단 시즌·이슈 번호 `27SS · ISSUE 01`, 좌하단 데이트라인, 우하단 `LOOP · 12s`). 정적.
+
+### Step 3 — 애니메이션 (`@keyframes` only, JavaScript 없음)
+
+다음 키프레임을 정의:
+
+- `rotate-slow` — 가장 큰 링, 180s, linear
+- `rotate-med` — 중간 링, 90s, linear
+- `rotate-fast` — 작은 링, 60s, linear
+- `monogram-spin` — 중앙 포컬 마크, 60s linear 또는 약하게 흔들리는 12s ease
+- `pulse` — 중앙 포컬 도트, 2s, ease-in-out
+- `type-in` — 헤드라인이 페이드인 + 글자 간격이 자연스럽게 안정화 (로드 시 1회)
+- `marquee-fade` — 작은 코너 메타가 부드럽게 fade in
+
+다른 속도로 움직이는 레이어가 **최소 3개** 있어야 깊이감이 생깁니다.
+
+### Step 4 — HTML 작성
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`)로 작성합니다.
+
+- CSS는 인라인. **JavaScript 금지** — HyperFrames/Lottie/After Effects가 결정론적으로 캡처할 수 있어야 합니다.
+- 외부 이미지 URL 금지. 모든 시각 요소는 인라인 SVG와 CSS 그라데이션.
+- 풀블리드 16:9 권장. 인스타 릴스(9:16) 재크롭을 고려해 중요 요소를 가운데 70% 영역 안에 배치.
+- 주요 요소에 식별 속성:
+  - **OpenDesign 환경**: `data-od-id="stage"`, `data-od-id="focal"`, `data-od-id="ring-1"`, `data-od-id="ring-2"`, `data-od-id="headline"`, `data-od-id="chrome"`
+  - **그 외 환경**: 일반 `id` 속성으로 충분합니다.
+
+### Step 5 — 자체 검수
+
+- [ ] 모션을 frame 0에서 멈춰도 포스터로 읽힘 (정지컷 셀카블)
+- [ ] 최소 3개 레이어가 다른 속도로 움직임 (depth는 패럴랙스 트릭이 아니라 속도 차이로 생김)
+- [ ] 액센트 컬러는 헤드라인 이탤릭 단어 1회만 등장
+- [ ] JavaScript 없음, 외부 이미지 URL 없음
+- [ ] 16:9 풀블리드. 핵심 요소가 가운데 70% 영역 안에 — 9:16 재크롭 가능
+- [ ] 타입 링 키워드 5~8개가 시즌 컨셉을 한 번에 보여줌
+- [ ] 헤드라인이 포엣코어 톤 — 직설 카피 아님
+- [ ] 코너 크롬(스튜디오 태그, 시즌 코드, LOOP 타이머)에 mono 폰트 적용
+- [ ] 루프 길이가 자연스러움(8~16s 권장, 일반적으로 12s)
+
+## 한국 K-패션 브랜드 모션 사례 (참고)
+
+| 브랜드 | 모션 톤 | 활용 |
+|---|---|---|
+| **마뗑킴 (Matin Kim)** | 미니멀, 회전 워드마크, 텍스트 절제 | 자사몰 메인 슬라이드, 인스타 릴스 |
+| **마르디 메크르디 (Mardi Mercredi)** | 컬러풀, 회전 플라워, 영불 혼용 | 시즌 캠페인 영상, 무신사 라이브 |
+| **아더에러 (ADER ERROR)** | 영문 100%, 왜곡, 글로벌 톤 | 글로벌 콜라보 인트로 |
+| **와키윌리 (WACKYWILLY)** | 캐릭터 IP + 위트, 회전 캐릭터 그래픽 | 시즌 영상, 캐릭터 굿즈 발표 |
+| **키르시 (KIRSH)** | 체리 심볼 + 비비드, 회전 체리 모티프 | 시즌 키비주얼, 콜라보 발매 |
+| **시야쥬 (CHYAJU)** | 정제·여백, 본명조 타입링 | 자사몰 메인 영상 |
+
+### 타입 링 키워드 시즌 예시
+
+- 마뗑킴 27SS BLOOM: `ivory · sage · ash · 봄 · BLOOM · Quietly · 27SS · Linen`
+- 와키윌리 27SS: `Wacky · Willy · 즐거움 · IP · 캐릭터 · K-아이돌 · 27SS · DROP02`
+- 아더에러 글로벌: `Post-Minimalism · Blue · Distortion · 27SS · Berlin · Tokyo · Seoul`
+- 마르디 메크르디: `Bonjour · 꽃 · Mardi · Mercredi · Spring · 봄날 · 27SS`
+
+## 한국 패션기업 부서 R&R + 채널 연계
+
+| 부서 | 역할 |
+|---|---|
+| **마케팅실** | 헤드라인 카피, 타입 링 키워드, IMC 캘린더상 영상 발행 시점 결정 |
+| **디자인실(그래픽팀)** | 시그니처 IP 그래픽, 컬러 토큰, 모션 톤 검토 |
+| **이커머스팀** | 자사몰 메인 슬라이드 적재, 비디오 변환(MP4·WebM) |
+| **VMD** | 매장·팝업 입구 디스플레이 영상 운영 |
+
+### 채널 연계
+
+- **자사몰 메인 슬라이드 영상** — 16:9, 12초 루프 (MP4 변환 후 자동재생)
+- **인스타그램 릴스** — 9:16 재크롭, 15~30초 (모션 + 음악)
+- **무신사 라이브 인트로** — 16:9, 라이브 시작 5초 인트로
+- **팝업스토어 입구 디스플레이** — 16:9 또는 세로 풀스크린, 무한 루프
+- **카카오톡 채널 친구톡 영상 메시지** — 9:16 또는 1:1, 4MB 이하
+- **HyperFrames / After Effects 내보내기** — CSS 키프레임을 그대로 키프레임 영상으로 캡처
+
+## 시즌 사이클 내 위치
+
+```
+[시즌 시작 5개월 전]   컨셉 보드 (디자인실)
+[시즌 시작 3개월 전]   라인업 LOCK, 키 아이템 시트
+[시즌 시작 2~3개월 전] ▶ 시즌 키비주얼 모션 포스터 (이 스킬)
+                       그래픽 디렉션 (디자인실)
+[시즌 시작 2개월 전]   룩북 촬영 / IMC 캘린더 확정
+[시즌 시작 1~2개월 전] 캠페인 영상 발행 (자사몰·인스타·무신사)
+[시즌 시작]            S1~S4 판기 발매
+```
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="motion-slug" type="text/html" title="Motion — 시즌 / 시즌 코드">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "마뗑킴 27SS BLOOM 시즌 키비주얼 모션 포스터를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

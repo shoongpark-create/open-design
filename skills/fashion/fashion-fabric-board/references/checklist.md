@@ -1,48 +1,41 @@
-# Fabric Board Checklist
+# 패브릭 보드 자체 검수 체크리스트
 
-Run before emitting `<artifact>`. P0 are hard gates.
+산출물 출력 직전 한 항목씩 직접 확인하세요. **P0**는 통과해야 하는 하드 게이트.
 
-## P0 — Hard gates
+## P0 — 통과 필수
 
-- [ ] Header carries season, lines covered, status, lock date.
-- [ ] Board thesis paragraph names the fabric posture in 1–3 sentences.
-- [ ] Functional block carries 2–4 fabrics; each has function, ingredient
-  brand (or "—"), use, hangtag mock or "no hangtag (carryover)".
-- [ ] Each line block (UNI / WOMEN) carries 4–6 structural fabrics; each
-  has hand, weave/knit, use, swatch image.
-- [ ] Every `<img src="...">` resolves to a file the agent wrote in
-  `images/`. No orphan references.
-- [ ] If any image generation failed, the matching `<figure>` falls back
-  to the styled placeholder.
-- [ ] Lab-dip / approval status table lists every fabric on the page,
-  one row each, with status from the canonical set (for-info / lab-dip
-  pending / bulk pending / approved).
-- [ ] No external image URLs, no base64, no absolute paths.
-- [ ] Color references use color-story names; no improvised TCX codes.
+- [ ] 헤더에 시즌, 커버 라인, 상태(v1/locked), LOCK 일자 모두 표기
+- [ ] 보드 thesis 단락이 1~3 문장으로 패브릭 자세 명명
+- [ ] 기능성 블록에 2~4 패브릭. 각각 기능, 인그리디언트 브랜드(또는 "—"), 용도, 행택 mock 또는 `행택 미적용 (캐리오버)` 표시
+- [ ] 각 라인 블록(UNI / WOMEN)에 4~6 구조 패브릭. 각각 핸드, 위브/니트, 용도, 스와치 이미지
+- [ ] 모든 `<img src="...">`가 `images/` 폴더의 실제 파일 참조. 고아 참조 없음
+- [ ] 이미지 생성 실패 시 해당 `<figure>`가 폴백 텍스트로 자연스럽게 폴백
+- [ ] 랩딥 / 승인 상태 표가 페이지 모든 패브릭을 1행씩 나열, canonical 세트(for-info / 랩딥 pending / 벌크 pending / approved)의 상태
+- [ ] 외부 이미지 URL 없음, base64 없음, 절대 경로 없음
+- [ ] 컬러 참조가 컬러 스토리 이름 사용; 임의 TCX 코드 금지
 
-## P1 — Quality bars
+## P1 — 강한 패브릭 보드
 
-- [ ] Functional fabrics' hangtag mocks show the correct ingredient
-  brand (Sorona, Askin, Coolmax, Creora) — do not invent a generic tag.
-- [ ] No fabric appears in both UNI and WOMEN sections without a
-  documented reason (line-shared fabric needs a note in `Use`).
-- [ ] Carryover fabrics name the prior season ("carried from 26SS"),
-  not "carried from last season".
-- [ ] Each fabric card's "Recommended categories" tag uses canonical
-  category names (top / outer / bottom / setup / dress / knit /
-  accessory).
-- [ ] No more than one fabric leans on the same functional brand
-  without diverging hand (two Sorona Cool variants need different
-  knit / blend / hand).
+- [ ] 기능성 패브릭 행택 mock이 정확한 인그리디언트 브랜드(Sorona, Askin, Coolmax, Creora) 표시 — 제너릭 행택 임의 금지
+- [ ] 동일 패브릭이 UNI와 WOMEN 양쪽에 나타나면 문서화된 사유 보유 (라인 공유 패브릭은 `Use` 노트 필수)
+- [ ] 캐리오버 패브릭이 이전 시즌 명명 (`26SS에서 캐리오버`), `지난 시즌에서` 같은 모호한 표현 금지
+- [ ] 각 패브릭 카드의 `Recommended categories` 태그가 canonical 카테고리 이름 사용 (top / outer / bottom / setup / dress / knit / accessory)
+- [ ] 동일 기능성 브랜드에 기댄 패브릭이 핸드 분기 없이 2개 이상 금지 (두 소로나쿨 변형은 다른 니트/블렌드/핸드 필요)
+- [ ] **한국 K-패션 컨텍스트** 본문 카피가 한국 패션 비즈니스 등록 따름
 
-## P2 — Polish
+## P2 — 다듬기
 
-- [ ] Swatch + worn-context images per fabric share lighting / framing
-  so the board reads as one set.
-- [ ] Sustainability story (recycled / Sorona) is mentioned only when
-  there is a real backstory; do not paste a sustainability bullet for
-  flavor.
-- [ ] Open / next decisions list has owner + date for every entry, or
-  the section is omitted entirely.
-- [ ] Korean fabric names use the brand's working spelling (와플 저지,
-  슬럽 저지) — do not auto-translate or romanize unless requested.
+- [ ] 패브릭당 스와치 + 착장 컨텍스트 이미지가 라이팅 / 프레이밍 공유 — 보드가 하나의 세트로 읽힘
+- [ ] 지속가능성 스토리(리사이클 / Sorona)는 실제 백스토리 있을 때만 언급. 풍미용 bullet 추가 금지
+- [ ] Open / Next Decisions 리스트의 모든 항목에 owner + 일자, 또는 섹션 전체 생략
+- [ ] 한국어 패브릭 이름이 브랜드의 워킹 표기 사용 (와플 저지, 슬럽 저지) — 자동 번역·로마자 표기 금지 (요청 시 제외)
+
+## K-DTC 컨텍스트 특화 검수
+
+- [ ] 기능성 패브릭이 한국 D2C 매장(무신사·29CM 입점)에서 가시적으로 어필 가능 — 행택 디자인이 한국 고객 친화
+- [ ] 행택 텍스트가 한국어 + 영문 혼용 자연스러움 (`UV차단 + 생활방수`, `Sorona COOL TOUCH` 등)
+- [ ] 사입가율 영향 가능한 고가 패브릭(폴리 우라기리, 라이트 나일론) 사용 시 MD실 확인 노트 포함
+- [ ] 캐리오버 비중이 시즌 전략의 BTA 정책 정합 (BASIC 캐리오버 50~70% 일반)
+- [ ] 패브릭 LOCK 일정이 시즌 사이클상 4~5개월 전 + 랩딥 strike 일정 정합
+
+검수 통과 후 사용자에게 산출물 외에 별도 보고는 하지 않습니다 (출력 규약).

@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>[必填] 替换为 PPT 标题 · Deck Title</title>
+<title>[필수] 덱 제목으로 교체 · Deck Title</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@300;400;500;600&family=Noto+Serif+KR:wght@300;400;500;600;700;900&family=Noto+Sans+KR:wght@300;400;500;700;900&family=Hahmlet:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   :root{
-    /* ============ 主题色(默认:🖋 墨水经典) ============
-       切换主题:从 references/themes.md 复制对应的 :root 块
-       整体替换这几行(--ink / --ink-rgb / --paper / --paper-rgb)
-       其他地方散落的 rgba() 都走 var(--ink-rgb) / var(--paper-rgb),无需逐处改 */
+    /* ============ 테마 컬러(기본:🖋 잉크 클래식) ============
+       테마 전환: references/themes.md에서 해당 :root 블록 복사
+       다음 4줄을 전체 교체 (--ink / --ink-rgb / --paper / --paper-rgb)
+       다른 곳의 rgba()는 var(--ink-rgb) / var(--paper-rgb) 사용 — 일괄 적용됨 */
     --ink:#0a0a0b;
     --ink-rgb:10,10,11;
     --paper:#f1efea;
@@ -20,12 +20,12 @@
     --paper-tint:#e8e5de;
     --ink-tint:#18181a;
 
-    /* ============ 字体(跨主题固定) ============ */
+    /* ============ 폰트 (테마 무관 고정) ============ */
     --mono:"IBM Plex Mono",ui-monospace,monospace;
     --serif-en:"Playfair Display","Source Serif 4",Georgia,serif;
     --serif-body-en:"Source Serif 4",Georgia,serif;
-    --serif-zh:"Noto Serif SC",source-han-serif-sc,serif;
-    --sans-zh:"Noto Sans SC",source-han-sans-sc,sans-serif;
+    --serif-zh:"Hahmlet","Noto Serif KR",source-han-serif,serif;
+    --sans-zh:"Pretendard Variable","Noto Sans KR",source-han-sans,sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html,body{width:100%;height:100%;overflow:hidden;background:var(--ink);color:var(--paper);font-family:var(--sans-zh);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
@@ -412,14 +412,14 @@
 
 <canvas id="bg-dark" class="bg"></canvas>
 <canvas id="bg-light" class="bg"></canvas>
-<div id="hint">← → 翻页 · ESC 索引</div>
+<div id="hint">← → 페이지 이동 · ESC 색인</div>
 
 <div id="deck">
 
 <!-- ============================================================
-     SLIDES 插入区 · 在此处填充所有 <section class="slide ..."> 页面
-     每页模板参考 references/page-patterns.md
-     页面组件参考 references/components.md
+     SLIDES 삽입 영역 · 모든 <section class="slide ..."> 페이지를 여기에
+     각 페이지 템플릿 참고: references/layouts.md
+     페이지 컴포넌트 참고: references/components.md
      ============================================================ -->
 
 <!-- SLIDES_HERE -->

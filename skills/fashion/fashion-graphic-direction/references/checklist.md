@@ -1,48 +1,43 @@
-# Graphic Direction Checklist
+# 그래픽 디렉션 자체 검수 체크리스트
 
-Run before emitting `<artifact>`. P0 are hard gates.
+산출물 출력 직전 한 항목씩 직접 확인하세요. **P0**는 통과해야 하는 하드 게이트.
 
-## P0 — Hard gates
+## P0 — 통과 필수
 
-- [ ] Header carries season, brand, status (v1 / v2 / locked), and lock
-  date.
-- [ ] Direction thesis paragraph names the connection back to the
-  concept board territory.
-- [ ] Theme block carries 3–8 themes — not 0, not 10+.
-- [ ] Each theme card carries: theme name + 1-line thesis + ≥1
-  application-surface tag + 4–6 reference tiles + carryover note.
-- [ ] Every reference tile's `<img>` resolves to a file the agent wrote
-  in `images/`. No orphan references.
-- [ ] If any image generation failed, the matching `<figure>` falls
-  back to the styled placeholder block.
-- [ ] Theme × surface matrix exists and lists every chosen theme.
-- [ ] Anti-direction lists ≥ 3 explicit "no" entries.
-- [ ] No external image URLs, no base64, no absolute paths.
-- [ ] No real-world third-party brand logos / brand text are reproduced
-  in the imagegen output (verify the prompt's `Constraints:` line was
-  honored).
+- [ ] 헤더에 시즌, 브랜드, 상태(v1 / v2 / locked), LOCK 일자 표기
+- [ ] 디렉션 thesis 단락이 컨셉 보드 영역과의 연결 명명
+- [ ] 테마 블록에 3~8개 테마 — 0개 또는 10+개 금지
+- [ ] 각 테마 카드: 테마 이름 + 1줄 thesis + ≥1 적용 표면 태그 + 4~6 레퍼런스 타일 + 캐리오버 노트
+- [ ] 모든 레퍼런스 타일 `<img>`가 `images/` 폴더 실제 파일 참조. 고아 참조 없음
+- [ ] 이미지 생성 실패 시 해당 `<figure>`가 폴백 텍스트 블록으로 자연스럽게 폴백
+- [ ] 테마 × 표면 매트릭스 존재 + 모든 선택 테마 나열
+- [ ] Anti-direction에 ≥3 명시적 "no" 항목
+- [ ] 외부 이미지 URL 없음, base64 없음, 절대 경로 없음
+- [ ] imagegen 출력에 실제 제3자 브랜드 로고 / 브랜드 텍스트 미재현 (프롬프트 `Constraints:` 준수 검증)
 
-## P1 — Quality bars
+## P1 — 강한 그래픽 디렉션
 
-- [ ] Each theme uses a name that is brand-internal and concrete — not
-  "Modern Cool" or "Minimal Chic".
-- [ ] Application-surface tags use the canonical surface names (tee
-  print, sweat print, embroidery, all-over pattern, sticker, point
-  label, woven tag, hardware engraving). No invented surface names.
-- [ ] No more than 2 themes carry the same dominant color cluster — if
-  three themes lean Pop Pink, the season is one-note.
-- [ ] Carryover notes for "carried from [season]" use a real prior
-  season code; do not write "carried from last season".
-- [ ] If the Symbol & Wordmark block is present, it carries all three
-  sub-clusters (symbol / wordmark / lockup).
+- [ ] 각 테마가 브랜드 내부용 + 구체적 이름 사용 — `Modern Cool`, `Minimal Chic` 같은 제너릭 금지
+- [ ] 적용 표면 태그가 canonical 표면 이름 사용 (tee print, sweat print, embroidery, all-over pattern, sticker, point label, woven tag, hardware engraving). 임의 표면 이름 금지
+- [ ] 2개 이상 테마가 동일 지배 컬러 클러스터 사용 금지 — 3개 테마가 Pop Pink로 기울면 시즌 단조
+- [ ] 캐리오버 노트 `carried from [season]`이 실제 이전 시즌 코드 사용. `지난 시즌에서 캐리오버` 같은 모호 표현 금지
+- [ ] Symbol & Wordmark 블록 존재 시 3개 서브 클러스터 모두 보유 (symbol / wordmark / lockup)
+- [ ] **한국 K-패션 컨텍스트** 본문 카피가 한국 패션 비즈니스 등록 따름
 
-## P2 — Polish
+## P2 — 다듬기
 
-- [ ] Anti-direction items are concrete ("no AI-slop chrome glitter"),
-  not generic ("no bad design").
-- [ ] Open / next decisions list has owner + date for every entry, or
-  the section is omitted entirely.
-- [ ] Theme cluster tiles share lighting / framing within a theme so
-  they read as one set.
-- [ ] No two theme names are synonyms (e.g. "Vintage cartoon" and
-  "Retro cartoon" — pick one).
+- [ ] Anti-direction 항목이 구체 (`AI-슬롭 chrome glitter 금지`), 제너릭 금지 (`나쁜 디자인 금지`)
+- [ ] Open / Next Decisions 리스트의 모든 항목에 owner + 일자, 또는 섹션 전체 생략
+- [ ] 테마 클러스터 타일이 테마 내 라이팅 / 프레이밍 공유 — 하나의 세트로 읽힘
+- [ ] 두 테마 이름이 동의어 금지 (예: `Vintage cartoon`과 `Retro cartoon` — 하나 선택)
+
+## K-DTC 컨텍스트 특화 검수
+
+- [ ] 테마 컬러 선택이 fashion-color-story의 ACCENT/TREND 티어와 일치
+- [ ] 캐릭터 IP 테마 사용 시 실제 IP 계약 보유 (없으면 K-pop / IP 콜라보 테마 제거)
+- [ ] 자카드 / 포인트 라벨 공급사가 한국 공장 기준 MOQ·리드타임 현실적
+- [ ] 시즌 심볼 / 워드마크 트리트먼트가 브랜드 영구 로고와 시각 정합 (시즌 변형이 브랜드 정체성 파괴 금지)
+- [ ] Anti-direction에 한국 K-패션 트렌드 사이클 반영 (`24FW 마뗑킴 미니멀 차용 금지` 등 시점 구체)
+- [ ] 캡슐 / IP 콜라보 시즌은 카피라이트·라이선스 노트 포함
+
+검수 통과 후 사용자에게 산출물 외에 별도 보고는 하지 않습니다 (출력 규약).

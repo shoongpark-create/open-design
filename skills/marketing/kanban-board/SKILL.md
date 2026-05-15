@@ -1,48 +1,203 @@
 ---
 name: kanban-board
 description: |
-  Kanban / task board with columns (To do / In progress / In review / Done),
-  draggable-looking cards, assignee avatars, swimlanes, and a top filter
-  bar. Use when the brief mentions "kanban", "task board", "sprint board",
-  "trello", "看板".
+  K-패션 브랜드의 **시즌 진척 보드 / 캠페인 칸반**을 단일 HTML 파일로 생성하는 스킬입니다.
+  컨셉 → 1차 샘플 → 품평회 → LOCK → 발주/생산 → 입고/판매로 이어지는
+  한국 영캐주얼 시즌 사이클을 그대로 칸반 컬럼으로 가져온 진척 모니터링 화면.
+  좌측에 4~6개 컬럼(스테이지), 각 카드에는 SKU 코드·디자이너·BTA 태그·시즌 판기 표기.
+  우측 사이드바에는 시즌 펄스(LOCK 비율·블락된 샘플·top 디자이너) 요약.
+  영업기획·MD실·디자인실이 매주 들여다보는 시즌 운영 보드입니다.
+  사용자가 "시즌 진척", "시즌 칸반", "샘플 진척 보드", "27SS 진척",
+  "캠페인 칸반", "디자인 보드", "kanban", "sprint board"를 언급하면 활성화하세요.
 triggers:
+  - "시즌 진척"
+  - "시즌 칸반"
+  - "샘플 진척 보드"
+  - "라인업 진척"
+  - "캠페인 칸반"
+  - "디자인 보드"
+  - "품평 진척"
   - "kanban"
   - "task board"
   - "sprint board"
-  - "trello"
-  - "jira board"
-  - "看板"
 od:
   mode: prototype
   platform: desktop
   scenario: operations
+  category: fashion
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Make me a kanban board for a 5-person growth squad mid-sprint — backlog, doing, review, done."
+  example_prompt: "와키윌리 27SS S/S 시즌의 진척 보드를 만들어주세요. 컬럼은 컨셉/1차 샘플/품평회/LOCK/발주·생산/입고. 카드 22장 정도. BTA 태그(B/T/A), 디자이너 이니셜 아바타, SKU 코드(WW-27SS-XXX) 표기. 우측 사이드바엔 LOCK 진행률·블락된 샘플(원단 미입고 1건)·top 디자이너."
 ---
 
-# Kanban Board Skill
+# 패션 시즌 진척 보드 스킬
 
-Produce a single-screen kanban board.
+K-패션 브랜드의 **시즌 진척 보드 / 캠페인 칸반**을 단일 HTML 파일로 생성합니다. 한국 영캐주얼 시즌 사이클의 6단계 — 컨셉 / 1차 샘플 / 품평회 / LOCK / 발주·생산 / 입고·판매 — 를 컬럼으로 두고, 각 SKU 또는 룩을 카드로 띄우는 운영 모니터링 화면입니다.
 
-## Workflow
+이 산출물의 청중은 **디자인 실장, MD 실장, 영업기획, 디자인실 전체 팀원**입니다. 한국 패션기업에서는 매주 월요일 시즌 진척 미팅에서 이 보드를 띄워놓고 LOCK이 임박한 SKU를 함께 확인하는 흐름이 일반적입니다. Trello / 노션 칸반의 마케팅 톤을 그대로 시즌 운영 사이클에 이식한 형태이며, 무신사 셀러센터의 상품 진척 화면이나 영업 데이터와도 연결됩니다.
 
-1. Read the active DESIGN.md.
-2. Identify squad name, sprint number, columns, and member roster from the brief.
-3. Layout:
-   - Top bar: project crumb, sprint chip, filter row (members, labels, status), search.
-   - 4 columns: Backlog, In progress, In review, Done. Each column has a count chip and an "+ add" affordance.
-   - 3–6 cards per column. Each card: tag chip, title, assignee avatar, point estimate, progress (if applicable).
-   - Sidebar (collapsible feel): "Sprint pulse" with progress bar, top assignees, blocked-tickets callout.
-4. One inline `<style>`, semantic HTML.
+## 환경 호환성
 
-## Output contract
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 본문의 `data-od-id` 속성으로 인라인 코멘트 기능을 사용할 수 있습니다. 그 외 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 작업 흐름은 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 `DESIGN.md` 경로나 기본 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 시즌 운영 보드의 등록(register)을 따릅니다.
+
+- 시즌 사이클 라벨은 한국 패션 현장 표기. 가로 컬럼은 영문 그대로 두어도 무방한 한국 패션 산업용어 유지: `CONCEPT`, `1차 샘플`, `품평`, `LOCK`, `발주·생산`, `입고`. 한글-영문 혼용 자연스러움.
+- 카드 메타에 들어가는 산업용어는 그대로 사용: SKU, BTA(B/T/A), UNI/WOMEN, S1~S4 판기, QR, SPOT, LOT, MOQ, OEM.
+- 디자이너·MD 이니셜은 한글 두 글자 또는 영문 두 글자 모두 OK. 한국 패션기업 관행상 한글 이니셜이 더 자연스러움.
+- 상태 칩(pill): `정상`, `지연`, `블락`, `LOCK 완료`, `검수 대기` — 한국어 명사구 종결 권장.
+- 사이드바 라벨: `시즌 펄스`, `LOCK 진행률`, `Top 디자이너`, `블락된 샘플` 같은 한국어/영문 혼용.
+
+## 폴더 구조
 
 ```
-<artifact identifier="kanban-board" type="text/html" title="Sprint Board">
-<!doctype html>...</artifact>
+kanban-board/
+├── SKILL.md       ← 이 파일
+└── example.html   ← 작성 예시 (와키윌리 27SS S/S 시즌 진척 보드)
 ```
+
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. `example.html`을 처음부터 끝까지 읽어 상단바 + 필터바 + 6개 컬럼 + 사이드바 구조를 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 파일이 자동 주입되지 않는 환경이라면 사용자에게 경로나 기본 톤을 묻고 진행합니다.
+
+### Step 1 — 분류 및 정보 수집
+
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
+
+- 브랜드명 + 시즌 코드 (예: 와키윌리 27SS, 마뗑킴 26FW)
+- 보드 컨텍스트 (시즌 진척 / IMC 캠페인 / 룩북 촬영 / 팝업 준비 중 하나)
+- 컬럼 구성 — 기본 권장: **컨셉 / 1차 샘플 / 품평회 / LOCK / 발주·생산 / 입고·판매**. IMC 캠페인이라면: **기획 / 자산 제작 / 검수 / 채널 송출 / 효과 측정**
+- 카드 18~26장 분량의 SKU/룩 라인업 (각 카드: 코드, 이름, 디자이너, BTA, 판기, 상태)
+- 사이드바 KPI (LOCK 진행률 / 블락 SKU 개수 / 디자이너별 카드 수 등)
+
+"Task A / Task B" 같은 플레이스홀더 금지 — 실제 K-패션 SKU 명칭과 사이클 단계로 작성합니다.
+
+### Step 2 — 레이아웃
+
+다음 4개 영역을 배치합니다.
+
+- **상단바**: 좌측에 브랜드/시즌 크럼(예: `WACKYWILLY / 27SS S/S 시즌`), 시즌 펄스 칩(예: `S1 판기 D-42 · LOCK 75%`), 우측에 검색 + 액션 버튼.
+- **필터바**: 디자이너 아바타 스택(MD/디자이너), 라벨 칩(BTA · UNI/WOMEN · KIDS/ACC · 카테고리), 그룹/정렬 칩.
+- **칸반 보드** (4~6 컬럼): 컬럼당 3~6개 카드. 각 카드는 BTA 태그, 룩 이름/SKU 코드, 디자이너 아바타, 진행률 바(선택), 사이클 단계 표시.
+- **우측 사이드바** (260~300px): 시즌 펄스(LOCK 진행률 progress bar), Top 디자이너(이번 시즌 가장 많이 LOCK한 디자이너), 블락 콜아웃(원단 미입고, MOQ 미달, 발주 지연 등).
+
+### Step 3 — 작성
+
+1. 단일 HTML 문서(`<!doctype html>` ~ `</html>`)로 작성, CSS는 인라인 `<style>` 한 블록.
+2. CSS Grid로 메인 + 사이드바, 보드는 `grid-template-columns: repeat(N, 1fr)`.
+3. 시맨틱 HTML: `<main>`, `<aside>`, `<section>`, `<article>`.
+4. 주요 영역(topbar, filterbar, board, sidebar)에 식별용 속성. OpenDesign 환경에서는 `data-od-id="<slug>"`, 그 외에서는 `id` 속성으로 대체.
+5. BTA 태그는 색상 구분 (B=베이직 회색 톤, T=트렌드 액센트, A=액센트 핑크/주황 톤). 컬럼 헤더에는 스워치 + 컬럼 이름 + 카운트 칩.
+
+### Step 4 — 자체 검수
+
+- 모든 색상은 `:root` 토큰에서 옴 — 임의 hex 금지
+- 6개 컬럼 모두 카드 보유 (텅 빈 컬럼 금지). LOCK이 마지막 컬럼이 아니라 발주·생산 직전이어야 함
+- BTA 분포가 그럴듯하게 — 베이직 40~50% · 트렌드 30~40% · 액센트 10~20% 정도
+- SKU 코드 패턴이 일관됨 (예: `WW-27SS-TOP-001`, `MM-26FW-OUT-014`)
+- 우측 사이드바에 LOCK 진행률 + 블락 콜아웃 + Top 디자이너 3개 블록
+- 모바일 폴백: 컬럼이 1단으로 떨어지고 사이드바가 하단으로
+
+## 한국 K-패션 시즌 사이클 (참고)
+
+칸반 컬럼 작성 시 참고할 한국 영캐주얼 시즌 운영 사이클.
+
+| 단계 | 시점 (27SS 기준) | 주요 활동 | 책임 부서 |
+|---|---|---|---|
+| **컨셉** | 26년 11~12월 | 컨셉 보드, 컬러 스토리, 패브릭 방향, 1차 디자인 일러스트 | 디자인실 |
+| **1차 샘플** | 27년 1월 | 1차 샘플 발주, 입고, 핏 체크 | 디자인실 + 패턴실 |
+| **품평회** | 27년 1월 말 | 1차 품평회, OK/NG 결정, 2차 샘플 발주 | 디자인실 + MD실 + 대표 |
+| **LOCK** | 27년 2월 | 라인업 락업, 발주 수량 확정, 컬러웨이 확정 | MD실 + 디자인실 |
+| **발주·생산** | 27년 2월~4월 | OEM 발주, 본생산, 품질 관리 | MD실 + 생산실 |
+| **입고·판매** | 27년 4월~9월 | 입고, 상세페이지 제작, 채널 송출, S1~S4 판매 | 영업기획 + 이커머스팀 + MD실 |
+
+위 사이클을 칸반 컬럼으로 사용하면 한국 패션기업 실무에 그대로 맞는 진척 보드가 됩니다.
+
+## 한국 K-패션 브랜드 사례 (참고)
+
+| 브랜드 | 사이클 특이점 | BTA 분포 경향 |
+|---|---|---|
+| **와키윌리 (WACKYWILLY)** | 캐릭터 IP 그래픽이 시즌마다 추가됨 → A 비중 ↑ | B 40% / T 35% / A 25% |
+| **마뗑킴 (Matin Kim)** | 로고 아이템 캐리오버 비중 높음 → B 비중 ↑ | B 55% / T 35% / A 10% |
+| **마르디 메크르디** | 플라워 그래픽 시그니처 → A 일관 | B 45% / T 30% / A 25% |
+| **아더에러 (ADER ERROR)** | 콜라보 캡슐 별도 보드 운영 | B 30% / T 40% / A 30% |
+| **무신사 스탠다드** | 베이직 회전 빠름, 시즌 진척이 짧음 | B 70% / T 25% / A 5% |
+| **시야쥬 (CHYAJU)** | 트렌드 반응 빠름, QR 비중 높음 | B 30% / T 50% / A 20% |
+
+## 한국 패션기업 조직 R&R 메모
+
+이 진척 보드의 작성·소비·결정 흐름.
+
+- **디자인 실장**: 컨셉 → 1차 샘플 단계 책임. 카드 생성 주체
+- **MD 실장**: 품평회 → LOCK 단계 결정. 발주 수량·컬러웨이 확정
+- **MD (Merchandiser)**: 발주·생산 → 입고 단계 운영. OEM 일정 관리
+- **영업기획팀**: 입고·판매 단계 모니터링. 실판매 데이터 보드 연결
+- **대표/임원**: 품평회·LOCK 단계에서 시즌 리뷰 시 보드 확인
+
+매주 월요일 시즌 진척 미팅에서 보드를 띄우고 블락된 SKU만 빠르게 리뷰하는 것이 한국 패션기업의 표준 운영 방식입니다.
+
+## 시즌 사이클 내 위치
+
+진척 보드는 **시즌 시작 6개월 전부터 입고 직후까지 상시 운영**됩니다.
+
+```
+[fashion-season-strategy] (시즌 시작 6개월 전 — 보드 컬럼 정의)
+    ↓
+[fashion-concept-board / fashion-color-story / fashion-fabric-board]
+    ↓ 디자인 산출물이 카드로 보드에 진입
+[kanban-board — 시즌 진척 보드, 상시 운영]
+    ↓ 매주 월요일 시즌 진척 미팅에서 리뷰
+[meeting-notes — 품평회 노트, 결정 사항 기록]
+    ↓ LOCK 단계 진입
+[fashion-new-lineup / fashion-key-item-sheet] 카드들이 LOCK 컬럼으로
+    ↓ 발주·생산 → 입고
+[dashboard — 시즌 매출 대시보드로 연결]
+    ↓ 시즌 결산
+[finance-report / fashion-season-deck]
+```
+
+## 채널 연계
+
+이 보드는 다음 운영 시스템 또는 데이터 소스와 연결되는 경우가 많습니다.
+
+- **무신사 셀러센터** (상품 등록 진척, 입점 검수)
+- **자사몰 어드민** (카페24 / 쇼피파이 / 자체 구축 — 상품 등록 상태)
+- **OEM 협력업체 발주 시스템** (생산 진척, 입고 일정)
+- **노션 / 슬랙 / 카카오워크** (디자이너·MD 협업)
+- **사내 ERP** (재고·발주·SKU 마스터)
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="kanban-board-slug" type="text/html" title="시즌 진척 보드 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "와키윌리 27SS S/S 시즌 진척 보드를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

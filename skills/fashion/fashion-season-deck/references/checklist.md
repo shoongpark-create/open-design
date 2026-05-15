@@ -1,48 +1,56 @@
-# Season Deck Checklist
+# 시즌 덱 자체 검수 체크리스트
 
-P0 are hard gates.
+산출물 출력 직전에 한 항목씩 확인하세요. **P0**는 통과해야 하는 하드 게이트.
 
-## P0
+## P0 — 통과 필수
 
-- [ ] Slide 1 is `slide--cover` and carries brand mark + season title
-  + division attribution + date.
-- [ ] Slide 2 is `slide--toc` and lists every slide present in the
-  deck (or every chapter, when paginated).
-- [ ] Final slide is `slide--end` with E.O.D. card.
-- [ ] Section dividers (`slide--divider`) appear before their
-  grouped slides — not after, not buried mid-group.
-- [ ] Every `slide--embed` carries `data-source="<skill-name>"` so
-  the upstream artifact is traceable.
-- [ ] Every `slide--embed` body holds the upstream module's `<main>`
-  content scoped to the slide (no global CSS leaks across slides).
-- [ ] Every `slide--placeholder` names the missing upstream skill +
-  the artifact it is missing.
-- [ ] Slide count is in the 30–50 range for a full season; ACC-only
-  decks may run 20–30. Decks padded to >50 slides with empty
-  placeholders fail this gate.
-- [ ] Page numbers appear in slide footers (or `data-page-num` is
-  set), so paginated print works.
-- [ ] No external image URLs across any embedded slide. All imagery
-  is project-local under `images/` per upstream module.
+- [ ] 슬라이드 1번은 `slide--cover` — 브랜드 마크 + 시즌 타이틀 + 부서 표시 + 일자 모두 표기
+- [ ] 슬라이드 2번은 `slide--toc` — 덱의 모든 슬라이드(또는 페이지네이션 시 모든 챕터) 나열
+- [ ] 최종 슬라이드는 `slide--end` — E.O.D. 카드 (감사합니다)
+- [ ] 섹션 디바이더(`slide--divider`)는 그룹 슬라이드 *앞*에 위치. *뒤*나 그룹 중간 매장 금지
+- [ ] 모든 `slide--embed`에 `data-source="<skill-name>"` 속성 → 상위 산출물 추적 가능
+- [ ] 모든 `slide--embed` 본문에 상위 모듈의 `<main>` 콘텐츠가 슬라이드 스코프로 들어 있음 (글로벌 CSS 누수 없음)
+- [ ] 모든 `slide--placeholder`는 빠진 상위 스킬명 + 빠진 산출물 명시
+- [ ] 슬라이드 개수가 30~50 범위 (풀 시즌 기준). ACC-only 덱은 20~30. 빈 플레이스홀더로 50 초과 시 게이트 실패
+- [ ] 페이지 번호가 슬라이드 푸터에 표시되거나 `data-page-num` 속성 설정 → 페이지네이션 인쇄 동작
+- [ ] 임베드된 슬라이드 전체에서 외부 이미지 URL 없음. 모든 이미지는 `images/` 폴더 내 프로젝트 로컬 (상위 모듈별)
 
-## P1
+## P1 — 강력 권장
 
-- [ ] Embedded slides preserve the upstream module's CSS via scoped
-  selectors (e.g. `.slide[data-source="fashion-color-story"] :is(...)`).
-- [ ] Slide attribution chips appear in the footer of every embed
-  slide.
-- [ ] Cover style matches the brand's existing deck convention (full-
-  bleed photo / brand-color block / minimal type).
-- [ ] When the deck is ACC-only, the slide order follows the
-  ACC-substitution table in `slide-order.md`.
-- [ ] Divider slides carry only the chapter title (and optionally a
-  brand mark) — no body content.
+- [ ] 임베드 슬라이드가 상위 모듈의 CSS를 스코프 셀렉터(예: `.slide[data-source="fashion-color-story"] :is(...)`)로 보존
+- [ ] 슬라이드 attribution chip이 모든 임베드 슬라이드 푸터에 표시 (`via fashion-color-story` 형태)
+- [ ] 커버 스타일이 브랜드의 기존 덱 컨벤션과 일치 (풀블리드 사진 / 브랜드 컬러 블록 / 미니멀 타입)
+- [ ] ACC-only 덱일 때, `slide-order.md`의 ACC 대체 표를 따름
+- [ ] 디바이더 슬라이드는 챕터 타이틀(+ 선택적 브랜드 마크)만 포함. 본문 콘텐츠 없음
 
-## P2
+## P2 — 다듬기
 
-- [ ] Navigation buttons (↑ ↓ or ← →) are present and keyboard-
-  shortcuts work (arrow keys + space).
-- [ ] Print-A4-landscape rhythm exports cleanly (`@page` set, slides
-  break on page boundaries).
-- [ ] Slide counter (current / total) is accurate at runtime.
-- [ ] EOD card matches the brand's closing convention (e.g. "감사합니다").
+- [ ] 내비게이션 버튼(↑ ↓ 또는 ← →)이 존재하며 키보드 단축키(화살표 + 스페이스) 동작
+- [ ] Print-A4-landscape 리듬이 깔끔하게 PDF로 내보내짐 (`@page` 설정, 슬라이드가 페이지 경계에서 분할)
+- [ ] 슬라이드 카운터(현재 / 전체)가 런타임에 정확
+- [ ] EOD 카드가 브랜드의 마무리 컨벤션 일치 (예: "감사합니다")
+
+## K-패션 비즈니스 특화 검수
+
+- [ ] **부서 표시가 정확** — 커버에 "디자인실 · 통합 액세 & 슈즈 디자인실" 등 한국 패션업계의 부서 명명 컨벤션 사용
+- [ ] **시즌 표기가 한국 패션 표준** — `27SS`, `26FW` 형식. 한글 병기는 선택 (27 봄/여름)
+- [ ] **챕터 순서가 한국 시즌 사이클과 정합** — 컨셉 → 컬러/소재 → 스타일링 → 라인업/키 아이템 → 그래픽 → 핏/라벨 → 전략 순서
+- [ ] **판기(S1~S4)별 스타일링 보드가 4개 슬라이드** — UNI/WOMEN 각각 4개씩, 총 8개. K-young-casual 표준
+- [ ] **신규 라인업 슬라이드 3~7개** — 시즌당 라인업 표준 개수
+- [ ] **키 아이템 시트 5~10개** — 시즌 히어로 아이템 표준 개수
+- [ ] **메인 택 / 라벨 가이드 슬라이드 존재** — 한국 패션업체의 라벨 정비는 시즌 덱의 정규 항목
+- [ ] **브랜드 볼륨 성장 전략 슬라이드 존재** — 매출/SKU/채널 확장 등 시즌 마무리 사업 전략
+- [ ] **E.O.D. "감사합니다"** — 한국 패션업계 발표 마무리 컨벤션
+- [ ] **attribution chip이 모듈 추적 가능** — 각 임베드 슬라이드의 `data-source`가 실제 존재하는 스킬명과 일치
+
+## 검수 실행 흐름
+
+1. 산출물 HTML을 브라우저에서 열어 전체 슬라이드 시퀀스 점검 (화살표 키로 처음부터 끝까지 진행)
+2. P0 항목을 차례로 확인. 미통과 시 작업으로 되돌아가 수정
+3. 슬라이드 개수 확인 → 30~50 범위 내
+4. 임베드 슬라이드 각각이 상위 모듈의 톤매너 유지 + CSS 누수 없음
+5. PDF 내보내기 미리보기 (Print 리듬 시) → 페이지 경계 깨끗
+6. P1·P2는 시간 여유에 따라 다듬기
+7. 최종 검수 통과 후 커버의 상태 표시를 `locked`로 표기
+
+검수 통과 후 사용자에게 산출물 외에 별도 보고는 하지 않습니다 (출력 규약).

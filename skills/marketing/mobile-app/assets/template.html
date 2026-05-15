@@ -1,21 +1,21 @@
 <!doctype html>
 <!--
-  OD mobile-app seed.
+  K-패션 의류 쇼핑 앱 mobile-app 시드.
 
-  A pixel-accurate iPhone 15 Pro frame (390 × 844) with Dynamic Island,
-  status-bar SVG icons, and home indicator — drawn entirely in HTML/SVG, no
-  external image. The screen content lives inside `<main class="screen">`;
-  paste in one of the layouts from `references/layouts.md`.
+  픽셀 정확 iPhone 15 Pro 프레임(390 × 844) + Dynamic Island +
+  상태 바 SVG 아이콘 + 홈 인디케이터 — 모두 HTML/SVG로 렌더, 외부 이미지 없음.
+  화면 콘텐츠는 `<main class="screen">` 안에 위치 — `references/layouts.md`의
+  6가지 K-패션 아키타입(피드/상세/온보딩/프로필/체크아웃/포커스) 중 하나를 붙여넣으세요.
 
-  Tokens at the top of `<style>` mirror the web-prototype seed so a single
-  DESIGN.md flows into both. Mobile spacing is tighter (~25%) and type sizes
-  drop one step from desktop — all pre-applied here.
+  `<style>` 최상단 토큰은 web-prototype 시드와 동일 — 단일 DESIGN.md가 두 시드에 흐릅니다.
+  모바일 간격은 ~25% 더 타이트, 타입 사이즈는 데스크탑보다 한 단계 작음 — 이미 적용됨.
+  K-패션 자사몰 / 무신사 / 29CM / VIP 라운지 / 정기배송 앱 UI에 활용.
 -->
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>[REPLACE] Screen name · brand</title>
+  <title>[REPLACE] 화면 이름 · 브랜드 · 시즌</title>
   <style>
     :root {
       --bg:      #fafaf7;
@@ -359,7 +359,7 @@
 </head>
 <body>
   <div class="stage">
-    <div class="caption"><strong>[REPLACE] App</strong> · [REPLACE] Screen name</div>
+    <div class="caption"><strong>[REPLACE] 브랜드 자사몰</strong> · [REPLACE] 화면 이름 (예: 27SS 신상 피드)</div>
 
     <div class="device" data-od-id="device">
       <span class="btn-rail left-1"  aria-hidden></span>
@@ -393,12 +393,12 @@
           </span>
         </div>
 
-        <!-- ─── Scrollable content (paste a layout from references/layouts.md HERE) ─── -->
+        <!-- ─── 스크롤 콘텐츠 (references/layouts.md의 K-패션 아키타입 하나를 여기 붙여넣으세요) ─── -->
         <main class="content" data-od-id="content">
           <div class="header" data-od-id="header">
             <div>
-              <p class="greeting">Tuesday · April 22</p>
-              <h1>[REPLACE] Hi there.</h1>
+              <p class="greeting">화요일 · 4월 22일</p>
+              <h1>[REPLACE] 인사 또는 화면 제목</h1>
             </div>
             <button class="icon-btn" aria-label="Settings">
               <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
@@ -407,30 +407,30 @@
 
           <div class="pad stack" data-od-id="empty-slot">
             <div class="card" style="text-align: center; padding: 28px 20px;">
-              <p class="meta" style="margin: 0 0 6px;">PASTE A LAYOUT FROM</p>
+              <p class="meta" style="margin: 0 0 6px;">PASTE A K-FASHION LAYOUT FROM</p>
               <p class="h3" style="margin: 0 0 6px;">references/layouts.md</p>
               <p style="margin: 0; color: var(--muted); font-size: 13px;">into <code style="font-family: var(--font-mono);">&lt;main class="content"&gt;</code></p>
             </div>
           </div>
         </main>
 
-        <!-- ─── Tab bar (drop if the screen kind doesn't have one) ─── -->
+        <!-- ─── 탭 바 (B 상세 / C 온보딩 / E 체크아웃 화면이면 이 블록 전체 삭제) ─── -->
         <nav class="tabbar" style="--tabs: 4;" data-od-id="tabbar">
           <a class="tab active">
             <svg viewBox="0 0 24 24"><path d="M3 12 12 3l9 9"/><path d="M5 10v10h14V10"/></svg>
-            Home
+            홈
           </a>
           <a class="tab">
             <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
-            Search
+            카테고리
           </a>
           <a class="tab">
-            <svg viewBox="0 0 24 24"><path d="M22 12c0 5.5-4.5 10-10 10S2 17.5 2 12 6.5 2 12 2s10 4.5 10 10z"/><path d="M12 6v6l4 2"/></svg>
-            Activity
+            <svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg>
+            좋아요
           </a>
           <a class="tab">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-7 8-7s8 3 8 7"/></svg>
-            Profile
+            마이
           </a>
         </nav>
 

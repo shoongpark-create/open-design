@@ -1,24 +1,30 @@
 ---
-name: magazine-web-ppt
-description: 生成"电子杂志 × 电子墨水"风格的横向翻页网页 PPT（单 HTML 文件），含 WebGL 流体背景、衬线标题 + 非衬线正文、章节幕封、数据大字报、图片网格等模板。当用户需要制作分享 / 演讲 / 发布会风格的网页 PPT，或提到"杂志风 PPT"、"horizontal swipe deck"、"editorial magazine"、"e-ink presentation"时使用。
+name: guizang-ppt
+description: |
+  K-패션 브랜드의 **시즌 합본 덱 / 콜라보 제안서 / IR 자료 / 브랜드 분기 발표**를
+  매거진 × 전자잉크 톤의 횡스크롤 단일 HTML PPT로 생성하는 스킬입니다.
+  WebGL 플루이드 배경, 세리프 디스플레이 + 산세리프 본문 + 모노 메타,
+  좌우 키보드/마우스/터치 스와이프, 챕터 막 페이지, 풀쿼트 페이지, 데이터
+  대자보, 도판 그리드 등 영캐주얼 톤의 슬라이드 템플릿을 제공합니다.
+  원본은 *guizang-ppt-skill*의 중국풍 미감 — 이 K-패션 버전은 와키윌리·
+  마뗑킴·아더에러 같은 한국 영캐주얼 톤으로 재해석. 사용자가 "시즌 합본",
+  "콜라보 제안서", "IR 자료", "브랜드 발표 덱", "27SS 합본"을 언급하면 활성화.
 triggers:
-  - "ppt"
+  - "시즌 합본"
+  - "시즌 합본 덱"
+  - "콜라보 제안서"
+  - "IR 자료"
+  - "투자자 자료"
+  - "브랜드 발표 덱"
+  - "분기 발표"
+  - "27SS 합본"
   - "deck"
-  - "slides"
   - "presentation"
-  - "magazine"
-  - "杂志"
-  - "杂志风 PPT"
-  - "horizontal swipe"
-  - "horizontal swipe deck"
-  - "editorial magazine"
-  - "e-ink presentation"
-  - "网页 PPT"
-  - "发布会"
-  - "分享 PPT"
+  - "ppt"
 od:
   mode: deck
-  scenario: marketing
+  scenario: fashion
+  category: fashion
   featured: 9
   default_for: deck
   upstream: "https://github.com/op7418/guizang-ppt-skill"
@@ -27,288 +33,319 @@ od:
     entry: index.html
   design_system:
     requires: false
-  example_prompt: "帮我做一份杂志风的 PPT —— 关于'一人公司 · 被 AI 折叠的组织'，25 分钟分享会，目标受众是设计师 + 创业者。先推荐一个方向（Monocle / WIRED / Kinfolk / Domus / Lab）让我选。"
+  example_prompt: "와키윌리 27SS 시즌 합본 덱을 만들어주세요 — 영캐주얼 매거진 톤. 받는 사람은 디자인실·MD실·마케팅실·대표. 25분 발표 분량, 22~24 페이지. 표지·시즌 컨셉·BTA 라인업·키 아이템·캠페인·매출 목표·다음 시즌 아웃룩 순서. 방향은 추천해주세요(Monocle / WIRED / Kinfolk / Domus / Lab 중 하나)."
 ---
 
-# Magazine Web Ppt
+# 패션 시즌 합본 덱 · 콜라보 제안서 · IR 자료 스킬
 
-## 这个 Skill 做什么
+## 이 스킬이 만드는 것
 
-生成一份**单文件 HTML**的横向翻页 PPT，视觉基调是：
+**단일 HTML 파일** 형태의 횡스크롤 PPT. 비주얼 톤은 다음을 결합:
 
-- **电子杂志 + 电子墨水**混血风格
-- **WebGL 流体 / 等高线 / 色散背景**（hero 页可见）
-- **衬线标题（Noto Serif SC + Playfair Display）+ 非衬线正文（Noto Sans SC + Inter）+ 等宽元数据（IBM Plex Mono）**
-- **Lucide 线性图标**（不用 emoji）
-- **横向左右翻页**（键盘 ← →、滚轮、触屏滑动、底部圆点、ESC 索引）
-- **主题平滑插值**：翻到 hero 页时颜色和 shader 柔顺过渡
+- **매거진 + 전자잉크** 혼합 톤
+- **WebGL 플루이드 / 등고선 / 색분산 배경** (히어로 페이지만 노출)
+- **세리프 디스플레이(Hahmlet · Grandiflora One · Noto Serif KR) + 산세리프 본문(Pretendard Variable · Noto Sans KR) + 모노 메타(IBM Plex Mono)**
+- **Lucide 라인 아이콘** (이모지 금지)
+- **좌우 키보드/마우스 휠/터치 스와이프** 네비게이션, ESC로 색인 오픈
+- **테마 부드러운 인터폴레이션**: 히어로 페이지 진입 시 컬러·셰이더 부드럽게 전환
 
-这个 skill 的美学不是"商务 PPT"，也不是"消费互联网 UI"——它像 *Monocle* 杂志贴上了代码后的样子。
+원본 *guizang-ppt-skill*의 중국풍 매거진 미감을 K-패션 영캐주얼 톤으로 재해석한 버전. 와키윌리 27SS 시즌 합본, 마뗑킴 콜라보 제안서, 아더에러 IR 자료, 분기 브랜드 발표 등에 적합.
 
-## 何时使用
+## 사용 시점 (K-패션 맥락)
 
-**合适的场景**：
-- 线下分享 / 行业内部讲话 / 私享会
-- AI 新产品发布 / demo day
-- 带有强烈个人风格的演讲
-- 需要"一次做完，不用翻页工具"的网页版 slides
+**적합한 시나리오**:
+- 시즌 합본 덱 — 디자인실·MD실·마케팅실 종합 (모든 시즌 산출물 종합)
+- 콜라보 제안서 — 양 브랜드 시그니처 톤을 한 덱에 — 와키x마뗑킴 / 마르디x아더 등
+- IR 자료 — 투자자·이사회 대상, 시즌 매출 + 성장 스토리
+- 분기 브랜드 발표 — 대표 → 전사 또는 외부 미디어 톤
+- 매장 입점 제안 — 입점채널(무신사·29CM·W컨셉) 대상 PR 덱
 
-**不合适的场景**：
-- 大段表格数据、图表叠加（用常规 PPT）
-- 培训课件（信息密度不够）
-- 需要多人协作编辑（这是静态 HTML）
+**부적합한 시나리오**:
+- 발주서·거래명세서 (인쇄 톤, 다른 스킬)
+- 룩북 (4:5 이미지 중심, 다른 스킬)
+- 일일 매장 매출 모니터링 (대시보드 스킬)
 
-## 工作流
+## 환경 호환성
 
-### Step 0 · 选方向(Direction · 必做的第一步)
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
 
-**在问 6 个澄清问题之前,先让用户在 5 个 magazine 方向里挑一个**。每个方向都把"主题色 / 推荐 layout / chrome 风格 / 推荐 slide 数"打包好,挑了方向就回答掉一半澄清问题。
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력.
+- **OpenDesign 환경**: `od:` frontmatter와 `data-od-id` 속성 사용 가능.
 
-打开 `references/styles.md`,**整段拷过来**给用户看 5 个方向的 1-line summary,然后让他选:
+폰트·WebGL은 외부 CDN 사용. 라이브러리 의존성 없음.
 
-```
-1. Monocle Editorial · 国际杂志风 ✦ 默认
-2. WIRED Tech · 数据 + 工程
-3. Kinfolk Slow · 慢生活 / 人文
-4. Domus Architectural · 建筑 / 空间感
-5. Lab / Reference · 学术 + 工艺手册
-```
+## 출력 언어 정책
 
-如果用户说"不知道,你推荐"——**默认推 Monocle Editorial**,因为它失败概率最低。如果用户提到"AI / benchmark / 技术发布"——推 WIRED;"读书 / 私享 / 朋友圈"——推 Kinfolk;"设计 / 建筑 / portfolio"——推 Domus;"研究 / 学术 / 方法论"——推 Lab。
+K-패션 시즌 발표 덱의 등록(register)을 따릅니다.
 
-挑完方向后,在项目目录下创建或更新 `项目记录.md`,第一行写清方向 + 主题色 + 受众 + 时长(模板见 `styles.md` 末尾)。**全程不要换方向**——半路换 = 前面全废。
+- **시즌 코드 유지**: 27SS / 26FW / S1 판기 / 1차 발주 / BTA / SKU.
+- **K-패션 KPI 유지**: GMV / 정상판매율 / 재고자산회전율 / AOV / 사입가율 / ROAS.
+- **통화 단위**: 원/만원/억. USD 환산 금지.
+- **세리프 디스플레이는 한글**: Hahmlet, Grandiflora One, 노토 세리프 KR 권장. 영문 혼용은 Playfair Display.
+- **본문은 명사구 종결** 권장 — "정판율 호조", "라인업 확장 검토", "콜라보 발매 계획", "오프라인 매장 확대".
+- **카피 톤은 브랜드별로 다름**: 마뗑킴 친근 / 아더 신비 / 와키 재미.
 
-### Step 1 · 需求澄清(**动手前必做**)
+## 작업 흐름
 
-**如果用户已经给了完整的大纲 + 图片**,可以跳过直接进 Step 2。
+### Step 0 · 매거진 방향 선택 (필수 첫 단계)
 
-**如果用户只给了主题或一个模糊想法**,用这 6 个问题逐个对齐后再动手。不要基于猜测就开始写 slide——一旦结构定错,后期翻修代价很高:
+6개 명확화 질문 *전에* 5개 매거진 방향에서 하나 선택. 각 방향은 "메인 컬러 / 추천 레이아웃 / chrome 톤 / 권장 슬라이드 수"를 패키지로 포함.
 
-#### 6 问澄清清单
-
-> 第 5 题已在 Step 0 选方向时一并回答(方向→主题色)。下面的 5 题里,第 5 题留白即可。
-
-| # | 问题 | 为什么要问 |
-|---|------|-----------|
-| 1 | **受众是谁?分享场景?**(行业内部 / 商业发布 / demo day / 私享会) | 决定语言风格和深度 |
-| 2 | **分享时长?** | 15 分钟 ≈ 10 页,30 分钟 ≈ 20 页,45 分钟 ≈ 25-30 页(每个方向的推荐范围见 `styles.md`) |
-| 3 | **有没有原始素材?**(文档 / 数据 / 旧 PPT / 文章链接) | 有素材就基于素材,没有就帮他搭 |
-| 4 | **有没有图片?放在哪?** | 详见下方"图片约定" |
-| 5 | ~~**想要哪套主题色?**~~ | ✓ 已在 Step 0 由方向决定 |
-| 6 | **有没有硬约束?**(必须包含 XX 数据 / 不能出现 YY) | 避免返工 |
-
-#### 大纲协助(如果用户没有大纲)
-
-用"叙事弧"模板搭骨架,再填内容:
+`references/styles.md`를 열어 5개 방향의 1줄 요약을 사용자에게 보여주고 선택:
 
 ```
-钩子(Hook)       → 1 页   : 抛一个反差 / 问题 / 硬数据让人停下来
-定调(Context)    → 1-2 页 : 说明背景 / 你是谁 / 为什么讲这个
-主体(Core)       → 3-5 页 : 核心内容,用 Layout 4/5/6/9/10 穿插
-转折(Shift)      → 1 页   : 打破预期 / 提出新观点
-收束(Takeaway)   → 1-2 页 : 金句 / 悬念问题 / 行动建议
+1. Monocle Editorial · 국제 매거진 톤 ✦ 기본 추천
+2. WIRED Tech · 데이터 + 엔지니어링
+3. Kinfolk Slow · 슬로우 라이프 / 인문
+4. Domus Architectural · 건축 / 공간감
+5. Lab / Reference · 학술 + 공예 매뉴얼
 ```
 
-叙事弧 + 页数规划 + 主题节奏表(见 `layouts.md`),**三张表对齐后**再进 Step 2。
+K-패션 매핑 가이드:
+- **시즌 합본 / 마뗑킴 톤** → Monocle Editorial (절제·국제·취향)
+- **IR 자료 / 매출 보고** → WIRED Tech (데이터·엔지니어링·미래감)
+- **마르디 콜라보 / 라이프스타일 캠페인** → Kinfolk Slow (인문·슬로우)
+- **아더에러 / 컨템포러리 콜라보** → Domus Architectural (건축·공간)
+- **연구·학술 발표 / 소재 개발 스토리** → Lab / Reference (방법론)
 
-大纲建议保存为 `项目记录.md` 或 `大纲-v1.md`,便于后续迭代。
+사용자가 "모르겠다, 추천"이라 하면 → **기본 Monocle Editorial**. 와키x마뗑킴 콜라보면 → Monocle. 27SS 매출 IR이면 → WIRED.
 
-#### 图片约定(告知用户)
+방향 선택 후 프로젝트 폴더에 `시즌-기록.md` 생성·갱신, 첫 행에 방향 + 컬러 + 받는 사람 + 시간 기록. **중도 방향 변경 금지** — 절반 가서 바꾸면 앞 작업 전부 폐기.
 
-在动手前向用户说清:
+### Step 1 · 필요 사항 정리 (착수 전 필수)
 
-- **文件夹位置**:`项目/XXX/ppt/images/` 下(和 `index.html` 同级)
-- **命名规范**:`{页号}-{语义}.{ext}`,例如 `01-cover.jpg` / `03-figma.jpg` / `05-dashboard.png`
-  - 页号补零便于排序
-  - 语义用英文,短、具体、和内容对应
-- **规格建议**:
-  - 单张 ≥ 1600px 宽(避免大屏模糊)
-  - JPG 用于照片/截图,PNG 用于透明 UI/图表
-  - 总大小控制在 10MB 内(影响翻页流畅度)
-- **如何替换**:保持**同名覆盖**最稳(HTML 里不用改路径);如果文件名变了,记得全局搜 `images/旧名` 改成新名
-- **没图怎么办**:和用户对齐,可以先用占位色块生成结构,等图片后期补;但要告知 layout 4/5/10 等图文混排页没图就没法验证视觉效果
+대강의 주제만 받았다면 6개 질문으로 정렬:
 
-### Step 2 · 拷贝模板
+| # | 질문 | 이유 |
+|---|------|------|
+| 1 | **받는 사람은 누구? 발표 장소?** (사내 종합 / 외부 IR / 콜라보 미팅) | 카피 톤·심도 결정 |
+| 2 | **발표 시간?** | 15분 ≈ 10페이지, 30분 ≈ 20페이지, 45분 ≈ 25-30페이지 |
+| 3 | **원본 자료 있는가?** (라인업 시트 / 시즌 결산 / 옛 덱 / 기사 링크) | 자료 있으면 그것 기반, 없으면 함께 작성 |
+| 4 | **이미지·룩 컷 있는가?** | 배치 룰 아래 참조 |
+| 5 | ~~**컬러 톤은?**~~ | ✓ Step 0 방향 선택 시 결정 완료 |
+| 6 | **하드 제약 있는가?** (예: 매출 수치 비공개 / 콜라보 상대 미공개) | 재작업 방지 |
 
-从 `assets/template.html` 拷贝一份到目标位置（通常是 `项目/XXX/ppt/index.html`），同时在同级建一个 `images/` 文件夹准备接图片。
+#### 시즌 합본 / 콜라보 제안서 아우트라인 (자료가 없을 때)
+
+서사 아크 템플릿:
+
+```
+훅(Hook)         → 1페이지  : 강한 시즌 결과치 또는 콜라보 도발 ("정판율 78%", "처음 만나는 브랜드")
+정조(Context)    → 1-2페이지: 브랜드 배경 / 시즌 컨셉 / 콜라보 배경
+본체(Core)       → 8-12페이지: 라인업 / 키 아이템 / 캠페인 / 매출 등 핵심 콘텐츠
+전환(Shift)      → 1페이지  : 다음 시즌 차별성 또는 콜라보 차별점
+결말(Takeaway)   → 1-2페이지: 매출 목표 또는 콜라보 비전 / 행동 제안
+```
+
+`시즌-기록.md`에 아우트라인 저장 후 Step 2 진행.
+
+#### 이미지 배치 (사용자에게 안내)
+
+- **폴더 위치**: `프로젝트/27SS-합본/ppt/images/` (HTML과 동급)
+- **명명**: `{페이지}-{의미}.{확장자}`. 예: `01-cover.jpg`, `06-key-item.jpg`, `12-campaign.jpg`
+- **권장 규격**: 룩 컷 4:5, 매장 라운드 16:10, 키비주얼 16:9. 단장 1600px 이상.
+- **누락 시**: 컬러 박스 placeholder로 구조 먼저, 이미지는 후처리.
+
+### Step 2 · 템플릿 복사
+
+`assets/template.html`을 프로젝트 폴더로 복사하고 `images/` 폴더 생성:
 
 ```bash
-mkdir -p "项目/XXX/ppt/images"
-cp "<SKILL_ROOT>/assets/template.html" "项目/XXX/ppt/index.html"
+mkdir -p "프로젝트/27SS-합본/ppt/images"
+cp "<SKILL_ROOT>/assets/template.html" "프로젝트/27SS-합본/ppt/index.html"
 ```
 
-`template.html` 是一个**完整可运行**的文件——CSS、WebGL shader、翻页 JS、字体/图标 CDN 全已预设好，只有 `<main id="deck">` 里面是 3 个示例 slide（封面、章节幕封、空白填充页）。
+`template.html`은 **완전 실행 가능** — CSS, WebGL 셰이더, 슬라이드 JS, 폰트/아이콘 CDN 사전 셋업. `<main id="deck">` 안 3개 예시 슬라이드(표지·챕터 막·여백 페이지)만 교체.
 
-#### 2.1 · 必改占位符（**容易漏**）
+#### 2.1 · 필수 변경 placeholder
 
-拷贝后立刻改掉以下占位符，否则浏览器 Tab 会显示"[必填] 替换为 PPT 标题"这种尴尬文字：
+복사 직후 즉시 변경 (안 그러면 브라우저 탭에 "[필수] 제목 교체"가 노출됨):
 
-| 位置 | 原始 | 需改为 |
-|------|------|--------|
-| `<title>` | `[必填] 替换为 PPT 标题 · Deck Title` | 实际 deck 标题(如 `一种新的工作方式 · Luke Wroblewski`) |
+| 위치 | 원본 | 변경 |
+|------|------|------|
+| `<title>` | `[필수] 덱 제목으로 교체 · Deck Title` | 실제 덱 제목 (예: `와키윌리 27SS 시즌 합본 · WACKYWILLY 27SS Recap`) |
 
-每次拷贝完 template.html 第一件事:grep 一下"[必填]" 确认全部替换完。
+복사 후 첫 작업: `grep "[필수]"`로 모든 placeholder 교체 확인.
 
-#### 2.2 · 选定主题色(5 套预设 · 不允许自定义)
+#### 2.2 · 컬러 테마 (5개 프리셋 · 커스텀 금지)
 
-本 skill **只允许从 5 套精心调配的预设里选一套**,不接受用户自定义 hex 值——颜色搭配错了画面瞬间变丑,保护美学比给自由更重要。
+5개 사전 조합된 테마 중 하나만 선택. 자유 hex 금지.
 
-| # | 主题 | 适合 |
+| # | 테마 | 적합 |
 |---|------|------|
-| 1 | 🖋 墨水经典 | 通用 / 商业发布 / 不知道选啥的默认 |
-| 2 | 🌊 靛蓝瓷 | 科技 / 研究 / 数据 / 技术发布会 |
-| 3 | 🌿 森林墨 | 自然 / 可持续 / 文化 / 非虚构 |
-| 4 | 🍂 牛皮纸 | 怀旧 / 人文 / 文学 / 独立杂志 |
-| 5 | 🌙 沙丘 | 艺术 / 设计 / 创意 / 画廊 |
+| 1 | 🖋 잉크 클래식 | 일반·콜라보·시즌 합본 기본 |
+| 2 | 🌊 인디고 자기 | 테크·연구·데이터·IR |
+| 3 | 🌿 포레스트 잉크 | 자연·지속가능·인문·비픽션 |
+| 4 | 🍂 카프 페이퍼 | 노스탤지어·인문·문학·독립 매거진 |
+| 5 | 🌙 듄 | 아트·디자인·창의·갤러리 |
 
-**操作**:
-1. 基于内容主题推荐一套,或直接问用户选哪一套
-2. 打开 `references/themes.md`,找到对应主题的 `:root` 块
-3. **整体替换** `assets/template.html`(已拷贝版本)开头 `:root{` 块里标有"主题色"注释的那几行(`--ink` / `--ink-rgb` / `--paper` / `--paper-rgb` / `--paper-tint` / `--ink-tint`)
-4. 其他 CSS 都走 `var(--...)`,无需任何其他改动
+**조작**:
+1. 콘텐츠 주제에 따라 추천 또는 사용자 선택
+2. `references/themes.md`에서 해당 테마 `:root` 블록 확인
+3. `assets/template.html`(복사본)의 `:root` 안 "테마 컬러" 주석 줄 전체 교체
+4. 다른 CSS는 `var(--...)` 사용, 추가 변경 없음
 
-**硬规则**:
-- 一份 deck 只用一套主题,不要中途换色
-- 不要接受用户给的任意 hex 值——委婉拒绝并展示 5 套让选
-- 不要混搭(例如 ink 取墨水经典、paper 取沙丘)——会彻底违和
+**하드 규칙**:
+- 한 덱에 한 테마. 중도 변경 금지
+- 자유 hex 거부 — 5개 테마 보여주고 선택 권장
+- 혼합 금지 (예: ink는 잉크, paper는 듄) — 시각 충돌
 
-### Step 3 · 填充内容
+### Step 3 · 콘텐츠 채우기
 
-#### 3.0 · 预检:类名必须在 template.html 里有定义（**最重要**）
+#### 3.0 · 사전 점검: 클래스명이 template.html에 정의됐는지 확인 (중요)
 
-**这是所有生成问题的源头**。layouts.md 的骨架使用了很多类名(`h-hero` / `h-xl` / `stat-card` / `pipeline` / `grid-2-7-5` 等),如果 `assets/template.html` 的 `<style>` 里没有对应定义,浏览器会 fallback 到默认样式——大标题变成非衬线、数据卡片挤成一团、pipeline 糊成一行、图片堆到页面底部。
+`layouts.md`의 골격이 사용하는 클래스(`h-hero` / `h-xl` / `stat-card` / `pipeline` 등)가 `template.html`의 `<style>`에 존재하는지 확인. 누락 시 브라우저 fallback이 결과 망침.
 
-**在写任何 slide 代码之前:**
+**슬라이드 코드 작성 전**:
 
-1. **先 Read `assets/template.html`**(至少读到 `<style>` 块末尾)
-2. **对照 layouts.md 的 Pre-flight 列表**,确认你要用的每个类都在 `<style>` 里存在
-3. 如果某个类缺失:**在 template.html 的 `<style>` 里补上**,不要在每个 slide 里 inline 重写
-4. **template.html 是唯一的类名来源**——不要发明新类名,如需自定义用 `style="..."` inline
+1. **`assets/template.html` Read** (최소 `<style>` 끝까지)
+2. **layouts.md의 Pre-flight 리스트와 대조** — 사용할 클래스 모두 정의 확인
+3. 누락된 클래스 있으면 **template.html의 `<style>`에 추가** — 슬라이드 inline 재정의 금지
+4. **template.html이 유일한 클래스 출처** — 새 클래스 발명 금지. 커스텀은 `style="..."` inline.
 
-常见容易遗漏的类(必须预先确认存在):
+자주 누락되는 클래스(필수 사전 확인):
 `h-hero` / `h-xl` / `h-sub` / `h-md` / `lead` / `kicker` / `meta-row` / `stat-card` / `stat-label` / `stat-nb` / `stat-unit` / `stat-note` / `pipeline-section` / `pipeline-label` / `pipeline` / `step` / `step-nb` / `step-title` / `step-desc` / `grid-2-7-5` / `grid-2-6-6` / `grid-2-8-4` / `grid-3-3` / `grid-6` / `grid-3` / `grid-4` / `frame` / `frame-img` / `img-cap` / `callout` / `callout-src` / `chrome` / `foot`
 
-#### 3.0.5 · 规划主题节奏（**和类预检同等重要**)
+#### 3.0.5 · 테마 리듬 계획 (클래스 사전 점검과 동등 중요)
 
-**在挑布局之前**,必须先列出每一页的主题 class(`hero dark` / `hero light` / `light` / `dark`)并写到文档或草稿里对齐。详细规则看 `references/layouts.md` 开头的"主题节奏规划"一节。
+**레이아웃 고르기 전**: 페이지별 테마 클래스(`hero dark` / `hero light` / `light` / `dark`) 리스트 작성.
 
-**强制规则**:
+**강제 규칙**:
+- 모든 section은 `light` / `dark` / `hero light` / `hero dark` 중 하나
+- 3페이지 연속 동일 테마 = 시각 피로 → 금지
+- 8페이지 이상이면 `hero dark` 1개 이상 + `hero light` 1개 이상 필수
+- `light` 본문만 있으면 안 됨 — `dark` 본문 1개 이상 포함
+- 3-4페이지마다 hero(표지 / 막 / 질문 / 대인용) 1개 삽입
 
-- 每页 section 必须带 `light` / `dark` / `hero light` / `hero dark` 之一,不要只写 `hero`
-- 连续 3 页以上同主题 = 视觉疲劳,不允许
-- 8 页以上必须有 ≥1 个 `hero dark` + ≥1 个 `hero light`
-- 整个 deck 不能只有 `light` 正文页,必须有 `dark` 正文页制造呼吸
-- 每 3-4 页插入 1 个 hero 页(封面/幕封/问题/大引用)
+**생성 후 자가 점검**: `grep 'class="slide' index.html`로 테마 리듬 확인.
 
-**生成后自检**:`grep 'class="slide' index.html` 列出所有主题,人工确认节奏合理再交付。
+#### 3.1 · 레이아웃 선택
 
-#### 3.1 · 挑布局
+**처음부터 작성 금지**. `references/layouts.md`에 10개 골격 — 각각 완전 페이스트 가능한 `<section>` 코드:
 
-**不要从零写 slide**。打开 `references/layouts.md`,里面有 10 种现成布局骨架,每种都是完整可粘贴的 `<section>` 代码块:
-
-| Layout | 用途 |
+| 레이아웃 | 용도 |
 |---|---|
-| 1. 开场封面 | 第 1 页 |
-| 2. 章节幕封 | 每幕开场 |
-| 3. 数据大字报 | 抛硬数据 |
-| 4. 左文右图(Quote + Image) | 身份反差 / 故事 |
-| 5. 图片网格 | 多图对比 / 截图实证 |
-| 6. 两列流水线(Pipeline) | 工作流程 |
-| 7. 悬念收束 / 问题页 | 幕末 / 收尾 |
-| 8. 大引用页(Big Quote) | 衬线金句 / takeaway |
-| 9. 并列对比(Before / After) | 旧模式 vs 新模式 |
-| 10. 图文混排(Lead Image + Side Text) | 信息密集的图文页 |
+| 1. 표지 | 1페이지 |
+| 2. 챕터 막 | 각 막 시작 |
+| 3. 데이터 대자보 | 강한 수치 |
+| 4. 좌문 우상 (Quote + Image) | 정체성 대비 / 스토리 |
+| 5. 이미지 그리드 | 다이미지 비교 / 스크린샷 |
+| 6. 2단 파이프라인 | 워크플로우 |
+| 7. 질문 / 의문 페이지 | 막 끝 / 마무리 |
+| 8. 대인용 페이지 (Big Quote) | 세리프 금구 / 테이크어웨이 |
+| 9. 병렬 비교 (Before / After) | 옛 패턴 vs 새 패턴 |
+| 10. 도판 + 사이드 텍스트 | 정보 밀도 높은 이미지+텍스트 |
 
-选对应 layout,粘过去,改文案和图片路径即可。**务必先完成 3.0 预检**。
+레이아웃 선택 → 페이스트 → 카피·이미지 경로 교체. **3.0 사전 점검 필수.**
 
-#### 3.2 · 图片比例规范
+#### 3.2 · 이미지 비율 표준
 
-永远用**标准比例**,不要用原图奇葩比例(如 `2592/1798`):
+원본 이상한 비율(예: 2592/1798) 절대 금지:
 
-| 场景 | 推荐比例 |
-|------|---------|
-| 左文右图 主图 | 16:10 或 4:3 + `max-height:56vh` |
-| 图片网格(多图对比) | **固定 `height:26vh`**,不用 aspect-ratio |
-| 左小图 + 右文字 | 1:1 或 3:2 |
-| 全屏主视觉 | 16:9 + `max-height:64vh` |
-| 图文混排小插图 | 3:2 或 3:4 |
+| 시나리오 | 권장 비율 |
+|---|---|
+| 좌문 우상 메인 이미지 | 16:10 또는 4:3 + `max-height:56vh` |
+| 이미지 그리드 (다중 비교) | **고정 `height:26vh`** (aspect-ratio 금지) |
+| 좌소상 + 우문 | 1:1 또는 3:2 |
+| 풀스크린 키비주얼 | 16:9 + `max-height:64vh` |
+| 이미지+텍스트 작은 삽화 | 3:2 또는 3:4 |
 
-**图片绝不使用 `align-self:end`**——会滑到 cell 底被浏览器工具栏遮挡。用 grid 容器 + `align-items:start`(template 已预设)让图片贴顶即可;左列若想贴底,用 flex column + `justify-content:space-between`。
+**이미지에 `align-self:end` 절대 금지** — 셀 하단으로 미끄러져 도구바에 가려짐. grid + `align-items:start` 사용.
 
-组件细节(字体、颜色、网格、图标、callout、stat-card 等)在 `references/components.md`。
+컴포넌트 디테일(폰트·컬러·그리드·아이콘·callout·stat-card 등)은 `references/components.md`.
 
-### Step 4 · 对照检查清单自检
+### Step 4 · 체크리스트 자가 점검
 
-生成完一定要打开 `references/checklist.md`，逐项对照。里面总结了**真实迭代过程中踩过的所有坑**，P0 级别的问题（emoji、图片撑破、标题换行、字体分工）必须全部通过。
+생성 후 `references/checklist.md` 한 항목씩 대조. P0(이모지·이미지 넘침·제목 줄바꿈·폰트 역할) 모두 통과 필수.
 
-特别要注意的几条：
+특히:
+1. **대제목 세리프 폰트** — 산세리프 표시 시 99% Step 3.0 사전 점검 누락, `h-hero` 클래스 누락
+2. **이미지 그리드는 `height:Nvh`만**, `aspect-ratio` 금지
+3. **이미지 페이지 하단 누적 금지** — `align-self:end` 금지, grid + `align-items:start`
+4. **이미지 표준 비율만** (16:10 / 4:3 / 3:2 / 1:1 / 16:9)
+5. **한글 대제목 ≤ 5자 + `nowrap`** (한 글자 한 줄 방지)
+6. **Lucide 사용, 이모지 금지**
+7. **제목 세리프, 본문 산세리프, 메타 모노**
 
-1. **大标题必须是衬线字体**——如果显示成非衬线,99% 是 Step 3.0 预检没做,`h-hero` 类在 template.html 里缺失
-2. **图片网格里只用 `height:Nvh`,不用 `aspect-ratio`**(会撑破)
-3. **图片不能堆到页面底部**——不要用 `align-self:end`,用 grid + `align-items:start`(见 Step 3.2)
-4. **图片只能用标准比例**(16:10 / 4:3 / 3:2 / 1:1 / 16:9),不要复制原图的奇葩比例
-5. **中文大标题 ≤ 5 字且 `nowrap`**(避免 1 字 1 行)
-6. **用 Lucide,不用 emoji**
-7. **标题用衬线,正文用非衬线,元数据用等宽**
+### Step 5 · 로컬 프리뷰
 
-### Step 5 · 本地预览
-
-直接在浏览器打开 `index.html` 就行。macOS 下：
+브라우저에서 `index.html` 열기. macOS:
 
 ```bash
-open "项目/XXX/ppt/index.html"
+open "프로젝트/27SS-합본/ppt/index.html"
 ```
 
-不需要本地服务器。图片走相对路径 `images/xxx.png`。
+로컬 서버 불필요. 이미지는 상대경로 `images/xxx.png`.
 
-### Step 6 · 迭代
+### Step 6 · 반복
 
-根据用户反馈修改——模板的 CSS 已经高度参数化，90% 的调整都是改 inline style（字号 `font-size:Xvw` / 高度 `height:Yvh` / 间距 `gap:Zvh`）。
+사용자 피드백에 따라 수정. 템플릿 CSS가 고도로 파라미터화 — 90%의 조정은 inline style (`font-size:Xvw` / `height:Yvh` / `gap:Zvh`).
 
 ---
 
-## 资源文件导览
+## 리소스 파일 안내
 
 ```
-magazine-web-ppt/
-├── SKILL.md              ← 你正在读
+guizang-ppt/
+├── SKILL.md                 ← 이 파일
 ├── assets/
-│   ├── template.html     ← 完整的可运行模板（种子文件）
-│   └── example-slides.html ← 9 页样例 deck（用于 Examples 预览）
+│   ├── template.html        ← 완전 실행 가능 템플릿 (시드 파일)
+│   └── example-slides.html  ← 9페이지 예시 덱 (와키윌리 27SS 합본)
 └── references/
-    ├── styles.md         ← 5 个 magazine 方向（Monocle / WIRED / Kinfolk / Domus / Lab）
-    ├── components.md     ← 组件手册（字体、色、网格、图标、callout、stat、pipeline...）
-    ├── layouts.md        ← 10 种页面布局骨架（可直接粘贴）
-    ├── themes.md         ← 5 套主题色预设（只能选不能自定义）
-    └── checklist.md      ← 质量检查清单（P0/P1/P2/P3 分级）
+    ├── styles.md            ← 5개 매거진 방향 (Monocle / WIRED / Kinfolk / Domus / Lab)
+    ├── components.md        ← 컴포넌트 매뉴얼
+    ├── layouts.md           ← 10개 레이아웃 골격 (페이스트 가능)
+    ├── themes.md            ← 5개 컬러 테마 (선택만, 커스텀 금지)
+    └── checklist.md         ← 품질 체크리스트 (P0/P1/P2/P3)
 ```
 
-**加载顺序建议**：
-1. 先读完 `SKILL.md`(这个文件)了解整体
-2. **Step 0 选方向时,读 `styles.md`**——5 个方向各自打包好了主题色 + 推荐 layout + chrome 风格
-3. Step 1 需求澄清完成后,如果方向需要确认,再读 `themes.md` 看色板细节
-4. **动手前 Read `assets/template.html` 的 `<style>` 块**——这是类名的唯一来源,缺类会导致整页样式崩
-5. 读 `layouts.md` 挑布局(顶部有 Pre-flight 类名清单和主题节奏规划)
-6. 细节调整时读 `components.md` 查组件
-7. 生成后读 `checklist.md` 自检(顶部 P0-0 规则强制预检)
+**로드 순서**:
+1. 먼저 `SKILL.md` 읽고 전체 파악
+2. **Step 0에서 `styles.md`** — 5개 방향 각각 컬러 + 레이아웃 + chrome 톤 패키지
+3. Step 1 명확화 후 필요시 `themes.md` 컬러 디테일
+4. **착수 전 `assets/template.html`의 `<style>` Read** — 클래스 유일 출처
+5. `layouts.md` 레이아웃 선택 (상단 Pre-flight 클래스 리스트)
+6. 디테일 조정 시 `components.md`
+7. 생성 후 `checklist.md` 자가 점검
 
-## 核心设计原则（哲学）
+## 한국 K-패션 시즌 합본 덱 사례 (참고)
 
-> 这些原则是"一人公司"分享 PPT 的 5 轮迭代总结出来的。违反其中任何一条，视觉感都会垮。
+| 산출물 | 추천 방향 | 슬라이드 수 |
+|---|---|---|
+| 27SS 시즌 합본 (사내 종합) | Monocle Editorial | 22-24 |
+| 26FW 결산 + 27SS 아웃룩 (대표 발표) | WIRED Tech | 18-22 |
+| 와키x마뗑킴 콜라보 제안서 | Monocle Editorial | 15-18 |
+| 아더x브랜드 콜라보 제안 | Domus Architectural | 18-20 |
+| 시리즈 A IR 자료 | WIRED Tech | 20-25 |
+| 마르디 라이프스타일 캠페인 | Kinfolk Slow | 18-22 |
+| 소재 개발 스토리 발표 | Lab / Reference | 12-15 |
 
-1. **克制优于炫技** — WebGL 背景只在 hero 页透出，普通页几乎看不见
-2. **结构优于装饰** — 不用阴影、不用浮动卡片、不用 padding box，一切信息靠**大字号 + 字体对比 + 网格留白**
-3. **内容层级由字号和字体共同定义** — 最大衬线 = 主标题，中衬线 = 副标，大非衬线 = lead，小非衬线 = body，等宽 = 元数据
-4. **图片是第一公民** — 图片只裁底部，保证顶部和左右完整；网格用 `height:Nvh` 固定，不要用 `aspect-ratio` 撑
-5. **节奏靠 hero 页** — hero 和 non-hero 交替，才不累眼睛
-6. **术语统一** — Skills 就是 Skills，不要中英混合翻译
+## 핵심 디자인 원칙 (철학)
 
-## 参考作品
+K-패션 시즌 합본 덱의 5회 이상 반복에서 도출한 원칙:
 
-本 skill 的视觉基调参考了：
+1. **절제 > 기교** — WebGL 배경은 히어로 페이지만 노출, 본문은 거의 안 보임
+2. **구조 > 장식** — 그림자·플로팅 카드·padding box 금지, **큰 글자 + 폰트 대비 + 그리드 여백**으로 정보 전달
+3. **위계는 글자 크기 + 폰트 조합으로 정의** — 가장 큰 세리프 = 메인 제목, 중간 세리프 = 부제, 큰 산세리프 = 리드, 작은 산세리프 = 본문, 모노 = 메타
+4. **이미지가 1순위** — 이미지는 하단만 자르고 상하좌우 완전 노출. 그리드 `height:Nvh` 고정, `aspect-ratio` 금지
+5. **리듬은 hero 페이지로** — hero / non-hero 교차로 시각 피로 방지
+6. **용어 통일** — SKU는 SKU, 캐리오버는 캐리오버, 한·영 혼용 번역 금지
 
-- 歸藏 "一人公司：被 AI 折叠的组织" 分享（2026-04-22，27 页）
-- *Monocle* 杂志的版式
-- YC 总裁 Garry Tan "Thin Harness, Fat Skills" 那篇博客的 demo
+## 출력 규약
 
-可以把它们当做风格锚点。
+단일 HTML 문서로 출력하세요.
+
+- **Claude 환경**: `<artifact identifier="deck-slug" type="text/html" title="덱 제목"><!doctype html>...</artifact>`
+- **그 외 환경**: ` ```html\n<!doctype html>...\n``` ` 코드 블록
+
+출력 앞에 한 문장 ("와키윌리 27SS 시즌 합본 덱을 Monocle Editorial 방향으로 작성했습니다, 22페이지."). 뒤에는 아무것도 덧붙이지 마세요.
+
+## 참고 작품
+
+이 스킬의 비주얼 톤 참고:
+
+- *guizang-ppt-skill* 원본 (歸藏, 中国语 PPT 스킬)
+- *Monocle* 매거진의 판형
+- 마뗑킴 27SS 룩북 (한국 영캐주얼 매거진 톤)
+- 아더에러 시즌 발표 (글로벌 컨템포러리 신비감)

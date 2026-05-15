@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 브랜드] 내부 위키 · [REPLACE 페이지 제목]</title>
+<!--
+  K-패션 내부 위키 / 운영 매뉴얼 / 디자인 시스템 문서 시드.
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+    4) references/layouts.md에서 리듬 1개를 골라
+       <article id="article"> 안에 붙여 넣기 + 좌측 사이드바 / 우측 TOC 갱신
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude (Claude.ai · Claude Code): <artifact identifier type="text/html"> 로 감쌈
+    - 그 외 (ChatGPT · Gemini · Grok · 일반 채팅): 표준 ```html 코드 블록
+    - OpenDesign: 주요 영역에 data-od-id 사용. 그 외에는 id 속성으로 대체.
+
+  K-패션 컨텍스트:
+    - 청중: 신규 입사자(디자이너 / MD / 영업기획), 외주 디자이너, 협력업체
+    - 작성 주체: 부서 실장 또는 위임 받은 시니어
+    - 갱신 주기: 시즌마다 1회 (시즌 전환 시) + 큰 정책 변경 시 즉시
+    - 본문 350자+ 카피 / 코드 블록 1~2개 / 표 1개 / 콜아웃 1~2개 필수
+    - 콜아웃 라벨: 참고 / 주의 / 중요 / 금지 (한국어)
+    - SKU 명명·코드 패턴은 실제 K-패션 코드 (WW-27SS-OUT-005 형식)
+-->
+<style>
+  /* 한국 K-패션 표준 폰트 시스템 */
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+  :root {
+    /* 색상 토큰 — DESIGN.md에서 오버라이드 */
+    --bg:        #fafaf9;
+    --surface:   #ffffff;
+    --code-bg:   #f4f4f2;
+    --fg:        #1c1b1a;
+    --muted:     #6b6964;
+    --muted-2:   #9b9892;
+    --border:    #e6e4e0;
+    --accent:    #c96442;     /* 와키윌리 27SS 톤 */
+    --accent-soft: color-mix(in oklch, var(--accent) 10%, transparent);
+    --warn:      #b8741a;
+    --danger:    #b13b3b;
+    --positive:  #2c8a4f;
+
+    /* 폰트 토큰 */
+    --font-sans:
+      "Pretendard Variable", Pretendard,
+      "Apple SD Gothic Neo", "Noto Sans KR",
+      -apple-system, system-ui, sans-serif;
+    --font-display-report:
+      "Pretendard Variable", "Wanted Sans Variable", "SUIT Variable", sans-serif;
+    --font-display: var(--font-display-report);
+    --font-mono:
+      "JetBrains Mono", "IBM Plex Mono", "SF Mono",
+      ui-monospace, Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  body * { font-variant-numeric: tabular-nums; }
+
+  /* ─── 상단바 ─── */
+  header.topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  header.topbar .brand {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 15px;
+    letter-spacing: -0.005em;
+  }
+  header.topbar .search {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    width: 280px;
+    font: inherit;
+    font-size: 13px;
+    background: var(--bg);
+    color: var(--muted);
+  }
+  header.topbar .actions {
+    display: flex; gap: 10px; align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* ─── 3컬럼 레이아웃 ─── */
+  .layout {
+    display: grid;
+    grid-template-columns: 248px minmax(0, 1fr) 224px;
+    gap: 0;
+    min-height: calc(100vh - 56px);
+  }
+  @media (max-width: 1100px) {
+    .layout { grid-template-columns: 224px 1fr; }
+    aside.toc { display: none; }
+  }
+  @media (max-width: 760px) {
+    .layout { grid-template-columns: 1fr; }
+    nav.sidebar { display: none; }
+    article { padding: 32px 24px 64px; }
+  }
+
+  /* ─── 좌측 사이드 네비 ─── */
+  nav.sidebar {
+    padding: 24px 16px;
+    border-right: 1px solid var(--border);
+    overflow-y: auto;
+    font-size: 14px;
+    position: sticky;
+    top: 56px;
+    height: calc(100vh - 56px);
+  }
+  nav.sidebar .group { margin-bottom: 22px; }
+  nav.sidebar .group-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted-2);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 0 8px 8px;
+  }
+  nav.sidebar a {
+    display: block;
+    color: var(--fg);
+    text-decoration: none;
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: 13.5px;
+  }
+  nav.sidebar a:hover { background: var(--surface); }
+  nav.sidebar a.active {
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 500;
+    border-left: 2px solid var(--accent);
+    padding-left: 6px;
+  }
+
+  /* ─── 중앙 article ─── */
+  article {
+    padding: 40px 56px 80px;
+    max-width: 760px;
+  }
+  .crumbs {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 12px;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  article h1 {
+    font-family: var(--font-display);
+    font-size: 36px;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+  article .lede {
+    color: var(--muted);
+    font-size: 17px;
+    margin: 0 0 32px;
+    line-height: 1.55;
+  }
+  article h2 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    margin: 40px 0 12px;
+    font-weight: 600;
+    scroll-margin-top: 72px;
+  }
+  article h3 {
+    font-family: var(--font-display);
+    font-size: 16.5px;
+    margin: 24px 0 8px;
+    font-weight: 600;
+  }
+  article p { margin: 12px 0; }
+  article a { color: var(--accent); text-decoration: underline; text-underline-offset: 3px; }
+
+  /* ─── 코드 ─── */
+  code {
+    font-family: var(--font-mono);
+    background: var(--code-bg);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.55;
+    margin: 14px 0;
+  }
+  pre code { background: transparent; padding: 0; font-size: 13px; }
+
+  /* ─── 콜아웃 ─── */
+  .callout {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin: 20px 0;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .callout .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 4px;
+    font-weight: 600;
+  }
+  .callout.warn { border-left-color: var(--warn); }
+  .callout.warn .label { color: var(--warn); }
+  .callout.danger { border-left-color: var(--danger); }
+  .callout.danger .label { color: var(--danger); }
+  .callout.info { border-left-color: var(--muted-2); }
+  .callout.info .label { color: var(--muted); }
+
+  /* ─── 표 ─── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 13.5px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    font-weight: 500;
+    background: var(--code-bg);
+  }
+  td.num { font-family: var(--font-mono); text-align: right; }
+
+  /* ─── 페이저 ─── */
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+  .pager a {
+    flex: 1;
+    text-decoration: none;
+    color: var(--fg);
+    padding: 12px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  .pager a small {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  /* ─── 우측 TOC ─── */
+  aside.toc {
+    padding: 40px 24px 24px;
+    font-size: 13px;
+    border-left: 1px solid var(--border);
+    position: sticky;
+    top: 56px;
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+  }
+  aside.toc .toc-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted-2);
+    margin-bottom: 10px;
+  }
+  aside.toc a {
+    display: block;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 4px 0;
+    font-size: 13px;
+  }
+  aside.toc a.active {
+    color: var(--accent);
+    font-weight: 500;
+  }
+  aside.toc a:hover { color: var(--fg); }
+</style>
+</head>
+<body>
+  <!-- 상단바 -->
+  <header class="topbar" data-od-id="topbar">
+    <span class="brand">◰ [REPLACE WACKYWILLY] 내부 위키</span>
+    <input class="search" placeholder="검색 · ⌘K" />
+    <div class="actions">
+      <span>v3.4</span>
+      <span>· [REPLACE 27SS] 갱신</span>
+    </div>
+  </header>
+
+  <div class="layout">
+    <!-- 좌측 사이드 네비: references/layouts.md의 사이드 네비를 가져와 갱신 -->
+    <nav class="sidebar" data-od-id="sidebar">
+      <!--
+        리듬 선택에 따라 네비 그룹·링크를 갱신하세요.
+        리듬 A — 시작하기 / 상품 등록 / 운영 / 정산
+        리듬 B — 가이드라인 / 로고 / 컬러·타이포 / 그래픽
+        리듬 C — 발주 시작 / SOP / QC / 입고
+        리듬 D — 디자인 토큰 / 그래픽 / 룩북 / 상세
+      -->
+    </nav>
+
+    <!-- 중앙 article: 본문 -->
+    <article id="article" data-od-id="article">
+      <!--
+        references/layouts.md에서 리듬 1개를 골라 여기에 붙여 넣으세요.
+
+        리듬 A · 무신사·29CM 입점 매뉴얼 (기본값)
+        리듬 B · 브랜드 가이드라인 (로고·컬러·타이포·그래픽)
+        리듬 C · 발주 SOP (시즌 발주 흐름·발주서·OEM 컨택)
+        리듬 D · 디자인 시스템 문서 (토큰·그래픽·룩북 표준)
+
+        모든 리듬은 다음 구조를 따릅니다:
+        - 크럼 + H1 + lede 문단 (350자+ 카피)
+        - H2 섹션 4~5개
+        - 코드 블록 1~2개 (한국어 주석 + SKU/명령어 패턴)
+        - 표 1개 (카테고리 매핑 / BTA 분포 / LOT 표준 등)
+        - 콜아웃 1~2개 (참고 / 주의 / 금지)
+        - 페이저 (이전 / 다음)
+      -->
+    </article>
+
+    <!-- 우측 TOC: 본문 H2 anchors -->
+    <aside class="toc" data-od-id="toc">
+      <div class="toc-label">이 페이지에서</div>
+      <!-- references/layouts.md의 TOC anchors를 가져와 갱신 -->
+    </aside>
+  </div>
+</body>
+</html>

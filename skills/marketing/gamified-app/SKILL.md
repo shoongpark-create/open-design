@@ -1,107 +1,272 @@
 ---
 name: gamified-app
 description: |
-  A multi-frame gamified mobile-app prototype — three phone frames on a dark
-  showcase stage. Frame 1: cover / poster, Frame 2: today's quests with XP
-  ribbons and a level bar, Frame 3: quest detail. Vivid quest tiles, level
-  ribbon, bottom tab bar. Use when the brief asks for a "gamified app",
-  "habit tracker", "RPG-style life app", "level-up app", "daily quests",
-  "XP / streak app", or "ELI5-style explainer app".
+  K-패션 브랜드 **멤버십 마일리지 / 일일 스타일 챌린지 / 시즌 출석 리워드 앱**
+  프로토타입을 다크 쇼케이스 위 3개 폰 프레임으로 생성하는 스킬입니다. 1번 폰:
+  시즌 마일리지 캠페인 표지 / 2번 폰: 오늘의 스타일 챌린지 대시보드(레벨 = 멤버십
+  등급, XP = 적립 포인트, 6개 데일리 챌린지 타일) / 3번 폰: 챌린지 디테일(7일 OOTD
+  인증 등). 무신사 출석 적립, 카카오톡 채널 친구 추가 적립, 29CM VIP 등급 시스템,
+  무신사 골드/다이아 멤버십, 마뗑킴 자사몰 회원 등급 톤을 다룹니다. 사용자가
+  "멤버십 마일리지 앱", "출석 리워드 앱", "OOTD 챌린지 앱", "스타일 챌린지 앱",
+  "포인트 적립 앱", "시즌 출석 이벤트", "fashion loyalty app"을 언급하면 활성화하세요.
 triggers:
-  - "gamified app"
-  - "habit tracker"
-  - "rpg app"
-  - "level up app"
-  - "daily quests"
-  - "xp app"
-  - "streak app"
-  - "life management app"
-  - "游戏化"
-  - "习惯打卡"
+  - "멤버십 마일리지 앱"
+  - "마일리지 앱"
+  - "포인트 적립 앱"
+  - "출석 리워드 앱"
+  - "출석 적립 앱"
+  - "OOTD 챌린지 앱"
+  - "스타일 챌린지 앱"
+  - "데일리 스타일 챌린지"
+  - "시즌 출석 이벤트"
+  - "회원 등급 앱"
+  - "VIP 등급 앱"
+  - "fashion loyalty app"
+  - "fashion rewards app"
+  - "ootd challenge app"
 od:
   mode: prototype
   platform: mobile
-  scenario: personal
-  featured: 4
+  scenario: marketing
+  category: marketing
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Design a gamified life-management app — multi-screen mobile prototype: cover poster, today's quests with XP, and a quest detail. ‘Daily quests for becoming a better human.’"
+  example_prompt: "와키윌리(WACKYWILLY) 27SS 멤버십 마일리지 앱 프로토타입. 표지 슬로건 = '오늘의 스타일을 인증하고 리워드를 받으세요.' 대시보드 = 회원명 '@minji', 등급 GOLD, 누적 포인트 1,648 / 다음 등급(PLATINUM)까지 2,480pt. 데일리 챌린지 6개(OOTD 인증 · 룩북 저장 · 친구 초대 · 매장 방문 · 인스타 태그 · 위시리스트 추가). 챌린지 디테일 = OOTD 인증 7일 챌린지, 4단계 미션. iPhone 다크 쇼케이스, 3개 폰 프레임 가로 정렬."
 ---
 
-# Gamified App Skill
+# K-패션 멤버십 마일리지 / 일일 스타일 챌린지 앱 스킬
 
-Produce a multi-screen mobile prototype on a single dark showcase page.
-Three phone frames side-by-side, each one its own moment in the journey.
+K-패션 브랜드의 **멤버십 마일리지 앱 · 일일 스타일 챌린지 앱 · 시즌 출석 리워드 앱** 다중 화면 프로토타입을 단일 다크 쇼케이스 페이지 위에 가로로 정렬된 3개 폰 프레임으로 생성합니다. 무신사 출석 적립, 카카오톡 채널 친구 추가 적립, 29CM VIP 등급 시스템, 마뗑킴/마르디 자사몰 회원 등급 톤을 다룹니다.
 
-## Workflow
+이 산출물은 **이커머스팀(디지털팀) + 마케팅실(CRM·캠페인팀) + 디자인실(그래픽팀)** 합작으로, 자사몰 앱 / 카카오톡 채널 미니샵 / 마이페이지 안의 이벤트 미니사이트에 해당하는 화면입니다.
 
-1. **Read the active DESIGN.md** (injected above). For gamified apps, lean
-   on bold display type for headlines and a brighter, broader palette than
-   most products — quests look like quests because the colors do.
-2. **Pick the brand + value prop** from the brief. Generate real quest
-   names (e.g. "Body — 20-min strength: pushups & planks", "Read — Four
-   Thousand Weeks", "Listen — Huberman Lab · Sleep Architecture",
-   "Nourish — Cook a high-protein lunch", "Mind — 10-min focus
-   meditation", "Watch — The Bear · S3 E4").
-3. **Stage** — full-bleed dark page (near-black `#0e0d0c` or DS dark token)
-   with a soft top spotlight gradient. Above the phones, a small caption
-   row: "HI-FI PROTOTYPE · IPHONE" left, brand wordmark right, both in mono.
-4. **Phones** — three 360×780 phone frames in a horizontal row (wraps to
-   stack on narrow viewports). Each phone:
-   - 12px black bezel, 44px corner radius, dynamic-island notch.
-   - Status bar (time / signal / battery).
-   - Phone-specific content (below).
-   - Bottom tab bar with 5 icons (Today, Library, Stats, ⊕ central CTA,
-     Profile). Active tab in accent.
-5. **Phone 1 — cover poster (sales/value prop)**:
-   - Status bar.
-   - HI-FI PROTOTYPE · IPHONE eyebrow.
-   - Big display headline ("Daily quests for becoming a better human."),
-     accent on "becoming".
-   - 1–2 sentence body in muted serif/sans.
-   - Mono tip line ("Tap quests to open detail. Toggle [theme] in the
-     toolbar to switch theme & layout.")
-   - Subtle scrolling teaser of the next screen at the bottom edge.
-6. **Phone 2 — today's quests dashboard** (the hero screen):
-   - Greeting "Good morning, Sam" + small XP-bell ringing.
-   - Level ribbon — "LV 14 · Level 14 · 1648 / 2480 XP" with a progress
-     bar inside a glassmorphic ribbon.
-   - Sub-line: "8 quests waiting · earn 430 XP today".
-   - 3×2 grid of quest tiles. Each tile: rounded corner, pastel accent
-     color, glyph chip in top-left, title, mini-meta line, "+NN XP" pill
-     in bottom-right.
-   - Bottom tab bar.
-7. **Phone 3 — quest detail**:
-   - Back arrow + screen title ("Quest").
-   - Hero block with the quest's accent color, big serif quest title
-     ("Body — strength"), short narrative body, "REWARD +90 XP" stamp.
-   - Steps checklist (3–4 micro-tasks, one done, two pending).
-   - Big primary CTA "Start quest" pill at the bottom in accent.
-8. **Write** a single HTML document:
-   - `<!doctype html>` through `</html>`, CSS inline.
-   - All in CSS — no images. Use `linear-gradient` and inline SVG glyphs
-     for tile chips and tab icons.
-   - `data-od-id` on stage, each phone, each frame's regions.
-9. **Self-check**:
-   - Three frames, each with a distinct purpose. Not three copies of the
-     same screen.
-   - Tile colors don't overpower — each quest tile uses a different pastel
-     against the same neutral surface.
-   - Reads as gamified and adult — playful, not childish.
+- **멤버십 마일리지 앱** — 등급 시스템(SILVER/GOLD/PLATINUM/VIP) + 누적 포인트 + 다음 등급 진척 + 데일리 출석 적립
+- **일일 스타일 챌린지** — `오늘의 룩` 인증, OOTD 챌린지, 룩북 저장, 친구 초대 등 6개 챌린지 + 완료 시 포인트 적립
+- **시즌 출석 리워드** — 시즌 동안 매일 앱 방문 → 7일 / 14일 / 30일 마일스톤 보상 (사전예약 우선권, 룩북 PDF, 사은품)
 
-## Output contract
+작성 주체는 **마케팅실(CRM·캠페인 기획) + 이커머스팀(디지털팀, 앱 화면 빌드) + 디자인실(그래픽팀, 시즌 키비주얼 및 타일 컬러)** 3자 합작입니다.
 
-Emit between `<artifact>` tags:
+## 환경 호환성
+
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 본문에서 권장하는 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기 기능을 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 워크플로는 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면, 사용자에게 `DESIGN.md` 경로나 기본 톤(밝은 영캐주얼 / 다크 럭셔리 / 컬러풀 IP 톤)을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 비즈니스 등록(register)을 따릅니다.
+
+- 모든 라벨을 한국어로 직역하지 마세요. 한국 패션 현장에서 실제로 쓰는 영어 산업용어는 그대로 유지합니다.
+- 유지하는 용어 예시: LEVEL · MEMBERSHIP · POINT · MILEAGE · CHALLENGE · OOTD · LOOKBOOK · DROP · STREAK · MEMBERS ONLY · BONUS · DAILY · WEEKLY · MONTHLY.
+- 레벨/등급 명칭은 한국 표준 멤버십 등급: `WELCOME / SILVER / GOLD / PLATINUM / VVIP` 또는 `LV 1 / LV 2 / ...`. 게임 RPG 톤이 아니라 패션 멤버십 톤.
+- 포인트/마일리지 표기: 숫자는 mono, 단위는 `pt` 또는 `P`. 예: `1,648 pt`, `+90 pt`. 큰 금액 환산은 `₩` 표기.
+- 챌린지 이름은 짧은 명사구: `오늘의 룩 인증`, `룩북 저장`, `친구 초대`, `매장 방문`, `인스타 태그`, `위시리스트 추가`, `리뷰 작성`, `사전예약 신청`.
+- 챌린지 설명은 한 줄 명사구: `27SS 룩 인증 #wackywilly_27ss · 인스타 공개 계정`, `이번 주 매장 방문 1회 + QR 스캔`.
+- 카피 톤은 **친근한 격려 + 짧고 명확**. 가벼운 위트는 OK. 어린이 톤이나 RPG 클리셰("전사", "용사", "퀘스트") 금지.
+- CTA는 행동: `챌린지 시작`, `OOTD 인증하기`, `친구 초대`, `포인트 사용`, `룩북 다운로드`.
+
+## 타이포그래피
+
+프로젝트 루트의 `DESIGN.md` 타이포그래피 토큰을 사용하세요. 앱 화면은 **세리프 디스플레이(헤드라인) + sans(UI) + mono(숫자·라벨)** 3폰트 조합이 표준입니다.
+
+| 위치 | 권장 폰트 |
+|---|---|
+| 표지 헤드라인 / 챌린지 디테일 헤드라인 | **세리프 디스플레이** — Hahmlet, 본명조, Instrument Serif, DM Serif Display |
+| 본문 / UI / 챌린지 타일 제목 | Pretendard Variable / Inter |
+| 레벨/포인트/XP 숫자, 라벨, 캡션 | IBM Plex Mono / Geist Mono |
+| 시스템 아이콘 | SVG monoline (이모지 글리프 사용 가능 — 단 ❤️🔥 같은 데이팅/게임 톤 이모지는 회피) |
+
+영캐주얼/팬덤 IP(와키윌리, 키르시) 톤일 경우 디스플레이는 G마켓 산스나 Bagel Fat One으로 교체.
+
+## 폴더 구조
 
 ```
-<artifact identifier="game-slug" type="text/html" title="Mobile — App Name">
-<!doctype html>
-<html>...</html>
-</artifact>
+gamified-app/
+├── SKILL.md          ← 이 파일을 읽고 있습니다
+└── example.html      ← 시드 + 참고 산출물 (와키윌리 27SS 멤버십 챌린지 앱)
 ```
 
-One sentence before the artifact, nothing after.
+`example.html`은 단일 파일 시드입니다. 복사해 `index.html`로 사용한 뒤 타일 컬러, 챌린지 이름, 등급 이름, 포인트 값을 교체합니다.
+
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. 이 스킬 폴더의 `example.html`을 처음부터 끝까지 `<style>` 블록 포함 읽으세요. 다크 쇼케이스 + 3개 폰 프레임 + 각 폰의 상태바·노치·하단 탭바가 모두 정의되어 있습니다. 6개 타일 컬러 변수(`--tile-1` ~ `--tile-6`)는 그대로 두고 카피만 교체합니다.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰)를 읽고, 다크 스테이지 컬러(`--stage`)와 액센트 컬러(`--accent`, `--accent-2`)를 브랜드 키컬러로 바인딩하세요.
+3. 게임 RPG 클리셰(`퀘스트`, `용사`, `XP`라는 단어가 단독 등장)를 패션 멤버십 톤으로 치환할 준비를 합니다. `XP`는 `pt` 또는 `P`(point/포인트)로 교체.
+
+### Step 1 — 캠페인 정보 수집
+
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
+
+- **브랜드명** + 워드마크 (예: WACKYWILLY, matin kim)
+- **캠페인 이름** — 예: `27SS 출석 챌린지`, `봄 마일리지 시즌`, `OOTD 7일 인증`
+- **표지 슬로건** — 1행 한국어 또는 영문. 18~28자
+- **회원 정보** — 핸들(`@minji`), 현재 등급, 누적 포인트, 다음 등급까지 남은 포인트
+- **6개 챌린지** — 각각 이름 + 한 줄 설명 + 적립 포인트
+- **챌린지 디테일(3번 폰)** — 한 가지 챌린지의 4단계 미션 + 1개 완료 / 3개 대기
+- **하단 탭바 5개** — 표준: `홈 · 카테고리 · ⊕(추가) · 챌린지 · 마이`
+- **톤 옵션** — 다크 럭셔리 / 다크 + 컬러 영캐주얼 / 다크 + IP 팝 톤 중 1개
+
+### Step 2 — 스테이지 + 폰 3개 구성
+
+`example.html`을 `index.html`로 복사한 뒤, **필수 구조 (순서대로)**:
+
+1. **스테이지 바** — 좌측: `HI-FI PROTOTYPE · IPHONE` (mono uppercase) / 가운데: 브랜드 워드마크(세리프 이탤릭 + 액센트 닷) / 우측: `3 SCREENS · 27SS`
+2. **3개 폰 프레임** — 가로 정렬 (좁은 뷰포트에서는 세로 스택). 360x760 (또는 320x700 in narrow).
+3. **폰 1 — 표지 포스터 (캠페인 소개)**:
+   - 상태바
+   - 작은 라벨 칩 (`27SS · MEMBERSHIP` + 액센트 닷)
+   - 큰 세리프 헤드라인 (`오늘의 스타일을 인증하고 리워드를 받으세요.`) — 핵심 단어에 액센트 (예: `리워드`만 액센트)
+   - 1~2문장 본문 (한국어). `매일의 작은 인증이 모여 시즌 끝엔 사전예약 우선권으로 돌아옵니다.`
+   - mono 팁 라인 (`타일을 탭하면 챌린지 상세. 7일 연속 인증 시 BONUS +200pt.`)
+   - 하단 큰 미리보기 박스 (`NEXT — 오늘의 챌린지`) + 액센트 스와치
+4. **폰 2 — 오늘의 챌린지 대시보드 (히어로 화면)**:
+   - 상태바
+   - 인사 (`안녕하세요, @minji 님`) + 작은 알림 벨(`x3`)
+   - **레벨 리본** — 다크 글래스모피즘 박스. 등급 칩(`GOLD`) + 라벨 `MEMBERSHIP` + 등급명 + 현재 / 다음 등급 포인트 + 진척 바 (66% 채움, 액센트 그라데이션)
+   - 서브 라인: `8개 챌린지 진행 가능 · 오늘 최대 [430 pt] 적립`
+   - **6개 챌린지 타일** (3×2 그리드). 각 타일: 둥근 코너, 파스텔 액센트 컬러(타일 1~6 변수 사용), 좌상단 글리프 칩 (1글자 영문 또는 SVG), 제목, 한 줄 메타, 우하단 `+NN pt` 칩
+   - 하단 탭바 (5개 탭, 활성 탭은 `홈`)
+5. **폰 3 — 챌린지 디테일**:
+   - 상태바
+   - 상단바 (← 뒤로 + `CHALLENGE · 03 / 08`)
+   - 히어로 블록 (그라데이션 배경, 카테고리 배지, 큰 세리프 챌린지 제목, 본문 1~2문장, 우상단 `+90 pt` 스탬프)
+   - 오늘의 미니 미션 체크리스트 (4개, 1개 완료 / 3개 대기). 각 미션 옆 `+NN pt` 메타
+   - 하단 시작 CTA (`챌린지 시작`) — 알약 형태, 다크 배경
+   - 하단 탭바
+
+**OpenDesign 환경에서 사용 시:** 각 섹션과 폰에 `data-od-id` 속성을 추가하면 인라인 코멘트 모드를 사용할 수 있습니다. 예: `<div class="phone" data-od-id="phone-cover">` 또는 `<div class="phone" id="phone-cover">`.
+
+### Step 3 — 카피 채우기 (K-패션 챌린지 예시)
+
+**6개 챌린지 예시 (와키윌리 27SS 톤)**:
+
+| 글리프 | 제목 | 메타 | 포인트 |
+|---|---|---|---|
+| O | 오늘의 룩 | 27SS OOTD 인증 #wackywilly_27ss | +90 pt |
+| L | 룩북 저장 | 27SS BLOOM LOOKBOOK PDF 다운로드 | +60 pt |
+| I | 친구 초대 | 카카오톡 친구 1명 가입 시 | +50 pt |
+| S | 매장 방문 | 성수 플래그십 QR 스캔 | +70 pt |
+| T | 인스타 태그 | 인스타 공개 계정 + @wackywilly 태그 | +40 pt |
+| W | 위시리스트 | 신상 3개 위시리스트 추가 | +30 pt |
+
+**챌린지 디테일(폰 3) 예시 — OOTD 인증 7일 챌린지**:
+
+- 카테고리 배지: `— DAILY · OOTD`
+- 헤드라인: `7일이 만드는 시그니처 룩.`
+- 본문: `매일 오늘의 룩을 인증하면 7일째 BONUS +200pt + 사전예약 우선권. @minji 님은 이번 시즌 11회 인증.`
+- 우상단 스탬프: `+90 pt`
+- 미션 4개:
+  - ✓ 인스타 공개 계정 설정 — `+5 pt` (완료)
+  - ⬡ 오늘의 룩 사진 1장 업로드 — `+30 pt`
+  - ⬡ #wackywilly_27ss 태그 추가 — `+30 pt`
+  - ⬡ 자사몰 앱 미인증 확인 — `+25 pt`
+
+### Step 4 — 자체 검수
+
+다음 체크리스트를 한 항목씩 직접 확인하세요.
+
+- 3개 폰 각각 다른 목적 (표지 / 대시보드 / 디테일). 같은 화면 3개 반복 금지
+- 6개 챌린지 타일 모두 서로 다른 파스텔 컬러 (`--tile-1` ~ `--tile-6` 6변수)
+- 게임 RPG 클리셰 없음 (`퀘스트`, `용사`, `Adventure` 단독 등장 금지). `챌린지`/`미션`은 OK
+- `XP` 표기 모두 `pt` 또는 `P`로 치환됨
+- 핫 액센트 컬러 사용 ≤ 4회 (헤드라인 핵심 단어 1 + 레벨 진척 바 1 + 활성 탭 1 + 챌린지 디테일 스탬프 1 정도)
+- 등급명이 패션 멤버십 톤 (SILVER/GOLD/PLATINUM/VVIP). 게임 톤(`Bronze 1`, `Master`) 금지
+- 친근하고 어른스러운 톤 — 어린이 톤 금지, 동시에 너무 차갑지도 않게
+- 외부 이미지 URL 없음 — 모든 비주얼 CSS 그라데이션 + 인라인 SVG
+- 모바일 1180w 이하에서 폰 크기가 자동으로 작아지는지 확인
+
+### Step 5 — 산출물 출력
+
+- **Claude 환경**:
+  ```
+  <artifact identifier="kfashion-loyalty-app-slug" type="text/html" title="멤버십 챌린지 — 브랜드/시즌">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경**: 표준 마크다운 HTML 코드 블록.
+
+출력 앞에 한 문장 요약(예: "와키윌리 27SS 멤버십 챌린지 앱 3개 화면 프로토타입을 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.
+
+## 하드 룰
+
+- **게임 RPG 클리셰 금지.** `퀘스트`(단독), `용사`, `전사`, `XP`(단독 표기), `Level Up` 영어 그대로 등장 금지. 한국 패션 멤버십 표준 용어(`챌린지`, `미션`, `등급 업그레이드`, `포인트`, `마일리지`)로 치환.
+- **패션 멤버십 등급 톤.** SILVER/GOLD/PLATINUM/VVIP. RPG 톤(`Bronze 1`, `Master`)이나 무신사 표준에서 벗어난 톤 금지.
+- **친근 + 어른.** 어린이 톤 금지(이모티콘 남발, 의태어 남발). 동시에 너무 차갑지 않게(`@minji 님` 같은 친근 호칭 사용).
+- **3개 폰 = 3개 목적.** 표지 / 대시보드 / 디테일. 같은 화면 3개 반복 금지.
+- **6개 타일 = 6개 다른 컬러.** 파스텔 변주. 한 색만 반복 금지.
+- **포인트 숫자는 mono.** 등급 진척, 적립 포인트, 누적 금액 모두 mono + `tnum`.
+- **하트·불꽃 이모지 금지.** 데이팅 클리셰. 챌린지 글리프는 1글자 영문(O/L/I/S/T/W) 또는 SVG monoline.
+- **외부 이미지 URL 금지.** 모든 비주얼은 CSS 그라데이션 + 인라인 SVG.
+
+## K-패션 멤버십/챌린지 사례 (참고)
+
+| 브랜드/플랫폼 | 챌린지 특성 | 시그니처 패턴 |
+|---|---|---|
+| **무신사 출석 적립** | 자사 멤버십, 매일 출석 → 5pt | 출석 도장 + 7일 연속 보너스 + 회원 등급별 차등 |
+| **카카오톡 채널 친구 추가 적립** | 채널 친구 추가 시 1회성 적립 | 알림톡 + 친구 추가 쿠폰 + 즉시 적립 |
+| **29CM VIP 등급** | 누적 금액 기반 등급 | 등급별 무료배송 횟수, 시크릿 세일 우선권 |
+| **W컨셉 PLUS** | 디자이너 브랜드 사전예약 우선 | 등급별 적립률 1~5%, 디자이너 쿠폰 |
+| **마뗑킴 자사몰 회원** | 사전예약 우선 + 매장 초대 | 사전예약 24h 우선 오픈, 매장 VIP 룸 초대 |
+| **무신사 OOTD 챌린지 (#오오티디)** | UGC 챌린지, 인증 시 적립 | 인스타 태그 + 인증샷 + 위클리 베스트 룩 선정 |
+| **와키윌리 캐릭터 팬덤 챌린지** | IP 기반 7일 인증 챌린지 | 시그니처 캐릭터 + 굿즈 리워드 |
+
+위 사례는 카피·예시 참고용입니다. 실제 산출물은 사용자 브랜드의 실제 멤버십·챌린지로 작성하세요.
+
+## 한국 패션기업 부서 R&R + 채널 연계
+
+| 부서 | 역할 |
+|---|---|
+| **마케팅실 (CRM·캠페인팀)** | 챌린지 기획, 적립 포인트 정책, 시즌 캠페인 카피 |
+| **이커머스팀(디지털팀)** | 앱 화면 UI 빌드, 챌린지 인증 시스템, 포인트 정산 백엔드 |
+| **MD실** | 등급별 리워드 상품 선정 (사은품 · 한정 굿즈) |
+| **디자인실(그래픽팀)** | 시즌 키비주얼, 타일 컬러, 챌린지 글리프 디자인 |
+| **CS실** | 챌린지 FAQ, 카카오톡 알림톡 응대, 포인트 분쟁 처리 |
+
+### 채널 연계
+
+- **자사몰 앱** — 카페24 모바일 앱 / 자체 개발 앱(React Native/Flutter). 멤버십 마이페이지 안 챌린지 미니사이트
+- **카카오톡 채널** — 매일 챌린지 알림톡 발송, 인증 완료 시 즉시 알림톡
+- **카카오 비즈채널 미니샵** — 카카오톡 안 미니샵 안에 멤버십 페이지 노출
+- **인스타그램** — OOTD 챌린지 인증 (해시태그 + 태그). 인스타 DM으로 인증 알림 연동
+- **매장 POS / QR** — 매장 방문 챌린지(QR 스캔 시 자동 적립)
+- **무신사 입점 페이지** — 무신사 자체 적립과 별개로 자사 캠페인 알림 발송
+
+## 시즌 사이클 내 위치
+
+```
+[시즌 시작 4주 전]   ▶ 시즌 출석 챌린지 캠페인 기획 LOCK (이 스킬)
+[시즌 시작 2주 전]   카카오톡 알림톡 발송 시작 (`27SS 챌린지 곧 시작`)
+[시즌 시작 D-1]      앱 표지 화면(폰 1) 자사몰에 노출
+[시즌 시작 D-DAY]    오늘의 챌린지 대시보드(폰 2) 활성화. 첫 챌린지 OOTD 인증
+[판기 중반 (S2~S3)]  주차별 챌린지 교체, 위클리 베스트 룩 발표
+[판기 종료]          시즌 마무리 보너스 챌린지 (BONUS +500pt), 다음 시즌 사전예약 우선권 부여
+```
+
+캠페인 기획은 보통 시즌 시작 4~6주 전, 마케팅실 캠페인팀에서 시작합니다. 챌린지 시스템 빌드는 이커머스팀(디지털팀) 2~3주 작업.
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**:
+  ```
+  <artifact identifier="kfashion-loyalty-app-slug" type="text/html" title="멤버십 챌린지 — 브랜드/시즌">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록.
+
+출력 앞에 한 문장 요약(예: "와키윌리 27SS 멤버십 챌린지 앱 3개 화면 프로토타입을 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

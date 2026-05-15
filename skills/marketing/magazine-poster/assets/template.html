@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 브랜드] [REPLACE 시즌] · 매니페스토</title>
+<!--
+  K-패션 매거진 포스터 시드 — 일요일판 신문 1면 톤.
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 카피로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+       (--paper = 크림 종이톤, --accent = 단일 액센트 컬러)
+    4) references/layouts.md에서 리듬 1개를 골라 <main class="poster"> 안에 붙여넣기
+
+  레이아웃 메모:
+    - 단일 페이지 1280~1440px 권장 (인쇄 포스터 비율)
+    - 6개 번호 섹션 본문은 2단 또는 3단 CSS Grid
+    - 헤드라인 = 페이지 지배. 취소선 1단어 + 이탤릭 액센트 1단어 (정확히 1회씩)
+    - 외부 이미지 URL 금지. 시각 요소는 룰·도트 노이즈·콜아웃 박스로만.
+
+  환경 호환성:
+    - Claude 환경: <artifact> 태그로 감싸 출력
+    - 그 외 환경: 표준 마크다운 HTML 코드 블록
+    - OpenDesign 환경: data-od-id 속성 사용 가능. 그 외 환경에서는 일반 id로 대체.
+
+  카피 톤:
+    - 헤드라인 = 짧은 한 문장 또는 영문/국문 혼용 한 줄
+    - 6개 번호 섹션 아이브로우 = mono 영문 대문자 (01 · COLOR)
+    - 본문 = 신문 사설처럼 차분한 단정형
+    - 콜아웃 인용문 = mono 따옴표 1줄
+-->
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=Noto+Serif+KR:wght@400;500;600;700&family=Courier+Prime:ital@0;1&display=swap");
+
+  :root {
+    /* 종이 톤 · 단일 액센트 */
+    --paper:    #f3eee2;
+    --paper-2:  #ede8dc;
+    --fg:       #1a1714;
+    --muted:    #6b5f54;
+    --rule:     #1a1714;
+    --rule-soft: #c8bfae;
+    --accent:   #8a3a2a;  /* 와인/벽돌 — 신문 1면 액센트 톤 */
+
+    /* 폰트 */
+    --font-body:
+      "Pretendard Variable", Pretendard,
+      -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", system-ui, sans-serif;
+
+    --font-display:
+      "Hahmlet", "Instrument Serif", "Noto Serif KR",
+      ui-serif, Georgia, "Times New Roman", serif;
+
+    --font-serif-body:
+      "Hahmlet", "Noto Serif KR", ui-serif, Georgia, serif;
+
+    --font-mono:
+      "Courier Prime", "JetBrains Mono", "IBM Plex Mono",
+      ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background:
+      radial-gradient(circle at 20% 30%, rgba(26, 23, 20, 0.04) 1px, transparent 1.5px) 0 0 / 8px 8px,
+      radial-gradient(circle at 80% 70%, rgba(26, 23, 20, 0.03) 1px, transparent 1.5px) 4px 4px / 8px 8px,
+      var(--paper);
+    color: var(--fg);
+    font-family: var(--font-serif-body);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── 포스터 컨테이너 ─── */
+  .poster {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px 56px 56px;
+    min-height: 100vh;
+  }
+
+  /* ─── 상단 룰 + 데이트라인 ─── */
+  .top-rule {
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    padding: 8px 0;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--fg);
+  }
+  .top-rule .left { display: flex; gap: 18px; }
+  .top-rule .left span:first-child { font-weight: 600; }
+
+  /* 상단 아이브로우 (POSTED TODAY 등) */
+  .top-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+  }
+
+  /* ─── 헤드라인 락업 ─── */
+  .lockup {
+    margin-bottom: 24px;
+  }
+  .headline {
+    font-family: var(--font-display);
+    font-size: clamp(56px, 8vw, 124px);
+    line-height: 0.98;
+    letter-spacing: -0.025em;
+    margin: 0 0 18px;
+    font-weight: 700;
+  }
+  .headline .strike {
+    text-decoration: line-through;
+    text-decoration-thickness: 3px;
+    text-decoration-color: var(--fg);
+  }
+  .headline .accent-word {
+    color: var(--accent);
+    font-style: italic;
+    font-family: var(--font-display);
+  }
+  .deck {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--muted);
+    max-width: 56ch;
+    margin: 0 0 18px;
+  }
+  .deck::before {
+    content: "— ";
+    color: var(--accent);
+  }
+  .accent-rule {
+    width: 80px;
+    height: 4px;
+    background: var(--accent);
+    margin: 8px 0 0;
+  }
+
+  /* ─── 6개 번호 섹션 본문 그리드 ─── */
+  .body-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px 36px;
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--rule);
+  }
+  .cell {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .cell .num-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+  }
+  .cell h3 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    line-height: 1.2;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  .cell p {
+    font-family: var(--font-serif-body);
+    font-size: 14px;
+    line-height: 1.65;
+    margin: 0;
+    color: var(--fg);
+  }
+  .cell .callout {
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: color-mix(in oklch, var(--accent) 6%, var(--paper-2));
+    border-left: 3px solid var(--accent);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--fg);
+    font-style: italic;
+  }
+  .cell .callout::before { content: "\201C"; }
+  .cell .callout::after  { content: "\201D"; }
+
+  /* ─── 풋터 밴드 ─── */
+  .pagefoot {
+    margin-top: 48px;
+    padding-top: 18px;
+    border-top: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    gap: 24px;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .pagefoot .plate {
+    padding: 4px 10px;
+    background: var(--fg);
+    color: var(--paper);
+    border-radius: 2px;
+    letter-spacing: 0.12em;
+    font-weight: 600;
+  }
+  .pagefoot .closing {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 13.5px;
+    color: var(--fg);
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  /* ─── 반응형 ─── */
+  @media (max-width: 1024px) {
+    .body-grid { grid-template-columns: repeat(2, 1fr); }
+    .poster { padding: 32px 28px 40px; }
+  }
+  @media (max-width: 640px) {
+    .body-grid { grid-template-columns: 1fr; gap: 24px; }
+    .headline { font-size: clamp(40px, 12vw, 64px); }
+    .deck { font-size: 17px; }
+    .pagefoot {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+  }
+
+  /* 인쇄 (A2/A3 포스터 출력) */
+  @media print {
+    body { background: var(--paper); }
+    .poster { max-width: none; padding: 24mm; }
+    .body-grid { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+  <main class="poster" data-od-id="poster">
+    <!--
+      references/layouts.md에서 리듬 1개를 골라 여기에 붙여 넣으세요.
+
+      리듬 A · 시즌 매니페스토 (기본값 — 마뗑킴 BLOOM 27SS 톤)
+      리듬 B · 팝업스토어 안내 (성수동 BLOOM 팝업 톤)
+      리듬 C · 브랜드 출범 선언 (와키윌리 출범 톤)
+      리듬 D · 콜라보 발매 (와키윌리 × SANRIO 톤)
+
+      모든 리듬은 다음 구조를 따릅니다:
+      1) 상단 룰 + 데이트라인
+      2) 상단 아이브로우
+      3) 헤드라인 (취소선 1단어 + 이탤릭 액센트 1단어)
+      4) 데크
+      5) 액센트 룰
+      6) 6개 번호 섹션 (각 셀: 아이브로우 + 서브 헤드라인 + 본문 + 콜아웃)
+      7) 풋터 밴드
+    -->
+  </main>
+</body>
+</html>

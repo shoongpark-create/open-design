@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Level — daily quests for becoming a better human</title>
+  <title>WACKYWILLY 27SS — 멤버십 챌린지</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -71,7 +71,7 @@
     .status { display: flex; justify-content: space-between; align-items: center; padding: 14px 26px 6px; font: 600 14px/1 var(--sans); }
     .status .right { display: flex; gap: 6px; align-items: center; font-size: 12px; }
 
-    /* Phone 1 — cover */
+    /* 폰 1 — 표지 (시즌 캠페인 포스터) */
     .cover { background: var(--ink); color: #fef9ee; height: 100%; display: flex; flex-direction: column; }
     .cover .status { color: #fef9ee; }
     .cover .body { flex: 1; padding: 40px 28px 0; display: flex; flex-direction: column; }
@@ -85,7 +85,7 @@
     .cover .next-peek { margin-top: auto; height: 92px; background: #211d18; border-top-left-radius: 26px; border-top-right-radius: 26px; padding: 14px 22px; display: flex; align-items: center; gap: 10px; color: rgba(254,249,238,0.6); font: 11px/1.4 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; }
     .cover .next-peek .swatch { width: 36px; height: 36px; border-radius: 8px; background: var(--accent); flex-shrink: 0; }
 
-    /* Phone 2 — quests dashboard */
+    /* 폰 2 — 오늘의 챌린지 대시보드 */
     .home { display: flex; flex-direction: column; height: 100%; padding: 0; }
     .home .head { padding: 14px 22px 6px; display: flex; justify-content: space-between; align-items: center; }
     .home .head h2 { margin: 0; font: 700 18px/1.2 var(--sans); letter-spacing: -0.005em; }
@@ -97,7 +97,7 @@
       color: #f5efe4; border-radius: 16px;
       display: grid; grid-template-columns: 38px 1fr auto; gap: 12px; align-items: center;
     }
-    .level-ribbon .lv { width: 38px; height: 38px; border-radius: 12px; background: var(--accent); display: grid; place-items: center; font: 700 14px/1 var(--mono); color: #1a1714; }
+    .level-ribbon .lv { width: 38px; height: 38px; border-radius: 12px; background: var(--accent); display: grid; place-items: center; font: 700 11px/1 var(--mono); color: #1a1714; }
     .level-ribbon .meta .label { font: 10px/1 var(--mono); letter-spacing: 0.16em; color: rgba(245,239,228,0.5); text-transform: uppercase; }
     .level-ribbon .meta .name { font: 700 14px/1.2 var(--sans); margin-top: 4px; }
     .level-ribbon .xp { font: 600 12px/1 var(--mono); color: rgba(245,239,228,0.7); }
@@ -126,7 +126,7 @@
     .q.q6 { background: var(--tile-5); }
     .q.q6 .glyph { background: #4a86e9; color: white; }
 
-    /* Phone 3 — quest detail */
+    /* 폰 3 — 챌린지 디테일 */
     .detail { display: flex; flex-direction: column; height: 100%; }
     .detail .topbar { display: flex; align-items: center; gap: 10px; padding: 8px 22px 6px; font: 13px/1 var(--sans); color: var(--muted); }
     .detail .topbar .back { width: 28px; height: 28px; border-radius: 50%; background: var(--line); display: grid; place-items: center; }
@@ -152,7 +152,7 @@
       font: 600 14px/1 var(--sans); letter-spacing: 0.06em;
     }
 
-    /* Tab bar shared */
+    /* 탭바 (3개 폰 공통) */
     .tabbar {
       margin-top: auto; display: grid; grid-template-columns: repeat(5, 1fr);
       padding: 10px 14px 26px; border-top: 1px solid var(--line); background: var(--paper);
@@ -171,118 +171,121 @@
   </style>
 </head>
 <body>
+  <!-- 스테이지 바 — 캠페인 정체성 + 화면 메타데이터 -->
   <div class="stage-bar" data-od-id="stage-bar">
     <span>HI-FI PROTOTYPE · IPHONE</span>
-    <span class="word">level<span style="color:var(--accent);">.</span></span>
-    <span>3 SCREENS · LIGHT MODE</span>
+    <span class="word">wackywilly<span style="color:var(--accent);">.</span></span>
+    <span>3 SCREENS · 27SS MEMBERSHIP</span>
   </div>
 
   <div class="phones" data-od-id="phones">
 
-    <!-- Phone 1 — cover -->
+    <!-- 폰 1 — 표지 (27SS 멤버십 캠페인 포스터) -->
     <div class="phone" data-od-id="phone-cover">
       <div class="screen cover">
         <div class="status"><span>9:41</span><span class="right">·· 5G · 100%</span></div>
         <div class="body">
-          <span class="eyebrow"><span class="dot"></span>HI-FI PROTOTYPE · IPHONE</span>
-          <h1>Daily quests for <span class="accent">becoming</span> a better human.</h1>
-          <p class="lede">Level turns the things you already know you should do — exercise, read, reflect, call a friend — into a daily quest log. Finish them, earn XP, watch your classes level up.</p>
-          <p class="tip">Tap quests to open detail. Complete the 6th quest to trigger the level-up moment. Toggle <b>[theme]</b> in the toolbar to switch theme &amp; layout.</p>
-          <div class="next-peek"><div class="swatch"></div>NEXT — TODAY'S QUESTS</div>
+          <span class="eyebrow"><span class="dot"></span>27SS · MEMBERSHIP</span>
+          <h1>오늘의 스타일을 인증하고 <span class="accent">리워드</span>를 받으세요.</h1>
+          <p class="lede">매일의 작은 인증이 모여 시즌이 끝날 즈음엔 사전예약 우선권으로 돌아옵니다. 오늘부터 7일, 함께 시작해요.</p>
+          <p class="tip">타일을 탭하면 챌린지 상세. 7일 연속 인증 시 <b>BONUS +200pt</b> + 다음 시즌 사전예약 우선권.</p>
+          <div class="next-peek"><div class="swatch"></div>NEXT — 오늘의 챌린지</div>
         </div>
       </div>
     </div>
 
-    <!-- Phone 2 — quests dashboard -->
+    <!-- 폰 2 — 오늘의 챌린지 대시보드 (히어로 화면) -->
     <div class="phone" data-od-id="phone-home">
       <div class="screen home">
         <div class="status"><span>9:41</span><span class="right">·· 5G · 100%</span></div>
         <div class="head">
-          <h2>Good morning, Sam</h2>
+          <h2>안녕하세요, @minji 님</h2>
           <div class="bell">×3</div>
         </div>
+        <!-- 레벨 리본 — 멤버십 등급 + 누적 포인트 + 진척 -->
         <div class="level-ribbon" data-od-id="level-ribbon">
-          <div class="lv">14</div>
-          <div class="meta"><div class="label">LEVEL</div><div class="name">Level 14</div></div>
-          <div class="xp">1648 / 2480</div>
+          <div class="lv">GOLD</div>
+          <div class="meta"><div class="label">MEMBERSHIP</div><div class="name">GOLD · 단골 회원</div></div>
+          <div class="xp">1,648 / 2,480 pt</div>
           <div class="bar"><span></span></div>
         </div>
-        <div class="sub">8 quests waiting · earn <span class="pill">430 XP</span> today</div>
+        <div class="sub">8개 챌린지 진행 가능 · 오늘 최대 <span class="pill">+430 pt</span> 적립</div>
 
+        <!-- 6개 챌린지 타일 (3×2 그리드) -->
         <div class="quests" data-od-id="quests">
           <div class="q q1">
-            <div class="glyph">B</div>
-            <p class="title">Body</p>
-            <div class="meta">20-min strength: pushups &amp; planks</div>
+            <div class="glyph">O</div>
+            <p class="title">오늘의 룩</p>
+            <div class="meta">27SS OOTD 인증 #wackywilly_27ss</div>
             <span class="xp">+90</span>
           </div>
           <div class="q q2">
-            <div class="glyph">R</div>
-            <p class="title">Read</p>
-            <div class="meta">Four Thousand Weeks</div>
+            <div class="glyph">L</div>
+            <p class="title">룩북 저장</p>
+            <div class="meta">27SS BLOOM LOOKBOOK PDF</div>
             <span class="xp">+60</span>
           </div>
           <div class="q q3">
-            <div class="glyph">L</div>
-            <p class="title">Listen</p>
-            <div class="meta">Huberman Lab — Sleep Architecture</div>
+            <div class="glyph">I</div>
+            <p class="title">친구 초대</p>
+            <div class="meta">카카오톡 친구 1명 신규 가입</div>
             <span class="xp">+50</span>
           </div>
           <div class="q q4">
-            <div class="glyph">N</div>
-            <p class="title">Nourish</p>
-            <div class="meta">Cook a high-protein lunch</div>
+            <div class="glyph">S</div>
+            <p class="title">매장 방문</p>
+            <div class="meta">성수 플래그십 QR 스캔</div>
             <span class="xp">+70</span>
           </div>
           <div class="q q5">
-            <div class="glyph">M</div>
-            <p class="title">Mind</p>
-            <div class="meta">10-min focus meditation</div>
+            <div class="glyph">T</div>
+            <p class="title">인스타 태그</p>
+            <div class="meta">공개 계정 + @wackywilly 태그</div>
             <span class="xp">+40</span>
           </div>
           <div class="q q6">
             <div class="glyph">W</div>
-            <p class="title">Watch</p>
-            <div class="meta">The Bear · S3 E4</div>
+            <p class="title">위시리스트</p>
+            <div class="meta">신상 3개 위시리스트 추가</div>
             <span class="xp">+30</span>
           </div>
         </div>
 
         <div class="tabbar" data-od-id="tabbar-home">
-          <div class="tab active"><div class="icon"></div>Today</div>
-          <div class="tab"><div class="icon"></div>Library</div>
+          <div class="tab active"><div class="icon"></div>홈</div>
+          <div class="tab"><div class="icon"></div>카테고리</div>
           <div class="tab center"><div class="icon">+</div>&nbsp;</div>
-          <div class="tab"><div class="icon"></div>Stats</div>
-          <div class="tab"><div class="icon"></div>Profile</div>
+          <div class="tab"><div class="icon"></div>챌린지</div>
+          <div class="tab"><div class="icon"></div>마이</div>
         </div>
       </div>
     </div>
 
-    <!-- Phone 3 — detail -->
+    <!-- 폰 3 — 챌린지 디테일 (OOTD 인증 7일 챌린지) -->
     <div class="phone" data-od-id="phone-detail">
       <div class="screen detail">
         <div class="status"><span>9:41</span><span class="right">·· 5G · 100%</span></div>
-        <div class="topbar"><div class="back">←</div>QUEST · 03 / 08</div>
+        <div class="topbar"><div class="back">←</div>CHALLENGE · 03 / 08</div>
         <div class="hero">
-          <span class="stamp">+90 XP</span>
-          <span class="badge">— BODY · STRENGTH</span>
-          <h2>20 minutes that change Wednesday.</h2>
-          <p>A short, repeatable strength block — pushups, planks, and one wildcard. No equipment. Sam, you've finished this 11 times this month.</p>
+          <span class="stamp">+90 pt</span>
+          <span class="badge">— DAILY · OOTD</span>
+          <h2>7일이 만드는 시그니처 룩.</h2>
+          <p>매일 오늘의 룩을 인증하면 7일째 BONUS +200pt + 사전예약 우선권. @minji 님은 이번 시즌 11회 인증.</p>
         </div>
         <div class="steps" data-od-id="steps">
-          <h3>Today's micro-tasks</h3>
-          <div class="step done"><div class="check"></div><div class="name">Roll out the mat</div><div class="meta">+5 XP</div></div>
-          <div class="step"><div class="check"></div><div class="name">3 × 12 pushups</div><div class="meta">+30 XP</div></div>
-          <div class="step"><div class="check"></div><div class="name">3 × 45s plank</div><div class="meta">+30 XP</div></div>
-          <div class="step"><div class="check"></div><div class="name">Wildcard: lunges</div><div class="meta">+25 XP</div></div>
+          <h3>오늘의 미니 미션</h3>
+          <div class="step done"><div class="check"></div><div class="name">인스타 공개 계정 설정</div><div class="meta">+5 pt</div></div>
+          <div class="step"><div class="check"></div><div class="name">오늘의 룩 사진 1장 업로드</div><div class="meta">+30 pt</div></div>
+          <div class="step"><div class="check"></div><div class="name">#wackywilly_27ss 태그 추가</div><div class="meta">+30 pt</div></div>
+          <div class="step"><div class="check"></div><div class="name">자사몰 앱에서 인증 확인</div><div class="meta">+25 pt</div></div>
         </div>
-        <div class="start">Start quest</div>
+        <div class="start">챌린지 시작</div>
         <div class="tabbar" data-od-id="tabbar-detail">
-          <div class="tab active"><div class="icon"></div>Today</div>
-          <div class="tab"><div class="icon"></div>Library</div>
+          <div class="tab"><div class="icon"></div>홈</div>
+          <div class="tab"><div class="icon"></div>카테고리</div>
           <div class="tab center"><div class="icon">+</div>&nbsp;</div>
-          <div class="tab"><div class="icon"></div>Stats</div>
-          <div class="tab"><div class="icon"></div>Profile</div>
+          <div class="tab active"><div class="icon"></div>챌린지</div>
+          <div class="tab"><div class="icon"></div>마이</div>
         </div>
       </div>
     </div>

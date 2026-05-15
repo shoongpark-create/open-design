@@ -1,0 +1,456 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 브랜드] [REPLACE 시즌] 진척 보드</title>
+<!--
+  K-패션 시즌 진척 보드 / 캠페인 칸반 시드.
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+    4) references/layouts.md에서 리듬 1개를 골라
+       <main id="board"> + <aside id="pulse"> 안에 붙여 넣기
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude (Claude.ai · Claude Code): <artifact> 태그
+    - 그 외 (ChatGPT · Gemini · Grok): ```html 코드 블록
+    - OpenDesign: 주요 영역에 data-od-id. 그 외에는 id 속성.
+
+  K-패션 컨텍스트:
+    - 6개 컬럼: 컨셉 → 1차 샘플 → 품평회 → LOCK → 발주·생산 → 입고·판매
+    - 카드 18~26장. 각 카드: SKU 코드(WW-27SS-XXX) + 룩 이름 + 디자이너 + BTA + 진행 상태
+    - BTA 분포 자연스럽게: Basic 40~50% / Trend 30~40% / Accent 10~20%
+    - 디자이너 이니셜: 한글 두 글자(예: 지훈 / 수민 / 은지)
+    - 사이드바: LOCK 진행률 + Top 디자이너 + 블락 콜아웃
+-->
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+  :root {
+    --bg:         #f6f5f1;
+    --surface:    #ffffff;
+    --surface-2:  #faf9f5;
+    --fg:         #1c1b1a;
+    --muted:      #76736d;
+    --muted-2:    #9b9892;
+    --border:     #e6e3dd;
+    --border-2:   #ededea;
+    --accent:     #c96442;
+    --accent-soft: color-mix(in oklch, var(--accent) 12%, transparent);
+    --good:       #2f7d4a;
+    --warn:       #c79321;
+    --bad:        #b53a2a;
+    --basic:      #6b6964;
+    --trend:      #1f6dbc;
+    --accent-bta: #c96442;
+
+    --font-sans:
+      "Pretendard Variable", Pretendard,
+      "Apple SD Gothic Neo", "Noto Sans KR",
+      system-ui, sans-serif;
+    --font-display-report:
+      "Pretendard Variable", "Wanted Sans Variable",
+      "SUIT Variable", sans-serif;
+    --font-display: var(--font-display-report);
+    --font-mono:
+      "JetBrains Mono", "IBM Plex Mono", "SF Mono",
+      ui-monospace, Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  body * { font-variant-numeric: tabular-nums; }
+
+  /* ─── 상단바 ─── */
+  header.topbar {
+    padding: 16px 28px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+  .topbar .crumb {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .topbar h1 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    margin: 4px 0 0;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  .pulse-chip {
+    display: inline-flex;
+    gap: 8px;
+    align-items: center;
+    margin-left: 14px;
+    padding: 6px 12px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .topbar .right { display: flex; align-items: center; gap: 10px; }
+  button, .btn { font: inherit; cursor: pointer; padding: 7px 14px; border-radius: 8px; font-weight: 500; }
+  .btn-primary { background: var(--accent); color: #fff; border: 1px solid var(--accent); }
+  .btn-secondary { background: transparent; color: var(--fg); border: 1px solid var(--border); }
+  .search {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 12px;
+    font: inherit;
+    min-width: 240px;
+    color: var(--fg);
+  }
+
+  /* ─── 필터바 ─── */
+  .filterbar {
+    background: var(--surface);
+    padding: 12px 28px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .avatars { display: flex; }
+  .avatars .av {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 2px solid var(--surface);
+    color: var(--fg);
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -6px;
+    font-weight: 500;
+  }
+  .avatars .av:first-child { margin-left: 0; }
+  .avatars .av.more { background: var(--accent-soft); color: var(--accent); }
+  .chip {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    padding: 5px 11px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    font-size: 12px;
+    color: var(--fg);
+  }
+  .chip .sw { width: 8px; height: 8px; border-radius: 50%; }
+  .chip.active { background: var(--accent-soft); color: var(--accent); border-color: color-mix(in oklch, var(--accent) 30%, transparent); }
+
+  /* ─── 본문 그리드 ─── */
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 0;
+    align-items: start;
+  }
+
+  /* ─── 보드 ─── */
+  main.board {
+    padding: 20px 24px 80px;
+    overflow-x: auto;
+  }
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(248px, 1fr));
+    gap: 14px;
+  }
+  .col {
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .col-head {
+    padding: 4px 6px 8px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .col-head h3 {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+  }
+  .col-head h3 .step-num {
+    display: inline-flex;
+    width: 18px; height: 18px;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 10px;
+    color: var(--fg);
+  }
+  .col-head .count {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .col.locked .col-head h3,
+  .col.shipped .col-head h3 { color: var(--accent); }
+
+  /* ─── 카드 ─── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+  }
+  .card.blocked {
+    border-color: color-mix(in oklch, var(--bad) 40%, transparent);
+    background: color-mix(in oklch, var(--bad) 5%, var(--surface));
+  }
+  .card.locked {
+    border-color: color-mix(in oklch, var(--accent) 40%, transparent);
+  }
+  .card .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .card .sku {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  .card h4 {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.35;
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+  .bta {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    width: 22px; height: 22px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+  .bta.B { background: color-mix(in oklch, var(--basic) 15%, transparent); color: var(--basic); }
+  .bta.T { background: color-mix(in oklch, var(--trend) 15%, transparent); color: var(--trend); }
+  .bta.A { background: color-mix(in oklch, var(--accent-bta) 15%, transparent); color: var(--accent-bta); }
+
+  .meta {
+    font-size: 11.5px;
+    color: var(--muted);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .av-small {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    font-size: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+  }
+  .progress {
+    height: 4px;
+    background: var(--border-2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress > i {
+    display: block;
+    height: 100%;
+    background: var(--accent);
+  }
+  .pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    letter-spacing: 0.04em;
+  }
+  .pill.good { color: var(--good); border-color: color-mix(in oklch, var(--good) 30%, transparent); }
+  .pill.warn { color: var(--warn); border-color: color-mix(in oklch, var(--warn) 30%, transparent); }
+  .pill.bad  { color: var(--bad);  border-color: color-mix(in oklch, var(--bad)  30%, transparent); }
+  .pill.lock { color: var(--accent); border-color: color-mix(in oklch, var(--accent) 40%, transparent); background: var(--accent-soft); }
+
+  /* ─── 사이드바 (시즌 펄스) ─── */
+  aside.pulse {
+    padding: 20px 24px 80px;
+    border-left: 1px solid var(--border);
+    background: var(--surface);
+    position: sticky;
+    top: 73px;
+    align-self: start;
+    height: calc(100vh - 73px);
+    overflow-y: auto;
+  }
+  aside.pulse h2 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 14px;
+  }
+  .stat {
+    margin-bottom: 22px;
+  }
+  .stat .label {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .stat .value {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .stat .progress {
+    height: 6px;
+    margin-top: 4px;
+  }
+  .stat .sub { font-size: 11.5px; color: var(--muted); margin-top: 6px; }
+  .stat .designers li {
+    list-style: none;
+    padding: 6px 0;
+    border-top: 1px solid var(--border-2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .stat .designers li:first-child { border-top: 0; }
+  .stat .designers ul { padding: 0; margin: 0; }
+
+  .blocker {
+    border: 1px dashed var(--bad);
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: color-mix(in oklch, var(--bad) 5%, transparent);
+  }
+  .blocker h4 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    color: var(--bad);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .blocker p { margin: 0; color: var(--fg); font-size: 13px; line-height: 1.45; }
+  .blocker .small { color: var(--muted); font-size: 11px; margin-top: 4px; display: block; }
+
+  /* 반응형 */
+  @media (max-width: 1100px) {
+    .layout { grid-template-columns: 1fr; }
+    aside.pulse { border-left: 0; border-top: 1px solid var(--border); position: relative; top: 0; height: auto; }
+    .columns { grid-template-columns: repeat(3, minmax(248px, 1fr)); }
+  }
+  @media (max-width: 720px) {
+    .columns { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <div class="crumb">[REPLACE WACKYWILLY] · [REPLACE 27SS] · 진척 보드</div>
+      <h1>27SS S/S 시즌 진척 <span class="pulse-chip">S1 D-42 · LOCK 75%</span></h1>
+    </div>
+    <div class="right">
+      <input class="search" placeholder="SKU 코드 / 룩 이름 검색" />
+      <button class="btn-secondary">필터 ▾</button>
+      <button class="btn-primary">+ 카드 추가</button>
+    </div>
+  </header>
+
+  <div class="filterbar">
+    <div class="avatars" title="이번 시즌 디자이너">
+      <span class="av">지훈</span>
+      <span class="av">수민</span>
+      <span class="av">은지</span>
+      <span class="av">하늘</span>
+      <span class="av more">+3</span>
+    </div>
+    <span class="chip active"><span class="sw" style="background: var(--accent);"></span>UNI · WOMEN · ACC</span>
+    <span class="chip"><span class="sw" style="background: var(--basic);"></span>BTA · Basic 43%</span>
+    <span class="chip"><span class="sw" style="background: var(--trend);"></span>Trend 35%</span>
+    <span class="chip"><span class="sw" style="background: var(--accent-bta);"></span>Accent 22%</span>
+    <span class="chip">정렬: 디자이너 ▾</span>
+  </div>
+
+  <div class="layout">
+    <main class="board" id="board">
+      <!--
+        references/layouts.md에서 리듬 1개를 골라 .columns 안에 붙여 넣으세요.
+
+        리듬 A · 시즌 진척 보드 (6단 컬럼: 컨셉 → 1차샘플 → 품평 → LOCK → 발주생산 → 입고판매)
+        리듬 B · IMC 캠페인 칸반 (5단 컬럼: 기획 → 자산 → 검수 → 송출 → 효과 측정)
+        리듬 C · 룩북 촬영 진척 (4단 컬럼: 캐스팅 → 스타일링 → 슛 → 리터칭)
+        리듬 D · 팝업스토어 준비 (5단 컬럼: 컨셉 → 공간 → 자산 → 운영 → 리뷰)
+
+        각 컬럼당 3~5개 카드. 카드 총합 18~26장.
+      -->
+      <section class="columns" data-od-id="columns">
+        <!-- 6개 컬럼 — references/layouts.md 리듬 A 참고 -->
+      </section>
+    </main>
+
+    <aside class="pulse" id="pulse" data-od-id="pulse">
+      <!--
+        시즌 펄스 사이드바 — references/layouts.md 리듬에 맞춰 채우세요.
+        기본 블록 3개: LOCK 진행률 / Top 디자이너 / 블로커 콜아웃
+      -->
+    </aside>
+  </div>
+</body>
+</html>

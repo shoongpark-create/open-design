@@ -5,6 +5,8 @@
 > Auto-detects whichever code-agent CLI you already have installed (Claude Code, Cursor, Copilot, Codex, Gemini, OpenCode, Qwen) and turns it into a design engine. Type a design brief, and the agent streams production-ready HTML artifacts into a sandboxed browser preview.
 >
 > This fork goes one step beyond the upstream Open Design: a **15-skill fashion season-design pipeline** (concept → color → fabric → fit/graphic → lineup → styling → lookbook → IMC → master deck) and a **5-gate `quality-gate`** (BTA/3B/Logo/Preset/Evidence) are integrated into `main`, tuned for K-young-casual brands such as WACKYWILLY.
+>
+> **2026-05 update — K-fashion migration complete.** All 46 fashion + marketing skills now ship in a Korean-first business register with a unified 4-file layout (`SKILL.md` + `assets/template.html` + `references/{layouts,checklist}.md`), the standard typography stack (Pretendard Variable + 4 display-font tokens), and a fully LLM-agnostic output contract (Claude `<artifact>` *and* plain HTML code-block fallback for GPT / Gemini / Grok / Codex / OpenDesign). K-fashion context — BTA (Basic / Trend / Accent), S1–S4 selling periods, QR / SPOT reorder cycles, Korean apparel-studio org chart, and 무신사 / 29CM / W컨셉 / 지그재그 / 카페24 / 카카오톡 channel mix — is baked into every skill.
 
 [**English**](./README.md) · [한국어](./README.ko.md) · [中文](./README.zh-CN.md) · [Deep guide (Korean)](./docs/open-design-overview.ko.md)
 
@@ -33,7 +35,10 @@ See [QUICKSTART.md](./QUICKSTART.md) for setup details and [AGENTS.md](./AGENTS.
 |---|---|
 | Fashion season-design skills | **15** (concept → master deck, end-to-end) |
 | Marketing / general skills | **31** (landing, dashboard, deck, document, mobile, …) |
+| Data / intelligence skills | **7** (musinsa-ranking, sales-analysis, trend-radar, demand-optimizer, …) |
 | UI master skill | **1** (`impeccable` — design / redesign / critique / audit) |
+| Skill register | **K-fashion (Korean-first, LLM-agnostic)** since 2026-05 |
+| Skill layout | `SKILL.md` + `assets/template.html` + `references/{layouts,checklist}.md` |
 | Brand design systems | **72** (Linear, Stripe, Apple, Nike, Xiaohongshu, …) |
 | Code-agent CLIs | **7 + Anthropic API fallback** |
 | `quality-gate` gates | **5** (BTA / 3B / Logo+Color / Preset / Evidence) |

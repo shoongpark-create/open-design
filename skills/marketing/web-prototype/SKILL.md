@@ -1,97 +1,219 @@
 ---
 name: web-prototype
 description: |
-  General-purpose desktop web prototype. Single self-contained HTML file built
-  by copying the seed `assets/template.html` and pasting section layouts from
-  `references/layouts.md`. Default for any landing / marketing / docs / SaaS
-  page when no more specific skill matches.
+  K-패션 브랜드의 **자사몰 메인 페이지 / 룩북 페이지 / 팝업스토어 안내 / 콜라보 발매 페이지 /
+  캠페인 단일 페이지**를 단일 HTML 프로토타입으로 생성하는 범용 데스크탑 스킬입니다.
+  시드 `assets/template.html`을 복사하고 `references/layouts.md`의 8가지 섹션 스켈레톤
+  (히어로 / 매거진 그리드 / 키 아이템 / 정상판매율 스탯 / 풀쿼트 / 카운트다운 CTA /
+  매거진 로그 / 가격 / 비교표) 중 4~6개를 골라 자사몰 톤의 페이지를 빚습니다.
+  무신사·29CM 상세 페이지보다 자사몰 매거진형 페이지에 적합. 더 구체적인 스킬
+  (블로그·이커머스앱·룩북 페이지·이메일 등)이 없을 때 기본값으로 사용합니다.
+  사용자가 "자사몰 메인", "룩북 페이지", "팝업스토어 안내", "콜라보 페이지",
+  "27SS LOOKBOOK", "성수동 팝업", "캠페인 페이지", "랜딩 페이지", "prototype",
+  "landing"을 언급하면 활성화하세요.
 triggers:
+  - "자사몰 메인"
+  - "자사몰 페이지"
+  - "룩북 페이지"
+  - "룩북 LOOKBOOK"
+  - "팝업스토어 안내"
+  - "성수동 팝업"
+  - "콜라보 페이지"
+  - "콜라보 발매"
+  - "27SS LOOKBOOK"
+  - "캠페인 페이지"
+  - "랜딩 페이지"
+  - "single page"
   - "prototype"
   - "mockup"
   - "landing"
-  - "single page"
   - "marketing page"
   - "homepage"
 od:
   mode: prototype
   platform: desktop
   scenario: design
+  category: marketing
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
+  example_prompt: "마뗑킴(MATIN KIM) 27SS 룩북 페이지. 단일 페이지: 히어로 (시즌 헤드라인 + 1줄 데크) → 4컷 매거진 그리드 → 정상판매율 통계 (3개 숫자) → 풀쿼트 (디자이너 매트 김) → 키 아이템 캐러셀 → 사전예약 CTA. 자사몰 톤, 매거진 호흡."
 ---
 
-# Web Prototype Skill
+# K-패션 자사몰 웹 프로토타입 스킬
 
-Produce a single, self-contained HTML prototype using the bundled seed and layout library — **not** by writing CSS from scratch. The seed already encodes good defaults (typography, spacing, accent budget). Your job is to compose it.
+K-패션 브랜드의 **자사몰 메인 페이지 / 룩북 페이지 / 팝업스토어 안내 페이지 / 콜라보 발매 페이지 / 단일 캠페인 페이지**를 단일 self-contained HTML 프로토타입으로 생성합니다. 시드 + 레이아웃 라이브러리를 조합해 만들며, **CSS를 처음부터 쓰지 않습니다**. 시드가 이미 좋은 디폴트(타이포·간격·액센트 예산)를 캡슐화하고 있어 사용자 역할은 **구성(composition)**입니다.
 
-## Resource map
+이 스킬은 **자사몰 매거진형 페이지**에 적합합니다. 무신사·29CM 입점 페이지의 상세 페이지 형식과는 다릅니다 (그 경우 `wireframe-sketch`로 v0.1 그린 뒤 픽셀 디자인하거나 별도 입점 매뉴얼 참조). 산출물 청중은 **신상 발매 1~2개월 전 자사몰 방문자 또는 사전예약 후보 고객**.
+
+작성 주체는 **디자인실(그래픽팀) + 이커머스팀(디지털팀)**이며, 카피는 **마케팅실(에디터/PR)**이 제공합니다. 한국 패션기업 시즌 사이클상 **시즌 시작 1~2개월 전**(룩북 페이지·콜라보 페이지) 또는 **팝업 1~2개월 전**(팝업 안내)에 활용합니다.
+
+## 환경 호환성
+
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기를 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 워크플로는 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일(`DESIGN.md`)이 자동 주입되지 않는 환경이라면, 사용자에게 `DESIGN.md` 경로나 기본 톤(영캐주얼 / 디자이너 / 럭셔리 / 스트릿)을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 자사몰 등록을 따릅니다.
+
+- 영문 산업용어 유지: SS · FW · LOOKBOOK · DROP · PRE-ORDER · MEMBERS · COLLAB · CAPSULE · KEY ITEM · BTA · UNI / WOMEN.
+- 영문 헤드라인 + 한국어 데크 혼용 권장. 헤드라인: `On Spring.` 데크: `27SS, 가장 조용한 옷에 대하여.`
+- 카피 톤은 **포엣코어(Poetcore)** — 기능·스펙 직설 ❌ → 감각·계절감·디자이너 의도 ⭕.
+- 금액 표기는 한국 표준: `₩128,000` 또는 `128,000원`. 큰 숫자는 mono 폰트.
+- CTA는 행동 명시: `사전예약 신청`, `룩북 보기`, `회원가입 후 우선 알림`, `팝업 위치 보기`, `한정 컬렉션 보기`. SaaS 톤 `Get Started` 금지.
+- 통계는 K-패션 KPI 등록: `정상판매율`, `재고 회전율`, `사전예약 비율`, `LOOKBOOK 페이지뷰`, `매장 방문 수`. SaaS KPI `Monthly Active Users` 금지.
+- 매거진 로그는 `룩북`, `매거진 컬럼`, `디자이너 노트`, `콜라보 비하인드`, `시즌 컨셉` 같은 K-패션 매거진 어휘.
+
+## 타이포그래피
+
+| 위치 | 권장 폰트 |
+|---|---|
+| 디스플레이 헤드라인 (`h1`, `h2`, `.quote`) | 디스플레이 세리프 — Hahmlet, 본명조 (디자이너 톤) 또는 Recoleta, Iowan Old Style (시드 디폴트) |
+| 본문 / UI | Pretendard Variable (사실상 한국 표준) |
+| 메타 / 일자 / 카테고리 (`.eyebrow`, `.meta`) | mono — IBM Plex Mono, Geist Mono |
+| 가격·통계 (`.num`, `.stat-num`) | mono 큰 사이즈, `font-variant-numeric: tabular-nums` |
+
+시드(`assets/template.html`)는 이 매핑을 `--font-display` / `--font-body` / `--font-mono` 3개 변수로 노출합니다. DESIGN.md에서 한국 브랜드 폰트로 매핑하면 전체가 다시 흐릅니다.
+
+## 폴더 구조
 
 ```
 web-prototype/
-├── SKILL.md                ← you're reading this
+├── SKILL.md                ← 이 파일을 읽고 있습니다
 ├── assets/
-│   └── template.html       ← seed: tokens + class system + chrome (READ FIRST)
+│   └── template.html       ← 시드: 토큰 + 클래스 시스템 + 크롬 (가장 먼저 읽기)
 └── references/
-    ├── layouts.md          ← 8 paste-ready section skeletons
-    └── checklist.md        ← P0/P1/P2 self-review
+    ├── layouts.md          ← 8가지 K-패션 섹션 스켈레톤 (붙여넣기 가능)
+    └── checklist.md        ← P0/P1/P2 자체 검수
 ```
 
-## Workflow
+## 작업 흐름
 
-### Step 0 — Pre-flight (do this once before writing anything)
+### Step 0 — 사전 점검 (작성 전 1회)
 
-1. **Read `assets/template.html` end-to-end** — at minimum through the `<style>` block. The class inventory at the top of `references/layouts.md` lists every class that must be defined there; if one is missing, add it to `<style>` rather than re-defining it inline on every section.
-2. **Read `references/layouts.md`** so you know which section skeletons exist. Don't write a section type that isn't covered — pick the closest layout and adapt.
-3. **Read the active DESIGN.md** (already injected into your system prompt). Map its colors to the six `:root` variables in the seed; don't introduce new tokens.
+1. **`assets/template.html`을 끝까지** `<style>` 블록 포함 읽으세요. `references/layouts.md` 상단의 클래스 인벤토리에 나온 모든 클래스가 시드에 정의되어 있어야 합니다. 누락된 게 있다면 인라인 정의보다 시드 `<style>`에 추가하세요.
+2. **`references/layouts.md`를 읽고** 어떤 섹션 스켈레톤이 있는지 파악하세요. 그 외 섹션 종류를 쓰지 말고, 가장 가까운 레이아웃을 선택해 적용합니다.
+3. **활성 `DESIGN.md`를 읽고**(또는 사용자에게 톤 확인) 색상을 시드 `:root`의 6개 변수에 매핑하세요. 새 토큰을 만들지 않습니다.
 
-### Step 1 — Copy the seed
+### Step 1 — 시드 복사
 
-Copy `assets/template.html` to the project root as `index.html`. Replace the six `:root` variables with the active design system's tokens. Replace the page `<title>` and the topnav brand.
+`assets/template.html`을 프로젝트 루트로 `index.html`로 복사하세요. 6개 `:root` 변수를 활성 디자인 시스템 토큰으로 교체. 페이지 `<title>`과 topnav 브랜드도 교체합니다.
 
-### Step 2 — Plan the section list
+### Step 2 — 섹션 리스트 기획
 
-**Pick layouts before writing copy.** Default rhythms (from `layouts.md`):
+**카피를 쓰기 전에 레이아웃을 고르세요.** K-패션 페이지 종류별 기본 리듬 (`layouts.md` 참조):
 
-| Page kind | Default rhythm |
+| 페이지 종류 | 기본 리듬 |
 |---|---|
-| Landing | 1 hero → 3 features → 4 stats *or* 5 quote → custom split → 6 cta |
-| Marketing / editorial | 1 hero-center → 7 log list → 6 cta |
-| Pricing | 1 hero-center → 8 comparison table → 6 cta |
-| Docs index | 1 hero-center → 7 log list (sections of docs) → 6 cta |
+| **자사몰 메인** | 1 히어로 → 3 키 아이템 트리플렛 → 4 시즌 통계 *또는* 5 풀쿼트 → 매거진 로그 → 6 사전예약 CTA |
+| **룩북 페이지** | 1 히어로 센터 → 2 매거진 그리드(스플릿) → 5 디자이너 풀쿼트 → 4 정상판매율 통계 → 6 CTA |
+| **팝업스토어 안내** | 1 히어로 센터 → 위치·운영시간 그리드 → 5 라인업 풀쿼트 → 6 예약 CTA |
+| **콜라보 발매 페이지** | 1 히어로 스플릿 → 콜라보 스토리 → 3 컬렉션 트리플렛 → 카운트다운 CTA(Layout 6 변형) |
+| **사전예약 단일 페이지** | 1 히어로 센터 → 2 키 아이템 스플릿 → 8 가격 비교(프리오더가 vs 정상가) → 6 CTA |
+| **매거진 인덱스** | 1 히어로 센터 → 7 매거진 로그 → 6 CTA |
 
-State the chosen list in one sentence to the user *before* writing — they can redirect cheaply now and not after 200 lines of HTML.
+선택한 섹션 리스트를 한 문장으로 사용자에게 선언하세요 — 200줄 HTML을 쓴 뒤보다 지금 방향 전환이 싸게 듭니다.
 
-### Step 3 — Paste and fill
+### Step 3 — 붙여넣기 + 채우기
 
-For each chosen layout, copy the `<section>` block from `layouts.md` into `<main id="content">` of your `index.html`. Replace bracketed `[REPLACE]` strings with real, specific copy from the user's brief. **No filler** — if a slot is empty, the section is the wrong choice; pick a different layout.
+선택한 각 레이아웃별로 `layouts.md`에서 `<section>` 블록을 복사해 `index.html`의 `<main id="content">`에 붙입니다. `[REPLACE]` 토큰을 사용자 브리프의 K-패션 카피로 교체. **필러 금지** — 빈 슬롯이 있다면 그 섹션이 잘못된 선택입니다. 다른 레이아웃을 선택하세요.
 
-### Step 4 — Self-check
+이미지 자리표시자는 `.ph-img` 클래스 사용 (외부 URL 금지). 자사몰 룩북 사진이 들어갈 자리만 표시합니다.
 
-Run through `references/checklist.md` top to bottom. Every P0 item must pass before you move on. P1 items should pass; P2 are bonus.
+### Step 4 — 자체 검수
 
-### Step 5 — Emit the artifact
+`references/checklist.md`를 위에서 아래로 점검하세요. 모든 P0 항목 통과 필수. P1 권장. P2 보너스.
 
-Wrap `index.html` in `<artifact>` tags. One sentence before describing what's there. Stop after `</artifact>`.
+### Step 5 — 산출물 출력
 
-## Hard rules (the seed protects most of these — don't fight it)
+`index.html`을 `<artifact>` 태그로 감쌉니다(Claude 환경). 앞에 한 문장 요약, 뒤에는 아무것도 추가하지 마세요.
 
-- **Single accent, used at most twice per screen.** Eyebrow + primary CTA is the default budget.
-- **Display font is serif** (Iowan Old Style / Charter / Georgia in the seed). Sans for body. Mono for numerics, captions, eyebrows.
-- **Image placeholders, not external URLs.** Use the `.ph-img` class — never link to a stock photo CDN.
-- **Mobile reflow already works** via the seed's media query at 920px. Don't break it by adding fixed widths.
-- **`data-od-id` on every `<section>`** so comment mode can target it.
+## 하드 룰 (시드가 대부분 보호 — 무시하지 마세요)
 
-## Output contract
+- **액센트 1개, 화면당 최대 2회.** 시드 디폴트는 아이브로우 + 1차 CTA. 3번째 사용은 신중히.
+- **디스플레이 폰트는 세리프** (Iowan Old Style / Charter / Hahmlet 권장). 본문은 산세리프(Pretendard). 숫자·메타·아이브로우는 mono.
+- **이미지 자리표시자, 외부 URL 금지.** `.ph-img` 클래스 사용 — 스톡 사진 CDN 링크 금지.
+- **모바일 리플로는 시드의 920px 미디어 쿼리에서 이미 작동.** 고정 너비 추가로 깨지지 않게.
+- **`data-od-id`는 OpenDesign 환경에서만 필수.** 다른 환경에서는 일반 `id` 속성으로 대체 가능. 코멘트 모드 미사용 환경에서는 생략해도 무방.
+- **무신사 톤과 자사몰 톤을 섞지 마세요.** 무신사 입점 페이지가 필요하면 `wireframe-sketch`로 시작하거나 별도 입점 매뉴얼을 참조. 이 스킬은 자사몰 매거진 톤 전용입니다.
+
+## K-패션 자사몰 웹 페이지 5가지 사례 패턴 (참고)
+
+| 페이지 종류 | 시그니처 섹션 구성 | 발행 시점 |
+|---|---|---|
+| **자사몰 메인** | 히어로 KV → 신상 캐러셀 → 시즌 룩북 → 매거진 컬럼 → 멤버스 CTA | 시즌 시작 + 매 드롭마다 갱신 |
+| **27SS LOOKBOOK 페이지** | 히어로 → 룩별 페이지(스크롤 시네마) → 디자이너 노트 → 사전예약 CTA | 시즌 시작 1~2개월 전 |
+| **성수동 팝업 안내** | 히어로 → 위치 지도 → 운영 시간 → 라인업 → SNS 인증 가이드 → 예약 CTA | 팝업 1~2개월 전 |
+| **콜라보 발매** (브랜드 × IP) | 히어로 → 콜라보 스토리 → 컬렉션 → 카운트다운 → 사전예약 | 발매 2~3주 전 |
+| **사전예약 단일 페이지** | 히어로 → 키 아이템 → 프리오더가 vs 정상가 → CTA | 시즌 시작 2개월 전 |
+
+## 한국 K-패션 브랜드 자사몰 사례 (참고)
+
+| 브랜드 | 자사몰 톤 | 시그니처 페이지 |
+|---|---|---|
+| **마뗑킴 (Matin Kim)** | 미니멀, 텍스트 절제, 모델 + 로고 | LOOKBOOK 페이지 (룩별 스크롤 시네마) |
+| **마르디 메크르디 (Mardi Mercredi)** | 프렌치, 컬러풀, 매거진 호흡 | JOURNAL + CAMPAIGN 페이지 |
+| **아더에러 (ADER ERROR)** | 영문 100%, 컨셉추얼, 글로벌 | GLOBAL + COLLAB 페이지 |
+| **무신사 스탠다드** | 정보 + 신뢰 + 가성비 | 카테고리 그리드 + 매거진 |
+| **시야쥬 (CHYAJU)** | 절제·여백, 디자이너 의도 | STORY + LOOKBOOK |
+| **와키윌리 (WACKYWILLY)** | 위트, 캐릭터 IP, 팬덤 | 캐릭터 페이지 + 콜라보 |
+
+## 한국 패션기업 부서 R&R + 채널 연계
+
+| 부서 | 역할 |
+|---|---|
+| **디자인실(그래픽팀)** | 키비주얼·룩북 컷·매거진 그리드 비주얼·페이지 디자인 |
+| **마케팅실 (에디터/PR)** | 카피·매거진 컬럼·디자이너 인터뷰·헤드라인·CTA 카피 |
+| **이커머스팀(디지털팀)** | HTML 제작·QA, 자사몰 적재, SEO 메타, 카페24/쇼피파이 연동 |
+| **MD실** | 키 아이템·가격·재고·사전예약 슬롯 데이터 |
+| **영업기획** | 발행 후 PV·체류시간·전환율 모니터링·정상판매율 추적 |
+
+### 채널 연계
+
+- **자사몰 (카페24 / 쇼피파이 / 자체 개발)** — 메인 페이지·룩북 페이지·팝업 안내·콜라보 페이지
+- **무신사 입점 브랜드 페이지** — 무신사 브랜드 페이지 (별도 입점 매뉴얼)
+- **29CM 큐레이션 페이지** — 29CM 큐레이션 컬렉션 (별도 큐레이션 매뉴얼)
+- **카카오톡 채널** — 페이지 발행 시 알림톡 발송 (멤버스 우선)
+- **인스타그램 → 자사몰 링크** — 인스타 캐러셀에서 자사몰 페이지로 연결
+- **네이버 쇼핑** — 네이버 쇼핑 상세 페이지로 일부 페이지 동시 연결
+
+## 시즌 사이클 내 위치
 
 ```
-<artifact identifier="kebab-case-slug" type="text/html" title="Human Title">
-<!doctype html>
-<html>...</html>
-</artifact>
+[시즌 시작 5개월 전]   컨셉 보드, 컬러 스토리 (디자인실)
+[시즌 시작 4~5개월 전] 룩북 페이지 와이어프레임 v0.1 (wireframe-sketch 스킬)
+[시즌 시작 3개월 전]   라인업 LOCK
+[시즌 시작 2개월 전]   ▶ 룩북 페이지 픽셀 디자인 v1.0 (이 스킬)
+                       룩북 촬영
+[시즌 시작 1~2개월 전] ▶ 자사몰 메인 갱신 + 사전예약 페이지 (이 스킬)
+                       매거진 컬럼 발행 (blog-post 스킬)
+                       신상 발매 이메일 (email-marketing 스킬)
+[시즌 시작]            S1~S4 판기 발매
+[판기 중반]            ▶ 팝업 안내 / 콜라보 발매 페이지 (이 스킬)
+                       카카오톡 채널 알림톡 발송
+[판기 종료]            시즌오프 페이지, 다음 시즌 티저
 ```
 
-One sentence before the artifact. Nothing after.
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**:
+  ```
+  <artifact identifier="page-slug" type="text/html" title="페이지 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록.
+
+출력 앞에 한 문장 요약(예: "마뗑킴 27SS 룩북 페이지를 5섹션 자사몰 톤으로 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

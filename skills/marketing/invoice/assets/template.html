@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 발주서 / 거래명세서] · [REPLACE 브랜드] · [REPLACE 발주번호]</title>
+<!--
+  K-패션 발주서(P/O) · 거래명세서 · OEM 계약서 시드.
+
+  사용 방법:
+    1) 이 파일을 index.html(또는 po-<번호>.html)로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+       (--accent = 브랜드 시즈널 톤, --display = 디스플레이 세리프)
+    4) references/layouts.md에서 양식 1개를 골라
+       <div class="sheet"> 안에 본문을 구성
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude 환경(Claude.ai · Claude Code): <artifact> 태그로 감싸 출력
+    - 그 외 환경(ChatGPT · Gemini · Grok): 표준 마크다운 HTML 코드 블록
+    - OpenDesign 환경: 주요 섹션에 data-od-id 속성 추가 시 인라인 코멘트 사용 가능
+
+  K-패션 사업자 양식 컨텍스트:
+    - 통화 단위 = 원 / 만원 / 억. USD 환산 금지.
+    - 사업자등록번호 형식 = `xxx-xx-xxxxx`
+    - 공급가액(VAT 별도) + 부가세 10% + 합계금액 표기
+    - K-패션 표준 결제 조건 = 40% 선급 / 60% 입고 시 (1차), 30/30/40 (장기), Net 30~60 (대형 OEM)
+    - MOQ 200~500장 (영캐주얼), 사입가율 25~35%
+    - LOT 번호 = LOT-{시즌}-{라인}-{차수} (예: LOT-27SS-W001)
+    - 한국 OEM 거점 = 합천 / 진주 / 안양 / 안산 / 부천 / 시흥 등
+    - 부서 R&R = 생산실 PD(발주 초안) → MD 실장(승인) → 회계팀(입금/거래명세서) → CFO(1억+ 컨펌)
+
+  인쇄 호환:
+    - @media print로 배경 제거, A4 단일 페이지 권장
+    - font-variant-numeric: tabular-nums (수량·금액 정렬)
+-->
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;500;600;700&display=swap");
+
+  :root {
+    --bg:         #f3f1ec;
+    --paper:      #ffffff;
+    --ink:        #15140f;
+    --muted:      #6e6a5d;
+    --line:       #ddd6c4;
+    --accent:     #1f4d3a;    /* 발주서 시그니처 톤 — 한국 사업자 톤 */
+    --accent-soft:#e3ece8;
+    --warn:       #8a4d2c;
+
+    --display:
+      "Hahmlet",
+      "Iowan Old Style",
+      "Charter",
+      "Noto Serif KR",
+      Georgia, serif;
+    --body:
+      "Pretendard Variable", Pretendard,
+      -apple-system, BlinkMacSystemFont,
+      "Apple SD Gothic Neo", "Noto Sans KR",
+      Inter, system-ui, sans-serif;
+    --mono:
+      ui-monospace, SFMono-Regular,
+      "IBM Plex Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  /* ─── A4 sheet ─── */
+  .sheet {
+    max-width: 820px;
+    margin: 32px auto;
+    background: var(--paper);
+    padding: 64px 72px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    box-shadow: 0 24px 60px rgba(28,27,26,0.06);
+  }
+
+  /* ─── 상단 브랜드 바 (자사 워드마크 + 발주서 라벨) ─── */
+  header.brandbar {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: flex-start;
+    padding-bottom: 28px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .brand { display: flex; align-items: center; gap: 14px; }
+  .brand-mark {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--paper);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 700;
+  }
+  .brand-name {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.005em;
+  }
+  .brand-meta { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+
+  .invoice-block { text-align: right; }
+  .invoice-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+  .invoice-num {
+    font-family: var(--display);
+    font-size: 32px;
+    letter-spacing: -0.01em;
+    font-weight: 700;
+    margin: 6px 0 4px;
+  }
+  .invoice-dates { font-size: 13px; color: var(--muted); }
+  .invoice-dates strong { color: var(--ink); }
+
+  /* ─── 공급자 / 공급받는자 ─── */
+  .parties {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding: 28px 0;
+  }
+  .party h4 {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin: 0 0 8px;
+    font-weight: 500;
+  }
+  .party .name {
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .party .lines { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+  .party .lines a { color: var(--accent); text-decoration: none; }
+
+  /* ─── 프로젝트 참조 스트립 ─── */
+  .ref-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    padding: 16px 22px;
+    background: var(--accent-soft);
+    border-radius: 6px;
+    margin-bottom: 32px;
+  }
+  .ref-strip .label {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+  .ref-strip .value { font-size: 14px; }
+
+  /* ─── 라인 아이템 표 ─── */
+  table { width: 100%; border-collapse: collapse; }
+  thead th {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 2px solid var(--ink);
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  tbody td {
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  td.desc strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  td.desc small {
+    display: block;
+    color: var(--muted);
+    font-size: 12.5px;
+  }
+  td.num,
+  th.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+    font-family: var(--mono);
+    font-size: 13.5px;
+  }
+
+  /* ─── 합계 블록 ─── */
+  .totals {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 24px;
+    margin-top: 28px;
+    align-items: flex-start;
+  }
+  .terms {
+    font-size: 12.5px;
+    color: var(--muted);
+    padding: 18px 20px;
+    background: var(--bg);
+    border-radius: 6px;
+  }
+  .terms h5 {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    margin: 0 0 6px;
+    font-weight: 500;
+  }
+  .totals-block { display: flex; flex-direction: column; gap: 8px; }
+  .total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    padding: 6px 0;
+  }
+  .total-row.subtotal { border-top: 1px solid var(--line); padding-top: 14px; }
+  .total-row.discount { color: var(--accent); }
+  .total-row.tax      { color: var(--muted); }
+  .total-row.grand {
+    padding: 14px 18px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 6px;
+    margin-top: 6px;
+    font-family: var(--display);
+    font-size: 20px;
+    font-weight: 700;
+    align-items: center;
+  }
+
+  /* ─── 결제 정보 ─── */
+  .pay {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-top: 36px;
+    padding: 22px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+  }
+  .pay h4 {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 10px;
+    font-weight: 500;
+  }
+  .pay .row {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+    font-size: 13px;
+  }
+  .pay .row span { font-family: var(--mono); }
+
+  /* ─── 사인 라인 ─── */
+  .signoff {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: end;
+  }
+  .signoff p {
+    margin: 0;
+    font-family: var(--display);
+    font-size: 16px;
+    font-style: italic;
+    color: var(--muted);
+  }
+  .signature { text-align: right; }
+  .signature .scribble {
+    font-family: 'Brush Script MT', 'Snell Roundhand', cursive;
+    font-size: 28px;
+    color: var(--accent);
+  }
+  .signature .name {
+    font-size: 12.5px;
+    color: var(--muted);
+    padding-top: 6px;
+    border-top: 1px solid var(--line);
+    margin-top: 4px;
+  }
+
+  /* ─── Print + 반응형 ─── */
+  @media print {
+    body { background: white; }
+    .sheet { box-shadow: none; border: none; margin: 0; padding: 32px 36px; }
+  }
+  @media (max-width: 720px) {
+    .sheet { padding: 32px 24px; margin: 0; border-radius: 0; }
+    .parties,
+    .pay,
+    .signoff,
+    .totals,
+    .ref-strip { grid-template-columns: 1fr; }
+    header.brandbar { grid-template-columns: 1fr; }
+    .invoice-block { text-align: left; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <!--
+    references/layouts.md에서 양식 1개를 골라 여기에 붙여 넣으세요.
+
+    양식 A · 발주서(P/O) 1차 본생산 (기본값 · 와키윌리 27SS 톤)
+    양식 B · 거래명세서 (입고 검수 후 발행)
+    양식 C · SPOT P/O (시즌 중 추가 발주, 매출 반등 시)
+    양식 D · OEM 계약서 (시즌 시작 4~6개월 전, MSA 본 계약)
+
+    모든 양식은 다음 7개 섹션 순서를 따릅니다:
+    1) header.brandbar — 자사 워드마크 + 문서 라벨/번호/일자
+    2) section.parties — 공급받는자(발주처) + 공급자(수주처)
+    3) div.ref-strip — 프로젝트 + 시즌·차수 + 결제 조건
+    4) table — 라인 아이템 (SKU · 컬러웨이 · LOT · 수량 · 사입단가 · 공급가액)
+    5) div.totals — 합계 (공급가액 + VAT 10% + 합계) + 좌측 결제 약관
+    6) div.pay — 입금 계좌 + 세금계산서 발행 정보
+    7) div.signoff — 감사 인사 + 자필 서명 + 직무·이름
+  -->
+</div>
+</body>
+</html>

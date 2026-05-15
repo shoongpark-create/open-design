@@ -1,48 +1,50 @@
-# Positioning Map Checklist
+# 포지셔닝 맵 자체 검수 체크리스트
 
-Run before emitting `<artifact>`. P0 are hard gates.
+산출물 출력 직전에 한 항목씩 확인하세요. **P0**는 통과해야 하는 하드 게이트.
 
-## P0 — Hard gates
+## P0 — 통과 필수
 
-- [ ] Header carries season (or "perpetual"), brand, status, lock date.
-- [ ] Strategic intent sentence is present above the map.
-- [ ] Map carries all 4 axis labels (top / bottom / left / right) and
-  a center crosshair.
-- [ ] Competitor set has ≥ 8 brands plotted. Below 8 is not a credible
-  positioning map.
-- [ ] Every plotted brand uses coordinates within the 0–100% box (no
-  point clipped off the map).
-- [ ] Our brand point uses a visually distinct treatment (filled chip,
-  brand color, slightly larger) vs. competitor wordmarks.
-- [ ] No two brand points overlap by more than 50% (re-place collisions
-  with a slight offset; collisions destroy legibility).
-- [ ] Default rendering uses CSS-rendered wordmark text, not raster
-  logo images. If the user attached real logos and asked for an
-  image-set version, every `<img src="...">` must resolve to a file
-  the agent wrote in `images/`.
+- [ ] 헤더에 시즌(또는 "perpetual"), 브랜드, 상태(v1/v2/locked), 락 일자가 모두 표기됨
+- [ ] 맵 위에 전략 의도 문장 1개 존재
+- [ ] 맵에 4개 축 라벨(상/하/좌/우) + 중앙 십자선 모두 렌더됨
+- [ ] 경쟁사 셋에 **8개 이상의 브랜드** 플롯됨. 8개 미만은 신뢰할 수 있는 포지셔닝 맵이 아님
+- [ ] 모든 플롯된 브랜드가 0~100% 박스 내 좌표 (맵 밖으로 잘린 점 없음)
+- [ ] 자사 브랜드 점이 시각적으로 구분됨 (채워진 칩, 브랜드 컬러, 약간 큰 사이즈) → 경쟁사 워드마크와 명확히 다름
+- [ ] 두 개 이상의 브랜드 점이 50% 이상 겹치지 않음. 충돌 시 약간씩 오프셋 (가독성 파괴 방지)
+- [ ] 기본 렌더링은 CSS 워드마크 텍스트. 사용자가 실제 로고 첨부 후 이미지 셋 버전을 요청한 경우만 `<img src="...">` 사용 + 모두 `images/` 폴더 내 파일
 
-## P1 — Quality bars
+## P1 — 강력 권장
 
-- [ ] Per-line notes explain why each plotted point sits where it does
-  (when ≥2 lines plotted).
-- [ ] Each competitor placement is consistent with the brand's public
-  identity (e.g. Supreme should not sit in NEW BASIC).
-- [ ] Quadrant labels (NW / NE / SW / SE) in the competitor table
-  match the actual coordinates plotted.
-- [ ] Strategic intent uses the brand's own language; do not paraphrase
-  into generic English.
-- [ ] When using the default "BASIC ↔ ACCENT × NEW BASIC ↔ TREND"
-  axes, the WACKYWILLY 27SS deck calibration is honored (TREND at
-  top, NEW BASIC at bottom).
+- [ ] 라인별 노트가 각 플롯 점의 위치 라쇼날을 설명 (2개 이상 라인 플롯 시)
+- [ ] 각 경쟁사 배치가 브랜드의 공개 정체성과 일관됨 (예: 슈프림이 NEW BASIC에 위치해선 안 됨)
+- [ ] 경쟁사 표의 쿼드런트 라벨(NW/NE/SW/SE)이 실제 플롯된 좌표와 일치
+- [ ] 전략 의도가 **브랜드의 실제 사용 언어** 따름 — 제너릭 영어로 재기술 금지
+- [ ] 기본 축(BASIC ↔ ACCENT × NEW BASIC ↔ TREND) 사용 시 K-young-casual 컨벤션 준수 (TREND 상단, NEW BASIC 하단)
 
-## P2 — Polish
+## P2 — 다듬기
 
-- [ ] Map is readable on landscape A4 print without cutting off
-  brand names at the right edge.
-- [ ] Competitor wordmarks use the brand's own canonical spelling
-  (e.g. "miu miu" lowercase, "PLAY CDG" uppercase) — do not
-  auto-capitalize.
-- [ ] No more than 3 brands cluster in any 10x10% map cell — if more,
-  drop redundant placements.
-- [ ] Open / next decisions list has owner + date for every entry, or
-  the section is omitted entirely.
+- [ ] 가로 A4 인쇄에서 우측 가장자리 브랜드명 잘림 없음
+- [ ] 경쟁사 워드마크가 **브랜드의 카노니컬 표기** 사용 (예: `miu miu` 소문자, `PLAY CDG` 대문자, `마뗑킴` 한글). 자동 대문자화 금지
+- [ ] 임의의 10x10% 셀에 3개 이상 브랜드 클러스터 금지. 더 많다면 중복 배치 제거
+- [ ] Open / Next Decisions 항목마다 owner + 일자 존재. 없으면 섹션 자체 삭제
+
+## K-패션 비즈니스 특화 검수
+
+- [ ] **경쟁사 셋이 한국 시장 + 한국 입점 채널 컨텍스트** — 무신사/29CM에서 실제로 부딪히는 브랜드 포함. 글로벌 럭셔리만 나열 금지
+- [ ] **자사 라인이 분리되어 플롯됨** — UNI / WOMEN / ACC가 다른 좌표면 별도 점으로 명시
+- [ ] **전략 의도가 시즌 전략(`fashion-season-strategy`)과 정합** — 의도가 바뀌면 시즌 전략 3축 재검토 필요
+- [ ] **글로벌 진출 브랜드인 경우 글로벌 경쟁사 포함** — 아더에러 같은 글로벌 진출 K-브랜드는 일본/유럽 셀렉트샵 라인업 의식
+- [ ] **MZ 친화 브랜드인 경우 라이브커머스 + SNS 셋 포함** — 네이버 쇼핑라이브, 카카오, 무신사 라이브에서 경쟁하는 브랜드 의식
+- [ ] **가격대 정합** — 같은 쿼드런트의 경쟁사가 가격대도 비슷한지 확인. 가격대가 너무 다르면 별도 축(VALUE↔PREMIUM)으로 분리 필요
+- [ ] **브랜드 로드맵의 캐릭터 단과 정합** — 좌표가 캐릭터 형용사("재미있는", "따라하고싶은")와 모순되지 않음
+- [ ] **디스플레이 폰트가 운영 덱 톤** — 포지셔닝 맵은 `--font-display-report` 기본
+
+## 검수 실행 흐름
+
+1. 산출물 HTML을 브라우저에서 열어 시각적으로 점검 (특히 점 충돌, 잘림)
+2. P0 항목을 차례로 확인. 미통과 시 작업으로 되돌아가 수정
+3. 가로 A4 PDF 인쇄 미리보기 → 잘림 확인
+4. P1·P2는 시간 여유에 따라 다듬기
+5. 최종 검수 통과 후 헤더 상태를 `locked`로 표기
+
+검수 통과 후 사용자에게 산출물 외에 별도 보고는 하지 않습니다 (출력 규약).

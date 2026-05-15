@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 브랜드] · [REPLACE 시즌·발주차수] 발주 SOP</title>
+<!--
+  K-패션 발주·생산·입고 운영 매뉴얼(런북) 시드.
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+    4) references/layouts.md에서 리듬 1개를 골라
+       <div class="page" id="content"> 안에 붙여 넣기
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude (Claude.ai · Claude Code): <artifact identifier type="text/html"> 로 감쌈
+    - 그 외 (ChatGPT · Gemini · Grok · 일반 채팅): 표준 ```html 코드 블록
+    - OpenDesign: 주요 영역에 data-od-id 사용. 그 외에는 id 속성으로 대체.
+
+  K-패션 컨텍스트:
+    - 작성 주체: 생산실 PD 또는 MD실
+    - 발행 시점: 시즌 시작 2~3개월 전 라인업 LOCK 직후
+    - 청중: 생산실 PD · MD실 RMD · OEM 공장 담당 · QC 외주실 · 3PL 물류
+    - 7섹션 구조: 헤더 → 서비스 요약 → 의존성 → 알람 표 → 절차 블록 → 로테이션 → 사고 대응
+    - 명령어 블록은 영문 명령어 유지 + 변수에 K-패션 코드 (27SS / PO-27SS-W001 / LOT-27SS-W001)
+    - 통화 원/만원/억 · 수량 PCS/장/마 · USD 금지
+-->
+<style>
+  /* 한국 K-패션 표준 폰트 시스템 */
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+  :root {
+    /* 색상 토큰 — 운영 SOP는 다크 톤 권장 (생산실 환경 대비) */
+    --bg:        #0c0e14;
+    --paper:     #14171f;
+    --paper-2:   #1c2030;
+    --ink:       #eaecf3;
+    --muted:     #8b94ad;
+    --muted-2:   #5a647a;
+    --line:      #262b3b;
+    --accent:    #6ee7b7;             /* 생산 OK 그린 */
+    --accent-soft: rgba(110,231,183,0.10);
+    --warn:      #fbbf24;
+    --danger:    #f87171;
+
+    /* 폰트 토큰 — SOP는 운영 톤 */
+    --font-sans:
+      "Pretendard Variable", Pretendard,
+      "Apple SD Gothic Neo", "Noto Sans KR",
+      -apple-system, system-ui, sans-serif;
+    --font-display-report:
+      "Pretendard Variable", "Wanted Sans Variable",
+      "SUIT Variable", "Inter", sans-serif;
+    --font-display: var(--font-display-report);
+    --font-mono:
+      "JetBrains Mono", "IBM Plex Mono", "SF Mono",
+      ui-monospace, Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  body * { font-variant-numeric: tabular-nums; }
+
+  .page { max-width: 1100px; margin: 0 auto; padding: 32px 28px 64px; }
+
+  /* ─── 헤더 스트립 ─── */
+  .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 28px;
+  }
+  .head-left { display: flex; flex-direction: column; gap: 6px; }
+  .crumb {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-size: 36px;
+    margin: 4px 0;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .head-meta {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+  .head-meta span { color: var(--accent); }
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 600;
+  }
+  .pill.tier {
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid color-mix(in oklch, var(--accent) 30%, transparent);
+  }
+  .pill.tier .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--accent);
+  }
+
+  /* ─── 섹션 ─── */
+  section { margin-top: 40px; }
+  h2 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    margin: 0 0 14px;
+    letter-spacing: -0.005em;
+    font-weight: 700;
+  }
+  h2 .index {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    margin-right: 12px;
+    vertical-align: middle;
+  }
+
+  /* ─── 서비스 요약 ─── */
+  .summary { display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px; }
+  .panel {
+    padding: 22px 24px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+  .panel p { margin: 0 0 12px; }
+  .panel p:last-child { margin: 0; }
+
+  /* ─── 의존성 리스트 ─── */
+  .deps h3 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 10px;
+    font-weight: 500;
+  }
+  .deps ul {
+    padding: 0; margin: 0; list-style: none;
+    display: flex; flex-direction: column; gap: 8px;
+    font-family: var(--font-mono); font-size: 12.5px;
+  }
+  .deps li {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: var(--paper-2);
+    border-radius: 6px;
+  }
+  .deps li .ok    { color: var(--accent); }
+  .deps li .warn  { color: var(--warn); }
+  .deps li .down  { color: var(--danger); }
+
+  /* ─── 표 ─── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  th, td {
+    text-align: left;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    font-size: 13px;
+    vertical-align: top;
+  }
+  th {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    background: var(--paper-2);
+    font-weight: 500;
+  }
+  tr:last-child td { border-bottom: none; }
+  td.code, .panel code { font-family: var(--font-mono); }
+
+  /* ─── 심각도 배지 ─── */
+  .sev {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+  }
+  .sev-1 { background: rgba(248,113,113,0.15); color: var(--danger); }
+  .sev-2 { background: rgba(251,191,36,0.15);  color: var(--warn); }
+  .sev-3 { background: rgba(110,231,183,0.15); color: var(--accent); }
+
+  /* ─── 절차 카드 ─── */
+  .procs { display: flex; flex-direction: column; gap: 14px; }
+  .proc {
+    padding: 18px 22px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+  .proc-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+    gap: 12px;
+  }
+  .proc-head h3 {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 17px;
+    font-weight: 600;
+  }
+  .proc-head .when {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  pre {
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 14px 16px;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: #cdd6f4;
+    margin: 8px 0 0;
+  }
+  pre .cmt { color: var(--muted); }
+  pre .var { color: var(--warn); }
+  pre .ok  { color: var(--accent); }
+
+  /* ─── 담당자 로테이션 ─── */
+  .rota {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  /* ─── 사고 대응 체크리스트 ─── */
+  .checklist {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .step {
+    padding: 18px 20px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex: 0 0 36px;
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: var(--bg);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-family: var(--font-display);
+    font-size: 16px;
+  }
+  .step h4 {
+    margin: 0 0 6px;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .step p { margin: 0; color: var(--muted); font-size: 13px; }
+  .step code {
+    font-family: var(--font-mono);
+    background: var(--paper-2);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--accent);
+  }
+
+  /* ─── 푸터 ─── */
+  footer {
+    margin-top: 56px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+
+  /* ─── 반응형 ─── */
+  @media (max-width: 880px) {
+    .summary, .checklist { grid-template-columns: 1fr; }
+    h1 { font-size: 26px; }
+    .head { flex-direction: column; align-items: flex-start; gap: 12px; }
+  }
+</style>
+</head>
+<body>
+<div class="page" id="content">
+  <!--
+    references/layouts.md에서 리듬 1개를 골라 여기에 붙여 넣으세요.
+
+    리듬 A · 시즌 1차 발주 SOP (기본값 — 시즌 메인 본생산 발주)
+    리듬 B · QR / SPOT 발주 매뉴얼 (시즌 진행 중 추가 발주)
+    리듬 C · 입고 검수 + QC 매뉴얼 (3PL 입고 직후 검수 흐름)
+    리듬 D · 시즌 전환 매뉴얼 (시즌 종료 → 다음 시즌 입고 전환)
+
+    모든 리듬은 7개 섹션 순서를 유지합니다:
+      01. 발주 개요 (목적 / 범위 / 총 SKU·PCS·사입금액 / 입고 마감)
+      02. 의존성 (원단 / 부자재 / OEM / QC / 3PL)
+      03. 알람 표 (4~7행 · 심각도 + 의미 + 1차 대응)
+      04. 표준 절차 (3~4건 · 명령어 블록에 K-패션 변수)
+      05. 담당자 로테이션 (주차별 PD / RMD / QC 배치)
+      06. 사고 대응 체크리스트 (첫 30분 · 5단계)
+      07. 푸터 (작성 부서 + 버전 + 소스 경로)
+  -->
+</div>
+</body>
+</html>

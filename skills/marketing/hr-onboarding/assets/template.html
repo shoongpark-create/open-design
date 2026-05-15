@@ -1,0 +1,413 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 브랜드]에 오신 것을 환영합니다 — [REPLACE 신입 이름] [REPLACE 직무] 온보딩</title>
+<!--
+  K-패션 디자이너 · MD 신입 온보딩 가이드 시드.
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+    4) references/layouts.md에서 리듬 1개를 골라
+       <div class="wrap" id="content"> 안에 붙여 넣기
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude (Claude.ai · Claude Code): <artifact identifier type="text/html"> 로 감쌈
+    - 그 외 (ChatGPT · Gemini · Grok · 일반 채팅): 표준 ```html 코드 블록
+    - OpenDesign: 주요 영역에 data-od-id 사용. 그 외에는 id 속성으로 대체.
+
+  K-패션 컨텍스트:
+    - 청중: 신입 본인 + 직속 디렉터(디자인실장/MD실장) + 온보딩 버디 + HR 담당자
+    - 작성: 브랜드 디렉터 / 디자인실장 / MD실장
+    - 6섹션 구조: 커버 → 1일차 → 1주차 → 30/60/90 → 리소스 → 준비 완료 체크리스트
+    - 1주차 활동 중 최소 1개는 현장 활동 (공장 견학 / 견본 CON / 품평회 참관 / 매장 라운드)
+    - 30/60/90 마일스톤은 시즌 산출물 단위 (컨셉 보드 / 라인업 / 키 아이템 발표)
+    - 친근 톤: 세리프 디스플레이 (Hahmlet / Grandiflora) + 따뜻한 베이지/오프화이트
+-->
+<style>
+  /* 한국 K-패션 표준 폰트 시스템 */
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
+
+  :root {
+    /* 색상 토큰 — 친근·따뜻 톤 (DESIGN.md에서 오버라이드) */
+    --bg:           #fbf9f4;
+    --paper:        #ffffff;
+    --ink:          #14110e;
+    --muted:        #6b6760;
+    --muted-2:      #999388;
+    --line:         #ece6d8;
+    --line-2:       #f4efe2;
+    --accent:       #c2521a;     /* 따뜻한 테라코타 */
+    --accent-soft:  color-mix(in oklch, var(--accent) 14%, transparent);
+    --positive:     #2c8a4f;
+    --warn:         #b58522;
+
+    /* 폰트 토큰 — 온보딩은 친근 톤이므로 세리프 디스플레이 권장 */
+    --font-sans:
+      "Pretendard Variable", Pretendard,
+      "Apple SD Gothic Neo", "Noto Sans KR",
+      -apple-system, system-ui, sans-serif;
+    --font-display-romance:
+      "Hahmlet", "Grandiflora One", "Iowan Old Style",
+      "Noto Serif KR", Georgia, serif;
+    --font-display-report:
+      "Pretendard Variable", "Wanted Sans Variable",
+      "SUIT Variable", sans-serif;
+    /* 친근 톤 기본값 romance — MD 신입은 report로 교체 가능 */
+    --font-display: var(--font-display-romance);
+    --font-mono:
+      "JetBrains Mono", "IBM Plex Mono", "SF Mono",
+      ui-monospace, Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  body * { font-variant-numeric: tabular-nums; }
+
+  .wrap { max-width: 1080px; margin: 28px auto; padding: 0 32px 64px; }
+
+  /* ─── 커버 배너 ─── */
+  .cover {
+    padding: 36px 40px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: 16px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: center;
+  }
+  .cover .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent-soft);
+  }
+  .cover h1 {
+    font-family: var(--font-display);
+    font-size: 38px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 8px 0 12px;
+    font-weight: 600;
+  }
+  .cover .meta {
+    display: flex;
+    gap: 28px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.74);
+    flex-wrap: wrap;
+  }
+  .cover .meta strong {
+    color: var(--paper);
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+  .cover-art {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent), color-mix(in oklch, var(--accent) 50%, white));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 56px;
+    color: var(--paper);
+    font-weight: 600;
+  }
+
+  /* ─── 섹션 ─── */
+  section { margin-top: 44px; }
+  h2 {
+    font-family: var(--font-display);
+    font-size: 22px;
+    margin: 0 0 6px;
+    letter-spacing: -0.005em;
+    font-weight: 600;
+  }
+  .section-sub {
+    color: var(--muted);
+    margin: 0 0 18px;
+    font-size: 13.5px;
+  }
+
+  /* ─── 1일차 시간표 ─── */
+  .day-one {
+    padding: 24px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+  .schedule {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 0;
+  }
+  .schedule-row { display: contents; }
+  .schedule-row .time {
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .schedule-row .item {
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+  }
+  .schedule-row:first-child .time,
+  .schedule-row:first-child .item {
+    border-top: none;
+  }
+  .schedule-row .item strong {
+    display: block;
+    font-weight: 600;
+  }
+  .schedule-row .item span {
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  /* ─── 1주차 타임라인 ─── */
+  .week {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+  .day {
+    padding: 16px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-height: 200px;
+  }
+  .day-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .day-name {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .day-date {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .activity {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 13px;
+  }
+  .activity .dot {
+    flex: 0 0 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 6px;
+  }
+  .activity small {
+    display: block;
+    color: var(--muted);
+    margin-top: 2px;
+    font-size: 11.5px;
+  }
+
+  /* ─── 30 / 60 / 90 마일스톤 ─── */
+  .milestones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .milestone {
+    padding: 22px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+  .milestone .badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+  }
+  .milestone h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+  .milestone ul {
+    padding-left: 18px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 13.5px;
+  }
+  .milestone li::marker { color: var(--accent); }
+
+  /* ─── 리소스 + 체크리스트 ─── */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .panel {
+    padding: 22px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+  }
+  .panel h3 {
+    font-family: var(--font-display);
+    font-size: 17px;
+    margin: 0 0 12px;
+    font-weight: 600;
+  }
+  .resource {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 10px;
+    padding: 10px 0;
+    border-top: 1px solid var(--line);
+    align-items: center;
+    font-size: 13.5px;
+  }
+  .resource:first-of-type {
+    border-top: none;
+    padding-top: 0;
+  }
+  .resource .icon {
+    width: 28px;
+    height: 28px;
+    background: var(--accent-soft);
+    border-radius: 7px;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .resource .meta {
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+  }
+  .check {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-top: 1px dashed var(--line);
+  }
+  .check:first-of-type {
+    border-top: none;
+    padding-top: 0;
+  }
+  .check .box {
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 1.5px solid var(--ink);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: transparent;
+  }
+  .check.done .box {
+    background: var(--positive);
+    border-color: var(--positive);
+    color: var(--paper);
+  }
+  .check strong {
+    display: block;
+    font-weight: 600;
+  }
+  .check span {
+    color: var(--muted);
+    font-size: 12.5px;
+  }
+
+  /* ─── 푸터 ─── */
+  footer {
+    margin-top: 56px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+  }
+
+  /* ─── 반응형 ─── */
+  @media (max-width: 900px) {
+    .cover {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .cover-art { margin: 0 auto; }
+    .week { grid-template-columns: 1fr 1fr; }
+    .milestones { grid-template-columns: 1fr; }
+    .grid-2 { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 540px) {
+    .week { grid-template-columns: 1fr; }
+    .wrap { padding: 0 20px 48px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap" id="content">
+  <!--
+    references/layouts.md에서 리듬 1개를 골라 여기에 붙여 넣으세요.
+
+    리듬 A · 디자이너 신입 (시즌 컨셉 단계 입사 — 기본값)
+    리듬 B · MD 신입 (시즌 본생산·발주 단계 입사)
+    리듬 C · 마케팅 / 콘텐츠 신입 (룩북·캠페인 단계 입사)
+    리듬 D · 외주 디자이너 / 단기 프리랜서 (시즌 단발 협업 온보딩)
+
+    모든 리듬은 다음 6개 섹션 순서를 유지합니다:
+      1) 커버 배너 (이름 / 직무 / 입사일 / 디렉터 / 버디 + 환영 문구)
+      2) 1일차 시간표 (09:00 ~ 17:00 · 7~8개 슬롯)
+      3) 1주차 타임라인 (월~금 · 하루 2개 · 현장 활동 1개 이상)
+      4) 30/60/90일 마일스톤 (시즌 산출물 단위)
+      5) 북마크 리소스 (K-패션 표준 도구)
+      6) "준비 완료 신호" 체크리스트 (5개 항목)
+  -->
+</div>
+</body>
+</html>

@@ -1,77 +1,239 @@
 ---
 name: pricing-page
 description: |
-  A standalone pricing page — header, plan tiers, feature comparison table,
-  and an FAQ. Use when the brief asks for "pricing", "plans",
-  "subscription tiers", or a "compare plans" page.
+  K-패션 브랜드의 **멤버십 티어 페이지 / 정기배송 플랜 / 프리오더 가격 페이지**를
+  단일 HTML 페이지로 생성하는 스킬입니다. 헤더(소개) → 등급 카드 (실버/골드/플래티넘/VIP)
+  → 등급별 혜택 비교표 → FAQ → 가입 CTA 5단 구조로,
+  무신사 멤버스/29CM VIP/자사몰 멤버십·정기배송·시즌 프리오더 가격 페이지에 사용합니다.
+  사용자가 "멤버십", "VIP 등급", "회원 등급 페이지", "혜택 비교", "정기배송 플랜",
+  "사전예약 가격", "프리오더", "pricing", "plans"를 언급하면 활성화하세요.
 triggers:
+  - "멤버십 페이지"
+  - "VIP 등급"
+  - "회원 등급"
+  - "회원 혜택"
+  - "혜택 비교"
+  - "등급 비교"
+  - "정기배송 플랜"
+  - "정기배송 가격"
+  - "프리오더 가격"
+  - "사전예약 가격"
+  - "사전예약 페이지"
   - "pricing"
   - "pricing page"
   - "plans"
   - "subscription"
   - "compare plans"
-  - "定价"
-  - "套餐"
 od:
   mode: prototype
   platform: desktop
   scenario: sales
+  category: marketing
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
+  example_prompt: "마뗑킴(MATIN KIM) 자사몰 멤버십 등급 페이지. 4단 티어 — BASIC(가입 즉시) / SILVER(누적 30만 이상) / GOLD(누적 100만 이상) / PLATINUM(누적 300만 이상, 초대제). 혜택: 적립률 / 무료 배송 / 시즌 사전예약 우선권 / 룩북 우편 발송 / 시즌 매장 초대. PLATINUM 추천 강조. FAQ 4개."
 ---
 
-# Pricing Page Skill
+# K-패션 멤버십·프리오더 가격 페이지 스킬
 
-Produce a single-screen pricing page that respects the active DESIGN.md.
+K-패션 브랜드의 **회원 등급 페이지 / 정기배송 플랜 / 시즌 프리오더 가격 페이지**를 단일 HTML 페이지로 생성합니다. 자사몰 멤버십(BASIC/SILVER/GOLD/PLATINUM/VIP), 무신사 멤버스 등급, 29CM VIP, 마뗑킴·마르디 메크르디 자체 멤버십, 27SS 프리오더 가격 페이지를 모두 다룹니다.
 
-## Workflow
+산출물의 청중은 **신규 가입 직전 고객 또는 등급 업그레이드를 고민하는 기존 회원**입니다. 한국 패션기업에서는 **마케팅실(CRM/멤버십 매니저) + 이커머스팀(디지털팀)**이 함께 작성하며, 디자인실(그래픽팀)이 카드 컬러와 등급 배지 디자인을 제공합니다.
 
-1. **Read the active DESIGN.md** (injected above). Use only its colors, type
-   tokens, and component patterns.
-2. **Classify** the product from the brief and pick a tier shape:
-   - 3-tier (most common): Free / Pro / Team or Starter / Growth / Enterprise.
-   - 4-tier when the brief says "scale" or "enterprise plus".
-   - 2-tier when it says "individual / business" or "personal / pro".
-3. **Sections**, in order:
-   1. **Hero** — page title (e.g. "Pricing"), one-line subhead, optional
-      monthly/annual toggle.
-   2. **Plan cards** — one card per tier. Each card: tier name, price (use the
-      display font + larger scale for the number), 1-line positioning, 4–6
-      bullet features, primary CTA. Mark the recommended tier with the DS
-      accent border or a small badge.
-   3. **Comparison table** — feature rows × tier columns, ✓ / — / value cells.
-      Group features into 2–3 logical sections (Core, Collaboration,
-      Support, Security…). Sticky header.
-   4. **FAQ** — 4–6 collapsible Q&A items. Use `<details><summary>` for the
-      collapse — no JS.
-   5. **Footer CTA** — single line + button, accent band sparingly.
-4. **Write** one self-contained HTML document:
-   - `<!doctype html>` through `</html>`, CSS in one inline `<style>`.
-   - CSS Grid for the plan-card row; CSS Grid for the comparison table.
-   - `data-od-id` on each tier card and each table row.
-5. **Money rendering**: use the display font for the big number, body for the
-   currency and "/mo" — sizes per DESIGN.md scale.
-6. **Self-check**:
-   - Prices are plausible for the product (not "$X / month").
-   - Accent is on the recommended tier and one CTA only.
-   - Comparison table renders cleanly at 1024px and stacks readably below
-     768px (rotate column headers or scroll-x).
-   - No fake feature names — every row reads as something a real product
-     would actually offer.
+이 페이지가 답해야 하는 3가지 질문:
 
-## Output contract
+1. **나는 어느 등급에 해당하는가?** (가입 조건 — 누적 구매액, 가입비, 초대제 여부)
+2. **각 등급은 무엇이 다른가?** (혜택 비교 — 적립률, 배송, 사전예약, 매장 초대, 한정 라인)
+3. **다음 등급으로 올라가면 무엇이 좋은가?** (업그레이드 유인 — 시즌 우선권, VIP 라운지, 매장 우편 발송)
 
-Emit between `<artifact>` tags:
+## 환경 호환성
+
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 본문에서 권장하는 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기 기능을 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 워크플로는 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 톤이나 등급 컬러 코드를 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 멤버십 등록(register)을 따릅니다.
+
+- 등급명은 영문 유지가 표준: `BASIC`, `SILVER`, `GOLD`, `PLATINUM`, `VIP`, `MEMBERS ONLY`. 한국어 음차(`실버`, `골드`)는 본문 보조 설명에서만.
+- 가격·금액 표기는 한국 표준: `₩128,000` 또는 `128,000원`. 누적 구매 조건: `누적 ₩300,000 이상`, `최근 12개월 누적`.
+- 적립률: `구매액의 3% 적립`, `0.5% → 1% → 2% → 3% → 5%` 같은 단계 표현.
+- 프리오더 가격은 `프리오더가 ₩89,000 (정가 ₩128,000)` 형식. 할인율은 `30% OFF` 또는 `정가 대비 30% 할인`.
+- CTA는 행동을 명시: `등급 자세히 보기`, `사전예약 신청`, `회원가입 후 BASIC 시작`, `골드 혜택 신청`.
+- 카피 톤은 **신뢰감 + 따뜻한 친근감 혼합**. 너무 SaaS적인 `시작하기`, `지금 가입`은 자제. 한국 패션 톤: `매트 김 회원이 되어주세요`, `오늘부터 BASIC 회원`, `다음 시즌, 가장 먼저`.
+
+## 타이포그래피
+
+| 위치 | 권장 폰트 |
+|---|---|
+| 페이지 헤드라인 (`.h1`, `header h1`) | 디스플레이 세리프 — Hahmlet, 본명조, Recoleta (디자이너/감도) 또는 G마켓산스 (영캐주얼) |
+| 등급명 라벨 (`.tier h2`, `.featured-pill`) | 산세리프 대문자 + 트래킹. Pretendard Variable Bold + `letter-spacing: 0.08em` |
+| 가격 숫자 (`.price`) | 디스플레이 세리프 큰 사이즈 또는 mono 큰 사이즈 |
+| 본문 / UI / 혜택 비교표 | Pretendard Variable |
+| 누적 금액 · 적립률 · 일자 | mono — IBM Plex Mono, Geist Mono |
+
+DESIGN.md에 등급별 컬러 토큰이 정의되어 있지 않다면 다음 K-패션 표준 컬러 패턴을 권장합니다.
+
+- **BASIC**: 무채색 (회색·아이보리)
+- **SILVER**: 차가운 메탈릭 그레이
+- **GOLD**: 따뜻한 골드·아이보리
+- **PLATINUM**: 딥 차콜·블랙 (가장 어두운 컬러 = 가장 높은 등급)
+- **VIP**: 브랜드 시그니처 액센트 컬러 + 골드 라인
+
+## 폴더 구조
 
 ```
-<artifact identifier="pricing-slug" type="text/html" title="Pricing — Product Name">
-<!doctype html>
-<html>...</html>
-</artifact>
+pricing-page/
+├── SKILL.md          ← 이 파일
+└── example.html      ← 참고 예시 (4단 멤버십 티어 1편)
 ```
 
-One sentence before the artifact, nothing after.
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. 이 스킬 폴더의 `example.html`을 끝까지 읽어 헤더 / 등급 카드 / 비교표 / FAQ / 푸터 CTA 구조를 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 디자인 시스템 파일이 없거나 자동 주입되지 않는 환경이라면 사용자에게 톤을 묻고 진행합니다.
+3. 사용자 브리프에서 다음이 빠져 있으면 함께 물어보세요.
+   - 브랜드명
+   - 멤버십 종류 (영구 회원 등급 / 정기배송 플랜 / 시즌 프리오더 / 한정 콜라보 등)
+   - 등급 수 (2~5단, 가장 흔한 것은 3~4단)
+   - 등급명 영문 표기 (`SILVER`/`GOLD`/`PLATINUM` 또는 브랜드 고유 명칭 `매트 키 / 매트 키 플러스`)
+   - 등급 진입 조건 (누적 구매액 / 가입비 / 초대제 / 자동 부여)
+   - 등급별 혜택 (적립률, 무료 배송, 사전예약, 룩북, 매장 초대 등 5~8개)
+   - 추천 강조 등급 1개
+
+### Step 1 — 페이지 종류 분류
+
+사용자 브리프에서 한 가지를 고르세요.
+
+| 페이지 종류 | 추천 티어 수 | 가격 형식 |
+|---|---|---|
+| **영구 회원 등급 페이지** (자사몰 멤버십) | 4~5단 | 조건 (누적 구매액 등) + 비용 ₩0 |
+| **정기배송 플랜** (스타킹/이너/베이직 정기배송) | 2~3단 | `₩39,000 / 월` |
+| **시즌 프리오더** (27SS 사전예약 컬렉션) | 1~3단 (얼리버드 / 정상 / VIP 한정) | `프리오더가 ₩89,000 (정가 ₩128,000, ~05/20)` |
+| **콜라보 한정 라인** (브랜드 × IP 컬래버) | 1~2단 (일반 / VIP 우선) | 정가 + 발매일 카운트다운 |
+| **VIP 초청제** (PLATINUM/VIP) | 2단 (현재 등급 / 다음 등급 안내) | 초청제, 조건만 명시 |
+
+가장 흔한 형식은 **4단 영구 회원 등급 + GOLD 추천 강조**입니다.
+
+### Step 2 — 섹션 구성 (순서대로)
+
+1. **헤더 (Hero)** — 페이지 타이틀 (`매트 키 멤버스`, `MATIN KIM MEMBERS`), 1줄 데크 (`오래 머무를수록, 더 가까이.`), 선택적 토글 (`연 누적 / 최근 12개월`).
+2. **등급 카드 (Plan tiers)** — 등급당 카드 1개. 각 카드에 등급명·진입 조건·핵심 혜택 4~6개·CTA. 추천 등급은 액센트 보더 + 작은 `RECOMMENDED` 또는 `MOST POPULAR` 배지. 가격(누적 조건)은 디스플레이 폰트 + 큰 사이즈.
+3. **혜택 비교표 (Comparison)** — 혜택 행 × 등급 열. ✓ / — / 값 셀. 혜택을 2~3개 논리 그룹으로 묶기:
+   - **적립·할인**: 적립률, 시즌 할인, 첫 구매 쿠폰
+   - **배송·CS**: 무료 배송, 익일 배송, 우선 CS 전용 라인
+   - **시즌 혜택**: 사전예약 우선권, 룩북 우편, 매장 초대, 한정 라인 접근
+4. **FAQ** — 4~6개 접이식 Q&A. `<details><summary>` 사용 (JS 없이).
+5. **푸터 CTA** — 1줄 + 버튼. 액센트 밴드는 절제 사용.
+
+### Step 3 — HTML 작성
+
+단일 HTML 문서로 작성합니다.
+
+- `<!doctype html>` ~ `</html>`, CSS는 인라인 `<style>` 1개.
+- 등급 카드 행은 CSS Grid. 비교표는 CSS Grid 또는 `<table>` + sticky 헤더.
+- 주요 요소 식별 속성:
+  - **OpenDesign 환경**: `data-od-id="header"`, `data-od-id="tiers"`, `data-od-id="compare"`, `data-od-id="faq"`
+  - **그 외 환경**: 일반 `id` 속성으로 대체 가능
+- 금액 렌더링: 큰 숫자는 디스플레이 폰트 + 큰 사이즈, 통화·단위(`/월`, `~05/20`)는 본문 폰트. DESIGN.md 스케일 사용.
+
+### Step 4 — 자체 검수
+
+- [ ] 가격·조건이 K-패션 멤버십에 자연스러움 (`$X / month` 같은 SaaS 가격 금지)
+- [ ] 액센트는 추천 등급 1개 + CTA 1개로 제한
+- [ ] 비교표가 1024px에서 깔끔, 768px 이하에서 가독성 유지 (열 헤더 회전 또는 가로 스크롤)
+- [ ] 가짜 혜택명 금지 (`Premium Feature 1`, `Advanced Support` 같은 SaaS 어휘 금지)
+- [ ] 모든 혜택이 K-패션 브랜드가 실제로 제공할 만한 항목 (적립·배송·룩북·매장 초대·사전예약·한정 라인)
+- [ ] 등급명이 K-패션 등록 (BASIC/SILVER/GOLD/PLATINUM/VIP 또는 브랜드 고유)
+- [ ] 가입 조건이 명시 (누적 구매액·기간·초대제 여부)
+- [ ] FAQ가 한국 고객이 실제 궁금해할 질문 (`등급은 언제 갱신되나요?`, `등급이 떨어질 수 있나요?`, `시즌 사전예약은 며칠 전부터?`)
+
+## 한국 K-패션 멤버십 사례 (참고)
+
+| 브랜드/플랫폼 | 멤버십 구조 | 시그니처 혜택 |
+|---|---|---|
+| **무신사 멤버스** | NEW → BRONZE → SILVER → GOLD → DIAMOND (구매액 누적) | 적립률 0.5% → 5%, 무신사 부티크 우선 접근, 매장 초대 |
+| **29CM** | NEW → SILVER → GOLD → BLACK (가장 어두운 = 최고) | 0~3% 적립, 큐레이션 우선, 시크릿 세일 |
+| **마뗑킴 자사몰** | 누적 구매액 기반 + 시즌 사전예약 우선권 | 룩북 우편 발송, 시즌 매장 초대 |
+| **마르디 메크르디** | 가입 즉시 + 누적 구매 등급 | 시즌 컬렉션 사전예약, 매장 행사 초대 |
+| **아더에러 (GLOBAL)** | 가입 즉시 + 글로벌 멤버 | 한정 콜라보 우선, 글로벌 발송 |
+| **W컨셉 VIP** | 누적 구매액 기반 | 시즌 패션쇼 초청, 디자이너 미팅 |
+| **롯데/신세계/현대 패션 멤버스** | 신용카드 연동 등급 | 백화점 라운지, 발레파킹, 시즌 우선 접근 |
+
+## K-패션 표준 등급별 혜택 매트릭스 (참고)
+
+| 혜택 | BASIC | SILVER | GOLD | PLATINUM | VIP |
+|---|---|---|---|---|---|
+| 적립률 | 0.5% | 1% | 2% | 3% | 5% |
+| 무료 배송 | ₩50,000 이상 | ₩30,000 이상 | 전 상품 | 전 상품 | 전 상품 + 익일 |
+| 시즌 사전예약 우선권 | — | 12시간 전 | 24시간 전 | 48시간 전 | 1주 전 |
+| 시즌 룩북 우편 발송 | — | — | ✓ | ✓ | ✓ + 한정판 |
+| 매장 시즌 행사 초대 | — | — | — | ✓ | ✓ + 1+1 동반 |
+| 한정 콜라보 우선 접근 | — | — | — | — | ✓ |
+| 생일 쿠폰 | ₩5,000 | ₩10,000 | ₩20,000 | ₩50,000 | ₩100,000 |
+| 전용 CS 라인 | — | — | — | — | ✓ |
+
+위 매트릭스는 출발점입니다. 실제 산출물은 사용자 브랜드의 실제 정책으로 작성하세요.
+
+## 한국 패션기업 부서 R&R + 채널 연계
+
+| 부서 | 역할 |
+|---|---|
+| **마케팅실 (CRM/멤버십 매니저)** | 등급 정책 설계, 혜택 카피, 가입 유인, 등급 업그레이드 캠페인 |
+| **이커머스팀(디지털팀)** | 페이지 HTML 제작·QA, 자사몰 적재, 등급 자동 부여 로직 |
+| **디자인실(그래픽팀)** | 등급 배지·카드 컬러, 멤버스 이메일 비주얼 |
+| **MD실 / 영업기획** | 등급별 혜택의 마진·효과 검토 (시즌 사전예약 비중, 적립률 손익) |
+| **CS팀** | FAQ 작성·검수, 전용 라인 운영 |
+
+### 채널 연계
+
+- **자사몰 (카페24 / 쇼피파이)** — 회원 등급 페이지 (`/membership`, `/vip`) + 마이페이지 등급 표시
+- **무신사 입점 브랜드** — 무신사 멤버스와 별도 자사몰 멤버스 동시 운영 (이중 멤버십)
+- **카카오톡 채널 알림톡** — 등급 업그레이드 알림, 시즌 사전예약 우선권 안내
+- **이메일** — 시즌 사전예약 / 룩북 우편 / 매장 초대 발송
+- **매장 (직영/팝업)** — 매장 POS에서 등급 확인, VIP 전용 룸·서비스
+
+## 시즌 사이클 내 위치
+
+```
+[시즌 시작 6개월 전]   멤버십 정책 연간 재설계 (정기 리뷰)
+[시즌 시작 3개월 전]   다음 시즌 등급별 혜택 확정 (사전예약 우선권 시간차 등)
+[시즌 시작 2개월 전]   ▶ 멤버십·프리오더 가격 페이지 업데이트 (이 스킬)
+                       프리오더 시작
+[시즌 시작 1개월 전]   ▶ 시즌 프리오더 가격 페이지 발행 (이 스킬)
+                       사전예약 알림톡 발송 (PLATINUM/VIP 우선)
+[시즌 시작]            정상 발매, 등급별 적립률 자동 적용
+[판기 종료]            시즌오프 가격 페이지, 다음 등급 안내
+```
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="pricing-slug" type="text/html" title="멤버십 페이지 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "마뗑킴 자사몰 4단 멤버십 페이지를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

@@ -1,52 +1,229 @@
 ---
 name: pm-spec
 description: |
-  Product spec / PRD as a single page — problem, success metrics, scope,
-  user stories, design notes, rollout plan, open questions. Use when the
-  brief mentions "PRD", "spec", "product spec", "feature brief", or "需求文档".
+  K-패션 브랜드의 **신상품 기획서 (PRD → 상품 기획서)**, **콜라보 기획서**,
+  **팝업스토어 기획안**을 단일 HTML 페이지로 생성하는 스킬입니다.
+  헤더(제목·상태·작성자·일자), 3줄 요약, 시장/문제 패널 + 고객/매거진 코멘트 인용,
+  목표·비목표, 성공 지표 표(정판율·회전율·매출 등), 페르소나 스토리,
+  4단계 마일스톤(샘플→LOCK→발주→입고→마케팅), 미결 질문 구조.
+  서양 SaaS의 PRD(Problem-Goal-Spec) 골격을 한국 패션기업의 상품 기획서로 재해석.
+  사용자가 "신상품 기획서", "상품 PRD", "콜라보 기획서", "팝업 기획안",
+  "27SS 키 아이템 기획서", "spec", "prd"를 언급하면 활성화하세요.
 triggers:
+  - "신상품 기획서"
+  - "상품 기획서"
+  - "상품 PRD"
+  - "키 아이템 기획서"
+  - "콜라보 기획서"
+  - "팝업 기획안"
+  - "팝업스토어 기획서"
   - "prd"
   - "spec"
   - "product spec"
-  - "feature brief"
-  - "feature doc"
-  - "需求文档"
 od:
   mode: prototype
   platform: desktop
   scenario: product
+  category: fashion
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Write me a PRD for adding two-factor auth to our SaaS app — problem, scope, milestones, open questions."
+  example_prompt: "와키윌리 27SS 키 아이템 기획서: 윌리 그래픽 후디. 시즌 헤드 아이템으로 마케팅 push + 무신사 베스트 진입 목표. 목표 = 시즌 1만장 판매, 정판율 85%, 무신사 베스트 TOP30 진입. 페르소나 = 22~28세 영캐주얼 + K-아이돌 팬 + 윌리 캐릭터 호감 1~3년 차. 마일스톤 = 1월 1차 샘플 → 2월 LOCK → 3월 발주 → 4월 입고 → 5월 입고·캠페인 동시 시작. 미결 = 컬러웨이 4 vs 5, 그래픽 단가 절감 OEM 협의."
 ---
 
-# Product Spec Skill
+# 패션 신상품 기획서 (상품 PRD) 스킬
 
-Produce a one-page product spec / PRD.
+K-패션 브랜드의 **신상품 기획서, 콜라보 기획서, 팝업스토어 기획안**을 단일 HTML 페이지로 생성합니다. 서양 SaaS의 PRD(Problem-Goal-Spec-Metric-Story-Milestone-Open Questions) 골격을 한국 패션기업의 상품 기획 양식으로 재해석한 형태입니다.
 
-## Workflow
+이 산출물의 청중은 **MD 실장, 디자인 실장, 마케팅 실장, 대표/임원, 영업기획팀**입니다. 시즌 키 아이템 또는 콜라보·팝업 같이 시즌 외 단발 프로젝트의 기획 합의 문서로 사용됩니다. 한국 패션기업 실무에서는 "기획서"라고 부르며, MD가 작성하고 디자인 실장 + 대표 결재가 표준입니다.
 
-1. Read the active DESIGN.md.
-2. Identify the feature + audience from the brief.
-3. Layout:
-   - Header strip: title, status pill (Draft / Review / Approved), date, owner.
-   - Three-line summary at the top — what, who, why now.
-   - "Problem" panel with one paragraph and a quote from a customer or
-     internal partner.
-   - "Goals & non-goals" two-column block.
-   - "Success metrics" table with metric / target / measurement.
-   - "User stories" list with as-a / I-want / so-that format.
-   - "Scope" milestone tracker (3–4 phases).
-   - "Open questions" with assignee chips.
-4. One inline `<style>`, semantic HTML, accent used twice max.
+## 환경 호환성
 
-## Output contract
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 본문의 `data-od-id` 속성으로 인라인 코멘트 기능을 사용할 수 있습니다. 그 외 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 작업 흐름은 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 `DESIGN.md` 경로나 기본 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 상품 기획서의 등록(register)을 따릅니다.
+
+- 제목·헤드라인은 한국어 + 영문 혼용. 예: "27SS 윌리 그래픽 후디 기획서", "WACKYWILLY x [Brand X] 콜라보 기획안".
+- 산업용어 유지: SKU, BTA, OEM, MOQ, LOT, QR, SPOT, 컬러웨이, 캐리오버, 정상판매율, 사입가율, 마진율, AOV, GMV, ROAS.
+- 채널 표기: 무신사 / 29CM / W컨셉 / 자사몰 / 한섬몰. 인플루언서·앰배서더는 한글.
+- 페르소나 카피는 한국 영캐주얼 타겟 언어. 예: "22~28세 영캐주얼 + 무신사 회원 + K-아이돌 팬 + 윌리 캐릭터 호감".
+- 마일스톤 표기: 1월/2월/3월 또는 W-카운트다운. 발매·LOCK·발주·입고 등 시즌 사이클 표준 단어 사용.
+
+## 폴더 구조
 
 ```
-<artifact identifier="spec-name" type="text/html" title="Spec Title">
-<!doctype html>...</artifact>
+pm-spec/
+├── SKILL.md       ← 이 파일
+└── example.html   ← 작성 예시 (와키윌리 27SS 윌리 그래픽 후디 키 아이템 기획서)
 ```
+
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. `example.html`을 처음부터 끝까지 읽어 헤더 + 요약 + 시장·문제 + 목표 + 지표 + 페르소나 + 마일스톤 + 미결 구조를 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 파일이 자동 주입되지 않는 환경이라면 사용자에게 경로나 기본 톤을 묻고 진행합니다.
+
+### Step 1 — 분류 및 정보 수집
+
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
+
+- 기획서 종류 (신상품 기획서 / 콜라보 기획서 / 팝업 기획안 중 하나)
+- 브랜드명 + 시즌 + 상품/콜라보/팝업 이름
+- 상태 (Draft / Review / Approved · MD 실장 결재 / 대표 결재 등)
+- 작성자, 결재자, 검토자 (관련 실장)
+- 3줄 요약 (한 문장으로 "무엇 / 누구를 위해 / 왜 지금")
+- **시장·문제** (왜 이 상품/콜라보/팝업이 필요한지 1~2 문단) + 인용 (매거진 / 인플루언서 / 회원 VOC)
+- **목표·비목표** (이 기획에서 다루는 것 / 미루는 것)
+- **성공 지표 표** (시즌 판매·정판율·무신사 베스트·SNS 도달 등 4~6 지표, 베이스라인 + 목표 + 측정 방법)
+- **페르소나 / 코디 스토리** (3개 페르소나 또는 코디 시나리오)
+- **마일스톤** (4단계: 샘플/LOCK → 발주/생산 → 입고/상세페이지 → 캠페인/판매)
+- **미결 질문** (3개 정도, 담당자 + 데드라인)
+
+"Item A / Feature B" 같은 플레이스홀더 금지 — 실제 K-패션 SKU·콜라보 브랜드명·팝업 위치로 작성합니다.
+
+### Step 2 — 레이아웃
+
+세로 한 컬럼 구조 (max-width 1080px):
+
+- **상단 헤더**: 좌측 크럼 + 상태 칩, 우측 작성자/일자/검토자
+- **H1 제목** + 3줄 요약
+- **메타 행**: 디자인실 라인 / 디자이너 / 디자인 리드 / 발매 일정 / 예상 LOT
+- **시장·문제 섹션**: 좌측 패널 본문 + 우측 인용 박스
+- **목표·비목표 섹션**: 2컬럼 그리드 (체크 / 엑스)
+- **성공 지표 표**: 지표 / 베이스라인 / 90일 목표 / 측정 방법
+- **페르소나 / 코디 스토리 섹션**: 번호 + "는 [페르소나]로서, [원함]를 통해, [왜]" 형식
+- **마일스톤 타임라인** (4단계 카드)
+- **미결 질문**: 카드 + 담당자 아바타 + 데드라인
+- **푸터**: 브랜드/문서 버전 + 일자
+
+### Step 3 — 작성
+
+1. 단일 HTML 문서로 작성, CSS는 인라인 `<style>` 한 블록.
+2. 본문 디스플레이 폰트는 한국 패션 매거진 톤(본명조/Charter 세리프) 또는 운영 톤(Pretendard 산세리프) 중 선택.
+3. 시맨틱 HTML: `<header>`, `<section>` × 6~7, `<table>`, `<footer>`.
+4. 주요 영역에 식별용 속성. OpenDesign 환경에서는 `data-od-id`, 그 외에서는 `id`.
+5. 액센트 컬러 최대 2번 사용 — 상태 칩 + 인용 박스 좌측 보더 + 마일스톤 뱃지 정도.
+
+### Step 4 — 자체 검수
+
+- 모든 색상은 `:root` 토큰에서 옴 — 임의 hex 금지
+- 인용 박스에 실제 매거진·인플루언서·회원 VOC 인용 (가공된 가짜 인용이라도 자연스럽게)
+- 성공 지표 표에 K-패션 현실치: 정판율 60~85%, 무신사 베스트 진입 가능 SKU 수, 시즌 판매량 단위
+- 페르소나 3개는 다른 인구 통계 + 다른 사용 동기 (예: K-아이돌 팬 / 디자인 감도 우선 / 친구 추천)
+- 마일스톤 4단계 — 첫 단계는 샘플/LOCK, 마지막은 입고+캠페인이 자연스러움
+- 미결 질문에 데드라인 + 담당자 명시
+- 모바일 폴백: 시장·문제, 목표·비목표 그리드 1열, 마일스톤 2×2
+
+## 한국 K-패션 기획서 표준 (참고)
+
+### 신상품 기획서 (시즌 키 아이템 기획)
+
+- **작성 시점**: 시즌 시작 4~5개월 전 (1차 디자인 시점)
+- **작성자**: MD (해당 카테고리 담당)
+- **결재**: 디자인 실장 → MD 실장 → 대표
+- **포함 내용**: 시장·트렌드 분석, 목표(정판율·발주량·매출), 페르소나, 컬러웨이, 가격 정책, 무신사 노출 계획
+
+### 콜라보 기획서
+
+- **작성 시점**: 협업 브랜드 컨택 직후
+- **작성자**: 브랜드 디렉터 또는 마케팅 실장
+- **결재**: 대표
+- **포함 내용**: 콜라보 파트너 소개, 시너지 가설, 라인업, 발매 일정·채널, 마케팅, 매출 목표
+
+### 팝업스토어 기획안
+
+- **작성 시점**: 팝업 2~3개월 전
+- **작성자**: 마케팅 실장 또는 VMD
+- **결재**: 대표
+- **포함 내용**: 위치(성수동/한남동/명동), 기간, 비주얼 컨셉, 라인업, 한정 SKU, 객수·매출 목표, 인플루언서 초대
+
+## 한국 K-패션 브랜드 기획서 톤 사례 (참고)
+
+| 브랜드 | 기획서 특징 |
+|---|---|
+| **와키윌리** | 캐릭터 IP 기획서 별도 라운드 + 페르소나에 K-아이돌 팬 명시 |
+| **마뗑킴** | 로고 아이템 캐리오버 기획 강함, 가격대 안정 |
+| **마르디 메크르디** | 플라워 그래픽 시즌 기획서 + 글로벌 매출 목표 명시 |
+| **아더에러** | 콜라보 기획서가 메인 산출물 — 컨셉 우선, 매출은 후순위 |
+| **시야쥬** | 트렌드 반응 빠른 QR 기획서 다수, 핏 기획 별도 |
+| **무신사 스탠다드** | 베이직 회전 + 한국적 핏 USP 강조 |
+
+위 사례는 카피·예시 참고용입니다. 실제 산출물은 사용자 브랜드의 실데이터로 작성하세요.
+
+## 한국 패션기업 조직 R&R 메모
+
+기획서의 작성·검토·결재 흐름.
+
+- **MD (작성 주체)**: 시장 데이터 정리, 페르소나·목표·마일스톤 초안
+- **디자인 실장**: 컨셉·핏·컬러웨이 검토, 디자이너 배정
+- **MD 실장**: 발주량·가격 정책·BTA 적합성 결재
+- **마케팅 실장**: 캠페인 일정·예산 합의 (콜라보·팝업의 경우 작성 주체)
+- **영업기획**: 채널별 노출 계획·매출 목표 합의
+- **대표**: 최종 결재. 콜라보·팝업은 대표 직접 결재 표준
+
+신상품 기획서는 시즌 디자인 킥오프와 함께 작성을 시작해 1차 품평회 전에 결재 완료가 한국 패션기업 표준 사이클입니다.
+
+## 시즌 사이클 내 위치
+
+신상품 기획서는 **시즌 시작 4~5개월 전 작성, 시즌 종료까지 운영 문서로 사용**됩니다.
+
+```
+[fashion-season-strategy] (시즌 시작 6개월 전 — 키 아이템 후보 결정)
+    ↓
+[fashion-concept-board / fashion-color-story] (5개월 전)
+    ↓
+[pm-spec — 신상품 기획서 작성, MD 작성 + 디자인실 + 대표 결재] (4~5개월 전)
+    ↓
+[fashion-key-item-sheet — 시각화된 키 아이템 시트로 보강]
+    ↓ 1차 품평회
+[meeting-notes — 품평회 노트 + 기획서 갱신]
+    ↓ LOCK
+[fashion-new-lineup — 전체 라인업과 함께 LOCK]
+    ↓ 발주 → 입고
+[fashion-imc-calendar — 캠페인 일정 연계]
+    ↓ 시즌 진행 중
+[weekly-update / dashboard — 기획서 목표값 vs 실데이터 추적]
+```
+
+## 채널 연계
+
+기획서의 보관·집행 채널.
+
+- **노션 / 컨플루언스 / 카카오워크 위키** — 본 기획서 보관
+- **사내 ERP** — SKU 마스터, 발주량, 가격 등록
+- **무신사 셀러센터** — 상품 등록 + 상세페이지 입력 시 참조
+- **광고 운영 부서** — 페르소나 기반 타겟팅 설정
+- **인플루언서·앰배서더 컨택 시트** — 페르소나 매칭
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="spec-key-item-27ss" type="text/html" title="상품 기획서 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "와키윌리 27SS 윌리 그래픽 후디 키 아이템 기획서를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

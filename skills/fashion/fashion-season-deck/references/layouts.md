@@ -1,15 +1,12 @@
-# Season Deck Layouts
+# 시즌 덱 레이아웃 (3종)
 
-Three rhythms. Pick **one** in Step 2 and assemble slides accordingly.
-The slide-order is fixed by `slide-order.md`; this file just defines
-how each slide presents.
+세 가지 리듬 중 **하나**를 Step 2에서 선택해 슬라이드를 조립하세요. 슬라이드 순서는 `slide-order.md`에서 고정되며, 이 파일은 각 슬라이드의 *표현 방식*만 정의합니다.
 
 ---
 
-## Rhythm A — Vertical scroll-snap (default)
+## 리듬 A — Vertical scroll-snap (기본값)
 
-Slides stack vertically, full-screen each, scroll-snap aligned. Arrow
-keys (↑ ↓) and Space navigate.
+슬라이드가 수직으로 쌓이며, 풀스크린 + 스크롤-스냅 정렬. 화살표 키(↑ ↓)와 스페이스로 내비게이션.
 
 ```html
 <body class="deck deck--scroll-vertical">
@@ -20,8 +17,8 @@ keys (↑ ↓) and Space navigate.
   </nav>
 
   <section class="slide slide--cover">
-    <header class="cover-header"><span class="brand-mark">[mark]</span><h1>27SS 디자인 기획안</h1></header>
-    <footer><p>와키윌리 디자인실 · 2026.04.29</p></footer>
+    <header class="cover-header"><span class="brand-mark">[REPLACE 와키윌리]</span><h1>[REPLACE 27SS 디자인 기획안]</h1></header>
+    <footer><p>[REPLACE 와키윌리 디자인실] · [REPLACE 2026.04.29]</p></footer>
   </section>
 
   <section class="slide slide--toc">
@@ -43,10 +40,13 @@ keys (↑ ↓) and Space navigate.
     <h2>컬러 / 소재</h2>
   </section>
 
-  <section class="slide slide--embed" data-source="fashion-color-story">
+  <section class="slide slide--embed"
+           data-source="fashion-color-story"
+           data-source-version="v2-locked"
+           data-source-artifact-id="fashion-color-story-27ss">
     <header class="slide-header"><span class="slide-num">9</span><h2>컬러 구성</h2></header>
     <div class="slide-body">
-      <!-- PASTE the <main> content from the color story artifact, scoped -->
+      <!-- 컬러 스토리 산출물의 <main> 내용을 스코프해서 붙여넣기 -->
     </div>
     <footer class="slide-footer">
       <span class="slide-attribution">via <code>fashion-color-story</code></span>
@@ -54,11 +54,11 @@ keys (↑ ↓) and Space navigate.
     </footer>
   </section>
 
-  <!-- repeat slides per slide-order.md -->
+  <!-- slide-order.md에 따라 슬라이드 반복 -->
 
   <section class="slide slide--placeholder" data-missing-source="fashion-key-item-sheet">
     <h2>키 아이템 시트 (대기)</h2>
-    <p>Source artifact missing for <code>fashion-key-item-sheet · 코튼 집업 점퍼</code>. Run the skill in this project folder, then re-bind.</p>
+    <p>소스 산출물 없음: <code>fashion-key-item-sheet · 코튼 집업 점퍼</code>. 프로젝트 폴더에서 스킬을 실행한 뒤 재바인딩하세요.</p>
   </section>
 
   <section class="slide slide--end">
@@ -68,28 +68,29 @@ keys (↑ ↓) and Space navigate.
 </body>
 ```
 
+**언제 쓰나**: 내부 디자인 리뷰, 분기 검토. 기본 선택.
+
 ---
 
-## Rhythm B — Horizontal scroll-snap (Keynote-feel)
+## 리듬 B — Horizontal scroll-snap (키노트 느낌)
 
-Same slide markup; deck container uses `overflow-x: auto;` and
-`scroll-snap-type: x mandatory;`.
+슬라이드 마크업은 동일. 덱 컨테이너가 `overflow-x: auto;` + `scroll-snap-type: x mandatory;` 사용.
 
 ```html
 <body class="deck deck--scroll-horizontal">
-  <!-- same slides as Rhythm A -->
+  <!-- 리듬 A와 동일한 슬라이드 -->
 </body>
 ```
 
-The arrow keys map to ← / → instead of ↑ / ↓ (the agent should
-inline a 30-line vanilla-JS handler for this).
+화살표 키는 ← / → 로 매핑(↑ / ↓ 대신). 에이전트가 30줄 정도의 바닐라 JS 핸들러를 인라인 추가해야 합니다.
+
+**언제 쓰나**: 외부 발표(이사회, 투자자, 글로벌 미팅). 키노트/슬라이드 룸과 비슷한 톤이 필요할 때.
 
 ---
 
-## Rhythm C — Print-A4-landscape (PDF intent)
+## 리듬 C — Print-A4-landscape (PDF 의도)
 
-Each slide is exactly one A4 landscape page. Use this when the
-output will be printed or exported as PDF.
+각 슬라이드가 정확히 A4 가로 1페이지. 출력 또는 PDF 내보내기용.
 
 ```html
 <body class="deck deck--print">
@@ -100,38 +101,47 @@ output will be printed or exported as PDF.
 </body>
 ```
 
-In CSS, set `@page { size: A4 landscape; margin: 0; }` and on
-`.slide--print` set `width: 297mm; height: 210mm; page-break-after:
-always`.
+CSS에서 `@page { size: A4 landscape; margin: 0; }` 설정 + `.slide--print`에 `width: 297mm; height: 210mm; page-break-after: always`.
+
+**언제 쓰나**: PDF로 외부 공유, 인쇄본 검토회, 글로벌 협력사 발송용.
 
 ---
 
-## Common slide kinds
+## 공통 슬라이드 종류
 
-Every slide carries one of these `data-kind` attributes (or class
-modifier) for consistent navigation behavior and CSS:
+모든 슬라이드는 다음 `data-kind` 속성(또는 클래스 모디파이어)을 가집니다:
 
-| `data-kind` | Class modifier | Use |
+| `data-kind` | 클래스 | 용도 |
 |---|---|---|
-| `cover` | `slide--cover` | Slide 1 only |
-| `toc` | `slide--toc` | Slide 2 only |
-| `divider` | `slide--divider` | Chapter break before a section group |
-| `embed` | `slide--embed` | Wraps the body of an upstream module artifact |
-| `inline` | `slide--inline` | Project-bound content (e.g. label guide, brand strategy) |
-| `placeholder` | `slide--placeholder` | When the upstream module artifact is missing |
-| `end` | `slide--end` | Final E.O.D. slide |
+| `cover` | `slide--cover` | 슬라이드 1번만 |
+| `toc` | `slide--toc` | 슬라이드 2번만 |
+| `divider` | `slide--divider` | 섹션 그룹 앞 챕터 브레이크 |
+| `embed` | `slide--embed` | 상위 모듈 산출물 본문 래핑 |
+| `inline` | `slide--inline` | 프로젝트 자체 콘텐츠 (라벨 가이드, 브랜드 전략 등) |
+| `placeholder` | `slide--placeholder` | 상위 모듈 산출물이 없을 때 |
+| `end` | `slide--end` | 최종 E.O.D. 슬라이드 |
 
-## Always-on metadata
+## 임베드 슬라이드 항상 필요한 메타데이터
 
-Every embed slide should carry:
+모든 임베드 슬라이드는 다음 속성을 가집니다:
 
 ```html
 <section class="slide slide--embed"
          data-source="<skill-name>"
-         data-source-version="<artifact lock version, e.g. v2-locked>"
-         data-source-artifact-id="<artifact identifier, e.g. fashion-color-story-27ss>">
+         data-source-version="<산출물 락 버전, 예: v2-locked>"
+         data-source-artifact-id="<산출물 식별자, 예: fashion-color-story-27ss>">
 ```
 
-This metadata makes it possible to traceback to the standalone
-artifact via the slide attribution chip and (later) auto-refresh
-when the source artifact is regenerated.
+이 메타데이터를 통해 슬라이드 attribution chip → 독립 산출물 추적이 가능하며, 향후 소스 산출물이 재생성될 때 자동 갱신을 지원합니다.
+
+---
+
+## 리듬 선택 가이드 요약
+
+| 시나리오 | 권장 리듬 |
+|---|---|
+| 내부 디자인 리뷰, 분기 검토 (기본) | **A — Vertical scroll-snap** |
+| 외부 발표 (이사회, 투자자, 글로벌 미팅) | **B — Horizontal scroll-snap** |
+| PDF 공유 / 인쇄본 검토회 / 글로벌 협력사 발송 | **C — Print-A4-landscape** |
+
+선택한 리듬을 Step 2에서 한 문장으로 선언하세요.

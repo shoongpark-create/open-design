@@ -1,23 +1,32 @@
 ---
 name: blog-post
 description: |
-  A long-form article / blog post — masthead, hero image placeholder,
-  article body with figures and pull quotes, author byline, related posts.
-  Use when the brief asks for "blog", "article", "post", "essay", or
-  "case study".
+  K-패션 브랜드의 **매거진 컬럼 / 시즌 에세이 / 디자이너 인터뷰**를 단일 HTML 매거진 페이지로 생성하는 스킬입니다.
+  마스트헤드 · 카테고리 아이브로우 · 헤드라인 · 데크(subhead) · 저자 바이라인 ·
+  히어로 이미지 플레이스홀더 · 본문(풀쿼트, 피겨, 리스트, 인용 포함) · 저자 풋터 ·
+  관련 글 3장 구조로 W Korea·Dazed Korea·Vogue Korea 톤의 매거진 글을 만듭니다.
+  브랜드 저널, 시즌 컨셉 비하인드, 디자이너 노트, 콜라보 비하인드, 룩북 에세이에 사용합니다.
+  사용자가 "블로그", "매거진 컬럼", "브랜드 저널", "시즌 에세이", "디자이너 인터뷰",
+  "룩북 에세이", "브랜드 스토리"를 언급하면 활성화하세요.
 triggers:
+  - "블로그"
+  - "블로그 글"
+  - "매거진 컬럼"
+  - "브랜드 저널"
+  - "시즌 에세이"
+  - "디자이너 인터뷰"
+  - "디자이너 노트"
+  - "룩북 에세이"
+  - "브랜드 스토리"
   - "blog"
-  - "blog post"
   - "article"
-  - "essay"
+  - "editorial"
   - "case study"
-  - "newsletter"
-  - "博客"
-  - "文章"
 od:
   mode: prototype
   platform: desktop
   scenario: marketing
+  category: marketing
   featured: 11
   preview:
     type: html
@@ -25,55 +34,192 @@ od:
   design_system:
     requires: true
     sections: [color, typography, layout, components]
+  example_prompt: "마뗑킴(MATIN KIM) 27SS 컨셉 비하인드 매거진 컬럼을 작성해주세요. 카테고리: SEASON STORY. 헤드라인 '봄, 가장 조용한 옷에 대하여.' 디자이너 매트 김 인터뷰 톤. 본문 600자 이상, 4개 H2 섹션, 풀쿼트 1개, 피겨 1개, 리스트 1개, 인용 1개."
 ---
 
-# Blog Post Skill
+# K-패션 매거진 블로그 스킬
 
-Produce a single long-form article page — editorial layout, no chrome.
+K-패션 브랜드의 **매거진 컬럼 / 디자이너 에세이 / 시즌 컨셉 비하인드**를 단일 HTML 페이지로 생성합니다. 페이지 주변 크롬은 없고, 순수 에디토리얼 레이아웃입니다. 글은 70% 타이포그래피, 20% 이미지, 10% 크롬 비율을 유지합니다.
 
-## Workflow
+이 스킬은 K-패션 매거진(W Korea, Dazed Korea, Vogue Korea, 마리끌레르 코리아, 1st Look) 톤을 따르며, 산업 영문/국문 혼용을 자연스럽게 허용합니다. 산출물 작성 주체는 **마케팅실(에디터 또는 PR 매니저) + 브랜드 디렉터**이며, 시즌 사이클상 **시즌 시작 1~2개월 전**(룩북 공개 시점 ± 2주)에 발행하는 것이 일반적입니다.
 
-1. **Read the active DESIGN.md** (injected above). Lean into the typography
-   tokens — long-form is 70% type, 20% image, 10% chrome.
-2. **Pick the topic** from the brief and write a real article — at least 600
-   words across 4–6 H2 sections. No lorem ipsum.
-3. **Sections**, in order:
-   - **Masthead** — small wordmark + 4–6 nav links, plain.
-   - **Article header** — category eyebrow, headline (display token, large),
-     deck (1–2 sentence subhead), author name + role + date.
-   - **Hero image** — a 16:9 placeholder block using a DS-tinted gradient or
-     solid fill (no external images). Add a 1-line caption underneath.
-   - **Body** — alternating prose paragraphs with at least:
-     - 1 pull quote (large display type, accent rule on the left).
-     - 1 figure (image placeholder + caption).
-     - 1 list (numbered or bulleted).
-     - 1 inline blockquote.
-   - **Author footer** — author avatar (initials in a circle), bio paragraph.
-   - **Related** — 3 cards linking to other posts. Each card: tiny image
-     block, title, 1-line excerpt, date.
-4. **Write** a single HTML document:
-   - `<!doctype html>` through `</html>`, CSS inline.
-   - Article body uses the DS body font, centered, max-width per DS layout
-     rule (typically 680–720px).
-   - Drop caps (`first-letter`) only if the DS mood is editorial / serif —
-     skip on tech-y DSes.
-   - `data-od-id` on the headline, hero, body, pull quote, related grid.
-5. **Self-check**:
-   - Type hierarchy is unambiguous — H1 is clearly the headline; H2s are
-     section dividers; pull quotes do not compete with H1.
-   - Line length 60–75 chars for body prose.
-   - Accent appears at most twice (eyebrow + pull-quote rule, or one link).
-   - The page reads like a magazine, not a marketing landing.
+발행 채널은 자사몰의 매거진/저널 코너(예: `mardi.kr/journal`, `matinkim.com/story`), 무신사 매거진, 29CM 매거진, 카카오톡 채널의 매거진 친구톡, 브런치/네이버 블로그 동시 발행이 많습니다.
 
-## Output contract
+## 환경 호환성
 
-Emit between `<artifact>` tags:
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기를 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 워크플로는 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 매거진의 카피 등록을 따릅니다.
+
+- 영문 산업용어는 그대로 유지: SS · FW · 룩북 · BTA · 컬러웨이 · 캡슐 · 콜라보 · 드롭 · 시그니처 · 사일런트 럭셔리.
+- **포엣코어(Poetcore) 톤**: 기능·스펙 직설 ❌ → 감각·계절감·라이프스타일·디자이너 의도 ⭕.
+  - Before: "신축성 좋은 코튼 100% 셔츠. 사이즈 XS~XL."
+  - After: "햇살이 닿으면 천천히 결을 따라 번지는 셔츠. 봄날의 가장 조용한 한 벌."
+- 영문 헤드라인 + 한국어 데크 혼용 권장:
+  - 헤드라인: `On Spring, and Silence.`
+  - 데크: `27SS, 마뗑킴이 봄을 가장 조용히 입는 방법.`
+- 본문 톤: **명사구 + 자연스러운 한국어 문장 혼용**. 너무 딱딱한 `~한다`, `~이다`는 매거진 등록에서 자제. 부드러운 `~한다.`, `~인다.`, `~다.` 사용 가능.
+- 풀쿼트는 디자이너/대표 발언으로 1~2 문장. 큰 디스플레이 타이포 + 액센트 룰.
+
+## 타이포그래피
+
+K-패션 매거진은 세리프 디스플레이 + 산세리프 본문의 조합이 표준입니다.
+
+| 위치 | 권장 폰트 (예시) |
+|---|---|
+| 헤드라인 | Hahmlet, 본명조, Recoleta, Instrument Serif (디스플레이 세리프) |
+| 데크 / 풀쿼트 | 같은 디스플레이 세리프 이탤릭 |
+| 본문 | Pretendard Variable, Spoqa Han Sans Neo, Noto Sans KR |
+| 캡션 / 메타 / 카테고리 | mono (IBM Plex Mono) 또는 작은 산세리프 대문자 |
+
+본문 컬럼 너비는 60~75자 (한국어 기준 약 40~55자) 가독성 최적 폭. `max-width: 680~720px`.
+
+드롭 캡(`::first-letter`)은 디자이너 브랜드·룩북 에세이처럼 에디토리얼 무드일 때만 적용. 영캐주얼·위트 톤에서는 생략 권장.
+
+## 폴더 구조
 
 ```
-<artifact identifier="post-slug" type="text/html" title="Article Title">
-<!doctype html>
-<html>...</html>
-</artifact>
+blog-post/
+├── SKILL.md          ← 이 파일
+└── example.html      ← 참고 예시 (시즌 에세이 1편)
 ```
 
-One sentence before the artifact, nothing after.
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. 이 스킬 폴더의 `example.html`을 끝까지 읽어 마스트헤드 / 헤더 / 히어로 / 본문 / 풀쿼트 / 피겨 / 저자 풋터 / 관련 글 구조를 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 디자인 시스템 파일이 없거나 자동 주입되지 않는 환경이라면 사용자에게 톤을 묻고 진행합니다.
+3. 사용자 브리프에서 **글의 주제 + 카테고리 + 저자 + 시즌 코드 + 핵심 인용문 1개**가 빠져 있으면 함께 물어보세요.
+
+### Step 1 — 주제 결정 + 본문 작성
+
+진짜 매거진 글을 씁니다. 플레이스홀더(`lorem ipsum`)는 절대 사용하지 않습니다. 최소 600자, 4~6개 H2 섹션.
+
+K-패션 매거진 컬럼의 4가지 표준 패턴:
+
+- **시즌 컨셉 비하인드** — "27SS의 무드는 어떻게 탄생했는가" 톤
+- **디자이너 인터뷰** — 1문답 형식 또는 Q&A 형식. 디자이너 1인의 의도·영감·아이덴티티 서술
+- **콜라보 비하인드** — "WACKYWILLY × XX의 첫 만남부터 발매까지"
+- **룩북 에세이** — 룩북 한 장 한 장의 의미를 풀어내는 시인적 에세이
+
+### Step 2 — 레이아웃 (순서대로)
+
+1. **마스트헤드** — 작은 워드마크 + 4~6개 내비 링크(`SHOP`, `JOURNAL`, `LOOKBOOK`, `MEMBERS`, `SHOPS`). 플레인.
+2. **아티클 헤더**:
+   - **카테고리 아이브로우** — 작은 대문자 (`SEASON STORY`, `DESIGNER NOTE`, `LOOKBOOK ESSAY`, `COLLAB BEHIND`)
+   - **헤드라인** — 디스플레이 세리프, 큰 사이즈. 영문 또는 한국어 또는 혼용
+   - **데크(subhead)** — 1~2문장 보조 설명
+   - **저자 바이라인** — 저자 이름 + 역할 (`마케팅 디렉터`, `브랜드 디렉터`, `에디터`) + 일자
+3. **히어로 이미지** — 16:9 플레이스홀더 블록. 외부 이미지 URL 금지. DS 토큰 기반 그라데이션 또는 솔리드 필. 캡션 1줄 (`27SS LOOKBOOK · 사진 이호인`).
+4. **본문(Body)** — 산문 단락 사이에 최소 다음을 포함:
+   - **풀쿼트** 1개 — 큰 디스플레이 타입, 좌측 액센트 룰. 디자이너/대표 발언 1~2 문장
+   - **피겨** 1개 — 이미지 플레이스홀더 + 캡션 (룩북 컷, 컬러 팔레트, 시그니처 IP 등)
+   - **리스트** 1개 — 번호 또는 글머리 (`이번 시즌이 고른 세 가지 약속`, `봄의 다섯 가지 색`)
+   - **인라인 인용문** 1개 (`<blockquote>`)
+5. **저자 풋터** — 저자 아바타(이니셜 원형) + 저자 약력 1문단. 짧고 따뜻하게.
+6. **관련 글(Related)** — 3개 카드. 각 카드: 작은 이미지 블록 + 제목 + 1줄 발췌 + 일자. 같은 시즌의 다른 에세이, 디자이너 인터뷰, 룩북 등을 묶습니다.
+
+### Step 3 — HTML 작성
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`)로 작성합니다.
+
+- CSS는 인라인.
+- 본문은 DS 본문 폰트(Pretendard 권장), 가운데 정렬, `max-width: 680~720px`.
+- 드롭 캡(`first-letter`)은 에디토리얼·세리프 톤 DS일 때만. 영캐주얼/위트 DS는 생략.
+- 외부 이미지 URL 금지. 모든 이미지는 그라데이션 또는 인라인 SVG로 표현.
+- 주요 요소에 식별 속성:
+  - **OpenDesign 환경**: `data-od-id="masthead"`, `data-od-id="headline"`, `data-od-id="hero"`, `data-od-id="body"`, `data-od-id="pull-quote"`, `data-od-id="related"`
+  - **그 외 환경**: 일반 `id` 속성으로 충분합니다.
+
+### Step 4 — 자체 검수
+
+- [ ] 타입 위계가 명확 — H1 = 헤드라인, H2 = 섹션 구분자, 풀쿼트는 H1과 경쟁하지 않음
+- [ ] 본문 한 줄당 60~75자(한국어 약 40~55자) 가독 폭 유지
+- [ ] 액센트 컬러는 최대 2회 (카테고리 아이브로우 + 풀쿼트 룰 또는 1개 링크)
+- [ ] 페이지가 매거진처럼 읽힘 — 마케팅 랜딩 페이지가 아님 (CTA 버튼 강조 금지)
+- [ ] 본문 600자 이상, 4~6개 H2 섹션
+- [ ] 풀쿼트 1개 + 피겨 1개 + 리스트 1개 + 인라인 인용 1개 모두 포함
+- [ ] 카피 톤이 포엣코어 — 직설 스펙 설명이 아니라 감각·계절감·디자이너 의도 서술
+- [ ] 저자 풋터에 실제 이름·역할·약력 (플레이스홀더 금지)
+- [ ] 관련 글 3개에 실제 제목·발췌·일자
+
+## 한국 K-패션 매거진 톤 사례 (참고)
+
+| 매거진/저널 | 톤 |
+|---|---|
+| **Vogue Korea** | 럭셔리, 정제, 긴 호흡 에세이 |
+| **W Korea** | 컨템포러리, 모던, 디자이너 의도 중심 |
+| **Dazed Korea** | 영캐주얼, 스트릿, 위트, 짧은 호흡 |
+| **마리끌레르 코리아** | 여성 라이프스타일, 따뜻한 1인칭 |
+| **1st Look** | K-팝, 셀럽 중심, 단정한 인터뷰 |
+
+### K-패션 브랜드 저널 패턴
+
+| 브랜드 | 저널 톤 | 발행 채널 |
+|---|---|---|
+| **마뗑킴 (Matin Kim)** | 텍스트 절제, 모델 + 로고 + 짧은 본문 | 자사몰 LOOKBOOK + 인스타 캐러셀 동반 |
+| **마르디 메크르디 (Mardi Mercredi)** | 프렌치 카페 에세이, 영불 혼용 | 자사몰 JOURNAL + 무신사 매거진 |
+| **아더에러 (ADER ERROR)** | 영문 100%, 컨셉추얼, 글로벌 | 자사몰 GLOBAL + Highsnobiety |
+| **무신사 스탠다드** | 정보 + 짧은 스토리. 가성비·소재 강조 | 무신사 매거진 |
+| **시야쥬 (CHYAJU)** | 절제·여백, 디자이너 의도 명상적 | 자사몰 STORY |
+
+## 한국 패션기업 부서 R&R + 워크플로
+
+| 부서 | 역할 |
+|---|---|
+| **마케팅실 (에디터/PR)** | 글 기획, 인터뷰 진행, 카피라이팅, 발행 일정 |
+| **브랜드 디렉터** | 글의 톤·디자이너 의도·시즌 컨셉 정합성 검토 |
+| **디자인실(그래픽팀)** | 히어로 컷·룩북 컷·캡션 사진 제공 |
+| **이커머스팀(디지털팀)** | HTML 제작·QA, 자사몰 JOURNAL 페이지 적재, SEO 메타 |
+| **영업기획** | 발행 후 페이지뷰·체류 시간·전환율 모니터링 |
+
+## 시즌 사이클 내 위치
+
+```
+[시즌 시작 5개월 전]   컨셉 보드, 컬러 스토리 (디자인실)
+[시즌 시작 3개월 전]   라인업 LOCK
+[시즌 시작 2개월 전]   룩북 촬영
+[시즌 시작 1~2개월 전] ▶ 매거진 컬럼 / 디자이너 인터뷰 작성 (이 스킬)
+                       룩북 공개 / 신상 발매 이메일
+[시즌 시작]            S1~S4 판기 발매
+[판기 중반]            추가 매거진 컬럼 (실착 후기, 스타일링 가이드)
+```
+
+## 채널 연계
+
+- **자사몰 매거진/저널** — `journal/` 또는 `story/` 경로에 SEO 메타와 함께 발행
+- **무신사 매거진** — 무신사 입점 브랜드의 경우 별도 협업
+- **29CM 매거진** — 29CM 큐레이션 브랜드의 경우 큐레이션 페이지와 연동
+- **카카오톡 채널 친구톡** — 발행 시 친구톡으로 매거진 카드 + CTA 전송
+- **인스타그램 + 네이버 블로그** — 발췌·요약 버전을 캐러셀과 블로그에 동시 게재
+- **브런치** — 디자이너/대표 1인칭 에세이의 경우 브런치 동시 발행
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="post-slug" type="text/html" title="아티클 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "마뗑킴 27SS 시즌 컨셉 비하인드 매거진 컬럼을 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

@@ -1,258 +1,226 @@
 ---
 name: critique
 description: |
-  Run a 5-dimension expert design review on any HTML artifact in the
-  project — Philosophy / Visual hierarchy / Detail / Functionality /
-  Innovation, each scored 0–10. Outputs a single self-contained HTML
-  report with a radar chart, evidence-backed scores, and three lists:
-  Keep / Fix / Quick-wins. Use when the brief asks for a "design
-  review", "design critique", "5 维度评审", "design audit", or "what's
-  wrong with my design".
+  K-패션 산출물(룩북, 상세페이지, 시즌 합본 덱, 자사몰 메인, 캠페인 랜딩,
+  콜라보 제안서)에 대해 **5차원 전문 비평 보고서**를 생성하는 스킬입니다.
+  브랜드 톤 정합성 / 시각 위계 / 디테일 실행 / 콘텐츠 기능성 / 시즌 차별성을
+  각 0-10점으로 평가, 레이더 차트 + 근거 기반 점수 + Keep / Fix / Quick-win
+  3개 액션 리스트를 단일 HTML 보고서로 출력. 디자인 실장·MD 실장이 룩북
+  1차/2차 비평, 상세페이지 검수, 시즌 덱 사전 점검 시 사용. 사용자가 "룩북
+  비평", "상세페이지 검토", "시즌 덱 검수", "디자인 리뷰", "패션 콘텐츠
+  비평"을 언급하면 활성화하세요.
 triggers:
+  - "룩북 비평"
+  - "룩북 리뷰"
+  - "룩북 1차 비평"
+  - "상세페이지 검토"
+  - "상세페이지 비평"
+  - "시즌 덱 검수"
+  - "패션 콘텐츠 비평"
+  - "디자인 리뷰"
+  - "시즌 산출물 리뷰"
   - "critique"
   - "design review"
-  - "design audit"
-  - "5 维度评审"
-  - "5-dim review"
-  - "audit my design"
-  - "review my deck"
-  - "review my landing page"
-  - "评审"
-  - "复盘"
 od:
   mode: prototype
   platform: desktop
   scenario: design
+  category: fashion
   upstream: "https://github.com/alchaincyf/huashu-design"
   preview:
     type: html
     entry: index.html
   design_system:
     requires: false
-  example_prompt: "Run a 5-dimension critique on the magazine-web-ppt deck I just generated — score philosophy / hierarchy / detail / function / innovation, give me Keep / Fix / Quick-wins."
+  example_prompt: "방금 만든 와키윌리 27SS 룩북 1차 컷에 5차원 비평을 실행해주세요 — 브랜드 톤 정합성 / 시각 위계 / 디테일 실행 / 콘텐츠 기능성 / 시즌 차별성. Keep / Fix / Quick-win 액션 리스트 포함. 디자인 실장이 2차 룩북 진행 전 결정 내릴 수 있게."
 ---
 
-# Critique Skill · 5 维度专家评审
+# 패션 룩북·상세페이지·시즌 덱 비평 스킬
 
-Produce a single-file HTML "design review report" that scores any
-artifact across 5 dimensions and proposes actionable fixes. Inspired by
-the *huashu-design* expert-critique flow.
+K-패션 산출물(룩북, 상세페이지, 시즌 합본 덱, 자사몰 메인, 콜라보 랜딩)에 대해 5차원 비평 보고서를 생성합니다. *huashu-design*의 전문 비평 플로우를 한국 패션 등록(register)으로 재해석.
 
-## When to use
+## 사용 시점
 
-- After the agent (or user) generates an artifact (deck / prototype /
-  landing page) and the user asks "what's wrong with this?" or
-  "review this"
-- As a self-check loop the agent can run on its own output **before**
-  emitting it
-- For comparing two variants of the same design
+- 룩북 1차 컷 촬영 직후, 2차 진행 전 의사결정용
+- 상세페이지 1차 디자인 완료 시, 매장 입고/자사몰 등록 전 검수
+- 시즌 합본 덱 작성 후, 대표 발표 전 사전 점검
+- 콜라보 제안서 작성 후, 외부 전송 전 사전 검수
+- 자사몰 메인 페이지 변경 시, 시즌 전환 적합성 점검
+- AI 또는 디자이너가 생성한 산출물 자체 검토 루프
 
-## What you produce
+## 만드는 것
 
-A single self-contained `<artifact type="text/html">` review report
-including:
+단일 자가포함 HTML 비평 보고서 — 다음 구성:
 
-1. **Header** — what artifact was reviewed, date, reviewer ("OD ·
-   Critique skill"), 1-line verdict
-2. **Radar chart** (inline SVG, no library) showing the 5 scores
-3. **Five dimension cards**, each with:
-   - Score 0–10 (with band: 0–4 *Broken* · 5–6 *Functional* · 7–8 *Strong*
-     · 9–10 *Exceptional*)
-   - 1-paragraph evidence (cite specific elements / files / lines)
-   - One Keep / Fix / Quick-win bullet
-4. **Combined action lists** at the bottom:
-   - **Keep** — what's working, don't touch
-   - **Fix** — P0 / P1 issues that are visually expensive
-   - **Quick wins** — 5–15 minute tweaks with disproportionate impact
+1. **헤더** — 검토 대상 산출물 + 일자 + 검토자(`디자인실장 + OD critique skill`) + 1줄 평가
+2. **레이더 차트** (인라인 SVG, 라이브러리 없음) — 5개 점수 시각화
+3. **5개 차원 카드**, 각각:
+   - 0~10점 점수 (배드: 0-4 *깨짐* · 5-6 *기능적* · 7-8 *강함* · 9-10 *탁월*)
+   - 1단락 근거 (구체적 요소·페이지·SKU·룩 번호 인용)
+   - Keep / Fix / Quick-win 1개씩
+4. **종합 액션 리스트** — Keep / Fix / Quick wins 3개 카드
 
-## The 5 dimensions
+## K-패션 5개 차원
 
-> Each dimension is independent — a deck can be 9/10 on Innovation but
-> 4/10 on Hierarchy and the report should say so plainly. Don't average
-> away interesting failures.
+> 각 차원은 독립적 — 시즌 덱이 시즌 차별성 9/10인데 시각 위계 4/10일 수 있고, 보고서는 그 사실을 명확히 적어야 합니다. 흥미로운 실패를 평균으로 없애지 마세요.
 
-### 1. Philosophy consistency · 哲学一致性
+### 1. 브랜드 톤 정합성 · Brand-tone Consistency
 
-> Does the artifact pick a clear *direction* and stick to it through
-> every micro-decision (chrome / kicker / spacing / accent)?
+> 산출물이 명확한 *브랜드 방향*을 고르고, 모든 미세 결정(헤더 / 카피 톤 / 컬러 룰 / 폰트 / 사진 디렉션)에서 그 방향을 일관되게 유지하는가?
 
-**Evidence to look for:**
-- Is there one declared design direction (e.g. Monocle / WIRED /
-  Kinfolk) or is it three styles in a trench coat?
-- Does the chrome / kicker vocabulary stay in one register, or does
-  page 3 say "Vol.04 · Spring" and page 7 say "BUT WAIT 🔥"?
-- Are accent / serif / mono used by the same rule throughout?
+**확인할 근거**:
+- 명확한 브랜드 톤 한 가지(마뗑킴 친근 SNS / 마르디 셀럽 친화 / 아더 글로벌 신비감 / 와키 캐릭터 IP / 무신사 스탠다드 베이직)인가, 아니면 3개 브랜드 톤이 충돌하는가?
+- 카피 등록(register)이 처음부터 끝까지 동일한가, 아니면 페이지 3은 "안녕하세요" 페이지 7은 "BUT WAIT 🔥"인가?
+- 액센트 컬러·시그니처 폰트·로고 사용 규칙이 모든 페이지에서 동일한 룰을 따르는가?
+- 브랜드 로드맵의 캐릭터(예: "재미있는", "따라하고 싶은")가 카피·룩·디테일에서 실제로 느껴지는가?
 
-**0–4** Three styles fighting each other. **5–6** One direction but
-half the elements drift. **7–8** Coherent, occasional drift on edge
-pages. **9–10** Every element argues for the same thesis.
+**0-4** 3개 브랜드 톤이 충돌. **5-6** 한 톤이지만 절반의 요소가 표류. **7-8** 일관, 엣지 페이지에서 미세 표류. **9-10** 모든 요소가 같은 thesis를 향함.
 
-### 2. Visual hierarchy · 视觉层级
+### 2. 시각 위계 · Visual Hierarchy
 
-> Can a stranger figure out what to read first, second, third — without
-> being told?
+> 처음 보는 사람이 무엇을 1번째·2번째·3번째로 읽어야 할지 가이드 없이 알 수 있는가?
 
-**Evidence to look for:**
-- Is the largest type clearly the most important thing on each page?
-- Do mono / serif / sans roles match the information's *role* (meta /
-  body / display)?
-- Lots of "loud" elements competing? Or a clear primary + secondary +
-  tertiary tier?
+**확인할 근거**:
+- 룩북: 메인 룩 컷 → 디테일 컷 → 컬러웨이 어소트 순으로 시선이 흐르는가?
+- 상세페이지: 키비주얼 → 가격·사이즈 → 소재·핏 가이드 → 후기 → CTA 순서가 명확한가?
+- 시즌 덱: 표지 → 시즌 컨셉 → 키 아이템 → 라인업 → 캠페인 → 사이트맵 순서가 막힘없이 흐르는가?
+- 세리프 / 산세리프 / 모노 폰트 역할이 정보의 *역할*(메타 / 본문 / 디스플레이)과 매칭되는가?
+- 모든 요소가 동일 무게로 외치는가, 아니면 명확한 1차 / 2차 / 3차 위계가 있는가?
 
-**0–4** Everything shouts. **5–6** Hierarchy works on hero pages but
-breaks on body. **7–8** Clear tiers, occasional collision. **9–10** Eye
-moves with zero friction.
+**0-4** 모든 것이 외침. **5-6** 히어로 페이지는 작동, 본문에서 무너짐. **7-8** 명확한 위계, 가끔 충돌. **9-10** 마찰 0으로 시선이 흐름.
 
-### 3. Detail execution · 细节执行
+### 3. 디테일 실행 · Detail Execution
 
-> The 90/10 stuff — alignment, leading, kerning at large sizes, image
-> framing, foot/chrome polish, edge-case spacing.
+> 90/10의 디테일 — 정렬, 자간, 사진 프레이밍, 컬러 일관성, 푸터/헤더 정돈, 엣지 케이스 여백.
 
-**Evidence to look for:**
-- Big-stat pages: does the number sit on a baseline, or float?
-- Left/right column tops aligned in `grid-2-7-5`?
-- `frame-img` + caption proportions consistent across pages?
-- Mono labels: same letter-spacing? same uppercase rule?
-- Any orphaned `<br>` causing 1-character lines?
+**확인할 근거**:
+- 룩북: 모든 룩 컷이 동일한 프레임 비율(예: 4:5 또는 3:4)을 따르는가? 모델 시선·포즈 일관성?
+- 상세페이지: 사이즈 표·핏 가이드 정렬이 어긋나지 않는가? 컬러웨이 스와치 톤이 실제 제품과 일치?
+- 컬러 락 코드(예: `CW01 OAT`)가 모든 페이지에서 동일한 명칭으로 표기?
+- 모노 라벨(SKU 코드, LOT 번호) 자간·대문자 룰이 일관?
+- 한글 본문에서 외로운 음절(고아 단어) 또는 1자 행이 발생하는가?
+- 사이즈 단위(cm vs 인치), 컬러 명칭(영문 vs 한글)이 일관?
 
-**0–4** Visible tape and string. **5–6** Most pages clean, 1–2
-ragged. **7–8** Polished, expert eye finds 2–3 misses. **9–10**
-Magazine-grade — the kind of detail that makes printed-by-hand
-typographers nod.
+**0-4** 보이는 테이프 자국. **5-6** 대부분 깔끔, 1-2 페이지 너덜. **7-8** 매끈, 전문가 눈에 2-3 미스. **9-10** 매거진급 — 인쇄 타이포그래퍼가 끄덕이는 디테일.
 
-### 4. Functionality · 功能性
+### 4. 콘텐츠 기능성 · Content Functionality
 
-> Does the artifact *work* for its intended use? Click targets, nav,
-> readability at presentation distance, copy-paste-ability for code
-> blocks, mobile fallback if relevant.
+> 산출물이 *의도된 용도*로 작동하는가? 룩북이 영업·발주 결정에 쓰일 수 있는가? 상세페이지가 구매 결정을 이끄는가?
 
-**Evidence to look for:**
-- Deck: keyboard / wheel / touch nav all working? Iframe scroll
-  fallback?
-- Landing: CTA above the fold? Phone number tappable on mobile?
-- Runbook: code blocks copyable, mono font, no smart quotes?
-- Critical info readable from 4m away (large screen presentation)?
+**확인할 근거**:
+- 룩북: 모든 룩의 SKU 코드·컬러웨이·사이즈가 매칭? MD가 룩북만 보고 발주 결정 가능?
+- 상세페이지: 사이즈 가이드 충분? 핏 정보 (예: "여유 있는 핏 / 모델 165cm · M 착용")? 후기·평점?
+- 시즌 덱: 발표 시간(20분/45분)에 맞는 슬라이드 수? 외부 미팅 시 이메일 첨부 가능한 크기? 핵심 의사결정 사항이 한 페이지에 정리?
+- 콜라보 제안서: 양 브랜드 정보·콜라보 스토리·가격·발매 일정·매출 예측이 모두 포함?
+- 모바일에서 글씨 가독성? 무신사 입점 페이지 톤이면 모바일 우선?
 
-**0–4** Visually fine but doesn't accomplish its job. **5–6** Core
-flow works, edge cases broken. **7–8** Robust through normal use.
-**9–10** Defensively engineered — handles iframe / fullscreen / paste
-/ print without flinching.
+**0-4** 시각적으로는 OK지만 본업 못 함. **5-6** 핵심 흐름 작동, 엣지 케이스 깨짐. **7-8** 일반 사용 전 구간 견고. **9-10** 방어적으로 설계됨 — 모바일·인쇄·이메일 첨부 어디서나 동작.
 
-### 5. Innovation · 创新性
+### 5. 시즌 차별성 · Seasonal Distinction
 
-> Does this push past the median? Is there one element that makes
-> people lean in?
+> 이번 시즌만의 *한 가지 결정적 모먼트*가 있는가? 사람들이 스크린샷을 찍게 만드는?
 
-**Evidence to look for:**
-- One *unexpected* layout / motion / typographic move that wasn't
-  required?
-- Or 100% safe — could be any deck/landing from any agency?
-- Is the innovation *earned* (matches direction) or grafted on
-  (random WebGL on a Kinfolk slow-living deck)?
+**확인할 근거**:
+- 이번 시즌만의 *예상 못 한* 시각·타이포·소재·룩 모먼트가 한 가지 있는가?
+- 100% 안전한 — 어느 영캐주얼 브랜드 어느 시즌 룩북에서도 볼 수 있는 톤인가?
+- 그 차별성이 *시즌 컨셉 보드*와 연결되는가(consciously earned), 아니면 외부에서 빌려온 그래프트인가?
+- 브랜드 로드맵의 캐릭터(예: 와키 "재미있는·따라하고싶은")가 이번 시즌에 새로 발현된 한 가지 모먼트가 있는가?
 
-**0–4** Generic AI-slop median. **5–6** Competent and unmemorable.
-**7–8** One memorable moment, the rest solid. **9–10** Multiple
-moves you'd steal — but each one obviously serves the thesis.
+**0-4** AI 생성형 평균. **5-6** 유능하지만 기억에 안 남음. **7-8** 기억에 남는 모먼트 1개. **9-10** 훔치고 싶은 모먼트가 여러 개 — 각각 thesis와 연결.
 
-## Scoring discipline (read before you score)
+## 점수 디시플린
 
-- **Always cite evidence** — "scored 4 because hero page mixes
-  Playfair display with Inter sans on the same line" beats "feels
-  inconsistent". Numbers without evidence get rejected.
-- **Don't average up** — if Hierarchy is 5 because page 3 is broken,
-  don't bump to 7 because pages 1 and 2 are fine. The score is the
-  *worst sustained band*.
-- **Don't grade-inflate** — a 7 means *strong*, not *acceptable*. If
-  every score is 7+, you're not reviewing critically.
-- **Innovation is allowed to be low** — 5/10 is fine for production
-  deliverables. Don't punish *appropriate* conservatism.
+- **항상 근거 인용** — "룩 03번에서 카피 톤이 룩 12번과 다름"이 "톤이 맞지 않음"을 이김. 근거 없는 숫자는 거절.
+- **평균 올리지 마세요** — 시각 위계가 5점인 이유가 페이지 3 때문이라면, 페이지 1·2가 OK여도 7점으로 올리지 마세요. 점수는 *가장 일관되게 나쁜 밴드*.
+- **점수 인플레 금지** — 7점은 *강함*이지 *수용 가능*이 아닙니다. 모든 점수가 7+이면 비평이 비판적이지 않음.
+- **시즌 차별성은 낮을 수 있음** — 베이직 라인 / 캐리오버 위주 시즌은 5/10이 적절. 적절한 보수성을 처벌하지 마세요.
 
-## Workflow
+## 출력 언어 정책
 
-### Step 1 — Acquire the artifact
+사용자가 한국어로 작성하거나 브랜드/맥락이 한국 K-패션이라면, 비평 보고서 카피는 **한국 패션 비즈니스 등록(register)**을 따릅니다.
 
-Three modes:
+- 한국 패션 현장에서 실제로 쓰는 영어 산업용어(SKU·BTA·룩북·카피·톤매너·캐리오버·QR/SPOT·LOT·핏·실루엣·컬러웨이·룩·셋업·UNI/WOMEN·S1~S4 판기)는 그대로 유지합니다.
+- 5개 차원 라벨은 한국어/영어 혼용 허용: "브랜드 톤 정합성 · Brand-tone Consistency", "시각 위계 · Visual Hierarchy" 등.
+- 점수 근거 문장은 명사구 종결 선호: `톤 일관성 부족`, `포엣코어 톤 적합`, `컷 03 노출 과다`, `MD 검토 필요`, `재촬영 검토` (딱딱한 `~이다`·`~한다` 회피).
+- 시즌 산출물 비평이므로 카피 예시는 K-패션 브랜드 사례를 우선 차용: 마뗑킴·마르디 메크르디·아더에러·키르시·시야쥬·와키윌리·무신사 스탠다드.
 
-1. **Project file** — user said "review the index.html I just made":
-   open it from the project folder.
-2. **Pasted HTML** — user pasted code in the chat: read it from the
-   message.
-3. **Generated by you in this turn** — you just emitted an artifact
-   above and want to self-critique: re-read your own `<artifact>`.
+## 환경 호환성
 
-If multiple HTML files exist, ask which one (don't review all).
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다. 라이브러리 없는 인라인 SVG 레이더 차트 사용.
 
-### Step 2 — Read enough to score
+## 작업 흐름
 
-Skim the entire `<style>`, then read 6–8 representative content
-blocks. **Do not score from frontmatter alone.** The score depends on
-*executed* design, not declared intent.
+### Step 1 — 산출물 확보
 
-### Step 3 — Score with evidence
+세 가지 방법:
+1. 프로젝트 파일 (예: 27SS 룩북 `index.html`)
+2. 채팅에 붙여넣은 HTML
+3. 이 턴에서 생성한 산출물 자체 검토
 
-For each of the 5 dimensions, write the score and a 30–80 word
-evidence paragraph that names specific elements. Use line numbers,
-class names, page numbers.
+여러 HTML 파일이 있으면 어느 것을 비평할지 물어보세요 (전체 비평 금지).
 
-Example:
+### Step 2 — 점수 위해 충분히 읽기
+
+전체 `<style>`을 스킴, 6-8개 대표 콘텐츠 블록을 읽으세요. **frontmatter만 보고 점수 매기지 마세요.** 점수는 *실행된 디자인*에 의존합니다.
+
+### Step 3 — 근거와 함께 점수
+
+각 5개 차원별로 점수 + 30-80단어 근거 단락. 룩 번호, SKU 코드, 페이지 번호, 클래스명 인용.
+
+예시:
 ```
-Dimension: Detail execution
-Score: 6 / 10
-Evidence: Stat-cards on page 3 align cleanly (grid-6, 3×2), but on
-page 8 the right column foot sits 2vh higher than the left because
-.callout has 3vh top margin while the figure doesn't. Image captions
-use mono on page 5 but sans on page 7 — pick one.
+차원: 디테일 실행
+점수: 6 / 10
+근거: 룩 01-08은 4:5 프레임으로 일관, 모델 자세도 정면 정렬. 그러나 룩
+09에서 사이즈 가이드 정렬이 5px 어긋나고, 룩 11의 컬러웨이 스와치(CW01)
+가 룩 01의 동명 스와치보다 +5% 채도. 모노 라벨 자간도 룩 12에서만
+0.16em이 아닌 0.12em. 한 시즌 통일성에 흠집.
 ```
 
-### Step 4 — Build the action lists
+### Step 4 — 액션 리스트 구축
 
-Aggregate the 5 evidence paragraphs into:
+5개 근거 단락을 종합:
 
-- **Keep** (3–5 bullets) — concrete things working that the user must
-  not break in the next iteration. Cite by class / page / element.
-- **Fix** (3–6 bullets) — must-do, ordered by *visual cost saved per
-  minute spent*. Each bullet ≤ 1 sentence.
-- **Quick wins** (3–5 bullets) — 5–15 minutes each, high
-  signal-to-noise (e.g. "swap `display:flex` for `grid` on page 4 to
-  fix the column drift").
+- **Keep** (3-5 글) — 다음 차수에 망가뜨리지 말아야 할 것. 룩 번호·SKU·페이지로 인용.
+- **Fix** (3-6 글) — 필수, *시간당 시각 비용 절감* 순. 각 1문장 이하.
+- **Quick wins** (3-5 글) — 5-15분 작업, 시그널 대 노이즈 비율 높음.
 
-### Step 5 — Emit the report HTML
+### Step 5 — 보고서 HTML 출력
 
-Build a single file:
+단일 파일:
+- 헤더: 산출물명 + 검토자 + 일자
+- 큰 레이더 차트 (SVG)
+- 5 차원 카드 (1열 또는 2열 그리드)
+- 하단 3개 액션 리스트 (체크박스 어포던스)
 
-- Header: artifact name + reviewer credit + date
-- Big radar chart (SVG)
-- 5 dimension cards in a 1-column or 2-column grid
-- Three action lists at the bottom with checkbox affordance
+`DESIGN.md` 토큰이 있으면 사용, 없으면 중성 라이트 톤(오프화이트 배경, 다크 텍스트, 액센트 1색).
 
-Use the active DESIGN.md tokens if one exists; otherwise default to a
-neutral light theme (off-white background, near-black text, one accent
-for radar fill).
+## K-패션 브랜드 톤 정합성 평가 기준 (참고)
 
-## Output contract
+| 브랜드 | 톤 정합성 기준 | 흔한 실패 |
+|---|---|---|
+| **마뗑킴** | 친근 SNS 톤 + 미니멀 시크 + 대표 직접 소통 | 갑자기 럭셔리 톤으로 전환, 셀럽 의존 |
+| **마르디** | 셀럽 친화 + 프렌치 감성 + 화훼 모티프 | 화훼 빠진 시즌, 컬러 과다 |
+| **아더에러** | 글로벌 신비감 + 컨셉추얼 + 익명성 | 친근 카피 등장, 가독성 추구 |
+| **와키윌리** | 캐릭터 IP + 팬덤 + 재미 | 무뚝뚝 베이직 톤, IP 부재 |
+| **무신사 스탠다드** | 데일리 베이직 + 신뢰 + 가성비 | 디자이너 톤 추구, 가격 인상 |
+
+## 출력 규약
 
 ```
-<artifact identifier="critique-<artifact-slug>" type="text/html" title="Critique · <Artifact Title>">
+<artifact identifier="critique-<artifact-slug>" type="text/html" title="Critique · <산출물 제목>">
 <!doctype html>
 <html>...</html>
 </artifact>
 ```
 
-One sentence before the artifact ("Reviewed X across 5 dimensions, see
-report below.") and **stop after `</artifact>`** — do not paraphrase
-the report in chat; the user will read the artifact.
+출력 앞에 한 문장 ("와키윌리 27SS 룩북 1차 컷을 5차원으로 검토했습니다, 보고서 아래 참조."). **`</artifact>` 뒤 멈춤** — 보고서를 채팅에서 재서술 금지.
 
-## Hard rules
+## 하드 규칙
 
-- **5 scores, every time** — partial reports (e.g. only 3 dimensions)
-  are not allowed.
-- **Evidence per score** — no "feels off" / "needs work". If you
-  can't cite an element, the score is not justified.
-- **Don't grade-inflate** — overall mean above 8 is suspicious; check
-  yourself.
-- **Don't review your own artifact in the same turn** — the user
-  needs to see it first. Self-critique only on explicit request
-  ("now critique what you just made").
-- **Single-file HTML only** — no external CSS/JS. Inline everything.
-- **Radar chart is mandatory** — gives the report a recognizable
-  silhouette and lets the user spot weak axes at a glance.
+- **5점, 매번** — 부분 보고서(예: 3차원만) 금지.
+- **점수당 근거** — "느낌이 어색함" 금지. 룩 번호·SKU·페이지를 인용 못 하면 점수 정당하지 않음.
+- **점수 인플레 금지** — 평균 8+ 의심스러움.
+- **같은 턴에서 본인 산출물 비평 금지** — 사용자가 산출물을 먼저 봐야 함. 명시적 요청("지금 만든 것을 비평해주세요") 시에만.
+- **단일 파일 HTML** — 외부 CSS/JS 금지.
+- **레이더 차트 필수** — 보고서 식별 실루엣과 약점 축 한눈에 인식.

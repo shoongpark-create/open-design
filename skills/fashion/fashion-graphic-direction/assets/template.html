@@ -1,15 +1,27 @@
 <!doctype html>
 <!--
-  fashion-graphic-direction template
-  Copy to <project>/index.html, replace [REPLACE] tokens, bind active
-  DESIGN.md tokens into :root, paste a rhythm + tail blocks from
-  references/layouts.md into <main id="graphic-direction">.
+  K-패션 시즌 그래픽 디렉션 시작 템플릿.
+
+  사용 방법:
+    1) 이 파일을 <project>/index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+    4) references/layouts.md에서 리듬 A/B 중 하나를 골라
+       <main id="graphic-direction"> 안에 붙여넣기
+    5) (선택) Symbol & Wordmark 블록 + 항상 꼬리 블록(매트릭스 + Anti-direction + Open Decisions) 추가
+    6) 테마 레퍼런스 이미지는 images/ 폴더에 저장
+
+  환경 호환성:
+    - Claude 환경: <artifact> 태그로 감싸 출력
+    - 그 외 환경: 표준 HTML 코드 블록으로 출력
+    - OpenDesign 환경: 주요 섹션에 data-od-id 속성 추가하면
+      인라인 코멘트 모드 사용 가능. 다른 환경에서는 일반 id 속성으로 충분.
 -->
 <html lang="ko">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>[REPLACE Season] Graphic Direction · [REPLACE Brand]</title>
+<title>[REPLACE 시즌] Graphic Direction · [REPLACE 브랜드]</title>
 <style>
   @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
   @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
@@ -99,7 +111,15 @@
 </head>
 <body>
   <main id="graphic-direction">
-    <!-- PASTE one rhythm + (optional symbol-wordmark) + tail blocks. -->
+    <!--
+      references/layouts.md에서 리듬 1개를 골라 여기에 붙여넣으세요.
+
+      리듬 A · 테마 스택 (기본, 3~6 테마)
+      리듬 B · 테마 그리드 (5~8 테마, 정보 밀도)
+
+      (선택) Symbol & Wordmark 블록을 테마 블록 다음에 삽입.
+      그리고 항상 꼬리 블록(Theme × Surface matrix + Anti-direction + Open Decisions)을 추가하세요.
+    -->
   </main>
 </body>
 </html>

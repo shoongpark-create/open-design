@@ -1,0 +1,224 @@
+<!doctype html>
+<!--
+  OD fashion-lookbook seed.
+
+  Copy this file to <project>/index.html. Generated look imagery should be
+  saved under <project>/images/ and referenced with relative paths.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>[REPLACE] Collection Lookbook</title>
+  <style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
+    :root {
+      --bg: #f5f1ea;
+      --paper: #fffdf8;
+      --ink: #17130f;
+      --muted: #6d655a;
+      --line: #ded6ca;
+      --accent: #b86b3f;
+      --accent-soft: color-mix(in oklch, var(--accent) 16%, transparent);
+      --shadow: rgba(32, 25, 18, 0.12);
+      --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
+      --font-display-report: "Paperlogy", "Wanted Sans Variable", "SUIT Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
+      --font-display-street: "Black Han Sans", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+      --font-display-play: "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+      --font-display-romance: "Grandiflora One", "Diphylleia", "Hahmlet", "Noto Serif KR", "Source Serif 4", ui-serif, Georgia, serif;
+      --font-display: var(--font-display-romance);
+      --font-body: var(--font-sans);
+      --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+      --container: 1180px;
+      --gutter: clamp(18px, 4vw, 44px);
+      --radius: 8px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 20% 10%, color-mix(in oklch, var(--accent) 10%, transparent), transparent 24%),
+        linear-gradient(180deg, var(--bg), color-mix(in oklch, var(--paper) 65%, var(--bg)));
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    p, h1, h2, h3 { margin: 0; text-wrap: pretty; }
+
+    .page-shell {
+      max-width: var(--container);
+      margin-inline: auto;
+      padding: clamp(28px, 5vw, 72px) var(--gutter);
+    }
+    .topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .section { padding: clamp(42px, 7vw, 92px) 0; border-bottom: 1px solid var(--line); }
+    .kicker {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+    }
+    .display {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 9vw, 118px);
+      line-height: 0.92;
+      letter-spacing: -0.035em;
+      font-weight: 400;
+    }
+    .h2 {
+      font-family: var(--font-display);
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1;
+      letter-spacing: -0.025em;
+      font-weight: 400;
+    }
+    .lead {
+      max-width: 640px;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.45;
+    }
+    .meta { font-family: var(--font-mono); color: var(--muted); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr); gap: clamp(28px, 5vw, 72px); align-items: end; }
+    .image-frame {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--accent-soft), color-mix(in oklch, var(--paper) 92%, var(--ink)));
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 70px var(--shadow);
+      min-height: 360px;
+    }
+    .image-frame::before {
+      content: attr(data-fallback);
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 28px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .image-frame img { position: relative; width: 100%; height: 100%; min-height: inherit; object-fit: cover; }
+    .cover-image { aspect-ratio: 4 / 5; }
+    .story-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(28px, 6vw, 86px); align-items: start; }
+    .story-copy { display: grid; gap: 22px; }
+    .quote {
+      font-family: var(--font-display);
+      font-size: clamp(30px, 4vw, 54px);
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+    }
+    .look-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .look-card {
+      background: color-mix(in oklch, var(--paper) 92%, white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .look-card .image-frame { border: 0; border-radius: 0; box-shadow: none; min-height: 300px; aspect-ratio: 4 / 5; }
+    .look-info { padding: 16px; display: grid; gap: 10px; }
+    .look-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+    .look-title { font-family: var(--font-display); font-size: 26px; line-height: 1; letter-spacing: -0.02em; }
+    .look-note { color: var(--muted); font-size: 14px; }
+    .board { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(24px, 5vw, 64px); align-items: start; }
+    .chips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .chip { min-height: 120px; border: 1px solid var(--line); border-radius: var(--radius); padding: 12px; display: flex; flex-direction: column; justify-content: space-between; background: var(--paper); }
+    .swatch { height: 56px; border-radius: 4px; background: var(--accent); border: 1px solid rgba(0,0,0,0.08); }
+    .material-list { display: grid; gap: 12px; }
+    .material { display: grid; grid-template-columns: 120px 1fr; gap: 18px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+    .detail-strip {
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: clamp(24px, 5vw, 64px);
+      align-items: start;
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .detail-card {
+      min-height: 180px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: color-mix(in oklch, var(--paper) 90%, white);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .detail-card p {
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .line-sheet { width: 100%; border-collapse: collapse; background: var(--paper); border: 1px solid var(--line); }
+    .line-sheet th, .line-sheet td { padding: 14px 16px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    .line-sheet th { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .line-sheet td { font-size: 14px; }
+    .cta { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; }
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: var(--ink);
+      color: var(--paper);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .story-grid, .board, .detail-strip, .cta { grid-template-columns: 1fr; }
+      .look-grid { grid-template-columns: 1fr; }
+      .chips, .detail-grid { grid-template-columns: repeat(2, 1fr); }
+      .topline { flex-direction: column; }
+    }
+    @media (max-width: 620px) {
+      .chips, .detail-grid { grid-template-columns: 1fr; }
+      .line-sheet { display: block; overflow-x: auto; white-space: nowrap; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topline" data-od-id="topline">
+      <span>[REPLACE] Studio / Brand</span>
+      <span>[REPLACE] Season</span>
+      <span>[REPLACE] Channel</span>
+    </header>
+    <main id="lookbook">
+      <!-- Paste sections from references/layouts.md here. -->
+    </main>
+  </div>
+</body>
+</html>

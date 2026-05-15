@@ -1,42 +1,51 @@
-# Accessory Lineup Checklist
+# 액세서리 라인업 자체 검수 체크리스트
 
-P0 are hard gates.
+산출물 출력 직전에 한 항목씩 직접 확인하세요. **P0**는 통과해야 하는 하드 게이트, **P1**은 강력 권장, **P2**는 다듬기.
 
-## P0
+## P0 — 통과 필수
 
-- [ ] Header carries season, category, sub-segment, status, lock date.
-- [ ] Lineup thesis paragraph names anchor + intent.
-- [ ] Exactly **one accessory category** is on the page (가방 OR 모자
-  OR 신발 — never combined).
-- [ ] Shape-family layout carries 2–4 families.
-- [ ] Each shape family has header + at least 1 SKU card with image.
-- [ ] Hero family flag appears in **at most one** family per lineup
-  (zero or one — never two).
-- [ ] Every `<img src="...">` resolves to a file the agent wrote in
-  `images/`. No orphan references.
-- [ ] If any image generation failed, the matching `<figure>` falls
-  back to the styled placeholder.
-- [ ] Family × SKU table totals match the SKU stated in each family.
-- [ ] Color references use color-story names; accent references use
-  graphic-direction names. No improvised vocabulary.
+- [ ] 헤더에 시즌 코드 · 카테고리 · 서브 세그먼트 · 상태(v1/locked) · LOCK 일자가 모두 표기됨
+- [ ] 라인업 thesis 단락이 앵커 + 의도(intent)를 명명
+- [ ] **한 페이지에 정확히 한 개 액세서리 카테고리만** 존재 (가방 OR 모자 OR 신발 — 절대 혼합 금지)
+- [ ] 셰이프 패밀리 레이아웃에 2~4개 패밀리 존재
+- [ ] 각 셰이프 패밀리에 헤더 + SKU 카드 최소 1개 (이미지 포함)
+- [ ] **히어로 패밀리 플래그는 라인업당 최대 1개** (0개 또는 1개 — 절대 2개 이상 금지)
+- [ ] 모든 `<img src="...">`가 `images/` 폴더의 실제 파일을 참조. 고아 참조 없음
+- [ ] 이미지 생성이 실패한 경우, 해당 `<figure>`가 스타일된 폴백 텍스트로 자연스럽게 폴백
+- [ ] 패밀리 × SKU 표 합계가 각 패밀리에 명시된 SKU 수와 일치
+- [ ] 컬러 참조는 컬러 스토리 이름을, 액센트 참조는 그래픽 디렉션 이름을 사용. 임의 어휘 금지
 
-## P1
+## P1 — 강력 권장
 
-- [ ] Shape family names use the brand's working spelling (Korean +
-  English mix when applicable).
-- [ ] Per-SKU 1-line spec mentions one concrete construction or
-  material detail ("nylon body, padded straps, mesh side"), not a
-  mood adjective.
-- [ ] Accent strip is present when the lineup uses a signature
-  accent set; otherwise the section is omitted.
-- [ ] Hero family designation is supported by larger imagery / more
-  SKUs / more imc tiles than minor families.
+- [ ] 셰이프 패밀리 이름이 브랜드의 워킹 표기(한국어 + 영어 혼용 가능)를 따름
+- [ ] SKU 1줄 스펙이 한 가지 구체적 구성·소재 디테일을 언급 ("나일론 바디, 패디드 스트랩, 메쉬 사이드"). 무드 형용사가 아님
+- [ ] 시그니처 액센트 스트립이 라인업에 액센트 세트가 포함될 때만 존재. 미포함 시 섹션 생략
+- [ ] 히어로 패밀리 지정이 더 큰 이미지 / 더 많은 SKU / 더 많은 IMC 타일로 시각적으로 뒷받침됨
+- [ ] **한국 K-패션 컨텍스트인 경우** 본문 카피가 한국 패션 비즈니스 등록(register)을 따름 — 영어 산업용어 유지, 한국어 명사구 종결
+- [ ] 타겟 LOT 수치가 MOQ 기준 이상으로 현실적임
 
-## P2
+## P2 — 다듬기
 
-- [ ] Product shots share lighting / background / shadow treatment so
-  the lineup reads as one set.
-- [ ] Open / next decisions list has owner + date for every entry, or
-  the section is omitted entirely.
-- [ ] Korean category labels (가방 / 모자 / 신발) use the brand's
-  spelling, not romanizations.
+- [ ] 제품컷이 라이팅 / 배경 / 그림자 처리를 공유해 라인업이 하나의 세트로 읽힘
+- [ ] Open / Next Decisions 리스트의 모든 항목에 owner + 일자 표시, 또는 섹션 전체 생략
+- [ ] 한국어 카테고리 라벨(가방 / 모자 / 신발)이 브랜드의 표기를 따름. 영문 로마자 표기 회피
+- [ ] 디스플레이 폰트가 산출물 성격에 맞음 (운영 덱 = `--font-display-report`, 캐릭터 IP 굿즈 = `--font-display-play`)
+- [ ] 768px 이하 뷰포트에서 패밀리 컬럼이 자연스럽게 스택
+
+## K-패션 비즈니스 특화 검수 (선택)
+
+- [ ] 셰이프 패밀리 정의가 `references/shape-families.md`의 카테고리별 라이브러리와 정합
+- [ ] 캐리오버 비중이 시즌 전략서의 ACC 카테고리 캐리오버 정책과 일치 (보통 BASIC 패밀리 30~50%)
+- [ ] 히어로 패밀리가 fashion-key-item-sheet의 ACC 히어로 지정과 일치
+- [ ] 액센트 세트가 `fashion-graphic-direction`의 시즌 액센트 라이브러리에서 가져왔으며, 임의 신규 액센트가 아님
+- [ ] 신학기 백팩 라인업인 경우, 시즌 사이클상 1월(품평회)~3월(LOCK)에 작성됐는지 일정 정합 확인
+- [ ] 컬러 티어 표기가 fashion-color-story의 BASIC/SUB/ACCENT 티어와 일치
+
+## 검수 실행 흐름
+
+1. 산출물 HTML을 브라우저(또는 미리보기 환경)에서 열어 시각적으로 점검
+2. P0 항목을 차례로 확인. 미통과 시 작업으로 되돌아가 수정
+3. P1·P2는 시간 여유에 따라 다듬기
+4. 최종 검수 통과 후 헤더 상태를 `locked`로, LOCK 일자 기록
+
+검수 통과 후 사용자에게 산출물 외에 별도 보고는 하지 않습니다 (출력 규약).

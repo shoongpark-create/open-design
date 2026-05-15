@@ -1,47 +1,223 @@
 ---
 name: team-okrs
 description: |
-  OKR tracker page — quarter banner, three objectives with their key
-  results as progress bars, owner avatars, status pills, and a "this
-  quarter at a glance" sidebar. Use when the brief mentions "OKRs",
-  "key results", "objectives", or "目标".
+  K-패션 브랜드의 **시즌 OKR / KPI 트래커**를 단일 HTML 파일로 생성하는 스킬입니다.
+  시즌 배너(27SS S/S · S1 판기 D-카운트), 3개 시즌 Objective(상품·채널·고객),
+  각 Objective의 3개 Key Result를 진행률 바 + 상태 칩으로 표시.
+  K-패션 표준 KPI — 정상판매율 78%, 재고자산회전율 8회, 27SS QR 비중 30%,
+  BTA 분포, AOV, 신규 회원 — 를 그대로 KR로 사용합니다.
+  우측 사이드바에 시즌 KPI 요약, top movers, 블로커 콜아웃.
+  사용자가 "시즌 OKR", "시즌 KPI", "27SS 목표", "디자인실 OKR",
+  "MD실 KPI", "okr", "key results"를 언급하면 활성화하세요.
 triggers:
+  - "시즌 OKR"
+  - "시즌 KPI"
+  - "27SS 목표"
+  - "디자인실 OKR"
+  - "MD실 KPI"
+  - "정판율 목표"
   - "okr"
   - "okrs"
   - "key results"
   - "objectives"
-  - "目标"
 od:
   mode: prototype
   platform: desktop
-  scenario: product
+  scenario: operations
+  category: fashion
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Build an OKR tracker for Q4 — three objectives, three key results each, progress bars, owners, status pills."
+  example_prompt: "와키윌리 27SS S/S 시즌 OKR 트래커를 만들어주세요. Objective 1 = 시즌 상품력 (KR: 정상판매율 78%, 재고자산회전율 8회, QR 비중 30%). Objective 2 = 채널 다각화 (KR: 무신사 GMV 30억, 29CM 비중 15%, 자사몰 신규회원 +12,000). Objective 3 = 브랜드·IP 확장 (KR: 윌리 캐릭터 굿즈 매출 5억, SNS 팔로워 +60K, 매거진 노출 8건). 현재는 S1 판기 D-42 시점."
 ---
 
-# Team OKRs Skill
+# 패션 시즌 OKR 트래커 스킬
 
-Produce a single-screen OKR tracker.
+K-패션 브랜드의 **시즌 OKR / KPI 트래커**를 단일 HTML 파일로 생성합니다. 영업기획·MD실·브랜드 디렉터가 매판기 단위로 합의한 3개 시즌 Objective와 각 9개의 Key Result를 진행률 바로 보여주는 운영 보드입니다.
 
-## Workflow
+이 산출물의 청중은 **대표/임원, MD 실장, 디자인 실장, 마케팅 실장, 영업기획팀장**입니다. 한국 패션기업에서는 시즌 시작 6개월 전 시즌 전략 워크숍에서 OKR을 설정하고, 시즌 진행 중 매주 OKR 트래커로 진척을 본 후, 시즌 결산 시 fashion-season-deck에 통합하는 흐름이 일반적입니다. 마르디 메크르디의 재고자산회전율 20회, 무신사 스탠다드의 베이직 회전율 같은 사실 데이터를 인지하고 작성합니다.
 
-1. Read DESIGN.md.
-2. Layout:
-   - Quarter banner: Q4 FY25, dates, overall progress chip.
-   - Three objective cards. Each has:
-     - Objective title + owner avatar + status pill (On track / At risk / Off track)
-     - 3 key results, each a row with metric / current → target / progress bar
-   - Right sidebar: at-a-glance KPIs, top movers, blockers callout.
-3. Clear progress visualisation, calm palette, one accent.
+## 환경 호환성
 
-## Output contract
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 본문의 `data-od-id` 속성으로 인라인 코멘트 기능을 사용할 수 있습니다. 그 외 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 작업 흐름은 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 `DESIGN.md` 경로나 기본 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 시즌 OKR 트래커의 등록(register)을 따릅니다.
+
+- Objective 본문은 **한국어 평서문**, 1문장. 예: "27SS 시즌 상품력을 마뗑킴 수준의 정판율 80%대로 끌어올린다."
+- KR 라벨은 한국 패션 KPI 표기 우선 — 정상판매율(정판율), 재고자산회전율, GMV, AOV, BTA 분포, QR 비중, MoM·YoY. 영문이 표준인 지표는 영문 유지.
+- 채널 표기: 무신사 / 29CM / W컨셉 / 자사몰 / 한섬몰 / 에이블리.
+- 상태 칩(pill): `정상` (On track) / `주의` (At risk) / `이탈` (Off track) — 한국어 권장. 영문 병기 가능.
+- 사이드바 라벨: `시즌 한눈에`, `이번 주 movers`, `블로커`.
+
+## 폴더 구조
 
 ```
-<artifact identifier="okr-q4" type="text/html" title="OKRs Q4">
-<!doctype html>...</artifact>
+team-okrs/
+├── SKILL.md       ← 이 파일
+└── example.html   ← 작성 예시 (와키윌리 27SS S/S 시즌 OKR)
 ```
+
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. `example.html`을 처음부터 끝까지 읽어 시즌 배너 + 3개 Objective 카드 + KR 진행률 바 + 사이드바 구조를 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 파일이 자동 주입되지 않는 환경이라면 사용자에게 경로나 기본 톤을 묻고 진행합니다.
+
+### Step 1 — 분류 및 정보 수집
+
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
+
+- 브랜드명 + 시즌 코드 (예: 와키윌리 27SS, 마뗑킴 26FW)
+- 시즌 기간 (S/S = 5월~10월, F/W = 11월~4월), 현재 D-카운트 또는 판기 위치
+- 3개 Objective — 한국 K-패션 시즌 운영에서는 보통 **상품 / 채널 / 브랜드** 축으로 나뉩니다
+- 각 Objective의 3개 KR (총 9개) — 정량 지표 + 베이스라인 + 목표값
+- 오너 (디자인 실장 / MD 실장 / 마케팅 실장 등)
+- 사이드바 KPI: Objectives 정상 비율, KR 그린 비율, 시즌 잔여일, 리스크 스코어
+
+"Goal A / Goal B" 같은 플레이스홀더 금지 — 실제 K-패션 KPI와 목표값을 사용합니다.
+
+### Step 2 — 레이아웃
+
+다음 4개 영역을 배치합니다.
+
+- **시즌 배너** (좌 1fr + 우 auto): 좌측 시즌명/기간/오너/Objective·KR 수, 우측 대형 진행률 숫자 + 시즌 경과율.
+- **Objective 카드 × 3**: 각 카드는 헤더(번호 + 제목 + 오너 아바타 + 상태 칩) + KR 3행. KR마다 메트릭 / 베이스라인 → 목표 / 진행률 바 / 퍼센트.
+- **우측 사이드바**: "시즌 한눈에" 4개 stat (Objective 정상 비율, KR 그린 비율, 시즌 잔여일, 리스크), "이번 주 movers" 3개, 블로커 콜아웃.
+- **모바일 폴백**: 사이드바 하단, KR 행이 1열로 떨어짐.
+
+### Step 3 — 작성
+
+1. 단일 HTML 문서(`<!doctype html>` ~ `</html>`)로 작성, CSS는 인라인 `<style>` 한 블록.
+2. CSS Grid로 메인 + 사이드바, KR 행은 `grid-template-columns: 1fr 200px 110px`.
+3. 시맨틱 HTML: `<main>`, `<aside>`, `<article>`, `<section>`.
+4. 주요 영역(banner, obj-1, obj-2, obj-3, sidebar)에 식별용 속성. OpenDesign 환경에서는 `data-od-id`, 그 외에서는 `id` 속성.
+5. 상태 칩 컬러: 정상 = green, 주의 = warn(amber), 이탈 = danger(red). KR 진행률 바도 같은 컬러 매핑.
+
+### Step 4 — 자체 검수
+
+- 모든 색상은 `:root` 토큰에서 옴 — 임의 hex 금지
+- 3개 Objective 모두 텍스트 콘텐츠 + 오너 + 상태 칩 + 3개 KR 보유
+- KR 값은 K-패션 현실치 — 정상판매율 60~85%, 재고자산회전율 3~20회, GMV 단위는 억/만원
+- 시즌 진행률 = 시즌 경과율 ± 5%p 정도(밀착) 또는 ± 15%p(차이) 중 의도적으로 선택
+- 상태 칩 3종 모두 등장하는 것이 좋음 (정상 1~2 / 주의 1 / 이탈 0~1)
+- 사이드바 블로커 콜아웃에 구체적 결정 사유와 데드라인 명시
+
+## 한국 K-패션 시즌 OKR 표준 (참고)
+
+OKR 작성 시 참고할 K-패션 시즌 운영 표준 KPI.
+
+### Objective 1 — 상품력 (디자인실 + MD실)
+
+| KR | 한국 패션 평균 | 우수 사례 |
+|---|---|---|
+| 정상판매율 (정판율) | 60~75% | 마르디 메크르디 85%+ |
+| 재고자산회전율 | 3~4회/년 | 마르디 메크르디 20회 |
+| QR 비중 | 15~25% | 시야쥬 30%+ (트렌드 반응 빠름) |
+| BTA 분포 | B 50% / T 35% / A 15% | 와키윌리 B 40% / T 35% / A 25% |
+| 사입가율 | 25~35% | 자사 디자인 중심 브랜드는 30%+ |
+
+### Objective 2 — 채널 다각화 (영업기획 + 이커머스팀)
+
+| KR | 한국 패션 평균 | 비고 |
+|---|---|---|
+| 무신사 GMV 시즌 | 신생 브랜드 10~30억 | 마뗑킴급은 100억+ |
+| 29CM 비중 | 10~20% | 컨템포러리 톤 강한 브랜드 |
+| 자사몰 D2C 비중 | 30~50% | 마진율 높은 채널 |
+| 신규 회원 / 시즌 | 5,000~30,000 | 마케팅 강도에 따라 |
+| AOV (객단가) | 8만~15만원 | 컨템포러리는 18~25만원 |
+
+### Objective 3 — 브랜드·IP 확장 (마케팅실 + 브랜드 디렉터)
+
+| KR | 한국 패션 평균 | 비고 |
+|---|---|---|
+| SNS 팔로워 시즌 증가 | +30K~+100K | 인스타그램 중심 |
+| 매거진 노출 (Vogue / W / Dazed Korea) | 시즌당 3~10건 | PR 강도에 따라 |
+| 콜라보 발표 | 시즌당 1~2건 | 와키윌리·아더에러는 정기 |
+| 캐릭터·IP 매출 (해당 시) | 별도 추적 | 와키윌리 윌리 IP 등 |
+| YouTube·Shorts 조회수 | 시즌당 100만~500만 | 룩북·캠페인 톤에 따라 |
+
+## 한국 K-패션 브랜드 OKR 톤 사례 (참고)
+
+| 브랜드 | Objective 1 톤 | Objective 2 톤 | Objective 3 톤 |
+|---|---|---|---|
+| **와키윌리** | "시즌 상품력 정판 78%대 진입" | "무신사 베스트 TOP 30 SKU 5개" | "윌리 IP 굿즈 신규 라인 런칭" |
+| **마뗑킴** | "시그니처 로고 아이템 회전율 12회" | "자사몰 비중 50%대 유지" | "글로벌 (일본·동남아) 매출 10%" |
+| **마르디 메크르디** | "플라워 그래픽 시즌 누적 정판 90%" | "29CM 시즌 베스트 노출 5건" | "유럽 편집숍 입점 3곳" |
+| **아더에러** | "콜라보 캡슐 sell-out 1주 내" | "글로벌 자사몰 GMV 50%대" | "프리즈 서울 부스 노출" |
+| **무신사 스탠다드** | "베이직 회전 10회/시즌" | "무신사 자사 채널 전환율 5%대" | "한국적 핏 USP 매거진 노출" |
+
+위 사례는 카피·예시 참고용입니다. 실제 산출물은 사용자 브랜드의 실제 KPI 합의값으로 작성하세요.
+
+## 한국 패션기업 조직 R&R 메모
+
+OKR의 작성·검토·운영 흐름.
+
+- **대표/임원**: 3개 Objective 최종 합의 (시즌 전략 워크숍)
+- **MD 실장**: Objective 1 (상품력) 책임. 정판율·회전율·BTA 분포 결정
+- **영업기획팀장**: Objective 2 (채널 다각화) 책임. 채널별 GMV·신규 회원 운영
+- **마케팅 실장**: Objective 3 (브랜드·IP 확장) 책임. SNS·매거진·콜라보 운영
+- **디자인 실장**: Objective 1·3 공동 책임. 상품 디자인 + IP 직접 운영
+- **영업기획팀**: 데이터 파이프라인, 주간 진척 업데이트
+
+매주 월요일 시즌 진척 미팅에서 OKR 트래커를 띄워놓고 빨간 KR을 함께 리뷰합니다.
+
+## 시즌 사이클 내 위치
+
+OKR 트래커는 **시즌 시작 6개월 전 합의 → 시즌 진행 중 매주 업데이트 → 시즌 결산 후 반영**됩니다.
+
+```
+[fashion-season-strategy] (시즌 시작 6개월 전 — OKR 합의)
+    ↓
+[team-okrs — OKR 트래커, 시즌 중 매주 업데이트]
+    ↓ 매주 진척 입력
+[kanban-board — 시즌 진척 보드와 데이터 동기화]
+    ↓ 시즌 중반
+[weekly-update — 위클리 매출 리포트와 연결, KR 값 갱신]
+    ↓ 시즌 종료
+[finance-report — 판기/월 결산 보고]
+    ↓
+[fashion-season-deck — 시즌 결산 + 다음 시즌 OKR 재합의]
+```
+
+## 채널 연계
+
+OKR KR 값의 데이터 소스.
+
+- **자사몰 / 카페24 / 쇼피파이** — GMV, AOV, 신규 회원
+- **무신사 셀러센터** — 무신사 GMV, 베스트 랭킹
+- **29CM / W컨셉 / 한섬몰 입점관리자** — 입점 채널별 매출
+- **인스타그램 인사이트 / Meta 비즈니스 스위트** — 팔로워, 도달
+- **사내 ERP** — 정상판매율, 재고자산회전율, BTA 분포
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="okr-27ss" type="text/html" title="시즌 OKR 트래커 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "와키윌리 27SS S/S 시즌 OKR 트래커를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

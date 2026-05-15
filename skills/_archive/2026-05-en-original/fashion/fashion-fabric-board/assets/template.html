@@ -1,0 +1,94 @@
+<!doctype html>
+<!--
+  fashion-fabric-board template
+  Copy to <project>/index.html, replace [REPLACE] tokens, bind active
+  DESIGN.md tokens into :root, paste a layout from references/layouts.md
+  into <main id="fabric-board">.
+-->
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE Season] Fabric Board · [REPLACE Brand]</title>
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
+  :root {
+    --ink:        #1f2933;
+    --paper:      #fafaf7;
+    --rule:       #e7e3da;
+    --muted:      #6b7280;
+    --accent:     #b8443a;
+    --uni-tint:   #e8eef4;
+    --women-tint: #f4ecec;
+    --func-tint:  #ecf2ee;
+
+    --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", system-ui, sans-serif;
+
+    --font-display-report: "Paperlogy", "Wanted Sans Variable", "SUIT Variable", "Pretendard Variable", Pretendard, system-ui, sans-serif;
+
+    --font-display-street: "Black Han Sans", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-play: "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", Pretendard, sans-serif;
+
+    --font-display-romance: "Grandiflora One", "Diphylleia", "Hahmlet", "Noto Serif KR", "Source Serif 4", ui-serif, Georgia, serif;
+
+    --font-display: var(--font-display-report);
+    --font-text: var(--font-sans);
+    --font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); font-family: var(--font-text); }
+  body { padding: 40px 40px 64px; }
+
+  .fb-header { border-bottom: 1px solid var(--rule); padding-bottom: 20px; margin-bottom: 32px; }
+  .fb-meta { display: flex; gap: 16px; font-family: var(--font-mono); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+  .fb-meta .date { margin-left: auto; }
+  .thesis { font-family: var(--font-display); font-size: 24px; line-height: 1.3; margin: 12px 0 0; max-width: 80ch; font-weight: 500; }
+
+  .block-header { display: flex; align-items: baseline; gap: 16px; padding: 12px 0; margin-bottom: 16px; border-bottom: 1px solid var(--rule); }
+  .block-header h2 { font-family: var(--font-display); font-size: 18px; margin: 0; letter-spacing: 0.04em; }
+  .block-header p { color: var(--muted); font-size: 13px; margin: 0; }
+
+  .fb-functional { background: var(--func-tint); border-radius: 8px; padding: 20px; margin-bottom: 32px; }
+  .fb-line-split { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .fb-line { padding: 20px; border-radius: 8px; }
+  .fb-line[data-line="uni"]   { background: var(--uni-tint); }
+  .fb-line[data-line="women"] { background: var(--women-tint); }
+
+  .fabric-grid { display: grid; gap: 16px; }
+  .fabric-grid--functional { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .fabric-grid--structural { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .fabric-card { background: rgba(255,255,255,0.7); border-radius: 6px; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+  .fabric-card--functional { background: rgba(255,255,255,0.85); border: 1px solid var(--rule); }
+  .fabric-name { font-family: var(--font-display); font-size: 15px; margin: 0; }
+  .fabric-meta { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 3px; font-size: 12px; line-height: 1.4; }
+  .fabric-meta li span { display: inline-block; width: 70px; font-family: var(--font-mono); font-size: 10px; text-transform: uppercase; color: var(--muted); letter-spacing: 0.05em; }
+
+  .fabric-imagery { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .fabric-imagery figure { margin: 0; display: flex; flex-direction: column; gap: 3px; }
+  .fabric-imagery .image-frame { aspect-ratio: 1/1; background: #efeae0; border-radius: 4px; overflow: hidden; }
+  .fabric-imagery .image-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .fabric-imagery figcaption { font-family: var(--font-mono); font-size: 9px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+
+  .image-frame[data-fallback]:not(:has(img[src]:not([src=""])))::after { content: attr(data-fallback); display: block; padding: 6px; font-size: 9px; line-height: 1.3; color: var(--muted); font-family: var(--font-mono); text-align: center; }
+
+  .approval-status, .open-decisions { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--rule); }
+  .approval-status h2, .open-decisions h2 { font-family: var(--font-display); font-size: 16px; margin: 0 0 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+  table { border-collapse: collapse; font-size: 12px; width: 100%; }
+  th, td { padding: 6px 12px; text-align: left; border-bottom: 1px solid var(--rule); }
+  th { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; color: var(--muted); }
+  ul { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.6; }
+
+  @media (max-width: 900px) { .fb-line-split { grid-template-columns: 1fr; } }
+  @media print { body { padding: 24px; } .fabric-card { break-inside: avoid; } }
+</style>
+</head>
+<body>
+  <main id="fabric-board">
+    <!-- PASTE one layout from references/layouts.md, then tail blocks. -->
+  </main>
+</body>
+</html>

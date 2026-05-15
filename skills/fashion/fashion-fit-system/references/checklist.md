@@ -1,37 +1,34 @@
-# Fit System Checklist
+# 핏 시스템 자체 검수 체크리스트
 
-P0 are hard gates.
+산출물 출력 직전 한 항목씩 직접 확인하세요. **P0**는 통과해야 하는 하드 게이트.
 
-## P0
+## P0 — 통과 필수
 
-- [ ] Header carries brand, version, status, lock date.
-- [ ] System thesis names the issues being resolved.
-- [ ] Future-state matrix lists every category × fit step × line cell
-  declared in Step 1; cells with no fit at that step show `—`, not
-  empty.
-- [ ] Fit step names per line are consistent with the canonical set
-  (UNI: slim / regular / oversize; WOMEN: slim baby / regular /
-  semi-oversize) or with an explicit reason for diverging.
-- [ ] Naming rules block lists ≥ 1 banned synonym.
-- [ ] If calibration figures were generated, every `<img src="...">`
-  resolves to a file the agent wrote in `images/`. No orphan
-  references.
-- [ ] If any image generation failed, the matching cell falls back to
-  the styled placeholder.
+- [ ] 헤더에 브랜드, 버전, 상태, LOCK 일자 모두 표기
+- [ ] 시스템 thesis가 해결되는 이슈를 명명
+- [ ] 향후 상태 매트릭스가 Step 1에서 선언된 모든 카테고리 × 핏 단계 × 라인 셀을 나열. 해당 단계에 핏 없는 셀은 `—` 표시, 빈칸 금지
+- [ ] 라인당 핏 단계 이름이 canonical 세트와 정합 (UNI: 슬림 / 레귤러 / 오버; WOMEN: 슬림 베이비 / 레귤러 / 세미오버) 또는 분기 시 명시적 사유
+- [ ] 명명 규칙 블록에 최소 1개 `banned synonym` 항목
+- [ ] Calibration figure 생성 시 모든 `<img src="...">`가 `images/` 폴더 실제 파일 참조. 고아 참조 없음
+- [ ] 이미지 생성 실패 시 해당 셀이 폴백 텍스트로 자연스럽게 폴백
 
-## P1
+## P1 — 강한 핏 시스템
 
-- [ ] Side-by-side layout flags every cell in the current state that
-  is being redefined (use `.flag` class) so the change is legible at
-  a glance.
-- [ ] Naming rules use canonical Korean spelling (크롭 / 레귤러 /
-  오버 / 슬림 / 슬림 베이비) consistently.
-- [ ] Supplier-equivalent line is present for any name that diverges
-  from common supplier vocabulary.
+- [ ] Side-by-side 레이아웃이 현재 상태에서 재정의되는 모든 셀에 플래그(`.flag` 클래스) 사용 — 한눈에 변경 가독
+- [ ] 명명 규칙이 canonical 한국어 표기 일관 사용 (크롭 / 레귤러 / 오버 / 슬림 / 슬림 베이비)
+- [ ] 공급사 등가 라인이 일반 공급사 어휘와 분기하는 모든 이름에 존재 (예: 우먼 `슬림 베이비` = 공급사 `Tight Crop`)
+- [ ] **한국 K-패션 컨텍스트** 본문 카피가 한국 패션 비즈니스 등록 따름
 
-## P2
+## P2 — 다듬기
 
-- [ ] Calibration figures (if generated) all use the same lighting,
-  background, pose, and color treatment.
-- [ ] Open / next decisions list has owner + date for every entry, or
-  the section is omitted entirely.
+- [ ] Calibration figure(생성된 경우)가 동일 라이팅, 배경, 포즈, 컬러 처리 사용
+- [ ] Open / Next Decisions 리스트의 모든 항목에 owner + 일자, 또는 섹션 전체 생략
+
+## K-DTC 컨텍스트 특화 검수
+
+- [ ] 핏 단계 수가 브랜드 운영 규모와 정합 (대형 브랜드 3단계 표준, 미니멀 브랜드 2단계 가능)
+- [ ] UNI / WOMEN 핏 이름이 한국 소비자 인지와 정합 — 무신사 상세페이지·29CM 사이즈 가이드에서 사용 가능
+- [ ] 사이즈 표 등가 매핑 보유 (XS-S-M-L-XL → 호수, 또는 95-100-105 등 한국 표준)
+- [ ] 핏 시스템 LOCK 시점이 시즌 사이클과 정합 (시즌 시작 6개월 전 영구 문서 개정 권장)
+
+검수 통과 후 사용자에게 산출물 외에 별도 보고는 하지 않습니다 (출력 규약).

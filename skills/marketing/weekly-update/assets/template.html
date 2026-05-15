@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 브랜드] [REPLACE 시즌] [REPLACE W주차] 위클리 매출 리포트</title>
+<!--
+  K-패션 시즌 위클리 매출 리포트 시드.
+  가로 스와이프 슬라이드 덱, 8장 표준 구성.
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 토큰 바인딩
+    4) references/layouts.md에서 리듬 1개를 골라 .deck 안에 8개 슬라이드 붙여 넣기
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude: <artifact>
+    - 그 외: ```html 코드 블록
+    - OpenDesign: data-od-id
+
+  K-패션 위클리 표준 8장:
+    01 표지 → 02 헤드라인 숫자 → 03 무신사 베스트 → 04 인기 SKU →
+    05 QR/SPOT 결정 → 06 KPI 차트 → 07 다음 주 액션 → 08 클로징
+-->
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+  :root {
+    --bg:         #f7f6f3;
+    --surface:    #ffffff;
+    --surface-2:  #faf9f5;
+    --fg:         #1c1b1a;
+    --muted:      #76736d;
+    --muted-2:    #9b9892;
+    --border:     #e6e3dd;
+    --border-2:   #ededea;
+    --accent:     #c96442;
+    --accent-soft: color-mix(in oklch, var(--accent) 12%, transparent);
+    --good:       #2f7d4a;
+    --warn:       #c79321;
+    --bad:        #b53a2a;
+    --basic:      #6b6964;
+    --trend:      #1f6dbc;
+    --accent-bta: #c96442;
+
+    --font-sans:
+      "Pretendard Variable", Pretendard,
+      "Apple SD Gothic Neo", "Noto Sans KR",
+      system-ui, sans-serif;
+    --font-display-report:
+      "Pretendard Variable", "Wanted Sans Variable",
+      "SUIT Variable", sans-serif;
+    --font-display: var(--font-display-report);
+    --font-mono:
+      "JetBrains Mono", "IBM Plex Mono", "SF Mono",
+      ui-monospace, Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+    line-height: 1.5;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  body * { font-variant-numeric: tabular-nums; }
+
+  /* ─── 덱 가로 스냅 스크롤 ─── */
+  .deck {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+  }
+  .deck::-webkit-scrollbar { display: none; }
+  .slide {
+    flex: 0 0 100vw;
+    height: 100vh;
+    scroll-snap-align: start;
+    padding: 56px 80px 80px;
+    display: flex;
+    flex-direction: column;
+    background: var(--bg);
+    position: relative;
+  }
+  .slide + .slide { border-left: 1px solid var(--border); }
+  .slide-num {
+    position: absolute;
+    top: 28px;
+    right: 32px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .slide-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 12px;
+  }
+  .slide h1 {
+    font-family: var(--font-display);
+    font-size: clamp(40px, 5.4vw, 72px);
+    letter-spacing: -0.025em;
+    margin: 0 0 18px;
+    line-height: 1.05;
+    font-weight: 600;
+  }
+  .slide h2 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: -0.015em;
+    margin: 0 0 18px;
+    font-weight: 600;
+  }
+  .slide p { color: var(--muted); margin: 0 0 12px; max-width: 70ch; }
+  .slide .author {
+    margin-top: auto;
+    font-size: 13px;
+    color: var(--muted);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .av-small {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    font-size: 11px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+  }
+
+  /* ─── 헤드라인 슬라이드 ─── */
+  .headline-num {
+    font-family: var(--font-display);
+    font-size: clamp(140px, 18vw, 240px);
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 8px 0 0;
+  }
+  .headline-num small {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 16px;
+    color: var(--muted);
+    margin-top: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+
+  /* ─── 표 ─── */
+  table { width: 100%; border-collapse: collapse; }
+  th, td {
+    text-align: left;
+    padding: 12px 8px;
+    border-top: 1px solid var(--border-2);
+    font-size: 14.5px;
+  }
+  th {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+    border-top: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  td.num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
+
+  .pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    padding: 2px 9px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    letter-spacing: 0.06em;
+  }
+  .pill.good { color: var(--good); border-color: color-mix(in oklch, var(--good) 30%, transparent); }
+  .pill.warn { color: var(--warn); border-color: color-mix(in oklch, var(--warn) 30%, transparent); }
+  .pill.bad  { color: var(--bad);  border-color: color-mix(in oklch, var(--bad)  30%, transparent); }
+  .pill.basic { color: var(--basic); }
+  .pill.trend { color: var(--trend); }
+  .pill.accent { color: var(--accent-bta); }
+  .pill.lock { color: var(--accent); border-color: color-mix(in oklch, var(--accent) 40%, transparent); background: var(--accent-soft); }
+  .pill.in { background: color-mix(in oklch, var(--good) 14%, transparent); color: var(--good); border-color: color-mix(in oklch, var(--good) 30%, transparent); }
+  .pill.out { background: color-mix(in oklch, var(--bad) 12%, transparent); color: var(--bad); border-color: color-mix(in oklch, var(--bad) 30%, transparent); }
+
+  /* ─── QR 결정 콜아웃 ─── */
+  .decision {
+    border: 1px dashed var(--accent);
+    border-radius: 14px;
+    padding: 22px 26px;
+    background: var(--accent-soft);
+    margin-bottom: 18px;
+  }
+  .decision h3 {
+    margin: 0 0 10px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .decision h4 {
+    margin: 0 0 6px;
+    font-family: var(--font-display);
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+  .decision p { margin: 0; color: var(--fg); }
+  .decision .meta {
+    margin-top: 10px;
+    display: flex;
+    gap: 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .decision .meta b { color: var(--fg); font-family: var(--font-sans); }
+
+  /* ─── 액션 박스 ─── */
+  .actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .action-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+  }
+  .action-card h4 {
+    margin: 0 0 8px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .action-card h5 {
+    margin: 0 0 10px;
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .action-card ul { margin: 0; padding-left: 18px; color: var(--muted); font-size: 13.5px; }
+  .action-card li { padding: 3px 0; }
+  .action-card .owner {
+    margin-top: 12px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ─── 차트 ─── */
+  .charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .chart-card h4 {
+    margin: 0 0 12px;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+  }
+  .chart-card h4 small {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 400;
+    margin-top: 3px;
+  }
+
+  /* ─── 도트 네비 ─── */
+  .dots {
+    position: fixed;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
+  .dots .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+  }
+  .dots .dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
+
+  /* 반응형 */
+  @media (max-width: 900px) {
+    .slide { padding: 40px 32px 80px; }
+    .actions, .charts { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="deck" id="deck">
+    <!--
+      references/layouts.md에서 리듬 1개를 골라 8개 .slide 를 여기에 붙여 넣으세요.
+
+      리듬 A · 표준 8장 위클리 (표지·헤드라인·무신사베스트·인기SKU·QR결정·KPI·액션·클로징) — 기본값
+      리듬 B · 위기 위클리 (이탈 SKU 중심, 디스카운트 결정)
+      리듬 C · 호조 위클리 (캐리오버 결정 + 다음 시즌 IMC 미리보기)
+      리듬 D · 시즌 마감 위클리 (S1 판기 종료 직전 결산 톤)
+
+      모든 리듬은 8장 슬라이드 + 도트 네비 유지.
+    -->
+  </div>
+
+  <nav class="dots" aria-label="슬라이드 네비">
+    <button class="dot active" data-idx="0" aria-label="01"></button>
+    <button class="dot" data-idx="1" aria-label="02"></button>
+    <button class="dot" data-idx="2" aria-label="03"></button>
+    <button class="dot" data-idx="3" aria-label="04"></button>
+    <button class="dot" data-idx="4" aria-label="05"></button>
+    <button class="dot" data-idx="5" aria-label="06"></button>
+    <button class="dot" data-idx="6" aria-label="07"></button>
+    <button class="dot" data-idx="7" aria-label="08"></button>
+  </nav>
+
+  <script>
+    // 위클리 덱 네비 — 도트 클릭 + 화살표 키
+    (function () {
+      var deck = document.getElementById('deck');
+      var dots = document.querySelectorAll('.dots .dot');
+      var w = window.innerWidth;
+      dots.forEach(function (d) {
+        d.addEventListener('click', function () {
+          deck.scrollTo({ left: parseInt(d.dataset.idx, 10) * w, behavior: 'smooth' });
+        });
+      });
+      deck.addEventListener('scroll', function () {
+        var i = Math.round(deck.scrollLeft / w);
+        dots.forEach(function (d, j) { d.classList.toggle('active', i === j); });
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowRight') deck.scrollBy({ left: w, behavior: 'smooth' });
+        if (e.key === 'ArrowLeft')  deck.scrollBy({ left: -w, behavior: 'smooth' });
+      });
+    })();
+  </script>
+</body>
+</html>

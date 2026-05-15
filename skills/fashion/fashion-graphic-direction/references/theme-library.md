@@ -1,129 +1,111 @@
-# Graphic Theme Library
+# 그래픽 테마 라이브러리
 
-Twelve recurring themes that show up in K-young-casual / streetwear
-season decks. Pick **3–8** in Step 2; do not include themes whose "use
-when" does not fit the brief. Coining a new theme is fine — match the
-shape (name · thesis · surfaces · references · carryover note).
+한국 영캐주얼 / 스트릿웨어 시즌 덱에 반복 등장하는 12개 테마. Step 2에서 **3~8개** 선택; `use when`이 브리프에 맞지 않는 테마 포함 금지. 신규 테마 정의 가능 — 동일 형태 매칭 (이름 · thesis · 표면 · 레퍼런스 · 캐리오버 노트).
 
-## 1. Vintage cartoon
+## 1. 빈티지 카툰 (Vintage cartoon)
 
-- **Thesis** — 90s cartoon graphics (Beavis & Butt-Head, Tom & Jerry,
-  Felix the Cat, Snoopy era) reissued on tees + sweats with witty,
-  nostalgia-driven copy. Wash / pigment-dye for faded look.
-- **Surfaces** — tee print, sweat print, optional patch
-- **Use when** — brand persona is playful + retro-coded; season has a
-  vintage graphic tee key item
-- **Avoid when** — brand is quiet / minimal; season is womenswear
-  feminine-led
+- **Thesis** — 90년대 카툰 그래픽(Beavis & Butt-Head, Tom & Jerry, Felix the Cat, Snoopy 시대) 티+스웻에 재발행 + 위트, 노스탤지어 카피. 워시 / 피그먼트 염색으로 페이드 룩
+- **표면** — 티 프린트, 스웻 프린트, 선택 패치
+- **사용** — 브랜드 페르소나가 위트 + 레트로 코드; 시즌에 빈티지 그래픽 티 키 아이템 보유
+- **회피** — 브랜드가 콰이엇 / 미니멀; 시즌이 우먼스웨어 페미닌 주도
 
-## 2. Graffiti spray + sticker
+## 2. 그래피티 스프레이 + 스티커 (Graffiti spray + sticker)
 
-- **Thesis** — 90s graffiti culture, spray-paint artworks layered with
-  cut-paper stickers; tee, hoodie, and denim canvas; loose / playful
-- **Surfaces** — tee print, hoodie print, denim print, sticker pack
-- **Use when** — season includes a street-coded layering line
-- **Avoid when** — brand has a clean / corporate identity
+- **Thesis** — 90년대 그래피티 컬처, 스프레이 페인트 + 컷 페이퍼 스티커 레이어, 티/후디/데님 캔버스, 루즈 / 위트
+- **표면** — 티 프린트, 후디 프린트, 데님 프린트, 스티커 팩
+- **사용** — 시즌에 스트릿 코드 레이어링 라인 포함
+- **회피** — 브랜드가 클린 / 코퍼레이트 정체성
 
-## 3. Line-drawing camo
+## 3. 라인 드로잉 카모 (Line-drawing camo)
 
-- **Thesis** — familiar camo silhouette redrawn in thick line work,
-  monochrome or single-color line on solid ground; modern take on a
-  classic
-- **Surfaces** — all-over pattern (tee, hoodie, jacket, hat)
-- **Use when** — season needs an outerwear-friendly all-over
-- **Avoid when** — brand has a no-camo policy
+- **Thesis** — 친숙한 카모 실루엣을 두꺼운 라인 워크로 재드로잉, 모노크롬 또는 솔리드 그라운드 단일 컬러 라인. 클래식의 모던 해석
+- **표면** — 올오버 패턴 (티, 후디, 재킷, 햇)
+- **사용** — 시즌에 아우터웨어 친화 올오버 필요
+- **회피** — 브랜드가 노-카모 정책
 
-## 4. Candy camo
+## 4. 캔디 카모 (Candy camo)
 
-- **Thesis** — camo silhouette filled with candy / pastel palette,
-  bridges UNI ↔ WOMEN with lovable color, stays street through the
-  shape
-- **Surfaces** — tee, hoodie, denim, accessory
-- **Use when** — season is bridging masculine/feminine; pastel palette
-  is locked
-- **Avoid when** — palette is dark / utility-coded
+- **Thesis** — 카모 실루엣을 캔디 / 파스텔 팔레트로 채움, UNI ↔ WOMEN 브릿지, 러블 컬러 + 셰이프로 스트릿 유지
+- **표면** — 티, 후디, 데님, 액세서리
+- **사용** — 시즌이 매스큘린/페미닌 브릿지; 파스텔 팔레트 LOCK
+- **회피** — 팔레트가 다크 / 유틸리티 코드
 
-## 5. Retro jelly-core
+## 5. 레트로 젤리-코어 (Retro jelly-core)
 
-- **Thesis** — Y2K jellyball / Y2K jelly typography rephrased through
-  90s warmth instead of metallic chrome; logos and symbols rendered as
-  jelly texture
-- **Surfaces** — tee print, sweat print, accessory patch, packaging
-- **Use when** — season locks a new symbol / wordmark jelly treatment
-- **Avoid when** — brand persona is dry / muted
+- **Thesis** — Y2K 젤리볼 / Y2K 젤리 타이포그래피를 메탈릭 크롬 대신 90s 따스함으로 재해석, 로고와 심볼을 젤리 텍스처로 렌더
+- **표면** — 티 프린트, 스웻 프린트, 액세서리 패치, 패키징
+- **사용** — 시즌이 신규 심볼 / 워드마크 젤리 트리트먼트 LOCK
+- **회피** — 브랜드 페르소나가 드라이 / 뮤트
 
-## 6. Colored point label / woven tag
+## 6. 컬러드 포인트 라벨 / 자카드 (Colored point label / woven tag)
 
-- **Thesis** — small woven labels and printed tension labels carrying
-  cartoon characters or color illustrations as one-point applique on
-  basics — turns a simple tee into a brand item without overloading the
-  graphic
-- **Surfaces** — point label, woven tag, hardware tag
-- **Use when** — basics need elevation without front-print
-- **Avoid when** — basics are price-sensitive entry points
+- **Thesis** — 작은 자카드 라벨 + 인쇄 텐션 라벨에 카툰 캐릭터·컬러 일러스트, 베이직 위 원-포인트 어플리케 — 단순 티를 그래픽 과부하 없이 브랜드 아이템화
+- **표면** — 포인트 라벨, 자카드, 하드웨어 태그
+- **사용** — 베이직이 프론트 프린트 없이 엘리베이션 필요
+- **회피** — 베이직이 가성비 엔트리 포인트
 
-## 7. Vintage athletic / collegiate
+## 7. 빈티지 애슬레틱 / 콜레지에이트 (Vintage athletic / collegiate)
 
-- **Thesis** — collegiate type lockups, varsity numerals, athletic
-  ringer trims; Champion / Russell / Camber DNA
-- **Surfaces** — tee print, embroidery (chest), woven label
-- **Use when** — season has a new-basic line; collegiate is a known
-  carryover for the brand
-- **Avoid when** — season is feminine-led only
+- **Thesis** — 콜레지에이트 타입 락업, 바시티 누메럴, 애슬레틱 링거 트림. Champion / Russell / Camber DNA
+- **표면** — 티 프린트, 자수 (체스트), 자카드
+- **사용** — 시즌에 뉴 베이직 라인; 콜레지에이트가 브랜드 캐리오버
+- **회피** — 시즌이 페미닌 주도만
 
-## 8. Retro lovely / floral / dot
+## 8. 레트로 러블리 / 플로럴 / 도트 (Retro lovely / floral / dot)
 
-- **Thesis** — 90s romantic girlish — small floral, dot prints, lace
-  trim graphics, ribbon embroidery
-- **Surfaces** — all-over pattern, tee print, embroidery
-- **Use when** — WOMEN line carries a lovely / new-basic ruffle series
-- **Avoid when** — UNI line dominates the season
+- **Thesis** — 90년대 로맨틱 걸리시 — 스몰 플로럴, 도트 프린트, 레이스 트림 그래픽, 리본 자수
+- **표면** — 올오버 패턴, 티 프린트, 자수
+- **사용** — WOMEN 라인이 러블리 / 뉴 베이직 러플 시리즈 보유
+- **회피** — UNI 라인이 시즌 지배
 
-## 9. K-pop / IP collaboration
+## 9. K-팝 / IP 콜라보 (K-pop / IP collaboration)
 
-- **Thesis** — IP / character / artist collab graphics treated with
-  brand's own typography; capsule-only
-- **Surfaces** — tee, hoodie, special edition packaging
-- **Use when** — explicit IP deal exists for the season
-- **Avoid when** — no signed IP; do not invent a fake collab
+- **Thesis** — IP / 캐릭터 / 아티스트 콜라보 그래픽을 브랜드 자체 타이포그래피로 처리, 캡슐 전용
+- **표면** — 티, 후디, 특별판 패키징
+- **사용** — 시즌에 명시적 IP 딜 존재
+- **회피** — 서명된 IP 없음; 가짜 콜라보 임의 발명 금지
 
-## 10. Hand-drawn doodle / scribble
+## 10. 핸드 드로운 두들 / 스크리블 (Hand-drawn doodle / scribble)
 
-- **Thesis** — designer hand-drawn doodles, single-line drawings,
-  marker scribble; conveys "made by a person, not a vector"
-- **Surfaces** — embroidery, tee print, woven label
-- **Use when** — season needs warmth / craft tone
-- **Avoid when** — brand is tech / utility-coded
+- **Thesis** — 디자이너 핸드 드로운 두들, 싱글 라인 드로잉, 마커 스크리블. `사람이 만든, 벡터 아님` 전달
+- **표면** — 자수, 티 프린트, 자카드
+- **사용** — 시즌이 따스함 / 크래프트 톤 필요
+- **회피** — 브랜드가 테크 / 유틸리티 코드
 
-## 11. Type-as-graphic
+## 11. 타입-as-그래픽 (Type-as-graphic)
 
-- **Thesis** — wordmark and short type lockups treated as the entire
-  graphic; no illustration; type weight / spacing carries the message
-- **Surfaces** — tee print, sweat print, woven label
-- **Use when** — season has a manifesto / line-defining slogan
-- **Avoid when** — slogan is generic ("Just Vibes")
+- **Thesis** — 워드마크와 짧은 타입 락업을 전체 그래픽으로 처리, 일러스트레이션 없음, 타입 무게 / 스페이싱이 메시지 운반
+- **표면** — 티 프린트, 스웻 프린트, 자카드
+- **사용** — 시즌에 매니페스토 / 라인 정의 슬로건 보유
+- **회피** — 슬로건이 제너릭 (`Just Vibes`)
 
-## 12. Functional / utility tag
+## 12. 펑셔널 / 유틸리티 태그 (Functional / utility tag)
 
-- **Thesis** — graphics that look like supply-room / spec-sheet
-  stamping — fabric content tags, batch numbers, lot codes treated as
-  design language
-- **Surfaces** — woven tag, sticker, hardware engraving, point print
-- **Use when** — season has a functional fabric story (Sorona, Coolmax,
-  Askin)
-- **Avoid when** — there is no functional story to back the language up
+- **Thesis** — 공급실 / 스펙 시트 스탬프처럼 보이는 그래픽 — 패브릭 컨텐트 태그, 배치 번호, LOT 코드를 디자인 언어로 처리
+- **표면** — 자카드, 스티커, 하드웨어 인그레이빙, 포인트 프린트
+- **사용** — 시즌이 기능성 패브릭 스토리(Sorona, Coolmax, Askin) 보유
+- **회피** — 언어를 뒷받침할 기능 스토리 없음
 
 ---
 
-## Theme card shape (for the layout)
+## 테마 카드 표준 형식 (레이아웃용)
 
-Every theme card the layout pastes should carry:
+레이아웃이 붙여 넣는 모든 테마 카드 표준:
 
 ```
-Theme name        — short, internal
-Thesis            — 1 line on what it is for this season
-Surfaces          — comma list from the surface set
-Reference cluster — 4–6 imagegen tiles
-Carryover note    — new / carried from [season] / evolved from [theme]
-Studio            — optional graphic studio / supplier owning execution
+Theme name        — 짧은 내부 이름
+Thesis            — 이번 시즌 의미 1줄
+Surfaces          — 표면 세트에서 콤마 리스트
+Reference cluster — 4~6 imagegen 타일
+Carryover note    — new / [시즌]에서 캐리오버 / [테마]에서 진화
+Studio            — 선택, 그래픽 스튜디오 / 공급사 owner
 ```
+
+## 한국 K-패션 시즌 그래픽 패턴 사례
+
+- **마뗑킴 26SS**: 타입-as-그래픽 + 컬러드 포인트 라벨 (텍스트 로고 시즌 변형)
+- **마르디 메크르디 25SS**: 플라워 마르디 그래픽 (영구 캐리오버) + 핸드 드로운 두들 (시즌 신규)
+- **아더에러 25FW**: 라인 드로잉 카모 + 타입-as-그래픽 (테트라이트 워드마크 LOCK)
+- **키르시 26SS**: 레트로 러블리 + 컬러드 포인트 라벨 (체리 자카드 영구)
+- **와키윌리 27SS**: 빈티지 카툰 + 캔디 카모 + 레트로 젤리-코어 (캐릭터 IP 시즌)
+- **무신사 스탠다드 26FW**: 펑셔널 유틸리티 태그 + 빈티지 애슬레틱 (기능성 + 가성비)

@@ -1,0 +1,490 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 브랜드] [REPLACE 시즌·페이지 종류] · Wireframe v0.1</title>
+<!--
+  K-패션 와이어프레임 v0.1 시드 (자사몰 / 무신사 / 29CM 상세페이지 · 룩북 · 캠페인 · 팝업).
+
+  사용 방법:
+    1) 이 파일을 index.html(또는 wireframe-v01.html)로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) DESIGN.md는 이 스킬에서 무시 — 와이어프레임은 의도적 저해상도
+    4) references/layouts.md에서 변형 1개를 골라
+       <div class="canvas"> 안에 본문을 구성
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude 환경(Claude.ai · Claude Code): <artifact> 태그로 감싸 출력
+    - 그 외 환경(ChatGPT · Gemini · Grok): 표준 마크다운 HTML 코드 블록
+    - OpenDesign 환경: 주요 요소에 data-od-id 속성 추가 시 인라인 코멘트 사용 가능
+
+  K-패션 와이어프레임 컨텍스트:
+    - "이것은 스케치다" 신호 필수 — 그래프 페이퍼, 마커톤, 해치 채움, 살짝 기울어진 카드, 형광펜 스와이프, 스티커 메모
+    - 픽셀 정확 산출물은 web-prototype 스킬 사용 (이 스킬은 v0.1 전용)
+    - 손글씨 폰트: Caveat / Patrick Hand / Architects Daughter
+    - 살짝 회전: transform: rotate(±0.4 ~ 2deg)로 그리드 깨기
+    - 활성 시안 1개만 형광펜 스와이프, 나머지 비활성 탭
+    - K-패션 KPI 라벨: 발매가 / 정상판매율 타겟 / LOT / 컬러웨이 / 사이즈 풀 / 발매일
+    - 도메인: musinsa.com / 29cm.co.kr / matinkim.com / mardimercredi.com / wackywilly.kr
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Patrick+Hand&family=Architects+Daughter&family=DM+Serif+Display&family=Hahmlet:wght@700&family=Bagel+Fat+One&family=Black+Han+Sans&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper:        #fbf6ec;
+    --paper-tint:   #f5eedf;
+    --ink:          #2b2620;
+    --pencil:       #4d473d;
+    --rule:         #c8bfa9;
+    --grid:         #e3d8b8;
+    --accent:       #d8482b;
+    --highlight:    #f9d27c;
+    --note-yellow:  #fff19a;
+    --note-pink:    #ffd5c9;
+    --note-blue:    #cfe6f5;
+
+    /* 디스플레이 — 마커톤. 변형에 따라 1개 선택 */
+    --serif-display: "DM Serif Display", "Hahmlet", "Iowan Old Style", Georgia, serif;
+    --display-play:  "Bagel Fat One", "Gmarket Sans", system-ui, sans-serif;
+    --display-street:"Black Han Sans", "Gmarket Sans", system-ui, sans-serif;
+
+    --hand:       "Patrick Hand", "Caveat", "Architects Daughter", cursive;
+    --hand-bold:  "Caveat", "Patrick Hand", "Architects Daughter", cursive;
+    --mono:       "IBM Plex Mono", ui-monospace, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    color: var(--ink);
+    /* 그래프 페이퍼 + 도트 페이퍼 혼합 — "이것은 스케치다" 신호 */
+    background:
+      radial-gradient(circle, rgba(43,38,32,0.04) 1px, transparent 1.4px) 0 0 / 22px 22px,
+      var(--paper);
+    font: 16px/1.5 var(--hand);
+  }
+  .page { padding: 32px 48px 56px; max-width: 1320px; margin: 0 auto; }
+
+  /* ─── 페이지 헤더 ─── */
+  .head {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 24px;
+    align-items: end;
+    padding-bottom: 14px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .head h1 {
+    font: 800 56px/1 var(--serif-display);
+    margin: 0;
+    letter-spacing: -0.005em;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .head h1 em { font-style: italic; }
+  .pin {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font: 12px/1 var(--mono);
+    padding: 6px 10px;
+    border: 1.5px dashed var(--accent);
+    color: var(--accent);
+    transform: rotate(-2.2deg);
+    letter-spacing: 0.18em;
+    background: var(--paper);
+  }
+  .pin .x {
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    transform: rotate(45deg);
+  }
+  .head .sub { font: 18px/1.4 var(--hand); color: var(--pencil); }
+  .head .meta {
+    font: 11px/1.4 var(--mono);
+    color: var(--pencil);
+    letter-spacing: 0.14em;
+    text-align: right;
+    text-transform: uppercase;
+  }
+  .head .meta b { color: var(--ink); }
+
+  /* ─── 탭 스트립 (시안 변형) ─── */
+  .tabs {
+    display: flex;
+    gap: 8px;
+    padding: 18px 0 12px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    font: 16px/1 var(--hand);
+    padding: 10px 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--pencil);
+    position: relative;
+    transform: rotate(-0.4deg);
+  }
+  .tab .num {
+    font: 11px/1 var(--mono);
+    color: var(--pencil);
+    padding: 4px 6px;
+    border: 1.5px solid var(--pencil);
+    letter-spacing: 0.06em;
+  }
+  .tab.active { color: var(--ink); }
+  /* 활성 시안에 형광펜 스와이프 */
+  .tab.active::before {
+    content: '';
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    top: 4px;
+    bottom: 6px;
+    background: var(--highlight);
+    transform: skew(-8deg);
+    z-index: -1;
+    opacity: 0.85;
+  }
+  .tab.active .num {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .tab .glyph {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid currentColor;
+    display: inline-block;
+  }
+
+  /* ─── 스케치 캔버스 ─── */
+  .canvas {
+    position: relative;
+    background:
+      /* 24px 그래프 페이퍼 그리드 */
+      repeating-linear-gradient(0deg, var(--grid) 0 1px, transparent 1px 24px),
+      repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 1px 24px),
+      var(--paper-tint);
+    border: 3px solid var(--ink);
+    border-radius: 14px;
+    padding: 26px 26px 32px;
+    /* 샤피 펜 그림자 — "이것은 스케치다" */
+    box-shadow: 6px 8px 0 -4px rgba(43,38,32,0.18);
+  }
+  .canvas .section-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .canvas h2 {
+    font: 800 30px/1 var(--serif-display);
+    margin: 0;
+  }
+  .canvas .pill {
+    font: 12px/1 var(--mono);
+    padding: 5px 9px;
+    border: 1.5px solid var(--pencil);
+    border-radius: 999px;
+    color: var(--pencil);
+    letter-spacing: 0.12em;
+    transform: rotate(1.2deg);
+  }
+  .canvas .lede {
+    font: 17px/1.5 var(--hand);
+    color: var(--pencil);
+    margin: 0 0 18px;
+    max-width: 70ch;
+  }
+
+  /* ─── 가짜 URL 바 ─── */
+  .browser {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 14px;
+    border: 2px solid var(--pencil);
+    border-radius: 999px;
+    background: var(--paper);
+    margin-bottom: 16px;
+  }
+  .browser .dots { display: flex; gap: 6px; }
+  .browser .dots span {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    border: 1.5px solid var(--pencil);
+  }
+  .browser .url {
+    flex: 1;
+    font: 14px/1 var(--hand);
+    color: var(--pencil);
+  }
+  .browser .user {
+    font: 14px/1 var(--hand);
+    color: var(--pencil);
+  }
+
+  /* ─── 사이드바 ─── */
+  .layout {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 22px;
+  }
+  aside.nav { padding: 10px 0; }
+  aside.nav .brand {
+    font: 800 28px/1 var(--serif-display);
+    font-style: italic;
+    padding: 4px 6px;
+    border-bottom: 2px solid var(--ink);
+    display: inline-block;
+    margin-bottom: 18px;
+  }
+  aside.nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  aside.nav li {
+    font: 17px/1.2 var(--hand);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 6px;
+    position: relative;
+  }
+  aside.nav li .square {
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid var(--pencil);
+    display: inline-block;
+    flex-shrink: 0;
+  }
+  aside.nav li.active { color: var(--ink); }
+  aside.nav li.active::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    right: -8px;
+    top: 4px;
+    bottom: 6px;
+    background: var(--highlight);
+    opacity: 0.6;
+    transform: skew(-6deg);
+    z-index: -1;
+  }
+
+  /* ─── 캔버스 본문 ─── */
+  .greeting { font: 14px/1.4 var(--hand); color: var(--pencil); }
+  .name {
+    font: 800 28px/1 var(--serif-display);
+    font-style: italic;
+    margin: 2px 0 4px;
+  }
+  .toggle-row {
+    display: inline-flex;
+    gap: 6px;
+    padding: 4px;
+    border: 1.5px solid var(--pencil);
+    border-radius: 999px;
+  }
+  .toggle-row .tag {
+    font: 13px/1 var(--hand);
+    padding: 6px 10px;
+    border-radius: 999px;
+    color: var(--pencil);
+  }
+  .toggle-row .tag.active {
+    background: var(--highlight);
+    color: var(--ink);
+  }
+
+  /* ─── KPI 타일 ─── */
+  .kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin: 16px 0;
+  }
+  .kpi {
+    border: 2px solid var(--pencil);
+    border-radius: 10px;
+    padding: 14px;
+    background: var(--paper);
+    position: relative;
+  }
+  .kpi .label {
+    font: 13px/1 var(--mono);
+    color: var(--pencil);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .kpi .value {
+    font: 800 44px/1 var(--serif-display);
+    margin-top: 8px;
+    color: var(--accent);
+  }
+  .kpi .value.ink { color: var(--ink); }
+  .kpi .small {
+    font: 12px/1.4 var(--hand);
+    color: var(--pencil);
+    margin-top: 6px;
+  }
+  /* 살짝 회전 흩뿌리기 — 손그림 톤 강화 */
+  .kpi.tilt-1 { transform: rotate(-0.6deg); }
+  .kpi.tilt-2 { transform: rotate(0.4deg); }
+  .kpi.tilt-3 { transform: rotate(-0.2deg); }
+  .kpi.tilt-4 { transform: rotate(0.7deg); }
+
+  /* ─── 차트 패널 ─── */
+  .panels {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 14px;
+  }
+  .panel {
+    border: 2px solid var(--pencil);
+    border-radius: 10px;
+    padding: 14px;
+    background: var(--paper);
+    position: relative;
+  }
+  .panel h3 {
+    font: 700 16px/1 var(--mono);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin: 0 0 14px;
+    color: var(--pencil);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .panel h3 .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .panel svg.scribble {
+    width: 100%;
+    height: 160px;
+    display: block;
+  }
+
+  /* ─── 스티커 메모 ─── */
+  .sticky {
+    position: absolute;
+    padding: 10px 12px;
+    font: 16px/1.3 var(--hand);
+    box-shadow: 4px 6px 0 -2px rgba(43,38,32,0.18);
+    max-width: 220px;
+  }
+  .sticky.sn1 { top: 20px;  right: 30px; background: var(--note-yellow); transform: rotate(2.4deg); }
+  .sticky.sn2 { top: 380px; right: 90px; background: var(--note-pink);   transform: rotate(-3.2deg); }
+  .sticky.sn3 { top: 600px; right: 40px; background: var(--note-blue);   transform: rotate(1.6deg); }
+  .sticky .tape {
+    position: absolute;
+    top: -10px;
+    left: 30px;
+    width: 70px;
+    height: 18px;
+    background: rgba(43,38,32,0.18);
+    transform: rotate(-4deg);
+  }
+  .sticky b { font-family: var(--hand-bold); font-weight: 700; }
+
+  /* ─── 이벤트 / NEXT STEP 박스 ─── */
+  .events {
+    padding: 12px 14px;
+    border: 2px dashed var(--pencil);
+    border-radius: 10px;
+    margin-top: 14px;
+    background: var(--paper);
+  }
+  .events .label {
+    font: 13px/1 var(--mono);
+    letter-spacing: 0.14em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .events .lines span {
+    display: block;
+    height: 8px;
+    background: var(--pencil);
+    opacity: 0.18;
+    border-radius: 4px;
+    margin: 6px 0;
+  }
+  .events .lines span:nth-child(1) { width: 80%; }
+  .events .lines span:nth-child(2) { width: 60%; }
+  .events .lines span:nth-child(3) { width: 70%; }
+
+  .next-step {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 12px 14px;
+    border: 2px solid var(--accent);
+    border-radius: 10px;
+    background: var(--paper);
+    margin-top: 14px;
+  }
+  .next-step .head {
+    font: 13px/1 var(--mono);
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .next-step ul {
+    padding: 0 0 0 18px;
+    margin: 6px 0 0;
+    font: 15px/1.4 var(--hand);
+    color: var(--ink);
+  }
+
+  /* ─── 반응형 (모바일에서 스티커 메모 숨김) ─── */
+  @media (max-width: 1000px) {
+    .layout { grid-template-columns: 1fr; }
+    .kpis { grid-template-columns: 1fr 1fr; }
+    .panels { grid-template-columns: 1fr; }
+    .sticky { display: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <!--
+      references/layouts.md에서 변형 1개를 골라 본문을 구성하세요.
+
+      변형 A · 상세페이지 와이어프레임 (4탭: 정보형 / 매거진형 / 룩북형 / 스토리형) — 기본값
+      변형 B · 룩북 페이지 와이어프레임 (그리드 / 스크롤 시네마 / 매거진 / 페이지별 룩)
+      변형 C · 캠페인 페이지 와이어프레임 (콜라보 — 키비주얼 / 라인업 / 매거진 우선)
+      변형 D · 팝업 안내 페이지 와이어프레임 (정보형 / 카운트다운 / 매거진형)
+
+      모든 변형은 다음 8개 섹션 골격을 유지합니다:
+      1) head — 페이지 제목 + WIREFRAME v0.1 핀 + meta
+      2) tabs — 시안 변형 라벨 (활성 1개에 형광펜)
+      3) canvas (그래프 페이퍼 카드) — 본문 배치
+         3-1) section-label — 활성 시안 제목 + 핀
+         3-2) browser URL 행 — musinsa.com / 29cm.co.kr / matinkim.com / wackywilly.kr
+         3-3) layout (사이드바 + 메인)
+              · 사이드바: 페이지 종류별 메뉴 (활성 1개 형광펜)
+              · 메인: 인사 + 이름 + 가격 토글
+         3-4) kpis (4개 타일, 살짝 회전)
+         3-5) panels (차트 자리표시자 — 손그림 SVG)
+         3-6) events / next-step 박스
+      4) sticky 메모 1~3개 (오른쪽 흩뿌림, 살짝 회전)
+    -->
+  </div>
+</body>
+</html>

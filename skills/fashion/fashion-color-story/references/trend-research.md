@@ -1,224 +1,189 @@
-# Fashion Color Story Trend Research
+# 컬러 스토리 트렌드 리서치
 
-This is the *color discipline filter* for season palette lock documents.
-Different from the concept board's research (which is about mood territory),
-the color story's research is about **the practical realities of locking a
-palette for a Korean young-casual brand**: what trend data exists, how to
-translate it into Seoul-coded colors, what Pantone systems to use, and how
-dyeing tolerance actually works in the field.
+이 문서는 시즌 팔레트 LOCK을 위한 **컬러 규율 필터**입니다. 컨셉 보드의 리서치(무드 영역에 대한)와 달리, 컬러 스토리의 리서치는 **한국 영캐주얼 브랜드의 팔레트 LOCK 실무**에 대한 것입니다: 어떤 트렌드 데이터가 존재하는지, 그것을 Seoul-coded 컬러로 어떻게 번역하는지, Pantone 시스템을 어떻게 선택하는지, 염색 tolerance가 현장에서 어떻게 작동하는지.
 
-A color story is downstream of mood and upstream of production. Its
-research must serve both directions.
+컬러 스토리는 무드의 하위, 생산의 상위. 리서치는 양방향으로 작동해야 합니다.
 
-## How to use this file
+## 사용 방법
 
-1. Use the **27SS Trend Inputs** section to anchor the palette in actual
-   season data — WGSN/Coloro key colors are the global default.
-2. Use the **K-DTC Color Reality** section to translate global trend signals
-   into Seoul-coded saturations.
-3. Use the **Pantone Systems** section to pick TCX vs. TPG correctly and
-   write supplier-grade documentation.
-4. Use the **Dyeing & QC Reality** section to set realistic tolerance and
-   lot-approval expectations.
+1. **27SS 트렌드 인풋** 섹션으로 실제 시즌 데이터에 팔레트를 앵커링 — WGSN/Coloro 핵심 컬러가 글로벌 기본값
+2. **K-DTC 컬러 현실** 섹션으로 글로벌 트렌드 신호를 Seoul-coded saturation으로 번역
+3. **Pantone 시스템** 섹션으로 TCX vs. TPG를 정확히 선택, 공장급 문서 작성
+4. **염색 + QC 현실** 섹션으로 현실적 tolerance와 LOT 승인 기대치 설정
 
-## 27SS Trend Inputs (factual season data)
+## 27SS 트렌드 인풋 (사실 시즌 데이터)
 
-### WGSN / Coloro 27 Key Colors
+### WGSN / Coloro 27 핵심 컬러
 
-[WGSN/Coloro press release][wgsn-27]:
+[WGSN/Coloro 보도자료][wgsn-27]:
 
-| Color | Coloro code | Tone direction |
-| --- | --- | --- |
-| **Luminous Blue** | 125-28-38 | Mid-blue, digital optimism. Color of the Year 2027. |
-| **Energy Orange** | (Coloro varies by year) | High-saturation activating orange. |
-| **Pop Pink** | (Coloro varies) | Clean cool pink. |
-| **Meadowland Green** | (Coloro varies) | Yellow-base mid-green. |
-| **Clay** | (Coloro varies) | Warm earthy neutral. |
+| 컬러 | Coloro 코드 | 톤 방향성 |
+|---|---|---|
+| **Luminous Blue** | 125-28-38 | 미드 블루, 디지털 낙관주의. 2027 올해의 컬러 |
+| **Energy Orange** | (연도별 가변) | 고채도 활성 오렌지 |
+| **Pop Pink** | (가변) | 클린 쿨 핑크 |
+| **Meadowland Green** | (가변) | 옐로우 베이스 미드 그린 |
+| **Clay** | (가변) | 따뜻한 어시 뉴트럴 |
 
-These are the global *defaults*. K-young-casual rarely uses them at full
-saturation. See K-DTC Color Reality below.
+이들은 글로벌 *기본값*입니다. 한국 영캐주얼은 풀 saturation으로 거의 사용하지 않습니다. 아래 K-DTC 컬러 현실 참조.
 
-### Spring/Summer 26 Runway Color Anchors
+### S/S 26 런웨이 컬러 앵커
 
-For 27SS you are translating from 25SS/26SS continuity, not jumping
-ahead. Useful runway color anchors carrying through:
+27SS는 25SS/26SS 연속성에서 번역, 점프하지 않음. 유용한 런웨이 컬러 앵커:
 
-- **Soft, sun-faded brights** — terracotta, washed orange, dusty mango.
-- **Cold-pastels paired with deep navy / charcoal** — icy blue, powder
-  cream alongside saturated dark anchor.
-- **One-color total looks** — head-to-toe single color story, the inverse
-  of mixed-palette trend.
-- **Monochrome neutral layering** — bleached sand, pristine, oat, cream
-  layered together, no contrast color.
+- **선-페이드 브라이트** — 테라코타, 워시드 오렌지, 더스티 망고
+- **콜드 파스텔 + 딥 네이비/차콜 페어** — 아이시 블루, 파우더 크림 + 채도 높은 다크 앵커
+- **원-컬러 토털 룩** — 헤드 투 토 단일 컬러 스토리, 믹스 팔레트 트렌드의 역
+- **모노크롬 뉴트럴 레이어링** — 블리치드 샌드, 프리스틴, 오트, 크림 레이어, 대비 컬러 없음
 
-These are anchors, not commands. A color story can deliberately reject
-runway directions with a clear thesis.
+이들은 앵커이지 명령이 아님. 컬러 스토리는 명확한 thesis로 런웨이 방향을 의도적으로 거절 가능.
 
-## K-DTC Color Reality
+## K-DTC 컬러 현실
 
-Korean young-casual brands rarely run global key colors at the WGSN/Coloro
-saturation. The pattern is **one step dustier / muted** for primary
-season colors, with the saturated version reserved for a small dry-pop
-accent.
+한국 영캐주얼 브랜드는 글로벌 핵심 컬러를 WGSN/Coloro saturation으로 거의 운영하지 않음. 패턴은 **한 단계 더스티 / 뮤트**된 시즌 메인 컬러 + 풀 saturation 버전은 작은 드라이 팝 액센트로 예약.
 
-| Global key | Typical K-DTC translation |
-| --- | --- |
-| Luminous Blue (125-28-38) | dusty mid-blue, ~16-4109 TCX *Stone Blue* tone |
-| Energy Orange | weathered terracotta, ~17-1340 TCX *Tawny Orange* tone |
-| Pop Pink | powder blush, ~14-1907 TCX *Cradle Pink* tone |
-| Meadowland Green | sage, ~16-0220 TCX *Dried Herb* tone |
-| Clay | warm taupe, ~16-1212 TCX *Almond Buff* tone |
+| 글로벌 키 | 일반적 K-DTC 번역 |
+|---|---|
+| Luminous Blue (125-28-38) | 더스티 미드 블루, 약 16-4109 TCX *Stone Blue* 톤 |
+| Energy Orange | 웨더드 테라코타, 약 17-1340 TCX *Tawny Orange* 톤 |
+| Pop Pink | 파우더 블러쉬, 약 14-1907 TCX *Cradle Pink* 톤 |
+| Meadowland Green | 세이지, 약 16-0220 TCX *Dried Herb* 톤 |
+| Clay | 따뜻한 토프, 약 16-1212 TCX *Almond Buff* 톤 |
 
-Brand-safe Korean young-casual carryover colors that almost always anchor
-the main tier:
+거의 항상 메인 티어를 앵커링하는 한국 영캐주얼 캐리오버 컬러:
 
-- White / Off-white — cotton ivory, bleached sand, pristine
-- Black — true black or soft black (dyed cotton has slight warmth)
-- Navy — brand main for many K-DTC brands
-- Charcoal / dark grey
-- Oat / camel
-- Light blue (denim companion)
+- 화이트 / 오프 화이트 — 코튼 아이보리, 블리치드 샌드, 프리스틴
+- 블랙 — 트루 블랙 또는 소프트 블랙 (염색 코튼은 살짝 따뜻함)
+- 네이비 — 많은 한국 D2C 브랜드의 브랜드 메인
+- 차콜 / 다크 그레이
+- 오트 / 카멜
+- 라이트 블루 (데님 컴패니언)
 
-These compose the **main tier**. Season colors are added on top. Every
-season's color story **must include the brand main carryover** unless the
-brand has explicitly retired it.
+이들이 **메인 티어** 구성. 시즌 컬러는 그 위에 추가. 모든 시즌 컬러 스토리는 **브랜드 메인 캐리오버 포함 필수** (브랜드가 명시적으로 은퇴시키지 않은 한).
 
-## Channel Color Behavior (Korean DTC)
+## 채널 컬러 행동 (한국 D2C)
 
-Different channels render colors differently. The color story should note
-which channel a tone risks washing out on.
+채널마다 컬러 렌더링이 다름. 컬러 스토리는 어느 톤이 어느 채널에서 워시아웃 리스크가 있는지 노트해야 합니다.
 
-| Channel | Behavior | Risk |
-| --- | --- | --- |
-| **Musinsa app thumbnails** | High contrast / saturated wins | Pastels, dusty mid-tones lose impact |
-| **29CM editorial** | Muted, paper-feel rendering | Saturated neon clashes with editorial layout |
-| **W컨셉 grid** | Curated neutral leaning | Loud accents need editorial framing |
-| **Own DTC (D2C)** | Brand-controlled, lighting flexible | Best place for nuanced mid-tones |
-| **Instagram feed** | Saturated cool tones outperform | Warm tones look dated; cool blues / pinks pop |
+| 채널 | 행동 | 리스크 |
+|---|---|---|
+| **무신사 앱 썸네일** | 높은 대비 / 채도 우승 | 파스텔, 더스티 미드톤이 임팩트 손실 |
+| **29CM 에디토리얼** | 뮤트, 페이퍼 필 렌더링 | 채도 네온이 에디토리얼 레이아웃과 충돌 |
+| **W컨셉 그리드** | 큐레이션 뉴트럴 기울임 | 라우드 액센트는 에디토리얼 프레이밍 필요 |
+| **자사몰 D2C** | 브랜드 컨트롤, 조명 유연 | 뉘앙스 미드톤에 최적 |
+| **인스타그램 피드** | 채도 쿨 톤 우승 | 웜 톤 데이티드 룩, 쿨 블루/핑크 팝 |
 
-For 27SS, the practical decision: dusty mid-tones for the season tier are
-safer for editorial channels but risk Musinsa thumbnail flatness. Solution
-is the dry-pop accent — one Musinsa-friendly saturated color per palette
-to anchor thumbnail click-through.
+27SS 실무 결정: 시즌 티어의 더스티 미드톤은 에디토리얼 채널에 안전하지만 무신사 썸네일 평면화 리스크. 솔루션은 드라이 팝 액센트 — 팔레트당 무신사 친화 채도 컬러 1개로 썸네일 클릭 스루 앵커.
 
-## Pantone Systems (working knowledge)
+## Pantone 시스템 (실무 지식)
 
 ### TCX (Textile Cotton Extended)
 
-**The standard for dyed fabric.** Each TCX swatch is a 100% cotton chip
-dyed to spec. There are ~2,625 colors in the TCX system (Pantone Fashion,
-Home + Interiors). Every color story for fabric production should cite
-TCX codes.
+**염색 패브릭의 표준.** 각 TCX 스와치는 스펙대로 염색된 100% 코튼 칩. TCX 시스템에 약 2,625컬러(Pantone Fashion, Home + Interiors). 패브릭 생산용 모든 컬러 스토리는 TCX 코드 인용 필수.
 
-- Format: `19-3911 TCX · Iron`
-- Cost: ~$10–15 per chip (loose), ~$1,000+ for the full FHI book
-- Use case: dyeing-supplier briefs, lab-dip approval, lot acceptance
+- 형식: `19-3911 TCX · Iron`
+- 비용: 칩 1개 약 $10~15, 전체 FHI 책 약 $1,000+
+- 사용 케이스: 염색 공장 브리프, 랩딥 승인, LOT 수용
 
 ### TPG (Textile Paper Green)
 
-The paper version of TCX, printed on coated paper instead of dyed cotton.
+코팅 종이 위에 인쇄된 TCX의 종이 버전.
 
-- Same 7-digit codes as TCX (`19-3911 TPG · Iron`)
-- Cost: ~40–60% cheaper than TCX
-- TPG runs about **15% lighter** than TCX on the same code due to substrate
-  difference ([Adstronaut][adstronaut], [Trimsbest][trimsbest])
-- Use case: printed lookbooks, paper presentations, designer-in-room mood
-  boards. **Never** for fabric matching.
+- TCX와 동일 7자리 코드 (`19-3911 TPG · Iron`)
+- 비용: TCX 대비 약 40~60% 저렴
+- 동일 코드에서 TCX보다 약 **15% 밝게 인쇄** (substrate 차이) ([Adstronaut][adstronaut], [Trimsbest][trimsbest])
+- 사용 케이스: 인쇄 룩북, 종이 프레젠테이션, 디자이너 룸 무드보드. 패브릭 매칭에 **절대** 사용 금지
 
-### When to use which
+### 어느 때 어느 것 사용
 
-- **Fabric brief / dyeing supplier / lab-dip** → TCX always.
-- **Printed paper deliverables** → TPG is acceptable and cheaper.
-- **Digital screen reference** → HEX is the working format. TCX/TPG are
-  reference only on screen — both shift on different monitors.
+- **패브릭 브리프 / 염색 공장 / 랩딥** → 항상 TCX
+- **인쇄 종이 산출물** → TPG 허용, 더 저렴
+- **디지털 스크린 참조** → HEX가 작업 형식. TCX/TPG는 스크린에서 참조 전용 — 모니터마다 다르게 시프트
 
 ### Coloro
 
-WGSN's color system, 7-digit format `BBB-DD-CC` (B=brightness, D=depth,
-C=chroma). Designed to be color-trend-research-aligned. Not a fabric
-standard — Coloro codes need translation to TCX for production.
+WGSN의 컬러 시스템, 7자리 형식 `BBB-DD-CC` (B=brightness, D=depth, C=chroma). 컬러 트렌드 리서치 정렬 설계. 패브릭 표준 아님 — Coloro 코드는 생산용으로 TCX 번역 필요.
 
-When the brand uses WGSN trend data, recording Coloro codes alongside TCX
-makes future trend-back-references easier.
+브랜드가 WGSN 트렌드 데이터 사용 시 Coloro 코드를 TCX와 함께 기록하면 미래 트렌드 역추적 용이.
 
-## Dyeing & QC Reality (for K-DTC + Korean factories)
+## 염색 + QC 현실 (한국 D2C + 한국 공장)
 
 ### Tolerance — ΔE
 
-ΔE (delta E) measures color difference. The dyeing supplier needs an
-explicit tolerance:
+ΔE (delta E)는 컬러 차이 측정. 염색 공장은 명시적 tolerance 필요:
 
-| ΔE range | Industry interpretation |
-| --- | --- |
-| ΔE ≤ 1.0 | Excellent — only critical brand-main colors require this |
-| ΔE ≤ 1.5 | Very good — typical for season main colors |
-| ΔE ≤ 2.0 | Good — acceptable for season / accent |
-| ΔE ≤ 3.0 | Visible difference — reject for fashion |
+| ΔE 범위 | 산업 해석 |
+|---|---|
+| ΔE ≤ 1.0 | 우수 — 중요 브랜드 메인 컬러만 요구 |
+| ΔE ≤ 1.5 | 매우 좋음 — 시즌 메인 컬러 일반 |
+| ΔE ≤ 2.0 | 좋음 — 시즌 / 액센트 수용 가능 |
+| ΔE ≤ 3.0 | 가시 차이 — 패션 거절 |
 
-Practical: brand-main carryover colors (navy, ivory) usually require ΔE ≤
-1.0; season colors ΔE ≤ 1.5; accent colors ΔE ≤ 2.0 if no other option.
+실무: 브랜드 메인 캐리오버 컬러(네이비, 아이보리)는 보통 ΔE ≤ 1.0 요구; 시즌 컬러 ΔE ≤ 1.5; 액센트 컬러 ΔE ≤ 2.0 (다른 옵션 없을 때).
 
-### Lab-dip approval flow
+### 랩딥 승인 흐름
 
-Standard 3-strike lab-dip flow:
+표준 3-strike 랩딥 흐름:
 
-1. **Strike 1** — first dye attempt, supplier sends 3 small swatches with
-   slight variations (lighter, target, darker).
-2. Designer / QC compares vs. master TCX swatch under D65 (daylight) and
-   TL84 (store fluorescent) light boxes.
-3. Designer approves one strike or requests Strike 2 with directional
-   correction.
-4. **Strike 2** — narrowed range based on Strike 1 feedback.
-5. **Strike 3** — final lab-dip; if approved, supplier proceeds to bulk.
-6. **Bulk lot approval** — every bulk-dyed lot must be compared head-to-
-   head vs. the approved Strike under both light sources.
+1. **Strike 1** — 첫 염색 시도, 공장이 미세 변동(밝게, 타겟, 어둡게)이 있는 작은 스와치 3개 송부
+2. 디자이너 / QC가 D65(데일라이트)와 TL84(매장 형광) 라이트박스 하에서 마스터 TCX 스와치와 비교
+3. 디자이너가 1개 strike 승인 또는 방향 수정과 함께 Strike 2 요청
+4. **Strike 2** — Strike 1 피드백 기반 좁혀진 범위
+5. **Strike 3** — 최종 랩딥; 승인 시 공장이 벌크 진행
+6. **벌크 LOT 승인** — 모든 벌크 염색 LOT은 두 광원 하에서 승인 Strike와 head-to-head 비교 필수
 
-A complete strike round takes 5–10 working days. Two-strike approval is
-common; three-strike is the safety net before re-tooling.
+완전한 strike 라운드 5~10영업일 소요. 2-strike 승인 일반, 3-strike는 재공구 전 안전망.
 
-### What goes wrong
+### 무엇이 잘못되는가
 
-- **Lot drift** — the same TCX code dyed in different lots can drift
-  visibly. A color story should note that "lot QC required for every bulk".
-- **Supplier substitution** — when a supplier silently changes dye source,
-  ΔE jumps. Lock supplier in writing.
-- **Substrate variation** — same TCX on cotton vs. linen vs. polyester
-  reads differently. The color story's fabric pairings list is what
-  prevents brief-to-fabric mismatch.
+- **LOT 드리프트** — 동일 TCX 코드를 다른 LOT으로 염색해도 시각적으로 드리프트 가능. 컬러 스토리는 "모든 벌크에 LOT QC 필수" 노트
+- **공장 대체** — 공장이 조용히 염료 소스를 바꾸면 ΔE 점프. 공장 서면 LOCK
+- **Substrate 변동** — 동일 TCX가 코튼 vs. 린넨 vs. 폴리에스터에서 다르게 읽힘. 컬러 스토리의 패브릭 페어링 리스트가 브리프-패브릭 미스매치 방지
 
-## Anti-palette logic (why "no" matters)
+## Anti-palette 논리 (왜 "no"가 중요한가)
 
-Color stories that omit anti-palette section produce drift in trim,
-embroidery, accessory, and packaging decisions later. Common anti-palette
-entries:
+Anti-palette 섹션을 누락한 컬러 스토리는 이후 트림, 자수, 액세서리, 패키징 결정에서 드리프트 유발. 일반적 anti-palette 항목:
 
-- **Channel anti** — colors that wash out on Musinsa thumbnails
-- **Recently-used anti** — last season's hero color that customers will
-  perceive as "old stock"
-- **Brand-clash anti** — colors that conflict with logo / hangtag
-- **Print anti** — colors that don't reproduce well in the season's
-  primary printing process (digital vs. screen)
-- **Dye-cost anti** — colors that exceed dye-cost ceiling for entry tier
+- **채널 anti** — 무신사 썸네일에서 워시아웃되는 컬러
+- **최근 사용 anti** — 지난 시즌 히어로 컬러 — 고객 인식 "오래된 재고"
+- **브랜드 충돌 anti** — 로고 / 행택과 충돌하는 컬러
+- **인쇄 anti** — 시즌 주요 인쇄 프로세스(디지털 vs. 스크린)에서 재현 부진
+- **염색 비용 anti** — 엔트리 티어 염색 비용 상한 초과
 
-Make these explicit. Brief the team once; reference forever.
+이를 명시적으로 만드세요. 팀에 한 번 브리핑, 영구 참조.
 
-## Sequencing rule
+## 시퀀싱 규칙
 
-The strongest color stories sequence the lock:
+가장 강한 컬러 스토리는 LOCK을 다음과 같이 시퀀스합니다.
 
-1. Thesis (linked to concept board)
-2. Master grid (everything at a glance)
-3. Hierarchy + proportion (the structure)
-4. Per-color detail (the codes + pairings + rules)
-5. Distribution matrix (the merchandising plan)
-6. QC notes (the supplier-facing brief)
-7. Anti-palette (what to reject)
-8. Carryover (continuity with prior seasons)
-9. Open questions (what still needs to be locked)
+1. Thesis (컨셉 보드와 연결)
+2. 마스터 그리드 (모든 것 한눈에)
+3. 계층 + 비율 (구조)
+4. 컬러별 디테일 (코드 + 페어링 + 규칙)
+5. 분포 매트릭스 (MD 계획)
+6. QC 노트 (공장 대상 브리프)
+7. Anti-palette (거절할 것)
+8. 캐리오버 (이전 시즌 연속성)
+9. Open Decisions (아직 LOCK 필요한 것)
 
-This order takes the viewer from intent → glance → structure → detail →
-plan → tooling → discipline → continuity → next-action, which is how a
-color review meeting is structured.
+이 순서는 viewer를 의도 → 한눈에 → 구조 → 디테일 → 계획 → 도구 → 규율 → 연속성 → 다음 액션으로 안내, 컬러 리뷰 회의 구조 그대로.
+
+## K-패션 컨텍스트 추가 보강
+
+### 한국 패션 염색 공장 현실
+
+- 한국 영캐주얼 브랜드 다수가 사용하는 염색 공장: 동대문 인근 중소 공장 + 부산·구미 광역 공장
+- 랩딥 표준 turnaround: 한국 공장 5~7영업일 (해외 공장 10~14영업일)
+- 한국 공장은 TCX 책을 표준 보유. 코드 형식 정확히 지키면 통상 1~2 strike에 승인
+- 단, 라텍스 / PU 코팅 / 워싱 후처리는 같은 TCX에서도 추가 드리프트 — 후처리 별도 LOCK
+
+### 한국 패션 브랜드별 컬러 운영 패턴
+
+- **마뗑킴**: 시즌 컬러 2~3개로 미니멀 운영. 메인 캐리오버 비중 70% 이상
+- **마르디 메크르디**: 다채로운 시즌 컬러 5~6개 + 비비드 액센트 1개. 시즌별 차별화 강한 케이스
+- **아더에러**: 블루 시그니처 메인 영구 LOCK. 시즌 컬러 2~3개로 절제
+- **키르시**: 비비드 시즌 컬러 4~5개. 체리 레드 시그니처 캐리오버
+- **무신사 스탠다드**: 베이직 메인 4개(블랙·화이트·네이비·차콜) + 시즌 액센트 1~2개
 
 [wgsn-27]: https://www.wgsn.com/en/wgsn/press/press-releases/wgsn-and-coloro-reveal-colour-year-2027-luminous-blue-and-s-s-27-key
 [adstronaut]: https://www.adstronaut.net/blog/pantone-color-matching-fashion

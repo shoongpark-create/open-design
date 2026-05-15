@@ -1,44 +1,43 @@
 <!doctype html>
 <!--
-  OD web-prototype seed.
+  K-패션 자사몰 웹 프로토타입 시드.
 
-  Copy this file to <project>/index.html, then fill `<main id="content">` by
-  pasting blocks from `references/layouts.md`. Every class referenced in
-  layouts.md is defined here — DO NOT remove unused ones unless you also
-  remove their callers, and DO NOT invent new global classes (use inline
-  style="…" for one-off tweaks).
+  이 파일을 <project>/index.html로 복사한 뒤, `references/layouts.md`의 블록을
+  `<main id="content">`에 붙여 넣어 페이지를 채웁니다. layouts.md에서 참조되는
+  모든 클래스가 여기 정의되어 있습니다 — 호출자가 없는데 제거하지 말 것,
+  그리고 새 전역 클래스를 발명하지 말 것 (1회성 변경은 `style="…"` 인라인 사용).
 
-  Theme tokens at the top of `<style>` are the *only* place to set palette
-  and type. They map cleanly onto a DESIGN.md — when an active design system
-  is injected, swap these six variables and everything reflows.
+  `<style>` 상단의 토큰이 팔레트와 타이포를 설정하는 *유일한* 자리입니다.
+  활성 DESIGN.md(또는 사용자가 알려준 K-패션 브랜드 톤)가 주입되면 이 6개 변수만
+  교체하면 전체가 다시 흐릅니다.
 -->
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>[REPLACE] Page title · brand</title>
+  <title>[REPLACE] 페이지 제목 · 브랜드</title>
   <style>
-    /* ─── tokens ─────────────────────────────────────────────────────────
-       Six variables. Bind them to the active DESIGN.md and stop.
-       Do not introduce raw hex anywhere else in this file. */
+    /* ─── 토큰 ─────────────────────────────────────────────────────────
+       6개 변수. 활성 DESIGN.md 또는 K-패션 브랜드 톤에 바인딩 후 그만.
+       이 파일 어디에서도 원시 hex를 추가하지 말 것. */
     :root {
-      --bg:      #fafaf7;   /* page background — never #fff */
-      --surface: #ffffff;   /* cards, modals, raised areas */
-      --fg:      #1a1916;   /* primary text — never #000 */
-      --muted:   #6b6964;   /* secondary text, captions */
-      --border:  #e8e5df;   /* hairlines, dividers */
-      --accent:  #c96442;   /* one accent — used at most 2× per screen */
+      --bg:      #fafaf7;   /* 페이지 배경 — #fff 금지 (한국 자사몰은 따뜻한 오프화이트) */
+      --surface: #ffffff;   /* 카드·모달·올라간 영역 */
+      --fg:      #1a1916;   /* 본문 텍스트 — #000 금지 */
+      --muted:   #6b6964;   /* 보조 텍스트, 캡션 */
+      --border:  #e8e5df;   /* 라인, 디바이더 */
+      --accent:  #c96442;   /* 액센트 1개 — 화면당 최대 2회 사용 */
 
-      /* derived — do not change */
+      /* 파생 — 변경하지 말 것 */
       --accent-soft: color-mix(in oklch, var(--accent) 14%, transparent);
       --fg-soft:     color-mix(in oklch, var(--fg) 6%, transparent);
 
-      /* type — display = serif (default), body = sans, mono for numerics */
-      --font-display: 'Iowan Old Style', 'Charter', Georgia, 'Times New Roman', serif;
-      --font-body:    -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      /* 타이포 — 디스플레이 = 세리프(기본), 본문 = 산세리프, mono는 숫자/메타 */
+      --font-display: 'Iowan Old Style', 'Charter', 'Hahmlet', Georgia, 'Times New Roman', serif;
+      --font-body:    'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       --font-mono:    ui-monospace, 'JetBrains Mono', 'SF Mono', Menlo, monospace;
 
-      /* scale — clamp() so it works at 1280, 1440, 1920 without media queries */
+      /* 스케일 — clamp()으로 1280·1440·1920에서 미디어 쿼리 없이 동작 */
       --fs-h1: clamp(44px, 6vw, 76px);
       --fs-h2: clamp(32px, 4vw, 48px);
       --fs-h3: 22px;
@@ -46,7 +45,7 @@
       --fs-body: 16px;
       --fs-meta: 13px;
 
-      /* spacing — 8-point grid */
+      /* 간격 — 8 포인트 그리드 */
       --gap-xs: 8px;
       --gap-sm: 12px;
       --gap-md: 20px;
@@ -60,7 +59,7 @@
       --radius-lg: 16px;
     }
 
-    /* ─── reset & base ──────────────────────────────────────────────── */
+    /* ─── 리셋 & 베이스 ──────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; }
     html { -webkit-text-size-adjust: 100%; }
     body {
@@ -79,7 +78,7 @@
     p { text-wrap: pretty; }
     h1, h2, h3, h4 { text-wrap: balance; }
 
-    /* ─── layout primitives ─────────────────────────────────────────── */
+    /* ─── 레이아웃 프리미티브 ─────────────────────────────────────── */
     .container {
       max-width: var(--container);
       margin-inline: auto;
@@ -102,7 +101,7 @@
       .grid-2, .grid-3, .grid-4, .grid-2-1, .grid-1-2 { grid-template-columns: 1fr; }
     }
 
-    /* ─── type ──────────────────────────────────────────────────────── */
+    /* ─── 타이포 ──────────────────────────────────────────────────────── */
     .h1, h1 { font-family: var(--font-display); font-size: var(--fs-h1); line-height: 1.04; letter-spacing: -0.02em; margin: 0; }
     .h2, h2 { font-family: var(--font-display); font-size: var(--fs-h2); line-height: 1.1; letter-spacing: -0.015em; margin: 0; }
     .h3, h3 { font-size: var(--fs-h3); font-weight: 600; line-height: 1.3; letter-spacing: -0.005em; margin: 0; }
@@ -118,7 +117,7 @@
     .meta { font-family: var(--font-mono); font-size: var(--fs-meta); color: var(--muted); }
     .num  { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 
-    /* ─── chrome: nav + footer ──────────────────────────────────────── */
+    /* ─── 크롬: 내비 + 푸터 ──────────────────────────────────────── */
     .topnav {
       position: sticky; top: 0; z-index: 10;
       background: color-mix(in oklch, var(--bg) 92%, transparent);
@@ -133,7 +132,7 @@
     .pagefoot { padding-block: var(--gap-xl); color: var(--muted); font-size: 13px; border-top: 1px solid var(--border); }
     .pagefoot .row-between { flex-wrap: wrap; gap: var(--gap-md); }
 
-    /* ─── buttons ───────────────────────────────────────────────────── */
+    /* ─── 버튼 ───────────────────────────────────────────────────── */
     .btn {
       display: inline-flex; align-items: center; gap: 8px;
       padding: 11px 20px;
@@ -154,7 +153,7 @@
     .btn-arrow::after { content: '→'; transition: transform 0.15s ease; }
     .btn-arrow:hover::after { transform: translateX(2px); }
 
-    /* ─── card / surface ────────────────────────────────────────────── */
+    /* ─── 카드 / 서피스 ────────────────────────────────────────────── */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -164,7 +163,7 @@
     .card-flat { background: transparent; border: 0; padding: 0; }
     .card-rule { background: transparent; border: 0; border-top: 1px solid var(--fg); padding: 24px 0 0; border-radius: 0; }
 
-    /* ─── feature cell (icon + h3 + p) ──────────────────────────────── */
+    /* ─── 기능 셀 (아이콘 + h3 + p) — K-패션에서는 키 아이템 셀로 활용 ──── */
     .feature .feature-mark {
       width: 36px; height: 36px;
       display: grid; place-items: center;
@@ -177,7 +176,7 @@
     .feature h3 { margin-bottom: 6px; }
     .feature p  { margin: 0; color: var(--muted); font-size: 15px; }
 
-    /* ─── stat (big number + label) ─────────────────────────────────── */
+    /* ─── 통계 (큰 숫자 + 라벨) — 정상판매율·재고 회전율 등 ──────────── */
     .stat .stat-num {
       font-family: var(--font-display);
       font-size: clamp(56px, 8vw, 96px);
@@ -189,7 +188,7 @@
     .stat .stat-label { color: var(--muted); font-size: 14px; margin-top: 8px; max-width: 24ch; }
     .stat .stat-unit  { font-size: 0.5em; opacity: 0.7; margin-left: 2px; }
 
-    /* ─── quote / testimonial ───────────────────────────────────────── */
+    /* ─── 풀쿼트 (디자이너 인용) ───────────────────────────────────── */
     .quote {
       font-family: var(--font-display);
       font-size: clamp(24px, 2.6vw, 32px);
@@ -205,7 +204,7 @@
       margin-bottom: -28px;
     }
 
-    /* ─── pill / badge / tag ────────────────────────────────────────── */
+    /* ─── 필 / 배지 / 태그 — NEW / 사전예약 / MEMBERS / SOLD OUT ─────── */
     .pill {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 4px 10px;
@@ -227,7 +226,7 @@
       font-size: 12px;
     }
 
-    /* ─── form field ────────────────────────────────────────────────── */
+    /* ─── 폼 필드 — 사전예약 신청·뉴스레터 가입 등 ───────────────────── */
     .field { display: flex; flex-direction: column; gap: 6px; }
     .field label { font-size: 13px; color: var(--muted); }
     .input, .textarea {
@@ -246,14 +245,15 @@
     }
     .textarea { min-height: 96px; resize: vertical; line-height: 1.55; }
 
-    /* ─── table (data-style, no chrome) ─────────────────────────────── */
+    /* ─── 테이블 (가격·재고·LOT 등 데이터 스타일, 크롬 없음) ─────────── */
     .ds-table { width: 100%; border-collapse: collapse; font-size: 14px; }
     .ds-table th, .ds-table td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); }
     .ds-table th { color: var(--muted); font-weight: 500; font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; }
     .ds-table tbody tr:hover { background: var(--fg-soft); }
     .ds-table .num-col { font-family: var(--font-mono); font-variant-numeric: tabular-nums; text-align: right; }
 
-    /* ─── image placeholder (DS-tinted block, never broken <img>) ──── */
+    /* ─── 이미지 자리표시자 (DS-tinted 블록, broken <img> 금지) ──────── */
+    /* 룩북 컷·키비주얼·모델컷이 들어갈 자리 */
     .ph-img {
       background:
         linear-gradient(135deg, var(--accent-soft), var(--fg-soft)),
@@ -268,14 +268,14 @@
       letter-spacing: 0.04em;
     }
     .ph-img.square    { aspect-ratio: 1 / 1; }
-    .ph-img.portrait  { aspect-ratio: 3 / 4; }
-    .ph-img.wide      { aspect-ratio: 16 / 9; }
+    .ph-img.portrait  { aspect-ratio: 3 / 4; }  /* 모델컷 풀샷에 자주 사용 */
+    .ph-img.wide      { aspect-ratio: 16 / 9; } /* 키비주얼·LOOKBOOK 헤더에 자주 사용 */
 
-    /* ─── divider ───────────────────────────────────────────────────── */
+    /* ─── 디바이더 ──────────────────────────────────────────────────── */
     .rule  { border: 0; border-top: 1px solid var(--border); margin: 0; }
     .rule-strong { border: 0; border-top: 1px solid var(--fg); margin: 0; }
 
-    /* ─── hero variants used by layouts.md ──────────────────────────── */
+    /* ─── 히어로 변형들 (layouts.md에서 사용) ──────────────────────── */
     .hero          { padding-block: clamp(80px, 12vw, 160px); }
     .hero-center   { text-align: center; max-width: 32ch; margin-inline: auto; }
     .hero h1       { margin-bottom: var(--gap-md); }
@@ -285,7 +285,7 @@
     .hero-split    { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-2xl); align-items: center; }
     @media (max-width: 920px) { .hero-split { grid-template-columns: 1fr; } }
 
-    /* ─── log row (newsletter, blog list, changelog) ────────────────── */
+    /* ─── 로그 행 (매거진 / 룩북 / 매거진 컬럼 리스트) ───────────────── */
     .log-row { display: grid; grid-template-columns: 120px 1fr 100px; gap: var(--gap-lg); padding: 22px 0; border-top: 1px solid var(--border); align-items: baseline; }
     .log-row .meta { color: var(--muted); }
     .log-row h3 { font-size: 19px; }
@@ -295,34 +295,38 @@
 <body>
   <header class="topnav" data-od-id="topnav">
     <div class="container topnav-inner">
-      <span class="logo">[REPLACE] Brand</span>
+      <span class="logo">[REPLACE] 브랜드명</span>
       <nav>
-        <a href="#">[REPLACE] Link 1</a>
-        <a href="#">[REPLACE] Link 2</a>
-        <a href="#">[REPLACE] Link 3</a>
+        <a href="#">[REPLACE] SHOP</a>
+        <a href="#">[REPLACE] LOOKBOOK</a>
+        <a href="#">[REPLACE] JOURNAL</a>
+        <a href="#">[REPLACE] MEMBERS</a>
       </nav>
-      <button class="btn btn-primary">[REPLACE] CTA</button>
+      <button class="btn btn-primary">[REPLACE] 사전예약 / 회원가입</button>
     </div>
   </header>
 
   <main id="content">
     <!--
       ┌─────────────────────────────────────────────────────────────────┐
-      │  PASTE LAYOUTS FROM references/layouts.md HERE.                │
-      │  ► Each layout block is a self-contained `<section>` —         │
-      │    drop in 3–6 of them per page.                                │
-      │  ► Always lead with one hero (Layout 1 or 2).                   │
-      │  ► End with a CTA strip + footer (Layout 6 / footer below).     │
+      │  references/layouts.md에서 K-패션 섹션을 여기에 붙여넣으세요.    │
+      │  ► 각 레이아웃 블록은 self-contained `<section>`입니다 —          │
+      │    페이지당 4~6개 사용.                                          │
+      │  ► 항상 1개 히어로(Layout 1 또는 2)로 시작.                      │
+      │  ► 사전예약 CTA(Layout 6) + 푸터로 마무리.                       │
+      │  ► 자사몰 페이지: 히어로 → 키 아이템 → 통계 → 풀쿼트 → CTA       │
+      │  ► 룩북 페이지: 히어로 → 매거진 그리드 → 디자이너 노트 → CTA     │
+      │  ► 콜라보 페이지: 히어로 → 스토리 → 컬렉션 → 카운트다운 CTA      │
       └─────────────────────────────────────────────────────────────────┘
     -->
     <section class="section hero" data-od-id="hero">
       <div class="container hero-center">
-        <p class="eyebrow">[REPLACE] Eyebrow</p>
-        <h1>[REPLACE] One sharp sentence about what this is.</h1>
-        <p class="lead">[REPLACE] One subhead sentence — concrete value, not a tagline.</p>
+        <p class="eyebrow">[REPLACE] 27SS · LOOKBOOK</p>
+        <h1>[REPLACE] 시즌을 한 문장으로 정의하는 헤드라인.</h1>
+        <p class="lead">[REPLACE] 1줄 데크 — 시즌의 무드·디자이너 의도를 구체적으로. 슬로건이 아닌 구체값.</p>
         <div class="hero-cta">
-          <button class="btn btn-primary">[REPLACE] Primary CTA</button>
-          <button class="btn btn-secondary">[REPLACE] Secondary</button>
+          <button class="btn btn-primary">[REPLACE] 사전예약 신청</button>
+          <button class="btn btn-secondary">[REPLACE] 룩북 보기</button>
         </div>
       </div>
     </section>
@@ -330,8 +334,8 @@
 
   <footer class="pagefoot" data-od-id="footer">
     <div class="container row-between">
-      <span>© [REPLACE] Brand · [REPLACE] Year</span>
-      <span class="meta">[REPLACE] tagline · contact@example.com</span>
+      <span>© [REPLACE] 브랜드명 · [REPLACE] 연도</span>
+      <span class="meta">[REPLACE] 슬로건 · contact@brand.kr</span>
     </div>
   </footer>
 </body>

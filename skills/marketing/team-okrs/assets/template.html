@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 브랜드] [REPLACE 시즌] OKR 트래커</title>
+<!--
+  K-패션 시즌 OKR / KPI 트래커 시드.
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+    4) references/layouts.md에서 리듬 1개를 골라 <main id="okrs"> 안에 붙여 넣기
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude (Claude.ai · Claude Code): <artifact>
+    - 그 외 (ChatGPT · Gemini · Grok): ```html 코드 블록
+    - OpenDesign: data-od-id, 그 외에는 id
+
+  K-패션 OKR 표준 구조:
+    - 3개 Objective: 상품(MD실+디자인실) / 채널(영업기획+이커머스) / 브랜드·IP(마케팅실)
+    - 각 Objective 마다 3개 KR (총 9개)
+    - KR은 실측 가능한 정량 지표 — 정판율, 회전율, GMV, AOV, 신규회원, SNS 팔로워
+    - 상태 칩: 정상 · 주의 · 이탈 (영문 On track / At risk / Off track 병기)
+    - 사이드바 4종: Objectives 정상비율 / KR 그린비율 / 시즌 잔여일 / 리스크
+-->
+<style>
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
+  :root {
+    --bg:         #f7f6f3;
+    --surface:    #ffffff;
+    --surface-2:  #faf9f5;
+    --fg:         #1c1b1a;
+    --muted:      #76736d;
+    --muted-2:    #9b9892;
+    --border:     #e6e3dd;
+    --border-2:   #ededea;
+    --accent:     #c96442;
+    --accent-soft: color-mix(in oklch, var(--accent) 12%, transparent);
+    --good:       #2f7d4a;
+    --good-soft:  color-mix(in oklch, var(--good) 12%, transparent);
+    --warn:       #c79321;
+    --warn-soft:  color-mix(in oklch, var(--warn) 14%, transparent);
+    --bad:        #b53a2a;
+    --bad-soft:   color-mix(in oklch, var(--bad) 12%, transparent);
+
+    --font-sans:
+      "Pretendard Variable", Pretendard,
+      "Apple SD Gothic Neo", "Noto Sans KR",
+      system-ui, sans-serif;
+    --font-display-report:
+      "Pretendard Variable", "Wanted Sans Variable",
+      "SUIT Variable", sans-serif;
+    --font-display: var(--font-display-report);
+    --font-mono:
+      "JetBrains Mono", "IBM Plex Mono", "SF Mono",
+      ui-monospace, Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 14.5px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  body * { font-variant-numeric: tabular-nums; }
+
+  .layout {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+    gap: 28px;
+    align-items: start;
+  }
+
+  /* ─── 시즌 배너 ─── */
+  .banner {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 22px;
+    align-items: center;
+    margin-bottom: 22px;
+  }
+  .banner .crumb {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+  .banner h1 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px;
+    font-weight: 600;
+  }
+  .banner .lede { color: var(--muted); margin: 0; font-size: 14px; max-width: 56ch; }
+  .banner .progress-block {
+    text-align: right;
+  }
+  .banner .progress-block .num {
+    font-family: var(--font-display);
+    font-size: 52px;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-weight: 600;
+  }
+  .banner .progress-block .sub {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 6px;
+  }
+
+  /* ─── Objective 카드 ─── */
+  article.objective {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin-bottom: 16px;
+  }
+  .obj-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .obj-head .num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+  }
+  .obj-head h2 {
+    font-family: var(--font-display);
+    font-size: 19px;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+    font-weight: 600;
+  }
+  .obj-head .owner {
+    font-size: 12.5px;
+    color: var(--muted);
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .av-small {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    font-size: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+  }
+
+  /* ─── KR 행 ─── */
+  .kr {
+    display: grid;
+    grid-template-columns: 1fr 220px 110px;
+    gap: 16px;
+    padding: 14px 0;
+    border-top: 1px solid var(--border-2);
+    align-items: center;
+  }
+  .kr:first-of-type { border-top: 0; padding-top: 4px; }
+  .kr .meta {
+    font-size: 13.5px;
+  }
+  .kr .meta b { font-weight: 500; }
+  .kr .meta .baseline {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 3px;
+    display: block;
+  }
+  .progress {
+    height: 7px;
+    background: var(--border-2);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .progress > i {
+    display: block;
+    height: 100%;
+    background: var(--good);
+  }
+  .progress.warn > i { background: var(--warn); }
+  .progress.bad  > i { background: var(--bad); }
+  .kr .right {
+    text-align: right;
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-variant-numeric: tabular-nums;
+  }
+  .kr .right small {
+    display: block;
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 2px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── 상태 pill ─── */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .pill::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--muted);
+  }
+  .pill.good { color: var(--good); border-color: color-mix(in oklch, var(--good) 30%, transparent); background: var(--good-soft); }
+  .pill.good::before { background: var(--good); }
+  .pill.warn { color: var(--warn); border-color: color-mix(in oklch, var(--warn) 35%, transparent); background: var(--warn-soft); }
+  .pill.warn::before { background: var(--warn); }
+  .pill.bad  { color: var(--bad);  border-color: color-mix(in oklch, var(--bad)  30%, transparent); background: var(--bad-soft); }
+  .pill.bad::before { background: var(--bad); }
+
+  /* ─── 사이드바 ─── */
+  aside.sidebar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 24px;
+    position: sticky;
+    top: 32px;
+  }
+  aside.sidebar h2 {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 0 0 16px;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+  .stat .label { font-size: 11.5px; color: var(--muted); margin-bottom: 4px; }
+  .stat .value {
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+  .stat .delta { font-size: 11px; color: var(--good); margin-top: 2px; }
+  .stat .delta.down { color: var(--bad); }
+
+  .section {
+    margin-bottom: 22px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-2);
+  }
+  .section h3 {
+    margin: 0 0 10px;
+    font-size: 12px;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .section ul { padding: 0; margin: 0; list-style: none; }
+  .section li {
+    padding: 8px 0;
+    border-top: 1px solid var(--border-2);
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .section li:first-child { border-top: 0; }
+
+  .blocker {
+    border: 1px dashed var(--bad);
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: var(--bad-soft);
+  }
+  .blocker h4 {
+    margin: 0 0 6px;
+    font-size: 12px;
+    color: var(--bad);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .blocker p { margin: 0; font-size: 13px; line-height: 1.5; }
+  .blocker .small {
+    display: block;
+    margin-top: 4px;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  /* 반응형 */
+  @media (max-width: 1024px) {
+    .layout { grid-template-columns: 1fr; }
+    aside.sidebar { position: relative; top: 0; }
+    .kr { grid-template-columns: 1fr; }
+    .kr .right { text-align: left; }
+  }
+  @media (max-width: 640px) {
+    .banner { grid-template-columns: 1fr; }
+    .banner .progress-block { text-align: left; }
+    .stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="layout">
+    <main id="okrs">
+      <!--
+        references/layouts.md에서 리듬 1개를 골라 여기에 붙여 넣으세요.
+
+        리듬 A · 시즌 OKR 트래커 (배너 + Obj × 3 + KR × 9) — 기본값
+        리듬 B · 분기 OKR (시즌 단위 대신 Q1~Q4 회계 분기 기준)
+        리듬 C · 디자인실 단일 OKR (디자인실 1개 Obj + 5개 KR 디테일 트래커)
+        리듬 D · IMC 캠페인 OKR (마케팅실 캠페인 단일 OKR + 5개 KR)
+      -->
+    </main>
+
+    <aside class="sidebar" id="sidebar" data-od-id="sidebar">
+      <!-- 시즌 한눈에 — references/layouts.md 사이드바 블록 -->
+    </aside>
+  </div>
+</body>
+</html>

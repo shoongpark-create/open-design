@@ -1,100 +1,223 @@
 ---
 name: mobile-app
 description: |
-  A mobile-app screen rendered inside a pixel-accurate iPhone 15 Pro frame
-  on the page. Built by copying the seed `assets/template.html` and pasting
-  one screen archetype from `references/layouts.md`. Use when the brief asks
-  for "mobile app", "iOS app", "Android app", "phone screen", or "app UI".
+  K-패션 의류 쇼핑 앱 한 화면을 픽셀 정확 iPhone 15 Pro 프레임 안에 렌더링하는 스킬입니다.
+  `assets/template.html`(시드)을 복사한 뒤 `references/layouts.md`의 6가지 화면 아키타입
+  (피드 · 상세 · 온보딩 · 프로필 · 체크아웃 · 포커스) 중 하나를 붙여 한 화면을 만듭니다.
+  무신사·29CM·자사몰·VIP 라운지·정기배송 같은 K-패션 의류 쇼핑 앱 UI에 사용합니다.
+  사용자가 "쇼핑 앱", "패션 앱", "의류 앱", "무신사 스타일 앱", "29CM 스타일", "자사몰 앱",
+  "VIP 라운지 앱", "mobile app", "ios app"을 언급하면 활성화하세요.
 triggers:
+  - "쇼핑 앱"
+  - "패션 앱"
+  - "의류 앱"
+  - "무신사 스타일 앱"
+  - "29CM 스타일 앱"
+  - "자사몰 앱"
+  - "VIP 라운지 앱"
+  - "스타일 매칭 앱"
+  - "멤버십 앱"
+  - "신상 디스커버리 앱"
   - "mobile app"
   - "ios app"
-  - "android app"
-  - "phone screen"
   - "app ui"
-  - "app mockup"
-  - "移动端"
-  - "手机 app"
+  - "phone screen"
 od:
   mode: prototype
   platform: mobile
   scenario: design
+  category: marketing
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
+  example_prompt: "마뗑킴(MATIN KIM) 자사몰 앱 메인 피드 화면. 27SS 신상 발매 알림 5개 (사전예약 시작, 신상 입고, 매트 김 인터뷰, BLOOM 팝업 안내, 회원 등급 혜택). iPhone 15 Pro 프레임, 무신사·29CM·자사몰 동시 운영 기준."
 ---
 
-# Mobile App Skill
+# K-패션 의류 쇼핑 앱 스킬
 
-Produce a single mobile-app screen mockup, framed inside a real-feeling iPhone 15 Pro device.
+K-패션 의류 쇼핑 앱 **한 화면**을 진짜 같은 iPhone 15 Pro 디바이스 안에 렌더링한 모크업을 생성합니다. 무신사·29CM·자사몰·VIP 라운지·정기배송 같은 한국 패션 이커머스 앱 UI를 다룹니다.
 
-## Resource map
+이 스킬의 산출물은 **이커머스팀(디지털팀) + 마케팅실 + 디자인실(그래픽팀)** 합작이며, 시즌 사이클상 다음 시점에 활용합니다.
+
+- **시즌 시작 1~2개월 전** — 자사몰 앱 메인 피드 / 신상 디스커버리 / 사전예약 플로우 화면 디자인
+- **시즌 중반** — 회원 등급 라운지 / VIP 멤버십 / OOTD 챌린지 화면
+- **연중** — 상세 페이지 / 체크아웃 / 회원 프로필 / 신상 알림 화면
+
+작성 주체는 **이커머스팀(PO 또는 디자이너) + 디자인실(그래픽팀)**이며, 카피와 콘텐츠는 **마케팅실 + MD실**이 제공합니다.
+
+## 폴더 구조
 
 ```
 mobile-app/
-├── SKILL.md                ← you're reading this
+├── SKILL.md                ← 이 파일을 읽고 있습니다
 ├── assets/
-│   └── template.html       ← seed: device frame + screen primitives (READ FIRST)
+│   └── template.html       ← 시드: 디바이스 프레임 + 화면 프리미티브 (가장 먼저 읽기)
 └── references/
-    ├── layouts.md          ← 6 screen archetypes (Feed / Detail / Onboarding / Profile / Checkout / Focus)
-    └── checklist.md        ← P0/P1/P2 self-review (anti-fake-device)
+    ├── layouts.md          ← 6가지 화면 아키타입 (Feed / Detail / Onboarding / Profile / Checkout / Focus)
+    └── checklist.md        ← P0/P1/P2 자체 검수 (anti-fake-device)
 ```
 
-## Workflow
+## 환경 호환성
 
-### Step 0 — Pre-flight
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
 
-1. **Read `assets/template.html`** end-to-end through the `<style>` block. The Dynamic Island, status bar SVG icons, home indicator, side rails, and tab bar are all already drawn in HTML/SVG — do not re-implement them inline on each screen.
-2. **Read `references/layouts.md`** so you know which 6 archetypes exist.
-3. **Read the active DESIGN.md** — map its tokens to the six `:root` variables in the seed.
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기를 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
 
-### Step 1 — Copy the seed
+본문 워크플로는 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 톤을 묻고 진행하세요.
 
-Copy `assets/template.html` to the project root as `index.html`. Replace the six `:root` variables with the active design system's tokens. Replace the page `<title>` and the caption above the device.
+## 출력 언어 정책
 
-### Step 2 — Pick exactly one archetype
+K-패션 의류 쇼핑 앱 등록을 따릅니다.
 
-| Brief language | Use |
+- 영문 산업용어 유지: SKU · BTA · LOOKBOOK · DROP · MEMBERSHIP · VIP · POINT · OOTD · QR · SPOT.
+- UI 라벨은 한국어 우선, 영문 보조: `홈`, `카테고리`, `좋아요`, `장바구니`, `마이`. 신상 라벨은 한국어 + 영문 혼용 (`NEW`, `사전예약`, `MEMBERS ONLY`, `DROP 02`).
+- 금액 표기는 한국 표준: `₩128,000` 또는 `128,000원`. 큰 숫자는 mono 폰트로.
+- **카피 톤은 포엣코어 우선**, 그러나 실용 정보(사이즈·재고·배송) 라벨은 직설 정보.
+- 알림 메시지는 친근한 호칭(`매트 김 회원님`, `27SS 회원님`) + 짧은 본문 + 시각 강조 (배지·도트).
+
+## 타이포그래피
+
+K-패션 의류 쇼핑 앱의 표준 폰트 조합:
+
+| 위치 | 권장 폰트 |
 |---|---|
-| feed, inbox, timeline, list, messages, notifications | A — Feed |
-| article, post, item, recipe, song, product, song detail | B — Detail |
-| sign-up, welcome, intro, walkthrough, tour | C — Onboarding |
-| profile, account, user page, someone's bio | D — Profile |
-| checkout, payment, order, form, settings step | E — Checkout |
-| timer, map, dashboard widget, single big number | F — Focus / hero card |
+| 디스플레이 헤딩 (`.h1`, `.h2`, `.header h1`) | **세리프 디스플레이** — Hahmlet, 본명조 (디자이너 브랜드) 또는 G마켓산스 (영캐주얼) |
+| 본문 / UI | Pretendard Variable (사실상 표준) |
+| 숫자 (가격·재고·날짜·포인트) — `.num` 클래스 | mono — IBM Plex Mono, Geist Mono |
+| 시스템 아이콘 | SVG monoline only (이모지 아이콘 금지) |
 
-A mobile screen does **one job**. If the brief seems to combine two, ship one screen and offer the other as a follow-up.
+시드(`assets/template.html`)는 이 매핑을 6개 `:root` CSS 변수로 이미 노출합니다.
 
-### Step 3 — Paste and fill
+## 작업 흐름
 
-Copy the archetype block from `layouts.md` into `<main class="content">`, replacing the placeholder card. Fill bracketed text with real, specific copy from the brief. **Drop the `<nav class="tabbar">` block entirely** for archetypes that don't show one (B, C, E).
+### Step 0 — 사전 점검
 
-### Step 4 — Self-check
+1. **`assets/template.html`을 끝까지** `<style>` 블록 포함 읽으세요. Dynamic Island, 상태 바 SVG 아이콘, 홈 인디케이터, 사이드 레일, 탭 바가 이미 HTML/SVG로 그려져 있습니다 — 각 화면에서 다시 구현하지 마세요.
+2. **`references/layouts.md`를 읽어** 6가지 아키타입이 무엇인지 파악하세요.
+3. **프로젝트 루트의 `DESIGN.md`**(또는 등가 디자인 토큰)를 읽고, 토큰을 시드의 6개 `:root` 변수에 매핑하세요. 자동 주입되지 않는 환경이라면 사용자에게 톤을 묻고 진행합니다.
 
-Run through `references/checklist.md`. Pay extra attention to:
-- Frame still has the Dynamic Island, status bar SVGs, and home indicator
-- Tap targets ≥ 44px
-- One accent, used ≤ 2× on the screen
-- Display headings still use `var(--font-display)` (serif)
+### Step 1 — 시드 복사
 
-### Step 5 — Emit the artifact
+`assets/template.html`을 프로젝트 루트로 `index.html`로 복사하세요. 6개 `:root` 변수를 활성 디자인 시스템의 토큰으로 교체. 페이지 `<title>`과 디바이스 위 캡션도 교체합니다.
+
+### Step 2 — 정확히 한 아키타입 선택
+
+| 브리프 표현 | 사용 아키타입 |
+|---|---|
+| 메인 피드, 신상 디스커버리, 알림함, 타임라인, 메시지 | A — Feed |
+| 상품 상세, 룩북 디테일, 캠페인 디테일, 매거진 디테일 | B — Detail |
+| 회원가입, 온보딩, 스타일 취향 진단, 첫 화면 | C — Onboarding |
+| 프로필, 마이페이지, 회원 등급, VIP 라운지 | D — Profile |
+| 체크아웃, 결제, 주문, 사이즈/컬러 선택, 사전예약 폼 | E — Checkout |
+| 카운트다운 발매, 라이브커머스 라운지, 단일 큰 숫자 | F — Focus / hero card |
+
+모바일 화면은 **한 가지 일**만 합니다. 브리프가 두 가지를 섞으면, 하나만 만들고 다른 하나는 후속으로 제안합니다.
+
+### Step 3 — 붙여넣기 + 채우기
+
+`references/layouts.md`에서 아키타입 블록을 복사해 `<main class="content">` 안의 플레이스홀더 카드 자리에 붙입니다. 대괄호 텍스트를 브리프의 실제 K-패션 카피로 교체. **`<nav class="tabbar">` 블록은 아키타입이 탭 바를 표시하지 않을 때(B, C, E) 전체 삭제**.
+
+### Step 4 — 자체 검수
+
+`references/checklist.md`를 한 줄씩 직접 확인하세요. 특히 다음에 주의:
+
+- 프레임에 Dynamic Island, 상태 바 SVG, 홈 인디케이터가 그대로 있음
+- 탭 타깃 ≥ 44px
+- 액센트 1개, 화면에서 ≤ 2회만 사용
+- 디스플레이 헤딩이 `var(--font-display)` (세리프) 유지
+- K-패션 카피·이미지 플레이스홀더에 외부 이미지 URL 없음
+
+### Step 5 — 산출물 출력
+
+- **Claude 환경**:
+  ```
+  <artifact identifier="mobile-slug" type="text/html" title="Mobile — 화면 이름">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경**: 표준 마크다운 HTML 코드 블록.
+
+출력 앞에 한 문장 요약, 뒤에는 아무것도 덧붙이지 마세요.
+
+## 하드 룰
+
+- **폰은 진짜다.** Dynamic Island 갭, SVG 상태 아이콘, 홈 인디케이터. 시드가 이 셋을 모두 보호합니다 — 프레임을 다시 쓰지 마세요.
+- **한 화면, 한 가지 일.** 다중 탭 투어, 분기 플로우 금지.
+- **액센트 예산 = 2.** 활성 탭 1개 + 메인 액션 1개가 기본.
+- **숫자는 mono** — `.num` 클래스 사용 (가격, 포인트, 재고, 일자).
+- **디스플레이는 세리프** — `var(--font-display)` 사용.
+- **외부 이미지 URL 없음** — `.ph-img` 플레이스홀더 클래스 사용.
+
+## K-패션 의류 쇼핑 앱 6가지 아키타입 매핑
+
+| 아키타입 | K-패션 화면 패턴 |
+|---|---|
+| **A — Feed** | 자사몰 메인 피드 (신상 알림함), 카테고리별 무한 스크롤, 신상 디스커버리 |
+| **B — Detail** | 상품 상세, 룩북 디테일, 매거진 컬럼 디테일, 캠페인 디테일 |
+| **C — Onboarding** | 회원가입 플로우, 스타일 취향 진단, 첫 진입 환영 |
+| **D — Profile** | 마이페이지, VIP 라운지, 회원 등급 (실버/골드/플래티넘/VIP), OOTD 챌린지 프로필 |
+| **E — Checkout** | 결제 화면, 사이즈/컬러 선택, 사전예약 폼, 정기배송 신청 |
+| **F — Focus** | 카운트다운 발매 시계, 라이브커머스 라운지, 일일 출석 적립 |
+
+## 한국 K-패션 앱 사례 (참고)
+
+| 브랜드/플랫폼 | 앱 특성 | 시그니처 UI 패턴 |
+|---|---|---|
+| **무신사** | 종합 K-패션 플랫폼, 전 연령대 | 카테고리 탭 + 베스트 + 신상 + 매거진 |
+| **29CM** | 25~35세 고감도 큐레이션 | 잡지형 큐레이션, 짧은 컬렉션 + 매거진 컬럼 |
+| **W컨셉** | 프리미엄 여성 디자이너 | 단정한 그리드, 디자이너별 페이지 |
+| **마뗑킴 자사몰 (앱)** | 미니멀 자사몰 | 로고 강조, 신상 드롭 알림 + LOOKBOOK |
+| **마르디 메크르디 자사몰** | 프렌치 컬러풀 | 시즌 컬렉션 + 매거진 |
+| **에이블리 / 지그재그** | 1020 여성 알고리즘 추천 | 개인화 피드, 라이브커머스 |
+| **무신사 라이브** | 라이브커머스 | 영상 풀스크린 + 채팅 + CTA |
+
+## 한국 패션기업 부서 R&R + 채널 연계
+
+| 부서 | 역할 |
+|---|---|
+| **이커머스팀(디지털팀) / PO** | 자사몰 앱 UI 기획, 화면 흐름 설계, 시드 토큰 적용 |
+| **디자인실(그래픽팀)** | 컬러·폰트·이미지 그리드, 상세 페이지 디자인 |
+| **마케팅실** | 카피, 알림 메시지, 푸시 톤, 캠페인 배너 |
+| **MD실** | 카테고리·SKU 구조, 가격·재고 데이터 |
+| **이커머스팀(개발)** | 카페24/쇼피파이 백엔드 연동, 카카오톡 채널/알림톡, 결제 PG |
+
+### 채널 연계
+
+- **자사몰 앱** — 카페24 모바일 앱, 쇼피파이 모바일, 자체 개발 앱 (React Native / Flutter)
+- **무신사 입점 브랜드 페이지** — 무신사 앱 안의 브랜드 페이지 (상세·룩북·매거진)
+- **29CM 큐레이션** — 29CM 앱의 큐레이션 컬렉션
+- **카카오톡 채널 미니샵** — 카카오톡 안의 미니샵 (간이 쇼핑)
+- **무신사 라이브 / 쇼핑라이브** — 라이브 화면 UI (스킬의 Focus 아키타입 활용)
+
+## 시즌 사이클 내 위치
 
 ```
-<artifact identifier="mobile-slug" type="text/html" title="Mobile — Screen Name">
-<!doctype html>
-<html>...</html>
-</artifact>
+[시즌 시작 3개월 전]   라인업 LOCK, SKU 코드 확정
+[시즌 시작 2개월 전]   룩북 촬영, IMC 캘린더 확정
+[시즌 시작 1~2개월 전] ▶ 자사몰 앱 신상 피드 / 사전예약 플로우 / 상세 페이지 화면 작성 (이 스킬)
+                       신상 발매 이메일, 캐러셀
+[시즌 시작]            S1~S4 판기 발매, 앱 신상 알림 푸시
+[판기 중반]            ▶ VIP 라운지, OOTD 챌린지, 회원 등급 화면 추가
+[판기 종료]            시즌오프 화면, 마크다운 알림
 ```
 
-One sentence before describing what's there. Stop after `</artifact>`.
+## 출력 규약
 
-## Hard rules
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
 
-- **The phone is real.** Dynamic Island gap, SVG status icons, home indicator. The seed protects all three — don't rewrite the frame.
-- **Single screen, single job.** No multi-tab tours, no spliced flows.
-- **Accent budget = 2.** One active tab + one primary action is the default.
-- **Numerics in mono** via `.num` class.
-- **Display in serif** via `var(--font-display)`.
-- **No external images** — use `.ph-img` placeholders.
+- **Claude 환경(Claude.ai · Claude Code)**:
+  ```
+  <artifact identifier="mobile-slug" type="text/html" title="Mobile — 화면 이름">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록.
+
+출력 앞에 한 문장 요약(예: "마뗑킴 자사몰 앱 27SS 신상 피드 화면을 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

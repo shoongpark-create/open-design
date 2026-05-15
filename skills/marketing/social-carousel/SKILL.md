@@ -1,26 +1,31 @@
 ---
 name: social-carousel
 description: |
-  A three-card social-media carousel laid out as 1080×1080 squares —
-  three cinematic, on-brand panels with display headlines that connect
-  across the series ("onwards." → "to the next one." → "looking ahead.").
-  Each card has a brand mark, a number / total, a caption, and a "loop"
-  affordance. Use when the brief asks for a "carousel post", "social
-  carousel", "Instagram carousel", "LinkedIn series", "X thread cards",
-  or "三连发".
+  K-패션 브랜드의 **인스타그램 3-카드 캐러셀**을 단일 HTML로 생성하는 스킬입니다.
+  1080×1080 정사각형 3장이 한 무대(stage) 위에 시리즈로 놓이며, 디스플레이 헤드라인이
+  세 장을 가로지르며 하나의 문장으로 읽힙니다 (예: "Quiet. · Steady. · Now." 또는
+  "시작 · 이어서 · 오늘도"). 각 카드에는 브랜드 마크, 번호/총 개수, 캡션, 1× LOOP 어포던스가
+  있습니다. 룩북 컷, 시즌 컨셉, 신상 발매, 콜라보 발매, 팝업 안내 등 K-패션 인스타그램 운영에 사용합니다.
+  사용자가 "캐러셀", "인스타그램 캐러셀", "인스타 3장", "시즌 컨셉 3장", "신상 캐러셀",
+  "social carousel", "ig carousel"을 언급하면 활성화하세요.
 triggers:
+  - "캐러셀"
+  - "인스타그램 캐러셀"
+  - "인스타 캐러셀"
+  - "인스타 3장"
+  - "신상 캐러셀"
+  - "시즌 캐러셀"
+  - "룩북 캐러셀"
+  - "콜라보 캐러셀"
   - "social carousel"
-  - "carousel post"
   - "instagram carousel"
-  - "linkedin carousel"
-  - "x thread cards"
-  - "social series"
-  - "三连发"
-  - "轮播图"
+  - "ig carousel"
+  - "carousel post"
 od:
   mode: prototype
   platform: desktop
   scenario: marketing
+  category: marketing
   featured: 7
   preview:
     type: html
@@ -28,65 +33,213 @@ od:
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Design a 3-card cinematic social carousel — ‘onwards.’, ‘to the next one.’, ‘looking ahead.’. 1080×1080 squares, drop-into-Instagram ready."
+  example_prompt: "와키윌리(WACKYWILLY) 27SS 캐릭터 신상 캐러셀 3장. 헤드라인이 한 문장으로 이어지게 — 'Wacky.' · 'Willy.' · '오늘도.' 다크 스테이지 + 시네마틱 그라데이션 + 캐릭터 IP 실루엣. 인스타그램 1:1 정사각형 3장."
 ---
 
-# Social Carousel Skill
+# K-패션 소셜 캐러셀 스킬
 
-Produce a 3-panel social carousel on a single dark stage. Each panel is a
-1080×1080 cinematic still — connected as a series, but each readable on its
-own.
+K-패션 브랜드의 **인스타그램 3-카드 캐러셀**을 단일 HTML로 생성합니다. 어두운 스테이지 한 장 위에 1080×1080 시네마틱 정사각형 3장이 가로로 배치되고, 좁은 뷰포트에서는 세로로 스택됩니다. 세 카드의 헤드라인을 연속해서 읽으면 **하나의 시리즈 문장**이 되도록 설계하며, 각 카드는 단독으로도 읽힙니다.
 
-## Workflow
+이 산출물은 **마케팅실 + 디자인실(그래픽팀)** 합작이며, 시즌 사이클상 **시즌 시작 2~3개월 전**(룩북 촬영 직후 + 콘텐츠 캘린더 확정 단계)에 작성합니다. 인스타그램 본 계정 외에 카카오톡 채널 친구톡 이미지, 무신사 브랜드 페이지 배너, 29CM 큐레이션 배너로도 1차 컷을 재활용합니다.
 
-1. **Read the active DESIGN.md** (injected above). Pick the loudest serif
-   token for the headline lockups and a mono token for stamps / counters.
-2. **Pick the theme + 3 captions** from the brief. The captions must read
-   as one sentence when stacked: ("onwards." → "to the next one." →
-   "looking ahead." or "input." → "iterate." → "ship.").
-3. **Stage** — full-bleed dark page. Top header strip:
-   - Left: serif italic display "Three posts. One beat."
-   - Just below the title: a one-line description in muted mono ("1080×1080
-     · cinematic video loops · minimal type. Drop into Instagram, LinkedIn,
-     or X — each post stands on its own or runs as a three-part series.").
-   - Right: small mono badge "SERIES · 01 → 03".
-4. **Cards** — 3 squares in a horizontal row (wraps to stack on narrow
-   viewports). Each card is `aspect-ratio: 1 / 1` with rounded 12px corners
-   and a subtle 1px border, plus a soft drop shadow.
-   - Background: a layered gradient that *suggests* a cinematic photo — for
-     example, panel 1 = warm dawn meadow (stacked greens with a cyan sky
-     wash); panel 2 = forest dusk (warm oranges fading into deep teals);
-     panel 3 = pink-mountain ridge (rosy peaks against a dim violet sky).
-     Use `radial-gradient` + `linear-gradient` only — no images.
-   - Top-left chip: brand wordmark in serif italic ("Jerrod Lew") with a
-     small accent dot.
-   - Top-left below chip: micro mono index "AI · 01 / 03" (and 02, 03).
-   - Bottom-left: the headline lockup in white serif display, italic accent
-     on one word.
-   - Bottom-right corner: a `1× LOOP` mono stamp inside a thin border.
-   - Bottom strip caption: small caps mono describing the imagined frame
-     ("Man, walking forward — close.", "Woman, stepping into frame.",
-     "Woman, overlooking the city.").
-5. **Write** a single HTML document:
-   - `<!doctype html>` through `</html>`, CSS inline.
-   - Cards are sized via `width: clamp(280px, 30vw, 380px)` so 3 fit
-     comfortably across most desktops and stack at < 1100px.
-   - `data-od-id` on stage, each card, each headline.
-6. **Self-check**:
-   - The three headlines together form one sentence and feel cinematic.
-   - Mono is used only for the wordmark index, the loop stamp, and the
-     bottom captions. The headlines stay serif.
-   - Each panel's color story is distinct — no two share a dominant hue.
+K-패션 인스타그램 운영의 표준 패턴은 다음과 같습니다.
 
-## Output contract
+- **3~10장 슬라이드** — 본 스킬은 3장 시리즈 기준
+- **첫 장**: 키비주얼 + 짧은 헤드라인(영문 혼용 흔함)
+- **중간 장**: 디테일, 컬러웨이, 소재, 모델 컷 등
+- **마지막 장**: CTA (구매 링크, 룩북 보기, 매장 위치)
+- **카피**: 미니멀, 1~2문장, 포엣코어(Poetcore) 톤
+- **톤**: 영캐주얼은 위트, 컨템포러리는 시크, 디자이너 브랜드는 미니멀, 스트릿은 위풍당당
 
-Emit between `<artifact>` tags:
+## 환경 호환성
+
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기를 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
+
+본문 워크플로는 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면 사용자에게 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+K-패션 인스타그램 운영의 카피 등록(register)을 따릅니다.
+
+- 영문/국문 혼용 권장: `Quiet. / Steady. / Now.` + 보조 자막에 `정제된 하루, 그 자체.`처럼.
+- 포엣코어 톤: 기능 설명 ❌ → 감각·계절감·라이프스타일 ⭕.
+- 영문 산업용어는 그대로 유지: SS · FW · DROP · LOOK · LOOKBOOK · CAMPAIGN · COLLAB · SERIES.
+- 카드 하단 캡션(작은 모노 텍스트)은 영문 대문자 + 한국어 보조 가능: `LOOK 01 · CAMPAIGN STILL · 27SS`.
+- 카드별 본문 카피는 1~2문장 명사구 또는 짧은 절(clause). 마침표(.) 또는 ¶(단락) 마침 활용.
+- 한국어 보조 자막은 명사구 종결 권장: `정제된 하루`, `오늘의 가장 조용한 옷`.
+
+## 타이포그래피
+
+프로젝트 루트의 `DESIGN.md` 타이포그래피 토큰을 사용하세요. **Pretendard Variable**을 본문·스테이지 메타 기본 폰트로 두고, 카드 헤드라인에는 디스플레이 폰트 1개를 골라 `--font-display` CSS 변수에 바인딩합니다.
+
+| 캐러셀 톤 | 권장 디스플레이 폰트 (예시) |
+|---|---|
+| 컨템포러리·미니멀 (마뗑킴·시야쥬·인사일런스) | Instrument Serif · Hahmlet · 본명조 · Recoleta |
+| 영캐주얼·위트 (와키윌리·키르시·토피) | G마켓산스 · Bagel Fat One · 한손글씨 |
+| 스트릿·캠페인 (아더에러·콜라보) | Druk · Inter · G마켓산스 |
+| 룩북·로맨틱 에디토리얼 (마르디 메크르디) | Instrument Serif · Hahmlet · 본명조 |
+
+카드 하단 캡션·번호 인덱스·1× LOOP 스탬프는 디스플레이 폰트를 쓰지 말고 `--font-mono` 유지.
+
+## 폴더 구조
 
 ```
-<artifact identifier="carousel-slug" type="text/html" title="Carousel — Title">
-<!doctype html>
-<html>...</html>
-</artifact>
+social-carousel/
+├── SKILL.md            ← 이 파일
+└── example.html        ← 참고 예시 (다크 스테이지 + 3장 시리즈)
 ```
 
-One sentence before the artifact, nothing after.
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. 이 스킬 폴더의 `example.html`을 처음부터 끝까지 읽어 스테이지·카드·헤드라인 락업·풋터 캡션 구조와 카드별 그라데이션 사용법을 파악하세요.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰)를 읽고 색상·타이포 토큰을 `:root` CSS 변수에 바인딩하세요. 자동 주입되지 않는 환경이라면 사용자에게 톤을 묻고 진행합니다.
+3. 사용자 브리프에서 **브랜드 + 시리즈 헤드라인 3개(이어지는 문장) + 시즌 + 모델/룩 설명**이 빠져 있으면 함께 물어보세요.
+
+### Step 1 — 시리즈 헤드라인 결정
+
+3개 카드의 헤드라인을 연결해서 읽었을 때 **하나의 문장**이 되도록 결정합니다.
+
+영문 시리즈 예시:
+- `Quiet.` → `Steady.` → `Now.`
+- `Onwards.` → `To the next one.` → `Looking ahead.`
+- `Wacky.` → `Willy.` → `Always.`
+- `Bloom.` → `Quietly.` → `Spring 27.`
+
+영문/국문 혼용 예시:
+- `시작.` → `이어서.` → `오늘도.`
+- `Spring.` → `Bloom.` → `봄, 천천히.`
+- `Wacky 1.` → `Wacky 2.` → `Wacky 27SS.`
+
+마지막 장은 보통 CTA가 들어가는 자리입니다 — `Shop Now.` `Pre-order.` `룩북 보기.`처럼 행동 동사로 닫는 패턴도 가능합니다.
+
+### Step 2 — 스테이지 구성
+
+전체 페이지를 다크 스테이지(`--stage: #0a0a0a`)로 채우고 상단 헤더 스트립에 다음 요소를 배치합니다.
+
+- **좌측 타이틀**: 디스플레이 폰트 이탤릭으로 `Three posts. One series.` 같은 문장 + 그 아래 mono 1줄로 시리즈 설명 ("1080×1080 · 시네마틱 비주얼 · 미니멀 타이포. 인스타그램·릴스·페이스북에 그대로 사용.")
+- **우측 뱃지**: `SERIES · 01 → 03` 또는 `27SS · DROP 02` 같은 작은 mono 라벨
+
+### Step 3 — 카드 3장 구성
+
+카드는 가로 일렬(`flex` row, `gap: 22px`)로 배치하고, `width: clamp(280px, 30vw, 380px)`로 사이즈를 잡아 1180px 이하에서는 자연스럽게 스택됩니다.
+
+각 카드 공통 요소:
+
+- **`aspect-ratio: 1 / 1`** — 정사각형 (인스타그램 1:1 표준)
+- **둥근 모서리 12~14px + 1px 보더 + 드롭 섀도**
+- **배경**: 외부 이미지 URL 금지. **레이어드 라디얼 + 리니어 그라데이션**으로 시네마틱 무드를 표현. 카드 3장은 색조가 분명히 달라야 합니다 (시즌 컬러 3종, 또는 새벽/석양/저녁 등 시간대 변화).
+- **좌상단 칩**: 브랜드 워드마크 (디스플레이 폰트 이탤릭) + 작은 액센트 도트. 약한 backdrop-blur.
+- **좌상단 칩 아래**: 마이크로 mono 인덱스 — `27SS · 01 / 03` (02, 03도 동일 패턴).
+- **좌하단 락업**: 헤드라인. 디스플레이 폰트 큰 글자 + 액센트 단어 1개 이탤릭 또는 액센트 컬러.
+- **우하단**: `1× LOOP` mono 스탬프 (얇은 보더 안).
+- **하단 캡션**: 작은 mono 영문 대문자 + 한국어 보조. 룩/모델 설명 (`LOOK 01 · CAMPAIGN STILL`, `MODEL: KIM HYEJUN · 27SS`).
+
+### Step 4 — K-패션 카드 패턴
+
+K-패션 인스타그램 캐러셀의 자주 쓰이는 3가지 패턴:
+
+**패턴 A — 시즌 컨셉 시리즈 (마뗑킴·시야쥬 톤)**
+- 카드 1: 시즌 무드(풍경, 추상) + 헤드라인 1단어
+- 카드 2: 키 아이템 클로즈업 + 헤드라인 2단어
+- 카드 3: 모델 풀샷 + CTA 또는 시즌 코드
+
+**패턴 B — 신상 발매 시리즈 (영캐주얼·위트 톤)**
+- 카드 1: 키비주얼 + 발매 일자
+- 카드 2: 컬러웨이 3종 또는 디테일 컷
+- 카드 3: 가격/사이즈 + 사전예약/구매 CTA
+
+**패턴 C — 콜라보 발매 시리즈 (아더에러·콜라보 브랜드 톤)**
+- 카드 1: `WACKYWILLY × XX` 락업
+- 카드 2: 콜라보 키 아이템 컷
+- 카드 3: 발매 일자 + 발매 채널
+
+### Step 5 — HTML 작성
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`)로 작성합니다.
+
+- CSS는 인라인. 카드 배경은 **그라데이션 only** (외부 이미지 URL 금지).
+- 모델 실루엣, 식물, 추상 요소는 `position: absolute`로 카드 안에 얹은 그라데이션·SVG로 표현.
+- 1180px 이하에서는 카드가 세로 스택. 헤드라인 폰트는 한 단계 축소.
+- 주요 요소에 식별용 속성을 추가:
+  - **OpenDesign 환경**: `data-od-id="stage"`, `data-od-id="card-1"`, `data-od-id="card-2"`, `data-od-id="card-3"`
+  - **그 외 환경**: 일반 `id="stage"`, `id="card-1"` 등으로 충분합니다.
+
+### Step 6 — 자체 검수
+
+- [ ] 3개 헤드라인을 연속해서 읽으면 한 문장으로 자연스럽게 흐름 (영문 시리즈 또는 한국어 시리즈, 일관성 있음)
+- [ ] mono 폰트는 워드마크 인덱스 · LOOP 스탬프 · 하단 캡션에만 사용. 헤드라인은 디스플레이 폰트 유지.
+- [ ] 각 카드의 도미넌트 컬러가 서로 다름 — 같은 색조 2장 금지
+- [ ] 외부 이미지 URL 없음 (CDN, 임시 폴더, base64 모두 금지)
+- [ ] 1180px 이하 뷰포트에서 카드가 세로 스택, 헤드라인 폰트가 한 단계 축소
+- [ ] 카피가 포엣코어 톤 — 직설 설명이 아니라 감각·계절감·시즌 컨셉 서술
+- [ ] 마지막 카드에 CTA 또는 시즌 코드/발매 정보가 들어 있음 (구매 행동을 유도)
+
+## 한국 K-패션 브랜드 인스타그램 사례 (참고)
+
+| 브랜드 | 캐러셀 패턴 | 헤드라인 톤 | 시그니처 |
+|---|---|---|---|
+| **마뗑킴 (Matin Kim)** | 룩 시리즈, 텍스트 절제, 모델 + 로고만 | 영문 1단어 × 3 또는 무카피 | 로고 단독 강조, 신상 드롭 시각 알림 |
+| **마르디 메크르디 (Mardi Mercredi)** | 컬러풀, 셀럽/스타 모델 컷 | 영불/국문 혼용 ("Mardi en Fleur") | 플라워 마르디 그래픽, 김고은·안유진 캠페인 |
+| **아더에러 (ADER ERROR)** | 영문 100%, 해외 모델, 컨셉추얼 | 영문 only ("Post-Minimalism") | 블루 키컬러, 왜곡된 구도 |
+| **키르시 (KIRSH)** | 비비드, 1020 영 컬처 | 영문 + 위트 ("cherry on top") | 체리 심볼, 비비드 색감 |
+| **와키윌리 (WACKYWILLY)** | 캐릭터 IP + 팬덤 호흡 | 영문 + 위트 ("Wacky.") | 캐릭터 일러스트, K-아이돌 콜라보 |
+| **시야쥬 (CHYAJU)** | 절제·여백, 정제된 모델링 | 영문 1단어 × 3 | 본명조, 물성 라이팅 |
+| **무신사 스탠다드** | 정보 위주, 베이직 컷 | 한국어 직설 카피 가능 | 무신사 PB 신뢰감 |
+
+## 한국 패션기업 부서 R&R + 채널 연계
+
+| 부서 | 역할 |
+|---|---|
+| **마케팅실** | 캐러셀 시리즈 기획, 카피라이팅(헤드라인·캡션), 발행 스케줄 통제 |
+| **디자인실(그래픽팀)** | 키비주얼·룩북 컷 제공, 1:1 크롭 가이드, 컬러 토큰 정합성 |
+| **이커머스팀** | CTA 도착지 URL(자사몰·무신사·29CM) 분기, UTM 태깅 |
+| **영업기획** | 발행 후 인사이트(저장률·도달·매출 전환) 모니터링 → 다음 시리즈 학습 |
+
+### 채널 연계
+
+이 스킬의 산출물은 다음 채널로 발행됩니다.
+
+- **인스타그램 본 계정** — 1:1 정사각 3장 캐러셀, 첫 장이 그리드 미리보기
+- **인스타그램 릴스(보조)** — 9:16 비율로 재크롭 후 모션 추가
+- **무신사 브랜드 페이지 / 29CM 큐레이션** — 첫 장 키비주얼을 배너로 재활용
+- **카카오톡 채널 친구톡 이미지** — 첫 장 + CTA를 친구톡 이미지 메시지로
+- **카페24 자사몰 메인 슬라이드** — 카드 3장을 메인 슬라이더로 순환 노출
+
+## 시즌 사이클 내 위치
+
+```
+[시즌 시작 5개월 전]   컨셉 보드 (디자인실)
+[시즌 시작 3개월 전]   라인업 LOCK, 키 아이템 시트
+[시즌 시작 2개월 전]   룩북 촬영 / IMC 캘린더 확정
+[시즌 시작 2~3개월 전] ▶ 시즌 캐러셀 시리즈 작성 (이 스킬)
+[시즌 시작 1~2개월 전] 발매 알림 이메일 (email-marketing 스킬)
+[시즌 시작]            S1~S4 판기 발매, 캐러셀 순차 발행
+[판기 중반]            신상 캐러셀, QR 발매 알림 캐러셀
+```
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="carousel-slug" type="text/html" title="Carousel — 시리즈 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "와키윌리 27SS 캐릭터 신상 캐러셀 3장을 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

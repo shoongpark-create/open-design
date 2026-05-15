@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[REPLACE 브랜드] [REPLACE 시즌·랜딩 성격] · 사전예약</title>
+<!--
+  K-패션 런칭 / 콜라보 발매 / 자사몰 메인 랜딩 시드.
+
+  사용 방법:
+    1) 이 파일을 index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+       (--accent = 시즌 키 컬러, --font-display = 랜딩 성격에 맞는 디스플레이 폰트)
+    4) references/layouts.md에서 리듬 1개를 골라
+       <main id="landing"> 안에 붙여 넣기
+    5) Step 4 자체 검수 (references/checklist.md)
+
+  환경 호환성:
+    - Claude 환경(Claude.ai · Claude Code): <artifact> 태그로 감싸 출력
+    - 그 외 환경(ChatGPT · Gemini · Grok): 표준 마크다운 HTML 코드 블록
+    - OpenDesign 환경: 주요 섹션에 data-od-id 속성 추가 시
+      인라인 코멘트 모드 사용 가능. 그 외 환경에서는 일반 id 속성으로 대체.
+
+  K-패션 컨텍스트:
+    - 가격은 ₩128,000 또는 128,000원 표준 표기
+    - 회원 등급명은 영문 (SILVER/GOLD/PLATINUM/VIP/VVIP)
+    - 매거진 인용은 영문 워드마크 (VOGUE KOREA, W KOREA, DAZED KOREA)
+    - CTA는 행동 동사 (사전예약, BUY NOW, LOOKBOOK 보기)
+    - 시그니처 아이템 = 정확히 3개. 5개·6개 늘리지 말 것.
+    - 액센트 컬러 사용 ≤ 3회 (히어로 CTA + 회원 등급 추천 + 클로징 CTA)
+-->
+<style>
+  /* 한국 K-패션 표준 폰트 시스템 */
+  @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+  @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Hahmlet:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap");
+
+  :root {
+    /* 색상 토큰 — DESIGN.md에서 오버라이드 */
+    --bg:        #fafaf9;
+    --surface:   #ffffff;
+    --fg:        #1c1b1a;
+    --muted:     #6b6964;
+    --border:    #e6e4e0;
+    --accent:    #c96442;   /* 시즌 키 컬러 — 와키윌리 톤 */
+    --accent-soft: color-mix(in oklch, var(--accent) 12%, transparent);
+
+    /* 폰트 토큰 */
+    --font-sans:
+      "Pretendard Variable", Pretendard,
+      -apple-system, BlinkMacSystemFont,
+      "Apple SD Gothic Neo", "Noto Sans KR",
+      system-ui, sans-serif;
+
+    --font-display-romance: "Hahmlet", "Instrument Serif", "Noto Serif KR", ui-serif, Georgia, serif;
+    --font-display-street:  "Black Han Sans", "Gmarket Sans", "Pretendard Variable", sans-serif;
+    --font-display-play:    "Bagel Fat One", "Gmarket Sans", "Pretendard Variable", sans-serif;
+    --font-display-report:  "Pretendard Variable", "Wanted Sans Variable", "SUIT Variable", sans-serif;
+
+    /* 랜딩 성격에 따라 1개 선택 (기본값 romance) */
+    --font-display: var(--font-display-romance);
+    --font-mono:    "JetBrains Mono", "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+
+  /* ─── 헤더 ─── */
+  header.topnav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .wordmark {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  nav.topnav-links a {
+    color: var(--fg);
+    text-decoration: none;
+    margin-left: 22px;
+    font-size: 13px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* ─── 버튼 ─── */
+  button, .btn { font: inherit; cursor: pointer; padding: 12px 22px; border-radius: 8px; font-weight: 500; }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid var(--accent);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--fg);
+    border: 1px solid var(--border);
+  }
+  .btn-link {
+    background: transparent;
+    border: 0;
+    color: var(--accent);
+    padding: 12px 0;
+    font-weight: 500;
+  }
+  .btn-on-accent {
+    background: #fff;
+    color: var(--accent);
+    border: 0;
+  }
+
+  /* ─── 섹션 공통 ─── */
+  section { padding: 84px 0; }
+
+  /* ─── 히어로 ─── */
+  .hero { padding: 110px 0 90px; }
+  .hero .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 18px;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(46px, 6.4vw, 84px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    max-width: 18ch;
+    margin: 0 0 22px;
+    font-weight: 600;
+  }
+  .hero .lede {
+    font-size: 19px;
+    color: var(--muted);
+    max-width: 56ch;
+    margin: 0 0 36px;
+  }
+  .hero .cta { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+  /* ─── 시그니처 아이템 그리드 (정확히 3개) ─── */
+  .features {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .feature .num {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .feature h3 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    margin: 0 0 10px;
+    letter-spacing: -0.01em;
+    line-height: 1.25;
+  }
+  .feature .item-img {
+    background:
+      linear-gradient(135deg, var(--accent-soft), transparent),
+      var(--surface);
+    border: 1px solid var(--border);
+    aspect-ratio: 4 / 5;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    display: grid;
+    place-items: center;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+  }
+  .feature p { margin: 0; color: var(--muted); font-size: 14.5px; line-height: 1.55; }
+
+  /* ─── 소셜프루프 ─── */
+  .proof { text-align: center; padding: 64px 0; }
+  .proof h2 {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin: 0 0 28px;
+  }
+  .logos {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    opacity: 0.65;
+    font-weight: 600;
+    font-size: 16px;
+    letter-spacing: -0.005em;
+  }
+
+  /* ─── 가격 / 회원 등급 ─── */
+  .pricing h2 {
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 38px;
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+  }
+  .pricing .lede {
+    text-align: center;
+    color: var(--muted);
+    margin: 0 0 48px;
+    max-width: 56ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .tiers {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .tier {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+  }
+  .tier.featured {
+    border-color: var(--accent);
+    position: relative;
+  }
+  .tier.featured::before {
+    content: 'RECOMMENDED';
+    position: absolute;
+    top: -12px;
+    left: 24px;
+    background: var(--accent);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    font-family: var(--font-mono);
+  }
+  .tier h3 {
+    font-family: var(--font-display);
+    margin: 0 0 8px;
+    font-size: 20px;
+  }
+  .tier .price {
+    font-family: var(--font-mono);
+    font-size: 42px;
+    letter-spacing: -0.02em;
+    margin: 6px 0 16px;
+    font-variant-numeric: tabular-nums;
+  }
+  .tier .price small {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 400;
+    font-family: var(--font-sans);
+  }
+  .tier ul {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 24px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .tier ul li {
+    padding: 7px 0;
+    border-top: 1px solid var(--border);
+  }
+  .tier ul li:first-child { border-top: 0; }
+
+  /* ─── 클로징 CTA (액센트 풀폭 밴드) ─── */
+  .closing {
+    background: var(--accent);
+    color: #fff;
+    text-align: center;
+    padding: 90px 0;
+  }
+  .closing .countdown {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin: 0 0 18px;
+  }
+  .closing h2 {
+    font-family: var(--font-display);
+    font-size: 44px;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+  }
+  .closing p { opacity: 0.85; margin: 0 0 28px; }
+
+  /* ─── 푸터 ─── */
+  footer.pagefoot {
+    padding: 28px 0;
+    color: var(--muted);
+    font-size: 13px;
+    text-align: center;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ─── 반응형 ─── */
+  @media (max-width: 800px) {
+    .feature-grid,
+    .tiers { grid-template-columns: 1fr; }
+    .hero { padding: 64px 0 56px; }
+    .hero h1 { font-size: clamp(36px, 9vw, 56px); }
+    nav.topnav-links a { margin-left: 12px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+  <main id="landing">
+    <!--
+      references/layouts.md에서 리듬 1개를 골라 여기에 붙여 넣으세요.
+
+      리듬 A · 콜라보 발매 (와키윌리 × SANRIO 톤)
+      리듬 B · 시즌 사전예약 (마뗑킴·마르디 27SS 톤)
+      리듬 C · 자사몰 메인 (무신사 스탠다드·시야쥬 톤)
+      리듬 D · 팝업 안내 (성수동 BLOOM 팝업 톤)
+
+      모든 리듬은 다음 섹션 순서를 따릅니다:
+      1) 헤더(topnav)
+      2) 히어로
+      3) 시그니처 아이템 (정확히 3개)
+      4) 소셜프루프 (RECOMMENDED BY)
+      5) 회원 등급 또는 컬렉션 가격
+      6) 클로징 CTA
+      7) 푸터
+    -->
+  </main>
+</body>
+</html>

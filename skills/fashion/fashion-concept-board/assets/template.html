@@ -1,15 +1,25 @@
 <!doctype html>
 <!--
-  OD fashion-concept-board seed.
+  K-패션 시즌 컨셉 보드 시작 템플릿.
 
-  Copy this file to <project>/index.html. Generated mood imagery should be
-  saved under <project>/images/ and referenced with relative paths.
+  사용 방법:
+    1) 이 파일을 <project>/index.html로 복사
+    2) [REPLACE ...] 토큰을 실제 값으로 치환
+    3) :root 변수에 프로젝트 DESIGN.md 색상·타이포 토큰 바인딩
+    4) references/layouts.md의 12개 섹션을 순서대로 <main id="concept-board"> 안에 붙여넣기
+    5) 생성된 무드 이미지는 <project>/images/ 폴더에 저장, 상대 경로로 참조
+
+  환경 호환성:
+    - Claude 환경: <artifact> 태그로 감싸 출력
+    - 그 외 환경: 표준 HTML 코드 블록으로 출력
+    - OpenDesign 환경: 주요 섹션에 data-od-id 속성 추가하면
+      인라인 코멘트 모드 사용 가능. 다른 환경에서는 일반 id 속성으로 충분.
 -->
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>[REPLACE] Season Concept Board</title>
+  <title>[REPLACE 브랜드] [REPLACE 시즌] · Concept Board</title>
   <style>
   @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
   @import url("https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Black+Han+Sans&family=Diphylleia&family=Grandiflora+One&family=Hahmlet:wght@400;500;600;700&display=swap");
@@ -489,24 +499,24 @@
 <body>
   <div class="page-shell">
     <header class="topline" data-od-id="topline">
-      <span>[REPLACE] Studio / Brand</span>
-      <span>[REPLACE] Season — Concept Board</span>
-      <span class="topline-status">[REPLACE] v1 / draft / locked</span>
+      <span>[REPLACE 스튜디오 / 브랜드]</span>
+      <span>[REPLACE 시즌 코드 — 예: 27SS] — Concept Board</span>
+      <span class="topline-status">[REPLACE v1 / draft / locked]</span>
     </header>
     <main id="concept-board">
-      <!-- Paste sections from references/layouts.md here, in this order:
-           1. cover
-           2. keyword cloud
-           3. thesis statement
-           4. mood grid (12)
-           5. reference shelf
-           6. tone dials
-           7. color seeds
-           8. material seeds
-           9. silhouette seeds
-           10. detail seeds
-           11. anti-territory
-           12. open questions / next decisions
+      <!-- references/layouts.md의 섹션을 다음 순서로 붙여넣으세요:
+           1. 커버 (Cover)
+           2. 키워드 클라우드 (Keyword Cloud)
+           3. Thesis Statement
+           4. 무드 그리드 (Mood Grid · 12장)
+           5. 레퍼런스 셸프 (Reference Shelf)
+           6. 톤 다이얼 (Tone Dials)
+           7. 컬러 시드 (Color Seeds)
+           8. 소재 시드 (Material Seeds)
+           9. 실루엣 시드 (Silhouette Seeds)
+           10. 디테일 시드 (Detail Seeds)
+           11. Anti-territory
+           12. Open Questions / Next Decisions
       -->
     </main>
   </div>

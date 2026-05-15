@@ -1,120 +1,214 @@
 ---
 name: simple-deck
 description: |
-  Single-file horizontal-swipe HTML deck. Built by copying the seed
-  `assets/template.html` (which carries the proven 5-rule iframe nav script)
-  and pasting slide layouts from `references/layouts.md`. Pitch decks,
-  product overviews, study material — when you don't need the magazine
-  aesthetic of `magazine-web-ppt`.
+  K-패션 브랜드의 **단일 파일 가로 스와이프 HTML 덱**을 생성하는 스킬입니다.
+  씨드(`assets/template.html`)에 검증된 iframe 5-룰 네비게이션 스크립트가
+  심어져 있어 그대로 복사해 슬라이드만 한국 패션 사례로 채우면 됩니다.
+  캠페인 결과 보고, 콜라보 제안서, 시즌 합본 발표, IMC 결과 리뷰 같은
+  마케팅실·MD실·디자인실 합의 자료에 사용합니다. (룩북 매거진 톤은
+  `magazine-poster`나 별도 룩북 스킬을 쓰세요.)
+  사용자가 "캠페인 결과 덱", "콜라보 제안서", "시즌 합본 덱", "발표 슬라이드",
+  "IMC 결과 보고", "프레젠테이션", "deck", "slides"를 언급하면 활성화하세요.
 triggers:
+  - "캠페인 결과 덱"
+  - "콜라보 제안서"
+  - "시즌 합본 덱"
+  - "발표 슬라이드"
+  - "IMC 결과 보고"
+  - "프레젠테이션 덱"
   - "deck"
   - "slides"
   - "ppt"
-  - "presentation"
-  - "幻灯"
-  - "ppt 模板"
 od:
   mode: deck
   scenario: product
+  category: fashion
   preview:
     type: html
     entry: index.html
   design_system:
     requires: true
     sections: [color, typography, layout, components]
+  example_prompt: "와키윌리 27SS IMC 캠페인 결과 보고 덱을 만들어주세요. 6슬라이드. Cover(시즌 캠페인 결과) → 캠페인 KPI(노출/도달/ROAS) → 베스트 콘텐츠(릴스 조회수) → 인플루언서 협업 결과 → 학습/시사점 → 다음 시즌 IMC 방향."
 ---
 
-# Simple Deck Skill
+# 패션 심플 덱 스킬
 
-Produce a single-file horizontal-swipe HTML deck using the seed and layout library.
+K-패션 브랜드의 **단일 파일 가로 스와이프 HTML 덱**을 씨드(`assets/template.html`)와 레이아웃 라이브러리(`references/layouts.md`)로 빠르게 생성합니다. 캠페인 결과 보고 / 콜라보 제안서 / 시즌 합본 발표 / IMC 결과 리뷰 같은 마케팅실·MD실·디자인실 합의 자료 작성에 사용합니다.
 
-## Resource map
+이 산출물의 청중은 **대표/CFO/CEO, 마케팅 실장, MD 실장, 디자인 실장, 콜라보 파트너, 외부 매체/인플루언서**입니다. 한국 패션기업에서는 마케팅실이 캠페인 결과 덱을 작성하고, MD실이 시즌 합본 덱을 작성하며, 디자인실장 또는 브랜드 디렉터가 콜라보 제안서를 작성하는 흐름입니다.
+
+## 환경 호환성
+
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 `data-od-id`, `data-screen-label` 속성으로 슬라이드 단위 코멘트·재편집 지원. 그 외에는 일반 `id` 속성으로 대체합니다.
+
+씨드의 `<script>` 블록은 iframe 환경에서 발생하는 5가지 네비게이션 버그를 해결합니다. **절대 다시 작성하지 마세요** — 모든 LLM은 씨드의 스크립트를 그대로 보존합니다.
+
+## 출력 언어 정책
+
+K-패션 덱의 등록(register)을 따릅니다.
+
+- 슬라이드 헤드라인은 한국어 우선, 영문 키워드 혼용 자연스러움 (예: "27SS, BLOOM의 봄.", "콜라보가 만든 결과는, +47%.").
+- 시즌 코드는 영문(27SS, 26FW), 판기는 한국어(S1 판기, S2 판기) 권장.
+- 숫자 단위는 한국 표기: 억 / 만원 / pp / %. USD 금지(국내 보고). 단, 글로벌 보고용은 KRW/USD 병기 가능.
+- 채널 표기: 무신사 / 29CM / 자사몰 / 인스타 릴스 / 카카오톡 알림톡.
+- 풀쿼트 인용은 셀럽·인플루언서·매거진 에디터 실명 인용 권장. 실명이 없으면 익명 표시.
+- 캡션/메타 라벨은 모노 폰트 + 한글·영문 혼용 ("27SS · IMC 결과 · 2027.06.15").
+
+## 폴더 구조
 
 ```
 simple-deck/
-├── SKILL.md                ← you're reading this
+├── SKILL.md                ← 이 파일
 ├── assets/
-│   └── template.html       ← seed: tokens + slide primitives + proven nav script (READ FIRST)
+│   └── template.html       ← 씨드 (토큰 + 슬라이드 프리미티브 + 검증된 nav 스크립트) — 먼저 읽기
+├── example.html            ← 작성 예시 (와키윌리 27SS IMC 결과 보고)
 └── references/
-    ├── layouts.md          ← 8 paste-ready slide layouts + theme-rhythm rules
-    └── checklist.md        ← P0/P1/P2 self-review (rhythm spot-check at bottom)
+    ├── layouts.md          ← 8가지 슬라이드 레이아웃 + 테마 리듬 규칙
+    └── checklist.md        ← P0/P1/P2 자체 검수 (테마 리듬 spot-check 포함)
 ```
 
-## Workflow
+## 작업 흐름
 
-### Step 0 — Pre-flight
+### Step 0 — 사전 점검
 
-1. **Read `assets/template.html`** end-to-end through the `<style>` block AND the `<script>` block. The script solves five iframe-specific bugs (real scroller detection, dual capture-phase listeners, auto-focus, no `scrollIntoView`, position persistence) — do not rewrite it.
-2. **Read `references/layouts.md`** so you know the 8 layouts. Pay special attention to the "Theme rhythm" section — it's the rule that prevents the deck from feeling sleepy.
-3. **Read the active DESIGN.md** — map its tokens to the six `:root` variables in the seed.
+1. `assets/template.html`을 처음부터 끝까지 읽으세요(스타일 블록 + 스크립트 블록 모두). 스크립트는 iframe 5가지 버그를 해결하므로 다시 작성하지 않습니다.
+2. `references/layouts.md`를 읽어 8개 레이아웃을 인지하세요. "테마 리듬" 섹션이 가장 중요합니다.
+3. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고 씨드의 6개 `:root` 변수에 토큰을 매핑하세요. 파일이 자동 주입되지 않는 환경이라면 사용자에게 경로나 기본 톤을 묻고 진행합니다.
 
-### Step 1 — Copy the seed
+### Step 1 — 씨드 복사
 
-Copy `assets/template.html` to the project root as `index.html`. Replace the six `:root` variables with the active design system's tokens. Replace the page `<title>`.
+`assets/template.html`을 프로젝트 루트의 `index.html`로 복사. 6개 `:root` 변수를 디자인 시스템 토큰으로 치환하고 `<title>`을 한국어 K-패션 사례로 변경합니다.
 
-### Step 2 — Decide slide count + theme rhythm BEFORE writing any slide
+### Step 2 — 슬라이드 수 + 테마 리듬 결정
 
-Default: 6 slides unless the brief says otherwise.
+기본 6슬라이드 (브리프에 다른 지시가 없으면).
 
-| Audience / format | Slides |
+| 청중 / 포맷 | 슬라이드 수 |
 |---|---|
-| Product overview / lightning talk (5–10 min) | 6 |
-| Pitch deck (15 min) | 8–10 |
-| Investor update / longer talk (20–30 min) | 12–18 |
+| 캠페인 결과 보고 / 라이트닝 발표 (5~10분) | 6 |
+| 콜라보 제안서 / 시즌 합본 (15분) | 8~10 |
+| IR / 시즌 종합 결산 (20~30분) | 12~18 |
 
-Then write out the rhythm before any HTML — for example, 8 slides:
-
-```
-01  hero light center  Cover
-02  light              Problem
-03  hero dark center   Big stat
-04  light              Three points
-05  dark               Pipeline
-06  hero light center  Quote
-07  light              Before / after
-08  hero dark center   Ask
-```
-
-A healthy sequence has:
-- No 3+ same theme in a row
-- ≥ 1 `hero dark` AND ≥ 1 `hero light` (for 8+ slides)
-- Alternating breath every 3–4 slides
-
-Show this rhythm sketch to the user *before* writing slide HTML — they can redirect cheaply.
-
-### Step 3 — Paste and fill
-
-For each planned slide, copy the matching `<section>` from `layouts.md` into the body. Replace bracketed text with real, specific copy. **No filler / no lorem.** If a slide feels empty, the layout is wrong — pick a different one.
-
-Tag each slide with `data-screen-label="01 Cover"`, `"02 Problem"`, etc., in the order you wrote them. (The seed's first three slides already do this — extend the pattern.)
-
-### Step 4 — Self-check
-
-Run through `references/checklist.md`. The "Theme rhythm spot-check" at the end is non-negotiable:
-
-```bash
-grep 'class="slide' index.html
-```
-
-Read the resulting class list. If you see `light × 4 in a row`, swap one to `dark`. If no `hero dark` exists in an 8+ slide deck, promote one big-stat or closing slide.
-
-### Step 5 — Emit the artifact
+HTML 작성 전에 리듬을 먼저 정합니다. 예시 — 와키윌리 IMC 결과 8슬라이드:
 
 ```
-<artifact identifier="deck-slug" type="text/html" title="Deck Title">
-<!doctype html>
-<html>...</html>
-</artifact>
+01  hero light center  표지 (27SS IMC 결과)
+02  light              캠페인 개요
+03  hero dark center   빅스탯 (총 노출 1.8억)
+04  light              3-포인트 (베스트 콘텐츠/채널/인플루언서)
+05  dark               파이프라인 (캠페인 단계별 결과)
+06  hero light center  풀쿼트 (셀럽 또는 인플루언서)
+07  light              Before/After (캠페인 전후 매출 비교)
+08  hero dark center   다음 시즌 IMC 방향
 ```
 
-One sentence before the artifact. Stop after `</artifact>`.
+건강한 시퀀스 조건:
+- 같은 테마 3개 이상 연속 금지
+- 8슬라이드 이상이면 최소 1개 `hero dark` + 최소 1개 `hero light`
+- 3~4 슬라이드마다 호흡 교차
 
-## Hard rules
+리듬 스케치를 사용자에게 먼저 보여주세요 — 슬라이드 HTML 작성 전 단계에서 재조정이 저렴합니다.
 
-- **Theme class on every slide** (`light` | `dark` | `hero light` | `hero dark`). Bare `class="slide"` = regression.
-- **No 3+ same theme in a row.**
-- **Display = serif via `var(--font-display)`.** `.h-hero` / `.h-xl` / `.h-md` already enforce.
-- **One accent per slide, used at most twice.**
-- **Don't rewrite the nav script.** It's proven.
-- **No `scrollIntoView()`.** Breaks iframe.
-- **`data-screen-label` on every slide.**
+### Step 3 — 레이아웃 붙이기 + 한국 사례로 채우기
+
+계획된 각 슬라이드에 대해 `references/layouts.md`에서 적합한 `<section>`을 복사. `[REPLACE]`를 실제 K-패션 사례 카피로 치환합니다. **플레이스홀더 금지, lorem 금지**. 슬라이드가 비어 보이면 레이아웃이 틀린 것이니 다른 것을 고릅니다.
+
+각 슬라이드에 `data-screen-label="01 표지"`, `"02 캠페인 개요"` 같은 한국어 라벨 부여 (씨드의 처음 3슬라이드 패턴 확장).
+
+### Step 4 — 자체 검수
+
+`references/checklist.md`의 체크리스트를 한 항목씩 확인하세요. "테마 리듬 spot-check"는 필수:
+
+`grep 'class="slide' index.html` 결과를 한 시퀀스로 읽기. `light × 4 연속`이면 1개를 `dark`로 교체. 8슬라이드 이상 덱에 `hero dark`가 없으면 빅스탯 또는 마무리 슬라이드를 승격.
+
+### Step 5 — 출력
+
+산출물을 출력 규약대로 emit합니다.
+
+## 핵심 규칙
+
+- **모든 슬라이드에 테마 클래스** (`light` | `dark` | `hero light` | `hero dark`). 빈 `class="slide"`는 회귀(regression).
+- **같은 테마 3개 이상 연속 금지**.
+- **디스플레이 = serif via `var(--font-display)`**. `.h-hero` / `.h-xl` / `.h-md`가 이미 강제합니다.
+- **슬라이드당 액센트 최대 2회**.
+- **nav 스크립트 재작성 금지**. 검증됨.
+- **`scrollIntoView()` 금지**. iframe 깨짐.
+- **모든 슬라이드에 `data-screen-label`** (한국어 라벨 권장).
+
+## 한국 K-패션 덱 사례 패턴 (참고)
+
+심플 덱 작성 시 참고할 시나리오별 K-패션 톤.
+
+| 시나리오 | 청중 | 추천 슬라이드 수 | 톤 |
+|---|---|---|---|
+| **시즌 IMC 결과 보고** | 대표, 마케팅 실장 | 6~8 | KPI 중심, ROAS, 베스트 콘텐츠 |
+| **콜라보 제안서** (예: "WACKYWILLY x XX") | 콜라보 파트너 | 8~10 | 브랜드 스토리 + 시너지 + 매출 시뮬레이션 |
+| **시즌 합본 덱 (요약)** | 임원진, 디자인실 | 12~15 | 컨셉 + 라인업 + 캠페인 + KPI |
+| **신규 카테고리 런칭 제안** | 대표, MD 실장 | 8 | 시장 분석 + 차별화 + 매출 전망 |
+| **사내 OKR 분기 리뷰** | 전사 | 6 | KR 진행률 + 학습 + 다음 분기 |
+
+## 한국 패션기업 조직 R&R 메모
+
+심플 덱의 작성·발표 흐름.
+
+- **마케팅실**: IMC 캠페인 결과 보고, 시즌 캠페인 사전 계획 덱 작성
+- **MD 실장**: 시즌 합본 덱, 신규 카테고리 런칭 제안
+- **디자인실장 / 브랜드 디렉터**: 콜라보 제안서, 브랜드 합본 발표
+- **영업기획팀**: 매출/KPI 데이터 제공
+- **대표/CEO**: 최종 컨펌, IR/외부 발표 시 활용
+
+## 시즌 사이클 내 위치
+
+심플 덱은 **시즌 종료 시 결과 보고** 또는 **시즌 시작 시 사전 합의** 시점에 사용됩니다.
+
+```
+[시즌 종료 (S4 판기 종료)]
+    ↓
+[IMC 결과 보고 덱 — 마케팅실, 시즌 종료 직후]
+    ↓
+[시즌 종합 결산 덱 — 영업기획+MD, 1개월 후]
+    ↓
+[다음 시즌 사전 합의 덱 — 시즌 시작 6개월 전]
+[콜라보 제안서 — 콜라보 협업 협상 단계]
+```
+
+연결 산출물:
+- `finance-report` → 결과 데이터 소스
+- `dashboard` → KPI 차트 그래픽 재사용
+- `fashion-imc-calendar` → 캠페인 일정 데이터
+- `fashion-season-deck` → 더 큰 종합 덱 (시즌 합본은 별도 스킬)
+
+## 채널 연계
+
+이 덱은 다음 컨텍스트에서 사용됩니다.
+
+- **사내 발표** — 임원 보고, 부서 리뷰, 전사 공유
+- **콜라보 협상 미팅** — 외부 브랜드와의 협업 제안
+- **IR 자료** — 분기/연간 투자자 보고 (간소화 버전)
+- **외부 매체/인플루언서 브리핑** — 시즌 컨셉 사전 공유
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="deck-slug" type="text/html" title="덱 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약을, 뒤에는 아무것도 덧붙이지 마세요.

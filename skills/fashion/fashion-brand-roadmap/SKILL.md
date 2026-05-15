@@ -1,23 +1,22 @@
 ---
 name: fashion-brand-roadmap
 description: |
-  Brand **roadmap pyramid** as a single HTML file. The 4-tier pyramid a
-  brand director uses to lock the brand's identity from North Star
-  (abstract aspiration) → Principles (action rules) → Characters (how
-  customers perceive us) → Foundation (the founding keywords). Internal,
-  perpetual document; revised once per fiscal year, not once per season.
-  Use when the brief asks for a "brand roadmap", "브랜드 로드맵", "북극성",
-  "north star", "브랜드 피라미드", "브랜드 정체성 정립", "Foundation/
-  Characters/Principles/North Star".
+  K-패션 브랜드의 **브랜드 로드맵 피라미드**를 단일 HTML 파일로 생성하는 스킬입니다.
+  북극성(North Star, 추상적 지향) → 행동원칙(Principles) → 캐릭터(Characters, 고객 인식)
+  → 파운데이션(Foundation, 창업 키워드)의 4단 피라미드로 브랜드 정체성을 시각화합니다.
+  연 1회 개정하는 영구 문서이며, 시즌 단위 산출물이 아닙니다.
+  사용자가 "브랜드 로드맵", "북극성", "브랜드 피라미드", "브랜드 정체성 정립",
+  "Foundation/Characters/Principles/North Star"를 언급하면 활성화하세요.
 triggers:
-  - "brand roadmap"
-  - "brand pyramid"
-  - "north star"
-  - "brand identity"
   - "브랜드 로드맵"
   - "북극성"
   - "브랜드 피라미드"
   - "브랜드 정체성"
+  - "brand roadmap"
+  - "brand pyramid"
+  - "north star"
+  - "brand identity"
+  - "파운데이션/캐릭터/원칙/북극성"
 od:
   mode: prototype
   platform: desktop
@@ -30,155 +29,204 @@ od:
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  example_prompt: "Build a brand roadmap pyramid for WACKYWILLY: North Star = '상품력으로 신뢰를 / 트렌드로 감도를 / IP로 독창성을 / 고객에게 즐거움을'; Principles = 팬덤·존중·새로운시도·트렌드리딩; Characters = 재미있는·따라하고싶은·신뢰할수있는·K-아이돌; Foundation = 아이피·프로덕트·라이프스타일·플레이."
+  example_prompt: "와키윌리(WACKYWILLY)의 FY26 브랜드 로드맵을 만들어주세요. 북극성 = '상품력으로 신뢰를 / 트렌드로 감도를 / IP로 독창성을 / 고객에게 즐거움을'. 원칙 = 팬덤·존중·새로운시도·트렌드리딩. 캐릭터 = 재미있는·따라하고싶은·신뢰할수있는·K-아이돌·캐릭터·색감좋은. 파운데이션 = 아이피·프로덕트·라이프스타일·플레이. 현재 강조 단계는 캐릭터입니다."
 ---
 
-# Fashion Brand Roadmap Skill
+# 패션 브랜드 로드맵 스킬
 
-Produce a single-file HTML **brand roadmap pyramid** — the 4-tier visual
-that locks a brand's identity at the North Star / Principles / Characters
-/ Foundation levels. It is **internal-facing**: the audience is the
-brand director, the leadership team, every new joiner. It is **not** a
-seasonal artifact; revise once per fiscal year unless a major reposition
-happens mid-cycle.
+K-패션 브랜드의 **4단 피라미드 형식 브랜드 로드맵**을 단일 HTML 파일로 생성합니다. 북극성(North Star) · 행동원칙(Principles) · 캐릭터(Characters) · 파운데이션(Foundation) 4계층으로 브랜드 정체성을 시각화하는 **내부용** 산출물입니다.
 
-The roadmap answers four questions at once:
+이 문서의 청중은 **브랜드 디렉터, C레벨 리더십, 신규 입사자**입니다. 한국 패션기업에서는 일반적으로 브랜드 디렉터가 작성하고 디자인실장·MD실장과 합의한 뒤 대표가 승인하는 흐름을 따릅니다. 시즌 산출물(컨셉 보드, 컬러 스토리, 라인업 시트 등)과 달리 **연 1회 개정**하는 영구 문서이며, 중대한 리포지셔닝이 있을 때만 시즌 중에 수정합니다.
 
-1. **What is the abstract end-state?** (North Star — the brand the
-   customer feels, not the products)
-2. **What action rules unlock it?** (Principles — the 3–6 behavior
-   rules every team applies)
-3. **How are we perceived in concrete terms?** (Characters — 4–6
-   adjectives or short phrases customers actually say)
-4. **What were the founding keywords?** (Foundation — the original
-   building blocks; never deleted, sometimes evolved)
+로드맵은 네 가지 질문을 동시에 답합니다.
 
-It is the **parent** of every other internal artifact: positioning
-maps, season strategies, season concepts all inherit from this.
+1. **추상적 종착점은 무엇인가?** (북극성 — 상품이 아니라 고객이 느끼는 브랜드)
+2. **그것을 실현할 행동 규칙은 무엇인가?** (행동원칙 — 모든 팀이 적용하는 3~6개 행동 원칙)
+3. **고객은 우리를 구체적으로 어떻게 인식하는가?** (캐릭터 — 고객이 실제로 말하는 4~6개 형용사/짧은 구절)
+4. **창업 당시의 키워드는 무엇이었는가?** (파운데이션 — 본질이 된 키워드. 삭제 불가, 진화는 가능)
 
-## Output language
+이 로드맵은 모든 시즌 산출물의 **상위 문서**입니다. 포지셔닝 맵, 시즌 전략, 시즌 컨셉 보드, 그래픽 디렉션 등은 모두 이 문서를 상속받습니다.
 
-Keep this skill's instructions in English. For user-facing artifact copy,
-default to a Korean fashion-business register when the user writes in Korean or
-the brand/context is Korean. Do not fully translate every label into Korean.
-Use natural Korean noun-phrase report style for strategy, rationale, caveats,
-owner notes, and decisions; keep established industry English or mixed terms when they are
-the normal working language. Typical terms to keep include SKU, new lineup,
-mood, lookbook, styling, fit, silhouette, colorway, carryover, target lot, drop,
-bridge, category, item, setup, BASIC/TREND/ACCENT, BTA, UNI/WOMEN, S1~S4,
-fabric/graphic names, season codes, and file paths. Section labels and table
-headers may be mixed, e.g. `Category × SKU Plan`, `Bridge Map`, `Open
-Decisions`, `Anti-pattern · 하지 않을 것`. Avoid awkward literal Hangulization
-such as `락 리뷰` when `LOCK REVIEW` is clearer. Image-generation prompts may
-stay in English; visible captions and fallback text should match the artifact
-register: Korean phrases with accepted fashion-business English terms. For
-report-style artifacts, prefer noun-phrase endings in Korean body copy, table
-interpretation, HTML comments, revision logs, and decision notes (e.g. `적용`, `전환`, `확보 사유`, `사용 금지`,
-`owner 확인`, `sample check 완료`, `Local ComfyUI 미사용`) instead of stiff
-finite endings such as `~이다`, `~한다`, or `~하였다`.
+## 환경 호환성
 
-## Typography
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
 
-Use the active `DESIGN.md` WACKYWILLY type system. Keep `Pretendard Variable`
-as the default body, table, UI, and decision-log font. Choose exactly one point
-font token per artifact and bind `--font-display` to it: `--font-display-report`
-for operational decks, line-up docs, roadmaps, and internal presentations;
-`--font-display-romance` for WACKYLILY, romantic street, soft editorial,
-lookbook, and mood-board artifacts; `--font-display-street` for strong street,
-launch, promo, and key-visual directions; `--font-display-play` for character
-IP, fandom goods, and witty campaign moments. Do not use point fonts for table
-body, long notes, revision logs, SKU rows, code, dates, filenames, or owner/by
-fields; keep those in `--font-sans` or `--font-mono`.
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 본문에서 권장하는 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기 기능을 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
 
-## Resource map
+본문 작업 흐름은 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면, 사용자에게 `DESIGN.md` 경로나 기본 톤을 묻고 진행하세요.
+
+## 출력 언어 정책
+
+사용자가 한국어로 작성하거나 브랜드/맥락이 한국 K-패션이라면, 산출물 카피는 **한국 패션 비즈니스 등록(register)**을 따릅니다.
+
+- 모든 라벨을 한국어로 직역하지 마세요. 한국 패션 현장에서 실제로 쓰는 영어 산업용어는 그대로 유지합니다.
+- 유지하는 용어 예시: SKU · BTA(Basic/Trend/Accent) · UNI/WOMEN · S1~S4 판기 · 캐리오버 · QR · SPOT · 룩북 · 스타일링 · 핏 · 실루엣 · 컬러웨이 · LOT · 사입가율 · 정상판매율 · 라인업 락(LOCK).
+- 섹션 라벨과 표 헤더는 영문 혼용 허용: `Category × SKU Plan`, `Bridge Map`, `Open Decisions`, `Anti-pattern · 하지 않을 것` 등.
+- `락 리뷰`처럼 어색한 한글 음차 대신 `LOCK REVIEW`처럼 영문 그대로 유지하는 편이 자연스럽습니다.
+- 이미지 생성 프롬프트는 영어로 작성해도 됩니다. 그러나 화면에 보이는 캡션·폴백 텍스트는 한국 패션 등록을 따라야 합니다.
+- 보고서 성격 산출물의 본문 카피, 표 해석, HTML 주석, 리비전 로그, 결정 노트는 **명사구 종결**을 선호합니다. 예: `적용`, `전환`, `확보 사유`, `사용 금지`, `owner 확인`, `sample check 완료`, `Local ComfyUI 미사용`. 딱딱한 `~이다`, `~한다`, `~하였다`는 피하세요.
+
+## 타이포그래피
+
+프로젝트 루트의 `DESIGN.md` 타이포그래피 토큰을 사용하세요. 한국 K-패션 브랜드 표준 폰트인 **Pretendard Variable**을 본문·테이블·UI·결정 로그 기본 폰트로 두는 것을 권장합니다.
+
+산출물 1개당 디스플레이 폰트 하나를 골라 `--font-display` CSS 변수로 바인딩합니다. 산출물 성격에 따른 권장 매핑:
+
+| 산출물 성격 | 권장 디스플레이 폰트 토큰 (예시) |
+|---|---|
+| 운영 덱, 라인업 문서, 로드맵, 내부 보고 | `--font-display-report` (Paperlogy, Wanted Sans, SUIT 등 가독성 우선) |
+| 룩북, 무드보드, 로맨틱 에디토리얼 | `--font-display-romance` (Grandiflora One, Hahmlet, 본명조, 노토 세리프 KR) |
+| 스트릿·캠페인·론칭 키비주얼 | `--font-display-street` (Black Han Sans, G마켓 산스) |
+| 캐릭터 IP, 팬덤 굿즈, 위트 캠페인 | `--font-display-play` (Bagel Fat One, 한손글씨 폰트) |
+
+브랜드 로드맵은 보통 **운영 덱 성격**이므로 `--font-display-report`를 기본값으로 사용합니다.
+
+테이블 본문, 긴 노트, 리비전 로그, SKU 행, 코드, 날짜, 파일명, owner/by 필드에는 디스플레이 폰트를 쓰지 말고 `--font-sans` 또는 `--font-mono`를 유지하세요.
+
+`DESIGN.md`에 디스플레이 토큰이 정의되어 있지 않다면 위 표를 참고해 사용자에게 톤을 확인한 뒤 결정합니다.
+
+## 폴더 구조
 
 ```
 fashion-brand-roadmap/
-├── SKILL.md
+├── SKILL.md              ← 이 파일
 ├── assets/
-│   └── template.html
+│   └── template.html     ← 시작 템플릿 (복사해서 index.html로 사용)
 └── references/
-    ├── layouts.md
-    └── checklist.md
+    ├── layouts.md        ← 피라미드 레이아웃 3종
+    └── checklist.md      ← 자체 검수 기준
 ```
 
-## Workflow
+## 작업 흐름
 
-### Step 0 — Pre-flight
+### Step 0 — 사전 점검
 
-1. Read `assets/template.html` end-to-end.
-2. Read `references/layouts.md` and pick a pyramid rhythm.
-3. Read `references/checklist.md`.
-4. Read the active `DESIGN.md`. Bind type and color tokens.
-5. Image generation is **optional**. The default uses CSS-rendered
-   pyramid with text only. Generate a single background mood image
-   (the pyramid backdrop) only if explicitly requested. If used,
-   follow [`../_shared/imagegen.md`](../_shared/imagegen.md).
+1. 이 스킬 폴더의 `assets/template.html`을 처음부터 끝까지 읽으세요.
+2. `references/layouts.md`를 읽고 사용할 피라미드 리듬 3종(A/B/C) 중 어느 것을 쓸지 가늠하세요.
+3. `references/checklist.md`를 읽어 P0/P1/P2 검수 기준을 미리 인지하세요.
+4. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰 파일)를 읽고, 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 파일이 자동 주입되지 않는 환경이라면 사용자에게 경로나 기본 톤을 물어 진행합니다.
+5. 이미지 생성은 **선택**입니다. 기본 출력은 CSS로 렌더링하는 텍스트 피라미드입니다. 피라미드 배경 무드 이미지를 명시적으로 요청받았을 때만 1장 생성합니다. 생성 시에는 `../_shared/imagegen.md`의 정책을 따르세요(LLM 환경에 따라 사용 가능한 이미지 생성 도구를 사용).
 
-### Step 1 — Clarify the roadmap
+### Step 1 — 로드맵 정보 수집
 
-Ask in the first discovery form if not provided:
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
 
-- Brand name and brand mark / wordmark
-- Effective year (e.g. 2026, FY26, 27SS-revised)
-- North Star — 2–4 short clauses; the abstract end-state
-- Principles — 3–6 short action verbs / verb phrases
-- Characters — 4–6 customer-perceived adjectives or short phrases
-- Foundation — 3–5 founding keywords (the original building blocks)
-- Optional: background mood image (yes / no; default no)
-- Highlight tier — which tier is currently being emphasized for the
-  effective year (default: Characters)
+- 브랜드명 + 워드마크/로고 표기
+- 효력 연도 (예: 2026, FY26, 27SS 개정)
+- **북극성** — 추상적 종착점. 짧은 절(clause) 2~4개
+- **행동원칙** — 행동 동사/동사구 3~6개
+- **캐릭터** — 고객이 실제로 말할 만한 형용사·짧은 구절 4~6개
+- **파운데이션** — 창업 키워드 3~5개 (창업 이후 추가됐다면 "(evolved)" 표시)
+- 선택: 배경 무드 이미지 사용 여부 (기본 비사용)
+- **강조 단계** — 효력 연도에 어느 단계를 특히 강조할지 (기본값: 캐릭터)
 
-### Step 2 — Pick a rhythm
+### Step 2 — 리듬 선택
 
-Pick **one** rhythm from `references/layouts.md`:
+`references/layouts.md`에서 **1개**를 선택합니다.
 
-- **Classic 4-tier pyramid** (default) — symmetric pyramid, North Star
-  at apex, Foundation at base, with annotation rail on the left
-- **Stacked-blocks pyramid** — wider base, distinct blocks per tier;
-  use when each tier carries 5+ items
-- **Annotated frame** — pyramid on the right, full per-tier annotation
-  panels on the left; use when the audience needs full context (board
-  meetings, strategy reviews)
+- **리듬 A · 클래식 4단 피라미드 (기본)** — 좌측 어노테이션 레일 + 우측 대칭 피라미드. 가장 보편적
+- **리듬 B · 스택드 블록 피라미드** — 각 단을 독립 블록으로 표현. 한 단에 5개 이상 항목이 있을 때 적합
+- **리듬 C · 어노테이션 프레임** — 좌측 단별 풀 어노테이션 + 우측 피라미드. 이사회 미팅, 전략 리뷰용
 
-State the chosen rhythm in one sentence.
+선택한 리듬을 한 문장으로 선언하세요.
 
-### Step 3 — Compose the roadmap
+### Step 3 — 로드맵 구성
 
-Copy `assets/template.html` to `index.html`. Replace `[REPLACE]`
-tokens, bind active `DESIGN.md` tokens into `:root`, then paste the
-chosen rhythm from `references/layouts.md` into
-`<main id="brand-roadmap">`.
+`assets/template.html`을 `index.html`로 복사한 뒤:
 
-Required sections, in order:
+1. `[REPLACE …]` 토큰을 사용자 입력으로 치환합니다.
+2. `DESIGN.md` 토큰을 `:root`에 바인딩합니다.
+3. 선택한 리듬을 `references/layouts.md`에서 복사해 `<main id="brand-roadmap">` 안에 붙입니다.
 
-1. **Header strip** — brand + effective year + status (locked /
-   draft) + lock date.
-2. **Roadmap pyramid** — the 4-tier visual with all tier labels and
-   tier content. Highlighted tier carries an accent treatment.
-3. **Per-tier annotation** — one paragraph per tier explaining the
-   tier's role, with examples or anchors.
-4. **Cross-reference** — a short list of where this roadmap shows up
-   in seasonal artifacts (positioning map, season strategy, season
-   concept boards). Helps new joiners follow the dependency chain.
-5. **Revision log** — table of prior versions with date and 1-line
-   change note.
+**필수 섹션 (순서대로):**
 
-### Step 4 — Self-check
+1. **헤더 스트립** — 브랜드 + 효력 연도 + 상태(locked/draft) + 락 일자
+2. **로드맵 피라미드** — 4단 모두 라벨과 콘텐츠를 포함. 강조 단계에는 액센트 처리
+3. **단별 어노테이션** — 각 단의 역할을 한 문단으로 설명. 예시·앵커 포함
+4. **교차 참조** — 이 로드맵이 어느 시즌 산출물(포지셔닝 맵, 시즌 전략, 시즌 컨셉 보드, 그래픽 디렉션)에 나타나는지 짧은 리스트. 신규 입사자가 의존성 체인을 따라갈 수 있게 합니다
+5. **리비전 로그** — 이전 버전 일자와 한 줄 변경 노트 표
 
-Run `references/checklist.md`. Every tier must carry text content;
-North Star must read as aspirational, not operational; Principles
-must read as action verbs; Characters must read as adjectives /
-phrases customers would say; Foundation keywords must be founding
-keywords (not new additions).
+**OpenDesign 환경에서 사용 시:** 각 섹션에 `data-od-id` 속성을 추가하면 인라인 코멘트 모드를 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다. 예: `<section class="br-pyramid" data-od-id="pyramid">` 또는 `<section class="br-pyramid" id="pyramid">`.
 
-## Output contract
+### Step 4 — 자체 검수
+
+`references/checklist.md`의 P0/P1/P2 기준을 한 항목씩 직접 확인하세요.
+
+- 4단 모두 텍스트 콘텐츠 보유
+- 북극성은 **추상적 지향**(예: "고객이 ~을 느끼게 하고 싶다")이어야 하며 운영 KPI(예: "100 SKU 출시")가 아닙니다
+- 행동원칙은 **행동 동사/동사구**(팬덤, 존중, 새로운시도, 트렌드리딩 등)여야 하며 형용사가 아닙니다
+- 캐릭터는 **고객이 실제로 말할 만한** 형용사/짧은 구절(재미있는, 따라하고 싶은 등)이어야 하며 내부 용어가 아닙니다
+- 파운데이션 키워드는 **창업 키워드**여야 합니다. 창업 후 추가된 키워드는 "(evolved)" 표시
+- 교차 참조 리스트가 최소 3개 이상의 하위 산출물을 명명
+- 리비전 로그에 최소 1행(현재 버전)이 있음
+
+## 한국 K-패션 브랜드 사례 (참고)
+
+브랜드 로드맵 작성 시 참고할 K-패션 브랜드 정체성 패턴.
+
+| 브랜드 | 북극성 톤 | 캐릭터 톤 | 시그니처 IP |
+|---|---|---|---|
+| **마뗑킴 (Matin Kim)** | "쿨한 무드의 일상 럭셔리" | 로고 중심, 미니멀 러프 시크, 친근한 SNS | 텍스트 로고, 대표 직접 SNS 소통 |
+| **마르디 메크르디 (Mardi Mercredi)** | "프렌치 감성 데일리 럭셔리" | 다채로운 컬러, 사랑스러운, 셀럽 친화 | 플라워 마르디 그래픽 (재고자산회전율 20회 견인) |
+| **아더에러 (ADER ERROR)** | "Post-Minimalism, 실험과 왜곡" | 신비감, 글로벌, 컨셉추얼 | 블루 키컬러, 테트라이트 로고 |
+| **키르시 (KIRSH)** | "Young Culture, 발랄한 유니크" | 비비드, 상큼한, 영 컬처 | 체리 심볼 |
+| **와키윌리 (WACKYWILLY)** | "상품력으로 신뢰를 / IP로 독창성을" | 재미있는, 따라하고싶은, K-아이돌 | 캐릭터 IP, 팬덤 |
+| **무신사 스탠다드 (Musinsa Standard)** | "데일리 베이직의 가성비 표준" | 베이직, 신뢰, 한국적 핏 | 무신사 PB 신뢰감 |
+
+위 사례는 카피·예시 참고용입니다. 실제 산출물은 사용자 브랜드의 실제 키워드로 작성하세요.
+
+## 한국 패션기업 조직 R&R 메모
+
+브랜드 로드맵은 **브랜드 디렉터/대표**가 작성하지만, 작성·검토·승인 흐름에는 보통 다음 부서가 관여합니다.
+
+- **브랜드 디렉터/대표**: 북극성·행동원칙 초안 작성, 최종 승인
+- **디자인 실장**: 캐릭터·파운데이션 검토 (시각 정체성·시그니처 IP와의 정합성)
+- **MD 실장**: 행동원칙·캐릭터 검토 (상품 기획·라인업 구성과의 정합성)
+- **마케팅 실장**: 캐릭터·교차 참조 검토 (캠페인·IMC 계획과의 정합성)
+- **HR/조직 문화팀** (있는 경우): 행동원칙 검토 (조직 문화·평가 기준과의 정합성)
+
+산출물 헤더에 `status: locked` 표시 시 위 모든 검토자의 확인이 완료된 상태를 의미합니다.
+
+## 시즌 사이클 내 위치
+
+브랜드 로드맵은 **시즌 사이클과 무관한 영구 문서**입니다.
 
 ```
-<artifact identifier="fashion-brand-roadmap-slug" type="text/html" title="Brand Roadmap Title">
-<!doctype html>
-<html>...</html>
-</artifact>
+[연 1회 개정 — 시즌과 무관]
+    ↓ 모든 시즌 산출물이 상속
+[fashion-positioning-map] (시즌 시작 시)
+[fashion-season-strategy] (시즌 시작 6개월 전)
+[fashion-concept-board] (시즌 시작 5개월 전)
+[fashion-color-story], [fashion-fabric-board] (시즌 시작 4~5개월 전)
+[fashion-styling-board] (시즌 시작 3~4개월 전)
+[fashion-new-lineup], [fashion-key-item-sheet] (시즌 시작 3개월 전)
+[fashion-graphic-direction] (시즌 시작 2~3개월 전)
+[fashion-lookbook] (시즌 시작 1~2개월 전)
+[fashion-imc-calendar] (시즌 시작 2개월 전)
+[fashion-season-deck] (모든 산출물 종합 후, 시즌 시작 1개월 전)
 ```
 
-One sentence before the artifact, nothing after.
+브랜드 로드맵을 새로 만들거나 개정한 뒤에는 위 시즌 산출물 모두를 재점검해 정합성을 확인하세요.
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 아래와 같이 `<artifact>` 태그로 감싸세요.
+  ```
+  <artifact identifier="fashion-brand-roadmap-slug" type="text/html" title="브랜드 로드맵 제목">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록으로 출력하세요.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "와키윌리 FY26 브랜드 로드맵을 리듬 A로 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

@@ -1,122 +1,263 @@
 ---
 name: saas-landing
 description: |
-  Single-page SaaS landing with hero, features, social proof, pricing, and CTA.
-  Respects the active DESIGN.md color/typography/layout tokens.
-  Trigger keywords: "saas landing", "marketing page", "product landing".
+  K-패션 브랜드의 **신규 런칭 / 콜라보 발매 / 자사몰 메인** 단일 랜딩 페이지를
+  단일 HTML 파일로 생성하는 스킬입니다. 키비주얼 히어로, 시그니처 아이템(피처
+  타일), 매거진/인플루언서 소셜프루프, 회원 등급(또는 콜라보 컬렉션 가격), 사전예약
+  CTA 섹션을 한 페이지에 배치합니다. 마뗑킴, 마르디 메크르디, 아더에러, 와키윌리
+  자사몰 랜딩과 무신사 입점 페이지, 콜라보 발매 페이지 톤을 다룹니다.
+  사용자가 "브랜드 런칭 페이지", "콜라보 발매 페이지", "자사몰 랜딩", "신규 회원
+  랜딩", "사전예약 페이지", "팝업 안내 페이지", "K-fashion landing"을 언급하면
+  활성화하세요.
 triggers:
-  - "saas landing"
-  - "marketing page"
-  - "product landing"
+  - "브랜드 런칭 페이지"
+  - "신규 브랜드 랜딩"
+  - "콜라보 발매 페이지"
+  - "콜라보 랜딩"
+  - "자사몰 랜딩"
+  - "자사몰 메인"
+  - "신규 회원 랜딩"
+  - "사전예약 페이지"
+  - "프리오더 랜딩"
+  - "팝업 안내 페이지"
+  - "무신사 입점 페이지"
+  - "29CM 큐레이션 페이지"
+  - "k-fashion landing"
+  - "fashion landing page"
+  - "brand launch page"
+  - "drop landing"
 od:
   mode: prototype
   platform: desktop
   scenario: marketing
+  category: marketing
   preview:
     type: html
     entry: index.html
-    reload: debounce-100
   design_system:
     requires: true
     sections: [color, typography, layout, components]
-  inputs:
-    - name: product_name
-      type: string
-      required: true
-    - name: tagline
-      type: string
-      required: true
-    - name: has_pricing
-      type: boolean
-      default: true
-    - name: proof_count
-      type: integer
-      default: 3
-      min: 0
-      max: 6
-  parameters:
-    - name: hero_density
-      type: spacing
-      default: 96
-      range: [48, 200]
-    - name: accent_strength
-      type: opacity
-      default: 1.0
-      range: [0.5, 1.0]
-  outputs:
-    primary: index.html
-  capabilities_required:
-    - file_write
+  example_prompt: "와키윌리(WACKYWILLY) 27SS 콜라보 발매 랜딩 페이지. 콜라보 상대 = SANRIO 캐릭터. 발매일 = 2027-03-14. 키비주얼 슬로건 = '오늘의 즐거움이 내일의 시그니처로'. 시그니처 아이템 3종(콜라보 후디·콜라보 백·콜라보 키링). 소셜프루프 = VOGUE KOREA·W KOREA·DAZED KOREA 추천. 회원 등급 3단계(실버/골드/플래티넘) + 사전예약 우선권. CTA = '사전예약 시작'. 무신사 입점 브랜드 페이지 + 자사몰(카페24) 동시 운영 기준."
 ---
 
-# SaaS Landing Skill
+# K-패션 런칭 / 콜라보 발매 랜딩 페이지 스킬
 
-Produce a single-page SaaS landing. Agent, follow this workflow exactly.
+K-패션 브랜드의 **신규 런칭 페이지 · 콜라보 발매 페이지 · 자사몰 메인 랜딩 · 무신사 입점 페이지**를 단일 HTML 파일로 생성합니다. 한국 영캐주얼·디자이너 브랜드의 자사몰(카페24·쇼피파이·자체 개발) 랜딩 톤과 무신사 입점 브랜드 페이지, 29CM 큐레이션 컬렉션 페이지 톤을 다룹니다.
 
-## 1. Read context
+이 산출물은 **마케팅실 + 이커머스팀(디지털팀) + 디자인실(그래픽팀)** 합작이며, 시즌 사이클상 다음 시점에 활용합니다.
 
-Before writing anything:
-- Read `DESIGN.md` in the current working directory. If missing, stop and ask for one.
-- Identify the color palette, typography tokens, and layout principles.
-- Note the "Agent Prompt Guide" section — it overrides any instruction here if they conflict.
+- **신규 브랜드 런칭** — 브랜드 출범 4~6주 전, 티저 페이지 → 정식 오픈 페이지 순서로 사용
+- **시즌 사전예약** — 시즌 시작 3~4주 전, 사전예약 모집 페이지 (S1 판기 시작 직전)
+- **콜라보 발매** — 콜라보 발표일 ~ 발매일 사이, 카운트다운 + 사전예약 페이지
+- **팝업 안내** — 팝업 오픈 2~3주 전, 위치·시간·예약·한정 아이템 안내
+- **자사몰 메인 랜딩** — 상시 운영, 시즌 전환 시점에 키비주얼·CTA 교체
 
-## 2. Plan sections
+작성 주체는 **마케팅실(카피·메시지)** + **디자인실 그래픽팀(시각 디렉션)** + **이커머스팀(URL·결제·회원 시스템 연동)** 3자 합작입니다.
 
-Required sections, in order:
-1. **Hero** — logo-or-wordmark, headline (tagline input), subhead (1–2 sentences), primary CTA, secondary CTA. Use the hero_density parameter as vertical padding in px.
-2. **Features** — 3–6 feature tiles. Each: icon, short title, 1–2 sentence body.
-3. **Social proof** — `proof_count` logos or testimonials. If 0, skip this section.
-4. **Pricing** — 2–3 tiers. Include only if `has_pricing` is true.
-5. **Footer CTA** — large accent-colored band with one-button call to action.
-6. **Footer** — minimal: links + copyright.
+## 환경 호환성
 
-## 3. Apply design system
+이 스킬은 모든 LLM 환경에서 동일하게 사용할 수 있습니다.
 
-- All colors must come from DESIGN.md tokens. Do not invent hex values.
-- Typography: use the declared display font for headlines, body font for everything else.
-- Layout: respect the grid, max-width, and section spacing rules.
-- Components: use declared button/card/input patterns. Do not add shadows if DESIGN.md's Depth & Elevation says minimal.
-- Accent: use the accent color only once in the hero, once in the footer CTA, and for all links. Do not flood the page.
+- **Claude 환경(Claude.ai · Claude Code)**: 결과물을 `<artifact>` 태그로 감싸 출력합니다.
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 HTML 코드 블록으로 출력합니다.
+- **OpenDesign 환경**: frontmatter의 `od:` 블록과 본문에서 권장하는 `data-od-id` 속성을 활용하면 인라인 코멘트·미리보기 기능을 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다.
 
-## 4. Write the file
+본문 워크플로는 모든 LLM이 자력으로 따라할 수 있도록 명시적으로 작성되어 있습니다. 디자인 시스템 파일이 자동 주입되지 않는 환경이라면, 사용자에게 `DESIGN.md` 경로나 기본 톤(예: 브랜드 키컬러·디스플레이 폰트)을 묻고 진행하세요.
 
-Output a single self-contained `index.html` with:
-- All CSS inlined in a `<style>` block in `<head>`.
-- System font fallbacks if DESIGN.md fonts aren't loadable from Google Fonts etc.
-- No external JS.
-- Semantic HTML (`<header>`, `<main>`, `<section>`, `<footer>`).
-- Each editable element tagged with `data-od-id="<unique-slug>"` so the host app's comment mode can target it.
+## 출력 언어 정책
 
-## 5. Self-check
+K-패션 비즈니스 등록(register)을 따릅니다.
 
-Before finishing, verify:
-- [ ] All text is content-meaningful, not lorem ipsum (use product_name and tagline inputs; generate plausible specific copy for the rest).
-- [ ] No broken color references (every CSS color value is in DESIGN.md's palette or a valid alpha/fallback variant).
-- [ ] Responsive breakpoints match DESIGN.md's Responsive Behavior section.
-- [ ] The page looks good at 1440w, 768w, and 375w (mentally simulate).
-- [ ] Accent used no more than twice total.
+- 모든 라벨을 한국어로 직역하지 마세요. 한국 패션 현장에서 실제로 쓰는 영어 산업용어는 그대로 유지합니다.
+- 유지하는 용어 예시: LOOKBOOK · DROP · PRE-ORDER · MEMBERS ONLY · LIMITED · COLLAB · CAPSULE · 캠페인 · 컬렉션 · 시그니처 · 키비주얼.
+- 가격은 한국 표준 표기: `₩128,000` 또는 `128,000원`. 큰 숫자는 mono 폰트로 (`.num` 클래스).
+- 카피는 **포엣코어 + 짧은 명사구** 우선. 영어 슬로건은 영문 그대로 유지(과도한 한국어 직역 금지). 예: "Bloom 27SS" 그대로, "꽃피움 27SS"로 옮기지 않음.
+- 회원 등급명은 한국 표준: `WELCOME / SILVER / GOLD / PLATINUM / VIP / VVIP` 또는 `일반 / 신규 / 단골 / VIP`.
+- CTA 버튼은 짧고 명확하게: `사전예약`, `LOOKBOOK 보기`, `회원가입`, `장바구니`, `발매 알림 신청`, `BUY NOW`.
+- 매거진/인플루언서 인용은 영문 매체명 그대로: `VOGUE KOREA`, `W KOREA`, `DAZED KOREA`, `HARPER'S BAZAAR KR`, `ALLURE KOREA`, `ELLE KOREA`, `1stLook`, `NYLON KOREA`.
 
-## 6. Done
+## 타이포그래피
 
-Write only `index.html`. Do not generate a separate CSS file, JS file, or README.
+프로젝트 루트의 `DESIGN.md` 타이포그래피 토큰을 사용하세요. 한국 K-패션 브랜드 표준 폰트인 **Pretendard Variable**을 본문·UI·가격·CTA 기본 폰트로 두는 것을 권장합니다.
 
----
+산출물 1개당 디스플레이 폰트 하나를 골라 `--font-display` CSS 변수로 바인딩합니다. 랜딩 성격에 따른 권장 매핑:
 
-## For skill authors reading this as a reference
+| 랜딩 성격 | 권장 디스플레이 폰트 토큰 (예시) |
+|---|---|
+| 신규 브랜드 런칭 · 미니멀 자사몰 (마뗑킴 톤) | `--font-display-romance` (Hahmlet, Grandiflora One, 본명조, Noto Serif KR) |
+| 콜라보 발매 · 스트릿 · 캠페인 (와키윌리·아더에러 톤) | `--font-display-street` (Black Han Sans, G마켓 산스, Pretendard Black) |
+| 영캐주얼 · 컬러풀 (마르디 메크르디·키르시 톤) | `--font-display-play` (Bagel Fat One, Hi Melody, 한손글씨) |
+| 럭셔리 · 디자이너 (사일런트 단톤·아더에러 미니멀) | `--font-display-romance` (Hahmlet, DM Serif Display) |
+| 무신사 입점 페이지 · 양판 톤 | `--font-display-report` (Wanted Sans, SUIT, Paperlogy) |
 
-This is a minimal but complete skill. Structure:
+테이블 본문, 가격, 회원 등급 표, 사이즈 라벨, 발매 카운트다운 숫자에는 디스플레이 폰트를 쓰지 말고 `--font-sans` 또는 `--font-mono`를 유지하세요.
+
+## 폴더 구조
 
 ```
-saas-landing-skill/
-├── SKILL.md    ← you are here
-└── assets/
-    └── base.html    (optional starter template; this skill doesn't use one)
+saas-landing/
+├── SKILL.md          ← 이 파일을 읽고 있습니다
+└── example.html      ← 시드 + 참고 산출물 (와키윌리 27SS 콜라보 발매 페이지)
 ```
 
-Things to notice:
-- The `od:` front-matter block is optional for Claude-Code-only compatibility, but adding it lights up OD's typed inputs, sliders, preview metadata, and capability gating.
-- The workflow below the front-matter is plain Markdown that the agent reads as its system prompt.
-- DESIGN.md is treated as a collaborator, not an override. The skill gives the agent authority to override when the brief conflicts, but never to invent new tokens.
-- `data-od-id` tagging is how we wire elements to comment mode. Skills that want comment-mode compatibility must annotate their output.
+`example.html`은 단일 파일 시드입니다. 복사해 `index.html`로 사용한 뒤 카피·이미지 플레이스홀더·CSS 토큰을 교체합니다.
 
-See [`../../skills-protocol.md`](../../skills-protocol.md) for the full protocol.
+## 작업 흐름
+
+### Step 0 — 사전 점검
+
+1. 이 스킬 폴더의 `example.html`을 처음부터 끝까지 `<style>` 블록 포함 읽으세요. 섹션 5개(헤더 / 히어로 / 시그니처 아이템 그리드 / 소셜프루프 / 회원 등급 또는 컬렉션 가격 / 클로징 CTA / 푸터)가 모두 정의되어 있습니다.
+2. 프로젝트 루트의 `DESIGN.md`(또는 등가 디자인 토큰)를 읽고, 색상·타이포 토큰을 `:root` CSS 변수로 바인딩하세요. 자동 주입되지 않는 환경이라면 사용자에게 브랜드 키컬러와 디스플레이 폰트 톤을 물어 진행합니다.
+3. **이미지 생성은 선택입니다.** 기본 출력은 CSS로 렌더링하는 텍스트·플레이스홀더 랜딩입니다. 키비주얼 이미지를 명시적으로 요청받았을 때만 1장 생성합니다(생성 시 LLM 환경에 따라 사용 가능한 이미지 생성 도구를 사용).
+
+### Step 1 — 랜딩 정보 수집
+
+다음 항목이 사용자 입력에 빠져 있으면 첫 발견 폼에서 함께 물어보세요.
+
+- **브랜드명** + 워드마크 표기 (예: WACKYWILLY, Matin Kim, MARDI MERCREDI)
+- **랜딩 성격** — 신규 런칭 / 콜라보 발매 / 시즌 사전예약 / 팝업 안내 / 자사몰 메인 중 1개
+- **키비주얼 슬로건** — 1행 (영문 또는 한국어, 영문 권장) + 서브카피 1~2문장
+- **시그니처 아이템 3종** — 각 아이템 이름 + 한 줄 설명 (시즌 키 아이템 또는 콜라보 컬렉션)
+- **소셜프루프** — 매거진 인용 또는 인플루언서 워닝 (3~6개)
+- **CTA** — 사전예약 / 회원가입 / LOOKBOOK 보기 / 매장 찾기 중 1차 / 2차
+- **가격 또는 등급** — 회원 등급 3티어 또는 콜라보 컬렉션 가격 3종
+- **발매일/오픈일** — 카운트다운 표시 여부
+- **채널 라우팅** — 자사몰 / 무신사 / 29CM / 매장 중 어느 채널로 보낼지
+
+### Step 2 — 섹션 구성
+
+`example.html`을 `index.html`로 복사한 뒤, **필수 섹션(순서대로)**:
+
+1. **헤더** — 워드마크 + 네비게이션(NEW · COLLECTION · LOOKBOOK · STORE · LOGIN) + 사이드 CTA
+2. **히어로** — 키비주얼 슬로건 + 서브카피 + 1차 CTA(`사전예약`) + 2차 CTA(`LOOKBOOK 보기`). 배경은 키컬러 또는 키비주얼 이미지 플레이스홀더
+3. **시그니처 아이템 그리드** — 3개 타일(시즌 키 아이템 또는 콜라보 컬렉션). 각 타일: 01/02/03 번호 + 아이템명 + 한 줄 설명
+4. **소셜프루프** — `RECOMMENDED BY` 헤더 + 매거진 로고 워드마크(VOGUE KOREA, W KOREA, DAZED KOREA, ELLE KOREA, HARPER'S BAZAAR KR)
+5. **가격 또는 회원 등급** — 3개 카드. 회원 등급(SILVER/GOLD/PLATINUM) 또는 콜라보 컬렉션 3종 가격
+6. **클로징 CTA** — 키컬러 풀폭 밴드 + 카운트다운(있으면) + 메인 CTA 버튼
+7. **푸터** — 워드마크 + Privacy · Terms · CS · INSTAGRAM 링크
+
+**OpenDesign 환경에서 사용 시:** 각 섹션에 `data-od-id` 속성을 추가하면 인라인 코멘트 모드를 사용할 수 있습니다. 다른 환경에서는 일반 `id` 속성으로 대체하거나 생략 가능합니다. 예: `<section class="hero" data-od-id="hero">` 또는 `<section class="hero" id="hero">`.
+
+### Step 3 — 카피 채우기
+
+- **히어로 슬로건**: 영문 권장 ("Bloom 27SS", "Onwards.", "To the next one."). 또는 한국 짧은 명사구 ("오늘의 시그니처."). 18~24자 이내.
+- **시그니처 아이템**: 아이템명은 영문 라벨 + 한국어 설명. 예: `COLLAB HOODIE` / "산리오 캐릭터 자수 후드. 옥스포드 코튼 12oz."
+- **소셜프루프**: 매거진 영문 워드마크. 4~6개. 또는 인플루언서 핸들 (`@goeun_official`).
+- **회원 등급**: 등급명(영문) + 혜택 리스트 3~5개. 가격은 `₩XX,XXX` 또는 등급별 적립률(`1% 적립`, `3% 적립`, `5% 적립`).
+- **CTA**: 짧고 직설. 1차 CTA = 행동(`사전예약 시작`, `BUY NOW`), 2차 CTA = 정보(`LOOKBOOK 보기 →`, `매장 찾기 →`).
+
+### Step 4 — 자체 검수
+
+다음 체크리스트를 한 항목씩 직접 확인하세요.
+
+- 키비주얼 슬로건이 18~24자 이내 (긴 문장이면 라인 분리)
+- 시그니처 아이템 정확히 3개 (5개·6개로 늘리지 말 것 — 시각 강도 분산됨)
+- 소셜프루프 매거진 영문 표기 일관성 (`VOGUE KOREA` 또는 `Vogue Korea` 중 하나로 통일)
+- 액센트 컬러 사용 ≤ 3회 (히어로 1차 CTA + 회원 등급 추천 + 클로징 CTA)
+- 가격 표기는 `₩` 또는 `원` 중 일관성 있게 통일
+- 영문 슬로건을 한국어로 직역하지 않음
+- 외부 이미지 URL 없음 (플레이스홀더 클래스 사용)
+- 모바일 폭(375w)에서 컬럼이 한 줄로 스택되는지 (mental simulation)
+
+### Step 5 — 산출물 출력
+
+- **Claude 환경**:
+  ```
+  <artifact identifier="kfashion-landing-slug" type="text/html" title="K-패션 랜딩 — 브랜드/시즌">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경**: 표준 마크다운 HTML 코드 블록.
+
+출력 앞에 한 문장 요약(예: "와키윌리 27SS x SANRIO 콜라보 발매 랜딩 페이지를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.
+
+## 하드 룰
+
+- **랜딩은 1페이지에 1메시지.** 신규 런칭 + 콜라보를 한 페이지에 섞지 마세요. 두 개를 요청받으면 하나만 만들고 다른 하나는 후속 페이지로 제안.
+- **시그니처 아이템 = 3개.** 5개·6개는 시각 강도가 분산되어 무신사 입점 페이지 자체 가이드에서도 권장하지 않습니다.
+- **액센트 ≤ 3회.** 히어로 CTA · 회원 등급 추천 · 클로징 CTA 3곳이 기본. 더 쓰면 핸드폰 화면이 시끄러워 보입니다.
+- **CTA는 행동 동사.** `더보기`, `자세히`보다 `사전예약`, `BUY NOW`, `룩북 보기`처럼 행동 명확화.
+- **소셜프루프는 영문 매체명 그대로.** `보그 코리아` 같은 직역 금지.
+- **외부 이미지 URL 금지.** `.ph-img` 같은 플레이스홀더 클래스로 대체.
+- **모바일 우선.** 한국 패션 트래픽 80% 이상이 모바일. 모바일 폭에서 깨지면 페이지로서 가치 없음.
+
+## K-패션 랜딩 패턴 매핑
+
+| 랜딩 성격 | 자주 쓰는 패턴 | 참고 브랜드 |
+|---|---|---|
+| **신규 브랜드 런칭** | 키비주얼 히어로 + 브랜드 매니페스토 + 시그니처 3종 + 신규회원 혜택 | LMC, Bensimon Korea |
+| **시즌 사전예약** | 카운트다운 히어로 + 시즌 키 아이템 + 사전예약 혜택(우선 발송·할인) | 마뗑킴 27SS, 마르디 27SS |
+| **콜라보 발매** | 콜라보 스토리 + 컬렉션 그리드 + 발매 카운트다운 + 사전예약 | 아더에러 x MAISON KITSUNÉ, 와키윌리 x SANRIO |
+| **팝업 안내** | 위치·시간 + 한정 아이템 + 사전예약 + 매장 지도 | 마뗑킴 성수 팝업, 마르디 한남 팝업 |
+| **자사몰 메인** | 시즌 키비주얼 + 베스트셀러 + 매거진 + 회원 등급 안내 | 무신사 스탠다드 자사몰 톤 |
+| **무신사 입점 페이지** | 브랜드 스토리 + 베스트 + 룩북 + 매거진 인용 + 신규회원 혜택 | 무신사 입점 브랜드 일반 |
+
+## 한국 K-패션 채널별 등급/혜택 사례 (참고)
+
+회원 등급 섹션 카피 작성 시 참고할 한국 실제 채널 멤버십.
+
+| 채널/브랜드 | 등급 구조 | 시그니처 혜택 |
+|---|---|---|
+| **무신사** | NORMAL → BRONZE → SILVER → GOLD → DIAMOND → BLACK | 적립 1~5%, 단독 발매 우선권, 무료배송, 생일 쿠폰 |
+| **29CM** | 일반 → 단골 → VIP → VVIP | 무료배송 횟수, 시크릿 세일, 큐레이션 우선 알림 |
+| **W컨셉** | WELCOME → REGULAR → PLUS → VIP | 1% → 5% 적립, 등급별 쿠폰, 디자이너 사전예약 |
+| **마뗑킴 자사몰** | 신규 → 일반 → VIP | 사전예약 우선권, 매장 초대, 시즌 룩북 PDF |
+| **카카오톡 채널 (브랜드 톡)** | 친구 추가 단일 등급 | 신상 알림톡, 친구 추가 쿠폰, 라이브 방송 알림 |
+
+위 사례는 카피·예시 참고용입니다. 실제 산출물은 사용자 브랜드의 실제 등급·혜택으로 작성하세요.
+
+## 한국 패션기업 부서 R&R + 채널 연계
+
+| 부서 | 역할 |
+|---|---|
+| **마케팅실** | 키비주얼 슬로건·카피 작성, 매거진 인용·인플루언서 코디 |
+| **디자인실(그래픽팀)** | 키비주얼·시그니처 아이템 이미지·페이지 비주얼 디렉션 |
+| **이커머스팀(디지털팀)** | 자사몰 페이지 빌드, 사전예약 폼·결제 PG 연동, GA·픽셀 설치 |
+| **MD실** | 시그니처 아이템 선정, 가격 확정, 회원 등급 혜택 협의 |
+| **이커머스팀(개발)** | 카페24·쇼피파이 백엔드, 카카오톡 알림톡, SMS, 푸시 연동 |
+| **CS실** | 사전예약 FAQ, 챗봇 스크립트(채널톡), 매장 매니저 교육 |
+
+### 채널 연계
+
+- **자사몰** — 카페24, 쇼피파이, 자체 개발(React/Next.js). 페이지 URL = `brand.com/27ss` 또는 `brand.com/collab-sanrio`
+- **무신사 입점 페이지** — 무신사 브랜드 페이지(`musinsa.com/brand/<brand>`)에 동일 카피를 적용
+- **29CM 큐레이션** — 29CM 큐레이션 컬렉션(`29cm.co.kr/curation/<id>`)에 큐레이션용으로 재편집
+- **카카오톡 채널 미니샵** — 카카오톡 채널 안 미니샵 페이지로 사전예약 유도
+- **인스타그램 링크인바이오** — Link in Bio 도구(Linktree·Lit.link)로 랜딩 URL 노출
+
+## 시즌 사이클 내 위치
+
+```
+[시즌 시작 6개월 전]   포지셔닝 맵 + 시즌 전략 LOCK
+[시즌 시작 5개월 전]   시즌 컨셉 보드, 컬러 스토리 LOCK
+[시즌 시작 4개월 전]   IMC 캘린더 1차 안 (랜딩 페이지 노출 시점 잡힘)
+[시즌 시작 3개월 전]   라인업 LOCK, SKU 코드 확정
+[시즌 시작 2개월 전]   룩북 촬영, 키비주얼 확정
+[시즌 시작 1~2개월 전] ▶ 콜라보 발매 페이지 / 시즌 사전예약 페이지 작성 (이 스킬)
+                       팝업 안내 페이지 작성 (오픈 2~3주 전)
+[시즌 시작]            S1 판기 발매, 자사몰 메인 키비주얼 교체
+[판기 중반]            자사몰 메인 키비주얼 2차 교체 (배스트셀러 강조)
+[판기 종료]            시즌오프 안내 페이지로 교체 (이 스킬 재사용 가능)
+```
+
+## 출력 규약
+
+단일 HTML 문서(`<!doctype html>`부터 `</html>`까지)를 결과물로 출력하세요.
+
+- **Claude 환경(Claude.ai · Claude Code)**:
+  ```
+  <artifact identifier="kfashion-landing-slug" type="text/html" title="K-패션 랜딩 — 브랜드/시즌">
+  <!doctype html>
+  <html>...</html>
+  </artifact>
+  ```
+- **그 외 환경(ChatGPT · Gemini · Grok · 일반 채팅)**: 표준 마크다운 HTML 코드 블록.
+  ````
+  ```html
+  <!doctype html>
+  <html>...</html>
+  ```
+  ````
+
+출력 앞에 한 문장 요약(예: "마뗑킴 27SS 시즌 사전예약 랜딩 페이지를 작성했습니다.")을, 뒤에는 아무것도 덧붙이지 마세요.

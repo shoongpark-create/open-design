@@ -1,326 +1,278 @@
-# Themes · replit-deck
+# 테마 · replit-deck (K-패션)
 
-Eight complete visual systems captured from **replit.com/slides**. Each theme is a commitment — once the deck picks a theme, every slide inherits from that theme's token set via `<body data-theme="…">`. Do not override per-slide.
+**replit.com/slides**에서 캡처한 8가지 시각 시스템. 각 테마는 커밋 — 덱이 한 테마를 선택하면 모든 슬라이드가 그 테마의 토큰을 `<body data-theme="…">`을 통해 상속받습니다. 슬라이드별 오버라이드 금지.
 
-All hex values were sampled from the actual Replit Slides landing-page PNGs with ImageMagick on **2026-04-29** (see `SKILL.md` → *Scope & provenance*). Don't guess, don't substitute "similar" colors from memory. To add or refresh a theme, follow the procedure in *Contributing a new theme* at the bottom of this file.
+모든 hex 값은 2026-04-29 Replit Slides 랜딩 페이지 PNG에서 ImageMagick으로 직접 샘플링 (원본 패키지 참조). 추측 / 기억 대체 금지.
 
 ---
 
-## How to pick
+## 어떻게 선택하나 (K-패션 시나리오)
 
-| If the brief mentions… | Pick |
+| K-패션 시나리오 | 추천 테마 |
 |---|---|
-| SaaS, metrics, board, analytics, fund | `helix` |
-| law firm, memo, pre-read, confidential, investor note | `holm` |
-| art, sculpture, photography, catalog, portfolio, gallery | `vance` |
-| fashion, campaign, lookbook, SS26, jewelry, editorial | `bevel` |
-| policy, macro, finance report, world economy, dark mood | `world-dark` |
-| lighter companion deck for a world-dark topic (ESG, wellness finance, sustainability) | `world-mint` |
-| history, chapter, archive, long-form narrative, museum | `atlas` |
-| consumer product, real estate, lifestyle, playful | `bluehouse` |
+| 디자인실 27SS 기획 합본, 시즌 매트릭 보고, 라인업 리뷰 | `helix` |
+| IR 사전 메모, 콜라보 제안서, 시즌 사업 메모 (진지/기관 톤) | `holm` |
+| 룩북 인덱스, 화보 카탈로그, 시즌 아카이브 (갤러리 톤) | `vance` |
+| 시즌 캠페인 리뷰, 룩북 발표, Y2K 캠페인 덱 | `bevel` |
+| 매출 결산 / 시즌 종합 결산 / 사업 보고 (다크 프리미엄) | `world-dark` |
+| ESG / 지속가능 / 윤리 패션 / 웰니스 리포트 | `world-mint` |
+| 시즌 합본, 챕터 내러티브, 브랜드 히스토리 (박물관 톤) | `atlas` |
+| 컨슈머 제품 쇼케이스, VIP 라운지, 컬러풀 콜라보 발매 | `bluehouse` |
 
-**Never mix two themes in one deck.** `<body data-theme="…">` is the single source of truth for the whole deck — one value, no per-slide overrides. This is enforced as a P0 gate in `checklist.md`.
+**한 덱에 두 테마 섞기 금지.** `<body data-theme="…">`은 전체 덱의 단일 진실 소스 — 값 하나, 슬라이드별 오버라이드 없음. `checklist.md`에서 P0 게이트로 강제.
 
-If the brief really needs two visual registers (e.g. chapters vs. data), either pick the theme that already carries that internal contrast (`bluehouse` has gradient cards; `atlas` has chapter plates vs. data strips), or split the content into two separate decks. `world-dark` and `world-mint` are stylistic siblings (same palette, inverted surface), so if you need a companion deck in a different mood they are the most coherent pair — but **still one theme per file**.
+브리프가 두 가지 시각 등록(예: 챕터 vs 데이터)을 요구하면, 내부 대비를 이미 가진 테마(`bluehouse`의 그라데이션 카드 / `atlas`의 챕터 플레이트 vs 데이터 스트립)를 고르거나, 콘텐츠를 두 덱으로 분리.
 
 ---
 
-## helix — Modern minimal
+## helix — 모던 미니멀
 
-Reference: replit slide-1, slide-4, slide-5.
+K-패션 적용 시나리오: 디자인실 내부 시즌 기획 합본, 1차 품평회 리뷰, MD 라인업 리뷰, 신규 카테고리 런칭 제안.
 
 ```
 --bg       #fafafa   near-white
---fg       #19191c   ink
+--fg       #19191c   잉크
 --muted    #6e6e73
 --border   #e4e4e7
---accent   #5889fe   electric blue
---display  Inter Display · weight 600 · tracking -0.02em
+--accent   #5889fe   일렉트릭 블루
+--display  Inter Display · 600 · -0.02em
 --body     Inter
---mono     JetBrains Mono   (bps / YoY labels)
+--mono     JetBrains Mono   (YoY / 정판율 라벨)
 ```
 
 **Do**
-- Huge `.num` (`$1.37B`, `128%`, `42,850`) — dominant element on the slide, no decoration.
-- Blue shows up in `▲ 38% YoY` / `▼ 1 mo` labels only. Use the mono family for those.
-- Plenty of white space. Slides often have the content only in the top or left half.
-- Page counter bottom-right in mono (`03 / 05`).
+- 거대한 `.num` (`12.4억`, `78.4%`, `8.2회`) — 슬라이드의 지배적 요소, 장식 없음.
+- 블루는 `▲ 38% YoY` / `▼ 1.2 pp` 라벨에만. 모노 패밀리 사용.
+- 충분한 여백. 콘텐츠는 슬라이드 상단 또는 좌측 절반만.
+- 페이지 카운터 모노로 우하단 (`03 / 05`).
 
 **Don't**
-- No gradients. No card shadows. No rounded accent bars.
-- Never put a KPI inside a blue-filled box — blue is type-color only.
-- Don't tilt or slant.
-- Don't add emoji or icons to metric cards.
+- 그라데이션 금지. 카드 그림자 금지. 둥근 액센트 바 금지.
+- 블루 채움 박스 안에 KPI 넣지 마세요 — 블루는 타입 색상.
+- 기울임 / 사선 금지.
+- 매트릭 카드에 이모지 / 아이콘 금지.
 
-**Best layouts**: `kpi-row-6` · `split-hero-metric` · `big-number-center`.
+**최적 레이아웃**: `kpi-row-6` · `split-hero-metric` · `big-number-center`.
 
 ---
 
-## holm — Editorial serif memo
+## holm — 에디토리얼 세리프 메모
 
-Reference: replit slide-2, slide-5.
+K-패션 적용 시나리오: 콜라보 제안서, IR 사전 메모, 시즌 사업 메모, 시즌 합본 표지.
 
 ```
---bg       #e4dfd7   warm cream
---fg       #0f0f0e   ink
+--bg       #e4dfd7   따뜻한 크림
+--fg       #0f0f0e   잉크
 --muted    #7c7e84
 --border   #c7c1b7
---accent   #52311d   deep chestnut
---display  Tiempos / GT Super style serif · weight 500
---body     Inter sans (body copy + mono eyebrows)
---mono     JetBrains Mono  (MEMO 04 / APR 2026 style meta)
+--accent   #52311d   딥 체스넛
+--display  Tiempos / GT Super 스타일 세리프 · 500
+--body     Inter sans (본문 + 모노 키커)
+--mono     JetBrains Mono  (MEMO 04 / 2027.04 같은 메타)
 ```
 
 **Do**
-- Serif display only on the **one** hero statement per slide. Body copy stays sans.
-- Eyebrows (`SERIES A — CONFIDENTIAL PRE-READ`, `04 — THE ASK`) in **mono, uppercase, widely tracked**, colored by `--accent` or muted.
-- Large vertical rhythm. Think one sentence at 64–96px occupying the left half, the rest breathing.
-- A small chestnut wordmark ("Holm") in the top-left meta bar is the only branding.
+- 세리프 디스플레이는 슬라이드당 **하나의** 히어로 진술에만. 본문은 sans.
+- 키커 (`27SS — 콜라보 제안 · CONFIDENTIAL`, `04 — 제안`) 모노, 대문자, wide tracking, `--accent` 또는 muted 컬러.
+- 큰 수직 리듬. 한 문장이 64~96px로 좌측 절반을 차지하고 나머지는 호흡.
+- 작은 체스넛 워드마크(예: "Matin Kim", "WACKYWILLY")가 좌상단 메타 바에 유일한 브랜딩.
 
 **Don't**
-- No pure white surface — the cream is the identity. Don't lighten to #fff.
-- Don't use the serif for body paragraphs (it will feel like a novel, not a memo).
-- No boxed cards. A memo has edges only from whitespace.
+- 순수 화이트 표면 금지 — 크림이 정체성. `#fff`로 밝아지지 마세요.
+- 세리프를 본문 단락에 사용 금지 (소설 느낌).
+- 박스 카드 금지. 메모는 여백으로만 가장자리.
 
-**Best layouts**: `memo-hero-statement` · `two-column-ask` · `name-card-team`.
+**최적 레이아웃**: `memo-hero-statement` · `two-column-ask` · `name-card-team`.
 
 ---
 
-## vance — Gallery catalog
+## vance — 갤러리 카탈로그
 
-Reference: replit slide-3, slide-7.
+K-패션 적용 시나리오: 룩북 인덱스, 화보 카탈로그, 시즌 아카이브, 캡슐 컬렉션 발표.
 
 ```
---bg       #f1ede2   gallery cream
---fg       #171815   ink
---bar      #0a0a0a   black band (top and/or bottom of slide)
---bar-fg   #f1ede2   cream-on-black
---accent   #171815   ink (there is no chromatic accent)
---display  serif display · weight 400  (italic variants encouraged)
+--bg       #f1ede2   갤러리 크림
+--fg       #171815   잉크
+--bar      #0a0a0a   블랙 바 (슬라이드 상단/하단)
+--bar-fg   #f1ede2   블랙 위 크림
+--accent   #171815   잉크 (크로마틱 액센트 없음)
+--display  serif 디스플레이 · 400 (이탤릭 변형 권장)
 --body     Inter
 ```
 
 **Do**
-- Top band holds `CATALOG — PLATE NN`, `II OF V · FEATURED`, `© 2026 THE ARTIST` — always three-column meta in ALL CAPS small tracked type on black.
-- The artwork / photo fills the middle plate, edge-to-edge.
-- Serif title (`Untitled (Threshold)`) may break across two lines with italic for the parenthetical.
-- Bottom band mirrors top: caption on left (`Untitled (Threshold), 2022. Felt, plaster, and resin…`), `PHOTOGRAPHY — NAME` on right.
+- 상단 바 `CATALOG — PLATE 04`, `II OF V · FEATURED`, `© 2027 WACKYWILLY` — 항상 3-컬럼 메타, 대문자 작은 tracked 타입 on 블랙.
+- 룩 / 화보 / 의상 컷이 중앙 플레이트를 edge-to-edge로 채움.
+- 세리프 제목 (`Untitled (윌리, 봄)`) 2줄 split, 부제는 이탤릭.
+- 하단 바 미러: 캡션 좌측 (`Untitled (윌리, 봄), 2027. 워시드 데님 셋업, 시그니처 그래픽 티…`), `PHOTOGRAPHY — KIM HAEUN` 우측.
 
 **Don't**
-- No color accents. Chromatic noise kills the gallery tone.
-- Don't center-align text inside the bands — always left/center/right three-column.
-- Don't use the cream as a solid background without the black bands; the two-tone is the identity.
+- 컬러 액센트 없음. 크로마틱 노이즈가 갤러리 톤을 죽임.
+- 바 안에서 가운데 정렬 금지 — 항상 좌/중/우 3-컬럼.
+- 블랙 바 없이 크림 단색 배경 금지; 2-톤이 정체성.
 
-**Best layouts**: `gallery-plate` · `spread-image-quote` · `index-grid`.
+**최적 레이아웃**: `gallery-plate` · `spread-image-quote` · `index-grid`.
 
 ---
 
-## bevel — Y2K editorial
+## bevel — Y2K 에디토리얼
 
-Reference: replit slide-6, slide-13.
+K-패션 적용 시나리오: 27SS 캠페인 발표, 룩북 인덱스 (위트 / 스트릿 톤), 콜라보 캡슐 캠페인.
 
 ```
---bg       #0d0d0b   near-black
---fg       #eae6dd   warm off-white
+--bg       #0d0d0b   니어-블랙
+--fg       #eae6dd   따뜻한 오프-화이트
 --muted    #a29e95
 --border   #2a2a28
---accent   #c8ff00   neon / chartreuse (outline + dots only)
---display  Y2K display face — Antonio / Bebas / italic chrome sans · weight 700
+--accent   #c8ff00   네온 / 샤르트뢰즈 (아웃라인 + 도트만)
+--display  Y2K 디스플레이 — Antonio / Bebas / 이탤릭 크롬 sans · 700
 --body     Inter
 ```
 
 **Do**
-- Display wordmark (`bevel`, `reflex`) in the chrome-y Y2K italic face — oversized, often rotated off-axis by 0 (but tracked wide).
-- Dashed neon frames around product imagery. Each frame gets `::before` / `::after` neon dots in the corners.
-- Small neon square markers (`14 PIECES`, `SS26 INDEX`) in the corners.
-- Product imagery treated as lookbook: desaturated on black, caption under image in serif-italic small caps.
+- 디스플레이 워드마크 (`bevel`, `WACKYWILLY`)는 크롬-y Y2K 이탤릭 페이스에서 — 오버사이즈, 와이드 tracking.
+- 제품 이미지 주변에 대시드 네온 프레임. 각 프레임에 `::before` / `::after` 네온 도트 코너에.
+- 코너에 작은 네온 사각 마커 (`9 ITEMS`, `27SS INDEX`).
+- 제품 이미지는 룩북 처리: 블랙 위 desaturated, 캡션은 이미지 아래 세리프-이탤릭 small caps.
 
 **Don't**
-- Never fill anything with neon. Neon is outline, dot, or 1-char accent only. More than ~2% neon by area = slop.
-- Don't use photography that looks like stock SaaS. If the brief is SaaS, pick a different theme.
-- Don't use sentence case for the display wordmark.
+- 네온으로 채우지 마세요. 네온은 아웃라인, 도트, 1-자 액센트만. 면적 ~2% 초과 = 슬롭.
+- 스톡 SaaS 룩 사진 금지. 브리프가 SaaS면 다른 테마 선택.
+- 디스플레이 워드마크에 문장 케이스 금지.
 
-**Best layouts**: `campaign-cover` · `product-triptych` · `index-grid`.
+**최적 레이아웃**: `campaign-cover` · `product-triptych` · `index-grid`.
 
 ---
 
-## world-dark — Finance dark
+## world-dark — 파이낸스 다크
 
-Reference: replit slide-8, slide-10.
+K-패션 적용 시나리오: 매출 결산 (시즌 종합), IR 분기 보고, 사업 메모, 임원 보고.
 
 ```
---bg       #0d3a2b   deep racing green
---fg       #bcd6cd   mint text
+--bg       #0d3a2b   딥 레이싱 그린
+--fg       #bcd6cd   민트 텍스트
 --muted    #789f91
 --border   #1d4c3c
---accent   #e8f615   neon yellow
---display  Inter Display · weight 500
+--accent   #e8f615   네온 옐로우
+--display  Inter Display · 500
 --body     Inter
 ```
 
 **Do**
-- Big sans display for the report title (`World Finance Report`, `Monetary Policy`).
-- Neon yellow appears as:
-  - a small **square marker** (14×14px) near section breaks,
-  - the color of section labels (`Total debt`, `S&P 500`) above the dark green cells,
-  - **never** as a fill for a text block.
-- Horizontal divider lines are 1px hairlines in `--border`.
-- Image tiles (portraits, skyline, streetscape) use tall 2:3 aspect, full-bleed, with captions in white overlaid bottom-left.
+- 큰 sans 디스플레이로 리포트 제목 (`27SS 시즌 결산`, `Q2 사업 보고`).
+- 네온 옐로우는:
+  - 섹션 브레이크 옆 작은 **사각 마커** (14×14px),
+  - 다크 그린 셀 위 섹션 라벨 색상 (`총 매출`, `정상판매율`),
+  - **절대** 텍스트 블록 채움으로 사용 안 함.
+- 가로 디바이더 라인은 1px hairline, `--border`.
+- 이미지 타일 (인물 / 시즌 KV / 매장 스트리트) 2:3 비율, 풀-블리드, 좌하단 화이트 캡션 오버레이.
 
 **Don't**
-- No icons in KPI cells.
-- Don't use the yellow for links or CTAs — it is a pointer, not a button.
-- No rounded corners on dividers or cells.
+- KPI 셀에 아이콘 금지.
+- 옐로우를 링크 / CTA로 사용 금지 — 포인터, 버튼 아님.
+- 디바이더 / 셀에 둥근 모서리 금지.
 
-**Best layouts**: `finance-hero-grid` · `quadrant-policy` · `indicator-strip`.
-
----
-
-## world-mint — Finance light (sibling)
-
-Reference: replit slide-9.
-
-Exact mirror of `world-dark`: swap `--bg` with `--fg`. Deep green becomes the type color; mint becomes the surface. Yellow accent stays identical.
-
-Use `world-mint` as a **standalone deck** when the topic is gentler (ESG report, wellness finance, sustainability). If a `world-dark` deck wants a lighter companion piece for a separate audience, make it a **separate deck file** with `data-theme="world-mint"` — do not alternate slides inside one deck (see one-theme rule above).
-
-**Do / Don't**: same as world-dark.
-
-**Best layouts**: `section-divider-giant-title` · `quadrant-policy` · `indicator-strip`.
+**최적 레이아웃**: `finance-hero-grid` · `quadrant-policy` · `indicator-strip`.
 
 ---
 
-## atlas — Museum chapter
+## world-mint — 파이낸스 라이트 (시블링)
 
-Reference: replit slide-11.
+K-패션 적용 시나리오: ESG 리포트, 지속가능 패션 정책, 윤리적 소싱 보고, 웰니스 / 라이프스타일 컬렉션 발표.
+
+`world-dark`의 정확한 미러: `--bg`와 `--fg` 교체. 딥 그린이 타입 컬러, 민트가 표면. 옐로우 액센트는 동일.
+
+`world-mint`를 **단독 덱**으로 사용 — ESG, 윤리 소싱, 웰니스 같이 부드러운 주제. `world-dark` 덱이 가벼운 컴패니언을 원하면 **분리된 덱 파일**로 만들고 `data-theme="world-mint"` 설정 — 한 덱 안에서 슬라이드별 교체 금지.
+
+**Do / Don't**: world-dark 동일.
+
+**최적 레이아웃**: `section-divider-giant-title` · `quadrant-policy` · `indicator-strip`.
+
+---
+
+## atlas — 박물관 챕터
+
+K-패션 적용 시나리오: 시즌 합본 챕터 발표, 브랜드 히스토리, 5주년 / 10주년 리뷰, 시즌 아카이브 책.
 
 ```
---bg       #111010   near-black
---fg       #e7e6e2   ivory
+--bg       #111010   니어-블랙
+--fg       #e7e6e2   아이보리
 --muted    #827d78
 --border   #2a2826
---accent   #de3f40   vermilion
---display  serif display · weight 500
+--accent   #de3f40   버밀리언
+--display  serif 디스플레이 · 500
 --body     Inter
 ```
 
 **Do**
-- Vermilion dot (●) before `THE ATLAS QUARTERLY · CHAPTER 01` in the meta bar.
-- Huge serif titles split across 2 lines (`The Imperial` / `Age.`) — the period is always vermilion.
-- Three-column data strip at the bottom: `PERIOD` / `REACH` / `CAPITALS`, labels in mono all-caps small, data in sans display (one word per column if possible).
-- Right half often carries an archival photograph inside a thin ivory hairline border with `PLATE I` label top-left and `EXHIBIT 04.B` tag top-right.
-- Progress bar at the very bottom (vermilion segment + ivory hairline).
+- 메타 바에 `THE WACKYWILLY ATLAS · CHAPTER 01` 앞에 버밀리언 도트 (●).
+- 큰 세리프 제목을 2줄 split (`그래픽 IP의` / `시대.`) — 마침표는 항상 버밀리언.
+- 하단에 3-컬럼 데이터 스트립: `시즌` / `SKU` / `정판율`, 라벨은 모노 대문자 작게, 데이터는 sans 디스플레이.
+- 우측 절반에 아카이브 화보 (얇은 아이보리 hairline 보더, 좌상단 `PLATE I` 라벨, 우상단 `EXHIBIT 04.B` 태그).
+- 하단 진행 바 (버밀리언 세그먼트 + 아이보리 hairline).
 
 **Don't**
-- Never use the vermilion for body text or callouts — only for the terminal period, the meta dot, and the progress segment.
-- Don't pair the serif with a mono kicker that's larger than 12px; the mono must always feel like a catalogue footer.
-- Avoid images with modern styling (filters, gradients). Archive-grade black & white or sepia only.
+- 버밀리언을 본문 텍스트 / 콜아웃에 사용 금지 — 종결 마침표, 메타 도트, 진행 세그먼트만.
+- 세리프와 12px 초과 모노 키커 페어링 금지; 모노는 카탈로그 푸터 느낌.
+- 모던 스타일링 이미지 (필터, 그라데이션) 금지. 아카이브-그레이드 흑백 또는 세피아만.
 
-**Best layouts**: `chapter-plate` · `timeline-strip` · `photo-with-caption`.
+**최적 레이아웃**: `chapter-plate` · `timeline-strip` · `photo-with-caption`.
 
 ---
 
-## bluehouse — Consumer card
+## bluehouse — 컨슈머 카드
 
-Reference: replit slide-12.
+K-패션 적용 시나리오: 컨슈머 제품 쇼케이스, VIP 라운지 발표, 컬러풀 콜라보 발매, 멤버십 리뉴얼.
 
 ```
---bg       #0b1524   deep navy
+--bg       #0b1524   딥 네이비
 --fg       #ffffff
 --muted    #8ea0b8
 --border   #1a2c46
---accent   #fb675d   coral
---accent-2 #ff8f68   peach (for gradient)
+--accent   #fb675d   코랄
+--accent-2 #ff8f68   피치 (그라데이션용)
 --card-peach     #e0af99
 --card-lavender  #c7cff0
---display  Inter Display · weight 700 · tracking -0.025em
+--display  Inter Display · 700 · -0.025em
 --body     Inter
 ```
 
 **Do**
-- Big bold sans headlines (`Driving real estate ROI with prime properties`) with an inline **pill** highlighting a key noun (e.g., `ROI`) — pill uses `--card-peach` or `--card-lavender` background with navy text.
-- 3–4 cards below in a horizontal row, mixing:
-  - one photo card with a subtle tint overlay,
-  - one **coral→peach gradient** card with the hero stat (`+47%`),
-  - one **cool lavender→blue gradient** card with a secondary stat,
-  - one **navy / peach neutral** card for small numbers.
-- Cards are `border-radius: 24px`, 4:3 aspect, label top-left, number/stat bottom-left.
-- Tiny icon cluster top-left of gradient cards (e.g., property-pin chips overlapping).
+- 굵은 sans 헤드라인 (`VIP 멤버십을 새롭게 다듬었습니다`)에 핵심 명사를 강조하는 인라인 **알약** (예: `VIP`) — 알약은 `--card-peach` 또는 `--card-lavender` 배경, 네이비 텍스트.
+- 하단에 3~4개 카드를 가로 row로 믹스:
+  - 사진 카드 1개 (옅은 틴트 오버레이),
+  - **코랄→피치 그라데이션** 카드 1개 (히어로 스탯 `+47%`),
+  - **쿨 라벤더→블루 그라데이션** 카드 1개 (보조 스탯),
+  - **네이비 / 피치 중립** 카드 1개 (작은 숫자용).
+- 카드는 `border-radius: 24px`, 4:3 비율, 라벨 좌상단, 숫자/스탯 좌하단.
+- 그라데이션 카드 좌상단에 작은 아이콘 클러스터 (예: 컬렉션 아이콘 칩 중첩).
 
 **Don't**
-- Don't use the coral for headline text. It lives **inside** gradient cards.
-- No more than one gradient direction per slide (either 135° coral→peach OR 180° lavender→blue, not both on the same card).
-- Don't put text over the photo area that's smaller than 16px — the imagery competes.
+- 코랄을 헤드라인 텍스트로 사용 금지. 코랄은 그라데이션 카드 **안**에만.
+- 슬라이드당 하나의 그라데이션 방향만 (135° 코랄→피치 XOR 180° 라벤더→블루, 동일 카드에 둘 다 금지).
+- 사진 영역 위 16px 미만 텍스트 금지 — 이미지가 경쟁.
 
-**Best layouts**: `pill-headline-cards-row` · `product-gradient-grid` · `hero-photo-split`.
-
----
-
-## Cross-theme don'ts (all 8)
-
-- No emoji (SaaS trap).
-- No hand-drawn SVG people (AI-slop).
-- No "aggressive purple gradient" — bluehouse is the only theme allowed to gradient, and only peach/coral/lavender.
-- No rounded left-border cards with a hex-shift accent (generic AI card).
-- Invented metrics are forbidden. Use `—` or a muted rectangle when the number doesn't exist yet.
-- The display face is a **theme setting**, not a slide setting. Never mix serif and Y2K in one deck.
+**최적 레이아웃**: `pill-headline-cards-row` · `product-gradient-grid` · `hero-photo-split`.
 
 ---
 
-## Contributing a new theme
+## 크로스-테마 Don'ts (8개 전체)
 
-If replit.com/slides ships a new template you want reflected here, or you want to propose a fork theme, follow this procedure so colors stay honest (no memory guesses, no "looks about right").
+- 이모지 금지 (SaaS 함정).
+- 손그림 SVG 인물 금지 (AI 슬롭).
+- "공격적 보라 그라데이션" 금지 — bluehouse만 그라데이션 허용, 그것도 피치/코랄/라벤더만.
+- 둥근 좌측 보더 카드 + hex-shift 액센트 금지 (제네릭 AI 카드).
+- 만든 매트릭 금지. 숫자가 아직 없으면 `—` 또는 muted 직사각형.
+- 디스플레이 페이스는 **테마 설정**이지 슬라이드 설정 아님. 한 덱에 세리프 + Y2K 혼용 금지.
 
-### 1. Capture the source PNG
+## K-패션 시즌 사이클 매핑
 
-Screenshot the replit.com/slides card at **2× device pixel ratio** (macOS: `Cmd+Shift+4` on a HiDPI display captures 2×). Save as `reference-<theme>.png`. Crop to just the template card — exclude chrome and shadows.
-
-### 2. Extract the dominant colors
-
-```bash
-# Install once (macOS): brew install imagemagick
-magick reference-<theme>.png \
-  -resize 200x200 \
-  -colors 8 \
-  -unique-colors txt:- \
-  | tail -n +2 \
-  | awk '{print $3}' \
-  | sort -u
-```
-
-This quantizes to 8 dominant colors and prints their hex values. The top few will be surface / type / border; the rare one is usually the accent.
-
-For a specific point (e.g. sampling the accent from a known pixel):
-
-```bash
-magick reference-<theme>.png -format "%[pixel:p{420,280}]" info:
-```
-
-### 3. Map to the 6-token palette
-
-Every theme uses the same 6 tokens plus a display font. Fill in:
-
-```
---bg         surface (largest area, ≥ 50% coverage)
---fg         type color (largest area inside text blocks)
---muted      secondary text (~40% alpha feel)
---border     hairline dividers, 1px
---accent     chromatic accent (≤ 5% coverage — the rare color)
---font-display  sans / serif / Y2K display — see the three allowed families in template.html
-```
-
-If the source uses two near-identical grays, collapse to one `--border`. Don't invent new tokens; every theme must map cleanly to this set so `data-theme` switching stays lossless.
-
-### 4. Add the theme block
-
-1. Append a new `body[data-theme="<name>"] { … }` block to `assets/template.html` in the theme tokens section. Mirror an existing block's token order.
-2. Add the theme row to the `od.inputs.theme.values` enum in `SKILL.md` (frontmatter).
-3. Add a "When to pick" row to the pick-table in `SKILL.md` and to the table in this file.
-4. Write a new `## <theme> — <name>` section below (palette block + Do / Don't / Best layouts), matching the shape of the other eight.
-5. Add a P1 theme-specific must to `checklist.md` (one bullet describing the theme's non-negotiable visual tell).
-6. Add a row to the reviewer screenshot-mapping table in the PR description so future contributors can reconcile drift.
-
-### 5. Verify
-
-- Render a one-slide example with the new theme and compare side-by-side with the source PNG. If the `--accent` looks off, re-sample with a larger `-colors` count (try `16`) and pick the one whose coverage matches the source.
-- Add an `example-<theme>.html` to `examples/` if the new theme is visually contrasting from the existing four (helix / holm / atlas / bluehouse). Otherwise a preview via `examples/README.md`'s instructions is enough.
+| 시점 | 테마 | 사례 |
+|---|---|---|
+| 시즌 시작 6개월 전 | `helix` 또는 `holm` | 시즌 전략 합의, 사전 사업 메모 |
+| 시즌 시작 3~5개월 전 | `helix` 또는 `atlas` | 디자인 기획 합본, 1차 품평회 리뷰 |
+| 시즌 시작 1~3개월 전 | `vance` 또는 `bevel` | 룩북 인덱스, 캠페인 사전 발표 |
+| 시즌 진행 중 / 종료 후 | `world-dark` 또는 `holm` | 매출 결산, IR 자료 |
+| 연중 수시 | `holm` 또는 `bluehouse` | 콜라보 제안, VIP 멤버십 발표 |
+| 5주년 / 10주년 / 브랜드 헤리티지 | `atlas` | 브랜드 히스토리 챕터 |
+| ESG / 윤리 / 지속가능 | `world-mint` | 지속가능 패션 정책 |

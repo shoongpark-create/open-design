@@ -1,363 +1,211 @@
-# 组件参考 · Components
+# 컴포넌트 매뉴얼 (Components)
 
-这是 `magazine-web-ppt` skill 的组件手册。template.html 已经定义好了所有样式，这里只写"这个组件长什么样、怎么用"。
+guizang-ppt 스킬의 컴포넌트 매뉴얼. CSS·HTML 구조는 원본 `marketing/guizang-ppt/references/components.md`와 동일. 이 K-패션 판은 **사용 시 K-패션 카피 가이드**만 추가.
 
-## 目录
-
-- [基础 Slide 外壳](#基础-slide-外壳)
-- [字体 Typography](#字体-typography)
-- [Chrome & Foot](#chrome--foot)
-- [Callout 引用框](#callout-引用框)
-- [Stat 数字矩阵](#stat-数字矩阵)
-- [Platform 平台卡](#platform-平台卡)
-- [Rowline 表格行](#rowline-表格行)
-- [Pillar 支柱卡](#pillar-支柱卡)
-- [Tag & Kicker](#tag--kicker)
-- [Figure 图片框](#figure-图片框)
-- [Icons 图标](#icons-图标)
-- [Ghost 巨型背景字](#ghost-巨型背景字)
-- [Highlight 荧光标记](#highlight-荧光标记)
+상세 컴포넌트 코드는 원본 참조. 아래는 K-패션 등록(register) 적용 가이드.
 
 ---
 
-## 基础 Slide 外壳
+## 1. 폰트 시스템
 
-每一页都是一个 `<section class="slide ...">`。必须包含 `data-theme` 属性（`light` 或 `dark`），JS 翻页时会根据这个属性切换背景。
+### 디스플레이 (대제목·부제·매니페스토)
+- **한글**: Hahmlet, Grandiflora One, Noto Serif KR (브랜드 톤 따라)
+- **영문**: Playfair Display, Source Serif 4
+- 변수: `--serif-zh` (한글), `--serif-en` (영문)
+
+### 본문 (리드·body)
+- **한글**: Pretendard Variable (K-패션 표준), Noto Sans KR
+- **영문**: Inter, system fonts
+- 변수: `--sans-zh` (한글 + 영문 혼용)
+
+### 메타 (kicker·foot·chrome·라벨·LOT·SKU)
+- **모노**: IBM Plex Mono
+- 변수: `--mono`
+
+### K-패션 사용 패턴
+- 시즌 표기 (27SS / 26FW), SKU 코드 (`27SS-W001`), LOT 번호 (`LOT-27SS-W023`) → 항상 `--mono`
+- 한글 대제목은 5자 이하 + `white-space:nowrap` (한 글자 한 줄 방지)
+- 영문 단어가 5자 초과면 줄바꿈 가능, 한글은 압축
+
+---
+
+## 2. 컬러 시스템
+
+5개 테마 프리셋만 사용 (`references/themes.md` 참조). 자유 hex 금지.
+
+### 시즌·캠페인 강조 컬러
+- 본 스킬의 5개 테마는 **베이스 톤**
+- 시즌 시그니처 (와키 RED, 27SS BLOOM, 26FW EMBER 등)는 별도 액센트로 사용
+- 액센트 변경은 `tweaks` 스킬의 `ACCENT_PRESETS` 통해 별도 오버라이드
+
+### 사용 위치
+- 메인 잉크 (`--ink`): 본문, 대제목, 일반 텍스트
+- 페이퍼 (`--paper`): 배경
+- 잉크 틴트 (`--ink-tint`): 카드 배경, 호버 상태
+- 페이퍼 틴트 (`--paper-tint`): 보조 영역, 라인
+
+---
+
+## 3. 그리드 시스템
+
+### 기본 그리드 클래스
+- `grid-2-7-5`: 좌 20% / 우 50% / 여백 (좌문 우상 레이아웃용)
+- `grid-2-6-6`: 좌 16% / 양쪽 42% (Before/After)
+- `grid-2-8-4`: 좌 16% / 우 66% (도판+사이드 텍스트)
+- `grid-3-3`: 50:50
+- `grid-3` / `grid-4` / `grid-6`: 3·4·6 균등 분할
+
+### K-패션 사용 패턴
+- 데이터 대자보 (시즌 KPI 6종): `grid-6`
+- BTA 라인업 비교: `grid-3-3`
+- 26SS vs 27SS: `grid-2-6-6`
+- 룩 4장 비교: `grid-4` 또는 이미지 그리드 골격
+
+---
+
+## 4. Stat-card (데이터 카드)
+
+K-패션 사용 패턴:
 
 ```html
-<section class="slide light" data-theme="light">   <!-- 浅色页 -->
-<section class="slide dark" data-theme="dark">     <!-- 深色页 -->
-<section class="slide light hero" data-theme="light">  <!-- Hero 页：浅色 + 薄遮罩透出 WebGL -->
-<section class="slide dark hero" data-theme="dark">    <!-- Hero 页：深色 + 薄遮罩 -->
+<div class="stat-card">
+  <div class="stat-label">정상판매율 목표</div>
+  <div class="stat-nb">75%</div>
+  <div class="stat-note">26SS 67% → +8pp</div>
+</div>
 ```
 
-**light vs dark 的使用：交替使用**，每 2-3 页切换一次主题，避免连续超过 3 页同色。翻页时 WebGL 背景会自动在两个 shader 之间渐变过渡。
+- `stat-label`: 영문 모노 + 한글 짧은 명사구 ("총 SKU", "1차 발주 PCS", "사입금액")
+- `stat-nb`: 큰 숫자 + 단위 (`80 SKU`, `7.2 억`, `75%`, `24,500 PCS`)
+- `stat-note`: 부연 ("UNI 42 + WOMEN 38", "+18% YoY", "사입가율 28%")
 
-**hero 类的使用**：只给视觉主导的页面加（封面、金句页、章节过渡、结尾）。加 `hero` 后遮罩降到 12-16%，WebGL 背景会大幅透出，所以不要在 hero 页上放太多文字。
-
----
-
-## 字体 Typography
-
-字体分工是本模板最重要的规则，严禁混用。
-
-| Class | 用途 | 字体 |
-|---|---|---|
-| `.display` | 超大号英文（Hero 页） | Playfair Display 700, 11vw |
-| `.display-zh` | 超大号中文标题 | Noto Serif SC 700, 7.8vw |
-| `.h1-zh` | 页面主标题 | Noto Serif SC 700, 4.6vw |
-| `.h2-zh` | 副标题 | Noto Serif SC 600, 3.2vw |
-| `.h3-zh` | 流水线步骤标题 | Noto Serif SC 500, 1.9vw |
-| `.lead` | 引导段（比 body 大） | Noto Serif SC 400, 1.9vw |
-| `.body-zh` | **正文/描述（非衬线）** | Noto Sans SC 400, 1.22vw |
-| `.body-serif` | 正文（衬线） | Noto Serif SC 400, 1.3vw |
-| `.kicker` | 小节提示（标题上方） | IBM Plex Mono, 12px uppercase |
-| `.meta` | 元信息标签 | IBM Plex Mono, 0.88vw uppercase |
-| `.big-num` | 巨型数字 | Playfair Display 800, 10vw |
-| `.mid-num` | 中号数字 | Playfair Display 700, 5.5vw |
-
-**核心规则**：
-- **衬线**（`serif-zh` / `serif-en`）：标题、重点金句、数字 —— 用于"视觉重音"
-- **非衬线**（`sans-zh`）：正文描述、大段阅读内容 —— 用于"信息密度"
-- **等宽**（`mono`）：kicker、meta、foot 的英文标签 —— 用于"装饰节奏"
-
-**强调技巧**：
-- `<em class="en">英文词</em>` —— 把英文词渲染成 Playfair Display 斜体（很好看）
-- `<em style="opacity:.65">短语</em>` —— 让标题后半段淡出，制造节奏
+### 한국 단위 사용
+- 통화: 원 / 만원 / 억 (`7.2억`, `12.4억`)
+- 수량: 장 / PCS (`24,500 PCS`)
+- 비율: % / pp (`75%`, `+8pp`)
+- 변동: YoY / QoQ / MoM (`+18% YoY`)
 
 ---
 
-## Chrome & Foot
+## 5. Pipeline (단계 흐름)
 
-每一页的顶部和底部的元信息条。几乎所有页都应该有。
+K-패션 사용 패턴:
 
 ```html
+<div class="pipeline-section">
+  <div class="pipeline-label">WOMEN · 38 SKU · BTA 25/55/20</div>
+  <div class="pipeline">
+    <div class="step">
+      <div class="step-nb">01</div>
+      <div class="step-title">Basic</div>
+      <div class="step-desc">캐리오버 핏 · 9 SKU</div>
+    </div>
+    ...
+  </div>
+</div>
+```
+
+- `pipeline-label`: 라인 / 단계 그룹 명 (WOMEN · UNI · 발주 단계 등)
+- `step-nb`: 번호 (01, 02, ...)
+- `step-title`: 영문 짧은 단어 (Basic, Trend, Accent, Distribute)
+- `step-desc`: 한글 명사구 ("캐리오버 핏 · 9 SKU")
+
+---
+
+## 6. Callout (인용 / 메시지)
+
+```html
+<div class="callout">
+  "조금 단정해도, 충분히 와키답다."
+  <div class="callout-src">— 디자인실장 김도하</div>
+</div>
+```
+
+K-패션 인용 출처:
+- "— 디자인실장 김도하"
+- "— 27SS 시즌 컨셉 보드"
+- "— 마뗑킴 대표 김다인 인스타그램"
+- "— 무신사 파트너센터 가이드"
+
+---
+
+## 7. Chrome (상단 메타) + Foot (하단 푸터)
+
+K-패션 사용 패턴:
+
+```html
+<!-- Chrome (상단) -->
 <div class="chrome">
-  <div class="left">
-    <span>第一幕 · 硬数据</span>
-    <span class="sep"></span>
-    <span>Act I</span>
-  </div>
-  <div class="right"><span>02 / 27</span></div>
+  <div>27SS Season Recap · 2026.05.14</div>
+  <div>Vol.01</div>
 </div>
 
-<!-- ... 页面主体 ... -->
-
+<!-- Foot (하단) -->
 <div class="foot">
-  <div class="title">项目名 · CodePilot　|　github.com/codepilot</div>
-  <div>Act I · Dev Numbers</div>
+  <div>Page 03 · 시즌 컨셉</div>
+  <div>— · —</div>
 </div>
 ```
 
-**规则**：
-- `chrome.right` 总是放页码 `NN / TOTAL` （TOTAL 为总页数）
-- `foot.title` 是中文说明，`foot.right` 是英文 act 标记
-- chrome 和 foot 共同构成杂志感的"页眉页脚"
+- 모노 폰트, 작은 사이즈, 자간 `.18em` 이상
+- Chrome 좌측: 발표 정보 (받는 사람, 일자, 챕터)
+- Chrome 우측: 페이지 또는 Vol 번호
+- Foot: 페이지 번호 + 짧은 설명
 
 ---
 
-## Callout 引用框
+## 8. 아이콘
 
-展示金句 / 关键观点 / 他人引言。
+**Lucide 아이콘 사용. 이모지 금지.**
 
-```html
-<div class="callout" style="max-width:80vw">
-  <div class="q-big">"这东西在三年前，<br>需要一个十人团队做一年。"</div>
-  <span class="cite">— 一个观察者的判断</span>
-</div>
-```
-
-变体：
-- 不带 cite：去掉 `<span class="cite">` 即可
-- 带英文金句：`<em class="en">"Thin Harness, Fat Skills."</em>`
-- 在 hero 页使用：外层加 `style="position:relative;z-index:2"`（避免被背景遮罩盖住）
-
----
-
-## Stat 数字矩阵
-
-展示数据指标，常与 `.grid-6` / `.grid-4` 配合。
+K-패션에서 자주 쓰는 아이콘:
+- `shopping-bag` — 매장·이커머스
+- `palette` — 컬러 / 디자인
+- `tag` — SKU / 라벨
+- `truck` — 입고 / 물류
+- `factory` — OEM 공장
+- `trending-up` — 매출 / 성장
+- `users` — 멤버십 / 팬덤
+- `sparkles` — 신상 / 콜라보
+- `crown` — VIP / 한정판
 
 ```html
-<div class="grid-6">
-  <div class="stat">
-    <span class="m">Duration</span>
-    <span class="n">64<em style="font-size:.4em;opacity:.5;font-style:normal"> 天</em></span>
-    <span class="l">从 0 到现在</span>
-  </div>
-  <!-- ... 更多 stat ... -->
-</div>
-```
-
-三段式结构：`.m` 等宽小标签 → `.n` 巨型数字 → `.l` 描述说明。数字后的单位用 `<em>` 缩小到 0.4em，opacity 0.5。
-
-**常用布局容器**：
-- `.grid-6` — 3×2 网格（最常用，6 个 stat）
-- `.grid-4` — 2×2 网格（4 个 stat）
-- `.grid-3` — 3 等分单行（3 个 stat / pillar）
-
----
-
-## Platform 平台卡
-
-展示社交平台 / 渠道 + 粉丝数。
-
-```html
-<div class="plat">
-  <div class="sub">Weibo</div>
-  <div class="name">微博</div>
-  <div class="nb">289K</div>
-</div>
-```
-
-可选第四行（补充说明）：
-```html
-<div class="body-zh" style="font-size:max(11px,.8vw);opacity:.5;margin-top:.6vh">
-  含小绿书同步
-</div>
-```
-
-**"Also On" 变体**（补充平台）：
-```html
-<div class="plat" style="border-top-style:dashed;opacity:.72">
-  <div class="sub">Also On</div>
-  <div class="body-zh" style="font-weight:600;margin-top:.8vh">
-    B 站　·　知乎
-  </div>
-</div>
+<i data-lucide="shopping-bag" class="ico-md"></i>
 ```
 
 ---
 
-## Rowline 表格行
+## 9. 이미지 처리
 
-列表式内容，每行一个条目。
+### 룩 컷 (4:5 또는 3:4)
+- 인물 풀바디 컷, 모델 시선 정면 권장
+- 상의 풀샷, 하의는 컷 가능
+- 컬러웨이 일관 (같은 SKU 다른 컬러 = 동일 프레임)
 
-```html
-<div class="rowline">
-  <div class="k">CLAUDE.md</div>
-  <div class="v">你该怎么做事 —— 行为规则 + 工作偏好 + 禁止事项</div>
-  <div class="m">EMPLOYEE · HANDBOOK</div>
-</div>
-```
+### 매장 라운드 (16:10 또는 16:9)
+- 매장 전경, 디스플레이 컷
+- 자연광 우선
 
-三列结构：`.k` 衬线关键词 · `.v` 正文描述 · `.m` 等宽标签（右对齐）。第一个和最后一个 rowline 自动加上下边框。
+### 키비주얼 (16:9)
+- 시즌 캠페인 메인 비주얼
+- 풀스크린 또는 풀 width
 
-**变体：2 列**：`style="grid-template-columns:1fr 3fr"` 去掉 `.m` 列。
-
----
-
-## Pillar 支柱卡
-
-三支柱结构，常用于"概念并列"类型页面。
-
-```html
-<div class="grid-3">
-  <div class="pillar">
-    <div class="ic">01</div>
-    <div class="t">三层<br>文档体系</div>
-    <div class="d">CLAUDE.md<br>+ 项目知识库<br>+ 护栏文件</div>
-  </div>
-  <!-- ... 更多 pillar ... -->
-</div>
-```
-
-**带图标的 pillar（用于强调性页面）**：
-```html
-<div class="pillar" style="padding:4vh 2vw;border:1px solid currentColor;border-color:rgba(10,10,11,.2)">
-  <div class="ic"><i data-lucide="compass" class="ico-lg"></i></div>
-  <div class="t">判断力</div>
-  <div class="d">决策和方向的权威。<br>取舍、品味、方向感。</div>
-</div>
-```
-
-`.ic` 可以是序号（`01 / 02 / 03` 或 `A. / B. / C.`），也可以是 Lucide 图标。
+### 디테일 컷 (1:1 또는 3:2)
+- 소재 디테일, 트림, 라벨
+- 작은 도판으로 사이드 텍스트와 함께 사용
 
 ---
 
-## Tag & Kicker
+## 10. 텍스트 위계
 
-**Kicker** 是标题上方的小提示文字（等宽、全大写、小字号）：
-```html
-<div class="kicker">过去 64 天 · 开发篇</div>
-<div class="h1-zh">一个人，做了什么。</div>
-```
+큰 순서:
+1. `h-hero` (디스플레이 세리프, 최대 글자, 표지·챕터 막)
+2. `h-xl` (세리프, 본문 페이지 대제목)
+3. `h-sub` (세리프, 부제)
+4. `h-md` (세리프, 중간 제목)
+5. `lead` (산세리프 큰 글씨, 리드 문장)
+6. `body` (산세리프 본문)
+7. `kicker` (모노, 짧은 라벨)
+8. `meta-row` / `chrome` / `foot` (모노, 메타데이터)
 
-**Tag** 是独立的标签胶囊（带边框）：
-```html
-<div style="display:flex;gap:1.6vw;flex-wrap:wrap">
-  <div class="tag">早上 10 点起床</div>
-  <div class="tag">周二 / 四下午健身</div>
-  <div class="tag">晚上照样看剧 · 玩游戏</div>
-</div>
-```
-
----
-
-## Figure 图片框
-
-**这是本模板最容易踩坑的组件，务必遵守以下规则**。
-
-### 基础结构
-
-```html
-<figure class="tile">
-  <div class="frame-img" style="height:26vh">
-    <img src="图片素材/xxx.png" alt="说明">
-  </div>
-  <figcaption class="frame-cap">
-    <span class="pf">推特 · Twitter</span>
-    <span class="nb">137K</span>
-  </figcaption>
-</figure>
-```
-
-### 关键约束（血泪经验，不要违反）
-
-1. **必须用 `height:Nvh` 固定高度**，不要用 `aspect-ratio`。
-   - 原因：用 aspect-ratio 在网格里会撑破父容器，导致图片堆叠。
-   - 推荐尺寸：`height:18vh` (紧凑条形) / `22vh` (标准网格) / `26vh` (突出展示) / `28vh` (大图)。
-
-2. **`object-position:top center`（已在 CSS 里设好）**，只允许裁掉底部。
-   - 严禁裁剪左右和顶部 —— 这是图片的核心身份信息区。
-
-3. **网格里多张图时，用内联 grid 而不是 `grid-3`**：
-   ```html
-   <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1vh 1.2vw">
-     <figure class="tile">...</figure>
-     <figure class="tile">...</figure>
-     <figure class="tile">...</figure>
-   </div>
-   ```
-
-4. **图片与布局其他部分对齐**：figure 单独加 `align-self:end` 让图片贴底。
-
-### Frame Caption 变体
-
-```html
-<!-- 标准：左 figure 名，右数字 -->
-<figcaption class="frame-cap">
-  <span class="pf">推特 · Twitter</span>
-  <span class="nb">137K</span>
-</figcaption>
-
-<!-- 带编号 -->
-<figcaption class="frame-cap">
-  <span class="idx">01</span>
-  <span class="pf">AI 润色</span>
-  <span>Polish</span>
-</figcaption>
-```
-
-### 图片占位（设计阶段占位符）
-
-图片还没有就位时，用虚线框占位：
-```html
-<div class="img-slot r-4x3">  <!-- r-4x3 / r-16x9(default) / r-3x2 / r-1x1 -->
-  <span class="plus">+</span>
-  <span class="label">GitHub 截图位置</span>
-</div>
-```
-
----
-
-## Icons 图标
-
-**严禁使用 emoji**。用 Lucide via CDN（template.html 已引入）。
-
-```html
-<i data-lucide="compass" class="ico-lg"></i>     <!-- 大图标（pillar 用） -->
-<i data-lucide="target" class="ico-md"></i>      <!-- 中图标（列表项用） -->
-<i data-lucide="check-circle" class="ico-sm"></i>  <!-- 小图标（inline 用） -->
-```
-
-**常用 Lucide 图标名**（按含义分组）：
-
-- 判断类：`compass`, `target`, `crosshair`, `search-check`
-- 关系类：`share-2`, `users`, `network`, `link`, `handshake`
-- 品牌类：`crown`, `gem`, `award`, `star`, `badge-check`
-- 流程类：`workflow`, `route`, `arrow-right-left`, `repeat`
-- 数据类：`grid-2x2`, `bar-chart-3`, `trending-up`, `activity`
-- 审美类：`palette`, `brush`, `eye`, `sparkles`
-- 对错类：`check-circle`, `x-circle`, `check`, `x`
-- 方向类：`arrow-right`, `arrow-up-right`, `corner-down-right`
-
-**图标与文字 inline 组合**：
-```html
-<div class="h3-zh" style="display:flex;align-items:center;gap:.8em">
-  <i data-lucide="target" class="ico-md"></i>
-  判断 — 什么值得写
-</div>
-```
-
----
-
-## Ghost 巨型背景字
-
-用作"装饰性背景字"，极低透明度，营造杂志感。
-
-```html
-<div class="ghost" style="right:-6vw;top:-8vh">BUT</div>
-<div class="ghost" style="left:-8vw;bottom:-18vh;font-style:italic">Harness</div>
-```
-
-- 字号 34vw，opacity 0.06
-- 常用定位：`right:-6vw;top:-8vh`（右上超出）/ `left:-8vw;bottom:-18vh`（左下超出）
-- 内容：英文单词或数字（章节序号 01/02/03、关键词 BUT/NOW/HERE）
-
-**注意**：使用 ghost 的页面里，其他内容要加 `position:relative;z-index:2` 避免被压到下面。
-
----
-
-## Highlight 荧光标记
-
-行内短语的"荧光笔"效果：
-
-```html
-<span class="hi">不是</span>
-<span class="hi">一次性爆发</span>
-```
-
-在文字底部生成一条半透明高亮条。深色主题用亮条，浅色主题用暗条（CSS 已处理）。
-
-**适合场景**：只对关键 1-3 个词使用，不要大面积用。
+**규칙**: 한 페이지에 `h-hero` 또는 `h-xl` 중 하나만 사용. 둘 다 쓰면 위계 충돌.
